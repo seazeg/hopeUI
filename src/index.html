@@ -104,13 +104,13 @@
                 <div class="hopeui-form-item">
                     <div class="hopeui-input-block">
                         <button
-                            type="submit"
+                            type="button"
                             class="hopeui-btn hopeui-btn-primary"
                         >
                             普通按钮
                         </button>
                         <button type="submit" class="hopeui-btn">
-                            默认按钮
+                            提交按钮
                         </button>
                     </div>
                 </div>
@@ -122,6 +122,9 @@
                 onChange: function (e) {
                     console.log(e);
                 },
+                onOpen:function (e) {
+                    console.log(1);
+                }
             });
             hope.checkbox({
                 onChange: function (e) {

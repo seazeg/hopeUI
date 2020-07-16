@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-16 17:49:35
+ * @LastEditTime : 2020-07-16 18:05:16
  * @Description  :
  */
 
@@ -16,24 +16,22 @@ class HopeControls {
      * @param {type}
      * @return:
      */
-    selector(
-        { ele, options, onOpen, onChange, onClose } = {
-            ele: (ele = null),
-            options: (options = null),
-            onOpen: (open = null),
-            onChange: (change = null),
-            onClose: (close = null),
-        }
-    ) {
+    selector({
+        ele: ele = null,
+        options: options = null,
+        onToggle: toggle = null,
+        onChange: change = null,
+        onClose: close = null,
+    }) {
         let _this = this;
         let $dom = [];
         if (!ele) {
-            $dom = document.querySelectorAll("select");
+            $dom = _this.utils.$("select");
         } else {
-            if (document.querySelector(ele)) {
-                $dom.push(document.querySelector(ele));
+            if (_this.utils.$(ele)) {
+                $dom.push(_this.utils.$(ele));
             } else {
-                $dom = document.querySelectorAll("select");
+                $dom = _this.utils.$("select");
             }
         }
         $dom.forEach(function (selector) {
@@ -84,8 +82,8 @@ class HopeControls {
                 if (_this.utils.hasClass(newEle, "hopeui-form-selected")) {
                     _this.utils.removeClass(newEle, "hopeui-form-selected");
                 } else {
-                    document
-                        .querySelectorAll(".hopeui-form-select")
+                    _this.utils
+                        .$(".hopeui-form-select")
                         .forEach(function (select) {
                             _this.utils.removeClass(
                                 select,
@@ -95,8 +93,8 @@ class HopeControls {
                     _this.utils.addClass(newEle, "hopeui-form-selected");
                 }
                 //打开列表回调
-                if (open) {
-                    open();
+                if (toggle) {
+                    toggle();
                 }
             };
 
@@ -145,22 +143,20 @@ class HopeControls {
      * @param {type}
      * @return:
      */
-    checkbox(
-        { ele, options, onChange } = {
-            ele: (ele = null),
-            options: (options = null),
-            onChange: (change = null),
-        }
-    ) {
+    checkbox({
+        ele: ele = null,
+        options: options = null,
+        onChange: change = null,
+    }) {
         let _this = this;
         let $dom = [];
         if (!ele) {
-            $dom = document.querySelectorAll("input[type=checkbox]");
+            $dom = _this.utils.$("input[type=checkbox]");
         } else {
-            if (document.querySelector(ele)) {
-                $dom.push(document.querySelector(ele));
+            if (_this.utils.$(ele)) {
+                $dom.push(_this.utils.$(ele));
             } else {
-                $dom = document.querySelectorAll("checkbox");
+                $dom = _this.utils.$("checkbox");
             }
         }
 
@@ -200,22 +196,20 @@ class HopeControls {
         });
     }
 
-    radio(
-        { ele, options, onChange } = {
-            ele: (ele = null),
-            options: (options = null),
-            onChange: (change = null),
-        }
-    ) {
+    radio({
+        ele: ele = null,
+        options: options = null,
+        onChange: change = null,
+    }) {
         let _this = this;
         let $dom = [];
         if (!ele) {
-            $dom = document.querySelectorAll("input[type=radio]");
+            $dom = _this.utils.$("input[type=radio]");
         } else {
-            if (document.querySelector(ele)) {
-                $dom.push(document.querySelector(ele));
+            if (_this.utils.$(ele)) {
+                $dom.push(_this.utils.$(ele));
             } else {
-                $dom = document.querySelectorAll("radio");
+                $dom = _this.utils.$("radio");
             }
         }
 
@@ -278,7 +272,7 @@ class HopeControls {
                 if (document.querySelectorAll(ele).length > 0) {
                     return document.querySelectorAll(ele);
                 } else {
-                    return document.querySelectol(ele);
+                    return document.querySelector(ele);
                 }
             },
             isPC: () => {
