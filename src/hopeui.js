@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-20 11:51:39
+ * @LastEditTime : 2020-07-20 16:24:33
  * @Description  :
  */
 
@@ -278,7 +278,7 @@ class HopeControls {
                 if (on.change) {
                     on.change({
                         ele: radio,
-                        value:radio.value,
+                        value: radio.value,
                         status: radio.checked,
                     });
                 }
@@ -289,7 +289,9 @@ class HopeControls {
     form({
         ele: ele = null,
         options: options = null,
-        onSubmit: submit = null,
+        on: on = {
+            submit: null,
+        },
         controls: controls = {
             selector: (selector = {
                 on: (on = {
@@ -364,27 +366,78 @@ class HopeControls {
                         };
 
                         items.forEach(function (ele, i) {
-                            obj.name = ele.name;
-                            if (ele.checked) {
-                                obj.value += `${ele.value},`;
+                            if (ele.value) {
+                                obj.name = ele.name;
+                                if (ele.checked) {
+                                    obj.value += `${ele.value},`;
+                                }
+                            } else {
                             }
                         });
-                        obj.value = obj.value.substring(
-                            0,
-                            obj.value.length - 1
-                        );
-                        formParams.push(obj);
+
+                        if (obj.value) {
+                            obj.value = obj.value
+                                .substring(0, obj.value.length - 1)
+                                .trim();
+                            formParams.push(obj);
+                            _this.utils.verify(items[0], "pass");
+                        }
                     } else {
-                        formParams.push({
-                            name: items[0].name,
-                            value: items[0].value,
-                        });
+                        if (items.length > 1) {
+                            let obj = {
+                                name: "",
+                                value: "",
+                            };
+                            items.forEach(function (ele, i) {
+                                if (ele.value) {
+                                    obj.name = ele.name;
+                                    obj.value += `${ele.value},`;
+                                } else {
+                                    //校验
+                                    if (items.type == "select-one") {
+                                        let obj = _this.utils.siblings(
+                                            ele,
+                                            ".hopeui-form-select"
+                                        )[0].childNodes[1].childNodes[1];
+                                        _this.utils.verify(obj, "blank");
+                                    } else {
+                                        _this.utils.verify(ele, "blank");
+                                    }
+                                }
+                            });
+                            if (obj.value) {
+                                obj.value = obj.value
+                                    .substring(0, obj.value.length - 1)
+                                    .trim();
+                                formParams.push(obj);
+                                _this.utils.verify(items[0], "pass");
+                            }
+                        } else {
+                            //校验
+                            if (items[0].value) {
+                                formParams.push({
+                                    name: items[0].name,
+                                    value: items[0].value.trim(),
+                                });
+                                _this.utils.verify(items[0], "pass");
+                            } else {
+                                if (items.type == "select-one") {
+                                    let obj = _this.utils.siblings(
+                                        items[0],
+                                        ".hopeui-form-select"
+                                    )[0].childNodes[1].childNodes[1];
+                                    _this.utils.verify(obj, "blank");
+                                } else {
+                                    _this.utils.verify(items[0], "blank");
+                                }
+                            }
+                        }
                     }
                 });
 
                 //提交回调
-                if (submit) {
-                    submit({
+                if (on.submit) {
+                    on.submit({
                         objectParams: formParams,
                         stringParams: _this.utils.deserialization(formParams),
                     });
@@ -423,6 +476,20 @@ class HopeControls {
                     // IE 浏览器
                     obj.attachEvent("on" + eventName, CallFn);
                 }
+            },
+            verify(obj, rule) {
+                switch (rule) {
+                    case "blank":
+                        this.addClass(obj, "hopeui-form-error");
+                        break;
+                    case "pass":
+                        this.removeClass(obj, "hopeui-form-error");
+                    default:
+                        break;
+                }
+            },
+            isRequired(obj) {
+                return !!obj.getAttribute("hope-verify");
             },
             deserialization(obj) {
                 if (obj) {
