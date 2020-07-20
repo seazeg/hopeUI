@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div style="width: 48%; padding-top: 50px; display:inline-block;vertical-align: top">
+    <div style="padding:50px 10px;">
         <form class="hopeui-form" name="form" action="" id="form">
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">下拉框</label>
@@ -92,9 +92,9 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">多选框</label>
                 <div class="hopeui-input-block">
-                    <input type="checkbox" name="subject" value="音乐" />
-                    <input type="checkbox" name="subject" value="历史" />
-                    <input type="checkbox" name="subject" value="生物" />
+                    <input type="checkbox" name="subject" value="音乐" hope-verify="required"/>
+                    <input type="checkbox" name="subject" value="历史" hope-verify="required"/>
+                    <input type="checkbox" name="subject" value="生物" hope-verify="required"/>
                 </div>
             </div>
             <div class="hopeui-form-item">
@@ -157,6 +157,7 @@
                 }
             }
         })
+
     </script>
 </body>
 
