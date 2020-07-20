@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-16 18:05:16
+ * @LastEditTime : 2020-07-20 11:00:32
  * @Description  :
  */
 
@@ -50,14 +50,16 @@ class HopeControls {
                         <i class="hopeui-edge"></i>
                     </div>
                     <div class="hopeui-select-list hopeui-anim hopeui-anim-upbit">`;
-            for (let item of selector.children) {
+
+            Array.from(selector.children).forEach(function (item, i) {
                 if (item.tagName.toLowerCase() == "optgroup") {
-                    template += `<div class="groupTitle">${item.getAttribute(
+                    template += `<div class="groupTitle" hope-group=${i}>${item.getAttribute(
                         "label"
                     )}</div>`;
-                    for (let groupOpt of item.children) {
-                        template += `<div class="option group" hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
-                    }
+
+                    Array.from(item.children).forEach(function (groupOpt, ii) {
+                        template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                    });
                 } else {
                     if (item.value) {
                         template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
@@ -65,7 +67,8 @@ class HopeControls {
                         template += `<div class="option hopeui-select-tips" hope-value="${item.value}">${item.innerText}</div>`;
                     }
                 }
-            }
+            });
+
             template += `</div>`;
             _this.utils.addClass(selector, "hopeui-hide");
 
@@ -115,13 +118,24 @@ class HopeControls {
                     } else {
                         input.value = "";
                     }
-                    selector.children[i].selected = true;
+
+                    if (e.target.getAttribute("hope-group")) {
+                        selector.children[
+                            e.target.getAttribute("hope-group")
+                        ].children[
+                            e.target.getAttribute("hope-group-sort")
+                        ].selected = true;
+                    } else {
+                        selector.children[i].selected = true;
+                    }
 
                     //选中options后回调
                     if (change) {
                         change({
                             label: item.innerText,
                             value: item.getAttribute("hope-value"),
+                            group: e.target.getAttribute("hope-group"),
+                            groupSort: e.target.getAttribute("hope-group-sort"),
                         });
                     }
                 };
@@ -163,9 +177,7 @@ class HopeControls {
         $dom.forEach(function (checkbox) {
             let newEle;
             let template = `
-                        <span>${checkbox.getAttribute(
-                            "title"
-                        )}</span><i class="hopeui-icon hopeui-icon-ok"></i>
+                        <span>${checkbox.value}</span><i class="hopeui-icon hopeui-icon-ok"></i>
                     `;
 
             _this.utils.addClass(checkbox, "hopeui-hide");
@@ -266,6 +278,92 @@ class HopeControls {
         });
     }
 
+    form({
+        ele: ele = null,
+        options: options = null,
+        selector: selector = { onChange: null, onToggle: null },
+        checkbox: checkbox = { onChange: null },
+        radio: radio = { onChange: null },
+    }) {
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = _this.utils.$("form");
+        } else {
+            if (_this.utils.$(ele)) {
+                $dom.push(_this.utils.$(ele));
+            } else {
+                $dom = _this.utils.$("form");
+            }
+        }
+
+        //初始化控件组
+        this.selector({
+            onChange: selector.onChange,
+            onToggle: selector.onToggle,
+        });
+        this.checkbox({
+            onChange: checkbox.onChange,
+        });
+        this.radio({
+            onChange: radio.onChange,
+        });
+
+        $dom.forEach(function (form) {
+            form.onsubmit = function (e) {
+                e.stopPropagation();
+                let sortArr = {},
+                    formParams = [];
+                for (let item of e.target) {
+                    if (
+                        (item.type != "submit" ||
+                            item.type != "button" ||
+                            item.type != "reset") &&
+                        item.name
+                    ) {
+                        if (!sortArr[item.name]) {
+                            sortArr[item.name] = [];
+                            sortArr[item.name].push(item);
+                            sortArr[item.name].type = item.type;
+                        } else {
+                            sortArr[item.name].push(item);
+                            sortArr[item.name].type = item.type;
+                        }
+                    }
+                }
+
+                Object.keys(sortArr).forEach(function (key) {
+                    let items = sortArr[key];
+                    if (items.type == "checkbox" || items.type == "radio") {
+                        let obj = {
+                            name: "",
+                            value: "",
+                        };
+
+                        items.forEach(function (ele, i) {
+                            obj.name = ele.name;
+                            if (ele.checked) {
+                                obj.value += `${ele.value},`;
+                            }
+                        });
+                        obj.value = obj.value.substring(
+                            0,
+                            obj.value.length - 1
+                        );
+                        formParams.push(obj);
+                    } else {
+                        formParams.push({
+                            name: items[0].name,
+                            value: items[0].value,
+                        });
+                    }
+                });
+
+                return false;
+            };
+        });
+    }
+
     _utils() {
         return {
             $: (ele) => {
@@ -273,6 +371,27 @@ class HopeControls {
                     return document.querySelectorAll(ele);
                 } else {
                     return document.querySelector(ele);
+                }
+            },
+            on: (evt, fn) => {
+                let eventArr = evt.split(" ");
+                for (var i = 0; i < this.elments.length; i++) {
+                    for (var j = 0; j < eventArr.length; j++) {
+                        _this.utils.addEvent(eventArr[j], this.elements[i], fn);
+                    }
+                }
+            },
+            addEvent(eventName, obj, fn) {
+                function CallFn(e) {
+                    var ev = e || window.event;
+                    fn.call(obj, ev);
+                }
+                if (obj.addEventListener) {
+                    // 非 IE 浏览器；
+                    obj.addEventListener(eventName, CallFn, false);
+                } else {
+                    // IE 浏览器
+                    obj.attachEvent("on" + eventName, CallFn);
                 }
             },
             isPC: () => {
