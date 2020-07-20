@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-20 11:00:32
+ * @LastEditTime : 2020-07-20 11:51:39
  * @Description  :
  */
 
@@ -19,9 +19,11 @@ class HopeControls {
     selector({
         ele: ele = null,
         options: options = null,
-        onToggle: toggle = null,
-        onChange: change = null,
-        onClose: close = null,
+        on: on = {
+            toggle: (toggle = null),
+            change: (change = null),
+            close: (close = null),
+        },
     }) {
         let _this = this;
         let $dom = [];
@@ -96,8 +98,8 @@ class HopeControls {
                     _this.utils.addClass(newEle, "hopeui-form-selected");
                 }
                 //打开列表回调
-                if (toggle) {
-                    toggle();
+                if (on.toggle) {
+                    on.toggle();
                 }
             };
 
@@ -130,8 +132,8 @@ class HopeControls {
                     }
 
                     //选中options后回调
-                    if (change) {
-                        change({
+                    if (on.change) {
+                        on.change({
                             label: item.innerText,
                             value: item.getAttribute("hope-value"),
                             group: e.target.getAttribute("hope-group"),
@@ -145,8 +147,8 @@ class HopeControls {
             document.addEventListener("click", function (e) {
                 _this.utils.removeClass(newEle, "hopeui-form-selected");
                 //下拉列表关闭回调
-                if (close) {
-                    close();
+                if (on.close) {
+                    on.close();
                 }
             });
         });
@@ -160,7 +162,9 @@ class HopeControls {
     checkbox({
         ele: ele = null,
         options: options = null,
-        onChange: change = null,
+        on: on = {
+            change: (change = null),
+        },
     }) {
         let _this = this;
         let $dom = [];
@@ -198,9 +202,10 @@ class HopeControls {
                 }
 
                 //点击回调
-                if (change) {
-                    change({
+                if (on.change) {
+                    on.change({
                         ele: checkbox,
+                        value: checkbox.value,
                         status: checkbox.checked,
                     });
                 }
@@ -211,7 +216,9 @@ class HopeControls {
     radio({
         ele: ele = null,
         options: options = null,
-        onChange: change = null,
+        on: on = {
+            change: (change = null),
+        },
     }) {
         let _this = this;
         let $dom = [];
@@ -268,9 +275,10 @@ class HopeControls {
                     });
 
                 //点击回调
-                if (change) {
-                    change({
+                if (on.change) {
+                    on.change({
                         ele: radio,
+                        value:radio.value,
                         status: radio.checked,
                     });
                 }
@@ -281,11 +289,39 @@ class HopeControls {
     form({
         ele: ele = null,
         options: options = null,
-        selector: selector = { onChange: null, onToggle: null },
-        checkbox: checkbox = { onChange: null },
-        radio: radio = { onChange: null },
+        onSubmit: submit = null,
+        controls: controls = {
+            selector: (selector = {
+                on: (on = {
+                    change: null,
+                    toggle: null,
+                }),
+            }),
+            checkbox: (checkbox = {
+                on: (on = {
+                    change: null,
+                }),
+            }),
+            radio: (radio = {
+                on: (on = {
+                    change: null,
+                }),
+            }),
+        },
     }) {
         let _this = this;
+        //初始化控件组
+        this.selector({
+            on: controls.selector.on,
+        });
+        this.checkbox({
+            on: controls.checkbox.on,
+        });
+        this.radio({
+            on: controls.radio.on,
+        });
+
+        //form事件绑定
         let $dom = [];
         if (!ele) {
             $dom = _this.utils.$("form");
@@ -296,19 +332,6 @@ class HopeControls {
                 $dom = _this.utils.$("form");
             }
         }
-
-        //初始化控件组
-        this.selector({
-            onChange: selector.onChange,
-            onToggle: selector.onToggle,
-        });
-        this.checkbox({
-            onChange: checkbox.onChange,
-        });
-        this.radio({
-            onChange: radio.onChange,
-        });
-
         $dom.forEach(function (form) {
             form.onsubmit = function (e) {
                 e.stopPropagation();
@@ -359,6 +382,13 @@ class HopeControls {
                     }
                 });
 
+                //提交回调
+                if (submit) {
+                    submit({
+                        objectParams: formParams,
+                        stringParams: _this.utils.deserialization(formParams),
+                    });
+                }
                 return false;
             };
         });
@@ -392,6 +422,15 @@ class HopeControls {
                 } else {
                     // IE 浏览器
                     obj.attachEvent("on" + eventName, CallFn);
+                }
+            },
+            deserialization(obj) {
+                if (obj) {
+                    let res = "";
+                    for (let item of obj) {
+                        res += item.name + "=" + item.value + "&";
+                    }
+                    return res.substring(0, res.length - 1);
                 }
             },
             isPC: () => {

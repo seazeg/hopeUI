@@ -32,12 +32,26 @@
                     <select name="school" hope-verify="required">
                         <option value="">请选择</option>
                         <optgroup label="北京"">
-                            <option value="北京大学">北京大学</option>
+                            <option value=" 北京大学">北京大学</option>
                             <option value="清华大学">清华大学</option>
                         </optgroup>
                         <optgroup label="浙江"">
-                            <option value="浙江大学">浙江大学</option>
+                            <option value=" 浙江大学">浙江大学</option>
                         </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="hopeui-form-item">
+                <label class="hopeui-form-label">下拉框</label>
+                <div class="hopeui-input-block">
+                    <select name="city" hope-verify="required">
+                        <option value="">请选择</option>
+                        <option value="青岛">青岛</option>
+                        <option value="武汉">武汉</option>
+                        <option value="乌鲁木齐">乌鲁木齐</option>
+                        <option value="南京">南京</option>
+                        <option value="天津">天津</option>
+                        <option value="郑州">郑州</option>
                     </select>
                 </div>
             </div>
@@ -56,9 +70,9 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">多选框</label>
                 <div class="hopeui-input-block">
-                    <input type="checkbox" name="subject" value="音乐"/>
-                    <input type="checkbox" name="subject" value="历史"/>
-                    <input type="checkbox" name="subject" value="生物"/>
+                    <input type="checkbox" name="subject" value="音乐" />
+                    <input type="checkbox" name="subject" value="历史" />
+                    <input type="checkbox" name="subject" value="生物" />
                 </div>
             </div>
             <div class="hopeui-form-item">
@@ -107,23 +121,34 @@
         //     },
         // });
         hope.form({
-            selector:{
-                onChange: function(e){
-                    console.log(e);
+            onSubmit: function (e) {
+                console.log(e);
+            },
+            controls: {
+                selector: {
+                    on: {
+                        change: function (e) {
+                            console.log(e);
+                        },
+                        toggle: function (e) {
+                            console.log(1);
+                        }
+                    }
                 },
-                onToggle: function(e){
-                    console.log(1);
+                checkbox: {
+                    on: {
+                        change: function (e) {
+                            console.log(e);
+                        }
+                    }
+                },
+                radio: {
+                    on: {
+                        change: function (e) {
+                            console.log(e);
+                        }
+                    }
                 }
-            },
-            checkbox:{
-                onChange: function(e){
-                    console.log(e);
-                },
-            },
-            radio:{
-                onChange: function(e){
-                    console.log(e);
-                },
             }
         })
     </script>
