@@ -23,6 +23,9 @@
                         <option value="南京">南京</option>
                         <option value="天津">天津</option>
                         <option value="郑州">郑州</option>
+                        <option value="重庆">重庆</option>
+                        <option value="成都">成都</option>
+                        <option value="云南">云南</option>
                     </select>
                 </div>
             </div>
@@ -44,7 +47,7 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">联动下拉框</label>
                 <div class="hopeui-input-inline">
-                    <select name="LD"" hope-verify="required">
+                    <select name="LD"" hope-verify=" required">
                         <option value="">请选择</option>
                         <option value="青岛">青岛</option>
                         <option value="武汉">武汉</option>
@@ -80,21 +83,25 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">文本框</label>
                 <div class="hopeui-input-block">
-                    <input name="text" type="text" placeholder="请输入" value="" class="hopeui-input" hope-verify="required"/>
+                    <input name="text" type="text" placeholder="请输入" value="" class="hopeui-input"
+                        hope-verify="required" />
+                        <span class="hopeui-form-error-prompt">
+                            <i class="hopeui-icon hopeui-icon-close-fill"></i>文本至少得5个字符</span>
                 </div>
             </div>
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">密码框</label>
                 <div class="hopeui-input-block">
-                    <input name="password" type="password" placeholder="请输入" value="" class="hopeui-input" hope-verify="required"/>
+                    <input name="password" type="password" placeholder="请输入" value="" class="hopeui-input"
+                        hope-verify="required" />
                 </div>
             </div>
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">多选框</label>
                 <div class="hopeui-input-block">
-                    <input type="checkbox" name="subject" value="音乐" hope-verify="required"/>
-                    <input type="checkbox" name="subject" value="历史" hope-verify="required"/>
-                    <input type="checkbox" name="subject" value="生物" hope-verify="required"/>
+                    <input type="checkbox" name="subject" value="音乐" hope-verify="required" />
+                    <input type="checkbox" name="subject" value="历史" hope-verify="required" />
+                    <input type="checkbox" name="subject" value="生物" hope-verify="required" />
                 </div>
             </div>
             <div class="hopeui-form-item">
@@ -107,7 +114,8 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">多文本域</label>
                 <div class="hopeui-input-block">
-                    <textarea name="textarea" class="hopeui-textarea" placeholder="请输入内容" hope-verify="required"></textarea>
+                    <textarea name="textarea" class="hopeui-textarea" placeholder="请输入内容"
+                        hope-verify="required"></textarea>
                 </div>
             </div>
             <div class="hopeui-form-item">
@@ -155,9 +163,20 @@
                         }
                     }
                 }
+            },
+            verify: {
+                text: function (value) {
+                    if (value.length < 5) {
+                        return '文本至少得5个字符';
+                    }
+                },
+                password: function (value) {
+                    if (value.length < 6) {
+                        return '密码至少输入6个字符';
+                    }
+                }
             }
         })
-
     </script>
 </body>
 

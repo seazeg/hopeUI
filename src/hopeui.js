@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-20 17:43:20
+ * @LastEditTime : 2020-07-21 13:56:35
  * @Description  :
  */
 
@@ -286,6 +286,11 @@ class HopeControls {
         });
     }
 
+    /**
+     * @description: 表单功能函数
+     * @param {type} 
+     * @return: 
+     */    
     form({
         ele: ele = null,
         options: options = null,
@@ -310,6 +315,7 @@ class HopeControls {
                 }),
             }),
         },
+        verify: verify = {},
     }) {
         let _this = this;
         //初始化控件组
@@ -364,6 +370,7 @@ class HopeControls {
                     }
                 }
 
+                //校验区域
                 Object.keys(sortArr).forEach(function (key) {
                     let items = sortArr[key];
                     //单选和多选判断
@@ -396,98 +403,70 @@ class HopeControls {
                         obj.value = obj.value
                             .substring(0, obj.value.length - 1)
                             .trim();
-                        formParams.push(obj);
+                        if (items.required) {
+                            if (obj.value) {
+                                formParams.push(obj);
+                            }
+                        }
                     } else {
-                        //联动框判断
+                        let obj = {
+                            name: "",
+                            value: "",
+                        };
 
-                        // if (items.eles.length > 1) {
-                            let obj = {
-                                name: "",
-                                value: "",
-                            };
-
-                            items.eles.forEach(function (ele, i) {
-                                //校验
-                                if (items.required) {
-                                    if (ele.value) {
-                                        //不为空
-                                        obj.name = ele.name;
-                                        obj.value += `${ele.value},`;
-                                        if (items.type == "select-one") {
-                                            let obj = _this.utils.siblings(
-                                                ele,
-                                                ".hopeui-form-select"
-                                            )[0].childNodes[1].childNodes[1];
-                                            _this.utils.verify(obj, "pass");
-                                        } else {
-                                            _this.utils.verify(ele, "pass");
-                                        }
-                                    } else {
-                                        //为空
-                                        if (items.type == "select-one") {
-                                            let obj = _this.utils.siblings(
-                                                ele,
-                                                ".hopeui-form-select"
-                                            )[0].childNodes[1].childNodes[1];
-                                            _this.utils.verify(obj, "blank");
-                                        } else {
-                                            _this.utils.verify(ele, "blank");
-                                        }
-                                    }
-                                } else {
+                        items.eles.forEach(function (ele, i) {
+                            //校验
+                            if (items.required) {
+                                if (ele.value) {
+                                    //不为空
                                     obj.name = ele.name;
                                     obj.value += `${ele.value},`;
-                                    _this.utils.verify(ele, "pass");
-                                }
-                            });
+                                    if (items.type == "select-one") {
+                                        let obj = _this.utils.siblings(
+                                            ele,
+                                            ".hopeui-form-select"
+                                        )[0].childNodes[1].childNodes[1];
+                                        _this.utils.validation(obj, "pass");
+                                    } else {
+                                        _this.utils.validation(ele, "pass");
+                                    }
 
-                            obj.value = obj.value
-                                .substring(0, obj.value.length - 1)
-                                .trim();
-                            if (obj.name) {
-                                formParams.push(obj);
-                                _this.utils.verify(obj, "pass");
+                                    // 自定义校验
+                                    if (verify[ele.name]) {
+                                        if (!verify[ele.name](ele.value)) {
+                                            _this.utils.validation(ele, "pass");
+                                        } else {
+                                            console.log(verify[ele.name](ele.value));
+                                        }
+                                    }
+
+
+                                } else {
+                                    //为空
+                                    if (items.type == "select-one") {
+                                        let obj = _this.utils.siblings(
+                                            ele,
+                                            ".hopeui-form-select"
+                                        )[0].childNodes[1].childNodes[1];
+                                        _this.utils.validation(obj, "blank");
+                                    } else {
+                                        _this.utils.validation(ele, "blank");
+                                    }
+                                }
+                            } else {
+                                obj.name = ele.name;
+                                obj.value += `${ele.value},`;
+                                _this.utils.validation(ele, "pass");
                             }
-                        // } else {
-                        //     //正常
-                        //     //校验
-                        //     let ele = items.eles[0];
-                        //     if (items.required) {
-                        //         if (ele.value) {
-                        //             //不为空
-                        //             formParams.push({
-                        //                 name: ele.name,
-                        //                 value: ele.value.trim(),
-                        //             });
-                        //             if (items.type == "select-one") {
-                        //                 let obj = _this.utils.siblings(
-                        //                     ele,
-                        //                     ".hopeui-form-select"
-                        //                 )[0].childNodes[1].childNodes[1];
-                        //                 _this.utils.verify(obj, "pass");
-                        //             } else {
-                        //                 _this.utils.verify(ele, "pass");
-                        //             }
-                        //         } else {
-                        //             //为空
-                        //             if (items.type == "select-one") {
-                        //                 let obj = _this.utils.siblings(
-                        //                     ele,
-                        //                     ".hopeui-form-select"
-                        //                 )[0].childNodes[1].childNodes[1];
-                        //                 _this.utils.verify(obj, "blank");
-                        //             } else {
-                        //                 _this.utils.verify(ele, "blank");
-                        //             }
-                        //         }
-                        //     } else {
-                        //         formParams.push({
-                        //             name: ele.name,
-                        //             value: ele.value.trim(),
-                        //         });
-                        //         _this.utils.verify(ele, "pass");
-                        //     }
-                        // }
+                        });
+
+                        obj.value = obj.value
+                            .substring(0, obj.value.length - 1)
+                            .trim();
+                        if (obj.name) {
+                            formParams.push(obj);
+                            _this.utils.validation(obj, "pass");
+                        }
                     }
                 });
 
@@ -533,7 +512,7 @@ class HopeControls {
                     obj.attachEvent("on" + eventName, CallFn);
                 }
             },
-            verify(obj, rule) {
+            validation(obj, rule) {
                 switch (rule) {
                     case "blank":
                         this.addClass(obj, "hopeui-form-error");
