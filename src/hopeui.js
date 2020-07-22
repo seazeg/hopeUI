@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-21 13:56:35
- * @Description  :
+ * @LastEditTime : 2020-07-22 10:30:09
+ * @Description  : hopeUI框架
  */
 
 class HopeControls {
@@ -130,6 +130,7 @@ class HopeControls {
                     } else {
                         selector.children[i].selected = true;
                     }
+                    selector.value = selector.selectedOptions[0].value;
 
                     //选中options后回调
                     if (on.change) {
@@ -213,6 +214,12 @@ class HopeControls {
         });
     }
 
+    /**
+     * @description: 单选框
+     * @param {type}
+     * @return:
+     */
+
     radio({
         ele: ele = null,
         options: options = null,
@@ -288,9 +295,10 @@ class HopeControls {
 
     /**
      * @description: 表单功能函数
-     * @param {type} 
-     * @return: 
-     */    
+     * @param {type}
+     * @return:
+     */
+
     form({
         ele: ele = null,
         options: options = null,
@@ -417,46 +425,30 @@ class HopeControls {
                         items.eles.forEach(function (ele, i) {
                             //校验
                             if (items.required) {
+
                                 if (ele.value) {
                                     //不为空
                                     obj.name = ele.name;
                                     obj.value += `${ele.value},`;
-                                    if (items.type == "select-one") {
-                                        let obj = _this.utils.siblings(
-                                            ele,
-                                            ".hopeui-form-select"
-                                        )[0].childNodes[1].childNodes[1];
-                                        _this.utils.validation(obj, "pass");
-                                    } else {
-                                        _this.utils.validation(ele, "pass");
-                                    }
-
                                     // 自定义校验
                                     if (verify[ele.name]) {
                                         if (!verify[ele.name](ele.value)) {
-                                            _this.utils.validation(ele, "pass");
+
+                                            _this.utils.validation(ele, "pass", null, items.type);
                                         } else {
-                                            console.log(verify[ele.name](ele.value));
+                                            _this.utils.validation(ele, "error", verify[ele.name](ele.value), items.type);
                                         }
-                                    }
-
-
-                                } else {
-                                    //为空
-                                    if (items.type == "select-one") {
-                                        let obj = _this.utils.siblings(
-                                            ele,
-                                            ".hopeui-form-select"
-                                        )[0].childNodes[1].childNodes[1];
-                                        _this.utils.validation(obj, "blank");
                                     } else {
-                                        _this.utils.validation(ele, "blank");
+                                        _this.utils.validation(ele, "pass", null, items.type);
                                     }
+                                } else {
+                                    _this.utils.validation(ele, "error", "内容不能为空", items.type);
                                 }
                             } else {
+
                                 obj.name = ele.name;
                                 obj.value += `${ele.value},`;
-                                _this.utils.validation(ele, "pass");
+                                _this.utils.validation(ele, "pass", null, items.type);
                             }
                         });
 
@@ -464,8 +456,9 @@ class HopeControls {
                             .substring(0, obj.value.length - 1)
                             .trim();
                         if (obj.name) {
+
                             formParams.push(obj);
-                            _this.utils.validation(obj, "pass");
+                            // _this.utils.validation(obj, "pass", null, items.type);
                         }
                     }
                 });
@@ -482,6 +475,11 @@ class HopeControls {
         });
     }
 
+    /**
+     * @description: 工具类
+     * @param {type}
+     * @return:
+     */
     _utils() {
         return {
             $: (ele) => {
@@ -512,13 +510,47 @@ class HopeControls {
                     obj.attachEvent("on" + eventName, CallFn);
                 }
             },
-            validation(obj, rule) {
+            validation(ele, rule, prompt, type) {
+
+                let obj = ele,
+                    bro = ele;
+                if (type == "select-one") {
+                    bro = this.siblings(
+                        ele,
+                        ".hopeui-form-select"
+                    )[0]
+
+                    obj = bro.childNodes[1].childNodes[1];
+                }
                 switch (rule) {
-                    case "blank":
+                    case "error":
+                        // let obj = ele,
+                        //     bro = ele;
+                        // if (type == "select-one") {
+                        //     bro = this.siblings(
+                        //         ele,
+                        //         ".hopeui-form-select"
+                        //     )[0]
+                        //     obj = bro.childNodes[1].childNodes[1];
+                        // }
+
                         this.addClass(obj, "hopeui-form-error");
+                        if (this.siblings(bro, ".hopeui-form-error-prompt").length <= 0) {
+                            this.insertAfter(bro, {
+                                template: `<i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`,
+                                rootClass: `hopeui-form-error-prompt`,
+                            });
+                        } else {
+                            this.siblings(bro, ".hopeui-form-error-prompt")[0].innerHTML = ` <i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`
+                        }
+
                         break;
                     case "pass":
+
                         this.removeClass(obj, "hopeui-form-error");
+                        this.removeELe(
+                            this.siblings(bro, ".hopeui-form-error-prompt")[0]
+                        );
                     default:
                         break;
                 }
@@ -571,7 +603,6 @@ class HopeControls {
                     }
                 }
             },
-
             siblings: (ele, tag) => {
                 let nodes = [];
                 let previ = ele.previousSibling;
@@ -611,13 +642,17 @@ class HopeControls {
                 }
                 return nodes;
             },
-
             insertAfter: (targetEle, templateParams) => {
                 let ele = document.createElement("div");
                 ele.className = templateParams.rootClass;
                 ele.innerHTML = templateParams.template;
                 targetEle.after(ele);
                 return ele;
+            },
+            removeELe: (targetEle) => {
+                if (targetEle) {
+                    targetEle.parentNode.removeChild(targetEle);
+                }
             },
         };
     }
