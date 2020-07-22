@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-22 10:30:09
+ * @LastEditTime : 2020-07-22 18:17:31
  * @Description  : hopeUI框架
  */
 
@@ -153,6 +153,23 @@ class HopeControls {
                 }
             });
         });
+
+        return {
+            val: function (value) {
+                if (value) {
+                    value.split(",").forEach(function (i) {
+                        $dom[i].checked = true;
+                        _this.utils.addClass(
+                            $dom[i].nextSibling,
+                            "hopeui-form-checked"
+                        );
+                    });
+                }
+            },
+            clear: function () {
+                console.log("clear");
+            },
+        };
     }
 
     /**
@@ -212,6 +229,23 @@ class HopeControls {
                 }
             };
         });
+
+        return {
+            val: function (value) {
+                if (value) {
+                    value.split(",").forEach(function (i) {
+                        $dom[i].checked = true;
+                        _this.utils.addClass(
+                            $dom[i].nextSibling,
+                            "hopeui-form-checked"
+                        );
+                    });
+                }
+            },
+            clear: function () {
+                console.log("clear");
+            },
+        };
     }
 
     /**
@@ -258,28 +292,7 @@ class HopeControls {
 
             newEle.onclick = function (e) {
                 e.stopPropagation();
-                _this.utils
-                    .siblings(newEle, ".hopeui-form-radio")
-                    .forEach(function (bro, i) {
-                        if (_this.utils.hasClass(bro, "hopeui-form-radioed")) {
-                            radio.checked = true;
-
-                            _this.utils.removeClass(bro, "hopeui-form-radioed");
-                            _this.utils.removeClass(
-                                bro.childNodes[1],
-                                "hopeui-anim-scaleSpring"
-                            );
-
-                            bro.childNodes[1].innerHTML = "&#xe63f;";
-
-                            _this.utils.addClass(newEle, "hopeui-form-radioed");
-                            _this.utils.addClass(
-                                newEle.childNodes[1],
-                                "hopeui-anim-scaleSpring"
-                            );
-                            newEle.childNodes[1].innerHTML = "&#xe643;";
-                        }
-                    });
+                checked(radio, newEle);
 
                 //点击回调
                 if (on.change) {
@@ -291,6 +304,44 @@ class HopeControls {
                 }
             };
         });
+
+        function checked(original, targetEle) {
+            _this.utils
+                .siblings(targetEle, ".hopeui-form-radio")
+                .forEach(function (bro) {
+                    if (_this.utils.hasClass(bro, "hopeui-form-radioed")) {
+                        original.checked = true;
+
+                        _this.utils.removeClass(bro, "hopeui-form-radioed");
+                        _this.utils.removeClass(
+                            bro.childNodes[1],
+                            "hopeui-anim-scaleSpring"
+                        );
+
+                        bro.childNodes[1].innerHTML = "&#xe63f;";
+
+                        _this.utils.addClass(targetEle, "hopeui-form-radioed");
+                        _this.utils.addClass(
+                            targetEle.childNodes[1],
+                            "hopeui-anim-scaleSpring"
+                        );
+                        targetEle.childNodes[1].innerHTML = "&#xe643;";
+                    }
+                });
+        }
+
+        return {
+            val: function (value) {
+                if (value) {
+                    value.split(",").forEach(function (i) {
+                        checked($dom[i], $dom[i].nextSibling);
+                    });
+                }
+            },
+            clear: function () {
+                console.log("clear");
+            },
+        };
     }
 
     /**
@@ -327,15 +378,18 @@ class HopeControls {
     }) {
         let _this = this;
         //初始化控件组
-        this.selector({
-            on: controls.selector.on,
-        });
-        this.checkbox({
-            on: controls.checkbox.on,
-        });
-        this.radio({
-            on: controls.radio.on,
-        });
+
+        let initEle = {
+            selector: this.selector({
+                on: controls.selector.on,
+            }),
+            checkbox: this.checkbox({
+                on: controls.checkbox.on,
+            }),
+            radio: this.radio({
+                on: controls.radio.on,
+            }),
+        };
 
         //form事件绑定
         let $dom = [];
@@ -391,15 +445,12 @@ class HopeControls {
                         items.eles.forEach(function (ele, i) {
                             //校验
                             if (items.required) {
-                                if (ele.value) {
                                     //不为空
                                     obj.name = ele.name;
                                     if (ele.checked) {
                                         obj.value += `${ele.value},`;
                                     }
-                                } else {
-                                    //为空
-                                }
+    
                             } else {
                                 obj.name = ele.name;
                                 if (ele.checked) {
@@ -407,7 +458,7 @@ class HopeControls {
                                 }
                             }
                         });
-
+                        
                         obj.value = obj.value
                             .substring(0, obj.value.length - 1)
                             .trim();
@@ -425,7 +476,6 @@ class HopeControls {
                         items.eles.forEach(function (ele, i) {
                             //校验
                             if (items.required) {
-
                                 if (ele.value) {
                                     //不为空
                                     obj.name = ele.name;
@@ -433,22 +483,45 @@ class HopeControls {
                                     // 自定义校验
                                     if (verify[ele.name]) {
                                         if (!verify[ele.name](ele.value)) {
-
-                                            _this.utils.validation(ele, "pass", null, items.type);
+                                            _this.utils.validation(
+                                                ele,
+                                                "pass",
+                                                null,
+                                                items.type
+                                            );
                                         } else {
-                                            _this.utils.validation(ele, "error", verify[ele.name](ele.value), items.type);
+                                            _this.utils.validation(
+                                                ele,
+                                                "error",
+                                                verify[ele.name](ele.value),
+                                                items.type
+                                            );
                                         }
                                     } else {
-                                        _this.utils.validation(ele, "pass", null, items.type);
+                                        _this.utils.validation(
+                                            ele,
+                                            "pass",
+                                            null,
+                                            items.type
+                                        );
                                     }
                                 } else {
-                                    _this.utils.validation(ele, "error", "内容不能为空", items.type);
+                                    _this.utils.validation(
+                                        ele,
+                                        "error",
+                                        "内容不能为空",
+                                        items.type
+                                    );
                                 }
                             } else {
-
                                 obj.name = ele.name;
                                 obj.value += `${ele.value},`;
-                                _this.utils.validation(ele, "pass", null, items.type);
+                                _this.utils.validation(
+                                    ele,
+                                    "pass",
+                                    null,
+                                    items.type
+                                );
                             }
                         });
 
@@ -456,7 +529,6 @@ class HopeControls {
                             .substring(0, obj.value.length - 1)
                             .trim();
                         if (obj.name) {
-
                             formParams.push(obj);
                             // _this.utils.validation(obj, "pass", null, items.type);
                         }
@@ -473,6 +545,17 @@ class HopeControls {
                 return false;
             };
         });
+
+        return {
+            val: function (obj) {
+                Object.keys(obj).forEach(function (key) {
+                    initEle[obj[key].type].val(obj[key].value);
+                });
+            },
+            clear: function () {
+                console.log("clear");
+            },
+        };
     }
 
     /**
@@ -511,14 +594,10 @@ class HopeControls {
                 }
             },
             validation(ele, rule, prompt, type) {
-
                 let obj = ele,
                     bro = ele;
                 if (type == "select-one") {
-                    bro = this.siblings(
-                        ele,
-                        ".hopeui-form-select"
-                    )[0]
+                    bro = this.siblings(ele, ".hopeui-form-select")[0];
 
                     obj = bro.childNodes[1].childNodes[1];
                 }
@@ -535,18 +614,23 @@ class HopeControls {
                         // }
 
                         this.addClass(obj, "hopeui-form-error");
-                        if (this.siblings(bro, ".hopeui-form-error-prompt").length <= 0) {
+                        if (
+                            this.siblings(bro, ".hopeui-form-error-prompt")
+                                .length <= 0
+                        ) {
                             this.insertAfter(bro, {
                                 template: `<i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`,
                                 rootClass: `hopeui-form-error-prompt`,
                             });
                         } else {
-                            this.siblings(bro, ".hopeui-form-error-prompt")[0].innerHTML = ` <i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`
+                            this.siblings(
+                                bro,
+                                ".hopeui-form-error-prompt"
+                            )[0].innerHTML = ` <i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`;
                         }
 
                         break;
                     case "pass":
-
                         this.removeClass(obj, "hopeui-form-error");
                         this.removeELe(
                             this.siblings(bro, ".hopeui-form-error-prompt")[0]

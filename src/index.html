@@ -85,7 +85,7 @@
                 <div class="hopeui-input-block">
                     <input name="text" type="text" placeholder="请输入" value="" class="hopeui-input"
                         hope-verify="required" />
-                        <!-- <span class="hopeui-form-error-prompt">
+                    <!-- <span class="hopeui-form-error-prompt">
                             <i class="hopeui-icon hopeui-icon-close-fill"></i>文本至少得5个字符</span> -->
                 </div>
             </div>
@@ -107,8 +107,8 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">单选框</label>
                 <div class="hopeui-input-block">
-                    <input type="radio" name="radio" value="男" title="男" checked />
-                    <input type="radio" name="radio" value="女" title="女" />
+                    <input type="radio" name="radio" value="男" title="男" checked hope-verify="required"/>
+                    <input type="radio" name="radio" value="女" title="女" hope-verify="required"/>
                 </div>
             </div>
             <div class="hopeui-form-item">
@@ -120,8 +120,8 @@
             </div>
             <div class="hopeui-form-item">
                 <div class="hopeui-input-block">
-                    <button type="button" class="hopeui-btn hopeui-btn-primary">
-                        普通按钮
+                    <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="set()">
+                        赋值
                     </button>
                     <button type="submit" class="hopeui-btn">
                         提交按钮
@@ -131,8 +131,8 @@
         </form>
     </div>
     <script>
-        var hope = new HopeControls();
-        hope.form({
+        window.hope = new HopeControls();
+        window.form = hope.form({
             on: {
                 submit: function (e) {
                     console.log(e);
@@ -177,6 +177,21 @@
                 }
             }
         })
+
+        function set(){
+            form.val({
+                subject:{
+                    type:"checkbox",
+                    value:"0,1"
+                },
+                radio:{
+                    type:"radio",
+                    value:"1"
+                }
+            })
+        }
+
+        
     </script>
 </body>
 
