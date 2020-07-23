@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-22 18:17:31
+ * @LastEditTime : 2020-07-23 15:04:29
  * @Description  : hopeUI框架
  */
 
@@ -38,7 +38,7 @@ class HopeControls {
         }
         $dom.forEach(function (selector) {
             //模板初始化
-            let newEle, items, input;
+            let newEle, items;
             let template = `
                     <div class="hopeui-select-title">
                         <input
@@ -78,7 +78,7 @@ class HopeControls {
                 template: template,
                 rootClass: "hopeui-form-select",
             });
-            input = newEle.querySelector("input");
+
             items = newEle.querySelectorAll(".option");
 
             //单击后下拉列表事件
@@ -107,30 +107,10 @@ class HopeControls {
             items.forEach(function (item, i) {
                 item.onclick = function (e) {
                     e.stopPropagation();
-                    _this.utils.removeClass(items, "hopeui-select-this");
-                    _this.utils.addClass(item, "hopeui-select-this");
-                    _this.utils.removeClass(newEle, "hopeui-form-selected");
-
-                    input.setAttribute(
-                        "hope-value",
-                        item.getAttribute("hope-value")
-                    );
-                    if (item.getAttribute("hope-value")) {
-                        input.value = item.innerText;
-                    } else {
-                        input.value = "";
-                    }
-
-                    if (e.target.getAttribute("hope-group")) {
-                        selector.children[
-                            e.target.getAttribute("hope-group")
-                        ].children[
-                            e.target.getAttribute("hope-group-sort")
-                        ].selected = true;
-                    } else {
-                        selector.children[i].selected = true;
-                    }
-                    selector.value = selector.selectedOptions[0].value;
+                    handle(selector, newEle, items, {
+                        obj: item,
+                        idx: i,
+                    });
 
                     //选中options后回调
                     if (on.change) {
@@ -154,15 +134,64 @@ class HopeControls {
             });
         });
 
+        /**
+         * @description: 选择辅助方法
+         * @param {original} 原始元素
+         * @param {targetELe} 目标虚拟元素
+         * @param {optEles} 目标虚拟元素集合
+         * @param {optEles} 目标虚拟元素内选中选项
+         * @return:
+         */
+        function handle(original, targetELe, optEles, optEle) {
+            let input = targetELe.querySelector("input");
+
+            _this.utils.removeClass(optEles, "hopeui-select-this");
+            _this.utils.addClass(optEle.obj, "hopeui-select-this");
+            _this.utils.removeClass(targetELe, "hopeui-form-selected");
+
+            input.setAttribute(
+                "hope-value",
+                optEle.obj.getAttribute("hope-value")
+            );
+            if (optEle.obj.getAttribute("hope-value")) {
+                input.value = optEle.obj.innerText;
+            } else {
+                input.value = "";
+            }
+
+            if (optEle.obj.getAttribute("hope-group")) {
+                original.children[
+                    optEle.obj.getAttribute("hope-group")
+                ].children[
+                    optEle.obj.getAttribute("hope-group-sort")
+                ].selected = true;
+            } else {
+                original.children[optEle.idx].selected = true;
+            }
+            original.value = original.selectedOptions[0].value;
+        }
+
         return {
-            val: function (value) {
+            val: function (value, name) {
                 if (value) {
-                    value.split(",").forEach(function (i) {
-                        $dom[i].checked = true;
-                        _this.utils.addClass(
-                            $dom[i].nextSibling,
-                            "hopeui-form-checked"
-                        );
+                    let thisEle = _this.utils.$(`select[name=${name}]`);
+                    //值拆分成数组
+                    value.split(",").forEach(function (val, i) {
+                        //当前真是select的虚拟话元素位
+                        let opts = thisEle[i].nextSibling.querySelectorAll(
+                                ".option"
+                            ),
+                            idx = 0;
+                        //内选项集合
+                        opts.forEach(function (opt, j) {
+                            if (opt.getAttribute("hope-value") == val) {
+                                idx = j;
+                            }
+                        });
+                        handle(thisEle[i], thisEle[i].nextSibling, opts, {
+                            obj: opts[idx],
+                            idx: idx,
+                        });
                     });
                 }
             },
@@ -211,14 +240,7 @@ class HopeControls {
 
             newEle.onclick = function (e) {
                 e.stopPropagation();
-                if (_this.utils.hasClass(newEle, "hopeui-form-checked")) {
-                    checkbox.checked = false;
-                    _this.utils.removeClass(newEle, "hopeui-form-checked");
-                } else {
-                    checkbox.checked = true;
-                    _this.utils.addClass(newEle, "hopeui-form-checked");
-                }
-
+                handle(checkbox, newEle);
                 //点击回调
                 if (on.change) {
                     on.change({
@@ -230,15 +252,38 @@ class HopeControls {
             };
         });
 
+        /**
+         * @description: 选择辅助方法
+         * @param {original} 原始元素
+         * @param {targetELe} 目标虚拟元素
+         * @param {single} 是否只选择不取消选择
+         * @return:
+         */
+        function handle(original, targetEle, single) {
+            if (
+                _this.utils.hasClass(targetEle, "hopeui-form-checked") &&
+                !single
+            ) {
+                original.checked = false;
+                _this.utils.removeClass(targetEle, "hopeui-form-checked");
+            } else {
+                original.checked = true;
+                _this.utils.addClass(targetEle, "hopeui-form-checked");
+            }
+        }
+
         return {
-            val: function (value) {
+            val: function (value, name) {
                 if (value) {
-                    value.split(",").forEach(function (i) {
-                        $dom[i].checked = true;
-                        _this.utils.addClass(
-                            $dom[i].nextSibling,
-                            "hopeui-form-checked"
-                        );
+                    let thisEle = _this.utils.$(`input[name=${name}]`);
+                    value.split(",").forEach(function (val, i) {
+                        let idx = 0;
+                        thisEle.forEach(function (ele, j) {
+                            if (ele.value == val) {
+                                idx = j;
+                            }
+                        });
+                        handle(thisEle[idx], thisEle[idx].nextSibling, true);
                     });
                 }
             },
@@ -292,7 +337,7 @@ class HopeControls {
 
             newEle.onclick = function (e) {
                 e.stopPropagation();
-                checked(radio, newEle);
+                handle(radio, newEle);
 
                 //点击回调
                 if (on.change) {
@@ -305,7 +350,13 @@ class HopeControls {
             };
         });
 
-        function checked(original, targetEle) {
+        /**
+         * @description: 选择辅助方法
+         * @param {original} 原始元素
+         * @param {targetELe} 目标虚拟元素
+         * @return:
+         */
+        function handle(original, targetEle) {
             _this.utils
                 .siblings(targetEle, ".hopeui-form-radio")
                 .forEach(function (bro) {
@@ -331,12 +382,17 @@ class HopeControls {
         }
 
         return {
-            val: function (value) {
-                if (value) {
-                    value.split(",").forEach(function (i) {
-                        checked($dom[i], $dom[i].nextSibling);
+            val: function (value, name) {
+                let thisEle = _this.utils.$(`input[name=${name}]`);
+                value.split(",").forEach(function (val, i) {
+                    let idx = 0;
+                    thisEle.forEach(function (ele, j) {
+                        if (ele.value == val) {
+                            idx = j;
+                        }
                     });
-                }
+                    handle(thisEle[idx], thisEle[idx].nextSibling, true);
+                });
             },
             clear: function () {
                 console.log("clear");
@@ -445,12 +501,11 @@ class HopeControls {
                         items.eles.forEach(function (ele, i) {
                             //校验
                             if (items.required) {
-                                    //不为空
-                                    obj.name = ele.name;
-                                    if (ele.checked) {
-                                        obj.value += `${ele.value},`;
-                                    }
-    
+                                //不为空
+                                obj.name = ele.name;
+                                if (ele.checked) {
+                                    obj.value += `${ele.value},`;
+                                }
                             } else {
                                 obj.name = ele.name;
                                 if (ele.checked) {
@@ -458,7 +513,7 @@ class HopeControls {
                                 }
                             }
                         });
-                        
+
                         obj.value = obj.value
                             .substring(0, obj.value.length - 1)
                             .trim();
@@ -549,7 +604,7 @@ class HopeControls {
         return {
             val: function (obj) {
                 Object.keys(obj).forEach(function (key) {
-                    initEle[obj[key].type].val(obj[key].value);
+                    initEle[obj[key].type].val(obj[key].value, key);
                 });
             },
             clear: function () {

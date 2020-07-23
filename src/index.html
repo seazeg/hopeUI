@@ -178,15 +178,38 @@
             }
         })
 
+        
+        /**
+         * @description: 
+         * @param {
+         *             eleName:{
+         *                  type:"selector|checkbox|radio"，
+         *                  value:""
+         *              }
+         *         } 
+         * @return: 
+         */
         function set(){
             form.val({
+                city:{
+                    type:"selector",
+                    value:"南京"
+                },
+                school:{
+                    type:"selector",
+                    value:"清华大学"
+                },
+                LD:{
+                    type:"selector",
+                    value:"天津,乌鲁木齐,青岛"
+                },
                 subject:{
                     type:"checkbox",
-                    value:"0,1"
+                    value:"历史"
                 },
                 radio:{
                     type:"radio",
-                    value:"1"
+                    value:"女"
                 }
             })
         }
