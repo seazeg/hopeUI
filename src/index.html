@@ -123,8 +123,11 @@
                     <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="set()">
                         赋值
                     </button>
+                    <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="xclear()">
+                        重置
+                    </button>
                     <button type="submit" class="hopeui-btn">
-                        提交按钮
+                        提交表达
                     </button>
                 </div>
             </div>
@@ -162,6 +165,26 @@
                             console.log(e);
                         }
                     }
+                },
+                input: {
+                    on: {
+                        blur: function (e) {
+                            console.log(e);
+                        },
+                        focus: function (e) {
+                            console.log(e);
+                        }
+                    }
+                },
+                textarea: {
+                    on: {
+                        blur: function (e) {
+                            console.log(e);
+                        },
+                        focus: function (e) {
+                            console.log(e);
+                        }
+                    }
                 }
             },
             verify: {
@@ -178,7 +201,7 @@
             }
         })
 
-        
+
         /**
          * @description: 
          * @param {
@@ -203,6 +226,18 @@
                     type:"selector",
                     value:"天津,乌鲁木齐,青岛"
                 },
+                text:{
+                    type:"input",
+                    value:"我爱HopeUI"
+                },
+                textarea:{
+                    type:"textarea",
+                    value:"我爱北京天安门"
+                },
+                password:{
+                    type:"input",
+                    value:"999888999"
+                },
                 subject:{
                     type:"checkbox",
                     value:"历史"
@@ -212,6 +247,11 @@
                     value:"女"
                 }
             })
+        }
+
+        function xclear(){
+            console.log(1);
+            form.clear();
         }
 
         

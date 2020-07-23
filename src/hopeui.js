@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-23 15:04:29
+ * @LastEditTime : 2020-07-23 15:59:24
  * @Description  : hopeUI框架
  */
 
@@ -47,6 +47,7 @@ class HopeControls {
                             readonly
                             value=""
                             hope-value=""
+                            hope-type="selector"
                             class="hopeui-input"
                         />
                         <i class="hopeui-edge"></i>
@@ -196,7 +197,18 @@ class HopeControls {
                 }
             },
             clear: function () {
-                console.log("clear");
+                let thisEle = _this.utils.$(`select`);
+                thisEle.forEach(function (ele) {
+                    handle(
+                        ele,
+                        ele.nextSibling,
+                        ele.nextSibling.querySelectorAll(".option"),
+                        {
+                            obj: ele.nextSibling.querySelectorAll(".option")[0],
+                            idx: 0,
+                        }
+                    );
+                });
             },
         };
     }
@@ -288,7 +300,14 @@ class HopeControls {
                 }
             },
             clear: function () {
-                console.log("clear");
+                let thisEle = _this.utils.$("input[type=checkbox]");
+                thisEle.forEach(function (ele) {
+                    ele.checked = false;
+                    _this.utils.removeClass(
+                        ele.nextSibling,
+                        "hopeui-form-checked"
+                    );
+                });
             },
         };
     }
@@ -298,7 +317,6 @@ class HopeControls {
      * @param {type}
      * @return:
      */
-
     radio({
         ele: ele = null,
         options: options = null,
@@ -395,7 +413,120 @@ class HopeControls {
                 });
             },
             clear: function () {
-                console.log("clear");
+                let thisEle = _this.utils.$("input[type=radio]");
+                handle(thisEle[0], thisEle[0].nextSibling, true);
+            },
+        };
+    }
+
+    /**
+     * @description: 文本框
+     * @param {type}
+     * @return:
+     */
+
+    input({
+        ele: ele = null,
+        options: options = null,
+        on: on = {
+            blur: (blur = null),
+            focus: (focus = null),
+        },
+    }) {
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = _this.utils.$("input[type=text],input[type=password]");
+        } else {
+            if (_this.utils.$(ele)) {
+                $dom.push(_this.utils.$(ele));
+            } else {
+                $dom = _this.utils.$("input");
+            }
+        }
+
+        $dom.forEach(function (input) {
+            input.onblur = function (e) {
+                if (on.blur) {
+                    on.blur(e.target.value);
+                }
+            };
+            input.onfocus = function (e) {
+                if (on.focus) {
+                    on.focus(e.target.value);
+                }
+            };
+        });
+
+        return {
+            val: function (value, name) {
+                let thisEle = _this.utils.$(`input[name=${name}]`);
+                thisEle[0].value = value;
+            },
+            clear: function () {
+                let thisEle = _this.utils.$(
+                    "input[type=text],input[type=password]"
+                );
+                thisEle = Array.from(thisEle).filter(function (item) {
+                    if (item.getAttribute("hope-type") != "selector") {
+                        return item;
+                    }
+                });
+                thisEle.forEach(function (ele) {
+                    ele.value = "";
+                });
+            },
+        };
+    }
+
+    /**
+     * @description: 长文本框
+     * @param {type}
+     * @return:
+     */
+    textarea({
+        ele: ele = null,
+        options: options = null,
+        on: on = {
+            blur: (blur = null),
+            focus: (focus = null),
+        },
+    }) {
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = _this.utils.$("textarea");
+        } else {
+            if (_this.utils.$(ele)) {
+                $dom.push(_this.utils.$(ele));
+            } else {
+                $dom = _this.utils.$("input");
+            }
+        }
+
+        $dom.forEach(function (input) {
+            input.onblur = function (e) {
+                if (on.blur) {
+                    on.blur(e.target.value);
+                }
+            };
+            input.onfocus = function (e) {
+                if (on.focus) {
+                    on.focus(e.target.value);
+                }
+            };
+        });
+
+        return {
+            val: function (value, name) {
+                let thisEle = _this.utils.$(`textarea[name=${name}]`);
+                thisEle[0].value = value;
+            },
+            clear: function () {
+                let thisEle = _this.utils.$(`textarea`);
+                thisEle.forEach(function (ele) {
+                    ele.value = "";
+                });
             },
         };
     }
@@ -434,8 +565,7 @@ class HopeControls {
     }) {
         let _this = this;
         //初始化控件组
-
-        let initEle = {
+        let formControls = {
             selector: this.selector({
                 on: controls.selector.on,
             }),
@@ -444,6 +574,12 @@ class HopeControls {
             }),
             radio: this.radio({
                 on: controls.radio.on,
+            }),
+            input: this.input({
+                on: controls.input.on,
+            }),
+            textarea: this.textarea({
+                on: controls.textarea.on,
             }),
         };
 
@@ -604,11 +740,13 @@ class HopeControls {
         return {
             val: function (obj) {
                 Object.keys(obj).forEach(function (key) {
-                    initEle[obj[key].type].val(obj[key].value, key);
+                    formControls[obj[key].type].val(obj[key].value, key);
                 });
             },
             clear: function () {
-                console.log("clear");
+                Object.keys(formControls).forEach(function (key) {
+                    formControls[key].clear();
+                });
             },
         };
     }
