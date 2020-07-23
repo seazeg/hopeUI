@@ -105,6 +105,14 @@
                 </div>
             </div>
             <div class="hopeui-form-item">
+                <label class="hopeui-form-label">多选框</label>
+                <div class="hopeui-input-block">
+                    <input type="checkbox" name="task" value="打桩" hope-verify="required" />
+                    <input type="checkbox" name="task" value="钓鱼"" hope-verify="required" />
+                    <input type="checkbox" name="task" value="看电视" hope-verify="required" />
+                </div>
+            </div>
+            <div class="hopeui-form-item">
                 <label class="hopeui-form-label">单选框</label>
                 <div class="hopeui-input-block">
                     <input type="radio" name="radio" value="男" title="男" checked hope-verify="required"/>
@@ -230,6 +238,10 @@
                     type:"input",
                     value:"我爱HopeUI"
                 },
+                task:{
+                    type:"checkbox",
+                    value:"打桩"
+                },
                 textarea:{
                     type:"textarea",
                     value:"我爱北京天安门"
@@ -250,7 +262,6 @@
         }
 
         function xclear(){
-            console.log(1);
             form.clear();
         }
 

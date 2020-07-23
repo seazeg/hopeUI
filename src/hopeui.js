@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-23 15:59:24
+ * @LastEditTime : 2020-07-23 17:40:28
  * @Description  : hopeUI框架
  */
 
@@ -52,7 +52,7 @@ class HopeControls {
                         />
                         <i class="hopeui-edge"></i>
                     </div>
-                    <div class="hopeui-select-list hopeui-anim hopeui-anim-upbit">`;
+                    <div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}">`;
 
             Array.from(selector.children).forEach(function (item, i) {
                 if (item.tagName.toLowerCase() == "optgroup") {
@@ -112,12 +112,15 @@ class HopeControls {
                         obj: item,
                         idx: i,
                     });
-
                     //选中options后回调
                     if (on.change) {
                         on.change({
-                            label: item.innerText,
-                            value: item.getAttribute("hope-value"),
+                            originalParentEle:selector,
+                            virtualParentEle:selector.nextSibling,
+                            targetEle: e.target,
+                            label: e.target.innerText,
+                            value: e.target.getAttribute("hope-value"),
+                            name: e.target.parentNode.getAttribute("name"),
                             group: e.target.getAttribute("hope-group"),
                             groupSort: e.target.getAttribute("hope-group-sort"),
                         });
@@ -256,7 +259,9 @@ class HopeControls {
                 //点击回调
                 if (on.change) {
                     on.change({
-                        ele: checkbox,
+                        original: checkbox,
+                        targetEle: checkbox.nextSibling,
+                        name: checkbox.name,
                         value: checkbox.value,
                         status: checkbox.checked,
                     });
@@ -360,7 +365,9 @@ class HopeControls {
                 //点击回调
                 if (on.change) {
                     on.change({
-                        ele: radio,
+                        original: radio,
+                        targetEle: radio.nextSibling,
+                        name: radio.name,
                         value: radio.value,
                         status: radio.checked,
                     });
