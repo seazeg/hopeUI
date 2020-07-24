@@ -225,7 +225,17 @@
                     if (value.length < 6) {
                         return '密码至少输入6个字符';
                     }
-                }
+                },
+                task:function(value){
+                    if (value.length <= 0) {
+                        return '需要选择至少一个选项';
+                    }
+                },
+                subject:function(value){
+                    if (value.length <= 0) {
+                        return '需要选择至少一个选项';
+                    }
+                },
             }
         })
 

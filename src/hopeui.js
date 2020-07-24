@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-24 14:16:00
+ * @LastEditTime : 2020-07-24 14:49:32
  * @Description  : hopeUI框架
  */
 
@@ -699,11 +699,42 @@ class HopeControls {
                                 if (ele.checked) {
                                     obj.value += `${ele.value},`;
                                 }
+                                if (verify[ele.name]) {
+                                    if (!verify[ele.name](obj.value)) {
+                                        _this.utils.validation(
+                                            ele,
+                                            "pass",
+                                            null,
+                                            items.type
+                                        );
+                                    } else {
+                                        _this.utils.validation(
+                                            ele,
+                                            "error",
+                                            verify[ele.name](obj.value),
+                                            items.type
+                                        );
+                                        status = false;
+                                    }
+                                } else {
+                                    _this.utils.validation(
+                                        ele,
+                                        "pass",
+                                        null,
+                                        items.type
+                                    );
+                                }
                             } else {
                                 obj.name = ele.name;
                                 if (ele.checked) {
                                     obj.value += `${ele.value},`;
                                 }
+                                _this.utils.validation(
+                                    ele,
+                                    "pass",
+                                    null,
+                                    items.type
+                                );
                             }
                         });
 
@@ -841,8 +872,12 @@ class HopeControls {
                     bro = ele;
                 if (type == "select-one") {
                     bro = this.siblings(ele, ".hopeui-form-select")[0];
-
                     obj = bro.childNodes[1].childNodes[1];
+                }
+                if (type == "checkbox") {
+                    bro = ele.parentNode.querySelectorAll(".hopeui-form-checkbox")[
+                        ele.parentNode.querySelectorAll(".hopeui-form-checkbox").length - 1
+                    ];
                 }
                 switch (rule) {
                     case "error":
