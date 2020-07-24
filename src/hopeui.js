@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-24 14:10:08
+ * @LastEditTime : 2020-07-24 14:16:00
  * @Description  : hopeUI框架
  */
 
@@ -724,44 +724,34 @@ class HopeControls {
                         items.eles.forEach(function (ele, i) {
                             //校验
                             if (items.required) {
-                                if (ele.value) {
-                                    //不为空
-                                    obj.name = ele.name;
-                                    obj.value += `${ele.value},`;
-                                    // 自定义校验
-                                    if (verify[ele.name]) {
-                                        if (!verify[ele.name](ele.value)) {
-                                            _this.utils.validation(
-                                                ele,
-                                                "pass",
-                                                null,
-                                                items.type
-                                            );
-                                        } else {
-                                            _this.utils.validation(
-                                                ele,
-                                                "error",
-                                                verify[ele.name](ele.value),
-                                                items.type
-                                            );
-                                            status = false;
-                                        }
-                                    } else {
+                                //不为空
+                                obj.name = ele.name;
+                                obj.value += `${ele.value},`;
+                                // 自定义校验
+                                if (verify[ele.name]) {
+                                    if (!verify[ele.name](ele.value)) {
                                         _this.utils.validation(
                                             ele,
                                             "pass",
                                             null,
                                             items.type
                                         );
+                                    } else {
+                                        _this.utils.validation(
+                                            ele,
+                                            "error",
+                                            verify[ele.name](ele.value),
+                                            items.type
+                                        );
+                                        status = false;
                                     }
                                 } else {
                                     _this.utils.validation(
                                         ele,
-                                        "error",
-                                        "内容不能为空",
+                                        "pass",
+                                        null,
                                         items.type
                                     );
-                                    status = false;
                                 }
                             } else {
                                 obj.name = ele.name;

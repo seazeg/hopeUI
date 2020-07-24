@@ -108,15 +108,15 @@
                 <label class="hopeui-form-label">多选框</label>
                 <div class="hopeui-input-block">
                     <input type="checkbox" name="task" value="打桩" hope-verify="required" />
-                    <input type="checkbox" name="task" value="钓鱼"" hope-verify="required" />
+                    <input type="checkbox" name="task" value="钓鱼"" hope-verify=" required" />
                     <input type="checkbox" name="task" value="看电视" hope-verify="required" />
                 </div>
             </div>
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">单选框</label>
                 <div class="hopeui-input-block">
-                    <input type="radio" name="radio" value="男" title="男" checked hope-verify="required"/>
-                    <input type="radio" name="radio" value="女" title="女" hope-verify="required"/>
+                    <input type="radio" name="radio" value="男" title="男" checked hope-verify="required" />
+                    <input type="radio" name="radio" value="女" title="女" hope-verify="required" />
                 </div>
             </div>
             <div class="hopeui-form-item">
@@ -182,7 +182,7 @@
                         focus: function (e) {
                             console.log(e);
                         },
-                        input:function (e) {
+                        input: function (e) {
                             console.log(e);
                         }
                     }
@@ -195,14 +195,22 @@
                         focus: function (e) {
                             console.log(e);
                         },
-                        input:function (e) {
+                        input: function (e) {
                             console.log(e);
                         }
                     }
                 }
             },
             verify: {
+                city: function(value){
+                    if (value.length <= 0) {
+                        return '请选择一个选项';
+                    }
+                },
                 text: function (value) {
+                    if (value.length <= 0) {
+                        return '文本不能为空';
+                    }
                     if (value.length < 5) {
                         return '文本至少得5个字符';
                     }
@@ -211,6 +219,9 @@
                     }
                 },
                 password: function (value) {
+                    if (value.length <= 0) {
+                        return '文本不能为空';
+                    }
                     if (value.length < 6) {
                         return '密码至少输入6个字符';
                     }
@@ -229,52 +240,50 @@
          *         } 
          * @return: 
          */
-        function set(){
+        function set() {
             form.val({
-                city:{
-                    type:"selector",
-                    value:"南京"
+                city: {
+                    type: "selector",
+                    value: "南京"
                 },
-                school:{
-                    type:"selector",
-                    value:"清华大学"
+                school: {
+                    type: "selector",
+                    value: "清华大学"
                 },
-                LD:{
-                    type:"selector",
-                    value:"天津,乌鲁木齐,青岛"
+                LD: {
+                    type: "selector",
+                    value: "天津,乌鲁木齐,青岛"
                 },
-                text:{
-                    type:"input",
-                    value:"我爱HopeUI"
+                text: {
+                    type: "input",
+                    value: "我爱HopeUI"
                 },
-                task:{
-                    type:"checkbox",
-                    value:"打桩"
+                task: {
+                    type: "checkbox",
+                    value: "打桩"
                 },
-                textarea:{
-                    type:"textarea",
-                    value:"我爱北京天安门"
+                textarea: {
+                    type: "textarea",
+                    value: "我爱北京天安门"
                 },
-                password:{
-                    type:"input",
-                    value:"999888999"
+                password: {
+                    type: "input",
+                    value: "999888999"
                 },
-                subject:{
-                    type:"checkbox",
-                    value:"历史"
+                subject: {
+                    type: "checkbox",
+                    value: "历史"
                 },
-                radio:{
-                    type:"radio",
-                    value:"女"
+                radio: {
+                    type: "radio",
+                    value: "女"
                 }
             })
         }
 
-        function xclear(){
+        function xclear() {
             form.clear();
         }
-
-        
     </script>
 </body>
 
