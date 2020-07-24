@@ -115,7 +115,7 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">单选框</label>
                 <div class="hopeui-input-block">
-                    <input type="radio" name="radio" value="男" title="男" checked hope-verify="required" />
+                    <input type="radio" name="radio" value="男" title="男"  hope-verify="required" />
                     <input type="radio" name="radio" value="女" title="女" hope-verify="required" />
                 </div>
             </div>
@@ -232,6 +232,11 @@
                     }
                 },
                 subject:function(value){
+                    if (value.length <= 0) {
+                        return '需要选择至少一个选项';
+                    }
+                },
+                radio:function(value){
                     if (value.length <= 0) {
                         return '需要选择至少一个选项';
                     }

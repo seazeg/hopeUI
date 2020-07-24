@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-24 14:49:32
+ * @LastEditTime : 2020-07-24 14:56:45
  * @Description  : hopeUI框架
  */
 
@@ -213,8 +213,7 @@ class HopeControls {
                     handle(
                         ele,
                         ele.nextSibling,
-                        ele.nextSibling.querySelectorAll(".option"),
-                        {
+                        ele.nextSibling.querySelectorAll(".option"), {
                             obj: ele.nextSibling.querySelectorAll(".option")[0],
                             idx: 0,
                         }
@@ -873,10 +872,13 @@ class HopeControls {
                 if (type == "select-one") {
                     bro = this.siblings(ele, ".hopeui-form-select")[0];
                     obj = bro.childNodes[1].childNodes[1];
-                }
-                if (type == "checkbox") {
+                } else if (type == "checkbox") {
                     bro = ele.parentNode.querySelectorAll(".hopeui-form-checkbox")[
                         ele.parentNode.querySelectorAll(".hopeui-form-checkbox").length - 1
+                    ];
+                } else if (type == "radio") {
+                    bro = ele.parentNode.querySelectorAll(".hopeui-form-radio")[
+                        ele.parentNode.querySelectorAll(".hopeui-form-radio").length - 1
                     ];
                 }
                 switch (rule) {
@@ -884,7 +886,7 @@ class HopeControls {
                         this.addClass(obj, "hopeui-form-error");
                         if (
                             this.siblings(bro, ".hopeui-form-error-prompt")
-                                .length <= 0
+                            .length <= 0
                         ) {
                             this.insertAfter(bro, {
                                 template: `<i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`,
