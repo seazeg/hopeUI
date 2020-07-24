@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-23 17:40:28
+ * @LastEditTime : 2020-07-24 10:58:08
  * @Description  : hopeUI框架
  */
 
@@ -112,11 +112,16 @@ class HopeControls {
                         obj: item,
                         idx: i,
                     });
+                    // if (!i) {
+                    //     _this.utils.validation(selector, "pass", null, "select-one");
+                    // }else{
+
+                    // }
                     //选中options后回调
                     if (on.change) {
                         on.change({
-                            originalParentEle:selector,
-                            virtualParentEle:selector.nextSibling,
+                            originalParentEle: selector,
+                            virtualParentEle: selector.nextSibling,
                             targetEle: e.target,
                             label: e.target.innerText,
                             value: e.target.getAttribute("hope-value"),
@@ -197,6 +202,9 @@ class HopeControls {
                             idx: idx,
                         });
                     });
+                    thisEle.forEach(function (ele) {
+                        _this.utils.validation(ele, "pass", null, "select-one");
+                    });
                 }
             },
             clear: function () {
@@ -205,8 +213,7 @@ class HopeControls {
                     handle(
                         ele,
                         ele.nextSibling,
-                        ele.nextSibling.querySelectorAll(".option"),
-                        {
+                        ele.nextSibling.querySelectorAll(".option"), {
                             obj: ele.nextSibling.querySelectorAll(".option")[0],
                             idx: 0,
                         }
@@ -301,6 +308,9 @@ class HopeControls {
                             }
                         });
                         handle(thisEle[idx], thisEle[idx].nextSibling, true);
+                    });
+                    thisEle.forEach(function (ele) {
+                        _this.utils.validation(ele, "pass", null, "checkbox");
                     });
                 }
             },
@@ -418,6 +428,9 @@ class HopeControls {
                     });
                     handle(thisEle[idx], thisEle[idx].nextSibling, true);
                 });
+                thisEle.forEach(function (ele) {
+                    _this.utils.validation(ele, "pass", null, "radio");
+                });
             },
             clear: function () {
                 let thisEle = _this.utils.$("input[type=radio]");
@@ -438,6 +451,7 @@ class HopeControls {
         on: on = {
             blur: (blur = null),
             focus: (focus = null),
+            input: (input = null),
         },
     }) {
         let _this = this;
@@ -455,12 +469,26 @@ class HopeControls {
         $dom.forEach(function (input) {
             input.onblur = function (e) {
                 if (on.blur) {
-                    on.blur(e.target.value);
+                    on.blur({
+                        targetELe: e.target,
+                        value: e.target.value,
+                    });
                 }
             };
             input.onfocus = function (e) {
                 if (on.focus) {
-                    on.focus(e.target.value);
+                    on.focus({
+                        targetELe: e.target,
+                        value: e.target.value,
+                    });
+                }
+            };
+            input.oninput = function (e) {
+                if (on.input) {
+                    on.input({
+                        targetELe: e.target,
+                        value: e.target.value,
+                    });
                 }
             };
         });
@@ -469,6 +497,9 @@ class HopeControls {
             val: function (value, name) {
                 let thisEle = _this.utils.$(`input[name=${name}]`);
                 thisEle[0].value = value;
+                thisEle.forEach(function (ele) {
+                    _this.utils.validation(ele, "pass", null, "input");
+                });
             },
             clear: function () {
                 let thisEle = _this.utils.$(
@@ -497,6 +528,7 @@ class HopeControls {
         on: on = {
             blur: (blur = null),
             focus: (focus = null),
+            input: (input = null),
         },
     }) {
         let _this = this;
@@ -514,12 +546,26 @@ class HopeControls {
         $dom.forEach(function (input) {
             input.onblur = function (e) {
                 if (on.blur) {
-                    on.blur(e.target.value);
+                    on.blur({
+                        targetELe: e.target,
+                        value: e.target.value,
+                    });
                 }
             };
             input.onfocus = function (e) {
                 if (on.focus) {
-                    on.focus(e.target.value);
+                    on.focus({
+                        targetELe: e.target,
+                        value: e.target.value,
+                    });
+                }
+            };
+            input.oninput = function (e) {
+                if (on.input) {
+                    on.input({
+                        targetELe: e.target,
+                        value: e.target.value,
+                    });
                 }
             };
         });
@@ -528,6 +574,9 @@ class HopeControls {
             val: function (value, name) {
                 let thisEle = _this.utils.$(`textarea[name=${name}]`);
                 thisEle[0].value = value;
+                thisEle.forEach(function (ele) {
+                    _this.utils.validation(ele, "pass", null, "textarea");
+                });
             },
             clear: function () {
                 let thisEle = _this.utils.$(`textarea`);
@@ -803,20 +852,10 @@ class HopeControls {
                 }
                 switch (rule) {
                     case "error":
-                        // let obj = ele,
-                        //     bro = ele;
-                        // if (type == "select-one") {
-                        //     bro = this.siblings(
-                        //         ele,
-                        //         ".hopeui-form-select"
-                        //     )[0]
-                        //     obj = bro.childNodes[1].childNodes[1];
-                        // }
-
                         this.addClass(obj, "hopeui-form-error");
                         if (
                             this.siblings(bro, ".hopeui-form-error-prompt")
-                                .length <= 0
+                            .length <= 0
                         ) {
                             this.insertAfter(bro, {
                                 template: `<i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`,
