@@ -132,7 +132,7 @@
                         赋值
                     </button>
                     <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="xclear()">
-                        重置
+                        清空
                     </button>
                     <button type="submit" class="hopeui-btn">
                         提交表单
@@ -205,6 +205,9 @@
                 text: function (value) {
                     if (value.length < 5) {
                         return '文本至少得5个字符';
+                    }
+                    if (!/^[A-Za-z]+$/.test(value)) {
+                        return '文本必须是英文';
                     }
                 },
                 password: function (value) {

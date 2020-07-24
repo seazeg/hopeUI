@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-24 10:58:08
+ * @LastEditTime : 2020-07-24 14:10:08
  * @Description  : hopeUI框架
  */
 
@@ -213,7 +213,8 @@ class HopeControls {
                     handle(
                         ele,
                         ele.nextSibling,
-                        ele.nextSibling.querySelectorAll(".option"), {
+                        ele.nextSibling.querySelectorAll(".option"),
+                        {
                             obj: ele.nextSibling.querySelectorAll(".option")[0],
                             idx: 0,
                         }
@@ -654,7 +655,8 @@ class HopeControls {
             form.onsubmit = function (e) {
                 e.stopPropagation();
                 let sortArr = {},
-                    formParams = [];
+                    formParams = [],
+                    status = true;
                 for (let item of e.target) {
                     if (
                         (item.type != "submit" ||
@@ -693,7 +695,6 @@ class HopeControls {
                         items.eles.forEach(function (ele, i) {
                             //校验
                             if (items.required) {
-                                //不为空
                                 obj.name = ele.name;
                                 if (ele.checked) {
                                     obj.value += `${ele.value},`;
@@ -743,6 +744,7 @@ class HopeControls {
                                                 verify[ele.name](ele.value),
                                                 items.type
                                             );
+                                            status = false;
                                         }
                                     } else {
                                         _this.utils.validation(
@@ -759,6 +761,7 @@ class HopeControls {
                                         "内容不能为空",
                                         items.type
                                     );
+                                    status = false;
                                 }
                             } else {
                                 obj.name = ele.name;
@@ -787,6 +790,7 @@ class HopeControls {
                     on.submit({
                         objectParams: formParams,
                         stringParams: _this.utils.deserialization(formParams),
+                        status: status,
                     });
                 }
                 return false;
@@ -855,7 +859,7 @@ class HopeControls {
                         this.addClass(obj, "hopeui-form-error");
                         if (
                             this.siblings(bro, ".hopeui-form-error-prompt")
-                            .length <= 0
+                                .length <= 0
                         ) {
                             this.insertAfter(bro, {
                                 template: `<i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`,
