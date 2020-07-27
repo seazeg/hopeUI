@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>基础控件</title>
-    <link rel="stylesheet" href="./less/hopeui.css" />
+    <link rel="stylesheet" href="./hopeui.css" />
     <script src="./hopeui.js"></script>
 </head>
 
@@ -143,8 +143,7 @@
         </form>
     </div>
     <script>
-        window.hope = new HopeControls();
-        window.form = hope.form({
+        hope.form({
             on: {
                 submit: function (e) {
                     console.log(e);
