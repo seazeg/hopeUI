@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-24 14:56:45
+ * @LastEditTime : 2020-07-24 15:04:23
  * @Description  : hopeUI框架
  */
 
@@ -412,6 +412,14 @@ class HopeControls {
                             "hopeui-anim-scaleSpring"
                         );
                         targetEle.childNodes[1].innerHTML = "&#xe643;";
+                    }else{
+                        original.checked = true;
+                        _this.utils.addClass(targetEle, "hopeui-form-radioed");
+                        _this.utils.addClass(
+                            targetEle.childNodes[1],
+                            "hopeui-anim-scaleSpring"
+                        );
+                        targetEle.childNodes[1].innerHTML = "&#xe643;";
                     }
                 });
         }
@@ -426,7 +434,7 @@ class HopeControls {
                             idx = j;
                         }
                     });
-                    handle(thisEle[idx], thisEle[idx].nextSibling, true);
+                    handle(thisEle[idx], thisEle[idx].nextSibling);
                 });
                 thisEle.forEach(function (ele) {
                     _this.utils.validation(ele, "pass", null, "radio");
@@ -434,7 +442,7 @@ class HopeControls {
             },
             clear: function () {
                 let thisEle = _this.utils.$("input[type=radio]");
-                handle(thisEle[0], thisEle[0].nextSibling, true);
+                handle(thisEle[0], thisEle[0].nextSibling);
             },
         };
     }

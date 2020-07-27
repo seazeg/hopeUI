@@ -115,8 +115,9 @@
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">单选框</label>
                 <div class="hopeui-input-block">
-                    <input type="radio" name="radio" value="男" title="男"  hope-verify="required" />
+                    <input type="radio" name="radio" value="男" title="男" hope-verify="required" checked/>
                     <input type="radio" name="radio" value="女" title="女" hope-verify="required" />
+                    <input type="radio" name="radio" value="什么玩意" title="什么玩意" hope-verify="required" />
                 </div>
             </div>
             <div class="hopeui-form-item">
@@ -132,7 +133,7 @@
                         赋值
                     </button>
                     <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="xclear()">
-                        清空
+                        重置
                     </button>
                     <button type="submit" class="hopeui-btn">
                         提交表单
@@ -202,7 +203,7 @@
                 }
             },
             verify: {
-                city: function(value){
+                city: function (value) {
                     if (value.length <= 0) {
                         return '请选择一个选项';
                     }
@@ -218,6 +219,16 @@
                         return '文本必须是英文';
                     }
                 },
+                school: function (value) {
+                    if (value.length <= 0) {
+                        return '请选择一个选项';
+                    }
+                },
+                LD: function (value) {
+                    if (value.length <= 0) {
+                        return '请选择一个选项';
+                    }
+                },
                 password: function (value) {
                     if (value.length <= 0) {
                         return '文本不能为空';
@@ -226,17 +237,22 @@
                         return '密码至少输入6个字符';
                     }
                 },
-                task:function(value){
+                task: function (value) {
                     if (value.length <= 0) {
                         return '需要选择至少一个选项';
                     }
                 },
-                subject:function(value){
+                subject: function (value) {
                     if (value.length <= 0) {
                         return '需要选择至少一个选项';
                     }
                 },
-                radio:function(value){
+                radio: function (value) {
+                    if (value.length <= 0) {
+                        return '需要选择至少一个选项';
+                    }
+                },
+                textarea: function (value) {
                     if (value.length <= 0) {
                         return '需要选择至少一个选项';
                     }
