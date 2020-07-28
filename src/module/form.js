@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-28 16:41:46
+ * @LastEditTime : 2020-07-28 16:58:29
  * @Description  : 表单控件组
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -112,6 +112,7 @@ class FormControls {
                         name: _this.parent().attr("name"),
                         group: _this.attr("hope-group"),
                         groupSort: _this.attr("hope-group-sort"),
+                        eventName: "change",
                     });
                 }
             });
@@ -253,6 +254,7 @@ class FormControls {
                         name: checkbox.name,
                         value: checkbox.value,
                         status: checkbox.checked,
+                        eventName: "change",
                     });
                 }
             });
@@ -360,6 +362,7 @@ class FormControls {
                         name: radio.name,
                         value: radio.value,
                         status: radio.checked,
+                        eventName: "change",
                     });
                 }
             });
@@ -465,30 +468,35 @@ class FormControls {
         }
 
         $dom.forEach(function (input) {
-            input.onblur = function (e) {
-                if (on.blur) {
-                    on.blur({
-                        targetELe: e.target,
-                        value: e.target.value,
-                    });
-                }
-            };
-            input.onfocus = function (e) {
-                if (on.focus) {
-                    on.focus({
-                        targetELe: e.target,
-                        value: e.target.value,
-                    });
-                }
-            };
-            input.oninput = function (e) {
-                if (on.input) {
-                    on.input({
-                        targetELe: e.target,
-                        value: e.target.value,
-                    });
-                }
-            };
+            if (!input.getAttribute("hope-type")) {
+                input.onblur = function (e) {
+                    if (on.blur) {
+                        on.blur({
+                            targetELe: e.target,
+                            value: e.target.value,
+                            eventName: "blur",
+                        });
+                    }
+                };
+                input.onfocus = function (e) {
+                    if (on.focus) {
+                        on.focus({
+                            targetELe: e.target,
+                            value: e.target.value,
+                            eventName: "focus",
+                        });
+                    }
+                };
+                input.oninput = function (e) {
+                    if (on.input) {
+                        on.input({
+                            targetELe: e.target,
+                            value: e.target.value,
+                            eventName: "input",
+                        });
+                    }
+                };
+            }
         });
 
         return {
@@ -560,6 +568,7 @@ class FormControls {
                     on.blur({
                         targetELe: e.target,
                         value: e.target.value,
+                        eventName: "blur",
                     });
                 }
             };
@@ -568,6 +577,7 @@ class FormControls {
                     on.focus({
                         targetELe: e.target,
                         value: e.target.value,
+                        eventName: "focus",
                     });
                 }
             };
@@ -576,6 +586,7 @@ class FormControls {
                     on.input({
                         targetELe: e.target,
                         value: e.target.value,
+                        eventName: "input",
                     });
                 }
             };
