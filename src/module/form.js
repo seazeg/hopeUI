@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-28 16:20:00
+ * @LastEditTime : 2020-07-28 16:41:46
  * @Description  : 表单控件组
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -293,12 +293,7 @@ class FormControls {
                                     handle(thisEle, $(thisEle).next(), true);
                                 }
                             });
-                            utils.validation(
-                                thisEle,
-                                "pass",
-                                null,
-                                "checkbox"
-                            );
+                            utils.validation(thisEle, "pass", null, "checkbox");
                         });
                     });
                 }
@@ -556,9 +551,7 @@ class FormControls {
     }) {
         let $dom = $("textarea");
         if (ele) {
-            utils.isSelf(ele)
-                ? ($dom = $(ele))
-                : ($dom = $(`${ele} textarea`));
+            utils.isSelf(ele) ? ($dom = $(ele)) : ($dom = $(`${ele} textarea`));
         }
 
         $dom.forEach(function (textarea) {
@@ -601,12 +594,7 @@ class FormControls {
 
                         eleArr.forEach(function (thisEle, i) {
                             $(thisEle).val(obj[key].value);
-                            utils.validation(
-                                thisEle,
-                                "pass",
-                                null,
-                                "textarea"
-                            );
+                            utils.validation(thisEle, "pass", null, "textarea");
                         });
                     });
                 }
@@ -690,7 +678,6 @@ class FormControls {
         }
         $dom.forEach(function (form) {
             form.onsubmit = function (e) {
-                
                 e.stopPropagation();
                 let sortArr = {},
                     formParams = [],
@@ -746,7 +733,6 @@ class FormControls {
                                             items.type
                                         );
                                     } else {
-                                        
                                         utils.validation(
                                             ele,
                                             "error",
@@ -768,12 +754,7 @@ class FormControls {
                                 if (ele.checked) {
                                     obj.value += `${ele.value},`;
                                 }
-                                utils.validation(
-                                    ele,
-                                    "pass",
-                                    null,
-                                    items.type
-                                );
+                                utils.validation(ele, "pass", null, items.type);
                             }
                         });
 
@@ -796,7 +777,9 @@ class FormControls {
                             if (items.required) {
                                 //不为空
                                 obj.name = ele.name;
-                                obj.value += `${ele.value},`;
+                                if (ele.value) {
+                                    obj.value += `${ele.value},`;
+                                }
                                 // 自定义校验
                                 if (verify[ele.name]) {
                                     if (!verify[ele.name](ele.value)) {
@@ -825,22 +808,21 @@ class FormControls {
                                 }
                             } else {
                                 obj.name = ele.name;
-                                obj.value += `${ele.value},`;
-                                utils.validation(
-                                    ele,
-                                    "pass",
-                                    null,
-                                    items.type
-                                );
+                                if (ele.value) {
+                                    obj.value += `${ele.value},`;
+                                }
+                                utils.validation(ele, "pass", null, items.type);
                             }
                         });
 
                         obj.value = obj.value
                             .substring(0, obj.value.length - 1)
                             .trim();
-                        if (obj.name) {
-                            formParams.push(obj);
-                            // utils.validation(obj, "pass", null, items.type);
+
+                        if (items.required) {
+                            if (obj.value) {
+                                formParams.push(obj);
+                            }
                         }
                     }
                 });
