@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div style="padding:50px 10px;width:40%;display:inline-block">
+    <div style="padding:50px 10px;width:30%;display:inline-block">
         <form class="hopeui-form" name="form" action="" id="form">
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">下拉框</label>
@@ -142,7 +142,7 @@
             </div>
         </form>
     </div>
-    <div style="padding:50px 10px;width:40%;display:inline-block">
+    <div style="padding:50px 10px;width:30%;display:inline-block">
         <form class="hopeui-form" name="form" action="" id="form2">
             <div class="hopeui-form-item">
                 <label class="hopeui-form-label">下拉框</label>
@@ -274,16 +274,59 @@
             </div>
         </form>
     </div>
+    <div style="padding:50px 10px;width:30%;display:inline-block">
+        <form class="hopeui-form" name="form" action="">
+            <div class="hopeui-form-item">
+                <label class="hopeui-form-label">下拉框</label>
+                <div class="hopeui-input-block">
+                    <select name="city" id="city" hope-verify="required">
+                        <option value="">请选择</option>
+                        <option value="青岛">青岛</option>
+                        <option value="武汉">武汉</option>
+                        <option value="乌鲁木齐">乌鲁木齐</option>
+                        <option value="南京">南京</option>
+                        <option value="天津">天津</option>
+                        <option value="郑州">郑州</option>
+                        <option value="重庆">重庆</option>
+                        <option value="成都">成都</option>
+                        <option value="云南">云南</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hopeui-form-item">
+                <label class="hopeui-form-label">文本框</label>
+                <div class="hopeui-input-block">
+                    <input name="text" type="text" id="text" placeholder="请输入" value="" class="hopeui-input"
+                        hope-verify="required" />
+                </div>
+            </div>
+        </form>
+    </div>
     <script>
-        // let sel = hope.selector({
-        //     ele:'#dd'
-        // })
-        // sel.val({
-        //     LD: {
-        //             type: "selector",
-        //             value: "天津"
-        //         },
-        // })
+        let ipt = hope.input({
+            ele: '#text',
+            on: {
+                blur: function (e) {
+                    console.log(e);
+                },
+                focus: function (e) {
+                    console.log(e);
+                },
+                input: function (e) {
+                    console.log(e);
+                }
+            }
+        })
+        let sel = hope.selector({
+            ele: '#city'
+        })
+        sel.val({
+            LD: {
+                type: "selector",
+                value: "天津"
+            },
+        })
+
         let form = hope.form({
             ele: '#form',
             on: {
@@ -615,11 +658,10 @@
         function xclear() {
             form.clear();
         }
+
         function xclear2() {
             form2.clear();
         }
-
-        
     </script>
 </body>
 

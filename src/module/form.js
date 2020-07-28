@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-28 16:58:29
+ * @LastEditTime : 2020-07-28 18:08:57
  * @Description  : 表单控件组
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -32,9 +32,12 @@ class FormControls {
             close: null,
         },
     }) {
+        let type = "select";
         let $dom = $("select");
         if (ele) {
-            utils.isSelf(ele) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
+            utils.isSelf(ele, type)
+                ? ($dom = $(ele))
+                : ($dom = $(`${ele} select`));
         }
 
         $dom.forEach(function (selector) {
@@ -166,7 +169,7 @@ class FormControls {
                     Object.keys(obj).forEach(function (key) {
                         let eleArr = $(`select[name=${key}]`);
                         if (ele) {
-                            utils.isSelf(ele)
+                            utils.isSelf(ele, type)
                                 ? (eleArr = $(ele))
                                 : (eleArr = $(`${ele} select[name=${key}]`));
                         }
@@ -196,7 +199,7 @@ class FormControls {
             clear: function () {
                 let thisEle = $(`select`);
                 if (ele) {
-                    utils.isSelf(ele)
+                    utils.isSelf(ele, type)
                         ? (thisEle = $(ele))
                         : (thisEle = $(`${ele} select`));
                 }
@@ -223,10 +226,11 @@ class FormControls {
             change: null,
         },
     }) {
+        let type = "input";
         let $dom = $("input[type=checkbox]");
 
         if (ele) {
-            utils.isSelf(ele)
+            utils.isSelf(ele, type)
                 ? ($dom = $(ele))
                 : ($dom = $(`${ele} input[type=checkbox]`));
         }
@@ -284,7 +288,7 @@ class FormControls {
                         let eleArr = $(`input[name=${key}]`);
 
                         if (ele) {
-                            utils.isSelf(ele)
+                            utils.isSelf(ele, type)
                                 ? (eleArr = $(ele))
                                 : (eleArr = $(`${ele} input[name=${key}]`));
                         }
@@ -303,7 +307,7 @@ class FormControls {
             clear: function () {
                 let thisEle = $(`input[type=checkbox]`);
                 if (ele) {
-                    utils.isSelf(ele)
+                    utils.isSelf(ele, type)
                         ? (thisEle = $(ele))
                         : (thisEle = $(`${ele} input[type=checkbox]`));
                 }
@@ -327,9 +331,10 @@ class FormControls {
             change: null,
         },
     }) {
+        let type = "input";
         let $dom = $("input[type=radio]");
         if (ele) {
-            utils.isSelf(ele)
+            utils.isSelf(ele, type)
                 ? ($dom = $(ele))
                 : ($dom = $(`${ele} input[type=radio]`));
         }
@@ -410,7 +415,7 @@ class FormControls {
                     Object.keys(obj).forEach(function (key) {
                         let eleArr = $(`input[name=${key}]`);
                         if (ele) {
-                            utils.isSelf(ele)
+                            utils.isSelf(ele, type)
                                 ? (eleArr = $(ele))
                                 : (eleArr = $(`${ele} input[name=${key}]`));
                         }
@@ -433,7 +438,7 @@ class FormControls {
             clear: function () {
                 let thisEle = $(`input[type=radio]`);
                 if (ele) {
-                    utils.isSelf(ele)
+                    utils.isSelf(ele, type)
                         ? (thisEle = $(ele))
                         : (thisEle = $(`${ele} input[type=radio]`));
                 }
@@ -458,9 +463,10 @@ class FormControls {
             input: null,
         },
     }) {
+        let type = "input";
         let $dom = $("input[type=text],input[type=password]");
         if (ele) {
-            utils.isSelf(ele)
+            utils.isSelf(ele, type)
                 ? ($dom = $(ele))
                 : ($dom = $(
                       `${ele} input[type=text],${ele} input[type=password]`
@@ -506,7 +512,7 @@ class FormControls {
                         let eleArr = $(`input[name=${key}]`);
 
                         if (ele) {
-                            utils.isSelf(ele)
+                            utils.isSelf(ele, type)
                                 ? (eleArr = $(ele))
                                 : (eleArr = $(`${ele} input[name=${key}]`));
                         }
@@ -524,7 +530,7 @@ class FormControls {
                 );
 
                 if (ele) {
-                    utils.isSelf(ele)
+                    utils.isSelf(ele, type)
                         ? (thisEle = $(ele))
                         : (thisEle = $(
                               `${ele} input[type=text],${ele} input[type=password]`
@@ -557,9 +563,12 @@ class FormControls {
             input: null,
         },
     }) {
+        let type = "textarea";
         let $dom = $("textarea");
         if (ele) {
-            utils.isSelf(ele) ? ($dom = $(ele)) : ($dom = $(`${ele} textarea`));
+            utils.isSelf(ele, type)
+                ? ($dom = $(ele))
+                : ($dom = $(`${ele} textarea`));
         }
 
         $dom.forEach(function (textarea) {
@@ -598,7 +607,7 @@ class FormControls {
                     Object.keys(obj).forEach(function (key) {
                         let eleArr = $(`textarea[name=${key}]`);
                         if (ele) {
-                            utils.isSelf(ele)
+                            utils.isSelf(ele, type)
                                 ? (eleArr = $(ele))
                                 : (eleArr = $(`${ele} textarea[name=${key}]`));
                         }
@@ -614,7 +623,7 @@ class FormControls {
                 let thisEle = $(`textarea`);
 
                 if (ele) {
-                    utils.isSelf(ele)
+                    utils.isSelf(ele, type)
                         ? (thisEle = $(ele))
                         : (thisEle = $(`${ele} textarea`));
                 }
