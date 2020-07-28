@@ -1,11 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-28 16:20:00
+ * @LastEditTime : 2020-07-27 16:37:48
  * @Description  : 表单控件组
  */
-import { hopeu as $ } from "../utils/hopeu.js";
-import { utils } from "../utils/utils.js";
+import { utils } from "../utils/verify.js";
+import { hopeu } from "../utils/hopeu.js";
 
 class FormControls {
     constructor(config) {
@@ -27,21 +27,26 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
-            toggle: null,
-            change: null,
-            close: null,
+            toggle: (toggle = null),
+            change: (change = null),
+            close: (close = null),
         },
     }) {
-        let $dom = $("select");
-        if (ele) {
-            utils.isSelf(ele) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = utils.$("select");
+        } else {
+            if (utils.$(ele)) {
+                $dom.push(utils.$(ele));
+            } else {
+                $dom = utils.$("select");
+            }
         }
-
         $dom.forEach(function (selector) {
             //模板初始化
             let newEle, items;
             let template = `
-                <div class="hopeui-form-select">
                     <div class="hopeui-select-title">
                         <input
                             type="text"
@@ -74,51 +79,65 @@ class FormControls {
                 }
             });
 
-            template += `</div></div>`;
+            template += `</div>`;
+            utils.addClass(selector, "hopeui-hide");
 
-            $(selector).addClass("hopeui-hide");
-            newEle = $(template).insertAfter(selector);
+            newEle = utils.insertAfter(selector, {
+                template: template,
+                rootClass: "hopeui-form-select",
+            });
+
+            items = newEle.querySelectorAll(".option");
 
             //单击后下拉列表事件
-            newEle.on("click", function (e) {
+            newEle.onclick = function (e) {
                 e.stopPropagation();
-                if ($(this).hasClass("hopeui-form-selected")) {
-                    $(this).removeClass("hopeui-form-selected");
+                if (utils.hasClass(newEle, "hopeui-form-selected")) {
+                    utils.removeClass(newEle, "hopeui-form-selected");
                 } else {
-                    $(".hopeui-form-selected").removeClass(
-                        "hopeui-form-selected"
-                    );
-                    $(this).addClass("hopeui-form-selected");
+                    utils.$(".hopeui-form-select").forEach(function (select) {
+                        utils.removeClass(select, "hopeui-form-selected");
+                    });
+                    utils.addClass(newEle, "hopeui-form-selected");
                 }
                 //打开列表回调
                 if (on.toggle) {
                     on.toggle();
                 }
-            });
+            };
 
             //绑定自定义option的点击事件
-            newEle.find(".option").on("click", function (e) {
-                e.stopPropagation();
-                let _this = $(this);
-                handle(selector, newEle, _this);
-                //选中options后回调
-                if (on.change) {
-                    on.change({
-                        originalParentEle: selector,
-                        virtualParentEle: selector.nextSibling,
-                        targetEle: e.target,
-                        label: _this.text(),
-                        value: _this.attr("hope-value"),
-                        name: _this.parent().attr("name"),
-                        group: _this.attr("hope-group"),
-                        groupSort: _this.attr("hope-group-sort"),
+            items.forEach(function (item, i) {
+                item.onclick = function (e) {
+                    e.stopPropagation();
+                    handle(selector, newEle, items, {
+                        obj: item,
+                        idx: i,
                     });
-                }
+                    // if (!i) {
+                    //     utils.validation(selector, "pass", null, "select-one");
+                    // }else{
+
+                    // }
+                    //选中options后回调
+                    if (on.change) {
+                        on.change({
+                            originalParentEle: selector,
+                            virtualParentEle: selector.nextSibling,
+                            targetEle: e.target,
+                            label: e.target.innerText,
+                            value: e.target.getAttribute("hope-value"),
+                            name: e.target.parentNode.getAttribute("name"),
+                            group: e.target.getAttribute("hope-group"),
+                            groupSort: e.target.getAttribute("hope-group-sort"),
+                        });
+                    }
+                };
             });
 
             //点击select区域外关闭下拉列表
             document.addEventListener("click", function (e) {
-                $(newEle).removeClass("hopeui-form-selected");
+                utils.removeClass(newEle, "hopeui-form-selected");
                 //下拉列表关闭回调
                 if (on.close) {
                     on.close();
@@ -128,82 +147,79 @@ class FormControls {
 
         /**
          * @description: 选择辅助方法
-         * @param {original:dom对象} 原始元素
-         * @param {targetELe:$对象} 目标虚拟元素
-         * @param {optEle:$对象} 目标虚拟元素内选中选项
+         * @param {original} 原始元素
+         * @param {targetELe} 目标虚拟元素
+         * @param {optEles} 目标虚拟元素集合
+         * @param {optEles} 目标虚拟元素内选中选项
          * @return:
          */
-        function handle(original, targetELe, optEle) {
-            let input = targetELe.find("input");
-            targetELe.find(".option").removeClass("hopeui-select-this");
-            optEle.addClass("hopeui-select-this");
-            targetELe.removeClass("hopeui-form-selected");
-            input.attr("hope-value", optEle.attr("hope-value"));
-            if (optEle.attr("hope-value")) {
-                input.val(optEle.text());
+        function handle(original, targetELe, optEles, optEle) {
+            let input = targetELe.querySelector("input");
+
+            utils.removeClass(optEles, "hopeui-select-this");
+            utils.addClass(optEle.obj, "hopeui-select-this");
+            utils.removeClass(targetELe, "hopeui-form-selected");
+
+            input.setAttribute(
+                "hope-value",
+                optEle.obj.getAttribute("hope-value")
+            );
+            if (optEle.obj.getAttribute("hope-value")) {
+                input.value = optEle.obj.innerText;
             } else {
-                input.val("");
+                input.value = "";
             }
 
-            if (optEle.attr("hope-group")) {
-                original.children[optEle.attr("hope-group")].children[
-                    optEle.attr("hope-group-sort")
+            if (optEle.obj.getAttribute("hope-group")) {
+                original.children[
+                    optEle.obj.getAttribute("hope-group")
+                ].children[
+                    optEle.obj.getAttribute("hope-group-sort")
                 ].selected = true;
             } else {
-                $(original)
-                    .children("option")
-                    .eq(optEle.index())[0].selected = true;
+                original.children[optEle.idx].selected = true;
             }
-
             original.value = original.selectedOptions[0].value;
         }
 
         return {
-            val: function (obj) {
-                if (obj) {
+            val: function (value, name) {
+                if (value) {
+                    let thisEle = utils.$(`select[name=${name}]`);
                     //值拆分成数组
-                    Object.keys(obj).forEach(function (key) {
-                        let eleArr = $(`select[name=${key}]`);
-                        if (ele) {
-                            utils.isSelf(ele)
-                                ? (eleArr = $(ele))
-                                : (eleArr = $(`${ele} select[name=${key}]`));
-                        }
-
-                        eleArr.forEach(function (thisEle, i) {
-                            let opts = $(thisEle).next().find(".option");
-                            //内选项集合
-                            opts.each(function (index) {
-                                if (
-                                    $.trim($(this).attr("hope-value")) ==
-                                    obj[key].value.split(",")[i]
-                                ) {
-                                    handle(thisEle, $(thisEle).next(), $(this));
-                                }
-                            });
-
-                            utils.validation(
-                                thisEle,
-                                "pass",
-                                null,
-                                "select-one"
-                            );
+                    value.split(",").forEach(function (val, i) {
+                        //当前真是select的虚拟话元素位
+                        let opts = thisEle[i].nextSibling.querySelectorAll(
+                                ".option"
+                            ),
+                            idx = 0;
+                        //内选项集合
+                        opts.forEach(function (opt, j) {
+                            if (opt.getAttribute("hope-value") == val) {
+                                idx = j;
+                            }
                         });
+                        handle(thisEle[i], thisEle[i].nextSibling, opts, {
+                            obj: opts[idx],
+                            idx: idx,
+                        });
+                    });
+                    thisEle.forEach(function (ele) {
+                        utils.validation(ele, "pass", null, "select-one");
                     });
                 }
             },
             clear: function () {
-                let thisEle = $(`select`);
-                if (ele) {
-                    utils.isSelf(ele)
-                        ? (thisEle = $(ele))
-                        : (thisEle = $(`${ele} select`));
-                }
+                let thisEle = utils.$(`select`);
                 thisEle.forEach(function (ele) {
                     handle(
                         ele,
-                        $(ele).next(),
-                        $(ele).next().find(".option").eq(0)
+                        ele.nextSibling,
+                        ele.nextSibling.querySelectorAll(".option"),
+                        {
+                            obj: ele.nextSibling.querySelectorAll(".option")[0],
+                            idx: 0,
+                        }
                     );
                 });
             },
@@ -219,30 +235,35 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
-            change: null,
+            change: (change = null),
         },
     }) {
-        let $dom = $("input[type=checkbox]");
-
-        if (ele) {
-            utils.isSelf(ele)
-                ? ($dom = $(ele))
-                : ($dom = $(`${ele} input[type=checkbox]`));
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = utils.$("input[type=checkbox]");
+        } else {
+            if (utils.$(ele)) {
+                $dom.push(utils.$(ele));
+            } else {
+                $dom = utils.$("checkbox");
+            }
         }
 
         $dom.forEach(function (checkbox) {
             let newEle;
             let template = `
-                <div class="hopeui-noUserSelect hopeui-form-checkbox">
-                    <span>${checkbox.value}</span><i class="hopeui-icon hopeui-icon-ok"></i>
-                </div>
+                        <span>${checkbox.value}</span><i class="hopeui-icon hopeui-icon-ok"></i>
                     `;
 
-            $(checkbox).addClass("hopeui-hide");
+            utils.addClass(checkbox, "hopeui-hide");
 
-            newEle = $(template).insertAfter(checkbox);
+            newEle = utils.insertAfter(checkbox, {
+                template: template,
+                rootClass: "hopeui-noUserSelect hopeui-form-checkbox",
+            });
 
-            newEle.on("click", function (e) {
+            newEle.onclick = function (e) {
                 e.stopPropagation();
                 handle(checkbox, newEle);
                 //点击回调
@@ -255,7 +276,7 @@ class FormControls {
                         status: checkbox.checked,
                     });
                 }
-            });
+            };
         });
 
         /**
@@ -266,53 +287,38 @@ class FormControls {
          * @return:
          */
         function handle(original, targetEle, single) {
-            if (targetEle.hasClass("hopeui-form-checked") && !single) {
+            if (utils.hasClass(targetEle, "hopeui-form-checked") && !single) {
                 original.checked = false;
-                targetEle.removeClass("hopeui-form-checked");
+                utils.removeClass(targetEle, "hopeui-form-checked");
             } else {
                 original.checked = true;
-                targetEle.addClass("hopeui-form-checked");
+                utils.addClass(targetEle, "hopeui-form-checked");
             }
         }
 
         return {
-            val: function (obj) {
-                if (obj) {
-                    Object.keys(obj).forEach(function (key) {
-                        let eleArr = $(`input[name=${key}]`);
-
-                        if (ele) {
-                            utils.isSelf(ele)
-                                ? (eleArr = $(ele))
-                                : (eleArr = $(`${ele} input[name=${key}]`));
-                        }
-
-                        eleArr.forEach(function (thisEle, i) {
-                            obj[key].value.split(",").forEach(function (val) {
-                                if ($(thisEle).val() == val) {
-                                    handle(thisEle, $(thisEle).next(), true);
-                                }
-                            });
-                            utils.validation(
-                                thisEle,
-                                "pass",
-                                null,
-                                "checkbox"
-                            );
+            val: function (value, name) {
+                if (value) {
+                    let thisEle = utils.$(`input[name=${name}]`);
+                    value.split(",").forEach(function (val, i) {
+                        let idx = 0;
+                        thisEle.forEach(function (ele, j) {
+                            if (ele.value == val) {
+                                idx = j;
+                            }
                         });
+                        handle(thisEle[idx], thisEle[idx].nextSibling, true);
+                    });
+                    thisEle.forEach(function (ele) {
+                        utils.validation(ele, "pass", null, "checkbox");
                     });
                 }
             },
             clear: function () {
-                let thisEle = $(`input[type=checkbox]`);
-                if (ele) {
-                    utils.isSelf(ele)
-                        ? (thisEle = $(ele))
-                        : (thisEle = $(`${ele} input[type=checkbox]`));
-                }
+                let thisEle = utils.$("input[type=checkbox]");
                 thisEle.forEach(function (ele) {
                     ele.checked = false;
-                    $(ele).next().removeClass("hopeui-form-checked");
+                    utils.removeClass(ele.nextSibling, "hopeui-form-checked");
                 });
             },
         };
@@ -327,36 +333,42 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
-            change: null,
+            change: (change = null),
         },
     }) {
-        let $dom = $("input[type=radio]");
-        if (ele) {
-            utils.isSelf(ele)
-                ? ($dom = $(ele))
-                : ($dom = $(`${ele} input[type=radio]`));
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = utils.$("input[type=radio]");
+        } else {
+            if (utils.$(ele)) {
+                $dom.push(utils.$(ele));
+            } else {
+                $dom = utils.$("radio");
+            }
         }
 
         $dom.forEach(function (radio) {
             let newEle;
             let template = `
-                    <div class="hopeui-noUserSelect hopeui-form-radio ${
-                        radio.checked ? "hopeui-form-radioed" : ""
-                    }">
                             <i class="hopeui-anim hopeui-icon">${
                                 radio.checked ? "&#xe643;" : "&#xe63f;"
-                            }</i><span>${radio.getAttribute(
-                "title"
-            )}</span></div>
+                            }</i><span>${radio.getAttribute("title")}</span>
                         `;
 
-            $(radio).addClass("hopeui-hide");
+            utils.addClass(radio, "hopeui-hide");
 
-            newEle = $(template).insertAfter(radio);
+            newEle = utils.insertAfter(radio, {
+                template: template,
+                rootClass: `hopeui-noUserSelect hopeui-form-radio ${
+                    radio.checked ? "hopeui-form-radioed" : ""
+                }`,
+            });
 
-            newEle.on("click", function (e) {
+            newEle.onclick = function (e) {
                 e.stopPropagation();
                 handle(radio, newEle);
+
                 //点击回调
                 if (on.change) {
                     on.change({
@@ -367,7 +379,7 @@ class FormControls {
                         status: radio.checked,
                     });
                 }
-            });
+            };
         });
 
         /**
@@ -377,70 +389,57 @@ class FormControls {
          * @return:
          */
         function handle(original, targetEle) {
-            $(targetEle)
-                .siblings(".hopeui-form-radio")
-                .each(function () {
-                    let _this = $(this);
-                    if (_this.hasClass("hopeui-form-radioed")) {
+            utils
+                .siblings(targetEle, ".hopeui-form-radio")
+                .forEach(function (bro) {
+                    if (utils.hasClass(bro, "hopeui-form-radioed")) {
                         original.checked = true;
 
-                        _this.removeClass("hopeui-form-radioed");
-                        _this
-                            .children("i")
-                            .removeClass("hopeui-anim-scaleSpring")
-                            .html("&#xe63f;");
+                        utils.removeClass(bro, "hopeui-form-radioed");
+                        utils.removeClass(
+                            bro.childNodes[1],
+                            "hopeui-anim-scaleSpring"
+                        );
 
-                        $(targetEle).addClass("hopeui-form-radioed");
-                        $(targetEle)
-                            .children("i")
-                            .addClass("hopeui-anim-scaleSpring")
-                            .html("&#xe643;");
+                        bro.childNodes[1].innerHTML = "&#xe63f;";
+
+                        utils.addClass(targetEle, "hopeui-form-radioed");
+                        utils.addClass(
+                            targetEle.childNodes[1],
+                            "hopeui-anim-scaleSpring"
+                        );
+                        targetEle.childNodes[1].innerHTML = "&#xe643;";
                     } else {
                         original.checked = true;
-                        $(targetEle).addClass("hopeui-form-radioed");
-                        $(targetEle)
-                            .children("i")
-                            .addClass("hopeui-anim-scaleSpring")
-                            .html("&#xe643;");
+                        utils.addClass(targetEle, "hopeui-form-radioed");
+                        utils.addClass(
+                            targetEle.childNodes[1],
+                            "hopeui-anim-scaleSpring"
+                        );
+                        targetEle.childNodes[1].innerHTML = "&#xe643;";
                     }
                 });
         }
 
         return {
-            val: function (obj) {
-                if (obj) {
-                    Object.keys(obj).forEach(function (key) {
-                        let eleArr = $(`input[name=${key}]`);
-                        if (ele) {
-                            utils.isSelf(ele)
-                                ? (eleArr = $(ele))
-                                : (eleArr = $(`${ele} input[name=${key}]`));
+            val: function (value, name) {
+                let thisEle = utils.$(`input[name=${name}]`);
+                value.split(",").forEach(function (val, i) {
+                    let idx = 0;
+                    thisEle.forEach(function (ele, j) {
+                        if (ele.value == val) {
+                            idx = j;
                         }
-
-                        eleArr.forEach(function (thisEle, i) {
-                            obj[key].value.split(",").forEach(function (val) {
-                                if ($(thisEle).val() == val) {
-                                    handle(thisEle, $(thisEle).next(), true);
-                                }
-                            });
-                            utils.validation(thisEle, "pass", null, "radio");
-                        });
                     });
-                }
-
-                // thisEle.forEach(function (ele) {
-                //     utils.validation(ele, "pass", null, "radio");
-                // });
+                    handle(thisEle[idx], thisEle[idx].nextSibling);
+                });
+                thisEle.forEach(function (ele) {
+                    utils.validation(ele, "pass", null, "radio");
+                });
             },
             clear: function () {
-                let thisEle = $(`input[type=radio]`);
-                if (ele) {
-                    utils.isSelf(ele)
-                        ? (thisEle = $(ele))
-                        : (thisEle = $(`${ele} input[type=radio]`));
-                }
-
-                handle(thisEle[0], $(thisEle).eq(0).next());
+                let thisEle = utils.$("input[type=radio]");
+                handle(thisEle[0], thisEle[0].nextSibling);
             },
         };
     }
@@ -455,18 +454,21 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
-            blur: null,
-            focus: null,
-            input: null,
+            blur: (blur = null),
+            focus: (focus = null),
+            input: (input = null),
         },
     }) {
-        let $dom = $("input[type=text],input[type=password]");
-        if (ele) {
-            utils.isSelf(ele)
-                ? ($dom = $(ele))
-                : ($dom = $(
-                      `${ele} input[type=text],${ele} input[type=password]`
-                  ));
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = utils.$("input[type=text],input[type=password]");
+        } else {
+            if (utils.$(ele)) {
+                $dom.push(utils.$(ele));
+            } else {
+                $dom = utils.$("input");
+            }
         }
 
         $dom.forEach(function (input) {
@@ -497,37 +499,15 @@ class FormControls {
         });
 
         return {
-            val: function (obj) {
-                if (obj) {
-                    Object.keys(obj).forEach(function (key) {
-                        let eleArr = $(`input[name=${key}]`);
-
-                        if (ele) {
-                            utils.isSelf(ele)
-                                ? (eleArr = $(ele))
-                                : (eleArr = $(`${ele} input[name=${key}]`));
-                        }
-
-                        eleArr.forEach(function (thisEle, i) {
-                            $(thisEle).val(obj[key].value);
-                            utils.validation(thisEle, "pass", null, "input");
-                        });
-                    });
-                }
+            val: function (value, name) {
+                let thisEle = utils.$(`input[name=${name}]`);
+                thisEle[0].value = value;
+                thisEle.forEach(function (ele) {
+                    utils.validation(ele, "pass", null, "input");
+                });
             },
             clear: function () {
-                let thisEle = $(
-                    `${ele} input[type=text],${ele} input[type=password]`
-                );
-
-                if (ele) {
-                    utils.isSelf(ele)
-                        ? (thisEle = $(ele))
-                        : (thisEle = $(
-                              `${ele} input[type=text],${ele} input[type=password]`
-                          ));
-                }
-
+                let thisEle = utils.$("input[type=text],input[type=password]");
                 thisEle = Array.from(thisEle).filter(function (item) {
                     if (item.getAttribute("hope-type") != "selector") {
                         return item;
@@ -549,20 +529,25 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
-            blur: null,
-            focus: null,
-            input: null,
+            blur: (blur = null),
+            focus: (focus = null),
+            input: (input = null),
         },
     }) {
-        let $dom = $("textarea");
-        if (ele) {
-            utils.isSelf(ele)
-                ? ($dom = $(ele))
-                : ($dom = $(`${ele} textarea`));
+        let _this = this;
+        let $dom = [];
+        if (!ele) {
+            $dom = utils.$("textarea");
+        } else {
+            if (utils.$(ele)) {
+                $dom.push(utils.$(ele));
+            } else {
+                $dom = utils.$("input");
+            }
         }
 
-        $dom.forEach(function (textarea) {
-            textarea.onblur = function (e) {
+        $dom.forEach(function (input) {
+            input.onblur = function (e) {
                 if (on.blur) {
                     on.blur({
                         targetELe: e.target,
@@ -570,7 +555,7 @@ class FormControls {
                     });
                 }
             };
-            textarea.onfocus = function (e) {
+            input.onfocus = function (e) {
                 if (on.focus) {
                     on.focus({
                         targetELe: e.target,
@@ -578,7 +563,7 @@ class FormControls {
                     });
                 }
             };
-            textarea.oninput = function (e) {
+            input.oninput = function (e) {
                 if (on.input) {
                     on.input({
                         targetELe: e.target,
@@ -589,37 +574,15 @@ class FormControls {
         });
 
         return {
-            val: function (obj) {
-                if (obj) {
-                    Object.keys(obj).forEach(function (key) {
-                        let eleArr = $(`textarea[name=${key}]`);
-                        if (ele) {
-                            utils.isSelf(ele)
-                                ? (eleArr = $(ele))
-                                : (eleArr = $(`${ele} textarea[name=${key}]`));
-                        }
-
-                        eleArr.forEach(function (thisEle, i) {
-                            $(thisEle).val(obj[key].value);
-                            utils.validation(
-                                thisEle,
-                                "pass",
-                                null,
-                                "textarea"
-                            );
-                        });
-                    });
-                }
+            val: function (value, name) {
+                let thisEle = utils.$(`textarea[name=${name}]`);
+                thisEle[0].value = value;
+                thisEle.forEach(function (ele) {
+                    utils.validation(ele, "pass", null, "textarea");
+                });
             },
             clear: function () {
-                let thisEle = $(`textarea`);
-
-                if (ele) {
-                    utils.isSelf(ele)
-                        ? (thisEle = $(ele))
-                        : (thisEle = $(`${ele} textarea`));
-                }
-
+                let thisEle = utils.$(`textarea`);
                 thisEle.forEach(function (ele) {
                     ele.value = "";
                 });
@@ -659,38 +622,39 @@ class FormControls {
         },
         verify: verify = {},
     }) {
+        let _this = this;
         //初始化控件组
         let formControls = {
             selector: this.selector({
-                ele: ele,
                 on: controls.selector.on,
             }),
             checkbox: this.checkbox({
-                ele: ele,
                 on: controls.checkbox.on,
             }),
             radio: this.radio({
-                ele: ele,
                 on: controls.radio.on,
             }),
             input: this.input({
-                ele: ele,
                 on: controls.input.on,
             }),
             textarea: this.textarea({
-                ele: ele,
                 on: controls.textarea.on,
             }),
         };
 
         //form事件绑定
-        let $dom = $("form");
-        if (ele) {
-            $dom = $(ele);
+        let $dom = [];
+        if (!ele) {
+            $dom = utils.$("form");
+        } else {
+            if (utils.$(ele)) {
+                $dom.push(utils.$(ele));
+            } else {
+                $dom = utils.$("form");
+            }
         }
         $dom.forEach(function (form) {
             form.onsubmit = function (e) {
-                
                 e.stopPropagation();
                 let sortArr = {},
                     formParams = [],
@@ -746,7 +710,6 @@ class FormControls {
                                             items.type
                                         );
                                     } else {
-                                        
                                         utils.validation(
                                             ele,
                                             "error",
@@ -768,12 +731,7 @@ class FormControls {
                                 if (ele.checked) {
                                     obj.value += `${ele.value},`;
                                 }
-                                utils.validation(
-                                    ele,
-                                    "pass",
-                                    null,
-                                    items.type
-                                );
+                                utils.validation(ele, "pass", null, items.type);
                             }
                         });
 
@@ -826,12 +784,7 @@ class FormControls {
                             } else {
                                 obj.name = ele.name;
                                 obj.value += `${ele.value},`;
-                                utils.validation(
-                                    ele,
-                                    "pass",
-                                    null,
-                                    items.type
-                                );
+                                utils.validation(ele, "pass", null, items.type);
                             }
                         });
 
@@ -860,9 +813,7 @@ class FormControls {
         return {
             val: function (obj) {
                 Object.keys(obj).forEach(function (key) {
-                    formControls[obj[key].type].val({
-                        [key]: obj[key],
-                    });
+                    formControls[obj[key].type].val(obj[key].value, key);
                 });
             },
             clear: function () {

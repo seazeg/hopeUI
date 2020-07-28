@@ -1,40 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2020-07-27 15:15:42
+ * @LastEditTime : 2020-07-28 16:19:27
  * @Description  : 工具类
  */
 class Utils {
     constructor() {}
-    $(ele) {
-        if (document.querySelectorAll(ele).length > 0) {
-            return document.querySelectorAll(ele);
-        } else {
-            return document.querySelector(ele);
-        }
-    }
-    on(evt, fn) {
-        let _this = this;
-        let eventArr = evt.split(" ");
-        for (var i = 0; i < this.elments.length; i++) {
-            for (var j = 0; j < eventArr.length; j++) {
-                _this.addEvent(eventArr[j], this.elements[i], fn);
-            }
-        }
-    }
-    addEvent(eventName, obj, fn) {
-        function CallFn(e) {
-            var ev = e || window.event;
-            fn.call(obj, ev);
-        }
-        if (obj.addEventListener) {
-            // 非 IE 浏览器；
-            obj.addEventListener(eventName, CallFn, false);
-        } else {
-            // IE 浏览器
-            obj.attachEvent("on" + eventName, CallFn);
-        }
-    }
     validation(ele, rule, prompt, type) {
         let obj = ele,
             bro = ele;
@@ -167,6 +138,15 @@ class Utils {
     removeELe(targetEle) {
         if (targetEle) {
             targetEle.parentNode.removeChild(targetEle);
+        }
+    }
+    isSelf(targetEle, typeName) {
+        if (
+            document.querySelector(targetEle).tagName.toLowerCase() == typeName
+        ) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

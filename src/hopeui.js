@@ -1,13 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-27 15:46:45
+ * @LastEditTime : 2020-07-28 14:29:14
  * @Description  : hopeUI框架
  */
 import "./styles/hopeui.less";
 import { formControls } from "./module/form.js";
-class HopeControls {
-    constructor() {}
+class Hopeui {
+    constructor() {
+    }
     _extend(target, source) {
         if (
             Object.prototype.toString.call(target) === "[object Object]" &&
@@ -34,5 +35,5 @@ class HopeControls {
     }
 }
 
-export const hope = new HopeControls().init();
+export const hope = new Hopeui().init();
 window.hope = hope;

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-07-27 15:42:46
+ * @LastEditTime : 2020-07-27 15:50:48
  * @Description  :
  */
 
@@ -31,7 +31,7 @@ module.exports = {
             },
             {
                 test: /\.jpg|png|gif|bmp|jpeg$/,
-                use: "url-loader?limit=图片大小",
+                use: "url-loader",
             },
             {
                 test: /\.ttf|eot|svg|woff|woff2$/,
