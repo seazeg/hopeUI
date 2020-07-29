@@ -1,7 +1,7 @@
 {
   "name": "hopeui",
   "version": "1.0.0",
-  "description": "hopeui",
+  "description": "HopeUI",
   "main": "hopeui.js",
   "scripts": {
     "start": "webpack --config webpack.config.js",

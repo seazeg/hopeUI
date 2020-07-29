@@ -1,9 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-29 09:51:32
+ * @LastEditTime : 2020-07-29 10:18:34
  * @Description  : 表单控件组
  */
+
+//todo: 1.联动调用问题 2.事件回调绑定方式
+
 import { hopeu as $ } from "../utils/hopeu.js";
 import { verify as utils } from "../utils/verify.js";
 

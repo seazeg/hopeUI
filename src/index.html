@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="./hopeui.css" />
-    <script src="./hopeui.js"></script>
 </head>
 
 <body>
@@ -302,367 +301,372 @@
             </div>
         </form>
     </div>
-    <script>
-        let ipt = hope.input({
-            ele: '#text',
-            on: {
-                blur: function (e) {
-                    console.log(e);
-                },
-                focus: function (e) {
-                    console.log(e);
-                },
-                input: function (e) {
-                    console.log(e);
+
+</body>
+
+
+<script>
+    let ipt = hope.input({
+        ele: '#text',
+        on: {
+            blur: function (e) {
+                console.log(e);
+            },
+            focus: function (e) {
+                console.log(e);
+            },
+            input: function (e) {
+                console.log(e);
+            }
+        }
+    })
+    let sel = hope.selector({
+        ele: '#city'
+    })
+    sel.val({
+        LD: {
+            type: "selector",
+            value: "天津"
+        },
+    })
+
+    let form = hope.form({
+        ele: '#form',
+        on: {
+            submit: function (e) {
+                console.log(e);
+            },
+        },
+        controls: {
+            selector: {
+                on: {
+                    change: function (e) {
+                        console.log(e);
+                    },
+                    toggle: function (e) {
+                        console.log(e);
+                    }
+                }
+            },
+            checkbox: {
+                on: {
+                    change: function (e) {
+                        console.log(e);
+                    }
+                }
+            },
+            radio: {
+                on: {
+                    change: function (e) {
+                        console.log(e);
+                    }
+                }
+            },
+            input: {
+                on: {
+                    blur: function (e) {
+                        console.log(e);
+                    },
+                    focus: function (e) {
+                        console.log(e);
+                    },
+                    input: function (e) {
+                        console.log(e);
+                    }
+                }
+            },
+            textarea: {
+                on: {
+                    blur: function (e) {
+                        console.log(e);
+                    },
+                    focus: function (e) {
+                        console.log(e);
+                    },
+                    input: function (e) {
+                        console.log(e);
+                    }
                 }
             }
-        })
-        let sel = hope.selector({
-            ele: '#city'
-        })
-        sel.val({
+        },
+        verify: {
+            //[name]:fn
+            city: function (value) {
+                if (value.length <= 0) {
+                    return '请选择一个选项';
+                }
+            },
+            text: function (value) {
+                if (value.length <= 0) {
+                    return '文本不能为空';
+                }
+                if (value.length < 5) {
+                    return '文本至少得5个字符';
+                }
+                if (!/^[A-Za-z]+$/.test(value)) {
+                    return '文本必须是英文';
+                }
+            },
+            school: function (value) {
+                if (value.length <= 0) {
+                    return '请选择一个选项';
+                }
+            },
+            LD: function (value) {
+                if (value.length <= 0) {
+                    return '请选择一个选项';
+                }
+            },
+            password: function (value) {
+                if (value.length <= 0) {
+                    return '文本不能为空';
+                }
+                if (value.length < 6) {
+                    return '密码至少输入6个字符';
+                }
+            },
+            task: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+            subject: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+            radio: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+            textarea: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+        }
+    })
+
+
+    let form2 = hope.form({
+        ele: '#form2',
+        on: {
+            submit: function (e) {
+                console.log(e);
+            },
+        },
+        controls: {
+            selector: {
+                on: {
+                    change: function (e) {
+                        console.log(e);
+                    },
+                    toggle: function (e) {
+                        console.log(1);
+                    }
+                }
+            },
+            checkbox: {
+                on: {
+                    change: function (e) {
+                        console.log(e);
+                    }
+                }
+            },
+            radio: {
+                on: {
+                    change: function (e) {
+                        console.log(e);
+                    }
+                }
+            },
+            input: {
+                on: {
+                    blur: function (e) {
+                        console.log(e);
+                    },
+                    focus: function (e) {
+                        console.log(e);
+                    },
+                    input: function (e) {
+                        console.log(e);
+                    }
+                }
+            },
+            textarea: {
+                on: {
+                    blur: function (e) {
+                        console.log(e);
+                    },
+                    focus: function (e) {
+                        console.log(e);
+                    },
+                    input: function (e) {
+                        console.log(e);
+                    }
+                }
+            }
+        },
+        verify: {
+            city: function (value) {
+                if (value.length <= 0) {
+                    return '请选择一个选项';
+                }
+            },
+            text: function (value) {
+                if (value.length <= 0) {
+                    return '文本不能为空';
+                }
+                if (value.length < 5) {
+                    return '文本至少得5个字符';
+                }
+                if (!/^[A-Za-z]+$/.test(value)) {
+                    return '文本必须是英文';
+                }
+            },
+            school: function (value) {
+                if (value.length <= 0) {
+                    return '请选择一个选项';
+                }
+            },
+            LD: function (value) {
+                if (value.length <= 0) {
+                    return '请选择一个选项';
+                }
+            },
+            password: function (value) {
+                if (value.length <= 0) {
+                    return '文本不能为空';
+                }
+                if (value.length < 6) {
+                    return '密码至少输入6个字符';
+                }
+            },
+            task: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+            subject: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+            radio: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+            textarea: function (value) {
+                if (value.length <= 0) {
+                    return '需要选择至少一个选项';
+                }
+            },
+        }
+    })
+
+
+    /**
+     * @description: 
+     * @param {
+     *             eleName:{
+     *                  type:"selector|checkbox|radio"，
+     *                  value:""
+     *              }
+     *         } 
+     * @return: 
+     */
+    function set() {
+        //[name]:fn
+        form.val({
+            city: {
+                type: "selector",
+                value: "南京"
+            },
+            school: {
+                type: "selector",
+                value: "清华大学"
+            },
             LD: {
                 type: "selector",
-                value: "天津"
+                value: "天津,乌鲁木齐,青岛"
             },
-        })
-
-        let form = hope.form({
-            ele: '#form',
-            on: {
-                submit: function (e) {
-                    console.log(e);
-                },
+            text: {
+                type: "input",
+                value: "我爱HopeUI"
             },
-            controls: {
-                selector: {
-                    on: {
-                        change: function (e) {
-                            console.log(e);
-                        },
-                        toggle: function (e) {
-                            console.log(1);
-                        }
-                    }
-                },
-                checkbox: {
-                    on: {
-                        change: function (e) {
-                            console.log(e);
-                        }
-                    }
-                },
-                radio: {
-                    on: {
-                        change: function (e) {
-                            console.log(e);
-                        }
-                    }
-                },
-                input: {
-                    on: {
-                        blur: function (e) {
-                            console.log(e);
-                        },
-                        focus: function (e) {
-                            console.log(e);
-                        },
-                        input: function (e) {
-                            console.log(e);
-                        }
-                    }
-                },
-                textarea: {
-                    on: {
-                        blur: function (e) {
-                            console.log(e);
-                        },
-                        focus: function (e) {
-                            console.log(e);
-                        },
-                        input: function (e) {
-                            console.log(e);
-                        }
-                    }
-                }
+            task: {
+                type: "checkbox",
+                value: "打桩"
             },
-            verify: {
-                city: function (value) {
-                    if (value.length <= 0) {
-                        return '请选择一个选项';
-                    }
-                },
-                text: function (value) {
-                    if (value.length <= 0) {
-                        return '文本不能为空';
-                    }
-                    if (value.length < 5) {
-                        return '文本至少得5个字符';
-                    }
-                    if (!/^[A-Za-z]+$/.test(value)) {
-                        return '文本必须是英文';
-                    }
-                },
-                school: function (value) {
-                    if (value.length <= 0) {
-                        return '请选择一个选项';
-                    }
-                },
-                LD: function (value) {
-                    if (value.length <= 0) {
-                        return '请选择一个选项';
-                    }
-                },
-                password: function (value) {
-                    if (value.length <= 0) {
-                        return '文本不能为空';
-                    }
-                    if (value.length < 6) {
-                        return '密码至少输入6个字符';
-                    }
-                },
-                task: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
-                subject: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
-                radio: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
-                textarea: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
+            textarea: {
+                type: "textarea",
+                value: "我爱北京天安门"
+            },
+            password: {
+                type: "input",
+                value: "999888999"
+            },
+            subject: {
+                type: "checkbox",
+                value: "历史"
+            },
+            radio: {
+                type: "radio",
+                value: "女"
             }
         })
+    }
 
-
-        let form2 = hope.form({
-            ele: '#form2',
-            on: {
-                submit: function (e) {
-                    console.log(e);
-                },
+    function set2() {
+        form2.val({
+            city: {
+                type: "selector",
+                value: "青岛"
             },
-            controls: {
-                selector: {
-                    on: {
-                        change: function (e) {
-                            console.log(e);
-                        },
-                        toggle: function (e) {
-                            console.log(1);
-                        }
-                    }
-                },
-                checkbox: {
-                    on: {
-                        change: function (e) {
-                            console.log(e);
-                        }
-                    }
-                },
-                radio: {
-                    on: {
-                        change: function (e) {
-                            console.log(e);
-                        }
-                    }
-                },
-                input: {
-                    on: {
-                        blur: function (e) {
-                            console.log(e);
-                        },
-                        focus: function (e) {
-                            console.log(e);
-                        },
-                        input: function (e) {
-                            console.log(e);
-                        }
-                    }
-                },
-                textarea: {
-                    on: {
-                        blur: function (e) {
-                            console.log(e);
-                        },
-                        focus: function (e) {
-                            console.log(e);
-                        },
-                        input: function (e) {
-                            console.log(e);
-                        }
-                    }
-                }
+            school: {
+                type: "selector",
+                value: "浙江大学"
             },
-            verify: {
-                city: function (value) {
-                    if (value.length <= 0) {
-                        return '请选择一个选项';
-                    }
-                },
-                text: function (value) {
-                    if (value.length <= 0) {
-                        return '文本不能为空';
-                    }
-                    if (value.length < 5) {
-                        return '文本至少得5个字符';
-                    }
-                    if (!/^[A-Za-z]+$/.test(value)) {
-                        return '文本必须是英文';
-                    }
-                },
-                school: function (value) {
-                    if (value.length <= 0) {
-                        return '请选择一个选项';
-                    }
-                },
-                LD: function (value) {
-                    if (value.length <= 0) {
-                        return '请选择一个选项';
-                    }
-                },
-                password: function (value) {
-                    if (value.length <= 0) {
-                        return '文本不能为空';
-                    }
-                    if (value.length < 6) {
-                        return '密码至少输入6个字符';
-                    }
-                },
-                task: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
-                subject: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
-                radio: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
-                textarea: function (value) {
-                    if (value.length <= 0) {
-                        return '需要选择至少一个选项';
-                    }
-                },
+            LD: {
+                type: "selector",
+                value: "武汉,南京,天津"
+            },
+            text: {
+                type: "input",
+                value: "biubiubiu"
+            },
+            task: {
+                type: "checkbox",
+                value: "打桩,钓鱼,看电视"
+            },
+            textarea: {
+                type: "textarea",
+                value: "红豆生南国，春来发几枝。愿君多采撷，此物最相思。"
+            },
+            password: {
+                type: "input",
+                value: "999888999"
+            },
+            subject: {
+                type: "checkbox",
+                value: "音乐,生物"
+            },
+            radio: {
+                type: "radio",
+                value: "什么玩意"
             }
         })
+    }
 
+    function xclear() {
+        form.clear();
+    }
 
-        /**
-         * @description: 
-         * @param {
-         *             eleName:{
-         *                  type:"selector|checkbox|radio"，
-         *                  value:""
-         *              }
-         *         } 
-         * @return: 
-         */
-        function set() {
-            form.val({
-                city: {
-                    type: "selector",
-                    value: "南京"
-                },
-                school: {
-                    type: "selector",
-                    value: "清华大学"
-                },
-                LD: {
-                    type: "selector",
-                    value: "天津,乌鲁木齐,青岛"
-                },
-                text: {
-                    type: "input",
-                    value: "我爱HopeUI"
-                },
-                task: {
-                    type: "checkbox",
-                    value: "打桩"
-                },
-                textarea: {
-                    type: "textarea",
-                    value: "我爱北京天安门"
-                },
-                password: {
-                    type: "input",
-                    value: "999888999"
-                },
-                subject: {
-                    type: "checkbox",
-                    value: "历史"
-                },
-                radio: {
-                    type: "radio",
-                    value: "女"
-                }
-            })
-        }
-
-        function set2() {
-            form2.val({
-                city: {
-                    type: "selector",
-                    value: "青岛"
-                },
-                school: {
-                    type: "selector",
-                    value: "浙江大学"
-                },
-                LD: {
-                    type: "selector",
-                    value: "武汉,南京,天津"
-                },
-                text: {
-                    type: "input",
-                    value: "biubiubiu"
-                },
-                task: {
-                    type: "checkbox",
-                    value: "打桩,钓鱼,看电视"
-                },
-                textarea: {
-                    type: "textarea",
-                    value: "红豆生南国，春来发几枝。愿君多采撷，此物最相思。"
-                },
-                password: {
-                    type: "input",
-                    value: "999888999"
-                },
-                subject: {
-                    type: "checkbox",
-                    value: "音乐,生物"
-                },
-                radio: {
-                    type: "radio",
-                    value: "什么玩意"
-                }
-            })
-        }
-
-        function xclear() {
-            form.clear();
-        }
-
-        function xclear2() {
-            form2.clear();
-        }
-    </script>
-</body>
+    function xclear2() {
+        form2.clear();
+    }
+</script>
 
 </html>

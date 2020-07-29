@@ -1,14 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-28 14:29:14
+ * @LastEditTime : 2020-07-29 10:25:51
  * @Description  : hopeUI框架
  */
 import "./styles/hopeui.less";
 import { formControls } from "./module/form.js";
 class Hopeui {
-    constructor() {
-    }
+    constructor() {}
     _extend(target, source) {
         if (
             Object.prototype.toString.call(target) === "[object Object]" &&
