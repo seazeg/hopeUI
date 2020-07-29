@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2020-07-28 16:19:27
+ * @LastEditTime : 2020-07-29 09:48:15
  * @Description  : 工具类
  */
 class Utils {
@@ -151,4 +151,4 @@ class Utils {
     }
 }
 
-export const utils = new Utils();
+export const verify = new Utils();

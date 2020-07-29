@@ -1,11 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-28 18:08:57
+ * @LastEditTime : 2020-07-29 09:51:32
  * @Description  : 表单控件组
  */
 import { hopeu as $ } from "../utils/hopeu.js";
-import { utils } from "../utils/utils.js";
+import { verify as utils } from "../utils/verify.js";
 
 class FormControls {
     constructor(config) {
@@ -266,8 +266,8 @@ class FormControls {
 
         /**
          * @description: 选择辅助方法
-         * @param {original} 原始元素
-         * @param {targetELe} 目标虚拟元素
+         * @param {original:dom对象} 原始元素
+         * @param {targetELe:$对象} 目标虚拟元素
          * @param {single} 是否只选择不取消选择
          * @return:
          */
@@ -375,8 +375,8 @@ class FormControls {
 
         /**
          * @description: 选择辅助方法
-         * @param {original} 原始元素
-         * @param {targetELe} 目标虚拟元素
+         * @param {original:dom对象} 原始元素
+         * @param {targetELe:$对象} 目标虚拟元素
          * @return:
          */
         function handle(original, targetEle) {
@@ -640,7 +640,6 @@ class FormControls {
      * @param {type}
      * @return:
      */
-
     form({
         ele: ele = null,
         options: options = null,

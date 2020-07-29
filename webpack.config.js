@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-07-27 15:50:48
+ * @LastEditTime : 2020-07-29 09:58:43
  * @Description  :
  */
 
@@ -62,9 +62,15 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Webpack Study Demo",
-            filename: "index.html", //指定生成的HTML文件名
-            template: path.join(__dirname, "./src/index.html"), // 指定模板路径
+            title: "HopeUI",
+            filename: "index.html",
+            minify: {
+                removeComments: true, 
+                collapseWhitespace: true, 
+                minifyCSS: true,
+            },
+            hash: true,
+            template: path.join(__dirname, "./src/index.html"),
         }),
         new webpack.BannerPlugin(
             `${pkg.description} version ${pkg.version}\nAuthor Evan.G\nFor more information, please visit ${pkg.author.github}\n${pkg.description} is available under the terms of the MIT license.`
