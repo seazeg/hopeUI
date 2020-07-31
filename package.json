@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --config webpack.config.js;npx webpack-dev-server --mode development --content-base ./dist --open",
     "build": "webpack --config webpack.config.js",
-    "api": "start-storybook -p 6066",
+    "api": "start-storybook",
     "build-api": "build-storybook"
   },
   "author": {
@@ -25,7 +25,10 @@
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-storysource": "^5.3.19",
     "@storybook/addon-viewport": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/client-api": "^5.3.19",
     "@storybook/html": "^5.3.19",
+    "@storybook/theming": "^5.3.19",
     "babel-loader": "^8.1.0",
     "core-js": "^3.6.5",
     "css-loader": "^4.0.0",
