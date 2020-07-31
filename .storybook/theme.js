@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-29 17:39:37
- * @LastEditTime : 2020-07-31 15:00:37
+ * @LastEditTime : 2020-07-31 15:13:20
  * @Description  :
  */
 
@@ -15,10 +15,10 @@ export default create({
     // colorSecondary: "#ff7400",
 
     // // UI
-    // appBg: "#fff",
-    // appContentBg: "#fff",
-    // appBorderColor: "grey",
-    // appBorderRadius: 1,
+    appBg: "#fff",
+    appContentBg: "#fff",
+    appBorderColor: "#ccc",
+    appBorderRadius: 1,
 
     // // Typography
     // fontBase: '"Open Sans", sans-serif',
@@ -41,5 +41,5 @@ export default create({
 
     brandTitle: "HopeUI",
     brandUrl: "https://github.com/seazeg/hopeUI",
-    // brandImage: "../docs/logo.png",
+    brandImage: "https://raw.githubusercontent.com/seazeg/hopeUI/master/docs/logo.png",
 });
