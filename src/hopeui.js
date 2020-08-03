@@ -1,11 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-29 10:25:51
+ * @LastEditTime : 2020-07-31 17:57:47
  * @Description  : hopeUI框架
  */
 import "./styles/hopeui.less";
 import { formControls } from "./module/form.js";
+import { layerControls } from "./module/layer.js";
+
 class Hopeui {
     constructor() {}
     _extend(target, source) {
@@ -24,12 +26,14 @@ class Hopeui {
     }
     init() {
         let modules = {
-                formControls: formControls,
+                form: formControls,
+                layer: layerControls,
             },
             res = {};
         for (let m in modules) {
             res = this._extend(res, new modules[m]());
         }
+
         return res;
     }
 }

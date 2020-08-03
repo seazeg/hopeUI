@@ -1,672 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <link rel="stylesheet" href="./hopeui.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="./hopeui.css" />
-</head>
+    <body style="height: 2000px;">
+        <button type="button" class="hopeui-btn" onclick="xopen()">
+            打开弹层
+        </button>
+        <button type="button" class="hopeui-btn" onclick="xopen2()">
+            打开弹层2
+        </button>
 
-<body>
-    <div style="padding:50px 10px;width:40%;display:inline-block;vertical-align: top;">
-        <form class="hopeui-form" name="form" action="" id="form">
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">下拉框</label>
-                <div class="hopeui-input-block">
-                    <select name="city" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                        <option value="重庆">重庆</option>
-                        <option value="成都">成都</option>
-                        <option value="云南">云南</option>
-                    </select>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">分组下拉框</label>
-                <div class="hopeui-input-block">
-                    <select name="school" hope-verify="required">
-                        <option value="">请选择</option>
-                        <optgroup label="北京"">
-                            <option value=" 北京大学">北京大学</option>
-                            <option value="清华大学">清华大学</option>
-                        </optgroup>
-                        <optgroup label="浙江"">
-                            <option value=" 浙江大学">浙江大学</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">联动下拉框</label>
-                <div class="hopeui-input-inline">
-                    <select name="LD" id="dd" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                    </select>
-                </div>
-                <div class="hopeui-input-inline">
-                    <select name="LD" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                    </select>
-                </div>
-                <div class="hopeui-input-inline">
-                    <select name="LD" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                    </select>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">文本框</label>
-                <div class="hopeui-input-block">
-                    <input name="text" type="text" placeholder="请输入" value="" class="hopeui-input"
-                        hope-verify="required" />
-                    <!-- <span class="hopeui-form-error-prompt">
-                            <i class="hopeui-icon hopeui-icon-close-fill"></i>文本至少得5个字符</span> -->
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">密码框</label>
-                <div class="hopeui-input-block">
-                    <input name="password" type="password" placeholder="请输入" value="" class="hopeui-input"
-                        hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">多选框</label>
-                <div class="hopeui-input-block">
-                    <input type="checkbox" name="subject" value="音乐" hope-verify="required" />
-                    <input type="checkbox" name="subject" value="历史" hope-verify="required" />
-                    <input type="checkbox" name="subject" value="生物" hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">多选框</label>
-                <div class="hopeui-input-block">
-                    <input type="checkbox" name="task" value="打桩" hope-verify="required" />
-                    <input type="checkbox" name="task" value="钓鱼"" hope-verify=" required" />
-                    <input type="checkbox" name="task" value="看电视" hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">单选框</label>
-                <div class="hopeui-input-block">
-                    <input type="radio" name="radio" value="男" title="男" hope-verify="required" checked />
-                    <input type="radio" name="radio" value="女" title="女" hope-verify="required" />
-                    <input type="radio" name="radio" value="什么玩意" title="什么玩意" hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">多文本域</label>
-                <div class="hopeui-input-block">
-                    <textarea name="textarea" class="hopeui-textarea" placeholder="请输入内容"
-                        hope-verify="required"></textarea>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <div class="hopeui-input-block">
-                    <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="set()">
-                        赋值
-                    </button>
-                    <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="xclear()">
-                        重置
-                    </button>
-                    <button type="submit" class="hopeui-btn">
-                        提交表单
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div style="padding:50px 10px;width:40%;display:inline-block;vertical-align: top;">
-        <form class="hopeui-form" name="form" action="" id="form2">
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">下拉框</label>
-                <div class="hopeui-input-block">
-                    <select name="city" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                        <option value="重庆">重庆</option>
-                        <option value="成都">成都</option>
-                        <option value="云南">云南</option>
-                    </select>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">分组下拉框</label>
-                <div class="hopeui-input-block">
-                    <select name="school" hope-verify="required">
-                        <option value="">请选择</option>
-                        <optgroup label="北京"">
-                            <option value=" 北京大学">北京大学</option>
-                            <option value="清华大学">清华大学</option>
-                        </optgroup>
-                        <optgroup label="浙江"">
-                            <option value=" 浙江大学">浙江大学</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">联动下拉框</label>
-                <div class="hopeui-input-inline">
-                    <select name="LD" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                    </select>
-                </div>
-                <div class="hopeui-input-inline">
-                    <select name="LD" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                    </select>
-                </div>
-                <div class="hopeui-input-inline">
-                    <select name="LD" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                    </select>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">文本框</label>
-                <div class="hopeui-input-block">
-                    <input name="text" type="text" placeholder="请输入" value="" class="hopeui-input"
-                        hope-verify="required" />
-                    <!-- <span class="hopeui-form-error-prompt">
-                            <i class="hopeui-icon hopeui-icon-close-fill"></i>文本至少得5个字符</span> -->
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">密码框</label>
-                <div class="hopeui-input-block">
-                    <input name="password" type="password" placeholder="请输入" value="" class="hopeui-input"
-                        hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">多选框</label>
-                <div class="hopeui-input-block">
-                    <input type="checkbox" name="subject" value="音乐" hope-verify="required" />
-                    <input type="checkbox" name="subject" value="历史" hope-verify="required" />
-                    <input type="checkbox" name="subject" value="生物" hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">多选框</label>
-                <div class="hopeui-input-block">
-                    <input type="checkbox" name="task" value="打桩" hope-verify="required" />
-                    <input type="checkbox" name="task" value="钓鱼"" hope-verify=" required" />
-                    <input type="checkbox" name="task" value="看电视" hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">单选框</label>
-                <div class="hopeui-input-block">
-                    <input type="radio" name="radio" value="男" title="男" hope-verify="required" checked />
-                    <input type="radio" name="radio" value="女" title="女" hope-verify="required" />
-                    <input type="radio" name="radio" value="什么玩意" title="什么玩意" hope-verify="required" />
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">多文本域</label>
-                <div class="hopeui-input-block">
-                    <textarea name="textarea" class="hopeui-textarea" placeholder="请输入内容"
-                        hope-verify="required"></textarea>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <div class="hopeui-input-block">
-                    <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="set2()">
-                        赋值
-                    </button>
-                    <button type="button" class="hopeui-btn hopeui-btn-primary" onclick="xclear2()">
-                        重置
-                    </button>
-                    <button type="submit" class="hopeui-btn">
-                        提交表单
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div style="padding:50px 10px;width:15%;display:inline-block;vertical-align: top;">
-        <form class="hopeui-form" name="form" action="">
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">下拉框</label>
-                <div class="hopeui-input-block">
-                    <select name="city" id="city" hope-verify="required">
-                        <option value="">请选择</option>
-                        <option value="青岛">青岛</option>
-                        <option value="武汉">武汉</option>
-                        <option value="乌鲁木齐">乌鲁木齐</option>
-                        <option value="南京">南京</option>
-                        <option value="天津">天津</option>
-                        <option value="郑州">郑州</option>
-                        <option value="重庆">重庆</option>
-                        <option value="成都">成都</option>
-                        <option value="云南">云南</option>
-                    </select>
-                </div>
-            </div>
-            <div class="hopeui-form-item">
-                <label class="hopeui-form-label">文本框</label>
-                <div class="hopeui-input-block">
-                    <input name="text" type="text" id="text" placeholder="请输入" value="" class="hopeui-input"
-                        hope-verify="required" />
-                </div>
-            </div>
-        </form>
-    </div>
+        <script src="./hopeui.js"></script>
+        <script>
+            // console.log(new hope.layerControls().laye);
 
-</body>
+            // let lay = hope.layer({
+            //     options: {
+            //         title: "fuck标题",
+            //         content: ` <div style="padding:20px;">
+            //                     我是弹层内容我是弹层内容我是弹层内容我是弹层内容我是弹层内容
+            //                 </div>`,
+            //         isDefaultBtn: true,
+            //         defaultBtn: {
+            //             ok: "好的",
+            //             close: "拜拜",
+            //         },
+            //     },
+            // });
 
-
-<script>
-    let ipt = hope.input({
-        ele: '#text',
-        on: {
-            blur: function (e) {
-                console.log(e);
-            },
-            focus: function (e) {
-                console.log(e);
-            },
-            input: function (e) {
-                console.log(e);
+            function xopen() {
+                hope.layer({
+                    options: {
+                        title: "fuck标题",
+                        content: ` <div style="padding:20px;">
+                                我是弹层内容我是弹层内容我是弹层内容我是弹层内容我是弹层内容
+                            </div>`,
+                        isDefaultBtn: true,
+                        defaultBtn: {
+                            ok: "好的",
+                            close: "拜拜",
+                        },
+                    },
+                }).open();
             }
-        }
-    })
-    let sel = hope.selector({
-        ele: '#city'
-    })
-    sel.val({
-        LD: {
-            type: "selector",
-            value: "天津"
-        },
-    })
 
-    let form = hope.form({
-        ele: '#form',
-        on: {
-            submit: function (e) {
-                console.log(e);
-            },
-        },
-        controls: {
-            selector: {
-                on: {
-                    change: function (e) {
-                        console.log(e);
+            function xopen2() {
+                let ly = hope.layer({
+                    options: {
+                        title: "卧槽标题",
+                        content: ` <div style="padding:20px;">
+                            是弹层内容我是弹层我我哦我我我是弹层内容
+                            </div>`,
+                        isDefaultBtn: true,
+                        defaultBtn: {
+                            ok: "ok",
+                            close: "bye~",
+                        },
                     },
-                    toggle: function (e) {
-                        console.log(e);
-                    }
-                }
-            },
-            checkbox: {
-                on: {
-                    change: function (e) {
-                        console.log(e);
-                    }
-                }
-            },
-            radio: {
-                on: {
-                    change: function (e) {
-                        console.log(e);
-                    }
-                }
-            },
-            input: {
-                on: {
-                    blur: function (e) {
-                        console.log(e);
+                    on: {
+                        confirm: function (e) {
+                            console.log(e);
+                        },
                     },
-                    focus: function (e) {
-                        console.log(e);
-                    },
-                    input: function (e) {
-                        console.log(e);
-                    }
-                }
-            },
-            textarea: {
-                on: {
-                    blur: function (e) {
-                        console.log(e);
-                    },
-                    focus: function (e) {
-                        console.log(e);
-                    },
-                    input: function (e) {
-                        console.log(e);
-                    }
-                }
+                }).open();
             }
-        },
-        verify: {
-            //[name]:fn
-            city: function (value) {
-                if (value.length <= 0) {
-                    return '请选择一个选项';
-                }
-            },
-            text: function (value) {
-                if (value.length <= 0) {
-                    return '文本不能为空';
-                }
-                if (value.length < 5) {
-                    return '文本至少得5个字符';
-                }
-                if (!/^[A-Za-z]+$/.test(value)) {
-                    return '文本必须是英文';
-                }
-            },
-            school: function (value) {
-                if (value.length <= 0) {
-                    return '请选择一个选项';
-                }
-            },
-            LD: function (value) {
-                if (value.length <= 0) {
-                    return '请选择一个选项';
-                }
-            },
-            password: function (value) {
-                if (value.length <= 0) {
-                    return '文本不能为空';
-                }
-                if (value.length < 6) {
-                    return '密码至少输入6个字符';
-                }
-            },
-            task: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-            subject: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-            radio: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-            textarea: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-        }
-    })
-
-
-    let form2 = hope.form({
-        ele: '#form2',
-        on: {
-            submit: function (e) {
-                console.log(e);
-            },
-        },
-        controls: {
-            selector: {
-                on: {
-                    change: function (e) {
-                        console.log(e);
-                    },
-                    toggle: function (e) {
-                        console.log(1);
-                    }
-                }
-            },
-            checkbox: {
-                on: {
-                    change: function (e) {
-                        console.log(e);
-                    }
-                }
-            },
-            radio: {
-                on: {
-                    change: function (e) {
-                        console.log(e);
-                    }
-                }
-            },
-            input: {
-                on: {
-                    blur: function (e) {
-                        console.log(e);
-                    },
-                    focus: function (e) {
-                        console.log(e);
-                    },
-                    input: function (e) {
-                        console.log(e);
-                    }
-                }
-            },
-            textarea: {
-                on: {
-                    blur: function (e) {
-                        console.log(e);
-                    },
-                    focus: function (e) {
-                        console.log(e);
-                    },
-                    input: function (e) {
-                        console.log(e);
-                    }
-                }
-            }
-        },
-        verify: {
-            city: function (value) {
-                if (value.length <= 0) {
-                    return '请选择一个选项';
-                }
-            },
-            text: function (value) {
-                if (value.length <= 0) {
-                    return '文本不能为空';
-                }
-                if (value.length < 5) {
-                    return '文本至少得5个字符';
-                }
-                if (!/^[A-Za-z]+$/.test(value)) {
-                    return '文本必须是英文';
-                }
-            },
-            school: function (value) {
-                if (value.length <= 0) {
-                    return '请选择一个选项';
-                }
-            },
-            LD: function (value) {
-                if (value.length <= 0) {
-                    return '请选择一个选项';
-                }
-            },
-            password: function (value) {
-                if (value.length <= 0) {
-                    return '文本不能为空';
-                }
-                if (value.length < 6) {
-                    return '密码至少输入6个字符';
-                }
-            },
-            task: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-            subject: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-            radio: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-            textarea: function (value) {
-                if (value.length <= 0) {
-                    return '需要选择至少一个选项';
-                }
-            },
-        }
-    })
-
-
-    /**
-     * @description: 
-     * @param {
-     *             eleName:{
-     *                  type:"selector|checkbox|radio"，
-     *                  value:""
-     *              }
-     *         } 
-     * @return: 
-     */
-    function set() {
-        //[name]:fn
-        form.val({
-            city: {
-                type: "selector",
-                value: "南京"
-            },
-            school: {
-                type: "selector",
-                value: "清华大学"
-            },
-            LD: {
-                type: "selector",
-                value: "天津,乌鲁木齐,青岛"
-            },
-            text: {
-                type: "input",
-                value: "我爱HopeUI"
-            },
-            task: {
-                type: "checkbox",
-                value: "打桩"
-            },
-            textarea: {
-                type: "textarea",
-                value: "我爱北京天安门"
-            },
-            password: {
-                type: "input",
-                value: "999888999"
-            },
-            subject: {
-                type: "checkbox",
-                value: "历史"
-            },
-            radio: {
-                type: "radio",
-                value: "女"
-            }
-        })
-    }
-
-    function set2() {
-        form2.val({
-            city: {
-                type: "selector",
-                value: "青岛"
-            },
-            school: {
-                type: "selector",
-                value: "浙江大学"
-            },
-            LD: {
-                type: "selector",
-                value: "武汉,南京,天津"
-            },
-            text: {
-                type: "input",
-                value: "biubiubiu"
-            },
-            task: {
-                type: "checkbox",
-                value: "打桩,钓鱼,看电视"
-            },
-            textarea: {
-                type: "textarea",
-                value: "红豆生南国，春来发几枝。愿君多采撷，此物最相思。"
-            },
-            password: {
-                type: "input",
-                value: "999888999"
-            },
-            subject: {
-                type: "checkbox",
-                value: "音乐,生物"
-            },
-            radio: {
-                type: "radio",
-                value: "什么玩意"
-            }
-        })
-    }
-
-    function xclear() {
-        form.clear();
-    }
-
-    function xclear2() {
-        form2.clear();
-    }
-</script>
-
+        </script>
+    </body>
 </html>

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-07-29 09:58:43
+ * @LastEditTime : 2020-07-31 15:58:31
  * @Description  :
  */
 
@@ -69,7 +69,7 @@ module.exports = {
                 collapseWhitespace: true, 
                 minifyCSS: true,
             },
-            hash: true,
+            // hash: true,
             template: path.join(__dirname, "./src/index.html"),
         }),
         new webpack.BannerPlugin(
