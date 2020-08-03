@@ -14,7 +14,7 @@
     z-index: 10001;
 
     .hopeui-layer-title {
-        padding: 0 80px 0 20px;
+        padding: 0 0 0 20px;
         height: 42px;
         line-height: 42px;
         border-bottom: 1px solid #eee;
@@ -26,16 +26,25 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+    .hopeui-layer-close {
+        height: 100%;
+        width: 40px;
+        text-align: center;
+        float: right;
+        cursor: pointer;
+    }
 
     .hopeui-layer-content {
         position: relative;
         overflow: auto;
         min-height: 50px;
         max-width: 300px;
+        font-size: 14px;
+        color: #333;
     }
 
     .hopeui-layer-btn {
-        padding: 10px;
+        padding: 0 20px 20px 20px;
         text-align: center;
     }
 }
@@ -49,6 +58,5 @@
     left: 0;
     right: 0;
     z-index: 10000;
-    background:rgba(0, 0, 0, 0.3)
+    background: rgba(0, 0, 0, 0.3);
 }
-

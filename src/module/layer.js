@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:29:55
- * @LastEditTime : 2020-08-03 13:54:53
+ * @LastEditTime : 2020-08-03 16:32:29
  * @Description  :
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -28,7 +28,8 @@ class LayerControls {
             ok: "确定",
             close: "取消",
         };
-
+        let self = null,
+            mask = null;
         let location = (layer, mask) => {
             layer.css({
                 left: (mask.width() - layer.width()) / 2,
@@ -43,13 +44,8 @@ class LayerControls {
             });
         };
 
-        let close = (layer, mask) => {
-            layer.addClass("hopeui-hide").remove();
-            mask.remove();
-        };
-
         let open = () => {
-            let mask = $(".hopeui-layer-mask");
+            mask = $(".hopeui-layer-mask");
             if (mask.length <= 0) {
                 let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
                 mask = $(maskTemplate).insertAfter("body");
@@ -60,6 +56,7 @@ class LayerControls {
                                     !options.title ? "hopeui-hide" : ""
                                 }">
                                     ${options.title}
+                                    <i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i>
                                 </div>
                                 <div class="hopeui-layer-content">
                                     ${options.content}
@@ -76,23 +73,32 @@ class LayerControls {
                                 </div>
                             </div>`;
 
-            let self = $(template).insertAfter("body");
+            self = $(template).insertAfter("body");
             location(self, mask);
             self.addClass("hopeui-anim hopeui-anim-scaleSpring");
 
             //事件绑定
             self.find('button[name="close"]').on("click", function (e) {
-                close(self, mask);
+                close();
             });
             self.find('button[name="ok"]').on("click", function (e) {
                 if (on.confirm) {
                     on.confirm(e);
                 }
             });
+
+            self.find(".hopeui-layer-close").on("click", function (e) {
+                close();
+            });
         };
 
+        let close = () => {
+            self.addClass("hopeui-hide").remove();
+            mask.remove();
+        };
+
+        open();
         return {
-            open: open,
             close: close,
         };
     }

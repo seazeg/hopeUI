@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-31 17:57:47
+ * @LastEditTime : 2020-08-03 16:24:50
  * @Description  : hopeUI框架
  */
 import "./styles/hopeui.less";
@@ -33,7 +33,6 @@ class Hopeui {
         for (let m in modules) {
             res = this._extend(res, new modules[m]());
         }
-
         return res;
     }
 }
