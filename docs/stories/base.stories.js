@@ -4,7 +4,7 @@ import { useEffect } from "@storybook/client-api";
 import "../../dist/hopeui.css";
 import "../../dist/hopeui.js";
 
-import button from "../view/button.html";
+import { button } from "../view/button.js";
 import checkbox from "../view/checkbox.html";
 import radio from "../view/radio.html";
 import selector from "../view/selector.html";
@@ -26,7 +26,7 @@ storiesOf("基础控件(Basis)", module)
     .add(
         "按钮(Button)",
         () => {
-            return button;
+            return button();
         },
         { notes: buttonMD }
     )
