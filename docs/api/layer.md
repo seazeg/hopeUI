@@ -1,4 +1,4 @@
-# 控件示例
+# 基础示例
 
 ```javascript
 document.querySelector("#open1").onclick = function () {
@@ -39,6 +39,12 @@ document.querySelector("#open2").onclick = function () {
 };
 ```
 
+# 基础属性
+
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| ---- | ------------- | ------ | -------------------- | ------- |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+
 # 参数配置 options
 
 | 参数         | 说明           | 类型          | 可选值 | 默认值                |
@@ -52,9 +58,9 @@ document.querySelector("#open2").onclick = function () {
 
 | 方法名  | 说明           | 类型     | 默认值 | 回调参数     |
 | ------- | -------------- | -------- | ------ | ------------ |
-| confirm | 确认完成后回调 | Function | --     | 当前对象 DOM |
-| open    | 打开后回调     | Function | --     | 当前对象 DOM |
-| close   | 关闭后回调     | Function | --     | 当前对象 DOM |
+| confirm | 确认完成后回调 | Function | null   | 当前对象 DOM |
+| open    | 打开后回调     | Function | null   | 当前对象 DOM |
+| close   | 关闭后回调     | Function | null   | 当前对象 DOM |
 
 # 调用方法
 

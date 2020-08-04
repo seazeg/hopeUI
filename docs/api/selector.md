@@ -1,63 +1,66 @@
-# 控件示例
+# 基础示例
 
 ```javascript
-document.querySelector("#open1").onclick = function () {
-    hope.layer({
-        options: {
-            title: "fuck标题",
-            content: ` <div style="width:500px;height:400px;padding:20px;">
-                            我是弹层内容我是弹层内容我是弹层内容我是弹层内容我是弹层内容
-                       /div>`,
-            isDefaultBtn: true,
-            defaultBtn: {
-                ok: "好的",
-                close: "拜拜",
-            },
+let select_normal = hope.selector({
+    ele: ".select_normal",
+    on: {
+        change: function (e) {
+            console.log(e);
         },
-    });
-};
+        toggle: function (e) {
+            console.log(e);
+        },
+        close: function (e) {
+            console.log(e);
+        },
+    },
+});
 
-document.querySelector("#open2").onclick = function () {
-    let ly = hope.layer({
-        options: {
-            title: "卧槽标题",
-            content: ` <div style="padding:20px;">
-                            是弹层内容我是弹层我我哦我我我是弹层内容
-                       </div>`,
-            isDefaultBtn: true,
-            defaultBtn: {
-                ok: "ok",
-                cancel: "bye~",
-            },
+let select_group = hope.selector({
+    ele: ".select_group",
+    on: {
+        change: function (e) {
+            console.log(e);
         },
-        on: {
-            confirm: function (e) {
-                ly.close();
-            },
+        toggle: function (e) {
+            console.log(e);
         },
-    });
-};
+        close: function (e) {
+            console.log(e);
+        },
+    },
+});
 ```
 
-# 参数配置 options
+# 基础属性
 
-| 参数         | 说明           | 类型          | 可选值 | 默认值                |
-| ------------ | -------------- | ------------- | ------ | --------------------- |
-| title        | 标题内容       | String        | --     | --                    |
-| content      | 主要内容       | HTML / String | --     | --                    |
-| isDefaultBtn | 是否有默认按钮 | Boolean       | --     | true                  |
-| defaultBtn   | 按钮描述       | Object        | --     | ok:确定 / cancel:取消 |
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| ---- | ------------- | ------ | -------------------- | ------- |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
 
 # 回调方法 on
 
-| 方法名  | 说明           | 类型     | 默认值 | 回调参数     |
-| ------- | -------------- | -------- | ------ | ------------ |
-| confirm | 确认完成后回调 | Function | --     | 当前对象 DOM |
-| open    | 打开后回调     | Function | --     | 当前对象 DOM |
-| close   | 关闭后回调     | Function | --     | 当前对象 DOM |
+| 参数   | 说明                   | 类型     | 默认值 | 回调参数 |
+| ------ | ---------------------- | -------- | ------ | -------- |
+| change | 选择完成后回调         | Function | null   | event↓   |
+| toggle | 下拉切换回调           | Function | null   | event↓   |
+| close  | 下拉框区域外关闭后回调 | Function | null   | event↓   |
+
+| event 参数        | 说明                 | 类型   |
+| ----------------- | -------------------- | ------ |
+| originalParentEle | select 原始 dom 对象 | Object |
+| virtualParentEle  | select 虚拟 dom 对象 | Object |
+| targetEle         | 当前选中选项 dom     | Object |
+| label             | 选中的描述值         | String |
+| value             | 选中的实际值         | String |
+| name              | select 组名          | String |
+| group             | 选项组内标号         | String |
+| groupSort         | 选项组内自身编号     | String |
+| eventName         | 当前回调事件名       | String |
 
 # 调用方法
 
-| 方法名 | 说明         | 类型     | 默认值 | 参数 |
-| ------ | ------------ | -------- | ------ | ---- |
-| close  | 外部调用关闭 | Function | --     | --   |
+| 方法名 | 说明     | 类型     | 默认值 | 参数 |
+| ------ | -------- | -------- | ------ | ---- |
+| val    | 外部赋值 | Function | --     | --   |
+| clear  | 外部清值 | Function | --     | --   |
