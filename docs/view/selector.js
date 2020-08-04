@@ -1,4 +1,24 @@
-<div style="padding: 3% 2%;">
+/*
+ * @Author       : Evan.G
+ * @Date         : 2020-08-04 11:25:18
+ * @LastEditTime : 2020-08-04 16:54:50
+ * @Description  : 
+ */ 
+import {
+    withKnobs,
+    number,
+    object,
+    boolean,
+    text,
+    select,
+    date,
+    array,
+    color,
+} from "@storybook/addon-knobs";
+import styleConf from "../styleConfig.json";
+import { utils } from "../utils";
+export const selector = () => {
+    return `<div style="padding: 3% 2%;">
     <select name="city" hope-verify="required" class="select_normal">
         <option value="">请选择</option>
         <option value="青岛">青岛</option>
@@ -24,4 +44,5 @@
             <option value=" 浙江大学">浙江大学</option>
         </optgroup>
     </select>
-</div>
+</div>`;
+};

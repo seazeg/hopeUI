@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-04 16:35:36
+ * @LastEditTime : 2020-08-04 16:43:34
  * @Description  :
  */
 
@@ -41,6 +41,7 @@ export const button = () => {
     //     fontFamily: "Arial",
     //     padding: "20px",
     // });
+
     const style = {
         // ...customStyle,
         borderWidth: borderWidth + "px",
@@ -65,10 +66,7 @@ export const button = () => {
                 <button type="submit" class="hopeui-btn">
                     普通按钮
                 </button>
-                <button type="button" class="hopeui-btn hopeui-btn-primary">
-                    按钮
-                </button>
-                <button type="submit" class="hopeui-btn">
+                <button type="button" class="hopeui-btn hopeui-custom-style">
                     ${btnText}
                  </button>
             </div>`;

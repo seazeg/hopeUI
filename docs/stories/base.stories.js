@@ -5,13 +5,13 @@ import "../../dist/hopeui.css";
 import "../../dist/hopeui.js";
 
 import { button } from "../view/button.js";
-import checkbox from "../view/checkbox.html";
-import radio from "../view/radio.html";
-import selector from "../view/selector.html";
-import input from "../view/input.html";
-import textarea from "../view/textarea.html";
-import form from "../view/form.html";
-import layer from "../view/layer.html";
+import { checkbox } from "../view/checkbox.js";
+import { radio } from "../view/radio.js";
+import { selector } from "../view/selector.js";
+import { input } from "../view/input.js";
+import { textarea } from "../view/textarea.js";
+import { form } from "../view/form.js";
+import { layer } from "../view/layer.js";
 
 import buttonMD from "../api/button.md";
 import checkboxMD from "../api/checkbox.md";
@@ -49,7 +49,7 @@ storiesOf("基础控件(Basis)", module)
                     },
                 });
             });
-            return input;
+            return input();
         },
         { notes: inputMD }
     )
@@ -72,7 +72,7 @@ storiesOf("基础控件(Basis)", module)
                     },
                 });
             });
-            return textarea;
+            return textarea();
         },
         { notes: textareaMD }
     )
@@ -104,7 +104,7 @@ storiesOf("基础控件(Basis)", module)
                     },
                 });
             });
-            return selector;
+            return selector();
         },
         { notes: selectorMD }
     )
@@ -121,7 +121,7 @@ storiesOf("基础控件(Basis)", module)
                     },
                 });
             });
-            return checkbox;
+            return checkbox();
         },
         { notes: checkboxMD }
     )
@@ -138,7 +138,7 @@ storiesOf("基础控件(Basis)", module)
                     },
                 });
             });
-            return radio;
+            return radio();
         },
         { notes: radioMD }
     );
@@ -352,7 +352,7 @@ storiesOf("模块(Module)", module)
                     fm.clear();
                 };
             });
-            return form;
+            return form();
         },
         { notes: formMD }
     )
@@ -398,7 +398,7 @@ storiesOf("模块(Module)", module)
                 };
             });
 
-            return layer;
+            return layer();
         },
         { notes: layerMD }
     );

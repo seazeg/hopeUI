@@ -1,3 +1,25 @@
+/*
+ * @Author       : Evan.G
+ * @Date         : 2020-08-04 11:25:10
+ * @LastEditTime : 2020-08-04 16:55:00
+ * @Description  :
+ */
+import {
+    withKnobs,
+    number,
+    object,
+    boolean,
+    text,
+    select,
+    date,
+    array,
+    color,
+} from "@storybook/addon-knobs";
+import styleConf from "../styleConfig.json";
+import { utils } from "../utils";
+
+export const form = () => {
+    return `
 <div style="padding:3% 2%">
     <form class="hopeui-form" name="form" action="" id="form">
         <div class="hopeui-form-item">
@@ -127,4 +149,5 @@
             </div>
         </div>
     </form>
-</div>
+</div>`;
+};
