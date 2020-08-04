@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-08-04 16:56:46
+ * @LastEditTime : 2020-08-04 17:38:18
  * @Description  :
  */
 
@@ -23,7 +23,7 @@ export const input = () => {
     <input
         name="text"
         type="text"
-        placeholder="请输入"
+        placeholder="请输入文本"
         value=""
         class="hopeui-input input_normal"
         hope-verify="required"
@@ -32,7 +32,7 @@ export const input = () => {
     <input
         name="password"
         type="password"
-        placeholder="请输入"
+        placeholder="请输入密码"
         value=""
         class="hopeui-input input_normal"
         hope-verify="required"

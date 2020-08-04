@@ -143,7 +143,7 @@ storiesOf("基础控件(Basis)", module)
         { notes: radioMD }
     );
 
-storiesOf("模块(Module)", module)
+storiesOf("组件(Components)", module)
     .add(
         "表单(Form)",
         () => {
