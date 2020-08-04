@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-04 16:03:38
+ * @LastEditTime : 2020-08-04 16:35:36
  * @Description  :
  */
 
@@ -21,8 +21,8 @@ import { utils } from "../utils";
 
 export const button = () => {
     const btnText = text("内容", "自定义按钮"); //文字控件
-    const selectedBgColor = color("背景颜色", styleConf.primaryColor); //颜色选择器
-    const selectedColor = color("字体颜色", styleConf.lightFontColor);
+    const backgroundColor = color("背景颜色", styleConf.primaryColor); //颜色选择器
+    const fontColor = color("字体颜色", styleConf.lightFontColor);
     const bold = boolean("字体加粗", false); //启用控件
     const borderColor = color("边框颜色", styleConf.primaryColor);
     const borderStyle = select("边框样式", {
@@ -30,7 +30,7 @@ export const button = () => {
         dotted: "dotted",
         dashed: "dashed",
     });
-    const borderWidth = number("边框宽度", {
+    const borderWidth = number("边框宽度", 1, {
         range: true,
         min: 0,
         max: 10,
@@ -48,20 +48,27 @@ export const button = () => {
         borderColor: borderColor,
         fontWeight: bold ? 800 : 400,
         fontSize: fontSize + "px",
-        color: selectedColor,
-        backgroundColor: selectedBgColor,
+        color: fontColor,
+        backgroundColor: backgroundColor,
     };
 
-    return `<div style="padding: 3% 2%;">
+    return `
+    <style>
+    .hopeui-custom-style{
+        ${utils.json2css(style)}
+    }
+    </style>
+    <div style="padding: 3% 2%;">
                 <button type="button" class="hopeui-btn hopeui-btn-primary">
                     按钮
                 </button>
                 <button type="submit" class="hopeui-btn">
                     普通按钮
                 </button>
-                <button type="submit" class="hopeui-btn" style='${utils.json2css(
-                    style
-                )}'>
+                <button type="button" class="hopeui-btn hopeui-btn-primary">
+                    按钮
+                </button>
+                <button type="submit" class="hopeui-btn">
                     ${btnText}
                  </button>
             </div>`;
