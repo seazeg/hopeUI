@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:29:55
- * @LastEditTime : 2020-08-03 16:32:29
+ * @LastEditTime : 2020-08-03 16:41:50
  * @Description  :
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -84,6 +84,8 @@ class LayerControls {
             self.find('button[name="ok"]').on("click", function (e) {
                 if (on.confirm) {
                     on.confirm(e);
+                }else{
+                    close();
                 }
             });
 
