@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-07-31 15:26:49
+ * @LastEditTime : 2020-08-04 12:05:15
  * @Description  : 表单控件组
  */
 
@@ -12,7 +12,6 @@ import { verify as utils } from "../utils/verify.js";
 
 class FormControls {
     constructor(config) {
-        this.config = config || {};
         this.form = this.form;
         this.selector = this.selector;
         this.radio = this.radio;

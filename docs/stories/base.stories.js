@@ -4,15 +4,148 @@ import { useEffect } from "@storybook/client-api";
 import "../../dist/hopeui.css";
 import "../../dist/hopeui.js";
 
+import button from "../view/button.html";
+import checkbox from "../view/checkbox.html";
+import radio from "../view/radio.html";
+import selector from "../view/selector.html";
+import input from "../view/input.html";
+import textarea from "../view/textarea.html";
 import form from "../view/form.html";
 import layer from "../view/layer.html";
 
+import buttonMD from "../api/button.md";
+import checkboxMD from "../api/checkbox.md";
+import radioMD from "../api/radio.md";
+import selectorMD from "../api/selector.md";
+import inputMD from "../api/input.md";
+import textareaMD from "../api/textarea.md";
 import formMD from "../api/form.md";
 import layerMD from "../api/layer.md";
 
-storiesOf("基础控件", module)
+storiesOf("基础控件(Basis)", module)
     .add(
-        "表单",
+        "按钮(Button)",
+        () => {
+            return button;
+        },
+        { notes: buttonMD }
+    )
+    .add(
+        "文本框(Input)",
+        () => {
+            useEffect(() => {
+                let input_normal = hope.input({
+                    ele: ".input_normal",
+                    on: {
+                        blur: function (e) {
+                            console.log(e);
+                        },
+                        focus: function (e) {
+                            console.log(e);
+                        },
+                        input: function (e) {
+                            console.log(e);
+                        },
+                    },
+                });
+            });
+            return input;
+        },
+        { notes: inputMD }
+    )
+    .add(
+        "多行文本框(Textarea)",
+        () => {
+            useEffect(() => {
+                let text_normal = hope.textarea({
+                    ele: ".text_normal",
+                    on: {
+                        blur: function (e) {
+                            console.log(e);
+                        },
+                        focus: function (e) {
+                            console.log(e);
+                        },
+                        input: function (e) {
+                            console.log(e);
+                        },
+                    },
+                });
+            });
+            return textarea;
+        },
+        { notes: textareaMD }
+    )
+    .add(
+        "下拉框(Selector)",
+        () => {
+            useEffect(() => {
+                let select_normal = hope.selector({
+                    ele: ".select_normal",
+                    on: {
+                        change: function (e) {
+                            console.log(e);
+                        },
+                        toggle: function (e) {
+                            console.log(e);
+                        },
+                    },
+                });
+
+                let select_group = hope.selector({
+                    ele: ".select_group",
+                    on: {
+                        change: function (e) {
+                            console.log(e);
+                        },
+                        toggle: function (e) {
+                            console.log(e);
+                        },
+                    },
+                });
+            });
+            return selector;
+        },
+        { notes: selectorMD }
+    )
+    .add(
+        "多选框(Checkbox)",
+        () => {
+            useEffect(() => {
+                let checkbox_normal = hope.checkbox({
+                    ele: ".checkbox_normal",
+                    on: {
+                        change: function (e) {
+                            console.log(e);
+                        },
+                    },
+                });
+            });
+            return checkbox;
+        },
+        { notes: checkboxMD }
+    )
+    .add(
+        "单选框(Radio)",
+        () => {
+            useEffect(() => {
+                let radio_normal = hope.radio({
+                    ele: ".radio_normal",
+                    on: {
+                        change: function (e) {
+                            console.log(e);
+                        },
+                    },
+                });
+            });
+            return radio;
+        },
+        { notes: radioMD }
+    );
+
+storiesOf("模块(Module)", module)
+    .add(
+        "表单(Form)",
         () => {
             useEffect(() => {
                 let fm = hope.form({
@@ -224,14 +357,14 @@ storiesOf("基础控件", module)
         { notes: formMD }
     )
     .add(
-        "弹层",
+        "弹层(Layer)",
         () => {
             useEffect(() => {
                 document.querySelector("#open1").onclick = function () {
                     hope.layer({
                         options: {
                             title: "fuck标题",
-                            content: ` <div style="width:900px;height:500px;padding:20px;">
+                            content: ` <div style="width:500px;height:400px;padding:20px;">
                                 我是弹层内容我是弹层内容我是弹层内容我是弹层内容我是弹层内容
                             </div>`,
                             isDefaultBtn: true,
@@ -253,7 +386,7 @@ storiesOf("基础控件", module)
                             isDefaultBtn: true,
                             defaultBtn: {
                                 ok: "ok",
-                                close: "bye~",
+                                cancel: "bye~",
                             },
                         },
                         on: {

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:29:55
- * @LastEditTime : 2020-08-03 16:41:50
+ * @LastEditTime : 2020-08-04 11:21:33
  * @Description  :
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -26,7 +26,7 @@ class LayerControls {
     }) {
         options.defaultBtn = options.defaultBtn || {
             ok: "确定",
-            close: "取消",
+            cancel: "取消",
         };
         let self = null,
             mask = null;
@@ -65,7 +65,7 @@ class LayerControls {
                                     !options.isDefaultBtn ? "hopeui-hide" : ""
                                 }">
                                     <button type="button" name="close" class="hopeui-btn hopeui-btn-primary">
-                                        ${options.defaultBtn.close}
+                                        ${options.defaultBtn.cancel}
                                     </button>
                                     <button type="button" name="ok" class="hopeui-btn">
                                         ${options.defaultBtn.ok}
@@ -77,14 +77,18 @@ class LayerControls {
             location(self, mask);
             self.addClass("hopeui-anim hopeui-anim-scaleSpring");
 
+            if (on.open) {
+                on.open(self[0]);
+            }
+
             //事件绑定
             self.find('button[name="close"]').on("click", function (e) {
                 close();
             });
             self.find('button[name="ok"]').on("click", function (e) {
                 if (on.confirm) {
-                    on.confirm(e);
-                }else{
+                    on.confirm(self[0]);
+                } else {
                     close();
                 }
             });
@@ -97,6 +101,10 @@ class LayerControls {
         let close = () => {
             self.addClass("hopeui-hide").remove();
             mask.remove();
+
+            if (on.close) {
+                on.close(self[0]);
+            }
         };
 
         open();
