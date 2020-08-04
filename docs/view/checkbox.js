@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-04 16:49:53
+ * @LastEditTime : 2020-08-04 17:58:41
  * @Description  :
  */
 
@@ -21,7 +21,7 @@ import { utils } from "../utils";
 
 export const checkbox = () => {
     return `
-    <div style="padding: 3% 2%;">
+    <div class="docs-box">
         <input type="checkbox" name="subject" value="音乐" hope-verify="required" class="checkbox_normal"/>
         <input type="checkbox" name="subject" value="历史" hope-verify="required" class="checkbox_normal"/>
         <input type="checkbox" name="subject" value="生物" hope-verify="required" class="checkbox_normal"/>

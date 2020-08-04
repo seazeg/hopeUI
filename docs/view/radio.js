@@ -19,7 +19,7 @@ import styleConf from "../styleConfig.json";
 import { utils } from "../utils";
 export const radio = () => {
     return `
-<div style="padding: 3% 2%;">
+<div class="docs-box">
     <input
         type="radio"
         name="radio"

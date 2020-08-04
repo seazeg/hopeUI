@@ -18,7 +18,7 @@ import {
 import styleConf from "../styleConfig.json";
 import { utils } from "../utils";
 export const selector = () => {
-    return `<div style="padding: 3% 2%;">
+    return `<div class="docs-box">
     <select name="city" hope-verify="required" class="select_normal">
         <option value="">请选择</option>
         <option value="青岛">青岛</option>

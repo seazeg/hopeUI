@@ -1,6 +1,7 @@
 import { storiesOf } from "@storybook/html";
 import { useEffect } from "@storybook/client-api";
 
+import "../docs.css";
 import "../../dist/hopeui.css";
 import "../../dist/hopeui.js";
 

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-04 16:43:34
+ * @LastEditTime : 2020-08-04 18:05:51
  * @Description  :
  */
 
@@ -59,15 +59,70 @@ export const button = () => {
         ${utils.json2css(style)}
     }
     </style>
-    <div style="padding: 3% 2%;">
-                <button type="button" class="hopeui-btn hopeui-btn-primary">
-                    按钮
-                </button>
-                <button type="submit" class="hopeui-btn">
-                    普通按钮
-                </button>
-                <button type="button" class="hopeui-btn hopeui-custom-style">
-                    ${btnText}
-                 </button>
-            </div>`;
+    <div class="docs-box">
+    <div class="docs-title">
+        <fieldset>
+            <legend><a name="icon">普通按钮</a></legend>
+        </fieldset>
+    </div>
+    <div class="docs-content">
+        <button type="button" class="hopeui-btn hopeui-btn-primary">
+            按钮
+        </button>
+        <button type="submit" class="hopeui-btn">
+            普通按钮
+        </button>
+    </div>
+    <div class="docs-title">
+        <fieldset>
+            <legend><a name="icon">圆角按钮</a></legend>
+        </fieldset>
+    </div>
+    <div class="docs-content">
+        <button
+            type="button"
+            class="hopeui-btn hopeui-btn-primary hopeui-btn-radius"
+        >
+            按钮
+        </button>
+        <button type="submit" class="hopeui-btn hopeui-btn-radius">
+            普通按钮
+        </button>
+    </div>
+    <div class="docs-title">
+        <fieldset>
+            <legend><a name="icon">图标按钮</a></legend>
+        </fieldset>
+    </div>
+    <div class="docs-content">
+        <button
+            type="button"
+            class="hopeui-btn hopeui-btn-primary hopeui-btn-radius"
+        >
+            按钮
+        </button>
+        <button type="submit" class="hopeui-btn hopeui-btn-radius">
+            普通按钮
+        </button>
+    </div>
+    <div class="docs-title">
+        <fieldset>
+            <legend><a name="icon">按钮组</a></legend>
+        </fieldset>
+    </div>
+    <div class="docs-content">
+        <button
+            type="button"
+            class="hopeui-btn hopeui-btn-primary hopeui-btn-radius"
+        >
+            按钮
+        </button>
+        <button type="submit" class="hopeui-btn hopeui-btn-radius">
+            普通按钮
+        </button>
+    </div>
+</div>
+
+
+    `;
 };

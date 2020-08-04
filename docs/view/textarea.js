@@ -18,7 +18,7 @@ import {
 import styleConf from "../styleConfig.json";
 import { utils } from "../utils";
 export const textarea = () => {
-    return `<div style="padding: 3% 2%;">
+    return `<div class="docs-box">
     <textarea
         name="textarea"
         class="hopeui-textarea text_normal"

@@ -1,0 +1,26 @@
+.docs-box {
+    padding: 0 30px;
+}
+.docs-title {
+    margin: 30px 0 20px;
+}
+.docs-title fieldset {
+    border: none;
+    padding: 0;
+    border-top: 1px solid #ccc;
+}
+
+.docs-title fieldset legend {
+    margin-left: 20px;
+    padding: 0 10px;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.docs-content {
+    padding-bottom: 50px;
+}
+
+.docs-content .hopeui-btn {
+    margin-right: 5px;
+}

@@ -19,7 +19,7 @@ import {
 import styleConf from "../styleConfig.json";
 import { utils } from "../utils";
 export const input = () => {
-    return `<div style="padding: 3% 2%;">
+    return `<div class="docs-box">
     <input
         name="text"
         type="text"
