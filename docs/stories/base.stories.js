@@ -361,25 +361,6 @@ storiesOf("组件(Components)", module)
         "弹层(Layer)",
         () => {
             useEffect(() => {
-                window.addEventListener(
-                    "message",
-                    e => {
-                        debugger
-                      if (e.data && e.data.type == "contentSize") {
-                        console.log(e.data.value)
-                        if (_this.params.width != "") {
-                          _this.contentSize = e.data.value;
-                          _this.contentSize[0] = _this.params.width;
-                        } else {
-                          _this.contentSize = e.data.value;
-                        }
-                        $("#frameContent").css("height",e.data.value[1]);
-                        _this.receviedMsg = true;
-                      }
-                    },
-                    false
-                  );
-
                 document.querySelector("#open1").onclick = function () {
                     hope.layer({
                         options: {
@@ -398,7 +379,7 @@ storiesOf("组件(Components)", module)
                     let ly = hope.layer({
                         options: {
                             title: "iframe弹框",
-                            content:`<iframe id="frameContent" style="width:1000px;height:500px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>`
+                            content:`<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>`
                             // content:
                             //     '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
                         },
