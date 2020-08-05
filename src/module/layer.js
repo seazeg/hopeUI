@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:29:55
- * @LastEditTime : 2020-08-04 11:21:33
+ * @LastEditTime : 2020-08-05 10:49:46
  * @Description  :
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -15,8 +15,9 @@ class LayerControls {
         options: options = {
             title: null,
             content: null,
-            isDefaultBtn: false,
+            isDefaultBtn: true,
             defaultBtn: {},
+            isDrag: false,
         },
         on: on = {
             confirm: null,
@@ -24,33 +25,74 @@ class LayerControls {
             close: null,
         },
     }) {
-        options.defaultBtn = options.defaultBtn || {
-            ok: "确定",
-            cancel: "取消",
+        options = {
+            title: options.title || "",
+            content: options.content || "",
+            isDefaultBtn: options.isDefaultBtn || true,
+            defaultBtn: options.defaultBtn || {
+                ok: "确定",
+                cancel: "取消",
+            },
+            isDrag: options.isDrag || false,
         };
+
         let self = null,
             mask = null;
-        let location = (layer, mask) => {
+        let location = (layer) => {
             layer.css({
-                left: (mask.width() - layer.width()) / 2,
-                top: (mask.height() - layer.height()) / 2,
+                left:
+                    (document.documentElement.clientWidth - layer.width()) / 2,
+                top:
+                    (document.documentElement.clientHeight - layer.height()) /
+                    2,
             });
 
             $(window).resize(function () {
                 layer.css({
-                    left: (mask.width() - layer.width()) / 2,
-                    top: (mask.height() - layer.height()) / 2,
+                    left:
+                        (document.documentElement.clientWidth - layer.width()) /
+                        2,
+                    top:
+                        (document.documentElement.clientHeight -
+                            layer.height()) /
+                        2,
                 });
             });
         };
 
-        let open = () => {
-            mask = $(".hopeui-layer-mask");
-            if (mask.length <= 0) {
-                let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
-                mask = $(maskTemplate).insertAfter("body");
-            }
+        let darg = (obj) => {
+            obj.onmousedown = function (e) {
+                //鼠标按下事件
 
+                let oe = e || window.event;
+                let _this = this.parentNode;
+                let startX = oe.clientX - _this.offsetLeft;
+                let startY = oe.clientY - _this.offsetTop;
+                document.onmousemove = function (e) {
+                    //鼠标移动事件
+                    let oe = e || window.event;
+                    _this.style.left = oe.clientX - startX + "px";
+                    _this.style.top = oe.clientY - startY + "px";
+                };
+
+                document.onmouseup = function () {
+                    //鼠标松开事件
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    if (_this.releaseCapture) {
+                        //debug释放鼠标捕获
+                        _this.releaseCapture();
+                    }
+                };
+                if (_this.setCapture) {
+                    //debug设置鼠标捕获
+                    _this.setCapture();
+                }
+                return false;
+            };
+        };
+
+        let open = () => {
             let template = `<div class="hopeui-layer">
                                 <div class="hopeui-layer-title ${
                                     !options.title ? "hopeui-hide" : ""
@@ -74,8 +116,18 @@ class LayerControls {
                             </div>`;
 
             self = $(template).insertAfter("body");
-            location(self, mask);
+            location(self);
             self.addClass("hopeui-anim hopeui-anim-scaleSpring");
+
+            if (options.isDrag) {
+                darg(self.children(".hopeui-layer-title")[0]);
+            } else {
+                mask = $(".hopeui-layer-mask");
+                if (mask.length <= 0) {
+                    let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
+                    mask = $(maskTemplate).insertAfter("body");
+                }
+            }
 
             if (on.open) {
                 on.open(self[0]);
@@ -100,7 +152,10 @@ class LayerControls {
 
         let close = () => {
             self.addClass("hopeui-hide").remove();
-            mask.remove();
+
+            if (mask) {
+                mask.remove();
+            }
 
             if (on.close) {
                 on.close(self[0]);
