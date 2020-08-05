@@ -36,6 +36,7 @@ document.querySelector("#open3").onclick = function () {
             title: "可拖拽弹框",
             content:
                 '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596605654660&di=3efa3194330834b16d1edce806f3ace4&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201105%2F17%2F113554rnu40q7nbgnn3lgq.jpg" style="width:800px" />',
+            isMask: false,
             isDrag: true,
         },
         on: {
@@ -55,12 +56,15 @@ document.querySelector("#open3").onclick = function () {
 
 ## 参数配置 options
 
-| 参数         | 说明           | 类型          | 可选值 | 默认值                |
-| ------------ | -------------- | ------------- | ------ | --------------------- |
-| title        | 标题内容       | String        | --     | --                    |
-| content      | 主要内容       | HTML / String | --     | --                    |
-| isDefaultBtn | 是否有默认按钮 | Boolean       | --     | true                  |
-| defaultBtn   | 按钮描述       | Object        | --     | ok:确定 / cancel:取消 |
+| 参数         | 说明             | 类型          | 可选值       | 默认值                 |
+| ------------ | ---------------- | ------------- | ------------ | ---------------------- |
+| title        | 标题内容         | String        | --           | --                     |
+| content      | 主要内容         | HTML / String | --           | --                     |
+| isMask       | 是否有背景遮罩层 | Boolean       | true / false | true                   |
+| isDefaultBtn | 是否有默认按钮   | Boolean       | true / false | true                   |
+| defaultBtn   | 按钮描述         | Object        | --           | ok:确定 / cancel:取消  |
+| isDrag       | 是否拖拽         | Boolean       | true / false | false                  |
+| animation    | 补间动画         | Class         | --           | hopeui-anim-scaleSprin |
 
 ## 回调方法 on
 

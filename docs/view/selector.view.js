@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:18
- * @LastEditTime : 2020-08-05 09:33:55
+ * @LastEditTime : 2020-08-05 14:16:14
  * @Description  : 
  */ 
 import {
@@ -26,7 +26,7 @@ export const selector = () => {
     </div>
     <div class="docs-content">
         <select name="city" hope-verify="required" class="select_normal">
-            <option value="">请选择</option>
+            <option value="">请选择一个选项</option>
             <option value="青岛">青岛</option>
             <option value="武汉">武汉</option>
             <option value="乌鲁木齐">乌鲁木齐</option>
@@ -45,7 +45,7 @@ export const selector = () => {
     </div>
     <div class="docs-content">
         <select name="school" hope-verify="required" class="select_group">
-            <option value="">请选择</option>
+            <option value="">请选择一个选项</option>
             <optgroup label="北京"">
                 <option value="北京大学">北京大学</option>
                 <option value="清华大学">清华大学</option>

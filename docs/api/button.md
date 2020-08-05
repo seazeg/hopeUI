@@ -9,16 +9,22 @@
 <button type="button" class="hopeui-btn">
     普通按钮
 </button>
+<button type="button" class="hopeui-btn hopeui-btn-disabled">
+    禁用按钮
+</button>
 ```
 
 #### 2.圆角按钮
 
 ```html
-<button type="button" class="hopeui-btn hopeui-btn-primary">
-    普通按钮
+<button type="button" class="hopeui-btn hopeui-btn-primary hopeui-btn-radius">
+    圆角按钮
 </button>
-<button type="button" class="hopeui-btn">
-    普通按钮
+<button type="button" class="hopeui-btn hopeui-btn-radius">
+    圆角按钮
+</button>
+<button type="button" class="hopeui-btn hopeui-btn-radius hopeui-btn-disabled">
+    禁用按钮
 </button>
 ```
 

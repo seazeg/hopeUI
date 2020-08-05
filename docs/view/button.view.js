@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-05 11:32:50
+ * @LastEditTime : 2020-08-05 14:13:57
  * @Description  :
  */
 
@@ -72,6 +72,9 @@ export const button = () => {
         <button type="button" class="hopeui-btn">
             普通按钮
         </button>
+        <button type="button" class="hopeui-btn hopeui-btn-disabled">
+            禁用按钮
+        </button>
     </div>
     <div class="docs-title">
         <fieldset>
@@ -87,6 +90,9 @@ export const button = () => {
         </button>
         <button type="button" class="hopeui-btn hopeui-btn-radius">
             圆角按钮
+        </button>
+        <button type="button" class="hopeui-btn hopeui-btn-radius hopeui-btn-disabled">
+            禁用按钮
         </button>
     </div>
     <div class="docs-title">

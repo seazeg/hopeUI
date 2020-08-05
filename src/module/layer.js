@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:29:55
- * @LastEditTime : 2020-08-05 10:49:46
+ * @LastEditTime : 2020-08-05 14:07:16
  * @Description  :
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -15,9 +15,11 @@ class LayerControls {
         options: options = {
             title: null,
             content: null,
+            isMask: true,
             isDefaultBtn: true,
             defaultBtn: {},
             isDrag: false,
+            animation: "hopeui-anim-scaleSpring",
         },
         on: on = {
             confirm: null,
@@ -28,12 +30,14 @@ class LayerControls {
         options = {
             title: options.title || "",
             content: options.content || "",
+            isMask: options.content || true,
             isDefaultBtn: options.isDefaultBtn || true,
             defaultBtn: options.defaultBtn || {
                 ok: "确定",
                 cancel: "取消",
             },
             isDrag: options.isDrag || false,
+            animation: options.content || "hopeui-anim-scaleSpring",
         };
 
         let self = null,
@@ -117,11 +121,12 @@ class LayerControls {
 
             self = $(template).insertAfter("body");
             location(self);
-            self.addClass("hopeui-anim hopeui-anim-scaleSpring");
+            self.addClass(`hopeui-anim ${options.animation}`);
 
             if (options.isDrag) {
                 darg(self.children(".hopeui-layer-title")[0]);
-            } else {
+            }
+            if (options.isMask) {
                 mask = $(".hopeui-layer-mask");
                 if (mask.length <= 0) {
                     let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
