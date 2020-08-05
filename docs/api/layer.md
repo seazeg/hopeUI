@@ -1,4 +1,4 @@
-# 基础示例
+## 基础示例
 
 ```javascript
 document.querySelector("#open1").onclick = function () {
@@ -47,13 +47,13 @@ document.querySelector("#open3").onclick = function () {
 };
 ```
 
-# 基础属性
+## 基础属性
 
 | 参数 | 说明          | 类型   | 可选值               | 默认值  |
 | ---- | ------------- | ------ | -------------------- | ------- |
 | ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
 
-# 参数配置 options
+## 参数配置 options
 
 | 参数         | 说明           | 类型          | 可选值 | 默认值                |
 | ------------ | -------------- | ------------- | ------ | --------------------- |
@@ -62,7 +62,7 @@ document.querySelector("#open3").onclick = function () {
 | isDefaultBtn | 是否有默认按钮 | Boolean       | --     | true                  |
 | defaultBtn   | 按钮描述       | Object        | --     | ok:确定 / cancel:取消 |
 
-# 回调方法 on
+## 回调方法 on
 
 | 方法名  | 说明           | 类型     | 默认值 | 回调参数     |
 | ------- | -------------- | -------- | ------ | ------------ |
@@ -70,7 +70,7 @@ document.querySelector("#open3").onclick = function () {
 | open    | 打开后回调     | Function | null   | 当前对象 DOM |
 | close   | 关闭后回调     | Function | null   | 当前对象 DOM |
 
-# 调用方法
+## 调用方法
 
 | 方法名 | 说明         | 类型     | 默认值 | 参数 |
 | ------ | ------------ | -------- | ------ | ---- |

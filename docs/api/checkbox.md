@@ -1,4 +1,4 @@
-# 基础示例
+## 基础示例
 
 ```javascript
 let checkbox_normal = hope.checkbox({
@@ -11,13 +11,13 @@ let checkbox_normal = hope.checkbox({
 });
 ```
 
-# 基础属性
+## 基础属性
 
 | 参数 | 说明          | 类型   | 可选值               | 默认值  |
 | ---- | ------------- | ------ | -------------------- | ------- |
 | ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
 
-# 回调方法 on
+## 回调方法 on
 
 | 参数   | 说明           | 类型     | 默认值 | 回调参数 |
 | ------ | -------------- | -------- | ------ | -------- |
@@ -32,7 +32,7 @@ let checkbox_normal = hope.checkbox({
 | status     | 选中状态       | Boolean |
 | eventName  | 当前回调事件名 | String  |
 
-# 调用方法
+## 调用方法
 
 | 方法名 | 说明     | 类型     | 默认值 | 参数 |
 | ------ | -------- | -------- | ------ | ---- |

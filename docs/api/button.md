@@ -1,17 +1,6 @@
-# 控件示例
+## 控件示例
 
-### 1.普通按钮
-
-```html
-<button type="button" class="hopeui-btn hopeui-btn-primary">
-    普通按钮
-</button>
-<button type="button" class="hopeui-btn">
-    普通按钮
-</button>
-```
-
-### 2.圆角按钮
+#### 1.普通按钮
 
 ```html
 <button type="button" class="hopeui-btn hopeui-btn-primary">
@@ -22,7 +11,18 @@
 </button>
 ```
 
-### 3.图标按钮
+#### 2.圆角按钮
+
+```html
+<button type="button" class="hopeui-btn hopeui-btn-primary">
+    普通按钮
+</button>
+<button type="button" class="hopeui-btn">
+    普通按钮
+</button>
+```
+
+#### 3.图标按钮
 
 ```html
 <button type="button" class="hopeui-btn hopeui-btn-primary hopeui-btn-radius">
@@ -39,7 +39,7 @@
 </button>
 ```
 
-### 4.按钮组
+#### 4.按钮组
 
 ```html
 <div class="hopeui-btn-group">
