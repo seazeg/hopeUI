@@ -7,64 +7,36 @@
         <link rel="stylesheet" href="./hopeui.css" />
     </head>
 
-    <body style="height: 2000px;">
-        <div class="hopeui-btn-group" style="padding:20%">
-            <button type="button" class="hopeui-btn" onclick="xopen()">
-                打开弹层
-            </button>
-            <button type="button" class="hopeui-btn" onclick="xopen2()">
-                打开弹层2
-            </button>
-            <button type="button" class="hopeui-btn" onclick="xopen2()">
-                打开弹层2
-            </button>
-            <button type="button" class="hopeui-btn" onclick="xopen2()">
-                打开弹层2
-            </button>
-            <button type="button" class="hopeui-btn" onclick="xopen2()">
-                打开弹层2
-            </button>
+    <body>
+        <div class="hopeui-container">
+            常规布局（以中型屏幕桌面为例）：
+            <div class="hopeui-row">
+                <div class="hopeui-col-md9">
+                    你的内容 9/12
+                </div>
+                <div class="hopeui-col-md3">
+                    你的内容 3/12
+                </div>
+            </div>
+
+            移动设备、平板、桌面端的不同表现：
+            <div class="hopeui-row">
+                <div class="hopeui-col-xs6 hopeui-col-sm6 hopeui-col-md4">
+                    移动：6/12 | 平板：6/12 | 桌面：4/12
+                </div>
+                <div class="hopeui-col-xs6 hopeui-col-sm6 hopeui-col-md4">
+                    移动：6/12 | 平板：6/12 | 桌面：4/12
+                </div>
+                <div class="hopeui-col-xs4 hopeui-col-sm12 hopeui-col-md4">
+                    移动：4/12 | 平板：12/12 | 桌面：4/12
+                </div>
+                <div class="hopeui-col-xs4 hopeui-col-sm7 hopeui-col-md8">
+                    移动：4/12 | 平板：7/12 | 桌面：8/12
+                </div>
+                <div class="hopeui-col-xs4 hopeui-col-sm5 hopeui-col-md4">
+                    移动：4/12 | 平板：5/12 | 桌面：4/12
+                </div>
+            </div>
         </div>
-
-        <script src="./hopeui.js"></script>
-        <script>
-            function xopen() {
-                hope.layer({
-                    options: {
-                        title: "fuck标题",
-                        content: ` <div style="width:900px;height:500px;padding:20px;">
-                                我是弹层内容我是弹层内容我是弹层内容我是弹层内容我是弹层内容
-                            </div>`,
-                        // isDefaultBtn: true,
-                        defaultBtn: {
-                            ok: "好的",
-                            cancel: "拜拜",
-                        },
-                        isDrag: true,
-                    },
-                });
-            }
-
-            function xopen2() {
-                let ly = hope.layer({
-                    options: {
-                        title: "卧槽标题",
-                        content: ` <div style="padding:20px;">
-                            是弹层内容我是弹层我我哦我我我是弹层内容
-                            </div>`,
-                        isDefaultBtn: true,
-                        defaultBtn: {
-                            ok: "ok",
-                            cancel: "bye~",
-                        },
-                    },
-                    on: {
-                        confirm: function (e) {
-                            ly.close();
-                        },
-                    },
-                });
-            }
-        </script>
     </body>
 </html>

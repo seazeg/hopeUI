@@ -4,7 +4,7 @@
   "description": "HopeUI",
   "main": "hopeui.js",
   "scripts": {
-    "dev": "webpack --config webpack.config.js;npx webpack-dev-server --mode development --content-base ./dist --open",
+    "dev": "npx webpack-dev-server --mode development --content-base ./dist --open",
     "build": "webpack --config webpack.config.js",
     "api": "start-storybook",
     "build-api": "build-storybook"

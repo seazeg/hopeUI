@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-07-31 15:58:31
+ * @LastEditTime : 2020-08-05 17:31:14
  * @Description  :
  */
 
@@ -9,7 +9,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
 const pkg = require("./package.json");
 
 module.exports = {
@@ -20,6 +20,7 @@ module.exports = {
         host: "localhost",
         compress: true,
         port: 8090,
+        hot: true
     },
     module: {
         rules: [
@@ -38,8 +39,18 @@ module.exports = {
                 use: "url-loader",
             },
             {
-                test: /\.(css|less)$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+                test: /\.(le|c)ss$/,
+                use: [
+                    {
+                        loader: ExtractCssChunks.loader,
+                        options: {
+                            hmr: true,
+                            reloadAll: true,
+                        },
+                    },
+                    "css-loader",
+                    "less-loader", 
+                ],
             },
         ],
     },
@@ -65,8 +76,8 @@ module.exports = {
             title: "HopeUI",
             filename: "index.html",
             minify: {
-                removeComments: true, 
-                collapseWhitespace: true, 
+                removeComments: true,
+                collapseWhitespace: true,
                 minifyCSS: true,
             },
             // hash: true,
@@ -75,9 +86,10 @@ module.exports = {
         new webpack.BannerPlugin(
             `${pkg.description} version ${pkg.version}\nAuthor Evan.G\nFor more information, please visit ${pkg.author.github}\n${pkg.description} is available under the terms of the MIT license.`
         ),
-        new MiniCssExtractPlugin({
+        new ExtractCssChunks({
             filename: "hopeui.css",
             chunkFilename: "[id].css",
+            orderWarning: true,
         }),
     ],
 };
