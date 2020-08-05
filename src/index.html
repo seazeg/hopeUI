@@ -8,12 +8,23 @@
     </head>
 
     <body style="height: 2000px;">
-        <button type="button" class="hopeui-btn" onclick="xopen()">
-            打开弹层
-        </button>
-        <button type="button" class="hopeui-btn" onclick="xopen2()">
-            打开弹层2
-        </button>
+        <div class="hopeui-btn-group" style="padding:20%">
+            <button type="button" class="hopeui-btn" onclick="xopen()">
+                打开弹层
+            </button>
+            <button type="button" class="hopeui-btn" onclick="xopen2()">
+                打开弹层2
+            </button>
+            <button type="button" class="hopeui-btn" onclick="xopen2()">
+                打开弹层2
+            </button>
+            <button type="button" class="hopeui-btn" onclick="xopen2()">
+                打开弹层2
+            </button>
+            <button type="button" class="hopeui-btn" onclick="xopen2()">
+                打开弹层2
+            </button>
+        </div>
 
         <script src="./hopeui.js"></script>
         <script>
@@ -29,9 +40,9 @@
                             ok: "好的",
                             cancel: "拜拜",
                         },
-                        isDrag:true
+                        isDrag: true,
                     },
-                })
+                });
             }
 
             function xopen2() {
