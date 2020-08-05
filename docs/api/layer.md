@@ -11,7 +11,7 @@ document.querySelector("#open1").onclick = function () {
             isDefaultBtn: true,
             defaultBtn: {
                 ok: "好的",
-                close: "拜拜",
+                cancel: "拜拜",
             },
         },
     });

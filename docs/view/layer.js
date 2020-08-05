@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2020-08-04 16:52:16
+ * @LastEditTime : 2020-08-05 09:42:42
  * @Description  : 
  */ 
 import {
@@ -21,7 +21,7 @@ export const layer = () => {
     return `
 <div style="padding:3% 2%">
     <button type="button" class="hopeui-btn" id="open1">
-        打开弹层
+        信息框
     </button>
     <button type="button" class="hopeui-btn" id="open2">
         打开弹层2

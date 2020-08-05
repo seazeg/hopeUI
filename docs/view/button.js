@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-04 18:05:51
+ * @LastEditTime : 2020-08-05 09:34:33
  * @Description  :
  */
 
@@ -122,7 +122,5 @@ export const button = () => {
         </button>
     </div>
 </div>
-
-
-    `;
+ `;
 };

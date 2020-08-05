@@ -364,14 +364,12 @@ storiesOf("组件(Components)", module)
                 document.querySelector("#open1").onclick = function () {
                     hope.layer({
                         options: {
-                            title: "fuck标题",
-                            content: ` <div style="width:500px;height:400px;padding:20px;">
-                                我是弹层内容我是弹层内容我是弹层内容我是弹层内容我是弹层内容
-                            </div>`,
+                            title: "信息",
+                            content: `是否确认要删除`,
                             isDefaultBtn: true,
                             defaultBtn: {
                                 ok: "好的",
-                                close: "拜拜",
+                                cancel: "拜拜",
                             },
                         },
                     });
