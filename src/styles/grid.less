@@ -1,4 +1,4 @@
-@import './config.less';
+@import "./config.less";
 
 .hopeui-container {
     position: relative;
@@ -12,8 +12,59 @@
     content: "";
     display: block;
     clear: both;
-
 }
 
+.hopeui-row {
+    font-size: 0;
+}
 
+.hopeui-row > * {
+    vertical-align: top;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+}
 
+.hopeui-col-center {
+    text-align: center !important;
+}
+
+@max: 1200px, 750px;
+@min: 750px, 1px;
+@name: hopeui-col-md, hopeui-col-xs;
+.Mixin(@index,@fen,@len) when (@index<=length(@max)) {
+    @media screen and (min-width: extract(@min,@index)) and (max-width: extract(@max,@index)) {
+        .Col(@fen,@class) when (@fen<= @len) {
+            .@{class}-@{fen}-@{len} {
+                width: (100% / @len) * @fen;
+            }
+            .@{class}-offset@{fen} {
+                margin-left: (100% / @len) * @fen;
+            }
+            .Col(@fen+1, extract(@name, @index));
+        }
+        .Col(@fen, extract(@name, @index));
+    }
+    .Mixin(@index+1, @fen, @len);
+}
+
+.Col(@fen,@len) when (@fen<= @len) {
+    .hopeui-col-xl-@{fen}-@{len} {
+        width: (100% / @len) * @fen;
+    }
+    .hopeui-col-xl-offset@{fen} {
+        margin-left: (100% / @len) * @fen;
+    }
+    .Col(@fen+1, @len);
+}
+
+.Space(@fen,@len) when (@fen<= @len) {
+    .hopeui-col-space@{fen} > * {
+        padding: 0.5px * @fen;
+    }
+    .Space(@fen+1, @len);
+}
+
+.Space(1, 5);
+.Col(1, 12);
+.Mixin(1, 1, 12);

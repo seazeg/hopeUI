@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-05 17:31:14
+ * @LastEditTime : 2020-08-05 17:57:15
  * @Description  :
  */
 
@@ -14,7 +14,7 @@ const pkg = require("./package.json");
 
 module.exports = {
     entry: "./src/hopeui.js",
-    devtool: "inline-source-map",
+    // devtool: "inline-source-map",
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
         host: "localhost",

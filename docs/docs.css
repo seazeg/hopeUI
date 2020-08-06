@@ -25,3 +25,29 @@
     margin-right: 5px;
 }
 
+.docs-grid-demo {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 80px;
+    height:80px;
+    font-size: 12px;
+    overflow: hidden;
+    color: #fff;
+}
+
+.docs-grid-demo-bg1 {
+    background: #ff7400;
+}
+
+.docs-grid-demo-bg2 {
+    background: #fd9037;
+}
+
+.docs-grid-demo-bg3 {
+    background: #ffa55b;
+}
+
+.docs-content .hopeui-row {
+    margin-bottom: 5px;
+}

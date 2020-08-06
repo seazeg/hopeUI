@@ -5,6 +5,7 @@ import "../docs.css";
 import "../../dist/hopeui.css";
 import "../../dist/hopeui.js";
 
+import { grid } from "../view/grid.view.js";
 import { button } from "../view/button.view.js";
 import { checkbox } from "../view/checkbox.view.js";
 import { radio } from "../view/radio.view.js";
@@ -14,6 +15,7 @@ import { textarea } from "../view/textarea.view.js";
 import { form } from "../view/form.view.js";
 import { layer } from "../view/layer.view.js";
 
+import gridMd from "../api/grid.md";
 import buttonMD from "../api/button.md";
 import checkboxMD from "../api/checkbox.md";
 import radioMD from "../api/radio.md";
@@ -24,6 +26,13 @@ import formMD from "../api/form.md";
 import layerMD from "../api/layer.md";
 
 storiesOf("基础控件(Basis)", module)
+    .add(
+        "栅格系统(Grid)",
+        () => {
+            return grid();
+        },
+        { notes: gridMd }
+    )
     .add(
         "按钮(Button)",
         () => {
@@ -38,13 +47,13 @@ storiesOf("基础控件(Basis)", module)
                 let input_normal = hope.input({
                     ele: ".input_normal",
                     on: {
-                        blur: function (e) {
+                        blur: function(e) {
                             console.log(e);
                         },
-                        focus: function (e) {
+                        focus: function(e) {
                             console.log(e);
                         },
-                        input: function (e) {
+                        input: function(e) {
                             console.log(e);
                         },
                     },
@@ -61,13 +70,13 @@ storiesOf("基础控件(Basis)", module)
                 let text_normal = hope.textarea({
                     ele: ".text_normal",
                     on: {
-                        blur: function (e) {
+                        blur: function(e) {
                             console.log(e);
                         },
-                        focus: function (e) {
+                        focus: function(e) {
                             console.log(e);
                         },
-                        input: function (e) {
+                        input: function(e) {
                             console.log(e);
                         },
                     },
@@ -84,10 +93,10 @@ storiesOf("基础控件(Basis)", module)
                 let select_normal = hope.selector({
                     ele: ".select_normal",
                     on: {
-                        change: function (e) {
+                        change: function(e) {
                             console.log(e);
                         },
-                        toggle: function (e) {
+                        toggle: function(e) {
                             console.log(e);
                         },
                     },
@@ -96,10 +105,10 @@ storiesOf("基础控件(Basis)", module)
                 let select_group = hope.selector({
                     ele: ".select_group",
                     on: {
-                        change: function (e) {
+                        change: function(e) {
                             console.log(e);
                         },
-                        toggle: function (e) {
+                        toggle: function(e) {
                             console.log(e);
                         },
                     },
@@ -116,7 +125,7 @@ storiesOf("基础控件(Basis)", module)
                 let checkbox_normal = hope.checkbox({
                     ele: ".checkbox_normal",
                     on: {
-                        change: function (e) {
+                        change: function(e) {
                             console.log(e);
                         },
                     },
@@ -133,7 +142,7 @@ storiesOf("基础控件(Basis)", module)
                 let radio_normal = hope.radio({
                     ele: ".radio_normal",
                     on: {
-                        change: function (e) {
+                        change: function(e) {
                             console.log(e);
                         },
                     },
@@ -152,57 +161,57 @@ storiesOf("组件(Components)", module)
                 let fm = hope.form({
                     ele: "#form",
                     on: {
-                        submit: function (e) {
+                        submit: function(e) {
                             console.log(e);
                         },
                     },
                     controls: {
                         selector: {
                             on: {
-                                change: function (e) {
+                                change: function(e) {
                                     console.log(e);
                                 },
-                                toggle: function (e) {
+                                toggle: function(e) {
                                     console.log(e);
                                 },
                             },
                         },
                         checkbox: {
                             on: {
-                                change: function (e) {
+                                change: function(e) {
                                     console.log(e);
                                 },
                             },
                         },
                         radio: {
                             on: {
-                                change: function (e) {
+                                change: function(e) {
                                     console.log(e);
                                 },
                             },
                         },
                         input: {
                             on: {
-                                blur: function (e) {
+                                blur: function(e) {
                                     console.log(e);
                                 },
-                                focus: function (e) {
+                                focus: function(e) {
                                     console.log(e);
                                 },
-                                input: function (e) {
+                                input: function(e) {
                                     console.log(e);
                                 },
                             },
                         },
                         textarea: {
                             on: {
-                                blur: function (e) {
+                                blur: function(e) {
                                     console.log(e);
                                 },
-                                focus: function (e) {
+                                focus: function(e) {
                                     console.log(e);
                                 },
-                                input: function (e) {
+                                input: function(e) {
                                     console.log(e);
                                 },
                             },
@@ -210,12 +219,12 @@ storiesOf("组件(Components)", module)
                     },
                     verify: {
                         //[name]:fn
-                        city: function (value) {
+                        city: function(value) {
                             if (value.length <= 0) {
                                 return "请选择一个选项";
                             }
                         },
-                        text: function (value) {
+                        text: function(value) {
                             if (value.length <= 0) {
                                 return "文本不能为空";
                             }
@@ -226,17 +235,17 @@ storiesOf("组件(Components)", module)
                                 return "文本必须是英文";
                             }
                         },
-                        school: function (value) {
+                        school: function(value) {
                             if (value.length <= 0) {
                                 return "请选择一个选项";
                             }
                         },
-                        LD: function (value) {
+                        LD: function(value) {
                             if (value.length <= 0) {
                                 return "请选择一个选项";
                             }
                         },
-                        password: function (value) {
+                        password: function(value) {
                             if (value.length <= 0) {
                                 return "文本不能为空";
                             }
@@ -244,22 +253,22 @@ storiesOf("组件(Components)", module)
                                 return "密码至少输入6个字符";
                             }
                         },
-                        task: function (value) {
+                        task: function(value) {
                             if (value.length <= 0) {
                                 return "需要选择至少一个选项";
                             }
                         },
-                        subject: function (value) {
+                        subject: function(value) {
                             if (value.length <= 0) {
                                 return "需要选择至少一个选项";
                             }
                         },
-                        radio: function (value) {
+                        radio: function(value) {
                             if (value.length <= 0) {
                                 return "需要选择至少一个选项";
                             }
                         },
-                        textarea: function (value) {
+                        textarea: function(value) {
                             if (value.length <= 0) {
                                 return "需要选择至少一个选项";
                             }
@@ -267,7 +276,7 @@ storiesOf("组件(Components)", module)
                     },
                 });
 
-                document.querySelector("#set").onclick = function () {
+                document.querySelector("#set").onclick = function() {
                     fm.val({
                         city: {
                             type: "selector",
@@ -308,7 +317,7 @@ storiesOf("组件(Components)", module)
                     });
                 };
 
-                document.querySelector("#set").onclick = function () {
+                document.querySelector("#set").onclick = function() {
                     fm.val({
                         city: {
                             type: "selector",
@@ -349,7 +358,7 @@ storiesOf("组件(Components)", module)
                     });
                 };
 
-                document.querySelector("#clear").onclick = function () {
+                document.querySelector("#clear").onclick = function() {
                     fm.clear();
                 };
             });
@@ -361,7 +370,7 @@ storiesOf("组件(Components)", module)
         "弹层(Layer)",
         () => {
             useEffect(() => {
-                document.querySelector("#open1").onclick = function () {
+                document.querySelector("#open1").onclick = function() {
                     hope.layer({
                         options: {
                             title: "信息",
@@ -375,23 +384,23 @@ storiesOf("组件(Components)", module)
                     });
                 };
 
-                document.querySelector("#open2").onclick = function () {
+                document.querySelector("#open2").onclick = function() {
                     let ly = hope.layer({
                         options: {
                             title: "iframe弹框",
-                            content:`<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>`
+                            content: `<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>`,
                             // content:
                             //     '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
                         },
                         on: {
-                            confirm: function (e) {
+                            confirm: function(e) {
                                 ly.close();
                             },
                         },
                     });
                 };
 
-                document.querySelector("#open3").onclick = function () {
+                document.querySelector("#open3").onclick = function() {
                     let ly = hope.layer({
                         options: {
                             title: "可拖拽弹框",
@@ -401,7 +410,7 @@ storiesOf("组件(Components)", module)
                             isDrag: true,
                         },
                         on: {
-                            confirm: function (e) {
+                            confirm: function(e) {
                                 ly.close();
                             },
                         },
