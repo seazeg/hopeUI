@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-06 16:41:37
+ * @LastEditTime : 2020-08-06 16:49:59
  * @Description  :
  */
 
@@ -300,7 +300,7 @@ export const grid = () => {
 
 <div class="docs-title">
     <fieldset>
-        <legend><a name="icon">栅格内嵌</a></legend>
+        <legend><a name="icon">栅格嵌套</a></legend>
     </fieldset>
 </div>
 <div class="docs-content">

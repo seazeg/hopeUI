@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-05 14:13:57
+ * @LastEditTime : 2020-08-06 17:53:21
  * @Description  :
  */
 
@@ -126,42 +126,46 @@ export const button = () => {
         </fieldset>
     </div>
     <div class="docs-content">
-        <div class="hopeui-btn-group">
-            <button type="button" class="hopeui-btn">
-                增加
-            </button>
-            <button type="button" class="hopeui-btn">
-                删除
-            </button>
-            <button type="button" class="hopeui-btn">
-                编辑
-            </button>
+
+            <div class="hopeui-btn-group">
+                <button type="button" class="hopeui-btn">
+                    增加
+                </button>
+                <button type="button" class="hopeui-btn">
+                    删除
+                </button>
+                <button type="button" class="hopeui-btn">
+                    编辑
+                </button>
+            </div>
+            
+
+            <div class="hopeui-btn-group">
+                <button type="button" class="hopeui-btn">
+                <i class="hopeui-icon hopeui-icon-add-1"></i>
+                </button>
+                <button type="button" class="hopeui-btn">
+                <i class="hopeui-icon hopeui-icon-delete"></i>
+                </button>
+                <button type="button" class="hopeui-btn">
+                <i class="hopeui-icon hopeui-icon-edit"></i>
+                </button>
+            </div>
+
+            <div class="hopeui-btn-group">
+                <button type="button" class="hopeui-btn">
+                <i class="hopeui-icon hopeui-icon-add-1"></i>增加
+                </button>
+                <button type="button" class="hopeui-btn">
+                <i class="hopeui-icon hopeui-icon-delete"></i>删除
+                </button>
+                <button type="button" class="hopeui-btn">
+                <i class="hopeui-icon hopeui-icon-edit"></i>编辑
+                </button>
+            </div>
+
         </div>
 
-        <div class="hopeui-btn-group">
-            <button type="button" class="hopeui-btn">
-            <i class="hopeui-icon hopeui-icon-add-1"></i>
-            </button>
-            <button type="button" class="hopeui-btn">
-            <i class="hopeui-icon hopeui-icon-delete"></i>
-            </button>
-            <button type="button" class="hopeui-btn">
-            <i class="hopeui-icon hopeui-icon-edit"></i>
-            </button>
-        </div>
-
-        <div class="hopeui-btn-group">
-            <button type="button" class="hopeui-btn">
-            <i class="hopeui-icon hopeui-icon-add-1"></i>增加
-            </button>
-            <button type="button" class="hopeui-btn">
-            <i class="hopeui-icon hopeui-icon-delete"></i>删除
-            </button>
-            <button type="button" class="hopeui-btn">
-            <i class="hopeui-icon hopeui-icon-edit"></i>编辑
-            </button>
-        </div>
-    </div>
 </div>
 
  `;

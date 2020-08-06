@@ -1,3 +1,6 @@
+* {
+    font-size: 14px;
+}
 .docs-box {
     padding: 0 30px;
 }
@@ -13,6 +16,9 @@
 .docs-title fieldset legend {
     margin-left: 20px;
     padding: 0 10px;
+}
+
+.docs-title fieldset legend a{
     font-size: 22px;
     font-weight: 300;
 }
@@ -30,7 +36,7 @@
     height: 100%;
     text-align: center;
     line-height: 80px;
-    height:80px;
+    height: 80px;
     font-size: 12px;
     overflow: hidden;
     color: #fff;
