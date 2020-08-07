@@ -1,96 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= htmlWebpackPlugin.options.title %></title>
-    </head>
-    <style>
-        * {
-            font-size: 14px;
-        }
+/*
+ * @Author       : Evan.G
+ * @Date         : 2020-08-04 11:43:06
+ * @LastEditTime : 2020-08-07 14:46:35
+ * @Description  :
+ */
 
-        .docs-box {
-            padding: 0 30px;
-        }
-
-        .docs-title {
-            margin: 30px 0 20px;
-        }
-
-        .docs-title fieldset {
-            border: none;
-            padding: 0;
-            border-top: 1px solid #ccc;
-        }
-
-        .docs-title fieldset legend {
-            margin-left: 20px;
-            padding: 0 10px;
-        }
-
-        .docs-title fieldset legend a {
-            font-size: 22px;
-            font-weight: 300;
-        }
-
-        .docs-content {
-            padding-bottom: 50px;
-        }
-
-        .docs-content > * {
-            margin-right: 5px;
-        }
-
-        .docs-grid-demo {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            line-height: 80px;
-            height: 80px;
-            font-size: 14px;
-            overflow: hidden;
-            color: #fff;
-        }
-
-        .docs-grid-demo-bg1 {
-            background: #ff7400;
-        }
-
-        .docs-grid-demo-bg2 {
-            background: #fd9037;
-        }
-
-        .docs-grid-demo-bg3 {
-            background: #ffa55b;
-        }
-
-        .docs-content .hopeui-row {
-            margin-bottom: 5px;
-        }
-
-        .docs-demo-circle {
-            width: 200px;
-            height: 200px;
-            background: #ff7400;
-            display: block;
-            line-height: 200px;
-            text-align: center;
-            color: #fff;
-            cursor: pointer;
-            user-select: none;
-        }
-    </style>
-
-    <body>
-        <div class="docs-box">
+import {
+    withKnobs,
+    number,
+    object,
+    boolean,
+    text,
+    select,
+    date,
+    array,
+    color,
+} from "@storybook/addon-knobs";
+import styleConf from "../styleConfig.json";
+import { utils } from "../utils";
+export const animate = () => {
+    return `
+    <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
-                    <legend><a name="icon">通用</a></legend>
+                    <legend><a name="icon">动画效果</a></legend>
                 </fieldset>
             </div>
             <div class="docs-content">
-                <div class="hopeui-row hopeui-col-space5">
+                <div class="hopeui-row hopeui-col-space10">
                     <div class="hopeui-col-3-12 ">
                         <span
                             class="hopeui-anim docs-demo-circle"
@@ -124,7 +61,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="hopeui-row hopeui-col-space5">
+                <div class="hopeui-row hopeui-col-space10">
                     <div class="hopeui-col-3-12 ">
                         <span
                             class="hopeui-anim docs-demo-circle"
@@ -158,7 +95,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="hopeui-row hopeui-col-space5">
+                <div class="hopeui-row hopeui-col-space10">
                     <div class="hopeui-col-3-12 ">
                         <span
                             class="hopeui-anim docs-demo-circle"
@@ -192,7 +129,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="hopeui-row hopeui-col-space5">
+                <div class="hopeui-row hopeui-col-space10">
                     <div class="hopeui-col-3-12">
                         <span
                             class="hopeui-anim docs-demo-circle"
@@ -203,40 +140,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-    <script>
-        function hasClass(ele, cls) {
-            return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(ele.className);
-        }
-        function addClass(ele, cls) {
-            if (!hasClass(ele, cls)) {
-                if (ele.className) {
-                    ele.className += " " + cls;
-                } else {
-                    ele.className += cls;
-                }
-            }
-        }
-
-        function removeClass(ele, cls) {
-            if (hasClass(ele, cls)) {
-                ele.className = ele.className.replace(
-                    new RegExp("(\\s|^)" + cls + "(\\s|$)"),
-                    ""
-                );
-            }
-        }
-
-        let ele = document.querySelectorAll(".hopeui-anim");
-        Array.from(ele).forEach(function(item) {
-            item.onclick = function(e) {
-                let dataAnim = item.getAttribute("data-anim");
-                addClass(item, dataAnim);
-                setTimeout(function() {
-                    removeClass(item, dataAnim);
-                }, 500);
-            };
-        });
-    </script>
-</html>
+        </div>`;
+};

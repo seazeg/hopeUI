@@ -15,6 +15,7 @@ import { textarea } from "../view/textarea.view.js";
 import { form } from "../view/form.view.js";
 import { layer } from "../view/layer.view.js";
 import { tab } from "../view/tab.view.js";
+import { animate } from "../view/animate.view.js";
 
 import gridMD from "../api/grid.md";
 import buttonMD from "../api/button.md";
@@ -26,6 +27,7 @@ import textareaMD from "../api/textarea.md";
 import formMD from "../api/form.md";
 import layerMD from "../api/layer.md";
 import tabMD from "../api/tab.md";
+import animateMD from "../api/animate.md";
 
 storiesOf("基础控件(Basis)", module)
     .add(
@@ -451,4 +453,51 @@ storiesOf("组件(Components)", module)
             return tab();
         },
         { notes: tabMD }
+    )
+    .add(
+        "动画(animate)",
+        () => {
+            useEffect(() => {
+                function hasClass(ele, cls) {
+                    return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(
+                        ele.className
+                    );
+                }
+                function addClass(ele, cls) {
+                    if (!hasClass(ele, cls)) {
+                        if (ele.className) {
+                            ele.className += " " + cls;
+                        } else {
+                            ele.className += cls;
+                        }
+                    }
+                }
+
+                function removeClass(ele, cls) {
+                    if (hasClass(ele, cls)) {
+                        ele.className = ele.className.replace(
+                            new RegExp("(\\s|^)" + cls + "(\\s|$)"),
+                            ""
+                        );
+                    }
+                }
+
+                let ele = document.querySelectorAll(".hopeui-anim");
+                Array.from(ele).forEach(function(item) {
+                    item.onclick = function(e) {
+                        let dataAnim = item.getAttribute("data-anim");
+                        addClass(item, dataAnim);
+                        let time = 500;
+                        if(dataAnim=='hopeui-anim-rotate'){
+                            time = 1000;
+                        }
+                        setTimeout(function() {
+                            removeClass(item, dataAnim);
+                        }, time);
+                    };
+                });
+            });
+            return animate();
+        },
+        { notes: animateMD }
     );

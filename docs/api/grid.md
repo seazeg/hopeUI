@@ -1,6 +1,6 @@
 ## 栅格系统
 
-<br>
+
 #### 1.通用示例
 
 ```html
@@ -240,7 +240,7 @@
 
 ## 栅格说明
 
-> 1.采用 hopeui-row 来定义行，如：<div class="hopeui-row"></div>
+> 1.采用 hopeui-row 来定义行，如：\<div class="hopeui-row"></div>
 >
 > 2.采用类似 hopeui-col-xl-\* 这样的预设类来定义一组列（column），且放在行（row）内。其中：
 >

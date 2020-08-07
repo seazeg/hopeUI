@@ -59,8 +59,11 @@
 }
 
 .Space(@fen,@len) when (@fen<= @len) {
+    .hopeui-col-space@{fen} {
+        margin:0 -0.5px * @fen;
+    }
     .hopeui-col-space@{fen} > * {
-        padding: 0.5px * @fen;
+        padding:0 0.5px * @fen;
     }
     .Space(@fen+1, @len);
 }
