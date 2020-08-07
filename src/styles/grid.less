@@ -29,9 +29,7 @@
     text-align: center !important;
 }
 
-@max: 1200px, 750px;
-@min: 750px, 1px;
-@name: hopeui-col-md, hopeui-col-xs;
+
 .Mixin(@index,@fen,@len) when (@index<=length(@max)) {
     @media screen and (min-width: extract(@min,@index)) and (max-width: extract(@max,@index)) {
         .Col(@fen,@class) when (@fen<= @len) {
@@ -69,5 +67,7 @@
 }
 
 .Space(1, 10);
+
+//12栅格
 .Col(1, 12);
 .Mixin(1, 1, 12);
