@@ -12,6 +12,7 @@
         transition: all 0.2s;
         -webkit-transition: all 0.2s;
         border-color: @gray_light;
+        
         li {
             display: inline-block;
             vertical-align: middle;
@@ -54,13 +55,17 @@
     }
 
     &.hopeui-tab-simple {
-        li {
-            &.hopeui-tab-this {
-                color: @primaryColor;
-                &:after {
-                    border: none;
-                    border-radius: 0;
-                    border-bottom: 2px solid @primaryColor;
+        .hopeui-tab-title {
+            overflow-x: auto;
+            overflow-y: hidden;
+            li {
+                &.hopeui-tab-this {
+                    color: @primaryColor;
+                    &:after {
+                        border: none;
+                        border-radius: 0;
+                        border-bottom: 2px solid @primaryColor;
+                    }
                 }
             }
         }

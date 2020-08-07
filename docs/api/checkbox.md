@@ -1,10 +1,20 @@
 ## 基础示例
 
+#### html 代码
+
+```html
+<input type="checkbox" name="subject" value="音乐" hope-verify="required" />
+<input type="checkbox" name="subject" value="历史" hope-verify="required" />
+<input type="checkbox" name="subject" value="生物" hope-verify="required" />
+```
+
+#### js 代码
+
 ```javascript
 let checkbox_normal = hope.checkbox({
     ele: ".checkbox_normal",
     on: {
-        change: function (e) {
+        change: function(e) {
             console.log(e);
         },
     },
@@ -19,10 +29,10 @@ let checkbox_normal = hope.checkbox({
 
 ## 回调方法 on
 
-| 参数   | 说明           | 类型     | 默认值 | 回调参数 |
-| ------ | -------------- | -------- | ------ | -------- |
+| 参数   | 说明           | 类型     | 默认值 | 回调参数     |
+| ------ | -------------- | -------- | ------ | ------------ |
 | init   | 初始化回调     | Function | null   | 当前对象 DOM |
-| change | 状态改变后回调 | Function | null   | event↓   |
+| change | 状态改变后回调 | Function | null   | event↓       |
 
 | event 参数 | 说明           | 类型    |
 | ---------- | -------------- | ------- |

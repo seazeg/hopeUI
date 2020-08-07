@@ -1,5 +1,14 @@
 ## 基础示例
 
+#### html 代码
+```html
+<textarea name="textarea" class="hopeui-textarea" placeholder="请输入内容"
+                        hope-verify="required"></textarea>
+```
+
+#### js 代码
+
+
 ```javascript
 hope.tab({
     ele: "#tab1",

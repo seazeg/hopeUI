@@ -1,16 +1,39 @@
 ## 基础示例
 
+#### html 代码
+
+```html
+<input
+    name="text"
+    type="text"
+    placeholder="请输入"
+    value=""
+    class="hopeui-input"
+    hope-verify="required"
+/>
+<input
+    name="password"
+    type="password"
+    placeholder="请输入密码"
+    value=""
+    class="hopeui-input"
+    hope-verify="required"
+/>
+```
+
+#### js 代码
+
 ```javascript
 let input_normal = hope.input({
     ele: ".input_normal",
     on: {
-        blur: function (e) {
+        blur: function(e) {
             console.log(e);
         },
-        focus: function (e) {
+        focus: function(e) {
             console.log(e);
         },
-        input: function (e) {
+        input: function(e) {
             console.log(e);
         },
     },
@@ -25,12 +48,12 @@ let input_normal = hope.input({
 
 ## 回调方法 on
 
-| 参数  | 说明         | 类型     | 默认值 | 回调参数 |
-| ----- | ------------ | -------- | ------ | -------- |
-| init   | 初始化回调     | Function | null   | 当前对象 DOM |
-| blur  | 失去焦点回调 | Function | null   | event↓   |
-| focus | 获得焦点回调 | Function | null   | event↓   |
-| input | 输入回调     | Function | null   | event↓   |
+| 参数  | 说明         | 类型     | 默认值 | 回调参数     |
+| ----- | ------------ | -------- | ------ | ------------ |
+| init  | 初始化回调   | Function | null   | 当前对象 DOM |
+| blur  | 失去焦点回调 | Function | null   | event↓       |
+| focus | 获得焦点回调 | Function | null   | event↓       |
+| input | 输入回调     | Function | null   | event↓       |
 
 | event 参数 | 说明           | 类型   |
 | ---------- | -------------- | ------ |

@@ -1,16 +1,45 @@
 ## 基础示例
 
+#### html 代码
+```html
+<select name="city" hope-verify="required">
+    <option value="">请选择</option>
+    <option value="青岛">青岛</option>
+    <option value="武汉">武汉</option>
+    <option value="乌鲁木齐">乌鲁木齐</option>
+    <option value="南京">南京</option>
+    <option value="天津">天津</option>
+    <option value="郑州">郑州</option>
+    <option value="重庆">重庆</option>
+    <option value="成都">成都</option>
+    <option value="云南">云南</option>
+</select>
+
+<select name="school" hope-verify="required">
+    <option value="">请选择</option>
+    <optgroup label="北京"">
+        <option value=" 北京大学">北京大学</option>
+        <option value="清华大学">清华大学</option>
+    </optgroup>
+    <optgroup label="浙江"">
+        <option value=" 浙江大学">浙江大学</option>
+    </optgroup>
+</select>
+```
+
+#### js 代码
+
 ```javascript
 let select_normal = hope.selector({
     ele: ".select_normal",
     on: {
-        change: function (e) {
+        change: function(e) {
             console.log(e);
         },
-        toggle: function (e) {
+        toggle: function(e) {
             console.log(e);
         },
-        close: function (e) {
+        close: function(e) {
             console.log(e);
         },
     },
@@ -19,13 +48,13 @@ let select_normal = hope.selector({
 let select_group = hope.selector({
     ele: ".select_group",
     on: {
-        change: function (e) {
+        change: function(e) {
             console.log(e);
         },
-        toggle: function (e) {
+        toggle: function(e) {
             console.log(e);
         },
-        close: function (e) {
+        close: function(e) {
             console.log(e);
         },
     },
@@ -40,12 +69,12 @@ let select_group = hope.selector({
 
 ## 回调方法 on
 
-| 参数   | 说明                   | 类型     | 默认值 | 回调参数 |
-| ------ | ---------------------- | -------- | ------ | -------- |
-| init   | 初始化回调     | Function | null   | 当前对象 DOM |
-| change | 选择完成后回调         | Function | null   | event↓   |
-| toggle | 下拉切换回调           | Function | null   | --   |
-| close  | 下拉框区域外关闭后回调 | Function | null   | --   |
+| 参数   | 说明                   | 类型     | 默认值 | 回调参数     |
+| ------ | ---------------------- | -------- | ------ | ------------ |
+| init   | 初始化回调             | Function | null   | 当前对象 DOM |
+| change | 选择完成后回调         | Function | null   | event↓       |
+| toggle | 下拉切换回调           | Function | null   | --           |
+| close  | 下拉框区域外关闭后回调 | Function | null   | --           |
 
 | event 参数        | 说明                 | 类型   |
 | ----------------- | -------------------- | ------ |
