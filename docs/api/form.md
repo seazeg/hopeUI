@@ -236,6 +236,7 @@ document.querySelector("#clear").onclick = function () {
 
 | 参数   | 说明       | 类型     | 默认值 | 回调参数 |
 | ------ | ---------- | -------- | ------ | -------- |
+| init   | 初始化回调     | Function | null   | 当前对象 DOM |
 | submit | 提交后回调 | Function | null   | event↓   |
 
 | event 参数   | 说明               | 类型    |

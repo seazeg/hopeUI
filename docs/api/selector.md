@@ -42,9 +42,10 @@ let select_group = hope.selector({
 
 | 参数   | 说明                   | 类型     | 默认值 | 回调参数 |
 | ------ | ---------------------- | -------- | ------ | -------- |
+| init   | 初始化回调     | Function | null   | 当前对象 DOM |
 | change | 选择完成后回调         | Function | null   | event↓   |
-| toggle | 下拉切换回调           | Function | null   | event↓   |
-| close  | 下拉框区域外关闭后回调 | Function | null   | event↓   |
+| toggle | 下拉切换回调           | Function | null   | --   |
+| close  | 下拉框区域外关闭后回调 | Function | null   | --   |
 
 | event 参数        | 说明                 | 类型   |
 | ----------------- | -------------------- | ------ |

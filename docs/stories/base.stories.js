@@ -14,8 +14,9 @@ import { input } from "../view/input.view.js";
 import { textarea } from "../view/textarea.view.js";
 import { form } from "../view/form.view.js";
 import { layer } from "../view/layer.view.js";
+import { tab } from "../view/tab.view.js";
 
-import gridMd from "../api/grid.md";
+import gridMD from "../api/grid.md";
 import buttonMD from "../api/button.md";
 import checkboxMD from "../api/checkbox.md";
 import radioMD from "../api/radio.md";
@@ -24,6 +25,7 @@ import inputMD from "../api/input.md";
 import textareaMD from "../api/textarea.md";
 import formMD from "../api/form.md";
 import layerMD from "../api/layer.md";
+import tabMD from "../api/tab.md";
 
 storiesOf("基础控件(Basis)", module)
     .add(
@@ -31,7 +33,7 @@ storiesOf("基础控件(Basis)", module)
         () => {
             return grid();
         },
-        { notes: gridMd }
+        { notes: gridMD }
     )
     .add(
         "按钮(Button)",
@@ -421,4 +423,32 @@ storiesOf("组件(Components)", module)
             return layer();
         },
         { notes: layerMD }
+    )
+    .add(
+        "选项卡(tab)",
+        () => {
+            useEffect(() => {
+                hope.tab({
+                    ele: "#tab1",
+                    on: {
+                        change: function(e) {
+                            console.log(e);
+                        },
+                        init: function(e) {
+                            console.log(e);
+                        },
+                    },
+                });
+
+                hope.tab({
+                    ele: "#tab2",
+                });
+
+                hope.tab({
+                    ele: "#tab3",
+                });
+            });
+            return tab();
+        },
+        { notes: tabMD }
     );

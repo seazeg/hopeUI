@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="./hopeui.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+    </head>
     <style>
-        .hopeui-row {
-            margin-bottom: 5px;
+        * {
+            font-size: 14px;
         }
 
-        .hopeui-row>* {
-            min-height: 80px;
-            color: #fff;
+        .docs-box {
+            padding: 0 30px;
+        }
+
+        .docs-title {
+            margin: 30px 0 20px;
+        }
+
+        .docs-title fieldset {
+            border: none;
+            padding: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .docs-title fieldset legend {
+            margin-left: 20px;
+            padding: 0 10px;
+        }
+
+        .docs-title fieldset legend a {
+            font-size: 22px;
+            font-weight: 300;
+        }
+
+        .docs-content {
+            padding-bottom: 50px;
+        }
+
+        .docs-content > * {
+            margin-right: 5px;
         }
 
         .docs-grid-demo {
@@ -21,7 +47,10 @@
             height: 100%;
             text-align: center;
             line-height: 80px;
+            height: 80px;
             font-size: 14px;
+            overflow: hidden;
+            color: #fff;
         }
 
         .docs-grid-demo-bg1 {
@@ -35,238 +64,106 @@
         .docs-grid-demo-bg3 {
             background: #ffa55b;
         }
+
+        .docs-content .hopeui-row {
+            margin-bottom: 5px;
+        }
     </style>
-</head>
 
-<body>
-    <div class="hopeui-container">
-        <h1>示例一</h1>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-9-12 hopeui-col-xs-6-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    默认：2/12 平板：9/12 移动：6/12
-                </div>
+    <body>
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">通用</a></legend>
+                </fieldset>
             </div>
-            <div class="hopeui-col-xl-8-12 hopeui-col-md-3-12 hopeui-col-xs-6-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    默认：10/12 平板：3/12 移动：6/12
-                </div>
-            </div>
-        </div>
-        <h1>示例二</h1>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-12-12 hopeui-col-md-6-12 hopeui-col-xs-3-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    默认：12/12 平板：6/12 移动：3/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-7-12 hopeui-col-md-6-12 hopeui-col-xs-9-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    默认：7/12 平板：6/12 移动：9/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-5-12 hopeui-col-md-6-12 hopeui-col-xs-9-12">
-                <div class="docs-grid-demo docs-grid-demo-bg3">
-                    默认：5/12 平板：6/12 移动：9/12
-                </div>
-            </div>
-        </div>
-
-        <h1>示例三</h1>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    33%
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    33%
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg3">
-                    33%
-                </div>
-            </div>
-        </div>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    1/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    1/12
-                </div>
-            </div>
-        </div>
-
-        <h1>示例四</h1>
-        <div class="hopeui-row hopeui-col-space2">
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    33%
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    33%
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg3">
-                    33%
-                </div>
-            </div>
-        </div>
-
-        <h1>示例五</h1>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    4/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-xl-offset1 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg3">
-                    偏移1列
-                </div>
-            </div>
-        </div>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    4/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-xl-offset2 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg3">
-                    偏移2列
-                </div>
-            </div>
-        </div>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    4/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-xl-offset3 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg3">
-                    偏移3列
-                </div>
-            </div>
-        </div>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    4/12
-                </div>
-            </div>
-            <div class="hopeui-col-xl-4-12 hopeui-col-xl-offset4 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-                <div class="docs-grid-demo docs-grid-demo-bg3">
-                    偏移4列
-                </div>
-            </div>
-        </div>
-
-        <h1>示例六</h1>
-        <div class="hopeui-row hopeui-col-space2 hopeui-col-center">
-            <div class="hopeui-col-xl-5-12 hopeui-col-md-5-12 hopeui-col-xs-5-12 hopeui-col-center">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    5/12
-                </div>
-            </div>
-        </div>
-
-        <h1>示例七</h1>
-        <div class="hopeui-row">
-            <div class="hopeui-col-xl-6-12 hopeui-col-md-6-12 hopeui-col-xs-6-12">
-                <div class="docs-grid-demo docs-grid-demo-bg1">
-                    <div class="hopeui-row" style="padding:20px;">
-                        <div class="hopeui-col-xl-6-12 hopeui-col-md-6-12 hopeui-col-xs-6-12">
-                            <div class="docs-grid-demo docs-grid-demo-bg2">
-                                50%
-                            </div>
-                        </div>
-                        <div class="hopeui-col-xl-6-12 hopeui-col-md-6-12 hopeui-col-xs-6-12">
-                            <div class="docs-grid-demo docs-grid-demo-bg2">
-                                50%
-                            </div>
-                        </div>
+            <div class="docs-content">
+                <div class="hopeui-tab" id="tab1">
+                    <ul class="hopeui-tab-title">
+                        <li class="hopeui-tab-this">金牌大牛</li>
+                        <li>银牌老牛</li>
+                        <li>铜牌小牛</li>
+                        <li>铁牌奶牛</li>
+                        <li>铝牌屁牛</li>
+                    </ul>
+                    <div class="hopeui-tab-content">
+                        <div class="hopeui-tab-item hopeui-show">内容1</div>
+                        <div class="hopeui-tab-item">内容2</div>
+                        <div class="hopeui-tab-item">内容3</div>
+                        <div class="hopeui-tab-item">内容4</div>
+                        <div class="hopeui-tab-item">内容5</div>
                     </div>
                 </div>
             </div>
-            <div class="hopeui-col-xl-6-12 hopeui-col-md-6-12 hopeui-col-xs-6-12">
-                <div class="docs-grid-demo docs-grid-demo-bg2">
-                    <div class="hopeui-row" style="padding:20px;">
-                        <div class="hopeui-col-xl-6-12 hopeui-col-md-6-12 hopeui-col-xs-6-12">
-                            <div class="docs-grid-demo docs-grid-demo-bg1">
-                                50%
-                            </div>
-                        </div>
-                        <div class="hopeui-col-xl-6-12 hopeui-col-md-6-12 hopeui-col-xs-6-12">
-                            <div class="docs-grid-demo docs-grid-demo-bg1">
-                                50%
-                            </div>
-                        </div>
+
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">简洁类型</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <div class="hopeui-tab hopeui-tab-simple" id="tab2">
+                    <ul class="hopeui-tab-title">
+                        <li class="hopeui-tab-this">金牌大牛</li>
+                        <li>银牌老牛</li>
+                        <li>铜牌小牛</li>
+                        <li>铁牌奶牛</li>
+                        <li>铝牌屁牛</li>
+                    </ul>
+                    <div class="hopeui-tab-content">
+                        <div class="hopeui-tab-item hopeui-show">内容1</div>
+                        <div class="hopeui-tab-item">内容2</div>
+                        <div class="hopeui-tab-item">内容3</div>
+                        <div class="hopeui-tab-item">内容4</div>
+                        <div class="hopeui-tab-item">内容5</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">卡片类型</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <div class="hopeui-tab hopeui-tab-card" id="tab3">
+                    <ul class="hopeui-tab-title">
+                        <li class="hopeui-tab-this">金牌大牛</li>
+                        <li>银牌老牛</li>
+                        <li>铜牌小牛</li>
+                        <li>铁牌奶牛</li>
+                        <li>铝牌屁牛</li>
+                    </ul>
+                    <div class="hopeui-tab-content">
+                        <div class="hopeui-tab-item hopeui-show">内容1</div>
+                        <div class="hopeui-tab-item">内容2</div>
+                        <div class="hopeui-tab-item">内容3</div>
+                        <div class="hopeui-tab-item">内容4</div>
+                        <div class="hopeui-tab-item">内容5</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
+    <script>
+        hope.tab({
+            ele: "#tab1",
+            on: {
+                change: function(e) {
+                    console.log(e);
+                },
+                init: function(e) {
+                    console.log(e);
+                },
+            },
+        });
 
+        hope.tab({
+            ele: "#tab2",
+        });
+
+        hope.tab({
+            ele: "#tab3",
+        });
+    </script>
 </html>

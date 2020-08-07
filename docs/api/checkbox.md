@@ -21,6 +21,7 @@ let checkbox_normal = hope.checkbox({
 
 | 参数   | 说明           | 类型     | 默认值 | 回调参数 |
 | ------ | -------------- | -------- | ------ | -------- |
+| init   | 初始化回调     | Function | null   | 当前对象 DOM |
 | change | 状态改变后回调 | Function | null   | event↓   |
 
 | event 参数 | 说明           | 类型    |

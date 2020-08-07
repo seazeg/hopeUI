@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:29:55
- * @LastEditTime : 2020-08-05 14:07:16
+ * @LastEditTime : 2020-08-07 11:33:36
  * @Description  :
  */
 import { hopeu as $ } from "../utils/hopeu.js";
@@ -22,6 +22,7 @@ class LayerControls {
             animation: "hopeui-anim-scaleSpring",
         },
         on: on = {
+            init: null,
             confirm: null,
             open: null,
             close: null,
@@ -51,7 +52,7 @@ class LayerControls {
                     2,
             });
 
-            $(window).resize(function () {
+            $(window).resize(function() {
                 layer.css({
                     left:
                         (document.documentElement.clientWidth - layer.width()) /
@@ -65,21 +66,21 @@ class LayerControls {
         };
 
         let darg = (obj) => {
-            obj.onmousedown = function (e) {
+            obj.onmousedown = function(e) {
                 //鼠标按下事件
 
                 let oe = e || window.event;
                 let _this = this.parentNode;
                 let startX = oe.clientX - _this.offsetLeft;
                 let startY = oe.clientY - _this.offsetTop;
-                document.onmousemove = function (e) {
+                document.onmousemove = function(e) {
                     //鼠标移动事件
                     let oe = e || window.event;
                     _this.style.left = oe.clientX - startX + "px";
                     _this.style.top = oe.clientY - startY + "px";
                 };
 
-                document.onmouseup = function () {
+                document.onmouseup = function() {
                     //鼠标松开事件
                     document.onmousemove = null;
                     document.onmouseup = null;
@@ -139,10 +140,10 @@ class LayerControls {
             }
 
             //事件绑定
-            self.find('button[name="close"]').on("click", function (e) {
+            self.find('button[name="close"]').on("click", function(e) {
                 close();
             });
-            self.find('button[name="ok"]').on("click", function (e) {
+            self.find('button[name="ok"]').on("click", function(e) {
                 if (on.confirm) {
                     on.confirm(self[0]);
                 } else {
@@ -150,7 +151,7 @@ class LayerControls {
                 }
             });
 
-            self.find(".hopeui-layer-close").on("click", function (e) {
+            self.find(".hopeui-layer-close").on("click", function(e) {
                 close();
             });
         };
@@ -167,7 +168,15 @@ class LayerControls {
             }
         };
 
+        if (on.init) {
+            on.init({
+                ele: $dom[0],
+                eventName: "init",
+            });
+        }
+
         open();
+
         return {
             close: close,
         };

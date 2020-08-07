@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-08-04 12:05:15
+ * @LastEditTime : 2020-08-07 11:33:17
  * @Description  : 表单控件组
  */
 
@@ -29,6 +29,7 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
+            init: null,
             toggle: null,
             change: null,
             close: null,
@@ -42,7 +43,7 @@ class FormControls {
                 : ($dom = $(`${ele} select`));
         }
 
-        $dom.forEach(function (selector) {
+        $dom.forEach(function(selector) {
             //模板初始化
             let newEle, items;
             let template = `
@@ -61,13 +62,13 @@ class FormControls {
                     </div>
                     <div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}">`;
 
-            Array.from(selector.children).forEach(function (item, i) {
+            Array.from(selector.children).forEach(function(item, i) {
                 if (item.tagName.toLowerCase() == "optgroup") {
                     template += `<div class="groupTitle" hope-group=${i}>${item.getAttribute(
                         "label"
                     )}</div>`;
 
-                    Array.from(item.children).forEach(function (groupOpt, ii) {
+                    Array.from(item.children).forEach(function(groupOpt, ii) {
                         template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
                     });
                 } else {
@@ -85,7 +86,7 @@ class FormControls {
             newEle = $(template).insertAfter(selector);
 
             //单击后下拉列表事件
-            newEle.on("click", function (e) {
+            newEle.on("click", function(e) {
                 e.stopPropagation();
                 if ($(this).hasClass("hopeui-form-selected")) {
                     $(this).removeClass("hopeui-form-selected");
@@ -102,7 +103,7 @@ class FormControls {
             });
 
             //绑定自定义option的点击事件
-            newEle.find(".option").on("click", function (e) {
+            newEle.find(".option").on("click", function(e) {
                 e.stopPropagation();
                 let _this = $(this);
                 handle(selector, newEle, _this);
@@ -123,13 +124,20 @@ class FormControls {
             });
 
             //点击select区域外关闭下拉列表
-            document.addEventListener("click", function (e) {
+            document.addEventListener("click", function(e) {
                 $(newEle).removeClass("hopeui-form-selected");
                 //下拉列表关闭回调
                 if (on.close) {
-                    on.close();
+                    on.close(e);
                 }
             });
+
+            if (on.init) {
+                on.init({
+                    ele: $dom[0],
+                    eventName: "init",
+                });
+            }
         });
 
         /**
@@ -165,10 +173,10 @@ class FormControls {
         }
 
         return {
-            val: function (obj) {
+            val: function(obj) {
                 if (obj) {
                     //值拆分成数组
-                    Object.keys(obj).forEach(function (key) {
+                    Object.keys(obj).forEach(function(key) {
                         let eleArr = $(`select[name=${key}]`);
                         if (ele) {
                             utils.isSelf(ele, type)
@@ -176,10 +184,12 @@ class FormControls {
                                 : (eleArr = $(`${ele} select[name=${key}]`));
                         }
 
-                        eleArr.forEach(function (thisEle, i) {
-                            let opts = $(thisEle).next().find(".option");
+                        eleArr.forEach(function(thisEle, i) {
+                            let opts = $(thisEle)
+                                .next()
+                                .find(".option");
                             //内选项集合
-                            opts.each(function (index) {
+                            opts.each(function(index) {
                                 if (
                                     $.trim($(this).attr("hope-value")) ==
                                     obj[key].value.split(",")[i]
@@ -198,18 +208,21 @@ class FormControls {
                     });
                 }
             },
-            clear: function () {
+            clear: function() {
                 let thisEle = $(`select`);
                 if (ele) {
                     utils.isSelf(ele, type)
                         ? (thisEle = $(ele))
                         : (thisEle = $(`${ele} select`));
                 }
-                thisEle.forEach(function (ele) {
+                thisEle.forEach(function(ele) {
                     handle(
                         ele,
                         $(ele).next(),
-                        $(ele).next().find(".option").eq(0)
+                        $(ele)
+                            .next()
+                            .find(".option")
+                            .eq(0)
                     );
                 });
             },
@@ -225,6 +238,7 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
+            init: null,
             change: null,
         },
     }) {
@@ -237,7 +251,7 @@ class FormControls {
                 : ($dom = $(`${ele} input[type=checkbox]`));
         }
 
-        $dom.forEach(function (checkbox) {
+        $dom.forEach(function(checkbox) {
             let newEle;
             let template = `
                 <div class="hopeui-noUserSelect hopeui-form-checkbox">
@@ -249,7 +263,7 @@ class FormControls {
 
             newEle = $(template).insertAfter(checkbox);
 
-            newEle.on("click", function (e) {
+            newEle.on("click", function(e) {
                 e.stopPropagation();
                 handle(checkbox, newEle);
                 //点击回调
@@ -265,6 +279,13 @@ class FormControls {
                 }
             });
         });
+
+        if (on.init) {
+            on.init({
+                ele: $dom[0],
+                eventName: "init",
+            });
+        }
 
         /**
          * @description: 选择辅助方法
@@ -284,9 +305,9 @@ class FormControls {
         }
 
         return {
-            val: function (obj) {
+            val: function(obj) {
                 if (obj) {
-                    Object.keys(obj).forEach(function (key) {
+                    Object.keys(obj).forEach(function(key) {
                         let eleArr = $(`input[name=${key}]`);
 
                         if (ele) {
@@ -295,8 +316,8 @@ class FormControls {
                                 : (eleArr = $(`${ele} input[name=${key}]`));
                         }
 
-                        eleArr.forEach(function (thisEle, i) {
-                            obj[key].value.split(",").forEach(function (val) {
+                        eleArr.forEach(function(thisEle, i) {
+                            obj[key].value.split(",").forEach(function(val) {
                                 if ($(thisEle).val() == val) {
                                     handle(thisEle, $(thisEle).next(), true);
                                 }
@@ -306,16 +327,18 @@ class FormControls {
                     });
                 }
             },
-            clear: function () {
+            clear: function() {
                 let thisEle = $(`input[type=checkbox]`);
                 if (ele) {
                     utils.isSelf(ele, type)
                         ? (thisEle = $(ele))
                         : (thisEle = $(`${ele} input[type=checkbox]`));
                 }
-                thisEle.forEach(function (ele) {
+                thisEle.forEach(function(ele) {
                     ele.checked = false;
-                    $(ele).next().removeClass("hopeui-form-checked");
+                    $(ele)
+                        .next()
+                        .removeClass("hopeui-form-checked");
                 });
             },
         };
@@ -330,6 +353,7 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
+            init: null,
             change: null,
         },
     }) {
@@ -341,7 +365,7 @@ class FormControls {
                 : ($dom = $(`${ele} input[type=radio]`));
         }
 
-        $dom.forEach(function (radio) {
+        $dom.forEach(function(radio) {
             let newEle;
             let template = `
                     <div class="hopeui-noUserSelect hopeui-form-radio ${
@@ -358,7 +382,7 @@ class FormControls {
 
             newEle = $(template).insertAfter(radio);
 
-            newEle.on("click", function (e) {
+            newEle.on("click", function(e) {
                 e.stopPropagation();
                 handle(radio, newEle);
                 //点击回调
@@ -375,6 +399,13 @@ class FormControls {
             });
         });
 
+        if (on.init) {
+            on.init({
+                ele: $dom[0],
+                eventName: "init",
+            });
+        }
+
         /**
          * @description: 选择辅助方法
          * @param {original:dom对象} 原始元素
@@ -384,7 +415,7 @@ class FormControls {
         function handle(original, targetEle) {
             $(targetEle)
                 .siblings(".hopeui-form-radio")
-                .each(function () {
+                .each(function() {
                     let _this = $(this);
                     if (_this.hasClass("hopeui-form-radioed")) {
                         original.checked = true;
@@ -412,9 +443,9 @@ class FormControls {
         }
 
         return {
-            val: function (obj) {
+            val: function(obj) {
                 if (obj) {
-                    Object.keys(obj).forEach(function (key) {
+                    Object.keys(obj).forEach(function(key) {
                         let eleArr = $(`input[name=${key}]`);
                         if (ele) {
                             utils.isSelf(ele, type)
@@ -422,8 +453,8 @@ class FormControls {
                                 : (eleArr = $(`${ele} input[name=${key}]`));
                         }
 
-                        eleArr.forEach(function (thisEle, i) {
-                            obj[key].value.split(",").forEach(function (val) {
+                        eleArr.forEach(function(thisEle, i) {
+                            obj[key].value.split(",").forEach(function(val) {
                                 if ($(thisEle).val() == val) {
                                     handle(thisEle, $(thisEle).next(), true);
                                 }
@@ -437,7 +468,7 @@ class FormControls {
                 //     utils.validation(ele, "pass", null, "radio");
                 // });
             },
-            clear: function () {
+            clear: function() {
                 let thisEle = $(`input[type=radio]`);
                 if (ele) {
                     utils.isSelf(ele, type)
@@ -445,7 +476,12 @@ class FormControls {
                         : (thisEle = $(`${ele} input[type=radio]`));
                 }
 
-                handle(thisEle[0], $(thisEle).eq(0).next());
+                handle(
+                    thisEle[0],
+                    $(thisEle)
+                        .eq(0)
+                        .next()
+                );
             },
         };
     }
@@ -460,6 +496,7 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
+            init: null,
             blur: null,
             focus: null,
             input: null,
@@ -475,9 +512,9 @@ class FormControls {
                   ));
         }
 
-        $dom.forEach(function (input) {
+        $dom.forEach(function(input) {
             if (!input.getAttribute("hope-type")) {
-                input.onblur = function (e) {
+                input.onblur = function(e) {
                     if (on.blur) {
                         on.blur({
                             targetELe: e.target,
@@ -486,7 +523,7 @@ class FormControls {
                         });
                     }
                 };
-                input.onfocus = function (e) {
+                input.onfocus = function(e) {
                     if (on.focus) {
                         on.focus({
                             targetELe: e.target,
@@ -495,7 +532,7 @@ class FormControls {
                         });
                     }
                 };
-                input.oninput = function (e) {
+                input.oninput = function(e) {
                     if (on.input) {
                         on.input({
                             targetELe: e.target,
@@ -507,10 +544,17 @@ class FormControls {
             }
         });
 
+        if (on.init) {
+            on.init({
+                ele: $dom[0],
+                eventName: "init",
+            });
+        }
+
         return {
-            val: function (obj) {
+            val: function(obj) {
                 if (obj) {
-                    Object.keys(obj).forEach(function (key) {
+                    Object.keys(obj).forEach(function(key) {
                         let eleArr = $(`input[name=${key}]`);
 
                         if (ele) {
@@ -519,14 +563,14 @@ class FormControls {
                                 : (eleArr = $(`${ele} input[name=${key}]`));
                         }
 
-                        eleArr.forEach(function (thisEle, i) {
+                        eleArr.forEach(function(thisEle, i) {
                             $(thisEle).val(obj[key].value);
                             utils.validation(thisEle, "pass", null, "input");
                         });
                     });
                 }
             },
-            clear: function () {
+            clear: function() {
                 let thisEle = $(
                     `${ele} input[type=text],${ele} input[type=password]`
                 );
@@ -539,12 +583,12 @@ class FormControls {
                           ));
                 }
 
-                thisEle = Array.from(thisEle).filter(function (item) {
+                thisEle = Array.from(thisEle).filter(function(item) {
                     if (item.getAttribute("hope-type") != "selector") {
                         return item;
                     }
                 });
-                thisEle.forEach(function (ele) {
+                thisEle.forEach(function(ele) {
                     ele.value = "";
                 });
             },
@@ -560,6 +604,7 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
+            init: null,
             blur: null,
             focus: null,
             input: null,
@@ -573,8 +618,8 @@ class FormControls {
                 : ($dom = $(`${ele} textarea`));
         }
 
-        $dom.forEach(function (textarea) {
-            textarea.onblur = function (e) {
+        $dom.forEach(function(textarea) {
+            textarea.onblur = function(e) {
                 if (on.blur) {
                     on.blur({
                         targetELe: e.target,
@@ -583,7 +628,7 @@ class FormControls {
                     });
                 }
             };
-            textarea.onfocus = function (e) {
+            textarea.onfocus = function(e) {
                 if (on.focus) {
                     on.focus({
                         targetELe: e.target,
@@ -592,7 +637,7 @@ class FormControls {
                     });
                 }
             };
-            textarea.oninput = function (e) {
+            textarea.oninput = function(e) {
                 if (on.input) {
                     on.input({
                         targetELe: e.target,
@@ -603,10 +648,17 @@ class FormControls {
             };
         });
 
+        if (on.init) {
+            on.init({
+                ele: $dom[0],
+                eventName: "init",
+            });
+        }
+
         return {
-            val: function (obj) {
+            val: function(obj) {
                 if (obj) {
-                    Object.keys(obj).forEach(function (key) {
+                    Object.keys(obj).forEach(function(key) {
                         let eleArr = $(`textarea[name=${key}]`);
                         if (ele) {
                             utils.isSelf(ele, type)
@@ -614,14 +666,14 @@ class FormControls {
                                 : (eleArr = $(`${ele} textarea[name=${key}]`));
                         }
 
-                        eleArr.forEach(function (thisEle, i) {
+                        eleArr.forEach(function(thisEle, i) {
                             $(thisEle).val(obj[key].value);
                             utils.validation(thisEle, "pass", null, "textarea");
                         });
                     });
                 }
             },
-            clear: function () {
+            clear: function() {
                 let thisEle = $(`textarea`);
 
                 if (ele) {
@@ -630,7 +682,7 @@ class FormControls {
                         : (thisEle = $(`${ele} textarea`));
                 }
 
-                thisEle.forEach(function (ele) {
+                thisEle.forEach(function(ele) {
                     ele.value = "";
                 });
             },
@@ -646,6 +698,7 @@ class FormControls {
         ele: ele = null,
         options: options = null,
         on: on = {
+            init: null,
             submit: null,
         },
         controls: controls = {
@@ -697,8 +750,8 @@ class FormControls {
         if (ele) {
             $dom = $(ele);
         }
-        $dom.forEach(function (form) {
-            form.onsubmit = function (e) {
+        $dom.forEach(function(form) {
+            form.onsubmit = function(e) {
                 e.stopPropagation();
                 let sortArr = {},
                     formParams = [],
@@ -729,7 +782,7 @@ class FormControls {
                 }
 
                 //校验区域
-                Object.keys(sortArr).forEach(function (key) {
+                Object.keys(sortArr).forEach(function(key) {
                     let items = sortArr[key];
                     //单选和多选判断
                     if (items.type == "checkbox" || items.type == "radio") {
@@ -738,7 +791,7 @@ class FormControls {
                             value: "",
                         };
 
-                        items.eles.forEach(function (ele, i) {
+                        items.eles.forEach(function(ele, i) {
                             //校验
                             if (items.required) {
                                 obj.name = ele.name;
@@ -793,7 +846,7 @@ class FormControls {
                             value: "",
                         };
 
-                        items.eles.forEach(function (ele, i) {
+                        items.eles.forEach(function(ele, i) {
                             //校验
                             if (items.required) {
                                 //不为空
@@ -860,16 +913,23 @@ class FormControls {
             };
         });
 
+        if (on.init) {
+            on.init({
+                ele: $dom[0],
+                eventName: "init",
+            });
+        }
+
         return {
-            val: function (obj) {
-                Object.keys(obj).forEach(function (key) {
+            val: function(obj) {
+                Object.keys(obj).forEach(function(key) {
                     formControls[obj[key].type].val({
                         [key]: obj[key],
                     });
                 });
             },
-            clear: function () {
-                Object.keys(formControls).forEach(function (key) {
+            clear: function() {
+                Object.keys(formControls).forEach(function(key) {
                     formControls[key].clear();
                 });
             },

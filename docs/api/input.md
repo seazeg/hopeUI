@@ -27,6 +27,7 @@ let input_normal = hope.input({
 
 | 参数  | 说明         | 类型     | 默认值 | 回调参数 |
 | ----- | ------------ | -------- | ------ | -------- |
+| init   | 初始化回调     | Function | null   | 当前对象 DOM |
 | blur  | 失去焦点回调 | Function | null   | event↓   |
 | focus | 获得焦点回调 | Function | null   | event↓   |
 | input | 输入回调     | Function | null   | event↓   |
