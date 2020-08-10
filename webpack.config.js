@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-05 17:57:15
+ * @LastEditTime : 2020-08-10 13:39:28
  * @Description  :
  */
 
@@ -13,26 +13,38 @@ const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
 const pkg = require("./package.json");
 
 module.exports = {
-    entry: "./src/hopeui.js",
+    entry: ["@babel/polyfill", "./src/hopeui.js"],
     // devtool: "inline-source-map",
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
         host: "localhost",
         compress: true,
+        host: "0.0.0.0",
         port: 8090,
-        hot: true
+        hot: true,
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                use: "babel-loader",
+                use: {
+                    loader: "babel-loader",
+                },
                 include: /src/,
                 exclude: /node_modules/,
             },
             {
                 test: /\.jpg|png|gif|bmp|jpeg$/,
-                use: "url-loader",
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            name: "[name].[hash:5].[ext]",
+                            limit: 1024, // size <= 1kib
+                            outputPath: "img",
+                        },
+                    },
+                ],
             },
             {
                 test: /\.ttf|eot|svg|woff|woff2$/,
@@ -44,12 +56,12 @@ module.exports = {
                     {
                         loader: ExtractCssChunks.loader,
                         options: {
-                            hmr: true,
-                            reloadAll: true,
+                            // hmr: true,
+                            // reloadAll: true,
                         },
                     },
                     "css-loader",
-                    "less-loader", 
+                    "less-loader",
                 ],
             },
         ],
@@ -67,6 +79,17 @@ module.exports = {
                 cache: false,
                 parallel: true,
                 sourceMap: false,
+                uglifyOptions: {
+                    warnings: false,
+                    parse: {},
+                    compress: false,
+                    mangle: true,
+                    output: null,
+                    toplevel: false,
+                    nameCache: null,
+                    ie8: true,
+                    keep_fnames: false,
+                },
             }),
         ],
         // minimize: false,

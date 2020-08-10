@@ -4,6 +4,63 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title><%= htmlWebpackPlugin.options.title %></title>
+        <!-- <link href="./assets/videojs/video-js.css" rel="stylesheet" />
+
+        <script src="./assets/videojs/videojs-ie8.min.js"></script> -->
+
+        <!-- <link
+            href="https://vjs.zencdn.net/7.8.4/video-js.css"
+            rel="stylesheet"
+        /> -->
+
+        <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+        <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+        <script>
+            var origDefineProperty = Object.defineProperty;
+
+            var arePropertyDescriptorsSupported = function() {
+                var obj = {};
+                try {
+                    origDefineProperty(obj, "x", {
+                        enumerable: false,
+                        value: obj,
+                    });
+                    for (var _ in obj) {
+                        return false;
+                    }
+                    return obj.x === obj;
+                } catch (e) {
+                    /* this is IE 8. */
+                    return false;
+                }
+            };
+            var supportsDescriptors =
+                origDefineProperty && arePropertyDescriptorsSupported();
+
+            if (!supportsDescriptors) {
+                Object.defineProperty = function(a, b, c) {
+                    //IE8支持修改元素节点的属性
+                    if (origDefineProperty && a.nodeType == 1) {
+                        return origDefineProperty(a, b, c);
+                    } else {
+                        a[b] = c.value || (c.get && c.get());
+                    }
+                };
+            }
+
+            if (!Array.prototype.indexOf) {
+                Array.prototype.indexOf = function(elt /*, from*/) {
+                    var len = this.length >>> 0;
+                    var from = Number(arguments[1]) || 0;
+                    from = from < 0 ? Math.ceil(from) : Math.floor(from);
+                    if (from < 0) from += len;
+                    for (; from < len; from++) {
+                        if (from in this && this[from] === elt) return from;
+                    }
+                    return -1;
+                };
+            }
+        </script>
     </head>
     <style>
         * {
@@ -86,157 +143,123 @@
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
-                    <legend><a name="icon">通用</a></legend>
+                    <legend><a name="icon">普通视频</a></legend>
                 </fieldset>
             </div>
             <div class="docs-content">
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-up"
+                <!-- <video
+                    id="my-video"
+                    class="video-js"
+                    muted
+                    loop
+                    controls
+                    autoplay
+                    preload="auto"
+                    width="1200"
+                    height="600"
+                    poster="./assets/cool.jpg"
+                    data-setup="{}"
+                >
+                    <source src="./assets/iwatch3.mp4" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and
+                        consider upgrading to a web browser that
+                        <a
+                            href="https://videojs.com/html5-video-support/"
+                            target="_blank"
+                            >supports HTML5 video</a
                         >
-                            自底向上
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-down"
-                        >
-                            自顶向下
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-left"
-                        >
-                            自右向左
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-right"
-                        >
-                            自左向右
-                        </span>
-                    </div>
-                </div>
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-upbit"
-                        >
-                            快速自底向上
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-downbit"
-                        >
-                            快速自顶向下
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-leftbit"
-                        >
-                            快速自右向左
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-rightbit"
-                        >
-                            快速自左向右
-                        </span>
-                    </div>
-                </div>
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-scale"
-                        >
-                            放大
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-scaleSpring"
-                        >
-                            快速放大
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-fadeout"
-                        >
-                            渐隐
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-fadein"
-                        >
-                            渐现
-                        </span>
-                    </div>
-                </div>
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-rotate"
-                        >
-                            旋转
-                        </span>
-                    </div>
-                </div>
+                    </p>
+                </video> -->
+                <input
+                    type="checkbox"
+                    name="subject"
+                    value="音乐"
+                    hope-verify="required"
+                    class="checkbox_normal"
+                />
+                <input
+                    type="checkbox"
+                    name="subject"
+                    value="历史"
+                    hope-verify="required"
+                    class="checkbox_normal"
+                />
+                <input
+                    type="checkbox"
+                    name="subject"
+                    value="生物"
+                    hope-verify="required"
+                    class="checkbox_normal"
+                />
             </div>
+            1111111111111
+            <!-- <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">RTMP流</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <video
+                    id="my-video2"
+                    class="video-js"
+                    muted
+                    controls
+                    autoplay
+                    preload="auto"
+                    width="1200"
+                    height="600"
+                    poster="./assets/cool.jpg"
+                    data-setup="{}"
+                >
+                    <source
+                        src="rtmp://media3.sinovision.net:1935/live/livestream"
+                    />
+                    <source
+                        src="rtmp://media3.sinovision.net:1935/live/livestream"
+                        type="rtmp/flv"
+                    />
+                </video>
+            </div>
+
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">HLS流</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <video
+                    id="my-video2"
+                    class="video-js"
+                    muted
+                    controls
+                    autoplay
+                    preload="auto"
+                    width="1200"
+                    height="600"
+                    poster="./assets/cool.jpg"
+                    data-setup="{}"
+                >
+                    <source src="http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8" />
+                </video>
+            </div> -->
         </div>
+
+        <!-- <script src="https://vjs.zencdn.net/7.8.4/video.js"></script> -->
+        <!-- <script src="./assets/videojs/video.js"></script> -->
+        <!-- <script src="./assets/videojs/videojs-flash.min.js"></script> -->
     </body>
-    <script>
-        function hasClass(ele, cls) {
-            return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(ele.className);
-        }
-        function addClass(ele, cls) {
-            if (!hasClass(ele, cls)) {
-                if (ele.className) {
-                    ele.className += " " + cls;
-                } else {
-                    ele.className += cls;
-                }
-            }
-        }
-
-        function removeClass(ele, cls) {
-            if (hasClass(ele, cls)) {
-                ele.className = ele.className.replace(
-                    new RegExp("(\\s|^)" + cls + "(\\s|$)"),
-                    ""
-                );
-            }
-        }
-
-        let ele = document.querySelectorAll(".hopeui-anim");
-        Array.from(ele).forEach(function(item) {
-            item.onclick = function(e) {
-                let dataAnim = item.getAttribute("data-anim");
-                addClass(item, dataAnim);
-                setTimeout(function() {
-                    removeClass(item, dataAnim);
-                }, 500);
-            };
-        });
-    </script>
 </html>
+<script>
+    // videojs.options.flash.swf = "./assets/video-js.swf";
+    // let video = videojs("#my-video");
+    // video.play();
+    hope.checkbox({
+        ele: ".checkbox_normal",
+        on: {
+            change: function(e) {
+                console.log(e);
+            },
+        },
+    });
+</script>
