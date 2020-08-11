@@ -1,16 +1,18 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2020-08-11 10:07:49
+ * @LastEditTime : 2020-08-11 17:07:36
  * @Description  : 工具类
  */
+const $ = require("./hopeu.js");
+
 module.exports.utils = {
     validation(ele, rule, prompt, type) {
         let obj = ele,
             bro = ele;
         if (type == "select-one") {
             bro = this.siblings(ele, ".hopeui-form-select")[0];
-            obj = bro.childNodes[1].childNodes[1];
+            obj = bro.childNodes[0].childNodes[0];
         } else if (type == "checkbox") {
             bro = ele.parentNode.querySelectorAll(".hopeui-form-checkbox")[
                 ele.parentNode.querySelectorAll(".hopeui-form-checkbox")
@@ -27,10 +29,12 @@ module.exports.utils = {
                 if (
                     this.siblings(bro, ".hopeui-form-error-prompt").length <= 0
                 ) {
-                    this.insertAfter(bro, {
-                        template: `<i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}`,
-                        rootClass: `hopeui-form-error-prompt`,
-                    });
+                    // this.insertAfter(bro, {
+                    //     template: ``,
+                    //     rootClass: `hopeui-form-error-prompt`,
+                    // });
+                    $(bro).after(`<div class="hopeui-form-error-prompt"><i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}</div>`)
+                    
                 } else {
                     this.siblings(
                         bro,

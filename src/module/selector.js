@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 14:42:20
+ * @LastEditTime : 2020-08-11 15:32:17
  * @Description  :
  */
 
@@ -144,10 +144,10 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         // original.value = original.selectedOptions[0].value; //?????
     }
 
-    obj.val = function(params) {
-        if (params) {
+    obj.val = function(obj) {
+        if (obj) {
             //值拆分成数组
-            Object.keys(params).forEach(function(key) {
+            Object.keys(obj).forEach(function(key) {
                 let eleArr = $(`select[name=${key}]`);
                 if (ele) {
                     utils.isSelf(ele, type)
@@ -163,7 +163,7 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                     opts.each(function(index) {
                         if (
                             $.trim($(this).attr("hope-value")) ==
-                            params[key].value.split(",")[i]
+                            obj[key].value.split(",")[i]
                         ) {
                             handle(thisEle, $(thisEle).next(), $(this));
                         }
