@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 14:11:16
+ * @LastEditTime : 2020-08-11 14:42:20
  * @Description  :
  */
 
@@ -53,7 +53,11 @@ module.exports.selectorHandler = function({ ele, options, on }) {
 
         //单击后下拉列表事件
         newEle.on("click", function(e) {
-            e.stopPropagation();
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            } else if (window.event) {
+                window.event.cancelBubble = true;
+            }
             if ($(this).hasClass("hopeui-form-selected")) {
                 $(this).removeClass("hopeui-form-selected");
             } else {
@@ -68,7 +72,11 @@ module.exports.selectorHandler = function({ ele, options, on }) {
 
         //绑定自定义option的点击事件
         newEle.find(".option").on("click", function(e) {
-            e.stopPropagation();
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            } else if (window.event) {
+                window.event.cancelBubble = true;
+            }
             let _this = $(this);
             handle(selector, newEle, _this);
             //选中options后回调

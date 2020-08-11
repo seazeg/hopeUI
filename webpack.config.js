@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-11 09:19:31
+ * @LastEditTime : 2020-08-11 15:08:20
  * @Description  :
  */
 
@@ -13,7 +13,8 @@ const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
 const pkg = require("./package.json");
 
 module.exports = {
-    entry: "./src/hopeui.js",
+    entry: ["./src/hopeui.js"],
+    // entry: ["@babel/polyfill", "./src/hopeui.js"],
     // devtool: "inline-source-map",
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),

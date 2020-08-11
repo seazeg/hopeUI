@@ -1,9 +1,10 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-11 11:58:59
- * @LastEditTime : 2020-08-11 13:46:19
+ * @LastEditTime : 2020-08-11 15:15:42
  * @Description  :
  */
+
 if (!Array.prototype.forEach) {
     Array.prototype.forEach = function forEach(callback, thisArg) {
         var T, k;
@@ -28,6 +29,20 @@ if (!Array.prototype.forEach) {
                 callback.call(T, kValue, k, O);
             }
             k++;
+        }
+    };
+}
+
+if (!String.prototype.includes) {
+    String.prototype.includes = function(search, start) {
+        if (typeof start !== "number") {
+            start = 0;
+        }
+
+        if (start + search.length > this.length) {
+            return false;
+        } else {
+            return this.indexOf(search, start) !== -1;
         }
     };
 }
