@@ -1,43 +1,59 @@
 /*
  * @Author       : Evan.G
- * @Date         : 2020-07-14 10:02:59
- * @LastEditTime : 2020-08-07 10:43:21
- * @Description  : hopeUI框架
+ * @Date         : 2020-08-10 14:14:49
+ * @LastEditTime : 2020-08-11 11:19:47
+ * @Description  :
  */
-import "./styles/hopeui.less";
-import { formControls } from "./module/form.js";
-import { layerControls } from "./module/layer.js";
-import { tabControls } from "./module/tab.js";
 
-class Hopeui {
-    constructor() {}
-    _extend(target, source) {
-        if (
-            Object.prototype.toString.call(target) === "[object Object]" &&
-            Object.prototype.toString.call(source) === "[object Object]"
-        ) {
-            for (let key in source) {
-                target[key] =
-                    target[key] && target[key].toString() === "[object Object]"
-                        ? this._extend(target[key], source[key])
-                        : (target[key] = source[key]);
-            }
-        }
-        return target;
-    }
-    init() {
-        let modules = {
-                form: formControls,
-                layer: layerControls,
-                tab: tabControls,
+require("./styles/hopeui.less");
+const { tabHandler } = require("./module/tab.js");
+const { layerHandler } = require("./module/layer.js");
+const { selectorHandler } = require("./module/selector.js");
+
+const hope = () => {
+    return {
+        tab: function({
+            ele: ele = null,
+            options: options = {},
+            on: on = {
+                change: null,
+                init: null,
             },
-            res = {};
-        for (let m in modules) {
-            res = this._extend(res, new modules[m]());
-        }
-        return res;
-    }
-}
+        }) {
+            return tabHandler({ ele, options, on });
+        },
+        layer: function({
+            options: options = {
+                title: null,
+                content: null,
+                isMask: true,
+                isDefaultBtn: true,
+                defaultBtn: {},
+                isDrag: false,
+                animation: "hopeui-anim-scaleSpring",
+            },
+            on: on = {
+                init: null,
+                confirm: null,
+                open: null,
+                close: null,
+            },
+        }) {
+            return layerHandler({ options, on });
+        },
+        selector: function({
+            ele: ele = null,
+            options: options = null,
+            on: on = {
+                init: null,
+                toggle: null,
+                change: null,
+                close: null,
+            },
+        }) {
+            return selectorHandler({ ele, options, on });
+        },
+    };
+};
 
-export const hope = new Hopeui().init();
-window.hope = hope;
+window.hope = hope();

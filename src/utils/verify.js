@@ -1,11 +1,10 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2020-07-29 09:48:15
+ * @LastEditTime : 2020-08-11 10:07:49
  * @Description  : 工具类
  */
-class Utils {
-    constructor() {}
+module.exports.utils = {
     validation(ele, rule, prompt, type) {
         let obj = ele,
             bro = ele;
@@ -48,7 +47,7 @@ class Utils {
             default:
                 break;
         }
-    }
+    },
     deserialization(obj) {
         if (obj) {
             let res = "";
@@ -57,13 +56,13 @@ class Utils {
             }
             return res.substring(0, res.length - 1);
         }
-    }
+    },
     isPC() {
         return !/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
-    }
+    },
     hasClass(ele, cls) {
         return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(ele.className);
-    }
+    },
     addClass(ele, cls) {
         if (!this.hasClass(ele, cls)) {
             if (ele.className) {
@@ -72,11 +71,11 @@ class Utils {
                 ele.className += cls;
             }
         }
-    }
+    },
     removeClass(ele, cls) {
         let _this = this;
         if (ele.length > 0 && ele.tagName != "SELECT") {
-            ele.forEach(function (el) {
+            ele.forEach(function(el) {
                 if (_this.hasClass(el, cls)) {
                     el.className = el.className.replace(
                         new RegExp("(\\s|^)" + cls + "(\\s|$)"),
@@ -92,7 +91,7 @@ class Utils {
                 );
             }
         }
-    }
+    },
     siblings(ele, tag) {
         let nodes = [];
         let previ = ele.previousSibling;
@@ -127,19 +126,19 @@ class Utils {
             nexts = nexts.nextSibling;
         }
         return nodes;
-    }
+    },
     insertAfter(targetEle, templateParams) {
         let ele = document.createElement("div");
         ele.className = templateParams.rootClass;
         ele.innerHTML = templateParams.template;
         targetEle.after(ele);
         return ele;
-    }
+    },
     removeELe(targetEle) {
         if (targetEle) {
             targetEle.parentNode.removeChild(targetEle);
         }
-    }
+    },
     isSelf(targetEle, typeName) {
         if (
             document.querySelector(targetEle).tagName.toLowerCase() == typeName
@@ -148,7 +147,5 @@ class Utils {
         } else {
             return false;
         }
-    }
-}
-
-export const verify = new Utils();
+    },
+};

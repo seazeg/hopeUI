@@ -1,211 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= htmlWebpackPlugin.options.title %></title>
-    </head>
-    <style>
-        * {
-            font-size: 14px;
-        }
 
-        .docs-box {
-            padding: 0 30px;
-        }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="hopeui.css" />
+</head>
+<style>
+    * {
+        font-size: 14px;
+    }
 
-        .docs-title {
-            margin: 30px 0 20px;
-        }
+    .docs-box {
+        padding: 0 30px;
+    }
 
-        .docs-title fieldset {
-            border: none;
-            padding: 0;
-            border-top: 1px solid #ccc;
-        }
+    .docs-title {
+        margin: 30px 0 20px;
+    }
 
-        .docs-title fieldset legend {
-            margin-left: 20px;
-            padding: 0 10px;
-        }
+    .docs-title fieldset {
+        border: none;
+        padding: 0;
+        border-top: 1px solid #ccc;
+    }
 
-        .docs-title fieldset legend a {
-            font-size: 22px;
-            font-weight: 300;
-        }
+    .docs-title fieldset legend {
+        margin-left: 20px;
+        padding: 0 10px;
+    }
 
-        .docs-content {
-            padding-bottom: 50px;
-        }
+    .docs-title fieldset legend a {
+        font-size: 22px;
+        font-weight: 300;
+    }
 
-        .docs-content > * {
-            margin-right: 5px;
-        }
+    .docs-content {
+        padding-bottom: 50px;
+    }
 
-        .docs-grid-demo {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            line-height: 80px;
-            height: 80px;
-            font-size: 14px;
-            overflow: hidden;
-            color: #fff;
-        }
+    .docs-content>* {
+        margin-right: 5px;
+    }
 
-        .docs-grid-demo-bg1 {
-            background: #ff7400;
-        }
+    .docs-grid-demo {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 80px;
+        height: 80px;
+        font-size: 14px;
+        overflow: hidden;
+        color: #fff;
+    }
 
-        .docs-grid-demo-bg2 {
-            background: #fd9037;
-        }
+    .docs-grid-demo-bg1 {
+        background: #ff7400;
+    }
 
-        .docs-grid-demo-bg3 {
-            background: #ffa55b;
-        }
+    .docs-grid-demo-bg2 {
+        background: #fd9037;
+    }
 
-        .docs-content .hopeui-row {
-            margin-bottom: 5px;
-        }
+    .docs-grid-demo-bg3 {
+        background: #ffa55b;
+    }
 
-        .docs-demo-circle {
-            width: 200px;
-            height: 200px;
-            background: #ff7400;
-            display: block;
-            line-height: 200px;
-            text-align: center;
-            color: #fff;
-            cursor: pointer;
-            user-select: none;
-        }
-    </style>
+    .docs-content .hopeui-row {
+        margin-bottom: 5px;
+    }
 
-    <body>
-        <div class="docs-box">
-            <div class="docs-title">
-                <fieldset>
-                    <legend><a name="icon">通用</a></legend>
-                </fieldset>
-            </div>
-            <div class="docs-content">
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-up"
-                        >
-                            自底向上
-                        </span>
+    .docs-demo-circle {
+        width: 200px;
+        height: 200px;
+        background: #ff7400;
+        display: block;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        user-select: none;
+    }
+</style>
+
+<body>
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">通用</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <select name="city" hope-verify="required" class="select_normal">
+                <option value="">请选择一个选项</option>
+                <option value="青岛">青岛</option>
+                <option value="武汉">武汉</option>
+                <option value="乌鲁木齐">乌鲁木齐</option>
+                <option value="南京">南京</option>
+                <option value="天津">天津</option>
+                <option value="郑州">郑州</option>
+                <option value="重庆">重庆</option>
+                <option value="成都">成都</option>
+                <option value="云南">云南</option>
+            </select>
+        </div>
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">分组</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <select name="school" hope-verify="required" class="select_group">
+                <option value="">请选择一个选项</option>
+                <optgroup label="北京"">
+                    <option value=" 北京大学">北京大学</option>
+                    <option value="清华大学">清华大学</option>
+                </optgroup>
+                <optgroup label="浙江"">
+                    <option value=" 浙江大学">浙江大学</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">通用</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <div class="hopeui-tab" id="tab">
+                <ul class="hopeui-tab-title">
+                    <li class="hopeui-tab-this">网站设置</li>
+                    <li>用户管理</li>
+                    <li>权限分配</li>
+                    <li>商品管理</li>
+                    <li>订单管理</li>
+                </ul>
+                <div class="hopeui-tab-content">
+                    <div class="hopeui-tab-item hopeui-show">
+                        1. 高度默认自适应，也可以随意固宽。
                     </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-down"
-                        >
-                            自顶向下
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-left"
-                        >
-                            自右向左
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-right"
-                        >
-                            自左向右
-                        </span>
-                    </div>
-                </div>
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-upbit"
-                        >
-                            快速自底向上
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-downbit"
-                        >
-                            快速自顶向下
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-leftbit"
-                        >
-                            快速自右向左
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-rightbit"
-                        >
-                            快速自左向右
-                        </span>
-                    </div>
-                </div>
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-scale"
-                        >
-                            放大
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12 ">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-scaleSpring"
-                        >
-                            快速放大
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-fadeout"
-                        >
-                            渐隐
-                        </span>
-                    </div>
-                    <div class="hopeui-col-3-12">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-fadein"
-                        >
-                            渐现
-                        </span>
-                    </div>
-                </div>
-                <div class="hopeui-row hopeui-col-space5">
-                    <div class="hopeui-col-3-12">
-                        <span
-                            class="hopeui-anim docs-demo-circle"
-                            data-anim="hopeui-anim-rotate"
-                        >
-                            旋转
-                        </span>
-                    </div>
+                    <div class="hopeui-tab-item">内容2</div>
+                    <div class="hopeui-tab-item">内容3</div>
+                    <div class="hopeui-tab-item">内容4</div>
+                    <div class="hopeui-tab-item">内容5</div>
                 </div>
             </div>
         </div>
-    </body>
-    <script>
+    </div>
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">普通弹层</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <button type="button" class="hopeui-btn" id="open1">
+                打开弹层
+            </button>
+        </div>
+
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">iframe嵌入弹层</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <button type="button" class="hopeui-btn" id="open2">
+                打开弹层
+            </button>
+        </div>
+
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">可拖拽弹层</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <button type="button" class="hopeui-btn" id="open3">
+                打开弹层
+            </button>
+        </div>
+    </div>
+
+</body>
+
+<!-- <script>
         function hasClass(ele, cls) {
             return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(ele.className);
         }
@@ -228,15 +212,102 @@
             }
         }
 
-        let ele = document.querySelectorAll(".hopeui-anim");
+        var ele = document.querySelectorAll(".hopeui-anim");
         Array.from(ele).forEach(function(item) {
             item.onclick = function(e) {
-                let dataAnim = item.getAttribute("data-anim");
+                var dataAnim = item.getAttribute("data-anim");
                 addClass(item, dataAnim);
                 setTimeout(function() {
                     removeClass(item, dataAnim);
                 }, 500);
             };
         });
-    </script>
+    </script> -->
+<script>
+    window.tabb = hope.tab({
+        ele: "#tab",
+        on: {
+            change: function (e) {
+                console.log(e);
+            },
+            init: function (e) {
+                console.log(e);
+            },
+        },
+    });
+
+
+
+    document.getElementById("open1").onclick = function () {
+        hope.layer({
+            options: {
+                title: "信息",
+                content: "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
+                defaultBtn: {
+                    ok: "好的",
+                    cancel: "拜拜",
+                },
+            },
+        });
+    };
+
+    document.getElementById("open2").onclick = function () {
+        var ly = hope.layer({
+            options: {
+                title: "iframe弹框",
+                content: '<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
+                // content:
+                //     '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
+            },
+            on: {
+                confirm: function (e) {
+                    ly.close();
+                },
+            },
+        });
+    };
+
+    document.getElementById("open3").onclick = function () {
+        var ly = hope.layer({
+            options: {
+                title: "可拖拽弹框",
+                content: '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596605654660&di=3efa3194330834b16d1edce806f3ace4&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201105%2F17%2F113554rnu40q7nbgnn3lgq.jpg" style="width:800px" />',
+                isMask: false,
+                isDrag: true,
+            },
+            on: {
+                confirm: function (e) {
+                    this.close();
+                },
+            },
+        });
+    };
+
+
+
+    var select_normal = hope.selector({
+        ele: ".select_normal",
+        on: {
+            change: function (e) {
+                console.log(e);
+            },
+            toggle: function (e) {
+                console.log(e);
+            },
+        },
+    });
+
+    var select_group = hope.selector({
+        ele: ".select_group",
+        on: {
+            change: function (e) {
+                console.log(e);
+            },
+            toggle: function (e) {
+                console.log(e);
+            },
+        },
+    });
+</script>
+
 </html>

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-05 17:57:15
+ * @LastEditTime : 2020-08-11 09:19:31
  * @Description  :
  */
 
@@ -17,10 +17,10 @@ module.exports = {
     // devtool: "inline-source-map",
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
-        host: "localhost",
+        host: "0.0.0.0",
         compress: true,
         port: 8090,
-        hot: true
+        // hot: true
     },
     module: {
         rules: [
@@ -49,7 +49,7 @@ module.exports = {
                         },
                     },
                     "css-loader",
-                    "less-loader", 
+                    "less-loader",
                 ],
             },
         ],
@@ -64,12 +64,18 @@ module.exports = {
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
-                cache: false,
+                // cache: false,
                 parallel: true,
-                sourceMap: false,
+                // sourceMap: true,
+                uglifyOptions: {
+                    compress: {
+                        properties: false,
+                        ie8: true,
+                    },
+                },
             }),
         ],
-        // minimize: false,
+        minimize: false,
     },
     plugins: [
         new HtmlWebpackPlugin({
