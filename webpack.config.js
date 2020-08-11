@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-11 15:08:20
+ * @LastEditTime : 2020-08-11 18:15:41
  * @Description  :
  */
 
@@ -9,7 +9,8 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const pkg = require("./package.json");
 
 module.exports = {
@@ -41,17 +42,7 @@ module.exports = {
             },
             {
                 test: /\.(le|c)ss$/,
-                use: [
-                    {
-                        loader: ExtractCssChunks.loader,
-                        options: {
-                            hmr: true,
-                            reloadAll: true,
-                        },
-                    },
-                    "css-loader",
-                    "less-loader",
-                ],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
             },
         ],
     },
@@ -75,8 +66,9 @@ module.exports = {
                     },
                 },
             }),
+            new OptimizeCssAssetsPlugin({}),
         ],
-        minimize: false,
+        // minimize: false,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -93,10 +85,9 @@ module.exports = {
         new webpack.BannerPlugin(
             `${pkg.description} version ${pkg.version}\nAuthor Evan.G\nFor more information, please visit ${pkg.author.github}\n${pkg.description} is available under the terms of the MIT license.`
         ),
-        new ExtractCssChunks({
+        new MiniCssExtractPlugin({
             filename: "hopeui.css",
             chunkFilename: "[id].css",
-            orderWarning: true,
         }),
     ],
 };
