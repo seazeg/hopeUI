@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 14:03:12
+ * @LastEditTime : 2020-08-11 14:11:16
  * @Description  :
  */
 
@@ -88,13 +88,13 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         });
 
         //点击select区域外关闭下拉列表
-        document.addEventListener("click", function(e) {
+        $(document).on('click',function(e) {
             $(newEle).removeClass("hopeui-form-selected");
             //下拉列表关闭回调
             if (on.close) {
                 on.close(e);
             }
-        });
+        })
 
         if (on.init) {
             on.init({
@@ -133,7 +133,7 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 .eq(optEle.index())[0].selected = true;
         }
 
-        original.value = original.selectedOptions[0].value;
+        // original.value = original.selectedOptions[0].value; //?????
     }
 
     obj.val = function(params) {
