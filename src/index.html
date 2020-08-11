@@ -297,6 +297,15 @@
         },
     });
 
+    select_normal.val({
+        city: {
+            type: "selector",
+            value: "青岛",
+        }
+    })
+
+    // select_normal.clear();
+
     var select_group = hope.selector({
         ele: ".select_group",
         on: {
@@ -308,6 +317,15 @@
             },
         },
     });
+
+    select_group.val({
+        school: {
+            type: "selector",
+            value: "清华大学",
+        }
+    })
+
+    // select_group.clear();
 </script>
 
 </html>

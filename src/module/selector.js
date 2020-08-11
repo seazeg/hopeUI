@@ -1,13 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 11:54:30
+ * @LastEditTime : 2020-08-11 14:03:12
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
-
 
 module.exports.selectorHandler = function({ ele, options, on }) {
     const obj = new Object();
@@ -16,36 +15,35 @@ module.exports.selectorHandler = function({ ele, options, on }) {
     if (ele) {
         utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
     }
-
-    if(!Array.from){
-        Array.from = function(iterable){
-            // IE(包括IE11)没有这个方法,用[].slice.call(new Uint8Array..代替
-            return [].slice.call(new Uint8Array(iterable));
-        }
-    }
-    
-    Array.from($dom).forEach(function(selector) {
+    $dom.each(function() {
         //模板初始化
-        let newEle, items;
+        let newEle,
+            selector = $(this)[0];
         let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="text" placeholder="${selector.children[0].innerText}" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}">`;
 
-        Array.from(selector.children).forEach(function(item, i) {
-            if (item.tagName.toLowerCase() == "optgroup") {
-                template += `<div class="groupTitle" hope-group=${i}>${item.getAttribute(
-                    "label"
-                )}</div>`;
+        $(this)
+            .children()
+            .each(function(i, item) {
+                item = $(this)[0];
+                if (item.tagName.toLowerCase() == "optgroup") {
+                    template += `<div class="groupTitle" hope-group=${i}>${item.getAttribute(
+                        "label"
+                    )}</div>`;
 
-                Array.from(item.children).forEach(function(groupOpt, ii) {
-                    template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
-                });
-            } else {
-                if (item.value) {
-                    template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
+                    $(this)
+                        .children()
+                        .each(function(ii, groupOpt) {
+                            groupOpt = $(this)[0];
+                            template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                        });
                 } else {
-                    template += `<div class="option hopeui-select-tips" hope-value="${item.value}">${item.innerText}</div>`;
+                    if (item.value) {
+                        template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
+                    } else {
+                        template += `<div class="option hopeui-select-tips" hope-value="${item.value}">${item.innerText}</div>`;
+                    }
                 }
-            }
-        });
+            });
 
         template += `</div></div>`;
 
@@ -149,8 +147,8 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                         : (eleArr = $(`${ele} select[name=${key}]`));
                 }
 
-                eleArr.forEach(function(thisEle, i) {
-                    let opts = $(thisEle)
+                eleArr.each(function(i, thisEle) {
+                    let opts = $(this)
                         .next()
                         .find(".option");
                     //内选项集合
@@ -176,11 +174,11 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 ? (thisEle = $(ele))
                 : (thisEle = $(`${ele} select`));
         }
-        thisEle.forEach(function(ele) {
+        thisEle.each(function(i, ele) {
             handle(
                 ele,
-                $(ele).next(),
-                $(ele)
+                $(this).next(),
+                $(this)
                     .next()
                     .find(".option")
                     .eq(0)
