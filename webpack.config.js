@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-11 18:15:41
+ * @LastEditTime : 2020-08-12 09:25:17
  * @Description  :
  */
 
@@ -56,7 +56,7 @@ module.exports = {
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
-                // cache: false,
+                cache: false,
                 parallel: true,
                 // sourceMap: true,
                 uglifyOptions: {
@@ -68,7 +68,7 @@ module.exports = {
             }),
             new OptimizeCssAssetsPlugin({}),
         ],
-        // minimize: false,
+        minimize: false,
     },
     plugins: [
         new HtmlWebpackPlugin({
