@@ -580,7 +580,6 @@ var hopeu = window['hopeu'] = (function(){
   $['setQuery'] = function(qry){
     $['query'] = function(sel, ctx){
       sel = sel.replace(/[\r\n]/g,"")   
-      console.log(sel);
       return $$(sel, ctx, (qry || function(sel, ctx){ return ctx.querySelectorAll(sel); }));
     };
   };

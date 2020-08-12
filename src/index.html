@@ -360,8 +360,8 @@
                 //     '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
             },
             on: {
-                confirm: function (e) {
-                    ly.close();
+                confirm: function (ele,e) {
+                    e.close();
                 },
             },
         });
@@ -376,8 +376,8 @@
                 isDrag: true,
             },
             on: {
-                confirm: function (e) {
-                    this.close();
+                confirm: function (ele,e) {
+                    e.close();
                 },
             },
         });

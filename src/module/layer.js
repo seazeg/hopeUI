@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 17:20:16
+ * @LastEditTime : 2020-08-12 11:37:23
  * @Description  :
  */
 
@@ -94,7 +94,7 @@ module.exports.layerHandler = function ({
         }
 
         if (on.open) {
-            on.open(self[0]);
+            on.open(self[0],obj);
         }
 
         //事件绑定
@@ -103,7 +103,7 @@ module.exports.layerHandler = function ({
         });
         self.find('button[name="ok"]').on("click", function (e) {
             if (on.confirm) {
-                on.confirm(self[0]);
+                on.confirm(self[0],obj);
             } else {
                 close();
             }
@@ -122,7 +122,7 @@ module.exports.layerHandler = function ({
         }
 
         if (on.close) {
-            on.close(self[0]);
+            on.close(self[0],obj);
         }
     };
 
