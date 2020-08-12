@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-12 11:37:23
+ * @LastEditTime : 2020-08-12 13:47:53
  * @Description  :
  */
 
@@ -79,9 +79,9 @@ module.exports.layerHandler = function ({
         let template = `<div class="hopeui-layer"><div class="hopeui-layer-title ${!options.title ? "hopeui-hide" : ""}">${options.title}<i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i></div><div class="hopeui-layer-content">${options.content}</div><div class="hopeui-layer-btn ${!options.isDefaultBtn ? "hopeui-hide" : ""}"><button type="button" name="close" class="hopeui-btn hopeui-btn-primary">${options.defaultBtn.cancel}</button><button type="button" name="ok" class="hopeui-btn">${options.defaultBtn.ok}</button></div></div>`;
 
         self = $(template).insertAfter("body");
-        location(self);
+    
         self.addClass(`hopeui-anim ${options.animation}`);
-
+        location(self);
         if (options.isDrag) {
             darg(self.children(".hopeui-layer-title")[0]);
         }

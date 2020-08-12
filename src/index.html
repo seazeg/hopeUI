@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="hopeui.css" />
+    <!-- <link rel="stylesheet" href="hopeui.css" /> -->
 </head>
 <style>
     * {
@@ -86,6 +86,16 @@
 
 <body>
     <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">通用</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            
+        </div>
+    </div>
+    <!-- <div class="docs-box">
         <div class="docs-title">
             <fieldset>
                 <legend><a name="icon">通用</a></legend>
@@ -285,45 +295,10 @@
                 打开弹层
             </button>
         </div>
-    </div>
+    </div> -->
 
 </body>
-
 <!-- <script>
-        function hasClass(ele, cls) {
-            return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(ele.className);
-        }
-        function addClass(ele, cls) {
-            if (!hasClass(ele, cls)) {
-                if (ele.className) {
-                    ele.className += " " + cls;
-                } else {
-                    ele.className += cls;
-                }
-            }
-        }
-
-        function removeClass(ele, cls) {
-            if (hasClass(ele, cls)) {
-                ele.className = ele.className.replace(
-                    new RegExp("(\\s|^)" + cls + "(\\s|$)"),
-                    ""
-                );
-            }
-        }
-
-        var ele = document.querySelectorAll(".hopeui-anim");
-        Array.from(ele).forEach(function(item) {
-            item.onclick = function(e) {
-                var dataAnim = item.getAttribute("data-anim");
-                addClass(item, dataAnim);
-                setTimeout(function() {
-                    removeClass(item, dataAnim);
-                }, 500);
-            };
-        });
-    </script> -->
-<script>
     window.tabb = hope.tab({
         ele: "#tab",
         on: {
@@ -356,8 +331,6 @@
             options: {
                 title: "iframe弹框",
                 content: '<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
-                // content:
-                //     '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
             },
             on: {
                 confirm: function (ele,e) {
@@ -371,7 +344,7 @@
         var ly = hope.layer({
             options: {
                 title: "可拖拽弹框",
-                content: '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596605654660&di=3efa3194330834b16d1edce806f3ace4&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201105%2F17%2F113554rnu40q7nbgnn3lgq.jpg" style="width:800px" />',
+                content: '<div style="width:1000px;height:600px;overflow:hidden" ><img style="width:100%" src="https://timgsa.baidu.com/timg?image&quality=100&size=b9999_10000&sec=1596605654660&di=3efa3194330834b16d1edce806f3ace4&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201105%2F17%2F113554rnu40q7nbgnn3lgq.jpg" style="width:800px" /></div>',
                 isMask: false,
                 isDrag: true,
             },
@@ -652,6 +625,7 @@
     document.querySelector("#clear").onclick = function () {
         fm.clear();
     };
-// </script>
+</script> -->
+
 
 </html>
