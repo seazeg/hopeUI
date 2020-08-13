@@ -313,43 +313,43 @@
 
 </body>
 <script>
-    hope.pager({
-        ele: "#pager",
-        options: {
-            omit: 5, //最多保留多少按钮,必须奇数
-            prevName: "prev",
-            nextName: "next",
-            hideNum: true,
-            pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
-        },
-        params: {
-            url: '/assets/page/list1.json',
-            dataType: "json",
-            type: 'get',
-            data: {
-                pageNo: 1,
-                pageSize: 20
-            }
-        },
-        reader: function (res) {
-            var data = res.data;
-            var template = '';
-            for (var i = 0; i < data.length; i++) {
-                template += "<p>" + data[i].goodsName + "|" + data[i].goodsStar + "</p>"
-            }
-            $('#pagelist').html(template);
-            return {
-                pageNo: res.pageNo,
-                pageSize: res.pageSize,
-                totalNumber: res.totalNumber
-            }
-        },
-        on: {
-            jump: function (e) {
-                console.log(e);
-            }
-        },
-    })
+    // hope.pager({
+    //     ele: "#pager",
+    //     options: {
+    //         omit: 5, //最多保留多少按钮,必须奇数
+    //         prevName: "prev",
+    //         nextName: "next",
+    //         hideNum: true,
+    //         pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
+    //     },
+    //     params: {
+    //         url: '/assets/page/list1.json',
+    //         dataType: "json",
+    //         type: 'get',
+    //         data: {
+    //             pageNo: 1,
+    //             pageSize: 20
+    //         }
+    //     },
+    //     reader: function (res) {
+    //         var data = res.data;
+    //         var template = '';
+    //         for (var i = 0; i < data.length; i++) {
+    //             template += "<p>" + data[i].goodsName + "|" + data[i].goodsStar + "</p>"
+    //         }
+    //         $('#pagelist').html(template);
+    //         return {
+    //             pageNo: res.pageNo,
+    //             pageSize: res.pageSize,
+    //             totalNumber: res.totalNumber
+    //         }
+    //     },
+    //     on: {
+    //         jump: function (e) {
+    //             console.log(e);
+    //         }
+    //     },
+    // })
 
 
     window.tabb = hope.tab({

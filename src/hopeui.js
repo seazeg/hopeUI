@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-13 10:37:08
+ * @LastEditTime : 2020-08-13 15:02:54
  * @Description  :
  */
 
@@ -19,18 +19,18 @@ const { formHandler } = require("./module/form.js");
 
 const hope = () => {
     return {
-        pager: function({
-            ele: ele = null,
-            options: options = {},
-            params: params = {},
-            reader: reader = null,
-            on: on = {
-                change: null,
-                init: null,
-            },
-        }) {
-            return pagerHandler({ ele, options, params, reader, on });
-        },
+        // pager: function({
+        //     ele: ele = null,
+        //     options: options = {},
+        //     params: params = {},
+        //     reader: reader = null,
+        //     on: on = {
+        //         change: null,
+        //         init: null,
+        //     },
+        // }) {
+        //     return pagerHandler({ ele, options, params, reader, on });
+        // },
         tab: function({
             ele: ele = null,
             options: options = {},
