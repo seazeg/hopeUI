@@ -1,12 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-11 16:06:48
+ * @LastEditTime : 2020-08-13 10:37:08
  * @Description  :
  */
 
 require("./styles/hopeui.less");
 require("./utils/patch.js");
+const { pagerHandler } = require("./module/pager.js");
 const { tabHandler } = require("./module/tab.js");
 const { layerHandler } = require("./module/layer.js");
 const { selectorHandler } = require("./module/selector.js");
@@ -18,6 +19,18 @@ const { formHandler } = require("./module/form.js");
 
 const hope = () => {
     return {
+        pager: function({
+            ele: ele = null,
+            options: options = {},
+            params: params = {},
+            reader: reader = null,
+            on: on = {
+                change: null,
+                init: null,
+            },
+        }) {
+            return pagerHandler({ ele, options, params, reader, on });
+        },
         tab: function({
             ele: ele = null,
             options: options = {},

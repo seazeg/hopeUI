@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- <link rel="stylesheet" href="hopeui.css" /> -->
+    <script src="assets/jquery.js"></script>
 </head>
 <style>
     * {
@@ -88,14 +89,27 @@
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
-                <legend><a name="icon">通用</a></legend>
+                <legend><a name="icon">分页</a></legend>
             </fieldset>
         </div>
         <div class="docs-content">
-            
+            <div id="pagelist"></div>
+            <div id="pager">
+                <!-- <div class="hopeui-pager">
+                    <span class="hopeui-pager-prev hopeui-pager-disabled">上一页</span>
+                    <span class="hopeui-pager-num hopeui-pager-cur">1</span>
+                    <span class="hopeui-pager-num">2</span>
+                    <span class="hopeui-pager-num">3</span>
+                    <span class="hopeui-pager-num">4</span>
+                    <i class="hopeui-pager-omit">...</i>
+                    <span class="hopeui-pager-num">8</span>
+                    <span class="hopeui-pager-num">9</span>
+                    <span class="hopeui-pager-next">下一页</span>
+                </div> -->
+            </div>
         </div>
     </div>
-    <!-- <div class="docs-box">
+    <div class="docs-box">
         <div class="docs-title">
             <fieldset>
                 <legend><a name="icon">通用</a></legend>
@@ -295,10 +309,49 @@
                 打开弹层
             </button>
         </div>
-    </div> -->
+    </div>
 
 </body>
-<!-- <script>
+<script>
+    hope.pager({
+        ele: "#pager",
+        options: {
+            omit: 5, //最多保留多少按钮,必须奇数
+            prevName: "prev",
+            nextName: "next",
+            hideNum: true,
+            pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
+        },
+        params: {
+            url: '/assets/page/list1.json',
+            dataType: "json",
+            type: 'get',
+            data: {
+                pageNo: 1,
+                pageSize: 20
+            }
+        },
+        reader: function (res) {
+            var data = res.data;
+            var template = '';
+            for (var i = 0; i < data.length; i++) {
+                template += "<p>" + data[i].goodsName + "|" + data[i].goodsStar + "</p>"
+            }
+            $('#pagelist').html(template);
+            return {
+                pageNo: res.pageNo,
+                pageSize: res.pageSize,
+                totalNumber: res.totalNumber
+            }
+        },
+        on: {
+            jump: function (e) {
+                console.log(e);
+            }
+        },
+    })
+
+
     window.tabb = hope.tab({
         ele: "#tab",
         on: {
@@ -333,7 +386,7 @@
                 content: '<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
             },
             on: {
-                confirm: function (ele,e) {
+                confirm: function (ele, e) {
                     e.close();
                 },
             },
@@ -349,7 +402,7 @@
                 isDrag: true,
             },
             on: {
-                confirm: function (ele,e) {
+                confirm: function (ele, e) {
                     e.close();
                 },
             },
@@ -625,7 +678,7 @@
     document.querySelector("#clear").onclick = function () {
         fm.clear();
     };
-</script> -->
+</script>
 
 
 </html>
