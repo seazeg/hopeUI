@@ -313,7 +313,7 @@
 
 </body>
 <script>
-    hope.pager({
+    var pager = hope.pager({
         ele: "#pager",
         options: {
             omit: 5, //最多保留多少按钮,必须奇数
@@ -321,6 +321,7 @@
             nextName: "next",
             hideNum: true,
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
+            extend:true
         },
         params: {
             url: '/assets/page/list1.json',
@@ -345,11 +346,14 @@
             }
         },
         on: {
-            jump: function (e) {
+            jumpOver: function (e) {
                 console.log(e);
             }
         },
     })
+    pager.jump(10)
+
+
 
 
     window.tabb = hope.tab({
