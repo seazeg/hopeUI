@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-08-13 15:09:06
+ * @LastEditTime : 2020-08-13 15:27:24
  * @Description  :
  */
 
@@ -12,8 +12,8 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
     let $dom = $(ele);
 
     (function getData(params, reader) {
-        $.ajax({
-            ...params,
+        $.ajax(Object.assign(params,{
+            // ...params,
             success: function(data) {
                 if (reader) {
                     //pageNo:当前页面页码
@@ -142,7 +142,7 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
                 }
             },
             error: function() {},
-        });
+        }));
     })(params, reader);
 
     return obj;

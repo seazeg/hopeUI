@@ -1,9 +1,10 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-11 11:58:59
- * @LastEditTime : 2020-08-11 16:48:46
+ * @LastEditTime : 2020-08-13 15:20:57
  * @Description  :
  */
+
 
 if (!Array.from) {
     Array.from = (function() {
@@ -130,11 +131,10 @@ if (!Array.prototype.forEach) {
 
 if (!Array.isArray) {
     Array.isArray = function(arg) {
-      return Object.prototype.toString.call(arg) === '[object Array]';
+        return Object.prototype.toString.call(arg) === "[object Array]";
     };
-  }
+}
 
-  
 if (!String.prototype.includes) {
     String.prototype.includes = function(search, start) {
         if (typeof start !== "number") {
