@@ -11,6 +11,7 @@ import { checkbox } from "../view/checkbox.view.js";
 import { radio } from "../view/radio.view.js";
 import { selector } from "../view/selector.view.js";
 import { input } from "../view/input.view.js";
+import { pager } from "../view/pager.view.js";
 import { textarea } from "../view/textarea.view.js";
 import { form } from "../view/form.view.js";
 import { layer } from "../view/layer.view.js";
@@ -23,6 +24,7 @@ import checkboxMD from "../api/checkbox.md";
 import radioMD from "../api/radio.md";
 import selectorMD from "../api/selector.md";
 import inputMD from "../api/input.md";
+import pagerMD from "../api/pager.md";
 import textareaMD from "../api/textarea.md";
 import formMD from "../api/form.md";
 import layerMD from "../api/layer.md";
@@ -371,6 +373,61 @@ storiesOf("组件(Components)", module)
         { notes: formMD }
     )
     .add(
+        "分页(Pager)",
+        () => {
+            useEffect(() => {
+                var mypager = hope.pager({
+                    ele: "#pager",
+                    options: {
+                        omit: 5, //最多保留多少按钮,必须奇数
+                        prevName: "prev",
+                        nextName: "next",
+                        hideNum: true,
+                        pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
+                        extend: true,
+                    },
+                    params: {
+                        url: "http://localhost:3007/assets/page/list1.json",
+                        dataType: "jsonp",
+                        // type: "get",
+                        data: {
+                            pageNo: 1,
+                            pageSize: 20,
+                        },
+                    },
+                    reader: function(res) {
+                        var data = res.data;
+                        var template = "";
+                        for (var i = 0; i < data.length; i++) {
+                            template +=
+                                "<p>" +
+                                data[i].goodsName +
+                                "|" +
+                                data[i].goodsStar +
+                                "</p>";
+                        }
+                        $("#pagelist").html(template);
+                        return {
+                            pageNo: res.pageNo,
+                            pageSize: res.pageSize,
+                            totalNumber: res.totalNumber,
+                        };
+                    },
+                    on: {
+                        jumpOver: function(e) {
+                            console.log(e);
+                        },
+                    },
+                });
+                //跳转到第10页
+                mypager.jump(10);
+            });
+
+            return pager();
+        },
+        { notes: pagerMD }
+    )
+    .add(
         "弹层(Layer)",
         () => {
             useEffect(() => {
@@ -488,7 +545,7 @@ storiesOf("组件(Components)", module)
                         let dataAnim = item.getAttribute("data-anim");
                         addClass(item, dataAnim);
                         let time = 500;
-                        if(dataAnim=='hopeui-anim-rotate'){
+                        if (dataAnim == "hopeui-anim-rotate") {
                             time = 1000;
                         }
                         setTimeout(function() {

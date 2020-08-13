@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 15:48:58
- * @LastEditTime : 2020-08-10 15:54:33
+ * @LastEditTime : 2020-08-13 16:41:28
  * @Description  :
  */
 const { series, parallel, watch, src, dest } = require("gulp"),
@@ -19,6 +19,7 @@ function webService() {
             baseDir: "dist/",
             directory: true,
             middleware: function(req, res, next) {
+                res.setHeader('Access-Control-Allow-Origin','*');
                 const fs = require("fs");
                 const ssi = require("ssi");
                 const baseDir = "dist/";
