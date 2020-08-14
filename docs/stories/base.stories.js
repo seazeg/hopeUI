@@ -501,6 +501,9 @@ storiesOf("组件(Components)", module)
 
                 hope.tab({
                     ele: "#tab2",
+                    options: {
+                        slideSwitch: true,
+                    }
                 });
 
                 hope.tab({
