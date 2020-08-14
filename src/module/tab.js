@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-14 17:02:04
+ * @LastEditTime : 2020-08-14 17:34:09
  * @Description  :
  */
 
@@ -12,7 +12,7 @@ module.exports.tabHandler = function({ ele, options, on }) {
         obj = new Object(),
         domWidth = $(ele).width();
 
-    if (options.slideSwitch) {
+    if (options.slideSwitch && supportCss3("transform")) {
         $dom.find(".hopeui-tab-content")
             .width(domWidth)
             .addClass("hopeui-tab-switch");
@@ -101,7 +101,7 @@ module.exports.tabHandler = function({ ele, options, on }) {
                     index: $(this).index(),
                     targetEle: this,
                     targetEleContent: $(this)
-                        .parent()
+                        .parent().parent()
                         .siblings(".hopeui-tab-content")[0],
                     eventName: "change",
                 });
@@ -113,7 +113,6 @@ module.exports.tabHandler = function({ ele, options, on }) {
             .addClass("hopeui-show");
 
         $dom.find("li").on("click", function(e) {
-            
             $(this)
                 .addClass("hopeui-tab-this")
                 .siblings()
@@ -150,3 +149,19 @@ module.exports.tabHandler = function({ ele, options, on }) {
 
     return obj;
 };
+
+function supportCss3(style) {
+    var prefix = ["webkit", "Moz", "ms", "o"],
+        i,
+        humpString = [],
+        htmlStyle = document.documentElement.style,
+        _toHumb = function(string) {
+            return string.replace(/-(\w)/g, function($0, $1) {
+                return $1.toUpperCase();
+            });
+        };
+    for (i in prefix) humpString.push(_toHumb(prefix[i] + "-" + style));
+    humpString.push(_toHumb(style));
+    for (i in humpString) if (humpString[i] in htmlStyle) return true;
+    return false;
+}
