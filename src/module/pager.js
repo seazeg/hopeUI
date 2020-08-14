@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-08-13 17:24:06
+ * @LastEditTime : 2020-08-13 17:37:19
  * @Description  :
  */
 
@@ -105,7 +105,7 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
 
                         $dom.find(".hopeui-pager-num").on("click", function() {
                             if (pageNo != $(this).attr("hopeui-num")) {
-                                params.url = `http://localhost:3007/assets/page/list${$(
+                                params.url = `../../assets/page/list${$(
                                     this
                                 ).attr("hopeui-num")}.json`; //测试代码
                                 params.data[pageMapping] = $(this).attr(
@@ -125,7 +125,7 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
                         $dom.find(".hopeui-pager-prev").on("click", function() {
                             if (pageNo > 1) {
                                 pageNo = pageNo - 1;
-                                params.url = `http://localhost:3007/assets/page/list${pageNo}.json`; //测试代码
+                                params.url = `../../assets/page/list${pageNo}.json`; //测试代码
                                 params.data[pageMapping] = pageNo;
                                 getData(params, reader);
                                 if (on.jump) {
@@ -141,7 +141,7 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
                         $dom.find(".hopeui-pager-next").on("click", function() {
                             if (pageNo < totalPage) {
                                 pageNo = pageNo + 1;
-                                params.url = `http://localhost:3007/assets/page/list${pageNo}.json`; //测试代码
+                                params.url = `../../assets/page/list${pageNo}.json`; //测试代码
                                 params.data[pageMapping] = pageNo;
                                 getData(params, reader);
                                 if (on.jumpOver) {
@@ -162,7 +162,7 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
                                     .siblings("input")
                                     .val();
                                 if (number) {
-                                    params.url = `http://localhost:3007/assets/page/list${number}.json`; //测试代码
+                                    params.url = `../../assets/page/list${number}.json`; //测试代码
                                     params.data[pageMapping] = number;
                                     getData(params, reader);
                                 }
@@ -177,7 +177,7 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
     //外部跳转方法
     obj.jump = function(number) {
         if (number) {
-            params.url = `http://localhost:3007/assets/page/list${number}.json`; //测试代码
+            params.url = `../../assets/page/list${number}.json`; //测试代码
             params.data[pageMapping] = number;
             getData(params, reader);
         }

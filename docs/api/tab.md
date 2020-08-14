@@ -3,18 +3,50 @@
 #### html 代码
 
 ```html
-<div class="hopeui-tab">
+<div class="hopeui-tab" id="tab1">
     <ul class="hopeui-tab-title">
-        <li class="hopeui-this">网站设置</li>
-        <li>用户管理</li>
-        <li>权限分配</li>
-        <li>商品管理</li>
-        <li>订单管理</li>
+        <li class="hopeui-tab-this">金牌大牛</li>
+        <li>银牌老牛</li>
+        <li>铜牌小牛</li>
+        <li>铁牌奶牛</li>
+        <li>铝牌屁牛</li>
     </ul>
     <div class="hopeui-tab-content">
-        <div class="hopeui-tab-item hopeui-show">
-            1. 高度默认自适应，也可以随意固宽。
-        </div>
+        <div class="hopeui-tab-item hopeui-show">内容1</div>
+        <div class="hopeui-tab-item">内容2</div>
+        <div class="hopeui-tab-item">内容3</div>
+        <div class="hopeui-tab-item">内容4</div>
+        <div class="hopeui-tab-item">内容5</div>
+    </div>
+</div>
+
+<div class="hopeui-tab hopeui-tab-simple" id="tab2">
+    <ul class="hopeui-tab-title">
+        <li class="hopeui-tab-this">金牌大牛</li>
+        <li>银牌老牛</li>
+        <li>铜牌小牛</li>
+        <li>铁牌奶牛</li>
+        <li>铝牌屁牛</li>
+    </ul>
+    <div class="hopeui-tab-content">
+        <div class="hopeui-tab-item hopeui-show">内容1</div>
+        <div class="hopeui-tab-item">内容2</div>
+        <div class="hopeui-tab-item">内容3</div>
+        <div class="hopeui-tab-item">内容4</div>
+        <div class="hopeui-tab-item">内容5</div>
+    </div>
+</div>
+
+<div class="hopeui-tab hopeui-tab-card" id="tab3">
+    <ul class="hopeui-tab-title">
+        <li class="hopeui-tab-this">金牌大牛</li>
+        <li>银牌老牛</li>
+        <li>铜牌小牛</li>
+        <li>铁牌奶牛</li>
+        <li>铝牌屁牛</li>
+    </ul>
+    <div class="hopeui-tab-content">
+        <div class="hopeui-tab-item hopeui-show">内容1</div>
         <div class="hopeui-tab-item">内容2</div>
         <div class="hopeui-tab-item">内容3</div>
         <div class="hopeui-tab-item">内容4</div>
@@ -58,3 +90,8 @@ hope.tab({
 | targetELe        | 当前选择的 dom 对象       | Object |
 | targetELeContent | 当前选择值对应的 content  | Object |
 | eventName        | 当前回调事件名            | String |
+
+| class 名称        | 说明     | 值范围 |
+| ----------------- | -------- | ------ |
+| hopeui-tab-simple | 简洁模式 | -      |
+| hopeui-tab-card   | 卡片模式 | -      |
