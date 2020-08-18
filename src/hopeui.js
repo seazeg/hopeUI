@@ -1,12 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-13 15:05:57
+ * @LastEditTime : 2020-08-17 15:05:45
  * @Description  :
  */
 
 require("./styles/hopeui.less");
 require("./utils/patch.js");
+
+const { lightboxHandler } = require("./module/lightbox.js");
 const { pagerHandler } = require("./module/pager.js");
 const { tabHandler } = require("./module/tab.js");
 const { layerHandler } = require("./module/layer.js");
@@ -19,13 +21,31 @@ const { formHandler } = require("./module/form.js");
 
 const hope = () => {
     return {
+        lightbox: function({
+            ele: ele = null,
+            options: options = {
+                content: null,
+                isMask: true,
+                maskColor: null,
+                animation: "hopeui-anim-scaleSpring",
+            },
+            on: on = {
+                init: null,
+                open: null,
+                close: null,
+                prev: null,
+                next: null,
+            },
+        }) {
+            return lightboxHandler({ ele, options, on });
+        },
         pager: function({
             ele: ele = null,
             options: options = {},
             params: params = {},
             reader: reader = null,
             on: on = {
-                jump: null
+                jump: null,
             },
         }) {
             return pagerHandler({ ele, options, params, reader, on });
@@ -45,6 +65,7 @@ const hope = () => {
                 title: null,
                 content: null,
                 isMask: true,
+                maskColor: null,
                 isDefaultBtn: true,
                 defaultBtn: {},
                 isDrag: false,

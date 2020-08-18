@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-13 15:20:17
+ * @LastEditTime : 2020-08-17 10:44:21
  * @Description  :
  */
 
@@ -22,6 +22,12 @@ module.exports = {
         host: "0.0.0.0",
         compress: true,
         port: 8090,
+        proxy : {
+            '/test' : {
+                target : 'http://localhost:3007',
+                changeOrigin : true
+            }
+        }
         // hot: true
     },
     module: {

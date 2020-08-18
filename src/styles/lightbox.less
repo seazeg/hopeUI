@@ -1,0 +1,57 @@
+@import "./config.less";
+
+.hopui-lightbox-switch {
+    position: fixed;
+    top: 50%;
+    width: 100%;
+    i {
+        font-size: 50px;
+        color: #fff;
+        cursor: pointer;
+    }
+    .hopui-lightbox-prev {
+        float: left;
+        margin-left: 20px;
+    }
+
+    .hopui-lightbox-next {
+        float: right;
+        margin-right: 20px;
+    }
+}
+
+.hopeui-lightbox-transparent {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.hopeui-lightbox-shadow {
+    box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+}
+
+.hopeui-lightbox-close {
+    width: 100%;
+    top: 10px;
+    position: fixed;
+    i {
+        font-size: 50px;
+        color: #fff;
+        float: right;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+}
+
+.hopeui-lightbox {
+    opacity: 0;
+    transform: scale(0.5);
+    transform:scale(0.5) img {
+        user-select: none;
+    }
+}
+
+.hopeui-lightbox-transition {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.3s;
+}
