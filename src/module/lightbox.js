@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-18 14:38:23
+ * @LastEditTime : 2020-08-18 15:09:05
  * @Description  :
  */
 
@@ -26,7 +26,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
     switch (options.type) {
         case "iframe":
-            content = `<iframe id="hopeui-lightbox-iframe" style="width:100%" src="" allowtransparency="true" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>`;
+            content = `<iframe id="hopeui-lightbox-iframe" style="width:100%" src="" allowtransparency="true" frameborder=0  scrolling="no"></iframe>`;
             break;
         case "pic":
             content = `<img id="hopeui-lightbox-picvdo" style="width:100%" src="" />`;
@@ -43,19 +43,30 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             layer
                 .children(".hopeui-layer-content")
                 .width($("body").width() * (parseInt(options.width) / 100));
+
             let ifm = layer.find("iframe");
             ifm.on("load", function() {
-                let scrollHeight = $(this)[0].contentWindow.document
-                    .documentElement.scrollHeight;
-                $(this).height(scrollHeight + 40);
+                try {
+                    $(this).height(
+                        $(this)[0].contentWindow.document.documentElement
+                            .scrollHeight + 40
+                    );
+                } catch (error) {}
             });
+
+            window.addEventListener(
+                "message",
+                function(e) {
+                    ifm.height(e.data.value[1] + 40);
+                },
+                false
+            );
 
             layer.css({
                 left:
                     (document.documentElement.clientWidth - layer.width()) / 2,
                 top: 40,
             });
-
 
             $(window).resize(function() {
                 layer
@@ -67,7 +78,6 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         2,
                     top: 40,
                 });
-
             });
         } else {
             //图片，视频模式
@@ -135,7 +145,9 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         let template =
             '<div class="hopeui-layer-mask"><div class="hopeui-lightbox-close"><i class="hopeui-icon hopeui-icon-close"></i></div><div class="hopui-lightbox-switch"><i class="hopeui-icon hopeui-icon-left hopui-lightbox-prev"></i><i class="hopeui-icon hopeui-icon-right hopui-lightbox-next"></i></div><div class="hopeui-layer hopeui-lightbox-transparent">';
 
-        template += `<div class="hopeui-layer-content ${options.type != 'iframe' && 'hopeui-lightbox hopeui-lightbox-shadow'}">${content}</div></div></div>`;
+        template += `<div class="hopeui-layer-content ${options.type !=
+            "iframe" &&
+            "hopeui-lightbox hopeui-lightbox-shadow"}">${content}</div></div></div>`;
 
         self = $(template).insertAfter("body");
 
