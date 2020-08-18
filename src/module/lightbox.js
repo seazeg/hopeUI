@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-18 16:10:21
+ * @LastEditTime : 2020-08-18 18:02:58
  * @Description  :
  */
 
@@ -12,7 +12,6 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     const obj = new Object();
     options = {
         width: options.width || "80%",
-        height: options.height || "80%",
         type: options.type || "iframe",
         isMask: options.isMask && true,
         maskColor: options.maskColor,
@@ -88,46 +87,38 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         } else {
             //图片，视频模式
             // debugger
-            layer
-                .children(".hopeui-layer-content")
-                .removeClass("hopeui-lightbox-transition")
-                .css({
-                    height: document.documentElement.clientHeight * 0.8,
-                    width: "auto",
-                });
-            $("#hopeui-lightbox-picvdo")
-                .css({
-                    height: "100%",
-                    width: "auto",
-                })
-                .load(function() {
-                    layer.css({
-                        left:
-                            (document.documentElement.clientWidth -
-                                layer.width()) /
-                            2,
-                        top:
-                            (document.documentElement.clientHeight -
-                                layer.height()) /
-                            2,
-                    });
-                    layer
-                        .children(".hopeui-layer-content")
-                        .addClass("hopeui-lightbox-transition");
-                });
 
-            $(window).resize(function() {
-                layer
-                    .children(".hopeui-layer-content")
-                    .removeClass("hopeui-lightbox-transition")
-                    .css({
-                        height: document.documentElement.clientHeight * 0.8,
-                        width: "auto",
-                    });
+            let rate = 1;
+            if (is.landscape()) {
+                rate = parseInt(options.width) / 100;
+            } else {
+                rate = parseInt(options.width) / 100;
+            }
+            if (imgObj.width() > imgObj.height()) {
+                layer.children(".hopeui-layer-content").css({
+                    height: "100%",
+                    width: document.documentElement.clientWidth * rate,
+                });
+                $("#hopeui-lightbox-picvdo").css({
+                    height: "auto",
+                    width: "100%",
+                });
+            } else {
+                layer.children(".hopeui-layer-content").css({
+                    height: document.documentElement.clientHeight * rate,
+                    width: "100%",
+                });
                 $("#hopeui-lightbox-picvdo").css({
                     height: "100%",
                     width: "auto",
                 });
+            }
+
+            layer
+                .children(".hopeui-layer-content")
+                .removeClass("hopeui-lightbox-transition");
+
+            $("#hopeui-lightbox-picvdo").load(function() {
                 layer.css({
                     left:
                         (document.documentElement.clientWidth - layer.width()) /
@@ -137,11 +128,12 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                             layer.height()) /
                         2,
                 });
-
                 layer
                     .children(".hopeui-layer-content")
                     .addClass("hopeui-lightbox-transition");
             });
+
+
         }
     };
 
@@ -152,8 +144,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             '<div class="hopeui-layer-mask"><div class="hopeui-lightbox-close"><i class="hopeui-icon hopeui-icon-close"></i></div><div class="hopui-lightbox-switch"><i class="hopeui-icon hopeui-icon-left hopui-lightbox-prev"></i><i class="hopeui-icon hopeui-icon-right hopui-lightbox-next"></i></div><div class="hopeui-layer hopeui-lightbox-transparent">';
 
         template += `<div class="hopeui-layer-content ${options.type !=
-            "iframe" &&
-            "hopeui-lightbox hopeui-lightbox-shadow"}">${content}</div></div></div>`;
+            "iframe" && "hopeui-lightbox"}">${content}</div></div></div>`;
 
         self = $(template).insertAfter("body");
 
@@ -231,7 +222,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     );
 
                     //判断横竖
-                    location(self.children(".hopeui-layer"));
+                    location(
+                        self.children(".hopeui-layer"),
+                        dataList.eq(curIndex - 1).children()
+                    );
 
                     curIndex = curIndex - 1;
                     if (curIndex > 0 && curIndex < dataList.length) {
@@ -257,7 +251,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     );
 
                     //判断横竖
-                    location(self.children(".hopeui-layer"));
+                    location(
+                        self.children(".hopeui-layer"),
+                        dataList.eq(curIndex + 1).children()
+                    );
                     curIndex = curIndex + 1;
 
                     if (curIndex > 0 && curIndex < dataList.length) {
@@ -284,7 +281,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
         $("body,html").addClass("hopeui-layer-nosrl");
 
-        location(self.children(".hopeui-layer"));
+        location(self.children(".hopeui-layer"), $dom.children());
 
         if (options.maskColor) {
             self.css("background-color", options.maskColor);
