@@ -1,11 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-18 15:09:05
+ * @LastEditTime : 2020-08-18 16:10:21
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
+const { is } = require("../utils/is.js");
 
 module.exports.lightboxHandler = function({ ele, options, on }) {
     const obj = new Object();
@@ -23,6 +24,11 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         content = null,
         dataList = $(ele).children(),
         curIndex = null;
+
+    let eventName = "click";
+    if (is.phone()) {
+        eventName = "touchend";
+    }
 
     switch (options.type) {
         case "iframe":
@@ -166,7 +172,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             let ifm = $("#hopeui-lightbox-iframe");
             ifm.attr("src", $dom.attr("hopeui-url"));
 
-            self.find(".hopui-lightbox-prev").on("click", function() {
+            self.find(".hopui-lightbox-prev").on(eventName, function() {
                 if (curIndex > 0) {
                     ifm.attr(
                         "src",
@@ -190,7 +196,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 }
             });
 
-            self.find(".hopui-lightbox-next").on("click", function() {
+            self.find(".hopui-lightbox-next").on(eventName, function() {
                 if (curIndex < dataList.length - 1) {
                     ifm.attr(
                         "src",
@@ -217,7 +223,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             let picvdo = $("#hopeui-lightbox-picvdo");
             picvdo.attr("src", $dom.attr("hopeui-src"));
 
-            self.find(".hopui-lightbox-prev").on("click", function() {
+            self.find(".hopui-lightbox-prev").on(eventName, function() {
                 if (curIndex >= 0) {
                     picvdo.attr(
                         "src",
@@ -243,7 +249,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 }
             });
 
-            self.find(".hopui-lightbox-next").on("click", function() {
+            self.find(".hopui-lightbox-next").on(eventName, function() {
                 if (curIndex < dataList.length - 1) {
                     picvdo.attr(
                         "src",
@@ -290,7 +296,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             on.open(self[0], obj);
         }
 
-        self.find(".hopeui-lightbox-close").on("click", function(e) {
+        self.find(".hopeui-lightbox-close").on(eventName, function(e) {
             close();
         });
     };
@@ -315,7 +321,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         });
     }
 
-    dataList.on("click", function() {
+    dataList.on(eventName, function() {
         open($(this));
     });
 
