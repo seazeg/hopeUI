@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-19 10:27:12
+ * @LastEditTime : 2020-08-19 11:54:18
  * @Description  :
  */
 
@@ -67,11 +67,6 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     },
                     false
                 );
-            } else if (typeof window.attachEvent != "undefined") {
-                //for ie8-
-                window.attachEvent("onmessage", function(e) {
-                    ifm.height(e.data.value[1] + 40);
-                });
             }
 
             layer.css({
@@ -128,17 +123,35 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             $("#hopeui-lightbox-picvdo").load(function() {
                 layer.css({
                     left:
-                        (document.documentElement.clientWidth - layer.width()) /
+                        (document.documentElement.clientWidth -
+                            layer.children(".hopeui-layer-content").width()) /
                         2,
                     top:
                         (document.documentElement.clientHeight -
-                            layer.height()) /
+                            layer.children(".hopeui-layer-content").height()) /
                         2,
                 });
                 layer
                     .children(".hopeui-layer-content")
                     .addClass("hopeui-lightbox-transition");
             });
+
+            //ie8 location fix
+            if (is.ie() == 8) {
+                layer.css({
+                    left:
+                        (document.documentElement.clientWidth -
+                            layer.children(".hopeui-layer-content").width()) /
+                        2,
+                    top:
+                        (document.documentElement.clientHeight -
+                            layer.children(".hopeui-layer-content").height()) /
+                        2,
+                });
+                layer
+                    .children(".hopeui-layer-content")
+                    .addClass("hopeui-lightbox-transition");
+            }
         }
     };
 
@@ -295,7 +308,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 mask = $(maskTemplate).insertAfter("body");
             }
             if (options.maskColor) {
-                if (is.ie() == "8" || is.ie() == "9") {
+                if (is.ie() == 8 || is.ie() == 9) {
                     mask.css(
                         "filter",
                         `progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF${RGBToHEX(
@@ -322,8 +335,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     };
 
     let close = () => {
-        self.addClass("hopeui-hide").remove();
-
+        self.remove();
         if (mask) {
             mask.remove();
         }
