@@ -7,6 +7,7 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link href="./assets/videojs/video-js.css" rel="stylesheet" />
     <script src="./assets/videojs/ie8/videojs-ie8.js"></script>
+ 
 
 </head>
 <style>
@@ -96,7 +97,8 @@
         <div class="docs-content">
             <video id="my-video" class="video-js" muted loop controls autoplay preload="auto" width="1200" height="600"
                 poster="./assets/cool.jpg" data-setup="{}">
-                <source src="http://192.168.2.191:8001/video/m3u8/hls/1d1fa7ec16e70a49b227b1c809b8c76a.m3u8" type="application/x-mpegURL" />
+                <source src="http://192.168.2.191:8001/video/m3u8/hls/1d1fa7ec16e70a49b227b1c809b8c76a.m3u8"
+                    type="application/x-mpegURL" />
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and
                     consider upgrading to a web browser that
@@ -111,8 +113,7 @@
             <div class="docs-content">
                 <video id="my-video2" class="video-js" muted controls autoplay preload="auto" width="1200" height="600"
                     poster="./assets/cool.jpg" data-setup="{}">
-                    <source src="rtmp://media3.sinovision.net:1935/live/livestream" />
-                    <source src="rtmp://media3.sinovision.net:1935/live/livestream" type="rtmp/flv" />
+                    <source src="rtmp://192.168.2.211:1935/rtmplive/" type="rtmp/flv">
                 </video>
             </div>
 
@@ -130,8 +131,23 @@
         </div>
 
         <script src="./assets/videojs/video.js"></script>
+        <script src="./assets/videojs/videojs-hlsjs-plugin.js"></script>
         <script>
             videojs.options.flash.swf = "http://192.168.2.166:3007/assets/videojs/video-js.swf";
+
+            var options = {
+                html5: {
+                    hlsjsConfig: {
+                        // Put your hls.js config here
+                    }
+                }
+            };
+            // setup beforeinitialize hook
+            videojs.Html5Hlsjs.addHook('beforeinitialize', (videojsPlayer, hlsjsInstance) => {
+                // here you can interact with hls.js instance and/or video.js playback is initialized
+            });
+
+            var player = videojs('example-video', options);
         </script>
 </body>
 
