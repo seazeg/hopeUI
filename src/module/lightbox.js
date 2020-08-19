@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-18 18:02:58
+ * @LastEditTime : 2020-08-19 10:27:12
  * @Description  :
  */
 
@@ -13,7 +13,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     options = {
         width: options.width || "80%",
         type: options.type || "iframe",
-        isMask: options.isMask && true,
+        isMask: !options.isMask,
         maskColor: options.maskColor,
         animation: options.animation || "hopeui-anim-scale",
     };
@@ -31,7 +31,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
     switch (options.type) {
         case "iframe":
-            content = `<iframe id="hopeui-lightbox-iframe" style="width:100%" src="" allowtransparency="true" frameborder=0  scrolling="no"></iframe>`;
+            content = `<iframe id="hopeui-lightbox-iframe" style="width:100%;border:none" src="" allowtransparency="true" scrolling="no" frameborder="no" border="0"></iframe>`;
             break;
         case "pic":
             content = `<img id="hopeui-lightbox-picvdo" style="width:100%" src="" />`;
@@ -59,13 +59,20 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 } catch (error) {}
             });
 
-            window.addEventListener(
-                "message",
-                function(e) {
+            if (typeof window.addEventListener != "undefined") {
+                window.addEventListener(
+                    "message",
+                    function(e) {
+                        ifm.height(e.data.value[1] + 40);
+                    },
+                    false
+                );
+            } else if (typeof window.attachEvent != "undefined") {
+                //for ie8-
+                window.attachEvent("onmessage", function(e) {
                     ifm.height(e.data.value[1] + 40);
-                },
-                false
-            );
+                });
+            }
 
             layer.css({
                 left:
@@ -132,8 +139,6 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     .children(".hopeui-layer-content")
                     .addClass("hopeui-lightbox-transition");
             });
-
-
         }
     };
 
@@ -141,7 +146,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         let index = $dom.index();
         curIndex = curIndex || index;
         let template =
-            '<div class="hopeui-layer-mask"><div class="hopeui-lightbox-close"><i class="hopeui-icon hopeui-icon-close"></i></div><div class="hopui-lightbox-switch"><i class="hopeui-icon hopeui-icon-left hopui-lightbox-prev"></i><i class="hopeui-icon hopeui-icon-right hopui-lightbox-next"></i></div><div class="hopeui-layer hopeui-lightbox-transparent">';
+            '<div class="hopeui-lightbox-warp"><div class="hopeui-lightbox-close"><i class="hopeui-icon hopeui-icon-close"></i></div><div class="hopui-lightbox-switch"><i class="hopeui-icon hopeui-icon-left hopui-lightbox-prev"></i><i class="hopeui-icon hopeui-icon-right hopui-lightbox-next"></i></div><div class="hopeui-layer hopeui-lightbox-transparent">';
 
         template += `<div class="hopeui-layer-content ${options.type !=
             "iframe" && "hopeui-lightbox"}">${content}</div></div></div>`;
@@ -283,8 +288,26 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
         location(self.children(".hopeui-layer"), $dom.children());
 
-        if (options.maskColor) {
-            self.css("background-color", options.maskColor);
+        if (options.isMask) {
+            mask = $(".hopeui-layer-mask");
+            if (mask.length <= 0) {
+                let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
+                mask = $(maskTemplate).insertAfter("body");
+            }
+            if (options.maskColor) {
+                if (is.ie() == "8" || is.ie() == "9") {
+                    mask.css(
+                        "filter",
+                        `progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF${RGBToHEX(
+                            options.maskColor
+                        ).replace("#", "")},endColorstr=#BF${RGBToHEX(
+                            options.maskColor
+                        ).replace("#", "")})`
+                    );
+                } else {
+                    mask.css("background", options.maskColor);
+                }
+            }
         }
 
         repalceUrl(curIndex, "title");
@@ -332,4 +355,41 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 function repalceUrl(name, title) {
     // let newUrl = "/" + name;
     // history.pushState({}, title, newUrl);
+}
+
+function RGBToHEX(str) {
+    let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    let result = "";
+    str = `${str.split(",")[0]},${str.split(",")[1]},${
+        str.split(",")[2]
+    })`.replace("rgba", "rgb");
+    if (/^(rgb|RGB)/.test(str)) {
+        let aColor = str.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
+        let strHex = "#";
+        for (let i = 0; i < aColor.length; i++) {
+            let hex = Number(aColor[i]).toString(16);
+            if (hex === "0") {
+                hex += hex;
+            }
+            strHex += hex;
+        }
+        if (strHex.length !== 7) {
+            strHex = str;
+        }
+        result = strHex;
+    } else if (reg.test(str)) {
+        let aNum = str.replace(/#/, "").split("");
+        if (aNum.length === 6) {
+            return str;
+        } else if (aNum.length === 3) {
+            let numHex = "#";
+            for (let i = 0; i < aNum.length; i += 1) {
+                numHex += aNum[i] + aNum[i];
+            }
+            result = numHex;
+        }
+    } else {
+        result = str;
+    }
+    return result;
 }
