@@ -1,11 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-20 09:56:59
+ * @LastEditTime : 2020-08-20 13:47:01
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
+const { is } = require("../utils/is.js");
 
 module.exports.layerHandler = function({ options, on }) {
     const obj = new Object();
@@ -34,10 +35,10 @@ module.exports.layerHandler = function({ options, on }) {
             layer
                 .children(".hopeui-layer-content")
                 .width($("body").width() * (parseInt(options.width) / 100));
-        }else{
+        } else {
             layer
-            .children(".hopeui-layer-content")
-            .width(parseInt(options.width));
+                .children(".hopeui-layer-content")
+                .width(parseInt(options.width));
         }
 
         layer.css({
@@ -126,8 +127,21 @@ module.exports.layerHandler = function({ options, on }) {
                 let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
                 mask = $(maskTemplate).insertAfter("body");
             }
+
             if (options.maskColor) {
                 mask.css("background", options.maskColor);
+                if (is.ie() == 8 || is.ie() == 9) {
+                    mask.css(
+                        "filter",
+                        `progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF${RGBToHEX(
+                            options.maskColor
+                        ).replace("#", "")},endColorstr=#BF${RGBToHEX(
+                            options.maskColor
+                        ).replace("#", "")})`
+                    );
+                } else {
+                    mask.css("background", options.maskColor);
+                }
             }
         }
 

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-19 11:54:18
+ * @LastEditTime : 2020-08-20 14:42:03
  * @Description  :
  */
 
@@ -292,7 +292,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             });
         }
 
-        self.css("overflow-y", "auto");
+        self.css("overflowY", "auto");
         self.children(".hopeui-layer")
             .addClass(`hopeui-anim ${options.animation}`)
             .css("position", "absolute");

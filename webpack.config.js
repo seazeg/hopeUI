@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-18 15:00:43
+ * @LastEditTime : 2020-08-20 15:11:51
  * @Description  :
  */
 
@@ -22,12 +22,12 @@ module.exports = {
         host: "0.0.0.0",
         compress: true,
         port: 8090,
-        proxy : {
-            '/test' : {
-                target : 'http://localhost:3007',
-                changeOrigin : true
-            }
-        }
+        proxy: {
+            "/test": {
+                target: "http://localhost:3007",
+                changeOrigin: true,
+            },
+        },
         // hot: true
     },
     module: {
@@ -69,12 +69,16 @@ module.exports = {
                     compress: {
                         properties: false,
                         ie8: true,
+                        keep_fnames: true,
+                    },
+                    mangle: {
+                        keep_fnames: true,
                     },
                 },
             }),
             new OptimizeCssAssetsPlugin({}),
         ],
-        minimize: false,
+        // minimize: false,
     },
     plugins: [
         new HtmlWebpackPlugin({

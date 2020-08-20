@@ -49,7 +49,7 @@ var hopeu = window['hopeu'] = (function () {
       td: [3, "<table><tbody><tr>", "</tr></tbody></table>"],
       col: [2, "<table><tbody></tbody><colgroup>", "</colgroup></table>"],
       area: [1, "<map>", "</map>"],
-      _default: [0, "", ""]
+      _dt: [0, "", ""]
     },
     breaker = {},
     ArrayProto = Array.prototype,
@@ -1006,7 +1006,7 @@ var hopeu = window['hopeu'] = (function () {
   function fragDiv(html, ctx) {
     var div = (ctx || doc).createElement('div'),
       tag = (rtagname.exec(html) || ["", ""])[1].toLowerCase(),
-      wrap = wrapMap[tag] || wrapMap._default,
+      wrap = wrapMap[tag] || wrapMap._dt,
       depth = wrap[0];
     div.innerHTML = wrap[1] + html + wrap[2];
     while (depth--)
@@ -1408,10 +1408,10 @@ hopeu['plug']("css", function ($) {
 
   $['fn']['css'] = function (name, value) {
     if (arguments.length === 2 && value === undefined) return this;
-
-    return access(this, name, value, true, function (el, name, value) {
+    var res = access(this, name, value, true, function (el, name, value) {
       return value !== undefined ? style(el, name, value) : css(el, name);
     });
+    return res;
   };
   $['cssNumber'] = {
     "zIndex": true,
@@ -1475,6 +1475,7 @@ hopeu['plug']("css", function ($) {
   function access(els, key, value, exec, fn, pass) {
     var l = els.length;
     if (typeof key === "object") {
+  
       for (var k in key) {
         access(els, k, key[k], exec, fn, value);
       }
@@ -1483,10 +1484,11 @@ hopeu['plug']("css", function ($) {
     if (value !== undefined) {
       exec = !pass && exec && $['isFunction'](value);
       for (var i = 0; i < l; i++)
+  
         fn(els[i], key, exec ? value.call(els[i], i, fn(els[i], key)) : value, pass);
       return els;
     }
-    return l ? fn(els[0], key) : undefined;
+    return l ? fn(els[0], key) : "undefined";
   }
 
   var init, noMarginBodyOff, subBorderForOverflow, suppFixedPos, noAddBorder, noAddBorderForTables,
