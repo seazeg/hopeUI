@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-19 10:44:46
+ * @LastEditTime : 2020-08-20 09:56:59
  * @Description  :
  */
 
@@ -9,7 +9,6 @@ const $ = require("../utils/hopeu.js");
 
 module.exports.layerHandler = function({ options, on }) {
     const obj = new Object();
-    $.ajaxSetup ({ cache: false });
     options = {
         width: options.width || "80%",
         title: options.title || "",
