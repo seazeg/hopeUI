@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 16:27:21
+ * @LastEditTime : 2020-08-20 15:27:19
  * @Description  :
  */
 
@@ -20,6 +20,8 @@ module.exports.inputHandler = function({ ele, options, on }) {
 
     $dom.each(function() {
         let input = $(this)[0];
+        console.log($(this));
+        $(this).insertAfter(`<label class="hopeui-placeholder">${$(this).attr('placeholder')}</label>`);
         if (!input.getAttribute("hope-type")) {
             input.onblur = function(e) {
                 if (on.blur) {
