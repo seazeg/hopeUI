@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 09:44:17
+ * @LastEditTime : 2020-08-21 09:58:39
  * @Description  :
  */
 
@@ -50,8 +50,14 @@ module.exports.textareaHandler = function({ ele, options, on }) {
                     _this.next().removeClass("hopeui-hide");
                 }
             });
-        }
 
+            $this.focus(function() {
+                let _this = $(this);
+                if (!_this.val()) {
+                    _this.next().addClass("hopeui-hide");
+                }
+            });
+        }
 
         textarea.onblur = function(e) {
             if (on.blur) {
@@ -99,7 +105,7 @@ module.exports.textareaHandler = function({ ele, options, on }) {
                         : (eleArr = $(`${ele} textarea[name=${key}]`));
                 }
 
-                eleArr.each(function(i,thisEle) {
+                eleArr.each(function(i, thisEle) {
                     $(thisEle).val(obj[key].value);
                     utils.validation(thisEle, "pass", null, "textarea");
                 });
@@ -115,7 +121,7 @@ module.exports.textareaHandler = function({ ele, options, on }) {
                 : (thisEle = $(`${ele} textarea`));
         }
 
-        thisEle.each(function(i,ele) {
+        thisEle.each(function(i, ele) {
             ele.value = "";
         });
     };

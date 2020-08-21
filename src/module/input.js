@@ -50,6 +50,13 @@ module.exports.inputHandler = function({ ele, options, on }) {
                         _this.next().removeClass("hopeui-hide");
                     }
                 });
+
+                $this.focus(function() {
+                    let _this = $(this);
+                    if (!_this.val()) {
+                        _this.next().addClass("hopeui-hide")
+                    }
+                });
             }
 
             input.onblur = function(e) {
