@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-20 13:47:01
+ * @LastEditTime : 2020-08-21 14:23:40
  * @Description  :
  */
 
@@ -11,7 +11,7 @@ const { is } = require("../utils/is.js");
 module.exports.layerHandler = function({ options, on }) {
     const obj = new Object();
     options = {
-        width: options.width || "80%",
+        width: options.width || "",
         title: options.title || "",
         content: options.content || "",
         isMask: !options.isMask,
@@ -31,14 +31,14 @@ module.exports.layerHandler = function({ options, on }) {
 
     //重新定位函数
     let location = (layer) => {
-        if (options.width.includes("%")) {
+        if (!is.noPer(options.width)) {
             layer
                 .children(".hopeui-layer-content")
-                .width($("body").width() * (parseInt(options.width) / 100));
+                .css('width',$("body").width() * (parseInt(options.width) / 100))
         } else {
             layer
                 .children(".hopeui-layer-content")
-                .width(parseInt(options.width));
+                .css('width',parseInt(options.width))
         }
 
         layer.css({
