@@ -389,9 +389,9 @@ storiesOf("组件(Components)", module)
                         extend: true,
                     },
                     params: {
-                        url: "http://localhost:3007/assets/page/list1.json",
-                        dataType: "jsonp",
-                        // type: "get",
+                        url: "http://192.168.1.4:3007/assets/page/list1.json",
+                        dataType: "json",
+                        type: "get",
                         data: {
                             pageNo: 1,
                             pageSize: 20,
