@@ -1,7 +1,7 @@
 ## 基础示例
 
 ```javascript
-document.querySelector("#open1").onclick = function () {
+document.querySelector("#open1").onclick = function() {
     hope.layer({
         options: {
             title: "信息",
@@ -15,7 +15,7 @@ document.querySelector("#open1").onclick = function () {
     });
 };
 
-document.querySelector("#open2").onclick = function () {
+document.querySelector("#open2").onclick = function() {
     let ly = hope.layer({
         options: {
             title: "iframe弹框",
@@ -23,14 +23,14 @@ document.querySelector("#open2").onclick = function () {
                 '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
         },
         on: {
-            confirm: function (e) {
+            confirm: function(e) {
                 ly.close();
             },
         },
     });
 };
 
-document.querySelector("#open3").onclick = function () {
+document.querySelector("#open3").onclick = function() {
     let ly = hope.layer({
         options: {
             title: "可拖拽弹框",
@@ -40,7 +40,7 @@ document.querySelector("#open3").onclick = function () {
             isDrag: true,
         },
         on: {
-            confirm: function (e) {
+            confirm: function(e) {
                 ly.close();
             },
         },
@@ -65,16 +65,16 @@ document.querySelector("#open3").onclick = function () {
 | defaultBtn   | 按钮描述         | Object        | --           | ok:确定 / cancel:取消  |
 | isDrag       | 是否拖拽         | Boolean       | true / false | false                  |
 | animation    | 补间动画         | Class         | --           | hopeui-anim-scaleSprin |
+| isFullScreen | 内容区是否全屏   | Boolean       | true / false | false                  |
 
 ## 回调方法 on
 
 | 方法名  | 说明           | 类型     | 默认值 | 回调参数     |
 | ------- | -------------- | -------- | ------ | ------------ |
-| init   | 初始化回调     | Function | null   | 当前对象 DOM |
+| init    | 初始化回调     | Function | null   | 当前对象 DOM |
 | confirm | 确认完成后回调 | Function | null   | 当前对象 DOM |
 | open    | 打开后回调     | Function | null   | 当前对象 DOM |
 | close   | 关闭后回调     | Function | null   | 当前对象 DOM |
-
 
 ## 调用方法
 
