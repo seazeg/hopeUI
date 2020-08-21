@@ -106,7 +106,7 @@
             </fieldset>
         </div>
         <div class="docs-content">
-            <input  name="text" type="text"  value="" class="hopeui-input js_hopeui_input" placeholder="请输入"/>
+            <input name="text" type="text" value="" class="hopeui-input js_hopeui_input" placeholder="请输入" />
         </div>
     </div>
 
@@ -118,8 +118,7 @@
         </div>
         <div class="docs-content">
             <ul id="lightbox">
-                <li
-                    hopeui-url="http://test.haier.com/cn/">
+                <li hopeui-url="http://test.haier.com/cn/">
                     <img src="https://hbimg.huabanimg.com/650c6c1d689de6cc08c4fac70505ee3cbccdbefd8218c-ALzKgw_fw658/format/webp"
                         alt="">
                 </li>
@@ -344,7 +343,7 @@
                 <div class="hopeui-form-item">
                     <label class="hopeui-form-label">密码框</label>
                     <div class="hopeui-input-block">
-                        <input name="password" type="password" placeholder="请输入"  value="" class="hopeui-input"
+                        <input name="password" type="password" placeholder="请输入" value="" class="hopeui-input"
                             hope-verify="required" />
                     </div>
                 </div>
@@ -426,7 +425,7 @@
 </body>
 <script>
     hope.input({
-        ele:'.js_hopeui_input'
+        ele: '.js_hopeui_input'
     })
 
     hope.lightbox({
@@ -434,8 +433,13 @@
         options: {
             width: '70%',
             type: 'iframe', //pic,video
+            frameFullScreen:true,
             maskColor: 'rgba(73,74,95,0.8)',
-            animation: "no"
+            animation: "no",
+            prevIcon: "hopeui-icon hopeui-icon-left",
+            nextIcon: "hopeui-icon hopeui-icon-right",
+            closeIcon: "hopeui-icon hopeui-icon-close",
+          
         },
         on: {
             confirm: function (ele, e) {

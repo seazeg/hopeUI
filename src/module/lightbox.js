@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-20 14:42:03
+ * @LastEditTime : 2020-08-21 10:45:56
  * @Description  :
  */
 
@@ -13,9 +13,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     options = {
         width: options.width || "80%",
         type: options.type || "iframe",
+        frameFullScreen: options.frameFullScreen || false,
         isMask: !options.isMask,
         maskColor: options.maskColor,
         animation: options.animation || "hopeui-anim-scale",
+        prevIcon: options.prevIcon || "hopeui-icon hopeui-icon-left",
+        nextIcon: options.nextIcon || "hopeui-icon hopeui-icon-right",
+        closeIcon: options.closeIcon || "hopeui-icon hopeui-icon-close",
     };
 
     let self = null,
@@ -45,9 +49,15 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     let location = (layer, imgObj) => {
         //ifm模式
         if (options.type == "iframe") {
-            layer
-                .children(".hopeui-layer-content")
-                .width($("body").width() * (parseInt(options.width) / 100));
+            if (options.isFullScreen) {
+                layer
+                    .children(".hopeui-layer-content")
+                    .width($("body").width() * (parseInt(options.width) / 100));
+            } else {
+                layer
+                    .children(".hopeui-layer-content")
+                    .width($("body").width());
+            }
 
             let ifm = layer.find("iframe");
             ifm.on("load", function() {
@@ -72,18 +82,26 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             layer.css({
                 left:
                     (document.documentElement.clientWidth - layer.width()) / 2,
-                top: 40,
+                top: options.isFullScreen ? 40 : 0,
             });
 
             $(window).resize(function() {
-                layer
-                    .children(".hopeui-layer-content")
-                    .width($("body").width() * (parseInt(options.width) / 100));
+                if (options.isFullScreen) {
+                    layer
+                        .children(".hopeui-layer-content")
+                        .width(
+                            $("body").width() * (parseInt(options.width) / 100)
+                        );
+                } else {
+                    layer
+                        .children(".hopeui-layer-content")
+                        .width($("body").width());
+                }
                 layer.css({
                     left:
                         (document.documentElement.clientWidth - layer.width()) /
                         2,
-                    top: 40,
+                    top: options.isFullScreen ? 40 : 0,
                 });
             });
         } else {
@@ -158,8 +176,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     let open = ($dom) => {
         let index = $dom.index();
         curIndex = curIndex || index;
-        let template =
-            '<div class="hopeui-lightbox-warp"><div class="hopeui-lightbox-close"><i class="hopeui-icon hopeui-icon-close"></i></div><div class="hopui-lightbox-switch"><i class="hopeui-icon hopeui-icon-left hopui-lightbox-prev"></i><i class="hopeui-icon hopeui-icon-right hopui-lightbox-next"></i></div><div class="hopeui-layer hopeui-lightbox-transparent">';
+        let template = `<div class="hopeui-lightbox-warp"><div class="hopeui-lightbox-close"><i class="${options.closeIcon}"></i></div><div class="hopui-lightbox-switch"><i class="${options.prevIcon} hopui-lightbox-prev"></i><i class="${options.nextIcon} hopui-lightbox-next"></i></div><div class="hopeui-layer hopeui-lightbox-transparent">`;
 
         template += `<div class="hopeui-layer-content ${options.type !=
             "iframe" && "hopeui-lightbox"}">${content}</div></div></div>`;
@@ -308,7 +325,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 mask = $(maskTemplate).insertAfter("body");
             }
             if (options.maskColor) {
-                if (is.ie() == 8 || is.ie() == 9) {
+                if (is.ie() <= 9) {
                     mask.css(
                         "filter",
                         `progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF${RGBToHEX(
