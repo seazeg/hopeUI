@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 13:38:33
+ * @LastEditTime : 2020-08-21 13:52:31
  * @Description  :
  */
 
@@ -196,13 +196,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         //ifm模式
         if (options.type == "iframe") {
             let ifm = $("#hopeui-lightbox-iframe");
-            ifm.attr("src", $dom.attr("hopeui-url"));
+            ifm.attr("src", $dom.find('img').attr("hope-url"));
 
             self.find(".hopui-lightbox-prev").on(eventName, function() {
                 if (curIndex > 0) {
                     ifm.attr(
                         "src",
-                        dataList.eq(curIndex - 1).attr("hopeui-url")
+                        dataList.eq(curIndex - 1).find('img').attr("hope-url")
                     );
                     self.scrollTop(0);
                     curIndex = curIndex - 1;
@@ -226,7 +226,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 if (curIndex < dataList.length - 1) {
                     ifm.attr(
                         "src",
-                        dataList.eq(curIndex + 1).attr("hopeui-url")
+                        dataList.eq(curIndex + 1).find('img').attr("hope-url")
                     );
                     self.scrollTop(0);
                     curIndex = curIndex + 1;
@@ -247,13 +247,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         } else {
             //图片，视频模式
             let picvdo = $("#hopeui-lightbox-picvdo");
-            picvdo.attr("src", $dom.attr("hopeui-src"));
+            picvdo.attr("src", $dom.find('img').attr("src"));
 
             self.find(".hopui-lightbox-prev").on(eventName, function() {
                 if (curIndex >= 0) {
                     picvdo.attr(
                         "src",
-                        dataList.eq(curIndex - 1).attr("hopeui-src")
+                        dataList.eq(curIndex - 1).find('img').attr('src')
                     );
 
                     //判断横竖
@@ -289,7 +289,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 if (curIndex < dataList.length - 1) {
                     picvdo.attr(
                         "src",
-                        dataList.eq(curIndex + 1).attr("hopeui-src")
+                        dataList.eq(curIndex + 1).find('img').attr("src")
                     );
 
                     //判断横竖
