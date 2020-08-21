@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-08-19 09:30:39
+ * @LastEditTime : 2020-08-21 14:12:31
  * @Description  : is类
  */
 module.exports.is = {
@@ -41,4 +41,7 @@ module.exports.is = {
         }
         return ie_version;
     },
+    noPer(str){
+        return !str.includes("%")
+    }
 };

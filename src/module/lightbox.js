@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 13:52:31
+ * @LastEditTime : 2020-08-21 14:16:07
  * @Description  :
  */
 
@@ -52,7 +52,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             if (!options.frameFullScreen) {
                 layer
                     .children(".hopeui-layer-content")
-                    .width($("body").width() * (parseInt(options.width) / 100));
+                    .css('width',is.noPer?parseInt(options.width):($("body").width() * (parseInt(options.width) / 100)))
             } else {
                 layer
                     .children(".hopeui-layer-content")
@@ -89,9 +89,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 if (!options.frameFullScreen) {
                     layer
                         .children(".hopeui-layer-content")
-                        .width(
-                            $("body").width() * (parseInt(options.width) / 100)
-                        );
+                        .css('width',is.noPer?parseInt(options.width):($("body").width() * (parseInt(options.width) / 100)))
                 } else {
                     layer
                         .children(".hopeui-layer-content")

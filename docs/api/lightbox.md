@@ -1,51 +1,78 @@
 ## 基础示例
 
+```html
+/*ifm*/
+<div class="hopeui-row" id="lightbox">
+    <div class="hopeui-col-xl-6-12">
+        <img
+            hope-url="http://test.haier.com/cn/"
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597991454359&di=c1b05e51256b5f0a175fa63e93ca38ab&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2017-11-27%2F5a1badef69784.png"
+            alt=""
+        />
+    </div>
+    <div class="hopeui-col-xl-6-12">
+        <img
+            hope-url="http://tbbs.haier.com/"
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597991491173&di=708f001ee20ef780378d82d5766f8029&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F1%2F57a1488cdd6de.jpg"
+            alt=""
+        />
+    </div>
+</div>
+
+/*picture*/
+<div class="hopeui-row" id="lightbox2">
+    <div class="hopeui-col-xl-6-12">
+        <img
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597998693093&di=551a5cfe9c00be5c21327d39166a3d38&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F381baf328b9d2a1df43d635b1d36553f.jpeg"
+            alt=""
+        />
+    </div>
+    <div class="hopeui-col-xl-6-12">
+        <img
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597998993812&di=36535a08230e435c69f81809bd3e639e&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1595589658%2C1278694932%26fm%3D214%26gp%3D0.jpg"
+            alt=""
+        />
+    </div>
+    <div class="hopeui-col-xl-6-12">
+        <img
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597998758089&di=fa42e91f6a92d2d4130e610e94566dc3&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201508%2F22%2F20150822210318_e3Bmw.jpeg"
+            alt=""
+        />
+    </div>
+    <div class="hopeui-col-xl-6-12">
+        <img
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597998693094&di=c5d9d6a56fd156eab0aeb4f6a360120e&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fd%2F57a310cde36c5.jpg"
+            alt=""
+        />
+    </div>
+</div>
+```
+
 ```javascript
-document.querySelector("#open1").onclick = function () {
-    hope.layer({
-        options: {
-            title: "信息",
-            content:
-                "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
-            defaultBtn: {
-                ok: "好的",
-                cancel: "拜拜",
-            },
-        },
-    });
-};
+hope.lightbox({
+    ele: "#lightbox",
+    options: {
+        width: "70%",
+        type: "iframe", //pic,video
+        frameFullScreen: false,
+        maskColor: "rgba(73,74,95,0.8)",
+        animation: "no",
+        prevIcon: "hopeui-icon hopeui-icon-left",
+        nextIcon: "hopeui-icon hopeui-icon-right",
+        closeIcon: "hopeui-icon hopeui-icon-close",
+    },
+});
 
-document.querySelector("#open2").onclick = function () {
-    let ly = hope.layer({
-        options: {
-            title: "iframe弹框",
-            content:
-                '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
-        },
-        on: {
-            confirm: function (e) {
-                ly.close();
-            },
-        },
-    });
-};
-
-document.querySelector("#open3").onclick = function () {
-    let ly = hope.layer({
-        options: {
-            title: "可拖拽弹框",
-            content:
-                '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596605654660&di=3efa3194330834b16d1edce806f3ace4&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201105%2F17%2F113554rnu40q7nbgnn3lgq.jpg" style="width:800px" />',
-            isMask: false,
-            isDrag: true,
-        },
-        on: {
-            confirm: function (e) {
-                ly.close();
-            },
-        },
-    });
-};
+hope.lightbox({
+    ele: "#lightbox2",
+    options: {
+        width: "70%",
+        type: "pic", //pic,video
+        maskColor: "rgba(73,74,95,0.8)",
+        animation: "no",
+    },
+    on: {},
+});
 ```
 
 ## 基础属性
@@ -56,25 +83,27 @@ document.querySelector("#open3").onclick = function () {
 
 ## 参数配置 options
 
-| 参数         | 说明             | 类型          | 可选值       | 默认值                 |
-| ------------ | ---------------- | ------------- | ------------ | ---------------------- |
-| title        | 标题内容         | String        | --           | --                     |
-| content      | 主要内容         | HTML / String | --           | --                     |
-| isMask       | 是否有背景遮罩层 | Boolean       | true / false | true                   |
-| isDefaultBtn | 是否有默认按钮   | Boolean       | true / false | true                   |
-| defaultBtn   | 按钮描述         | Object        | --           | ok:确定 / cancel:取消  |
-| isDrag       | 是否拖拽         | Boolean       | true / false | false                  |
-| animation    | 补间动画         | Class         | --           | hopeui-anim-scaleSprin |
+| 参数            | 说明             | 类型    | 可选值          | 默认值                        |
+| --------------- | ---------------- | ------- | --------------- | ----------------------------- |
+| width           | 内容宽度         | String  |       --          | 80%                           |
+| type            | 模式             | String  | iframe/pic      | iframe                        |
+| frameFullScreen | ifm 是否全屏     | Boolean | true / false    | false                         |
+| isMask          | 是否有背景遮罩层 | Boolean | true / false    | true                          |
+| maskColor       | 遮罩层颜色       | String  | 必须是 rgb 格式 | rgba(0,0,0,0.3)               |
+| animation       | 动画             | String  | hopeui 动画     | hopeui-anim-scale             |
+| prevIcon        | 前一帧图标       | String  | --              | hopeui-icon hopeui-icon-prev  |
+| nextIcon        | 下一帧图标       | String  | --              | hopeui-icon hopeui-icon-left  |
+| closeIcon       | 关闭图标         | String  | --              | hopeui-icon hopeui-icon-close |
 
 ## 回调方法 on
 
-| 方法名  | 说明           | 类型     | 默认值 | 回调参数     |
-| ------- | -------------- | -------- | ------ | ------------ |
-| init   | 初始化回调     | Function | null   | 当前对象 DOM |
-| confirm | 确认完成后回调 | Function | null   | 当前对象 DOM |
-| open    | 打开后回调     | Function | null   | 当前对象 DOM |
-| close   | 关闭后回调     | Function | null   | 当前对象 DOM |
-
+| 方法名 | 说明       | 类型     | 默认值 | 回调参数     |
+| ------ | ---------- | -------- | ------ | ------------ |
+| init   | 初始化回调 | Function | null   | 当前对象 DOM |
+| open   | 打开后回调 | Function | null   | 当前对象 DOM |
+| close  | 关闭后回调 | Function | null   | 当前对象 DOM |
+| prev   | 前一帧回调 | Function | null   | 当前对象 DOM |
+| next   | 下一帧回调 | Function | null   | 当前对象 DOM |
 
 ## 调用方法
 
