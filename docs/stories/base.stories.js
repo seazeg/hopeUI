@@ -17,6 +17,7 @@ import { form } from "../view/form.view.js";
 import { layer } from "../view/layer.view.js";
 import { tab } from "../view/tab.view.js";
 import { animate } from "../view/animate.view.js";
+import { lightbox } from "../view/lightbox.view.js";
 
 import gridMD from "../api/grid.md";
 import buttonMD from "../api/button.md";
@@ -30,6 +31,7 @@ import formMD from "../api/form.md";
 import layerMD from "../api/layer.md";
 import tabMD from "../api/tab.md";
 import animateMD from "../api/animate.md";
+import lightboxMD from "../api/lightbox.md";
 
 storiesOf("基础控件(Basis)", module)
     .add(
@@ -503,7 +505,7 @@ storiesOf("组件(Components)", module)
                     ele: "#tab2",
                     options: {
                         slideSwitch: true,
-                    }
+                    },
                 });
 
                 hope.tab({
@@ -513,6 +515,41 @@ storiesOf("组件(Components)", module)
             return tab();
         },
         { notes: tabMD }
+    )
+    .add(
+        "灯箱(lightbox)",
+        () => {
+            useEffect(() => {
+                hope.lightbox({
+                    ele: "#lightbox",
+                    options: {
+                        width: "70%",
+                        type: "iframe", //pic,video
+                        frameFullScreen: false,
+                        maskColor: "rgba(73,74,95,0.8)",
+                        animation: "no",
+                        prevIcon: "hopeui-icon hopeui-icon-left",
+                        nextIcon: "hopeui-icon hopeui-icon-right",
+                        closeIcon: "hopeui-icon hopeui-icon-close",
+                    },
+                });
+
+                hope.lightbox({
+                    ele: "#lightbox2",
+                    options: {
+                        width: "70%",
+                        type: "pic", //pic,video
+                        maskColor: "rgba(73,74,95,0.8)",
+                        animation: "no",
+                    },
+                    on: {
+
+                    },
+                });
+            });
+            return lightbox();
+        },
+        { notes: lightboxMD }
     )
     .add(
         "动画(animate)",

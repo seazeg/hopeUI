@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 10:45:56
+ * @LastEditTime : 2020-08-21 13:38:33
  * @Description  :
  */
 
@@ -49,7 +49,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     let location = (layer, imgObj) => {
         //ifm模式
         if (options.type == "iframe") {
-            if (options.isFullScreen) {
+            if (!options.frameFullScreen) {
                 layer
                     .children(".hopeui-layer-content")
                     .width($("body").width() * (parseInt(options.width) / 100));
@@ -82,11 +82,11 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             layer.css({
                 left:
                     (document.documentElement.clientWidth - layer.width()) / 2,
-                top: options.isFullScreen ? 40 : 0,
+                top: !options.frameFullScreen ? 40 : 0,
             });
 
             $(window).resize(function() {
-                if (options.isFullScreen) {
+                if (!options.frameFullScreen) {
                     layer
                         .children(".hopeui-layer-content")
                         .width(
@@ -101,7 +101,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     left:
                         (document.documentElement.clientWidth - layer.width()) /
                         2,
-                    top: options.isFullScreen ? 40 : 0,
+                    top: !options.frameFullScreen ? 40 : 0,
                 });
             });
         } else {
@@ -274,6 +274,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         $(".hopui-lightbox-next").hide();
                         $(".hopui-lightbox-prev").show();
                     }
+
+                    if (on.prev) {
+                        on.prev({
+                            thisIndex: curIndex,
+                            eventName: "prev"
+                        });
+                    }
                     repalceUrl(curIndex, "title");
                 }
             });
@@ -303,7 +310,12 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         $(".hopui-lightbox-next").hide();
                         $(".hopui-lightbox-prev").show();
                     }
-
+                    if (on.next) {
+                        on.next({
+                            thisIndex: curIndex,
+                            eventName: "next"
+                        });
+                    }
                     repalceUrl(curIndex, "title");
                 }
             });
@@ -343,7 +355,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         repalceUrl(curIndex, "title");
 
         if (on.open) {
-            on.open(self[0], obj);
+            on.open({
+                targetEle: self[0],
+                eventName: "open",
+            });
         }
 
         self.find(".hopeui-lightbox-close").on(eventName, function(e) {
@@ -359,13 +374,16 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         curIndex = null;
         $("body,html").removeClass("hopeui-layer-nosrl");
         if (on.close) {
-            on.close(self[0], obj);
+            on.close({
+                targetEle: self[0],
+                eventName: "close",
+            });
         }
     };
 
     if (on.init) {
         on.init({
-            ele: $dom[0],
+            targetEle: self[0],
             eventName: "init",
         });
     }

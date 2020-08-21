@@ -433,19 +433,14 @@
         options: {
             width: '70%',
             type: 'iframe', //pic,video
-            frameFullScreen:true,
+            frameFullScreen: false,
             maskColor: 'rgba(73,74,95,0.8)',
             animation: "no",
             prevIcon: "hopeui-icon hopeui-icon-left",
             nextIcon: "hopeui-icon hopeui-icon-right",
             closeIcon: "hopeui-icon hopeui-icon-close",
           
-        },
-        on: {
-            confirm: function (ele, e) {
-                e.close();
-            },
-        },
+        }
     });
 
     hope.lightbox({

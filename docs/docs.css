@@ -74,3 +74,10 @@
     border: 20px inset #fd9037;
     border-radius: 150px;
 }
+
+
+
+#lightbox img,
+#lightbox2 img {
+    width: 100%;
+}
