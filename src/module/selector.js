@@ -1,12 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 15:32:17
+ * @LastEditTime : 2020-08-21 09:46:39
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
+const { is } = require("../utils/is.js");
 
 module.exports.selectorHandler = function({ ele, options, on }) {
     const obj = new Object();
@@ -50,6 +51,25 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         $(selector).addClass("hopeui-hide");
 
         newEle = $(template).insertAfter(selector);
+
+
+        if (is.ie() == 8) {
+            let $this = newEle.find('input');
+            $this
+                .after(
+                    `<label class="hopeui-placeholder">${$this.attr(
+                        "placeholder"
+                    ) || "请输入"}</label>`
+                )
+                .parent()
+                .css("position", "relative");
+
+            $this.next().css({
+                lineHeight: $this.css("height") + 2,
+                paddingLeft: $this.css("paddingLeft") + 1,
+            });
+        }
+        
 
         //单击后下拉列表事件
         newEle.on("click", function(e) {

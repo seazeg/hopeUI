@@ -99,6 +99,16 @@
 </style>
 
 <body>
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">通用</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <input  name="text" type="text"  value="" class="hopeui-input js_hopeui_input" placeholder="请输入"/>
+        </div>
+    </div>
 
     <div class="docs-box">
         <div class="docs-title">
@@ -334,7 +344,7 @@
                 <div class="hopeui-form-item">
                     <label class="hopeui-form-label">密码框</label>
                     <div class="hopeui-input-block">
-                        <input name="password" type="password" placeholder="请输入" value="" class="hopeui-input"
+                        <input name="password" type="password" placeholder="请输入"  value="" class="hopeui-input"
                             hope-verify="required" />
                     </div>
                 </div>
@@ -415,6 +425,10 @@
 
 </body>
 <script>
+    hope.input({
+        ele:'.js_hopeui_input'
+    })
+
     hope.lightbox({
         ele: '#lightbox',
         options: {
