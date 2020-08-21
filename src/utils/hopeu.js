@@ -1274,7 +1274,7 @@ var hopeu = window['hopeu'] = (function () {
   };
 
   return $;
-})();;
+})();
 hopeu['plug']("css", function ($) {
   var doc = document,
     docEl = doc.documentElement,
@@ -1659,7 +1659,7 @@ hopeu['plug']("css", function ($) {
     };
   });
 
-});;
+});
 hopeu['plug']("events", function ($) {
   var doc = document,
     handlers = {},
@@ -1839,7 +1839,7 @@ hopeu['plug']("events", function ($) {
     });
   };
   if (!$['init']) $(window)['bind']("load", $['onload']);
-});;
+});
 hopeu['plug']("ajax", function ($) {
   var xhrs = [
       function () {
