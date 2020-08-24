@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-24 10:28:57
+ * @LastEditTime : 2020-08-24 10:57:34
  * @Description  :
  */
 
@@ -49,9 +49,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     let location = (layer, imgObj) => {
         let scrollFix = 0;
         if (is.os() == "win") {
-            scrollFix = 17
+            scrollFix = 21;
+            $(".hopui-lightbox-switch,.hopeui-lightbox-close").css(
+                "width",
+                "99%"
+            );
         }
-        
+
         //ifm模式
         if (options.type == "iframe") {
             if (!options.frameFullScreen) {
