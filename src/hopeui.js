@@ -1,13 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-17 15:05:45
+ * @LastEditTime : 2020-08-24 14:41:02
  * @Description  :
  */
 
 require("./styles/hopeui.less");
 require("./utils/patch.js");
 
+const { scrollbarHandler } = require("./module/scrollbar.js");
 const { lightboxHandler } = require("./module/lightbox.js");
 const { pagerHandler } = require("./module/pager.js");
 const { tabHandler } = require("./module/tab.js");
@@ -21,6 +22,16 @@ const { formHandler } = require("./module/form.js");
 
 const hope = () => {
     return {
+        scrollbar: function({
+            ele: ele = null,
+            options: options = {},
+            on: on = {
+                init: null,
+                scroll: null
+            },
+        }) {
+            return scrollbarHandler({ ele, options, on });
+        },
         lightbox: function({
             ele: ele = null,
             options: options = {

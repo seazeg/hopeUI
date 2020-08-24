@@ -106,6 +106,62 @@
             </fieldset>
         </div>
         <div class="docs-content">
+            <div id="scrollbar" class="hopeui-scrollbar">
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+                <div>3333333333</div>
+                <div>1111111111</div>
+                <div>2222222222</div>
+
+                <!-- <span class="hopeui-scrollbar-bar"></span> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">通用</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
             <input name="text" type="text" value="" class="hopeui-input js_hopeui_input" placeholder="请输入" />
         </div>
     </div>
@@ -413,6 +469,16 @@
 
 </body>
 <script>
+    hope.scrollbar({
+        ele: '#scrollbar',
+        on: {
+            init: function () {},
+            scroll: function (e) {
+                console.log(e.distance);
+            }
+        }
+    })
+
     hope.input({
         ele: '.js_hopeui_input'
     })
@@ -764,46 +830,6 @@
         });
     };
 
-    document.querySelector("#set").onclick = function () {
-        fm.val({
-            city: {
-                type: "selector",
-                value: "南京",
-            },
-            school: {
-                type: "selector",
-                value: "清华大学",
-            },
-            LD: {
-                type: "selector",
-                value: "天津,乌鲁木齐,青岛",
-            },
-            text: {
-                type: "input",
-                value: "我爱HopeUI",
-            },
-            task: {
-                type: "checkbox",
-                value: "打桩",
-            },
-            textarea: {
-                type: "textarea",
-                value: "我爱北京天安门",
-            },
-            password: {
-                type: "input",
-                value: "999888999",
-            },
-            subject: {
-                type: "checkbox",
-                value: "历史",
-            },
-            radio: {
-                type: "radio",
-                value: "女",
-            },
-        });
-    };
 
     document.querySelector("#clear").onclick = function () {
         fm.clear();

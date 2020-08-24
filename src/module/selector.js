@@ -1,13 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 09:46:39
+ * @LastEditTime : 2020-08-24 16:15:14
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
 const { is } = require("../utils/is.js");
+const { scrollbarHandler } = require("./scrollbar.js");
 
 module.exports.selectorHandler = function({ ele, options, on }) {
     const obj = new Object();
@@ -52,9 +53,8 @@ module.exports.selectorHandler = function({ ele, options, on }) {
 
         newEle = $(template).insertAfter(selector);
 
-
         if (is.ie() == 8) {
-            let $this = newEle.find('input');
+            let $this = newEle.find("input");
             $this
                 .after(
                     `<label class="hopeui-placeholder">${$this.attr(
@@ -69,7 +69,6 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 paddingLeft: $this.css("paddingLeft") + 1,
             });
         }
-        
 
         //单击后下拉列表事件
         newEle.on("click", function(e) {
@@ -84,19 +83,56 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 $(".hopeui-form-selected").removeClass("hopeui-form-selected");
                 $(this).addClass("hopeui-form-selected");
             }
+
+            // scrollbarHandler({
+            //     ele: newEle.children(".hopeui-select-list"),
+            //     options: {},
+            //     on: {
+            //         init: function(e) {
+            //              //绑定自定义option的点击事件
+            //             newEle.find(".option").on("click", function(e) {
+            //                 if (e.stopPropagation) {
+            //                     e.stopPropagation();
+            //                 } else if (window.event) {
+            //                     window.event.cancelBubble = true;
+            //                 }
+                         
+            //                 let _this = $(this);
+            //                 handle(selector, newEle, _this);
+            //                 //选中options后回调
+            //                 if (on.change) {
+            //                     on.change({
+            //                         originalParentEle: selector,
+            //                         virtualParentEle: selector.nextSibling,
+            //                         targetEle: e.target,
+            //                         label: _this.text(),
+            //                         value: _this.attr("hope-value"),
+            //                         name: _this.parent().attr("name"),
+            //                         group: _this.attr("hope-group"),
+            //                         groupSort: _this.attr("hope-group-sort"),
+            //                         eventName: "change",
+            //                     });
+            //                 }
+            //             });
+            //         }
+            //     },
+            // });
+
             //打开列表回调
             if (on.toggle) {
                 on.toggle();
             }
         });
 
-        //绑定自定义option的点击事件
-        newEle.find(".option").on("click", function(e) {
+
+         //绑定自定义option的点击事件
+         newEle.find(".option").on("click", function(e) {
             if (e.stopPropagation) {
                 e.stopPropagation();
             } else if (window.event) {
                 window.event.cancelBubble = true;
             }
+         
             let _this = $(this);
             handle(selector, newEle, _this);
             //选中options后回调
@@ -115,14 +151,17 @@ module.exports.selectorHandler = function({ ele, options, on }) {
             }
         });
 
+       
+
+
         //点击select区域外关闭下拉列表
-        $(document).on('click',function(e) {
+        $(document).on("click", function(e) {
             $(newEle).removeClass("hopeui-form-selected");
             //下拉列表关闭回调
             if (on.close) {
                 on.close(e);
             }
-        })
+        });
 
         if (on.init) {
             on.init({
@@ -150,7 +189,6 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         } else {
             input.val("");
         }
-
         if (optEle.attr("hope-group")) {
             original.children[optEle.attr("hope-group")].children[
                 optEle.attr("hope-group-sort")
