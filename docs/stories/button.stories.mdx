@@ -1,0 +1,115 @@
+import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
+// import { action } from '@storybook/addon-actions';
+import { useEffect } from "@storybook/client-api";
+import { button } from "../view/button.view.js";
+
+# 按钮
+
+一堆按钮
+
+<Meta title="基础控件/按钮(Button)" />
+
+## 普通按钮
+
+<Story name="通用" height="100px">
+    {() => {
+        useEffect(() => {
+            
+        });
+        return ` <button type="button" id="btn" class="hopeui-btn hopeui-btn-primary">
+                        普通按钮
+                    </button>
+                    <button type="button" class="hopeui-btn">
+                        普通按钮
+                    </button>
+                    <button type="button" class="hopeui-btn hopeui-btn-disabled">
+                        禁用按钮
+                    </button>`;
+    }}
+</Story>
+
+## 圆角按钮
+
+<Story name="圆角" height="100px">
+    {() => {
+        useEffect(() => {
+            
+        });
+        return `<button type="button" class="hopeui-btn hopeui-btn-primary hopeui-btn-radius">
+                        圆角按钮
+                    </button>
+                    <button type="button" class="hopeui-btn hopeui-btn-radius">
+                        圆角按钮
+                    </button>
+                    <button type="button" class="hopeui-btn hopeui-btn-radius hopeui-btn-disabled">
+                        禁用按钮
+                    </button>`;
+    }}
+</Story>
+
+## 图标按钮
+
+<Story name="图标" height="100px">
+    {() => {
+        useEffect(() => {
+            
+        });
+        return `<button type="button" class="hopeui-btn hopeui-btn-primary hopeui-btn-radius">
+                    <i class="hopeui-icon hopeui-icon-theme"></i>
+                </button>
+                <button type="button" class="hopeui-btn hopeui-btn-radius">
+                    <i class="hopeui-icon hopeui-icon-rate-solid"></i>
+                </button>
+                <button type="button" class="hopeui-btn hopeui-btn-primary hopeui-btn-radius">
+                    <i class="hopeui-icon hopeui-icon-theme"></i>主题皮肤
+                </button>
+                <button type="button" class="hopeui-btn hopeui-btn-radius">
+                    <i class="hopeui-icon hopeui-icon-rate-solid"></i>收藏一下
+                </button>`;
+    }}
+</Story>
+
+## 按钮组
+
+<Story name="按钮组" height="100px">
+    {() => {
+        useEffect(() => {
+            
+        });
+        return `<div>
+                <div class="hopeui-btn-group">
+                    <button type="button" class="hopeui-btn">
+                        增加
+                    </button>
+                    <button type="button" class="hopeui-btn">
+                        删除
+                    </button>
+                    <button type="button" class="hopeui-btn">
+                        编辑
+                    </button>
+                </div>
+                <div class="hopeui-btn-group">
+                    <button type="button" class="hopeui-btn">
+                        <i class="hopeui-icon hopeui-icon-add-1"></i>
+                    </button>
+                    <button type="button" class="hopeui-btn">
+                        <i class="hopeui-icon hopeui-icon-delete"></i>
+                    </button>
+                    <button type="button" class="hopeui-btn">
+                        <i class="hopeui-icon hopeui-icon-edit"></i>
+                    </button>
+                </div>
+                <div class="hopeui-btn-group">
+                    <button type="button" class="hopeui-btn">
+                        <i class="hopeui-icon hopeui-icon-add-1"></i>增加
+                    </button>
+                    <button type="button" class="hopeui-btn">
+                        <i class="hopeui-icon hopeui-icon-delete"></i>删除
+                    </button>
+                    <button type="button" class="hopeui-btn">
+                        <i class="hopeui-icon hopeui-icon-edit"></i>编辑
+                    </button>
+                </div>
+                </div>`;
+    }}
+</Story>

@@ -24,6 +24,7 @@
     "@babel/plugin-transform-object-assign": "^7.10.4",
     "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addon-notes": "^5.3.19",
@@ -54,5 +55,6 @@
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
-  }
+  },
+  "dependencies": {}
 }

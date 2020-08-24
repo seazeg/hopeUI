@@ -1,15 +1,15 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-29 16:20:03
- * @LastEditTime : 2020-08-04 13:33:08
+ * @LastEditTime : 2020-08-21 16:01:25
  * @Description  :
  */
 
 module.exports = {
-    stories: ["../docs/**/*.stories.js"],
+    stories: ["../docs/**/*.stories.@(js|mdx)"],
     logLevel: "debug",
     addons: [
-        // '@storybook/addon-docs',
+        '@storybook/addon-docs',
         // '@storybook/addon-storysource',
         "@storybook/addon-knobs",
         "@storybook/addon-viewport",

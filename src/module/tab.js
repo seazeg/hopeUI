@@ -1,18 +1,19 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-14 17:34:09
+ * @LastEditTime : 2020-08-24 10:00:52
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
+const { is } = require("../utils/is.js");
 
 module.exports.tabHandler = function({ ele, options, on }) {
     const $dom = $(ele),
         obj = new Object(),
         domWidth = $(ele).width();
 
-    if (options.slideSwitch && supportCss3("transform")) {
+    if (options.slideSwitch && is.supportCss3("transform")) {
         $dom.find(".hopeui-tab-content")
             .width(domWidth)
             .addClass("hopeui-tab-switch");
@@ -150,18 +151,3 @@ module.exports.tabHandler = function({ ele, options, on }) {
     return obj;
 };
 
-function supportCss3(style) {
-    var prefix = ["webkit", "Moz", "ms", "o"],
-        i,
-        humpString = [],
-        htmlStyle = document.documentElement.style,
-        _toHumb = function(string) {
-            return string.replace(/-(\w)/g, function($0, $1) {
-                return $1.toUpperCase();
-            });
-        };
-    for (i in prefix) humpString.push(_toHumb(prefix[i] + "-" + style));
-    humpString.push(_toHumb(style));
-    for (i in humpString) if (humpString[i] in htmlStyle) return true;
-    return false;
-}

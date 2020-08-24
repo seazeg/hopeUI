@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 14:22:24
+ * @LastEditTime : 2020-08-24 10:15:52
  * @Description  :
  */
 
@@ -47,12 +47,23 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
     }
 
     let location = (layer, imgObj) => {
+        let scrollFix = 0;
+        if (is.os() == "win") {
+            scrollFix = 17;
+        }
+
         //ifm模式
         if (options.type == "iframe") {
             if (!options.frameFullScreen) {
                 layer
                     .children(".hopeui-layer-content")
-                    .css('width',is.noPer(options.width)?parseInt(options.width):($("body").width() * (parseInt(options.width) / 100)))
+                    .css(
+                        "width",
+                        is.noPer(options.width)
+                            ? parseInt(options.width)
+                            : $("body").width() *
+                                  (parseInt(options.width) / 100)
+                    );
             } else {
                 layer
                     .children(".hopeui-layer-content")
@@ -81,7 +92,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
             layer.css({
                 left:
-                    (document.documentElement.clientWidth - layer.width()) / 2,
+                    (document.documentElement.clientWidth -
+                        scrollFix -
+                        layer.width()) /
+                    2,
                 top: !options.frameFullScreen ? 40 : 0,
             });
 
@@ -89,7 +103,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 if (!options.frameFullScreen) {
                     layer
                         .children(".hopeui-layer-content")
-                        .css('width',is.noPer(options.width)?parseInt(options.width):($("body").width() * (parseInt(options.width) / 100)))
+                        .css(
+                            "width",
+                            is.noPer(options.width)
+                                ? parseInt(options.width)
+                                : $("body").width() *
+                                      (parseInt(options.width) / 100)
+                        );
                 } else {
                     layer
                         .children(".hopeui-layer-content")
@@ -97,7 +117,9 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 }
                 layer.css({
                     left:
-                        (document.documentElement.clientWidth - layer.width()) /
+                        (document.documentElement.clientWidth -
+                            scrollFix -
+                            layer.width()) /
                         2,
                     top: !options.frameFullScreen ? 40 : 0,
                 });
@@ -140,6 +162,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 layer.css({
                     left:
                         (document.documentElement.clientWidth -
+                            scrollFix -
                             layer.children(".hopeui-layer-content").width()) /
                         2,
                     top:
@@ -157,6 +180,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 layer.css({
                     left:
                         (document.documentElement.clientWidth -
+                            scrollFix -
                             layer.children(".hopeui-layer-content").width()) /
                         2,
                     top:
@@ -194,13 +218,16 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         //ifm模式
         if (options.type == "iframe") {
             let ifm = $("#hopeui-lightbox-iframe");
-            ifm.attr("src", $dom.find('img').attr("hope-url"));
+            ifm.attr("src", $dom.find("img").attr("hope-url"));
 
             self.find(".hopui-lightbox-prev").on(eventName, function() {
                 if (curIndex > 0) {
                     ifm.attr(
                         "src",
-                        dataList.eq(curIndex - 1).find('img').attr("hope-url")
+                        dataList
+                            .eq(curIndex - 1)
+                            .find("img")
+                            .attr("hope-url")
                     );
                     self.scrollTop(0);
                     curIndex = curIndex - 1;
@@ -224,7 +251,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 if (curIndex < dataList.length - 1) {
                     ifm.attr(
                         "src",
-                        dataList.eq(curIndex + 1).find('img').attr("hope-url")
+                        dataList
+                            .eq(curIndex + 1)
+                            .find("img")
+                            .attr("hope-url")
                     );
                     self.scrollTop(0);
                     curIndex = curIndex + 1;
@@ -242,16 +272,112 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     repalceUrl(curIndex, "title");
                 }
             });
+
+            if (is.supportCss3("transform")) {
+                //移动端滑动
+
+                let startx, starty;
+                document.addEventListener(
+                    "touchstart",
+                    function(e) {
+                        startx = e.touches[0].pageX;
+                        starty = e.touches[0].pageY;
+                    },
+                    false
+                );
+                document.addEventListener("touchend", function(e) {
+                    var endx, endy;
+                    endx = e.changedTouches[0].pageX;
+                    endy = e.changedTouches[0].pageY;
+                    var direction = getDirection(startx, starty, endx, endy);
+                    switch (direction) {
+                        case 0:
+                            //"未滑动！"
+                            break;
+                        case 1:
+                            //"向上！"
+                            break;
+                        case 2:
+                            //"向下！"
+                            break;
+                        case 3:
+                            //"向左！"
+                            if (curIndex < dataList.length - 1) {
+                                ifm.attr(
+                                    "src",
+                                    dataList
+                                        .eq(curIndex + 1)
+                                        .find("img")
+                                        .attr("hope-url")
+                                );
+                                self.scrollTop(0);
+                                curIndex = curIndex + 1;
+                                if (
+                                    curIndex > 0 &&
+                                    curIndex < dataList.length
+                                ) {
+                                    $(".hopui-lightbox-next").show();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+                                if (curIndex == 0) {
+                                    $(".hopui-lightbox-prev").hide();
+                                    $(".hopui-lightbox-next").show();
+                                } else if (curIndex == dataList.length - 1) {
+                                    $(".hopui-lightbox-next").hide();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+                                repalceUrl(curIndex, "title");
+                            }
+
+                            break;
+                        case 4:
+                            //"向右！"
+                            if (curIndex > 0) {
+                                ifm.attr(
+                                    "src",
+                                    dataList
+                                        .eq(curIndex - 1)
+                                        .find("img")
+                                        .attr("hope-url")
+                                );
+                                self.scrollTop(0);
+                                curIndex = curIndex - 1;
+
+                                if (
+                                    curIndex > 0 &&
+                                    curIndex < dataList.length
+                                ) {
+                                    $(".hopui-lightbox-next").show();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+                                if (curIndex == 0) {
+                                    $(".hopui-lightbox-prev").hide();
+                                    $(".hopui-lightbox-next").show();
+                                } else if (curIndex == dataList.length - 1) {
+                                    $(".hopui-lightbox-next").hide();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+                                repalceUrl(curIndex, "title");
+                            }
+
+                            break;
+                        default:
+                    }
+                });
+            }
         } else {
             //图片，视频模式
             let picvdo = $("#hopeui-lightbox-picvdo");
-            picvdo.attr("src", $dom.find('img').attr("src"));
+            picvdo.attr("src", $dom.find("img").attr("src"));
 
             self.find(".hopui-lightbox-prev").on(eventName, function() {
                 if (curIndex >= 0) {
                     picvdo.attr(
                         "src",
-                        dataList.eq(curIndex - 1).find('img').attr('src')
+                        dataList
+                            .eq(curIndex - 1)
+                            .find("img")
+                            .attr("src")
                     );
 
                     //判断横竖
@@ -276,7 +402,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     if (on.prev) {
                         on.prev({
                             thisIndex: curIndex,
-                            eventName: "prev"
+                            eventName: "prev",
                         });
                     }
                     repalceUrl(curIndex, "title");
@@ -287,7 +413,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 if (curIndex < dataList.length - 1) {
                     picvdo.attr(
                         "src",
-                        dataList.eq(curIndex + 1).find('img').attr("src")
+                        dataList
+                            .eq(curIndex + 1)
+                            .find("img")
+                            .attr("src")
                     );
 
                     //判断横竖
@@ -311,12 +440,130 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                     if (on.next) {
                         on.next({
                             thisIndex: curIndex,
-                            eventName: "next"
+                            eventName: "next",
                         });
                     }
                     repalceUrl(curIndex, "title");
                 }
             });
+
+            if (is.supportCss3("transform")) {
+                //移动端滑动
+
+                let startx, starty;
+                document.addEventListener(
+                    "touchstart",
+                    function(e) {
+                        startx = e.touches[0].pageX;
+                        starty = e.touches[0].pageY;
+                    },
+                    false
+                );
+                document.addEventListener("touchend", function(e) {
+                    var endx, endy;
+                    endx = e.changedTouches[0].pageX;
+                    endy = e.changedTouches[0].pageY;
+                    var direction = getDirection(startx, starty, endx, endy);
+                    switch (direction) {
+                        case 0:
+                            //"未滑动！"
+                            break;
+                        case 1:
+                            //"向上！"
+                            break;
+                        case 2:
+                            //"向下！"
+                            break;
+                        case 3:
+                            //"向左！"
+
+                            if (curIndex < dataList.length - 1) {
+                                picvdo.attr(
+                                    "src",
+                                    dataList
+                                        .eq(curIndex + 1)
+                                        .find("img")
+                                        .attr("src")
+                                );
+
+                                //判断横竖
+                                location(
+                                    self.children(".hopeui-layer"),
+                                    dataList.eq(curIndex + 1).children()
+                                );
+                                curIndex = curIndex + 1;
+
+                                if (
+                                    curIndex > 0 &&
+                                    curIndex < dataList.length
+                                ) {
+                                    $(".hopui-lightbox-next").show();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+                                if (curIndex == 0) {
+                                    $(".hopui-lightbox-prev").hide();
+                                    $(".hopui-lightbox-next").show();
+                                } else if (curIndex == dataList.length - 1) {
+                                    $(".hopui-lightbox-next").hide();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+                                if (on.next) {
+                                    on.next({
+                                        thisIndex: curIndex,
+                                        eventName: "next",
+                                    });
+                                }
+                                repalceUrl(curIndex, "title");
+                            }
+
+                            break;
+                        case 4:
+                            //"向右！"
+                            if (curIndex >= 0) {
+                                picvdo.attr(
+                                    "src",
+                                    dataList
+                                        .eq(curIndex - 1)
+                                        .find("img")
+                                        .attr("src")
+                                );
+
+                                //判断横竖
+                                location(
+                                    self.children(".hopeui-layer"),
+                                    dataList.eq(curIndex - 1).children()
+                                );
+
+                                curIndex = curIndex - 1;
+                                if (
+                                    curIndex > 0 &&
+                                    curIndex < dataList.length
+                                ) {
+                                    $(".hopui-lightbox-next").show();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+                                if (curIndex == 0) {
+                                    $(".hopui-lightbox-prev").hide();
+                                    $(".hopui-lightbox-next").show();
+                                } else if (curIndex == dataList.length - 1) {
+                                    $(".hopui-lightbox-next").hide();
+                                    $(".hopui-lightbox-prev").show();
+                                }
+
+                                if (on.prev) {
+                                    on.prev({
+                                        thisIndex: curIndex,
+                                        eventName: "prev",
+                                    });
+                                }
+                                repalceUrl(curIndex, "title");
+                            }
+
+                            break;
+                        default:
+                    }
+                });
+            }
         }
 
         self.css("overflowY", "auto");
@@ -360,6 +607,8 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         }
 
         self.find(".hopeui-lightbox-close").on(eventName, function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             close();
         });
     };
@@ -436,5 +685,38 @@ function RGBToHEX(str) {
     } else {
         result = str;
     }
+    return result;
+}
+
+//获取角度
+function getAngle(angx, angy) {
+    return (Math.atan2(angy, angx) * 180) / Math.PI;
+}
+
+//根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动
+function getDirection(startx, starty, endx, endy) {
+    let angx = endx - startx;
+    let angy = endy - starty;
+    let result = 0;
+
+    //如果滑动距离太短
+    if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
+        return result;
+    }
+
+    let angle = getAngle(angx, angy);
+    if (angle >= -135 && angle <= -45) {
+        result = 1;
+    } else if (angle > 45 && angle < 135) {
+        result = 2;
+    } else if (
+        (angle >= 135 && angle <= 180) ||
+        (angle >= -180 && angle < -135)
+    ) {
+        result = 3;
+    } else if (angle >= -45 && angle <= 45) {
+        result = 4;
+    }
+
     return result;
 }

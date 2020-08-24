@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-08-21 14:12:31
+ * @LastEditTime : 2020-08-24 10:00:40
  * @Description  : is类
  */
 module.exports.is = {
@@ -41,7 +41,37 @@ module.exports.is = {
         }
         return ie_version;
     },
-    noPer(str){
-        return !str.includes("%")
-    }
+    os() {
+        let agent = navigator.userAgent.toLowerCase();
+        let isMac = /macintosh|mac os x/i.test(navigator.userAgent);
+        let res = null;
+        if (agent.indexOf("win32") >= 0 || agent.indexOf("wow32") >= 0) {
+            res = "win";
+        }
+        if (agent.indexOf("win64") >= 0 || agent.indexOf("wow64") >= 0) {
+            res = "win";
+        }
+        if (isMac) {
+            res = "mac";
+        }
+        return res;
+    },
+    supportCss3(style) {
+        var prefix = ["webkit", "Moz", "ms", "o"],
+            i,
+            humpString = [],
+            htmlStyle = document.documentElement.style,
+            _toHumb = function(string) {
+                return string.replace(/-(\w)/g, function($0, $1) {
+                    return $1.toUpperCase();
+                });
+            };
+        for (i in prefix) humpString.push(_toHumb(prefix[i] + "-" + style));
+        humpString.push(_toHumb(style));
+        for (i in humpString) if (humpString[i] in htmlStyle) return true;
+        return false;
+    },
+    noPer(str) {
+        return !str.includes("%");
+    },
 };
