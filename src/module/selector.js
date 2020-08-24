@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-24 16:15:14
+ * @LastEditTime : 2020-08-24 16:26:05
  * @Description  :
  */
 
@@ -21,7 +21,7 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         //模板初始化
         let newEle,
             selector = $(this)[0];
-        let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="text" placeholder="${selector.children[0].innerText}" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}">`;
+        let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="text" placeholder="${selector.children[0].innerText}" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}"><div class="hopeui-scrollbar-box ">`;
 
         $(this)
             .children()
@@ -47,7 +47,7 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 }
             });
 
-        template += `</div></div>`;
+        template += `</div></div></div>`;
 
         $(selector).addClass("hopeui-hide");
 
@@ -84,39 +84,11 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 $(this).addClass("hopeui-form-selected");
             }
 
-            // scrollbarHandler({
-            //     ele: newEle.children(".hopeui-select-list"),
-            //     options: {},
-            //     on: {
-            //         init: function(e) {
-            //              //绑定自定义option的点击事件
-            //             newEle.find(".option").on("click", function(e) {
-            //                 if (e.stopPropagation) {
-            //                     e.stopPropagation();
-            //                 } else if (window.event) {
-            //                     window.event.cancelBubble = true;
-            //                 }
-                         
-            //                 let _this = $(this);
-            //                 handle(selector, newEle, _this);
-            //                 //选中options后回调
-            //                 if (on.change) {
-            //                     on.change({
-            //                         originalParentEle: selector,
-            //                         virtualParentEle: selector.nextSibling,
-            //                         targetEle: e.target,
-            //                         label: _this.text(),
-            //                         value: _this.attr("hope-value"),
-            //                         name: _this.parent().attr("name"),
-            //                         group: _this.attr("hope-group"),
-            //                         groupSort: _this.attr("hope-group-sort"),
-            //                         eventName: "change",
-            //                     });
-            //                 }
-            //             });
-            //         }
-            //     },
-            // });
+            scrollbarHandler({
+                ele: newEle.children(".hopeui-select-list"),
+                options: {},
+                on: {},
+            });
 
             //打开列表回调
             if (on.toggle) {
@@ -124,15 +96,14 @@ module.exports.selectorHandler = function({ ele, options, on }) {
             }
         });
 
-
-         //绑定自定义option的点击事件
-         newEle.find(".option").on("click", function(e) {
+        //绑定自定义option的点击事件
+        newEle.find(".option").on("click", function(e) {
             if (e.stopPropagation) {
                 e.stopPropagation();
             } else if (window.event) {
                 window.event.cancelBubble = true;
             }
-         
+
             let _this = $(this);
             handle(selector, newEle, _this);
             //选中options后回调
@@ -150,9 +121,6 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 });
             }
         });
-
-       
-
 
         //点击select区域外关闭下拉列表
         $(document).on("click", function(e) {
