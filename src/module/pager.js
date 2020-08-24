@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-08-21 14:29:34
+ * @LastEditTime : 2020-08-24 13:38:18
  * @Description  :
  */
 
@@ -67,14 +67,20 @@ module.exports.pagerHandler = function({ ele, options, params, reader, on }) {
                                 }
                             }
 
-                            pageHTML += `<i class="hopeui-pager-omit">...</i>`;
-                            pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
+                            if (options.omit != totalPage) {
+                                if (options.omit != totalPage - 1) {
+                                    pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                }
+                                pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
+                            }
                         } else if (
                             totalPage - pageNo <=
                             options.omit - Math.floor(options.omit / 2)
                         ) {
                             pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
-                            pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                            if (options.omit != totalPage - 1) {
+                                pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                            }
                             for (
                                 let i = totalPage - options.omit + 1;
                                 i <= totalPage;
