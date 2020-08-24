@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-08-24 10:22:05
+ * @LastEditTime : 2020-08-24 10:26:57
  * @Description  : is类
  */
 module.exports.is = {
@@ -45,10 +45,7 @@ module.exports.is = {
         let agent = navigator.userAgent.toLowerCase();
         let isMac = /macintosh|mac os x/i.test(navigator.userAgent);
         let res = null;
-        if (agent.indexOf("win32") >= 0 || agent.indexOf("wow32") >= 0) {
-            res = "win";
-        }
-        if (agent.indexOf("win64") >= 0 || agent.indexOf("wow64") >= 0) {
+        if (agent.indexOf("win") >= 0) {
             res = "win";
         }
         if (isMac) {

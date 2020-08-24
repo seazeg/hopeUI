@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-24 10:22:52
+ * @LastEditTime : 2020-08-24 10:28:57
  * @Description  :
  */
 
@@ -48,11 +48,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
     let location = (layer, imgObj) => {
         let scrollFix = 0;
-        console.log(scrollFix);
         if (is.os() == "win") {
-            scrollFix = 17;
+            scrollFix = 17
         }
-
+        
         //ifm模式
         if (options.type == "iframe") {
             if (!options.frameFullScreen) {
@@ -699,7 +698,6 @@ function getDirection(startx, starty, endx, endy) {
     let angx = endx - startx;
     let angy = endy - starty;
     let result = 0;
-
     //如果滑动距离太短
     if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
         return result;
