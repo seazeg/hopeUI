@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-08-24 10:00:40
+ * @LastEditTime : 2020-08-24 10:22:05
  * @Description  : is类
  */
 module.exports.is = {
@@ -69,6 +69,21 @@ module.exports.is = {
         for (i in prefix) humpString.push(_toHumb(prefix[i] + "-" + style));
         humpString.push(_toHumb(style));
         for (i in humpString) if (humpString[i] in htmlStyle) return true;
+        return false;
+    },
+    stopBubble(e) {
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        } else {
+            window.event.cancelBubble = true;
+        }
+    },
+    stopDefault(e) {
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        } else {
+            window.event.returnValue = false;
+        }
         return false;
     },
     noPer(str) {

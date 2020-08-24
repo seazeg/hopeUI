@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-24 10:15:52
+ * @LastEditTime : 2020-08-24 10:22:52
  * @Description  :
  */
 
@@ -48,6 +48,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
     let location = (layer, imgObj) => {
         let scrollFix = 0;
+        console.log(scrollFix);
         if (is.os() == "win") {
             scrollFix = 17;
         }
@@ -607,8 +608,8 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         }
 
         self.find(".hopeui-lightbox-close").on(eventName, function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+            is.stopBubble(e);
+            is.stopDefault(e);
             close();
         });
     };
