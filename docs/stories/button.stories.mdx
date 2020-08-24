@@ -9,9 +9,10 @@ import { button } from "../view/button.view.js";
 
 <Meta title="基础控件/按钮(Button)" />
 
-## 普通按钮
 
-<Story name="通用" height="100px">
+## 普通按钮
+<Canvas>
+<Story name="通用" height="100px" parameters={{ docs: { transformSource: (src) => `transformed: ${src}` } }}>
     {() => {
         useEffect(() => {
             
@@ -27,6 +28,7 @@ import { button } from "../view/button.view.js";
                     </button>`;
     }}
 </Story>
+</Canvas>
 
 ## 圆角按钮
 
