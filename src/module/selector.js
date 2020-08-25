@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 15:57:53
+ * @LastEditTime : 2020-08-25 15:59:13
  * @Description  :
  */
 
@@ -167,6 +167,10 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 .eq(optEle.index())[0].selected = true;
         }
 
+        if (is.ie() == 8) {
+            targetELe.find("input").next('.hopeui-placeholder').removeClass('hopeui-hide');
+        }
+
         // original.value = original.selectedOptions[0].value; //?????
     }
 
@@ -195,10 +199,6 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                         }
                     });
 
-                    if (is.ie() == 8) {
-                        newEle.find("input").next('.hopeui-placeholder').addClass('hopeui-hide');
-                    }
-
                     utils.validation(thisEle, "pass", null, "select-one");
                 });
             });
@@ -222,10 +222,6 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                     .eq(0)
             );
         });
-
-        if (is.ie() == 8) {
-            newEle.find("input").next('.hopeui-placeholder').removeClass('hopeui-hide');
-        }
     };
 
     return obj;
