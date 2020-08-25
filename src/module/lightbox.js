@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-24 10:57:34
+ * @LastEditTime : 2020-08-25 15:31:18
  * @Description  :
  */
 
@@ -35,7 +35,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 
     switch (options.type) {
         case "iframe":
-            content = `<iframe id="hopeui-lightbox-iframe" style="width:100%;border:none" src="" allowtransparency="true" scrolling="no" frameborder="no" border="0"></iframe>`;
+            content = `<iframe id="hopeui-lightbox-iframe" style="width:100%;min-height:400px;border:none" src="" allowtransparency="true" scrolling="no" frameborder="no" border="0"></iframe>`;
             break;
         case "pic":
             content = `<img id="hopeui-lightbox-picvdo" style="width:100%" src="" />`;
@@ -79,7 +79,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 try {
                     $(this).height(
                         $(this)[0].contentWindow.document.documentElement
-                            .scrollHeight + 40
+                            .scrollHeight
                     );
                 } catch (error) {}
             });
@@ -88,7 +88,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 window.addEventListener(
                     "message",
                     function(e) {
-                        ifm.height(e.data.value[1] + 40);
+                        ifm.height(e.data.value[1]);
                     },
                     false
                 );
@@ -100,7 +100,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         scrollFix -
                         layer.width()) /
                     2,
-                top: !options.frameFullScreen ? 40 : 0,
+                top: !options.frameFullScreen ? 60 : 0,
             });
 
             $(window).resize(function() {
@@ -125,7 +125,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                             scrollFix -
                             layer.width()) /
                         2,
-                    top: !options.frameFullScreen ? 40 : 0,
+                    top: !options.frameFullScreen ? 60 : 0,
                 });
             });
         } else {

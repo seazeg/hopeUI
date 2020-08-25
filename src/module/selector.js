@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-24 16:26:05
+ * @LastEditTime : 2020-08-25 15:57:53
  * @Description  :
  */
 
@@ -195,6 +195,10 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                         }
                     });
 
+                    if (is.ie() == 8) {
+                        newEle.find("input").next('.hopeui-placeholder').addClass('hopeui-hide');
+                    }
+
                     utils.validation(thisEle, "pass", null, "select-one");
                 });
             });
@@ -218,6 +222,10 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                     .eq(0)
             );
         });
+
+        if (is.ie() == 8) {
+            newEle.find("input").next('.hopeui-placeholder').removeClass('hopeui-hide');
+        }
     };
 
     return obj;

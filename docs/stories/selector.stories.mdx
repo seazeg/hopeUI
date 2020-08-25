@@ -3,10 +3,11 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/selector.view.js";
 
 # 下拉框（Selector）
+***
 <Meta title="基础控件/下拉框(Selector)" />
 
 <Canvas>
-    <Story name="通用" height="300px" parameters={{ docs: { source: { code:`${viewinfo.general}${viewinfo.js}` }}}}>
+    <Story name="通用" height="300px" parameters={{ docs: { source: { code:`${viewinfo.general}${viewinfo.generalJS}` }}}}>
     {() => {
         useEffect(() => {
             Function(viewinfo.generalJS)()
@@ -17,7 +18,7 @@ import { viewinfo } from "../view/selector.view.js";
 </Canvas>
 
 <Canvas>
-    <Story name="分组" height="300px" parameters={{ docs: { source: { code:`${viewinfo.group}${viewinfo.js}` }}}}>
+    <Story name="分组" height="300px" parameters={{ docs: { source: { code:`${viewinfo.group}${viewinfo.groupJS}` }}}}>
     {() => {
         useEffect(() => {
             Function(viewinfo.groupJS)()
