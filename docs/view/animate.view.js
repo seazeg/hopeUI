@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-08-25 11:16:06
+ * @LastEditTime : 2020-08-25 14:07:28
  * @Description  :
  */
 
@@ -82,43 +82,17 @@ html:`
 </div>
 `,
 js: `
-function hasClass(ele, cls) {
-    return new RegExp("(\\s|^)" + cls + "(\\s|$)").test(
-        ele.className
-    );
-}
-function addClass(ele, cls) {
-    if (!hasClass(ele, cls)) {
-        if (ele.className) {
-            ele.className += " " + cls;
-        } else {
-            ele.className += cls;
-        }
+$('.docs-demo-circle').on('click',function(){
+    let _this = $(this);
+    let anim = _this.attr('data-anim')
+    _this.addClass(anim);
+    let time = 500;
+    if (anim == "hopeui-anim-rotate") {
+        time = 1000;
     }
-}
-
-function removeClass(ele, cls) {
-    if (hasClass(ele, cls)) {
-        ele.className = ele.className.replace(
-            new RegExp("(\\s|^)" + cls + "(\\s|$)"),
-            ""
-        );
-    }
-}
-
-let ele = document.querySelectorAll(".hopeui-anim");
-Array.from(ele).forEach(function(item) {
-    item.onclick = function(e) {
-        let dataAnim = item.getAttribute("data-anim");
-        addClass(item, dataAnim);
-        let time = 500;
-        if (dataAnim == "hopeui-anim-rotate") {
-            time = 1000;
-        }
-        setTimeout(function() {
-            removeClass(item, dataAnim);
-        }, time);
-    };
-});
+    setTimeout(function() {
+        _this.removeClass(anim)
+    }, time);
+})
 `
 }

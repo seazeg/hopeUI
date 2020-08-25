@@ -73,6 +73,7 @@
     user-select: none;
     border: 20px inset #fd9037;
     border-radius: 150px;
+    margin:5px 0;
 }
 
 #lightbox img {
@@ -87,6 +88,5 @@
     width: 100%;
 
 }
-
 
 .css-1egeiho tr td{width:900px}
