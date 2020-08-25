@@ -16,6 +16,7 @@ How you like them apples?!
 
 ## Function stories
 
+
 <Story name="function" height="100px">
   {() => {
     const btn = document.createElement('button');
@@ -41,7 +42,24 @@ How you like them apples?!
     height="100px"
     parameters={{ docs: { transformSource: (src) => `transformed: ${src}` } }}
   >
-    {'<h1>Some source</h1>'}
+    {() => {
+    const btn = document.createElement('button');
+    btn.innerHTML = 'Hello Button';
+    btn.addEventListener('click', action('Click'));
+    return btn;
+  }}
+  </Story>
+    <Story
+    name="transformed source"
+    height="100px"
+    parameters={{ docs: { transformSource: (src) => `transformed: ${src}` } }}
+  >
+    {() => {
+    const btn = document.createElement('button');
+    btn.innerHTML = 'Hello Button';
+    btn.addEventListener('click', action('Click'));
+    return btn;
+  }}
   </Story>
 </Canvas>
 

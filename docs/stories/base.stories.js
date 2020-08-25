@@ -147,8 +147,16 @@ storiesOf("基础控件(Basis)", module)
         "单选框(Radio)",
         () => {
             useEffect(() => {
-                let radio_normal = hope.radio({
+                 hope.radio({
                     ele: ".radio_normal",
+                    on: {
+                        change: function(e) {
+                            console.log(e);
+                        },
+                    },
+                });
+                 hope.radio({
+                    ele: ".radio_normal2",
                     on: {
                         change: function(e) {
                             console.log(e);

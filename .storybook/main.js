@@ -13,6 +13,6 @@ module.exports = {
         // '@storybook/addon-storysource',
         "@storybook/addon-knobs",
         "@storybook/addon-viewport",
-        // "@storybook/addon-notes/register-panel",
+        "@storybook/addon-notes/register-panel",
     ],
 };

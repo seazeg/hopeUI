@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:33
- * @LastEditTime : 2020-08-05 09:32:32
+ * @LastEditTime : 2020-08-25 09:36:48
  * @Description  :
  */
 
@@ -50,6 +50,33 @@ export const radio = () => {
             title="什么玩意"
             hope-verify="required"
             class="radio_normal"
+        />
+    </div>
+    <div class="docs-content">
+        <input
+            type="radio"
+            name="radio2"
+            value="第一"
+            title="第一"
+            hope-verify="required"
+            checked
+            class="radio_normal"
+        />
+        <input
+            type="radio"
+            name="radio2"
+            value="第二"
+            title="第二"
+            hope-verify="required"
+            class="radio_normal2"
+        />
+        <input
+            type="radio"
+            name="radio2"
+            value="第三"
+            title="第三"
+            hope-verify="required"
+            class="radio_normal2"
         />
     </div>
 </div>
