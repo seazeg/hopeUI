@@ -90,3 +90,10 @@
 }
 
 .css-1egeiho tr td{width:900px}
+
+.css-1egeiho tr th {
+    background: #f1f1f1;
+}
+.css-1egeiho tr{
+    background-color: #ffffff!important;
+}

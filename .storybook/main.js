@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-29 16:20:03
- * @LastEditTime : 2020-08-24 11:16:05
+ * @LastEditTime : 2020-08-25 20:20:25
  * @Description  :
  */
 
@@ -13,6 +13,6 @@ module.exports = {
         // '@storybook/addon-storysource',
         "@storybook/addon-knobs",
         "@storybook/addon-viewport",
-        "@storybook/addon-notes/register-panel",
+        // "@storybook/addon-notes/register-panel",
     ],
 };

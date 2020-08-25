@@ -1,11 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-08-24 16:25:39
+ * @LastEditTime : 2020-08-25 20:42:26
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
+const { is } = require("../utils/is.js");
 
 module.exports.scrollbarHandler = function({ ele, options, on }) {
     if ($(ele).find(".hopeui-scrollbar-bar").length <= 0) {
@@ -50,6 +51,19 @@ module.exports.scrollbarHandler = function({ ele, options, on }) {
                     eventName: "scroll",
                 });
             }
+        };
+
+        $bar.get(0).onmousedown = function(ev) {
+            is.stopBubble(ev);
+            is.stopDefault(ev);
+            this.thisTop = $dom.scrollTop;
+            $bar.get(0).onmousemove = function(ev) {
+                console.log(ev);
+                $dom.scrollTop = this.thisTop ++;
+            };
+            $bar.get(0).onmouseup = function() {
+                $bar.get(0).onmousemove = null;
+            };
         };
 
         if (on.init) {

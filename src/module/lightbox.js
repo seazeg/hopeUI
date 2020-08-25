@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 18:52:56
+ * @LastEditTime : 2020-08-25 19:29:36
  * @Description  :
  */
 
@@ -75,12 +75,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             }
 
             let ifm = layer.find("iframe");
-            let ifmHeight = 0;
             ifm.on("load", function() {
                 try {
-                    ifmHeight = $(this)[0].contentWindow.document.documentElement
-                    .scrollHeight
-                    $(this).height(ifmHeight);
+                    $(this).height($(this)[0].contentWindow.document.documentElement
+                    .scrollHeight);
                 } catch (error) {}
             });
 
@@ -89,36 +87,45 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 window.addEventListener(
                     "message",
                     function(e) {
-                        ifmHeight = e.data.value[1]
-                        ifm.height(ifmHeight);
+                        ifm.height(e.data.value[1]);
                     },
                     false
                 );
             }
 
-            if(document.documentElement.clientHeight>ifmHeight){
-                layer.css({
-                    left:
-                        (document.documentElement.clientWidth -
-                            scrollFix -
-                            layer.width()) /
-                        2,
-                    top: (document.documentElement.clientHeight -
-                        layer.height()) / 2
-                    
-                });
-            }else{
-                layer.css({
-                    left:
-                        (document.documentElement.clientWidth -
-                            scrollFix -
-                            layer.width()) /
-                        2,
-                    top: !options.frameFullScreen ? 60 : 0
-                    
-                });
+            layer.css({
+                left:
+                    (document.documentElement.clientWidth -
+                        scrollFix -
+                        layer.width()) /
+                    2,
+                top: !options.frameFullScreen ? 60 : 0
                 
-            }
+            });
+
+            // if(document.documentElement.clientHeight>ifmHeight){
+            //     layer.css({
+            //         left:
+            //             (document.documentElement.clientWidth -
+            //                 scrollFix -
+            //                 layer.width()) /
+            //             2,
+            //         top: (document.documentElement.clientHeight -
+            //             layer.height()) / 2
+                    
+            //     });
+            // }else{
+            //     layer.css({
+            //         left:
+            //             (document.documentElement.clientWidth -
+            //                 scrollFix -
+            //                 layer.width()) /
+            //             2,
+            //         top: !options.frameFullScreen ? 60 : 0
+                    
+            //     });
+                
+            // }
 
         
 
@@ -138,29 +145,39 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         .children(".hopeui-layer-content")
                         .width($("body").width());
                 }
-                if(document.documentElement.clientHeight>ifmHeight){
-                    layer.css({
-                        left:
-                            (document.documentElement.clientWidth -
-                                scrollFix -
-                                layer.width()) /
-                            2,
-                        top: (document.documentElement.clientHeight -
-                            layer.height()) / 2
-                        
-                    });
-                }else{
-                    layer.css({
-                        left:
-                            (document.documentElement.clientWidth -
-                                scrollFix -
-                                layer.width()) /
-                            2,
-                        top: !options.frameFullScreen ? 60 : 0
-                        
-                    });
+
+                layer.css({
+                    left:
+                        (document.documentElement.clientWidth -
+                            scrollFix -
+                            layer.width()) /
+                        2,
+                    top: !options.frameFullScreen ? 60 : 0
                     
-                }
+                });
+                // if(document.documentElement.clientHeight>ifmHeight){
+                //     layer.css({
+                //         left:
+                //             (document.documentElement.clientWidth -
+                //                 scrollFix -
+                //                 layer.width()) /
+                //             2,
+                //         top: (document.documentElement.clientHeight -
+                //             layer.height()) / 2
+                        
+                //     });
+                // }else{
+                //     layer.css({
+                //         left:
+                //             (document.documentElement.clientWidth -
+                //                 scrollFix -
+                //                 layer.width()) /
+                //             2,
+                //         top: !options.frameFullScreen ? 60 : 0
+                        
+                //     });
+                    
+                // }
             });
         } else {
             //图片，视频模式
