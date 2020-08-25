@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 23:05:45
+ * @LastEditTime : 2020-08-25 23:51:50
  * @Description  :
  */
 
@@ -738,7 +738,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
         });
     }
 
-    dataList.on(eventName, function () {
+    dataList.off().on(eventName, function () {
         open($(this));
     });
 
