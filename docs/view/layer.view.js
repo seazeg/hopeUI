@@ -1,58 +1,74 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2020-08-05 10:56:03
+ * @LastEditTime : 2020-08-25 11:34:18
  * @Description  :
  */
+export const viewinfo = {
+    message: `
+<button type="button" class="hopeui-btn" id="open1">
+    消息弹框
+</button>`,
 
-import {
-    withKnobs,
-    number,
-    object,
-    boolean,
-    text,
-    select,
-    date,
-    array,
-    color,
-} from "@storybook/addon-knobs";
-import styleConf from "../styleConfig.json";
-import { utils } from "../utils";
-export const layer = () => {
-    return `
-    <div class="docs-box">
-    <div class="docs-title">
-        <fieldset>
-            <legend><a name="icon">普通弹层</a></legend>
-        </fieldset>
-    </div>
-    <div class="docs-content">
-        <button type="button" class="hopeui-btn" id="open1">
-            打开弹层
-        </button>
-    </div>
+    ifm: `
+<button type="button" class="hopeui-btn" id="open2">
+    ifm嵌套
+</button>`,
 
-    <div class="docs-title">
-        <fieldset>
-            <legend><a name="icon">iframe嵌入弹层</a></legend>
-        </fieldset>
-    </div>
-    <div class="docs-content">
-        <button type="button" class="hopeui-btn" id="open2">
-            打开弹层
-        </button>
-    </div>
+    drag: `
+<button type="button" class="hopeui-btn" id="open3">
+    可拖拽
+</button>`,
 
-    <div class="docs-title">
-        <fieldset>
-            <legend><a name="icon">可拖拽弹层</a></legend>
-        </fieldset>
-    </div>
-    <div class="docs-content">
-        <button type="button" class="hopeui-btn" id="open3">
-            打开弹层
-        </button>
-    </div>
-</div>
-`;
+    messageJS: `
+    document.querySelector("#open1").onclick = function() {
+        hope.layer({
+            options: {
+                title: "信息",
+                content:
+                    "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
+                defaultBtn: {
+                    ok: "好的",
+                    cancel: "拜拜",
+                },
+            },
+        });
+    };`,
+
+    ifmJS:`
+    document.querySelector("#open2").onclick = function() {
+        let ly = hope.layer({
+            options: {
+                title: "iframe弹框",
+                content: '<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
+                // content:
+                //     '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
+            },
+            on: {
+                confirm: function(e) {
+                    ly.close();
+                },
+            },
+        });
+    };`,
+
+    dragJS:`
+    document.querySelector("#open3").onclick = function() {
+        let ly = hope.layer({
+            options: {
+                title: "可拖拽弹框",
+                content:
+                    '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596605654660&di=3efa3194330834b16d1edce806f3ace4&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201105%2F17%2F113554rnu40q7nbgnn3lgq.jpg" style="width:800px" />',
+                isMask: false,
+                isDrag: true,
+            },
+            on: {
+                confirm: function(e) {
+                    ly.close();
+                },
+            },
+        });
+    };`
+
+
 };

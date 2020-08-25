@@ -1,159 +1,56 @@
 import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
-// import { action } from '@storybook/addon-actions';
 import { useEffect } from "@storybook/client-api";
-import { button } from "../view/button.view.js";
+import { viewinfo } from "../view/grid.view.js";
 
-# 栅格系统
-
-一堆栅格
+# 栅格（Grid）
 
 <Meta title="基础控件/栅格(Grid)" />
 
+<Canvas>
+    <Story name="基础" height="150px" parameters={{ docs: { source: { code:viewinfo.general }}}}>
+        {() => {
+            return viewinfo.general;
+        }}
+    </Story>
+</Canvas>
 
+<Canvas>
+    <Story name="流式" height="150px" parameters={{ docs: { source: { code:viewinfo.flow }}}}>
+        {() => {
+            return viewinfo.flow;
+        }}
+    </Story>
+</Canvas>
 
-## 基本
-<Story name="基本" height="200px">
-    {() => {
-        useEffect(() => {});
-        return `<div class="hopeui-row">
-    <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            33%
-        </div>
-    </div>
-    <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            33%
-        </div>
-    </div>
-    <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-        <div class="docs-grid-demo docs-grid-demo-bg3">
-            33%
-        </div>
-    </div>
-</div>
-<div class="hopeui-row">
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            1/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-1-12 hopeui-col-md-1-12 hopeui-col-xs-1-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            1/12
-        </div>
-    </div>
-</div>`;
-    }}
-</Story>
+<Canvas>
+    <Story name="居中" height="150px" parameters={{ docs: { source: { code:viewinfo.center }}}}>
+        {() => {
+            return viewinfo.center;
+        }}
+    </Story>
+</Canvas>
 
-```html
-```
+<Canvas>
+    <Story name="列间距" height="150px" parameters={{ docs: { source: { code:viewinfo.spacing }}}}>
+        {() => {
+            return viewinfo.spacing;
+        }}
+    </Story>
+</Canvas>
 
+<Canvas>
+    <Story name="偏移" height="150px" parameters={{ docs: { source: { code:viewinfo.offset }}}}>
+        {() => {
+            return viewinfo.offset;
+        }}
+    </Story>
+</Canvas>
 
-## 流式
-
-<Story name="流式" height="200px">
-    {() => {
-        useEffect(() => {});
-        return `<div class="hopeui-row">
-    <div class="hopeui-col-xl-12-12 hopeui-col-md-6-12 hopeui-col-xs-3-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            默认：12/12 平板：6/12 移动：3/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-7-12 hopeui-col-md-6-12 hopeui-col-xs-9-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            默认：7/12 平板：6/12 移动：9/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-5-12 hopeui-col-md-6-12 hopeui-col-xs-9-12">
-        <div class="docs-grid-demo docs-grid-demo-bg3">
-            默认：5/12 平板：6/12 移动：9/12
-        </div>
-    </div>
-    <div class="hopeui-col-xl-12-12 hopeui-col-md-6-12 hopeui-col-xs-3-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            默认：5/12 平板：6/12 移动：9/12
-        </div>
-    </div>
-</div>`;
-    }}
-</Story>
-
-
-## 列间距
-
-<Story name="列间距" height="200px">
-    {() => {
-        useEffect(() => {});
-        return `<div class="hopeui-row hopeui-col-space2">
-    <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-        <div class="docs-grid-demo docs-grid-demo-bg1">
-            33%
-        </div>
-    </div>
-    <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-        <div class="docs-grid-demo docs-grid-demo-bg2">
-            33%
-        </div>
-    </div>
-    <div class="hopeui-col-xl-4-12 hopeui-col-md-4-12 hopeui-col-xs-4-12">
-        <div class="docs-grid-demo docs-grid-demo-bg3">
-            33%
-        </div>
-    </div>
-</div>`;
-    }}
-</Story>
+<Canvas>
+    <Story name="嵌套" height="150px" parameters={{ docs: { source: { code:viewinfo.nested }}}}>
+        {() => {
+            return viewinfo.nested;
+        }}
+    </Story>
+</Canvas>
 

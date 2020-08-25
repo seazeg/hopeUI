@@ -1,0 +1,28 @@
+import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
+import { useEffect } from "@storybook/client-api";
+import { viewinfo } from "../view/lightbox.view.js";
+
+# 灯箱（Lightbox）
+<Meta title="复用组件/灯箱(Lightbox)" />
+
+<Canvas>
+    <Story name="iframe模式" height="150px" parameters={{ docs: { source: { code:`${viewinfo.ifm}${viewinfo.ifmJS}` }}}}>
+    {() => {
+        useEffect(() => {
+            Function(viewinfo.ifmJS)()
+        });
+        return viewinfo.ifm
+    }} 
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="图片模式" height="150px" parameters={{ docs: { source: { code:`${viewinfo.pic}${viewinfo.picJS}` }}}}>
+    {() => {
+        useEffect(() => {
+            Function(viewinfo.picJS)()
+        });
+        return viewinfo.pic
+    }}  
+    </Story>
+</Canvas>

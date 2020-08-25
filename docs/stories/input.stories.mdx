@@ -1,0 +1,29 @@
+import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
+import { useEffect } from "@storybook/client-api";
+import { viewinfo } from "../view/input.view.js";
+
+# 单选框（Text）
+<Meta title="基础控件/文本框(Text)" />
+
+<Canvas>
+    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.general}${viewinfo.js}` }}}}>
+    {() => {
+        useEffect(() => {
+            Function(viewinfo.js)()
+        });
+        return viewinfo.general
+    }}  
+    </Story>
+</Canvas>
+
+
+<Canvas>
+    <Story name="密码" height="150px" parameters={{ docs: { source: { code:`${viewinfo.password}${viewinfo.js}` }}}}>
+    {() => {
+        useEffect(() => {
+            Function(viewinfo.js)()
+        });
+        return viewinfo.password
+    }}  
+    </Story>
+</Canvas>    

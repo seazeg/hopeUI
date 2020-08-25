@@ -81,7 +81,7 @@
 
 #lightbox2 >div{
     overflow: hidden;
-    max-height:300px;
+    max-height:200px;
 }
 #lightbox2 img {
     width: 100%;
