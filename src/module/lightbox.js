@@ -1,19 +1,20 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 19:29:36
+ * @LastEditTime : 2020-08-25 23:05:45
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
 const { is } = require("../utils/is.js");
 
-module.exports.lightboxHandler = function({ ele, options, on }) {
+module.exports.lightboxHandler = function ({ ele, options, on }) {
     const obj = new Object();
     options = {
         width: options.width || "80%",
         type: options.type || "iframe",
         frameFullScreen: options.frameFullScreen || false,
+        frameReplaceUrl: options.frameReplaceUrl || false,
         isMask: !options.isMask,
         maskColor: options.maskColor,
         animation: options.animation || "hopeui-anim-scale",
@@ -75,18 +76,19 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             }
 
             let ifm = layer.find("iframe");
-            ifm.on("load", function() {
+            ifm.on("load", function () {
                 try {
-                    $(this).height($(this)[0].contentWindow.document.documentElement
-                    .scrollHeight);
+                    $(this).height(
+                        $(this)[0].contentWindow.document.documentElement
+                            .scrollHeight
+                    );
                 } catch (error) {}
             });
 
-           
             if (typeof window.addEventListener != "undefined") {
                 window.addEventListener(
                     "message",
-                    function(e) {
+                    function (e) {
                         ifm.height(e.data.value[1]);
                     },
                     false
@@ -99,8 +101,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         scrollFix -
                         layer.width()) /
                     2,
-                top: !options.frameFullScreen ? 60 : 0
-                
+                top: !options.frameFullScreen ? 60 : 0,
             });
 
             // if(document.documentElement.clientHeight>ifmHeight){
@@ -112,7 +113,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             //             2,
             //         top: (document.documentElement.clientHeight -
             //             layer.height()) / 2
-                    
+
             //     });
             // }else{
             //     layer.css({
@@ -122,14 +123,12 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             //                 layer.width()) /
             //             2,
             //         top: !options.frameFullScreen ? 60 : 0
-                    
+
             //     });
-                
+
             // }
 
-        
-
-            $(window).resize(function() {
+            $(window).resize(function () {
                 if (!options.frameFullScreen) {
                     layer
                         .children(".hopeui-layer-content")
@@ -152,8 +151,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                             scrollFix -
                             layer.width()) /
                         2,
-                    top: !options.frameFullScreen ? 60 : 0
-                    
+                    top: !options.frameFullScreen ? 60 : 0,
                 });
                 // if(document.documentElement.clientHeight>ifmHeight){
                 //     layer.css({
@@ -164,7 +162,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 //             2,
                 //         top: (document.documentElement.clientHeight -
                 //             layer.height()) / 2
-                        
+
                 //     });
                 // }else{
                 //     layer.css({
@@ -174,9 +172,9 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 //                 layer.width()) /
                 //             2,
                 //         top: !options.frameFullScreen ? 60 : 0
-                        
+
                 //     });
-                    
+
                 // }
             });
         } else {
@@ -213,7 +211,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 .children(".hopeui-layer-content")
                 .removeClass("hopeui-lightbox-transition");
 
-            $("#hopeui-lightbox-picvdo").load(function() {
+            $("#hopeui-lightbox-picvdo").load(function () {
                 layer.css({
                     left:
                         (document.documentElement.clientWidth -
@@ -255,8 +253,9 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         curIndex = curIndex || index;
         let template = `<div class="hopeui-lightbox-warp"><div class="hopeui-lightbox-close"><i class="${options.closeIcon}"></i></div><div class="hopui-lightbox-switch"><i class="${options.prevIcon} hopui-lightbox-prev"></i><i class="${options.nextIcon} hopui-lightbox-next"></i></div><div class="hopeui-layer hopeui-lightbox-transparent">`;
 
-        template += `<div class="hopeui-layer-content ${options.type !=
-            "iframe" && "hopeui-lightbox"}">${content}</div></div></div>`;
+        template += `<div class="hopeui-layer-content ${
+            options.type != "iframe" && "hopeui-lightbox"
+        }">${content}</div></div></div>`;
 
         self = $(template).insertAfter("body");
 
@@ -275,7 +274,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             let ifm = $("#hopeui-lightbox-iframe");
             ifm.attr("src", $dom.find("img").attr("hope-url"));
 
-            self.find(".hopui-lightbox-prev").on(eventName, function() {
+            self.find(".hopui-lightbox-prev").on(eventName, function () {
                 if (curIndex > 0) {
                     ifm.attr(
                         "src",
@@ -298,17 +297,15 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         $(".hopui-lightbox-next").hide();
                         $(".hopui-lightbox-prev").show();
                     }
-                    repalceUrl(
-                        dataList
-                            .eq(curIndex)
-                            .find("img")
-                            .attr("hope-url"),
-                        "title"
+                    replaceUrl(
+                        dataList.eq(curIndex).find("img").attr("hope-url"),
+                        "title",
+                        options.frameReplaceUrl
                     );
                 }
             });
 
-            self.find(".hopui-lightbox-next").on(eventName, function() {
+            self.find(".hopui-lightbox-next").on(eventName, function () {
                 if (curIndex < dataList.length - 1) {
                     ifm.attr(
                         "src",
@@ -330,12 +327,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         $(".hopui-lightbox-next").hide();
                         $(".hopui-lightbox-prev").show();
                     }
-                    repalceUrl(
-                        dataList
-                            .eq(curIndex)
-                            .find("img")
-                            .attr("hope-url"),
-                        "title"
+                    replaceUrl(
+                        dataList.eq(curIndex).find("img").attr("hope-url"),
+                        "title",
+                        options.frameReplaceUrl
                     );
                 }
             });
@@ -346,13 +341,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 let startx, starty;
                 document.addEventListener(
                     "touchstart",
-                    function(e) {
+                    function (e) {
                         startx = e.touches[0].pageX;
                         starty = e.touches[0].pageY;
                     },
                     false
                 );
-                document.addEventListener("touchend", function(e) {
+                document.addEventListener("touchend", function (e) {
                     var endx, endy;
                     endx = e.changedTouches[0].pageX;
                     endy = e.changedTouches[0].pageY;
@@ -393,12 +388,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                     $(".hopui-lightbox-next").hide();
                                     $(".hopui-lightbox-prev").show();
                                 }
-                                repalceUrl(
+                                replaceUrl(
                                     dataList
                                         .eq(curIndex)
                                         .find("img")
                                         .attr("hope-url"),
-                                    "title"
+                                    "title",
+                                    options.frameReplaceUrl
                                 );
                             }
 
@@ -430,12 +426,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                     $(".hopui-lightbox-next").hide();
                                     $(".hopui-lightbox-prev").show();
                                 }
-                                repalceUrl(
+                                replaceUrl(
                                     dataList
                                         .eq(curIndex)
                                         .find("img")
                                         .attr("hope-url"),
-                                    "title"
+                                    "title",
+                                    options.frameReplaceUrl
                                 );
                             }
 
@@ -449,7 +446,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             let picvdo = $("#hopeui-lightbox-picvdo");
             picvdo.attr("src", $dom.find("img").attr("src"));
 
-            self.find(".hopui-lightbox-prev").on(eventName, function() {
+            self.find(".hopui-lightbox-prev").on(eventName, function () {
                 if (curIndex >= 0) {
                     picvdo.attr(
                         "src",
@@ -484,17 +481,15 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                             eventName: "prev",
                         });
                     }
-                    repalceUrl(
-                        dataList
-                            .eq(curIndex)
-                            .find("img")
-                            .attr("hope-url"),
-                        "title"
+                    replaceUrl(
+                        dataList.eq(curIndex).find("img").attr("hope-url"),
+                        "title",
+                        options.frameReplaceUrl
                     );
                 }
             });
 
-            self.find(".hopui-lightbox-next").on(eventName, function() {
+            self.find(".hopui-lightbox-next").on(eventName, function () {
                 if (curIndex < dataList.length - 1) {
                     picvdo.attr(
                         "src",
@@ -528,12 +523,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                             eventName: "next",
                         });
                     }
-                    repalceUrl(
-                        dataList
-                            .eq(curIndex)
-                            .find("img")
-                            .attr("hope-url"),
-                        "title"
+                    replaceUrl(
+                        dataList.eq(curIndex).find("img").attr("hope-url"),
+                        "title",
+                        options.frameReplaceUrl
                     );
                 }
             });
@@ -544,13 +537,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 let startx, starty;
                 document.addEventListener(
                     "touchstart",
-                    function(e) {
+                    function (e) {
                         startx = e.touches[0].pageX;
                         starty = e.touches[0].pageY;
                     },
                     false
                 );
-                document.addEventListener("touchend", function(e) {
+                document.addEventListener("touchend", function (e) {
                     var endx, endy;
                     endx = e.changedTouches[0].pageX;
                     endy = e.changedTouches[0].pageY;
@@ -604,12 +597,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                         eventName: "next",
                                     });
                                 }
-                                repalceUrl(
+                                replaceUrl(
                                     dataList
                                         .eq(curIndex)
                                         .find("img")
                                         .attr("hope-url"),
-                                    "title"
+                                    "title",
+                                    options.frameReplaceUrl
                                 );
                             }
 
@@ -653,12 +647,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                         eventName: "prev",
                                     });
                                 }
-                                repalceUrl(
+                                replaceUrl(
                                     dataList
                                         .eq(curIndex)
                                         .find("img")
                                         .attr("hope-url"),
-                                    "title"
+                                    "title",
+                                    options.frameReplaceUrl
                                 );
                             }
 
@@ -699,7 +694,11 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             }
         }
 
-        repalceUrl($dom.find("img").attr("hope-url"), "title");
+        replaceUrl(
+            $dom.find("img").attr("hope-url"),
+            "title",
+            options.frameReplaceUrl
+        );
 
         if (on.open) {
             on.open({
@@ -708,7 +707,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             });
         }
 
-        self.find(".hopeui-lightbox-close").on(eventName, function(e) {
+        self.find(".hopeui-lightbox-close").on(eventName, function (e) {
             is.stopBubble(e);
             is.stopDefault(e);
             close();
@@ -739,21 +738,23 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
         });
     }
 
-    dataList.on(eventName, function() {
+    dataList.on(eventName, function () {
         open($(this));
     });
 
-    obj.close = function() {
+    obj.close = function () {
         close();
     };
 
     return obj;
 };
 
-function repalceUrl(name, title) {
+function replaceUrl(name, title, frameReplaceUrl) {
     try {
-        let newUrl = name;
-        history.pushState({}, title, newUrl);
+        if (frameReplaceUrl) {
+            let newUrl = name;
+            history.pushState({}, title, newUrl);
+        }
     } catch (error) {}
 }
 
