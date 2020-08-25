@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 09:52:15
+ * @LastEditTime : 2020-08-25 16:09:56
  * @Description  :
  */
 
@@ -103,7 +103,17 @@ module.exports.inputHandler = function({ ele, options, on }) {
                 eleArr.each(function(i, thisEle) {
                     $(thisEle).val(obj[key].value);
                     utils.validation(thisEle, "pass", null, "input");
+
+                    if (is.ie() == 8) {
+                        $(thisEle)
+                            .next(".hopeui-placeholder")
+                            .addClass("hopeui-hide");
+                    }
+
                 });
+
+               
+
             });
         }
     };
@@ -125,6 +135,11 @@ module.exports.inputHandler = function({ ele, options, on }) {
         });
         thisEle.forEach(function(ele) {
             ele.value = "";
+            if (is.ie() == 8) {
+                $(ele)
+                    .next(".hopeui-placeholder")
+                    .removeClass("hopeui-hide");
+            }
         });
     };
 

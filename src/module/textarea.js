@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-21 09:58:39
+ * @LastEditTime : 2020-08-25 16:10:35
  * @Description  :
  */
 
@@ -108,6 +108,13 @@ module.exports.textareaHandler = function({ ele, options, on }) {
                 eleArr.each(function(i, thisEle) {
                     $(thisEle).val(obj[key].value);
                     utils.validation(thisEle, "pass", null, "textarea");
+                    if (is.ie() == 8) {
+                        $(thisEle)
+                            .next()
+                            .find("input")
+                            .next(".hopeui-placeholder")
+                            .addClass("hopeui-hide");
+                    }
                 });
             });
         }
@@ -123,6 +130,12 @@ module.exports.textareaHandler = function({ ele, options, on }) {
 
         thisEle.each(function(i, ele) {
             ele.value = "";
+            if (is.ie() == 8) {
+                $(this).next()
+                    .find("input")
+                    .next(".hopeui-placeholder")
+                    .removeClass("hopeui-hide");
+            }
         });
     };
 
