@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 17:23:49
+ * @LastEditTime : 2020-08-25 18:52:56
  * @Description  :
  */
 
@@ -75,33 +75,52 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             }
 
             let ifm = layer.find("iframe");
+            let ifmHeight = 0;
             ifm.on("load", function() {
                 try {
-                    $(this).height(
-                        $(this)[0].contentWindow.document.documentElement
-                            .scrollHeight
-                    );
+                    ifmHeight = $(this)[0].contentWindow.document.documentElement
+                    .scrollHeight
+                    $(this).height(ifmHeight);
                 } catch (error) {}
             });
 
+           
             if (typeof window.addEventListener != "undefined") {
                 window.addEventListener(
                     "message",
                     function(e) {
-                        ifm.height(e.data.value[1]);
+                        ifmHeight = e.data.value[1]
+                        ifm.height(ifmHeight);
                     },
                     false
                 );
             }
 
-            layer.css({
-                left:
-                    (document.documentElement.clientWidth -
-                        scrollFix -
-                        layer.width()) /
-                    2,
-                top: !options.frameFullScreen ? 60 : 0,
-            });
+            if(document.documentElement.clientHeight>ifmHeight){
+                layer.css({
+                    left:
+                        (document.documentElement.clientWidth -
+                            scrollFix -
+                            layer.width()) /
+                        2,
+                    top: (document.documentElement.clientHeight -
+                        layer.height()) / 2
+                    
+                });
+            }else{
+                layer.css({
+                    left:
+                        (document.documentElement.clientWidth -
+                            scrollFix -
+                            layer.width()) /
+                        2,
+                    top: !options.frameFullScreen ? 60 : 0
+                    
+                });
+                
+            }
+
+        
 
             $(window).resize(function() {
                 if (!options.frameFullScreen) {
@@ -119,14 +138,29 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         .children(".hopeui-layer-content")
                         .width($("body").width());
                 }
-                layer.css({
-                    left:
-                        (document.documentElement.clientWidth -
-                            scrollFix -
-                            layer.width()) /
-                        2,
-                    top: !options.frameFullScreen ? 60 : 0,
-                });
+                if(document.documentElement.clientHeight>ifmHeight){
+                    layer.css({
+                        left:
+                            (document.documentElement.clientWidth -
+                                scrollFix -
+                                layer.width()) /
+                            2,
+                        top: (document.documentElement.clientHeight -
+                            layer.height()) / 2
+                        
+                    });
+                }else{
+                    layer.css({
+                        left:
+                            (document.documentElement.clientWidth -
+                                scrollFix -
+                                layer.width()) /
+                            2,
+                        top: !options.frameFullScreen ? 60 : 0
+                        
+                    });
+                    
+                }
             });
         } else {
             //图片，视频模式
@@ -247,7 +281,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         $(".hopui-lightbox-next").hide();
                         $(".hopui-lightbox-prev").show();
                     }
-                    repalceUrl(curIndex, "title");
+                    repalceUrl(
+                        dataList
+                            .eq(curIndex)
+                            .find("img")
+                            .attr("hope-url"),
+                        "title"
+                    );
                 }
             });
 
@@ -273,7 +313,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                         $(".hopui-lightbox-next").hide();
                         $(".hopui-lightbox-prev").show();
                     }
-                    repalceUrl(curIndex, "title");
+                    repalceUrl(
+                        dataList
+                            .eq(curIndex)
+                            .find("img")
+                            .attr("hope-url"),
+                        "title"
+                    );
                 }
             });
 
@@ -330,7 +376,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                     $(".hopui-lightbox-next").hide();
                                     $(".hopui-lightbox-prev").show();
                                 }
-                                repalceUrl(curIndex, "title");
+                                repalceUrl(
+                                    dataList
+                                        .eq(curIndex)
+                                        .find("img")
+                                        .attr("hope-url"),
+                                    "title"
+                                );
                             }
 
                             break;
@@ -361,7 +413,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                     $(".hopui-lightbox-next").hide();
                                     $(".hopui-lightbox-prev").show();
                                 }
-                                repalceUrl(curIndex, "title");
+                                repalceUrl(
+                                    dataList
+                                        .eq(curIndex)
+                                        .find("img")
+                                        .attr("hope-url"),
+                                    "title"
+                                );
                             }
 
                             break;
@@ -409,7 +467,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                             eventName: "prev",
                         });
                     }
-                    repalceUrl(curIndex, "title");
+                    repalceUrl(
+                        dataList
+                            .eq(curIndex)
+                            .find("img")
+                            .attr("hope-url"),
+                        "title"
+                    );
                 }
             });
 
@@ -447,7 +511,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                             eventName: "next",
                         });
                     }
-                    repalceUrl(curIndex, "title");
+                    repalceUrl(
+                        dataList
+                            .eq(curIndex)
+                            .find("img")
+                            .attr("hope-url"),
+                        "title"
+                    );
                 }
             });
 
@@ -517,7 +587,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                         eventName: "next",
                                     });
                                 }
-                                repalceUrl(curIndex, "title");
+                                repalceUrl(
+                                    dataList
+                                        .eq(curIndex)
+                                        .find("img")
+                                        .attr("hope-url"),
+                                    "title"
+                                );
                             }
 
                             break;
@@ -560,7 +636,13 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                                         eventName: "prev",
                                     });
                                 }
-                                repalceUrl(curIndex, "title");
+                                repalceUrl(
+                                    dataList
+                                        .eq(curIndex)
+                                        .find("img")
+                                        .attr("hope-url"),
+                                    "title"
+                                );
                             }
 
                             break;
@@ -575,8 +657,6 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             .addClass(`hopeui-anim ${options.animation}`)
             .css("position", "absolute");
 
-        
-
         location(self.children(".hopeui-layer"), $dom.children());
 
         if (options.isMask) {
@@ -586,22 +666,23 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 mask = $(maskTemplate).insertAfter("body");
             }
             if (options.maskColor) {
-                if (is.ie() <= 9) {
-                    mask.css(
-                        "filter",
-                        `progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF${RGBToHEX(
-                            options.maskColor
-                        ).replace("#", "")},endColorstr=#BF${RGBToHEX(
-                            options.maskColor
-                        ).replace("#", "")})`
-                    );
-                } else {
-                    mask.css("background", options.maskColor);
-                }
+                mask.css("background", options.maskColor);
+                // if (is.ie() <= 9) {
+                //     mask.css(
+                //         "filter",
+                //         `progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF${RGBToHEX(
+                //             options.maskColor
+                //         ).replace("#", "")},endColorstr=#BF${RGBToHEX(
+                //             options.maskColor
+                //         ).replace("#", "")})`
+                //     );
+                // } else {
+                //     mask.css("background", options.maskColor);
+                // }
             }
         }
-       
-        repalceUrl(curIndex, "title");
+
+        repalceUrl($dom.find("img").attr("hope-url"), "title");
 
         if (on.open) {
             on.open({
@@ -653,8 +734,10 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
 };
 
 function repalceUrl(name, title) {
-    // let newUrl = "/" + name;
-    // history.pushState({}, title, newUrl);
+    try {
+        let newUrl = name;
+        history.pushState({}, title, newUrl);
+    } catch (error) {}
 }
 
 function RGBToHEX(str) {
