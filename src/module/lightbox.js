@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 15:31:18
+ * @LastEditTime : 2020-08-25 17:23:49
  * @Description  :
  */
 
@@ -575,7 +575,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             .addClass(`hopeui-anim ${options.animation}`)
             .css("position", "absolute");
 
-        $("body,html").addClass("hopeui-layer-nosrl");
+        
 
         location(self.children(".hopeui-layer"), $dom.children());
 
@@ -600,7 +600,7 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
                 }
             }
         }
-
+       
         repalceUrl(curIndex, "title");
 
         if (on.open) {
@@ -615,6 +615,8 @@ module.exports.lightboxHandler = function({ ele, options, on }) {
             is.stopDefault(e);
             close();
         });
+
+        $("body").addClass("hopeui-layer-nosrl");
     };
 
     let close = () => {

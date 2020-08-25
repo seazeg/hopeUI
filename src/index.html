@@ -480,7 +480,7 @@
             </fieldset>
         </div>
         <div class="docs-content">
-            <ul id="lightbox" class="lightbox">
+            <ul id="lightbox2" class="lightbox2">
                 <li>
                     <img hope-url="http://test.haier.com/cn/"
                         src="https://hbimg.huabanimg.com/650c6c1d689de6cc08c4fac70505ee3cbccdbefd8218c-ALzKgw_fw658/format/webp"
@@ -526,6 +526,21 @@
 
     hope.lightbox({
         ele: '.lightbox',
+        options: {
+            width: '70%',
+            type: 'iframe', //pic,video
+            frameFullScreen: false,
+            maskColor: 'rgba(73,74,95,0.8)',
+            animation: "no",
+            prevIcon: "hopeui-icon hopeui-icon-left",
+            nextIcon: "hopeui-icon hopeui-icon-right",
+            closeIcon: "hopeui-icon hopeui-icon-close",
+
+        }
+    });
+
+    hope.lightbox({
+        ele: '.lightbox2',
         options: {
             width: '70%',
             type: 'iframe', //pic,video

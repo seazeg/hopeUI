@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 16:10:06
+ * @LastEditTime : 2020-08-25 16:14:41
  * @Description  :
  */
 
@@ -106,6 +106,17 @@ module.exports.selectorHandler = function({ ele, options, on }) {
 
             let _this = $(this);
             handle(selector, newEle, _this);
+            if (is.ie() == 8) {
+                if(newEle.find("input").val()){
+                newEle.find("input")
+                    .next(".hopeui-placeholder")
+                    .addClass("hopeui-hide");
+                }else{
+                    newEle.find("input")
+                    .next(".hopeui-placeholder")
+                    .removeClass("hopeui-hide");
+                }
+            }
             //选中options后回调
             if (on.change) {
                 on.change({
