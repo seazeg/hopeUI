@@ -8,23 +8,23 @@ import { viewinfo } from "../view/lightbox.view.js";
 
 <Canvas>
     <Story name="iframe模式" height="150px" parameters={{ docs: { source: { code:`${viewinfo.ifm}${viewinfo.ifmJS}` }}}}>
-    {() => {
+        {() => {
         useEffect(() => {
-            Function(viewinfo.ifmJS)()
+        Function(viewinfo.ifmJS)()
         });
         return viewinfo.ifm
-    }} 
+        }}
     </Story>
 </Canvas>
 
 <Canvas>
     <Story name="图片模式" height="150px" parameters={{ docs: { source: { code:`${viewinfo.pic}${viewinfo.picJS}` }}}}>
-    {() => {
+        {() => {
         useEffect(() => {
-            Function(viewinfo.picJS)()
+        Function(viewinfo.picJS)()
         });
         return viewinfo.pic
-    }}  
+        }}
     </Story>
 </Canvas>
 
@@ -32,36 +32,37 @@ import { viewinfo } from "../view/lightbox.view.js";
 
 ## 基础属性
 
-| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ------------- | ------ | -------------------- | ------- |
-| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+| ele | 元素 dom 节点 | String | Class / id / TagName | TagName |
 
 ## 参数配置 options
 
-| 参数            | 说明             | 类型    | 可选值          | 默认值                        |
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | --------------- | ---------------- | ------- | --------------- | ----------------------------- |
-| width           | 内容宽度         | String  |       --          | 80%                           |
-| type            | 模式             | String  | iframe/pic      | iframe                        |
-| frameFullScreen | ifm 是否全屏     | Boolean | true / false    | false                         |
-| isMask          | 是否有背景遮罩层 | Boolean | true / false    | true                          |
-| maskColor       | 遮罩层颜色       | String  | 必须是 rgb 格式 | rgba(0,0,0,0.3)               |
-| animation       | 动画             | String  | hopeui 动画     | hopeui-anim-scale             |
-| prevIcon        | 前一帧图标       | String  | --              | hopeui-icon hopeui-icon-prev  |
-| nextIcon        | 下一帧图标       | String  | --              | hopeui-icon hopeui-icon-left  |
-| closeIcon       | 关闭图标         | String  | --              | hopeui-icon hopeui-icon-close |
+| width | 内容宽度 | String | -- | 80% |
+| type | 模式 | String | iframe/pic | iframe |
+| frameFullScreen | ifm模式是否全屏 | Boolean | true / false | false |
+| frameReplaceUrl | ifm模式下地址栏URL替换成ifm地址 | Boolean | true / false | false |
+| isMask | 是否有背景遮罩层 | Boolean | true / false | true |
+| maskColor | 遮罩层颜色 | String | 必须是 rgb 格式 | rgba(0,0,0,0.3) |
+| animation | 动画 | String | hopeui 动画 | hopeui-anim-scale |
+| prevIcon | 前一帧图标 | String | -- | hopeui-icon hopeui-icon-prev |
+| nextIcon | 下一帧图标 | String | -- | hopeui-icon hopeui-icon-left |
+| closeIcon | 关闭图标 | String | -- | hopeui-icon hopeui-icon-close |
 
 ## 回调方法 on
 
-| 方法名 | 说明       | 类型     | 默认值 | 回调参数     |
+| 方法名 | 说明 | 类型 | 默认值 | 回调参数 |
 | ------ | ---------- | -------- | ------ | ------------ |
-| init   | 初始化回调 | Function | null   | 当前对象 DOM |
-| open   | 打开后回调 | Function | null   | 当前对象 DOM |
-| close  | 关闭后回调 | Function | null   | 当前对象 DOM |
-| prev   | 前一帧回调 | Function | null   | 当前对象 DOM |
-| next   | 下一帧回调 | Function | null   | 当前对象 DOM |
+| init | 初始化回调 | Function | null | 当前对象 DOM |
+| open | 打开后回调 | Function | null | 当前对象 DOM |
+| close | 关闭后回调 | Function | null | 当前对象 DOM |
+| prev | 前一帧回调 | Function | null | 当前对象 DOM |
+| next | 下一帧回调 | Function | null | 当前对象 DOM |
 
 ## 调用方法
 
-| 方法名 | 说明         | 类型     | 默认值 | 参数 |
+| 方法名 | 说明 | 类型 | 默认值 | 参数 |
 | ------ | ------------ | -------- | ------ | ---- |
-| close  | 外部调用关闭 | Function | --     | --   |
+| close | 外部调用关闭 | Function | -- | -- |

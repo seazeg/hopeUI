@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 23:51:50
- * @Description  :
+ * @LastEditTime : 2020-08-26 14:02:35
+ * @Description  : 灯箱
  */
 
 const $ = require("../utils/hopeu.js");
@@ -738,7 +738,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
         });
     }
 
-    dataList.off().on(eventName, function () {
+    dataList.off().on('click', function () {
         open($(this));
     });
 

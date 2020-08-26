@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-25 10:58:42
+ * @LastEditTime : 2020-08-26 14:06:17
  * @Description  :
  */
 export const viewinfo = {
@@ -39,7 +39,7 @@ html:`
             </select>
         </div>
     </div>
-    <div class="hopeui-form-item">
+    <!--<div class="hopeui-form-item">
         <label class="hopeui-form-label">联动下拉框</label>
         <div class="hopeui-input-inline">
             <select name="LD" id="dd" hope-verify="required">
@@ -74,7 +74,7 @@ html:`
                 <option value="郑州">郑州</option>
             </select>
         </div>
-    </div>
+    </div>-->
     <div class="hopeui-form-item">
         <label class="hopeui-form-label">文本框</label>
         <div class="hopeui-input-block">

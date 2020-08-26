@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-24 14:41:02
+ * @LastEditTime : 2020-08-26 14:26:27
  * @Description  :
  */
 
@@ -19,20 +19,30 @@ const { radioHandler } = require("./module/radio.js");
 const { textareaHandler } = require("./module/textarea.js");
 const { inputHandler } = require("./module/input.js");
 const { formHandler } = require("./module/form.js");
+const { loadmoreHandler } = require("./module/loadmore.js");
 
 const hope = () => {
     return {
-        scrollbar: function({
+        loadmore: function ({
+            ele: ele = null,
+            options: options = {},
+            params: params = {},
+            reader: reader = null,
+            on: on = {},
+        }) {
+            return loadmoreHandler({ ele, options, params, reader, on });
+        },
+        scrollbar: function ({
             ele: ele = null,
             options: options = {},
             on: on = {
                 init: null,
-                scroll: null
+                scroll: null,
             },
         }) {
             return scrollbarHandler({ ele, options, on });
         },
-        lightbox: function({
+        lightbox: function ({
             ele: ele = null,
             options: options = {
                 content: null,
@@ -50,7 +60,7 @@ const hope = () => {
         }) {
             return lightboxHandler({ ele, options, on });
         },
-        pager: function({
+        pager: function ({
             ele: ele = null,
             options: options = {},
             params: params = {},
@@ -61,7 +71,7 @@ const hope = () => {
         }) {
             return pagerHandler({ ele, options, params, reader, on });
         },
-        tab: function({
+        tab: function ({
             ele: ele = null,
             options: options = {},
             on: on = {
@@ -71,7 +81,7 @@ const hope = () => {
         }) {
             return tabHandler({ ele, options, on });
         },
-        layer: function({
+        layer: function ({
             options: options = {
                 title: null,
                 content: null,
@@ -91,7 +101,7 @@ const hope = () => {
         }) {
             return layerHandler({ options, on });
         },
-        selector: function({
+        selector: function ({
             ele: ele = null,
             options: options = null,
             on: on = {
@@ -103,7 +113,7 @@ const hope = () => {
         }) {
             return selectorHandler({ ele, options, on });
         },
-        checkbox: function({
+        checkbox: function ({
             ele: ele = null,
             options: options = null,
             on: on = {
@@ -113,7 +123,7 @@ const hope = () => {
         }) {
             return checkboxHandler({ ele, options, on });
         },
-        radio: function({
+        radio: function ({
             ele: ele = null,
             options: options = null,
             on: on = {
@@ -123,7 +133,7 @@ const hope = () => {
         }) {
             return radioHandler({ ele, options, on });
         },
-        input: function({
+        input: function ({
             ele: ele = null,
             options: options = null,
             on: on = {
@@ -135,7 +145,7 @@ const hope = () => {
         }) {
             return inputHandler({ ele, options, on });
         },
-        textarea: function({
+        textarea: function ({
             ele: ele = null,
             options: options = null,
             on: on = {
@@ -147,7 +157,7 @@ const hope = () => {
         }) {
             return textareaHandler({ ele, options, on });
         },
-        form: function({
+        form: function ({
             ele: ele = null,
             options: options = null,
             on: on = {

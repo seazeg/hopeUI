@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-11 16:28:32
- * @Description  :
+ * @LastEditTime : 2020-08-26 14:30:05
+ * @Description  : 复选框
  */
 
 const $ = require("../utils/hopeu.js");
