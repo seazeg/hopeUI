@@ -101,6 +101,18 @@
 
 <body>
 
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">数字自增动画</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content" >
+           <div class="number">12,123.12</div>
+           <div class="number">1234111</div>
+           <div class="number">99.11</div>
+        </div>
+    </div>
 
     <div class="docs-box">
         <div class="docs-title">
@@ -113,9 +125,9 @@
             <div id="loadmore"></div>
         </div>
     </div>
-    
 
-    
+
+
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
@@ -183,7 +195,7 @@
         </div>
     </div>
 
-   
+
 
     <div class="docs-box">
         <div class="docs-title">
@@ -489,11 +501,13 @@
 
 </body>
 <script>
+    //数字自增到某一值动画参数（目标元素,自定义配置） 
+    hope.numup({ele:'.number'});
 
     var loadmore = hope.loadmore({
         ele: "#loadmore",
         options: {
-            loadBtnName:'加载多多'
+            loadBtnName: '加载多多'
         },
         params: {
             url: '/assets/page/list1.json',
@@ -517,22 +531,22 @@
                 totalNumber: res.totalNumber
             }
         },
-        on:{
-            loaded: function(e){
+        on: {
+            loaded: function (e) {
                 console.log(e);
             }
         }
     })
 
-    $('.js_tagload').on('click',function(){
+    $('.js_tagload').on('click', function () {
         loadmore.next();
     })
 
 
     hope.scrollbar({
         ele: '#scrollbar',
-        options:{
-            height:200,
+        options: {
+            height: 200,
         },
         on: {
             init: function () {},

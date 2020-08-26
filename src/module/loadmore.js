@@ -1,12 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 16:54:30
+ * @LastEditTime : 2020-08-26 17:11:05
  * @Description  : 加载更多
  */
 
 const $ = require("../utils/hopeu.js");
-const { is } = require("../utils/is.js");
 
 module.exports.loadmoreHandler = function ({
     ele,

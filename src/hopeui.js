@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-26 16:15:24
+ * @LastEditTime : 2020-08-26 17:20:56
  * @Description  :
  */
 
@@ -20,16 +20,26 @@ const { textareaHandler } = require("./module/textarea.js");
 const { inputHandler } = require("./module/input.js");
 const { formHandler } = require("./module/form.js");
 const { loadmoreHandler } = require("./module/loadmore.js");
+const { numupHandler } = require("./module/numup.js");
 
 const hope = () => {
     return {
+        numup: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {
+                loaded: null,
+            },
+        }) {
+            return numupHandler({ ele, options, on });
+        },
         loadmore: function ({
             ele: ele = null,
             options: options = {},
             params: params = {},
             reader: reader = null,
             on: on = {
-                loaded:null
+                loaded: null,
             },
         }) {
             return loadmoreHandler({ ele, options, params, reader, on });
