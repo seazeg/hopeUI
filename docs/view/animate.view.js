@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-08-25 14:07:28
+ * @LastEditTime : 2020-08-26 16:07:27
  * @Description  :
  */
 
@@ -75,7 +75,7 @@ html:`
 </div>
 <div class="hopeui-row hopeui-col-space10">
     <div class="hopeui-col-3-12">
-        <span class="hopeui-anim docs-demo-circle" data-anim="hopeui-anim-rotate">
+        <span class="hopeui-anim docs-demo-circle hopeui-anim-loop" data-anim="hopeui-anim-rotate">
             旋转
         </span>
     </div>

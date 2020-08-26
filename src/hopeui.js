@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-26 14:26:27
+ * @LastEditTime : 2020-08-26 16:15:24
  * @Description  :
  */
 
@@ -28,7 +28,9 @@ const hope = () => {
             options: options = {},
             params: params = {},
             reader: reader = null,
-            on: on = {},
+            on: on = {
+                loaded:null
+            },
         }) {
             return loadmoreHandler({ ele, options, params, reader, on });
         },
