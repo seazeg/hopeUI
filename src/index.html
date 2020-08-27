@@ -42,9 +42,9 @@
         padding-bottom: 50px;
     }
 
-    .docs-content>* {
+    /* .docs-content>* {
         margin-right: 5px;
-    }
+    } */
 
     .docs-grid-demo {
         width: 100%;
@@ -104,6 +104,17 @@
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
+                <legend><a name="icon">通用</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <input name="text" type="text" value="" class="hopeui-input js_hopeui_input" placeholder="请输入" autoprompt />
+        </div>
+    </div>
+
+    <!-- <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
                 <legend><a name="icon">数字自增动画</a></legend>
             </fieldset>
         </div>
@@ -112,7 +123,7 @@
            <div class="number">1234111</div>
            <div class="number">99.11</div>
         </div>
-    </div>
+    </div> -->
 
     <div class="docs-box">
         <div class="docs-title">
@@ -183,17 +194,6 @@
 
 
 
-
-    <div class="docs-box">
-        <div class="docs-title">
-            <fieldset>
-                <legend><a name="icon">通用</a></legend>
-            </fieldset>
-        </div>
-        <div class="docs-content">
-            <input name="text" type="text" value="" class="hopeui-input js_hopeui_input" placeholder="请输入" />
-        </div>
-    </div>
 
 
 
@@ -502,7 +502,9 @@
 </body>
 <script>
     //数字自增到某一值动画参数（目标元素,自定义配置） 
-    hope.numup({ele:'.number'});
+    hope.numup({
+        ele: '.number'
+    });
 
     var loadmore = hope.loadmore({
         ele: "#loadmore",
@@ -556,8 +558,25 @@
         }
     })
 
-    hope.input({
-        ele: '.js_hopeui_input'
+    hope.suggest({
+        ele: '.js_hopeui_input',
+        params: {
+            url: '/assets/page/list1.json',
+            dataType: "json",
+            type: 'get',
+            searchField: 'searchword'
+        },
+        reader: function (res) {
+            var list = res.data;
+            var tmp = [];
+            for (var i = 0; i < list.length; i++) {
+                tmp.push(list[i].goodsName)
+            }
+            return tmp
+        },
+        on:{
+            input:function (e) {console.log(e);}
+        }
     })
 
     hope.lightbox({

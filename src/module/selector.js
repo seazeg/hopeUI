@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-25 16:14:41
+ * @LastEditTime : 2020-08-27 09:53:47
  * @Description  : 下拉框
  */
 
@@ -141,6 +141,8 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                 on.close(e);
             }
         });
+      
+
 
         if (on.init) {
             on.init({

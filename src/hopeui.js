@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-26 17:20:56
+ * @LastEditTime : 2020-08-27 15:34:30
  * @Description  :
  */
 
@@ -21,9 +21,24 @@ const { inputHandler } = require("./module/input.js");
 const { formHandler } = require("./module/form.js");
 const { loadmoreHandler } = require("./module/loadmore.js");
 const { numupHandler } = require("./module/numup.js");
+const { suggestHandler } = require("./module/suggest.js");
 
 const hope = () => {
     return {
+        suggest: function ({
+            ele: ele = null,
+            options: options = {},
+            params: params = {},
+            reader: reader = null,
+            on: on = {
+                init: null,
+                blur: null,
+                focus: null,
+                input: null,
+            },
+        }) {
+            return suggestHandler({ ele, options, params, reader, on });
+        },
         numup: function ({
             ele: ele = null,
             options: options = {},

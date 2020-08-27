@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-08-24 10:26:57
+ * @LastEditTime : 2020-08-27 14:07:01
  * @Description  : is类
  */
 module.exports.is = {
@@ -58,8 +58,8 @@ module.exports.is = {
             i,
             humpString = [],
             htmlStyle = document.documentElement.style,
-            _toHumb = function(string) {
-                return string.replace(/-(\w)/g, function($0, $1) {
+            _toHumb = function (string) {
+                return string.replace(/-(\w)/g, function ($0, $1) {
                     return $1.toUpperCase();
                 });
             };
@@ -85,5 +85,10 @@ module.exports.is = {
     },
     noPer(str) {
         return !str.includes("%");
+    },
+    empty(str) {
+        return typeof str == "undefined" || str == null || str == ""
+            ? true
+            : false;
     },
 };
