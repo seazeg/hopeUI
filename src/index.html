@@ -560,6 +560,9 @@
 
     hope.suggest({
         ele: '.js_hopeui_input',
+        options:{
+            noMatchName : '-- 没有匹配的内容 --'
+        },
         params: {
             url: '/assets/page/list1.json',
             dataType: "json",
@@ -572,7 +575,7 @@
             for (var i = 0; i < list.length; i++) {
                 tmp.push(list[i].goodsName)
             }
-            return tmp
+            return []
         },
         on:{
             input:function (e) {console.log(e);}

@@ -7,7 +7,7 @@
     "dev": "npx webpack-dev-server --mode development --content-base ./dist --open",
     "build": "webpack --config webpack.config.js",
     "api": "start-storybook",
-    "build-api": "build-storybook"
+    "build:api": "build-storybook"
   },
   "author": {
     "name": "Evan.G",

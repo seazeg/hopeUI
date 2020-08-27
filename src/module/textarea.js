@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 14:31:39
+ * @LastEditTime : 2020-08-27 17:10:28
  * @Description  : 多行文本框
  */
 
@@ -21,8 +21,6 @@ module.exports.textareaHandler = function({ ele, options, on }) {
 
     $dom.each(function() {
         let $this = $(this);
-        let textarea = $this[0];
-
         if (is.ie() == 8) {
             $this
                 .after(
@@ -59,33 +57,33 @@ module.exports.textareaHandler = function({ ele, options, on }) {
             });
         }
 
-        textarea.onblur = function(e) {
+        $this.on('blur',function (){
             if (on.blur) {
                 on.blur({
-                    targetELe: e.target,
-                    value: e.target.value,
+                    targetELe: $(this).get(0),
+                    value: $(this).val(), 
                     eventName: "blur",
                 });
             }
-        };
-        textarea.onfocus = function(e) {
+        })
+        $this.on('focus',function (){
             if (on.focus) {
                 on.focus({
-                    targetELe: e.target,
-                    value: e.target.value,
+                    targetELe: $(this).get(0),
+                    value: $(this).val(), 
                     eventName: "focus",
                 });
             }
-        };
-        textarea.oninput = function(e) {
+        })
+        $this.on('input propertychange',function (){
             if (on.input) {
                 on.input({
-                    targetELe: e.target,
-                    value: e.target.value,
+                    targetELe: $(this).get(0),
+                    value: $(this).val(), 
                     eventName: "input",
                 });
             }
-        };
+        })
     });
 
     if (on.init) {

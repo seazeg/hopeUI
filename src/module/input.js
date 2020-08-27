@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 14:30:16
+ * @LastEditTime : 2020-08-27 17:09:56
  * @Description  : 文本框
  */
 
@@ -21,7 +21,6 @@ module.exports.inputHandler = function({ ele, options, on }) {
 
     $dom.each(function() {
         let $this = $(this);
-        let input = $this[0];
         if (!$this.attr("hope-type")) {
             if (is.ie() == 8) {
                 $this
@@ -59,33 +58,33 @@ module.exports.inputHandler = function({ ele, options, on }) {
                 });
             }
 
-            input.onblur = function(e) {
+            $this.on('blur',function (){
                 if (on.blur) {
                     on.blur({
-                        targetELe: e.target,
-                        value: e.target.value,
+                        targetELe: $(this).get(0),
+                        value: $(this).val(), 
                         eventName: "blur",
                     });
                 }
-            };
-            input.onfocus = function(e) {
+            })
+            $this.on('focus',function (){
                 if (on.focus) {
                     on.focus({
-                        targetELe: e.target,
-                        value: e.target.value,
+                        targetELe: $(this).get(0),
+                        value: $(this).val(), 
                         eventName: "focus",
                     });
                 }
-            };
-            input.oninput = function(e) {
+            })
+            $this.on('input propertychange',function (){
                 if (on.input) {
                     on.input({
-                        targetELe: e.target,
-                        value: e.target.value,
+                        targetELe: $(this).get(0),
+                        value: $(this).val(), 
                         eventName: "input",
                     });
                 }
-            };
+            })
         }
     });
 
