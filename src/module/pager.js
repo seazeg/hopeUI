@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-08-27 12:48:11
+ * @LastEditTime : 2020-08-28 15:23:50
  * @Description  : 分页
  */
 
@@ -45,6 +45,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 pageNo + Math.floor(options.omit / 2) <
                                     totalPage - 1
                             ) {
+
                                 pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
                                 pageHTML += `<i class="hopeui-pager-omit">...</i>`;
 
@@ -64,24 +65,43 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 pageHTML += `<i class="hopeui-pager-omit">...</i>`;
                                 pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
                             } else if (pageNo <= options.omit) {
-                                for (let i = 1; i <= options.omit; i++) {
-                                    if (pageNo == i) {
-                                        pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
-                                    } else {
-                                        pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
+                                if (options.omit > totalPage) {
+                                    for (let i = 1; i <= totalPage; i++) {
+                                        if (pageNo == i) {
+                                            pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
+                                        } else {
+                                            pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
+                                        }
+                                    }
+
+                                  
+                                }else{
+                                    for (let i = 1; i <= options.omit; i++) {
+                                        if (pageNo == i) {
+                                            pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
+                                        } else {
+                                            pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
+                                        }
+                                    }
+                                    if (options.omit != totalPage  ) {
+                                        if (options.omit != totalPage - 1) {
+                                            pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                        }
+                                        pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
                                     }
                                 }
 
-                                if (options.omit != totalPage) {
-                                    if (options.omit != totalPage - 1) {
-                                        pageHTML += `<i class="hopeui-pager-omit">...</i>`;
-                                    }
-                                    pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
-                                }
+                                // if (options.omit != totalPage ) {
+                                //     if (options.omit != totalPage - 1) {
+                                //         pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                //     }
+                                //     pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
+                                // }
                             } else if (
                                 totalPage - pageNo <=
                                 options.omit - Math.floor(options.omit / 2)
                             ) {
+                  
                                 pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
                                 if (options.omit != totalPage - 1) {
                                     pageHTML += `<i class="hopeui-pager-omit">...</i>`;
@@ -98,7 +118,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     }
                                 }
                             }
-                        }else{
+                        } else {
                             pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="1">1</span>`;
                         }
 
@@ -119,9 +139,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
 
                         $dom.find(".hopeui-pager-num").on("click", function () {
                             if (pageNo != $(this).attr("hopeui-num")) {
-                                // params.url = `../../assets/page/list${$(
-                                //     this
-                                // ).attr("hopeui-num")}.json`; //测试代码
+                                // params.url = `../../assets/page/list${$(this).attr("hopeui-num")}.json`; //测试代码
                                 params.data[pageMapping] = $(this).attr(
                                     "hopeui-num"
                                 );

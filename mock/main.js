@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:34:52
- * @LastEditTime : 2020-08-27 13:32:34
+ * @LastEditTime : 2020-08-28 15:22:25
  * @Description  :
  */
 const Mock = require("mockjs");
@@ -11,15 +11,15 @@ for (var i = 1; i <= 12; i++) {
     // 定义数据类型
     var data = Mock.mock({
         // 20条数据
-        "data|23": [
+        "data|20": [
             {
                 goodsName: "@ctitle(10)",
-                "goodsStar|1-5": "★",
+                "goodsStar|1-5": "★"
             },
         ],
         pageNo: i,
         pageSize: 20,
-        totalNumber:10 ,
+        totalNumber:61 ,
     });
 
     fs.writeFile(
