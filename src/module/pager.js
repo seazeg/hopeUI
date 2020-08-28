@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-08-28 15:35:34
+ * @LastEditTime : 2020-08-28 15:48:32
  * @Description  : 分页
  */
 
@@ -144,11 +144,12 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     "hopeui-num"
                                 );
                                 getData(params, reader);
-                                if (on.jump) {
-                                    on.jump({
+                                if (on.jumpOver) {
+                                    on.jumpOver({
                                         type: "number",
                                         targetEle: $(this)[0],
                                         pageNo: $(this).attr("hopeui-num"),
+                                        event: "jumpOver"
                                     });
                                 }
                             }
@@ -162,11 +163,12 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     // params.url = `../../assets/page/list${pageNo}.json`; //测试代码
                                     params.data[pageMapping] = pageNo;
                                     getData(params, reader);
-                                    if (on.jump) {
-                                        on.jump({
+                                    if (on.jumpOver) {
+                                        on.jumpOver({
                                             type: "prev",
                                             targetEle: $(this)[0],
                                             pageNo: pageNo,
+                                            event: "jumpOver",
                                         });
                                     }
                                 }
@@ -201,6 +203,14 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     // params.url = `../../assets/page/list${number}.json`; //测试代码
                                     params.data[pageMapping] = number;
                                     getData(params, reader);
+                                    if (on.jumpOver) {
+                                        on.jumpOver({
+                                            type: "jump",
+                                            targetEle: $(this)[0],
+                                            pageNo: pageNo,
+                                            event: "jumpOver",
+                                        });
+                                    }
                                 }
                             });
                     }
@@ -218,6 +228,13 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
             // params.url = `../../assets/page/list${number}.json`; //测试代码
             params.data[pageMapping] = number;
             getData(params, reader);
+            if (on.jumpOver) {
+                on.jumpOver({
+                    type: "jump",
+                    pageNo: number,
+                    event: "jumpOver",
+                });
+            }
         }
     };
     return obj;
