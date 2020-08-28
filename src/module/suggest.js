@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-27 17:08:59
+ * @LastEditTime : 2020-08-28 15:37:15
  * @Description  : 文本框
  */
 
@@ -35,6 +35,7 @@ module.exports.suggestHandler = function ({
                     if (reader) {
                         let list = reader(data);
                         let html = "";
+   
                         if (list.length > 0) {
                             for (let item of list) {
                                 html += `<div class="option" hope-value="${item}">${item}</div>`;
@@ -71,7 +72,14 @@ module.exports.suggestHandler = function ({
                         }
                     }
                 },
-                error: function () {},
+                error: function () {
+                    obj.find(".hopeui-suggest-list").html(
+                        `<div class="option" hope-value="">${
+                            options.noMatchName ||
+                            "-- 没有匹配的内容 --"
+                        }</div>`
+                    );
+                },
             })
         );
     }
