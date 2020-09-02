@@ -1,14 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 14:30:52
+ * @LastEditTime : 2020-09-02 11:01:21
  * @Description  : 单选框
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
 
-module.exports.radioHandler = function({ ele, options, on }) {
+module.exports.radioHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let type = "input";
     let $dom = $("input[type=radio]");
@@ -18,7 +18,7 @@ module.exports.radioHandler = function({ ele, options, on }) {
             : ($dom = $(`${ele} input[type=radio]`));
     }
 
-    $dom.each(function() {
+    $dom.each(function () {
         let newEle,
             radio = $(this)[0];
         let template = `<div class="hopeui-noUserSelect hopeui-form-radio ${
@@ -31,30 +31,34 @@ module.exports.radioHandler = function({ ele, options, on }) {
 
         newEle = $(template).insertAfter(radio);
 
-        newEle.on("click", function(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            } else if (window.event) {
-                window.event.cancelBubble = true;
-            }
-            handle(radio, newEle);
-            //点击回调
-            if (on.change) {
-                on.change({
-                    original: radio,
-                    targetEle: radio.nextSibling,
-                    name: radio.name,
-                    value: radio.value,
-                    status: radio.checked,
-                    eventName: "change",
-                });
-            }
-        });
+        if ($(this).attr("disabled")) {
+            newEle.addClass("hopeui-radio-disabled");
+        } else {
+            newEle.on("click", function (e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                handle(radio, newEle);
+                //点击回调
+                if (on.change) {
+                    on.change({
+                        original: radio,
+                        targetEle: radio.nextSibling,
+                        name: radio.name,
+                        value: radio.value,
+                        status: radio.checked,
+                        eventName: "change",
+                    });
+                }
+            });
+        }
     });
 
-    obj.val = function(obj) {
+    obj.val = function (obj) {
         if (obj) {
-            Object.keys(obj).forEach(function(key) {
+            Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`input[name=${key}]`);
                 if (ele) {
                     utils.isSelf(ele, type)
@@ -62,8 +66,8 @@ module.exports.radioHandler = function({ ele, options, on }) {
                         : (eleArr = $(`${ele} input[name=${key}]`));
                 }
 
-                eleArr.each(function(i, thisEle) {
-                    obj[key].value.split(",").forEach(function(val) {
+                eleArr.each(function (i, thisEle) {
+                    obj[key].value.split(",").forEach(function (val) {
                         if ($(thisEle).val() == val) {
                             handle(thisEle, $(thisEle).next(), true);
                         }
@@ -73,7 +77,7 @@ module.exports.radioHandler = function({ ele, options, on }) {
             });
         }
     };
-    obj.clear = function() {
+    obj.clear = function () {
         let thisEle = $(`input[type=radio]`);
         if (ele) {
             utils.isSelf(ele, type)
@@ -81,12 +85,7 @@ module.exports.radioHandler = function({ ele, options, on }) {
                 : (thisEle = $(`${ele} input[type=radio]`));
         }
 
-        handle(
-            thisEle[0],
-            $(thisEle)
-                .eq(0)
-                .next()
-        );
+        handle(thisEle[0], $(thisEle).eq(0).next());
     };
 
     if (on.init) {
@@ -105,7 +104,7 @@ module.exports.radioHandler = function({ ele, options, on }) {
     function handle(original, targetEle) {
         $(targetEle)
             .siblings(".hopeui-form-radio")
-            .each(function() {
+            .each(function () {
                 let _this = $(this);
                 if (_this.hasClass("hopeui-form-radioed")) {
                     original.checked = true;

@@ -21,6 +21,24 @@
         }
     }
 
+    &.hopeui-checkbox-disabled {
+        cursor: not-allowed !important;
+        > i {
+            color: #ffffff !important;
+            border-color: @gray_light;
+        }
+        > span {
+            color: @gray_normal !important;
+        }
+
+        &:hover {
+            i {
+                color: #ffffff !important;
+                border-color: @gray_light;
+            }
+        }
+    }
+
     > span {
         padding-left: 0;
         padding-right: 15px;
@@ -42,14 +60,14 @@
         width: 16px;
         height: 16px;
         line-height: 16px;
-        border: 1px solid @gray_normal;
+        border: 1px solid #c2c2c2;
         font-size: 12px;
         border-radius: 2px;
         background-color: @lightFontColor;
         -webkit-transition: 0.1s linear;
         transition: 0.1s linear;
         text-align: center;
-        color:#ffffff;
+        color: #ffffff;
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 14:30:05
+ * @LastEditTime : 2020-09-02 10:53:18
  * @Description  : 复选框
  */
 
@@ -28,25 +28,31 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
 
         newEle = $(template).insertAfter(checkbox);
 
-        newEle.on("click", function(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            } else if (window.event) {
-                window.event.cancelBubble = true;
-            }
-            handle(checkbox, newEle);
-            //点击回调
-            if (on.change) {
-                on.change({
-                    original: checkbox,
-                    targetEle: checkbox.nextSibling,
-                    name: checkbox.name,
-                    value: checkbox.value,
-                    status: checkbox.checked,
-                    eventName: "change",
-                });
-            }
-        });
+        if($(this).attr('disabled')){
+            newEle.addClass('hopeui-checkbox-disabled');
+        }else{
+            newEle.on("click", function(e) {
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+                handle(checkbox, newEle);
+                //点击回调
+                if (on.change) {
+                    on.change({
+                        original: checkbox,
+                        targetEle: checkbox.nextSibling,
+                        name: checkbox.name,
+                        value: checkbox.value,
+                        status: checkbox.checked,
+                        eventName: "change",
+                    });
+                }
+            });
+        }
+
+        
     });
 
     if (on.init) {

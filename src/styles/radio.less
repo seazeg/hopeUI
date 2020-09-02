@@ -18,18 +18,28 @@
         color: #c2c2c2;
         display: inline-block;
     }
-}
 
-&.hopeui-form-radio {
-    color:#666;
-    > i:hover {
-        color: @primaryColor;
+    &.hopeui-form-radio {
+        color:#666;
+        > i:hover {
+            color: @primaryColor;
+        }
     }
-}
-
-&.hopeui-form-radioed {
-    > i {
-        color: @primaryColor;
+    
+    &.hopeui-form-radioed {
+        > i {
+            color: @primaryColor;
+        }
     }
+    
+    &.hopeui-radio-disabled {
+        > i {
+            color: @gray_light !important;
+        }
+        >span{
+            color: @gray_normal !important;
+        }
+    }
+    
 }
 
