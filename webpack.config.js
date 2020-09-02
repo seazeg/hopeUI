@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-08-26 00:23:00
+ * @LastEditTime : 2020-09-02 14:47:44
  * @Description  :
  */
 
@@ -23,8 +23,11 @@ module.exports = {
         compress: true,
         port: 8090,
         proxy: {
-            "/test": {
-                target: "http://localhost:3007",
+            "/app": {
+                target: "http://0.0.0.0:9909",
+                pathRewrite: {
+                    '^/app': ''
+                },
                 changeOrigin: true,
             },
         },

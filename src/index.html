@@ -100,6 +100,19 @@
 </style>
 
 <body>
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">文件上传</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <div id="uploadlist"></div>
+            <br>
+            <button class="hopeui-btn" id="upload">文件选择</button>
+        </div>
+    </div>
+
 
     <div class="docs-box">
         <div class="docs-title">
@@ -396,7 +409,7 @@
                     <div class="hopeui-input-block">
                         <input type="checkbox" name="subject" value="音乐" hope-verify="required" />
                         <input type="checkbox" name="subject" value="历史" hope-verify="required" />
-                        <input type="checkbox" name="subject" value="生物" hope-verify="required" disabled/>
+                        <input type="checkbox" name="subject" value="生物" hope-verify="required" disabled />
                     </div>
                 </div>
                 <div class="hopeui-form-item">
@@ -412,7 +425,7 @@
                     <div class="hopeui-input-block">
                         <input type="radio" name="radio" value="男" title="男" hope-verify="required" checked />
                         <input type="radio" name="radio" value="女" title="女" hope-verify="required" />
-                        <input type="radio" name="radio" value="什么玩意" title="什么玩意" hope-verify="required" disabled/>
+                        <input type="radio" name="radio" value="什么玩意" title="什么玩意" hope-verify="required" disabled />
                     </div>
                 </div>
                 <div class="hopeui-form-item">
@@ -501,10 +514,37 @@
 
 </body>
 <script>
-    //数字自增到某一值动画参数（目标元素,自定义配置） 
-    hope.numup({
-        ele: '.number'
-    });
+    // hope.numup({
+    //     ele: '.number'
+    // });
+
+    hope.upload({
+        ele: "#upload",
+        options: {
+            url: '/app/fileUpload',
+            name: "file",
+            type: ['jpg', 'png'],
+            size: 5 * 1024 * 1024 //5mb
+        },
+        on: {
+            validate: function (e) {
+                console.log(e);
+                if (!e.result) {
+                    alert('type不符合')
+                }
+            },
+            uploading: function () {
+                console.log('上传中');
+            },
+            complete: function (res) {
+                console.log(res);
+                $('#uploadlist').html('<img src="/app/'+res.imgurl+'" />')
+            },
+            error: function (res) {
+
+            }
+        }
+    })
 
     var loadmore = hope.loadmore({
         ele: "#loadmore",
@@ -560,8 +600,8 @@
 
     hope.suggest({
         ele: '.js_hopeui_input',
-        options:{
-            noMatchName : '-- 没有匹配的内容 --'
+        options: {
+            noMatchName: '-- 没有匹配的内容 --'
         },
         params: {
             url: '/assets/page/list111.json',
@@ -577,8 +617,10 @@
             }
             return []
         },
-        on:{
-            input:function (e) {console.log(e);}
+        on: {
+            input: function (e) {
+                console.log(e);
+            }
         }
     })
 

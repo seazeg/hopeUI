@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-08-27 15:34:30
+ * @LastEditTime : 2020-09-02 14:22:08
  * @Description  :
  */
 
@@ -22,9 +22,24 @@ const { formHandler } = require("./module/form.js");
 const { loadmoreHandler } = require("./module/loadmore.js");
 const { numupHandler } = require("./module/numup.js");
 const { suggestHandler } = require("./module/suggest.js");
+const { uploadHandler } = require("./module/upload.js");
 
 const hope = () => {
     return {
+        upload: function ({
+            ele: ele = null,
+            options: options = {},
+            params: params = {},
+            reader: reader = null,
+            on: on = {
+                init: null,
+                blur: null,
+                focus: null,
+                input: null,
+            },
+        }) {
+            return uploadHandler({ ele, options, params, reader, on });
+        },
         suggest: function ({
             ele: ele = null,
             options: options = {},
