@@ -21,7 +21,7 @@ module.exports.textareaHandler = function({ ele, options, on }) {
 
     $dom.each(function() {
         let $this = $(this);
-        if (is.ie() == 8) {
+        if (is.ie() <= 9) {
             $this
                 .after(
                     `<label class="hopeui-placeholder">${$this.attr(
@@ -106,7 +106,7 @@ module.exports.textareaHandler = function({ ele, options, on }) {
                 eleArr.each(function(i, thisEle) {
                     $(thisEle).val(obj[key].value);
                     utils.validation(thisEle, "pass", null, "textarea");
-                    if (is.ie() == 8) {
+                    if (is.ie() <= 9) {
                         $(thisEle)
                             .next()
                             .find("input")
@@ -128,7 +128,7 @@ module.exports.textareaHandler = function({ ele, options, on }) {
 
         thisEle.each(function(i, ele) {
             ele.value = "";
-            if (is.ie() == 8) {
+            if (is.ie() <= 9) {
                 $(this).next()
                     .find("input")
                     .next(".hopeui-placeholder")

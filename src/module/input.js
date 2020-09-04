@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-04 15:39:02
+ * @LastEditTime : 2020-09-04 16:37:47
  * @Description  : 文本框
  */
 
@@ -103,7 +103,7 @@ module.exports.inputHandler = function({ ele, options, on }) {
                     $(thisEle).val(obj[key].value);
                     utils.validation(thisEle, "pass", null, "input");
 
-                    if (is.ie() == 9) {
+                    if (is.ie() <= 9) {
                         $(thisEle)
                             .next(".hopeui-placeholder")
                             .addClass("hopeui-hide");
@@ -134,7 +134,7 @@ module.exports.inputHandler = function({ ele, options, on }) {
         });
         thisEle.forEach(function(ele) {
             ele.value = "";
-            if (is.ie() == 9) {
+            if (is.ie() <= 9) {
                 $(ele)
                     .next(".hopeui-placeholder")
                     .removeClass("hopeui-hide");

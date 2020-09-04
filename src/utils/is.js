@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-08-27 14:07:01
+ * @LastEditTime : 2020-09-04 16:42:34
  * @Description  : is类
  */
 module.exports.is = {
@@ -39,7 +39,7 @@ module.exports.is = {
                 ie_version = 11;
             }
         }
-        return ie_version;
+        return ie_version || 999;
     },
     os() {
         let agent = navigator.userAgent.toLowerCase();

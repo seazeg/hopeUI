@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-28 15:37:15
+ * @LastEditTime : 2020-09-04 16:38:34
  * @Description  : 文本框
  */
 
@@ -87,7 +87,7 @@ module.exports.suggestHandler = function ({
     $dom.each(function () {
         let $this = $(this);
         if (!$this.attr("hope-type")) {
-            if (is.ie() == 8) {
+            if (is.ie() <= 9) {
                 $this
                     .after(
                         `<label class="hopeui-placeholder">${
