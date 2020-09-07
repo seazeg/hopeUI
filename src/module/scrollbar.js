@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-09-04 18:09:31
+ * @LastEditTime : 2020-09-07 17:34:52
  * @Description  : 自定义滚动条
  */
 
@@ -70,19 +70,18 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
                     !_this.style.top
                 ) {
                     _this.style.top = oe.clientY - startY + "px";
-                    // debugger
-                    content.scrollTop = content.scrollTop + (oe.clientY - startY)
-                   
-                    if(parseFloat(_this.style.top) >=
-                    content.offsetHeight - _this.offsetHeight){
-                        _this.style.top = content.offsetHeight - _this.offsetHeight + 'px';
-                       
-                    }else if(parseFloat(_this.style.top) < 0){
+
+                    if (
+                        parseFloat(_this.style.top) >=
+                        content.offsetHeight - _this.offsetHeight
+                    ) {
+                        _this.style.top =
+                            content.offsetHeight - _this.offsetHeight + "px";
+                    } else if (parseFloat(_this.style.top) < 0) {
                         _this.style.top = 0;
                     }
+                    content.scrollTop = parseFloat(_this.style.top) / rate;
                 }
-
-              
             };
 
             document.onmouseup = function () {
