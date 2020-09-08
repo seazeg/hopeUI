@@ -22,3 +22,29 @@ import { viewinfo } from "../view/upload.view.js";
         }}
     </Story>
 </Canvas>
+
+## 基础属性
+
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| ---- | ------------- | ------ | -------------------- | ------- |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+
+## 配置 options
+
+| 参数 | 说明           | 类型   | 可选值 | 默认值 |
+| ---- | -------------- | ------ | ------ | ------ |
+| url  | 上传服务地址   | String | --     | --     |
+| name | formname 值    | String | --     | file   |
+| type | 可上传文件类型 | Array  | --     | --     |
+| size | 可上传文件大小 | Number | --     | --     |
+
+## 回调方法 on
+
+| 参数      | 说明       | 类型     | 默认值 | 回调参数           |
+| --------- | ---------- | -------- | ------ | ------------------ |
+| validate  | 校验后回调 | Function | null   | event              |
+| uploading | 上传中回调 | Function | null   | --                 |
+| complete  | 完成时回调 | Function | null   | res(服务返回 json) |
+| error     | 错误时回调 | Function | null   | res(服务返回 json) |
+
+## 调用方法
