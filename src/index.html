@@ -139,14 +139,8 @@
     </div> -->
 
     <div class="docs-box">
-        <div class="docs-title">
-            <fieldset>
-                <legend><a name="icon"><span class="hopeui-btn js_tagload">触发加载</span></a></legend>
-            </fieldset>
-        </div>
-        <div class="docs-content" style="width:300px">
+        <div id="loadmore">
             <div id="pagelist2"></div>
-            <div id="loadmore"></div>
         </div>
     </div>
 
@@ -159,7 +153,7 @@
             </fieldset>
         </div>
         <div class="docs-content">
-            <div id="scrollbar" class="hopeui-scrollbar">
+            <div id="scrollbar">
                 <div>第一条</div>
                 <div>1111111111</div>
                 <div>2222222222</div>
@@ -538,7 +532,7 @@
             },
             complete: function (res) {
                 console.log(res);
-                $('#uploadlist').html('<img src="/app/'+res.imgurl+'" />')
+                $('#uploadlist').html('<img src="/app/' + res.imgurl + '" />')
             },
             error: function (res) {
 
@@ -549,7 +543,9 @@
     var loadmore = hope.loadmore({
         ele: "#loadmore",
         options: {
-            loadBtnName: '加载多多'
+            loadBtnName: '加载多多',
+            autoLoad:true,
+            offset:30
         },
         params: {
             url: '/assets/page/list1.json',
@@ -567,6 +563,10 @@
                 template += "<p>" + data[i].goodsName + "|" + data[i].goodsStar + "</p>"
             }
             $('#pagelist2').append(template);
+
+
+
+
             return {
                 pageNo: res.pageNo,
                 pageSize: res.pageSize,
@@ -585,10 +585,10 @@
     })
 
 
-    hope.scrollbar({
+    var scroll = hope.scrollbar({
         ele: '#scrollbar',
         options: {
-            height: 200,
+            height: 200
         },
         on: {
             init: function () {},
@@ -597,6 +597,8 @@
             }
         }
     })
+    scroll.setDistance(100)
+
 
     hope.suggest({
         ele: '.js_hopeui_input',
