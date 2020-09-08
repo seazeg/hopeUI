@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-08-28 15:48:32
+ * @LastEditTime : 2020-09-08 10:16:37
  * @Description  : 分页
  */
 
@@ -45,7 +45,6 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 pageNo + Math.floor(options.omit / 2) <
                                     totalPage - 1
                             ) {
-
                                 pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
                                 pageHTML += `<i class="hopeui-pager-omit">...</i>`;
 
@@ -73,9 +72,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
                                         }
                                     }
-
-                                  
-                                }else{
+                                } else {
                                     for (let i = 1; i <= options.omit; i++) {
                                         if (pageNo == i) {
                                             pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
@@ -83,7 +80,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
                                         }
                                     }
-                                    if (options.omit != totalPage  ) {
+                                    if (options.omit != totalPage) {
                                         if (options.omit != totalPage - 1) {
                                             pageHTML += `<i class="hopeui-pager-omit">...</i>`;
                                         }
@@ -101,7 +98,6 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 totalPage - pageNo <=
                                 options.omit - Math.floor(options.omit / 2)
                             ) {
-                  
                                 pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
                                 if (options.omit != totalPage - 1) {
                                     pageHTML += `<i class="hopeui-pager-omit">...</i>`;
@@ -139,7 +135,18 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
 
                         $dom.find(".hopeui-pager-num").on("click", function () {
                             if (pageNo != $(this).attr("hopeui-num")) {
-                                // params.url = `../../assets/page/list${$(this).attr("hopeui-num")}.json`; //测试代码
+                                if (params.url.includes(".json")) {
+                                    params.url =
+                                        params.url
+                                            .split(".")[0]
+                                            .substring(
+                                                0,
+                                                params.url.split(".")[0]
+                                                    .length - 1
+                                            ) +
+                                        $(this).attr("hopeui-num") +
+                                        ".json"; //测试代码
+                                }
                                 params.data[pageMapping] = $(this).attr(
                                     "hopeui-num"
                                 );
@@ -149,7 +156,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                         type: "number",
                                         targetEle: $(this)[0],
                                         pageNo: $(this).attr("hopeui-num"),
-                                        event: "jumpOver"
+                                        event: "jumpOver",
                                     });
                                 }
                             }
@@ -160,7 +167,18 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             function () {
                                 if (pageNo > 1) {
                                     pageNo = pageNo - 1;
-                                    // params.url = `../../assets/page/list${pageNo}.json`; //测试代码
+                                    if (params.url.includes(".json")) {
+                                        params.url =
+                                            params.url
+                                                .split(".")[0]
+                                                .substring(
+                                                    0,
+                                                    params.url.split(".")[0]
+                                                        .length - 1
+                                                ) +
+                                            pageNo +
+                                            ".json"; //测试代码
+                                    }
                                     params.data[pageMapping] = pageNo;
                                     getData(params, reader);
                                     if (on.jumpOver) {
@@ -180,7 +198,18 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             function () {
                                 if (pageNo < totalPage) {
                                     pageNo = pageNo + 1;
-                                    // params.url = `../../assets/page/list${pageNo}.json`; //测试代码
+                                    if (params.url.includes(".json")) {
+                                        params.url =
+                                            params.url
+                                                .split(".")[0]
+                                                .substring(
+                                                    0,
+                                                    params.url.split(".")[0]
+                                                        .length - 1
+                                                ) +
+                                            pageNo +
+                                            ".json"; //测试代码
+                                    }
                                     params.data[pageMapping] = pageNo;
                                     getData(params, reader);
                                     if (on.jumpOver) {
@@ -200,7 +229,18 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             .on("click", function () {
                                 let number = $(this).siblings("input").val();
                                 if (number) {
-                                    // params.url = `../../assets/page/list${number}.json`; //测试代码
+                                    if (params.url.includes(".json")) {
+                                        params.url =
+                                            params.url
+                                                .split(".")[0]
+                                                .substring(
+                                                    0,
+                                                    params.url.split(".")[0]
+                                                        .length - 1
+                                                ) +
+                                            number +
+                                            ".json"; //测试代码
+                                    }
                                     params.data[pageMapping] = number;
                                     getData(params, reader);
                                     if (on.jumpOver) {
@@ -215,9 +255,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             });
                     }
                 },
-                error: function () {
-
-                },
+                error: function () {},
             })
         );
     }
@@ -225,7 +263,14 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
     //外部跳转方法
     obj.jump = function (number) {
         if (number) {
-            // params.url = `../../assets/page/list${number}.json`; //测试代码
+            if (params.url.includes(".json")) {
+                params.url =
+                    params.url
+                        .split(".")[0]
+                        .substring(0, params.url.split(".")[0].length - 1) +
+                    number +
+                    ".json"; //测试代码
+            }
             params.data[pageMapping] = number;
             getData(params, reader);
             if (on.jumpOver) {

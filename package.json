@@ -7,7 +7,7 @@
     "dev": "npx webpack-dev-server --mode development --content-base ./dist --open",
     "server": "node server/app.js",
     "build": "webpack --config webpack.config.js",
-    "api": "start-storybook",
+    "api": "start-storybook -s ./docs/static",
     "build:api": "build-storybook"
   },
   "author": {

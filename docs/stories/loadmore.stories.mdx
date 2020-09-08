@@ -7,7 +7,7 @@ import { viewinfo } from "../view/loadmore.view.js";
 <Meta title="复用组件/流加载(Loadmore)" />
 
 <Canvas>
-    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html}` }}}}>
+    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html + viewinfo.js}` }}}}>
     {() => {
         useEffect(() => {
             Function(viewinfo.js)()

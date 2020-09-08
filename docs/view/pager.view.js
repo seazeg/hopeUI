@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-08-25 11:47:58
+ * @LastEditTime : 2020-09-08 10:19:59
  * @Description  :
  */
 
@@ -20,7 +20,7 @@ export const viewinfo = {
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
         },
         params: {
-            url: "http://192.168.1.4:3007/assets/page/list1.json",
+            url: "/mock/list1.json",
             dataType: "json",
             type: "get",
             data: {
@@ -70,7 +70,7 @@ export const viewinfo = {
             extend: true,
         },
         params: {
-            url: "http://192.168.1.4:3007/assets/page/list1.json",
+            url: "/mock/list1.json",
             dataType: "json",
             type: "get",
             data: {
@@ -103,7 +103,7 @@ export const viewinfo = {
         },
     });
     //跳转到第10页
-    mypager2.jump(10);
+    mypager2.jump(2);
     `,
 
 }
