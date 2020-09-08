@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-08 15:49:59
+ * @LastEditTime : 2020-09-08 16:58:11
  * @Description  : 加载更多
  */
 
@@ -31,7 +31,7 @@ module.exports.loadmoreHandler = function ({
                         let { pageNo, pageSize, totalNumber } = reader(data);
                         let totalPage = Math.ceil(totalNumber / pageSize);
                         let nextPage = pageNo + 1;
-                        let loadHTML = `<div class="hopeui-loadmore" hope-pageNo="${nextPage}"><span class="hopeui-loadmore-tag hopeui-btn">${loadBtnName}</span></div>`;
+                        let loadHTML = `<div class="hopeui-loadmore" hope-pageNo="${nextPage}"><span class="hopeui-loadmore-tag hopeui-btn" style="${autoLoad?'opacity:0':''}">${loadBtnName}</span></div>`;
 
                         let loadBox = $dom.find(".hopeui-loadmore-box");
 

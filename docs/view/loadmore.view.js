@@ -1,24 +1,23 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-09-08 10:35:27
+ * @LastEditTime : 2020-09-08 16:59:58
  * @Description  :
  */
 
 export const viewinfo = {
     html: `
-<span class="hopeui-btn js_tagload">外部触发加载</span>
-<hr/>
-<div class="docs-content" style="width:300px">
-    <div id="pagelist2"></div>
-    <div id="loadmore"></div>
+<div id="loadmore">
+    <div id="loadlist"></div>
 </div>
     `,
     js: `
 var loadmore = hope.loadmore({
     ele: "#loadmore",
     options: {
-        loadBtnName: '加载多多'
+        loadBtnName: '加载多多',
+        autoLoad:true,
+        offset:30
     },
     params: {
         url: '/mock/list1.json',
@@ -35,7 +34,7 @@ var loadmore = hope.loadmore({
         for (var i = 0; i < data.length; i++) {
             template += "<p>" + data[i].goodsName + "|" + data[i].goodsStar + "</p>"
         }
-        $('#pagelist2').append(template);
+        $('#loadlist').append(template);
         return {
             pageNo: res.pageNo,
             pageSize: res.pageSize,
@@ -49,8 +48,5 @@ var loadmore = hope.loadmore({
     }
 })
 
-document.querySelector('.js_tagload').onclick = function(){
-    loadmore.next();
-}
     `,
 };
