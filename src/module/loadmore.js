@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-08 10:22:20
+ * @LastEditTime : 2020-09-08 10:35:43
  * @Description  : 加载更多
  */
 
@@ -72,7 +72,18 @@ module.exports.loadmoreHandler = function ({
 
     obj.next = function () {
         let nextPage = +$dom.children().attr("hope-pageNo");
-        params.url = `../../assets/page/list${nextPage}.json`;
+        if (params.url.includes(".json")) {
+            params.url =
+                params.url
+                    .split(".")[0]
+                    .substring(
+                        0,
+                        params.url.split(".")[0]
+                            .length - 1
+                    ) +
+                nextPage +
+                ".json"; //测试代码
+        }
         params.data[pageMapping] = nextPage;
         getData(params, reader);
     };

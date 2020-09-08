@@ -1,12 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-09-08 10:23:46
+ * @LastEditTime : 2020-09-08 10:35:27
  * @Description  :
  */
 
 export const viewinfo = {
     html: `
+<span class="hopeui-btn js_tagload">外部触发加载</span>
+<hr/>
 <div class="docs-content" style="width:300px">
     <div id="pagelist2"></div>
     <div id="loadmore"></div>
@@ -46,5 +48,9 @@ var loadmore = hope.loadmore({
         }
     }
 })
+
+document.querySelector('.js_tagload').onclick = function(){
+    loadmore.next();
+}
     `,
 };

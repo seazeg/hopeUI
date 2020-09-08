@@ -3,16 +3,71 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/loadmore.view.js";
 
 # 流加载（Loadmore）
-***
+
+---
+
 <Meta title="复用组件/流加载(Loadmore)" />
 
 <Canvas>
-    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html + viewinfo.js}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.js)()
-        });
-        return viewinfo.html
-    }}  
+    <Story
+        name="通用"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html + viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.html;
+        }}
     </Story>
 </Canvas>
+
+## 基础属性
+
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| ---- | ------------- | ------ | -------------------- | ------- |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+
+## 配置 options
+
+| 参数        | 说明         | 类型   | 可选值 | 默认值   |
+| ----------- | ------------ | ------ | ------ | -------- |
+| loadBtnName | 按钮名称设置 | String | --     | 加载更多 |
+
+## http 请求参数 params
+
+参考 jquery.ajax 参数配置列表
+
+## 初始化函数 reader
+
+回调值为第一次请求后的返回 json 数据，在此区域对列表进行拼接赋值追加等动态操作，必须要有 return 一个参数对象
+
+```javascript
+return {
+    pageNo: res.pageNo,
+    pageSize: res.pageSize,
+    totalNumber: res.totalNumber,
+};
+```
+
+## 回调方法 on
+
+| 参数     | 说明       | 类型     | 默认值 | 回调参数 |
+| -------- | ---------- | -------- | ------ | -------- |
+| loaded | 加载后回调 | Function | null   | event↓   |
+
+| event 参数 | 说明     | 类型   |
+| ---------- | -------- | ------ |
+| targetELe  | dom 对象 | Object |
+| pageNo     | 页码     | String |
+| type       | 点击类型 | String |
+| event      | 事件类型 | String |
+
+## 调用方法
+
+| 方法名 | 说明         | 类型     | 默认值 | 参数 |
+| ------ | ------------ | -------- | ------ | ---- |
+| next   | 外部加载方法 | Function | --     | -- |
