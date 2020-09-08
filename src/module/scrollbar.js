@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-09-07 17:34:52
+ * @LastEditTime : 2020-09-07 18:10:46
  * @Description  : 自定义滚动条
  */
 
@@ -52,6 +52,8 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
             });
         }
     });
+
+    $bar.css("top", $dom.get(0).scrollTop * rate + "px");
 
     let darg = (obj, content) => {
         obj.onmousedown = function (e) {

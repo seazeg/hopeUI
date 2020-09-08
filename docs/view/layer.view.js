@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2020-08-25 11:34:18
+ * @LastEditTime : 2020-09-08 09:36:08
  * @Description  :
  */
 export const viewinfo = {
@@ -40,9 +40,8 @@ export const viewinfo = {
         let ly = hope.layer({
             options: {
                 title: "iframe弹框",
-                content: '<iframe id="frameContent" style="width:1000px;height:600px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
-                // content:
-                //     '<iframe style="width:1000px;height:600px" src="http://test.haier.com/masvod/public/2020/06/05/20200605_17283277896_r1_800k.mp4" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
+                content: '<iframe id="frameContent" style="width:100%;height:100%" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
+                isFullScreen:true
             },
             on: {
                 confirm: function(e) {

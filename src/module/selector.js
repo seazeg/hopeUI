@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-27 09:53:47
+ * @LastEditTime : 2020-09-07 17:53:46
  * @Description  : 下拉框
  */
 
@@ -10,14 +10,14 @@ const { utils } = require("../utils/verify.js");
 const { is } = require("../utils/is.js");
 const { scrollbarHandler } = require("./scrollbar.js");
 
-module.exports.selectorHandler = function({ ele, options, on }) {
+module.exports.selectorHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let type = "select";
     let $dom = $("select");
     if (ele) {
         utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
     }
-    $dom.each(function() {
+    $dom.each(function () {
         //模板初始化
         let newEle,
             selector = $(this)[0];
@@ -25,7 +25,7 @@ module.exports.selectorHandler = function({ ele, options, on }) {
 
         $(this)
             .children()
-            .each(function(i, item) {
+            .each(function (i, item) {
                 item = $(this)[0];
                 if (item.tagName.toLowerCase() == "optgroup") {
                     template += `<div class="groupTitle" hope-group=${i}>${item.getAttribute(
@@ -34,7 +34,7 @@ module.exports.selectorHandler = function({ ele, options, on }) {
 
                     $(this)
                         .children()
-                        .each(function(ii, groupOpt) {
+                        .each(function (ii, groupOpt) {
                             groupOpt = $(this)[0];
                             template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
                         });
@@ -57,9 +57,9 @@ module.exports.selectorHandler = function({ ele, options, on }) {
             let $this = newEle.find("input");
             $this
                 .after(
-                    `<label class="hopeui-placeholder">${$this.attr(
-                        "placeholder"
-                    ) || "请输入"}</label>`
+                    `<label class="hopeui-placeholder">${
+                        $this.attr("placeholder") || "请输入"
+                    }</label>`
                 )
                 .parent()
                 .css("position", "relative");
@@ -71,33 +71,39 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         }
 
         //单击后下拉列表事件
-        newEle.on("click", function(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
+        newEle.on("click", function (e) {
+            let oe = e || window.event;
+            if (oe.stopPropagation) {
+                oe.stopPropagation();
             } else if (window.event) {
-                window.event.cancelBubble = true;
-            }
-            if ($(this).hasClass("hopeui-form-selected")) {
-                $(this).removeClass("hopeui-form-selected");
-            } else {
-                $(".hopeui-form-selected").removeClass("hopeui-form-selected");
-                $(this).addClass("hopeui-form-selected");
+                oe.cancelBubble = true;
             }
 
-            scrollbarHandler({
-                ele: newEle.children(".hopeui-select-list"),
-                options: {},
-                on: {},
-            });
+            if (!$(oe.target).hasClass("hopeui-scrollbar-bar")) {
+                if ($(this).hasClass("hopeui-form-selected")) {
+                    $(this).removeClass("hopeui-form-selected");
+                } else {
+                    $(".hopeui-form-selected").removeClass(
+                        "hopeui-form-selected"
+                    );
+                    $(this).addClass("hopeui-form-selected");
+                }
 
-            //打开列表回调
-            if (on.toggle) {
-                on.toggle();
+                scrollbarHandler({
+                    ele: newEle.children(".hopeui-select-list"),
+                    options: {},
+                    on: {},
+                });
+
+                //打开列表回调
+                if (on.toggle) {
+                    on.toggle();
+                }
             }
         });
 
         //绑定自定义option的点击事件
-        newEle.find(".option").on("click", function(e) {
+        newEle.find(".option").on("click", function (e) {
             if (e.stopPropagation) {
                 e.stopPropagation();
             } else if (window.event) {
@@ -107,14 +113,16 @@ module.exports.selectorHandler = function({ ele, options, on }) {
             let _this = $(this);
             handle(selector, newEle, _this);
             if (is.ie() == 8) {
-                if(newEle.find("input").val()){
-                newEle.find("input")
-                    .next(".hopeui-placeholder")
-                    .addClass("hopeui-hide");
-                }else{
-                    newEle.find("input")
-                    .next(".hopeui-placeholder")
-                    .removeClass("hopeui-hide");
+                if (newEle.find("input").val()) {
+                    newEle
+                        .find("input")
+                        .next(".hopeui-placeholder")
+                        .addClass("hopeui-hide");
+                } else {
+                    newEle
+                        .find("input")
+                        .next(".hopeui-placeholder")
+                        .removeClass("hopeui-hide");
                 }
             }
             //选中options后回调
@@ -134,15 +142,13 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         });
 
         //点击select区域外关闭下拉列表
-        $(document).on("click", function(e) {
+        $(document).on("click", function (e) {
             $(newEle).removeClass("hopeui-form-selected");
             //下拉列表关闭回调
             if (on.close) {
                 on.close(e);
             }
         });
-      
-
 
         if (on.init) {
             on.init({
@@ -183,10 +189,10 @@ module.exports.selectorHandler = function({ ele, options, on }) {
         // original.value = original.selectedOptions[0].value; //?????
     }
 
-    obj.val = function(obj) {
+    obj.val = function (obj) {
         if (obj) {
             //值拆分成数组
-            Object.keys(obj).forEach(function(key) {
+            Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`select[name=${key}]`);
                 if (ele) {
                     utils.isSelf(ele, type)
@@ -194,12 +200,10 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                         : (eleArr = $(`${ele} select[name=${key}]`));
                 }
 
-                eleArr.each(function(i, thisEle) {
-                    let opts = $(this)
-                        .next()
-                        .find(".option");
+                eleArr.each(function (i, thisEle) {
+                    let opts = $(this).next().find(".option");
                     //内选项集合
-                    opts.each(function(index) {
+                    opts.each(function (index) {
                         if (
                             $.trim($(this).attr("hope-value")) ==
                             obj[key].value.split(",")[i]
@@ -217,42 +221,29 @@ module.exports.selectorHandler = function({ ele, options, on }) {
                             .next(".hopeui-placeholder")
                             .addClass("hopeui-hide");
                     }
-
                 });
-
-                
             });
         }
     };
 
-    obj.clear = function() {
+    obj.clear = function () {
         let thisEle = $(`select`);
         if (ele) {
             utils.isSelf(ele, type)
                 ? (thisEle = $(ele))
                 : (thisEle = $(`${ele} select`));
         }
-        thisEle.each(function(i, ele) {
-            handle(
-                ele,
-                $(this).next(),
-                $(this)
-                    .next()
-                    .find(".option")
-                    .eq(0)
-            );
+        thisEle.each(function (i, ele) {
+            handle(ele, $(this).next(), $(this).next().find(".option").eq(0));
 
             if (is.ie() == 8) {
-                $(this).next()
+                $(this)
+                    .next()
                     .find("input")
                     .next(".hopeui-placeholder")
                     .removeClass("hopeui-hide");
             }
-            
         });
-
-       
-
     };
 
     return obj;

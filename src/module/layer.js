@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 14:30:26
+ * @LastEditTime : 2020-09-08 09:38:18
  * @Description  : 弹层
  */
 
@@ -178,6 +178,12 @@ module.exports.layerHandler = function({ options, on }) {
         }
     };
 
+    $('body',document).on('keyup', function (e) {
+        if (e.which === 27) {
+           close();
+        }
+    });
+    
     if (on.init) {
         on.init({
             ele: $dom[0],
