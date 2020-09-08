@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-07 17:53:46
+ * @LastEditTime : 2020-09-08 11:11:40
  * @Description  : 下拉框
  */
 
@@ -49,10 +49,18 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
         template += `</div></div></div>`;
 
-        $(selector).addClass("hopeui-hide");
-
         newEle = $(template).insertAfter(selector);
+        
+        if (!is.phone()) {
+            $(selector).addClass("hopeui-hide");
+        } else {
+            $(selector).addClass("hopeui-select-phone").parent().addClass('hopeui-relative');
+            $(selector).on('change',function(e){
+                newEle.find("input").val($(this).val())
+            })
+        }
 
+    
         if (is.ie() == 8) {
             let $this = newEle.find("input");
             $this
@@ -72,33 +80,37 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
         //单击后下拉列表事件
         newEle.on("click", function (e) {
-            let oe = e || window.event;
-            if (oe.stopPropagation) {
-                oe.stopPropagation();
-            } else if (window.event) {
-                oe.cancelBubble = true;
-            }
-
-            if (!$(oe.target).hasClass("hopeui-scrollbar-bar")) {
-                if ($(this).hasClass("hopeui-form-selected")) {
-                    $(this).removeClass("hopeui-form-selected");
-                } else {
-                    $(".hopeui-form-selected").removeClass(
-                        "hopeui-form-selected"
-                    );
-                    $(this).addClass("hopeui-form-selected");
+            if (!is.phone()) {
+                let oe = e || window.event;
+                if (oe.stopPropagation) {
+                    oe.stopPropagation();
+                } else if (window.event) {
+                    oe.cancelBubble = true;
                 }
 
-                scrollbarHandler({
-                    ele: newEle.children(".hopeui-select-list"),
-                    options: {},
-                    on: {},
-                });
+                if (!$(oe.target).hasClass("hopeui-scrollbar-bar")) {
+                    if ($(this).hasClass("hopeui-form-selected")) {
+                        $(this).removeClass("hopeui-form-selected");
+                    } else {
+                        $(".hopeui-form-selected").removeClass(
+                            "hopeui-form-selected"
+                        );
+                        $(this).addClass("hopeui-form-selected");
+                    }
 
-                //打开列表回调
-                if (on.toggle) {
-                    on.toggle();
+                    scrollbarHandler({
+                        ele: newEle.children(".hopeui-select-list"),
+                        options: {},
+                        on: {},
+                    });
+
+                    //打开列表回调
+                    if (on.toggle) {
+                        on.toggle();
+                    }
                 }
+            } else {
+                $(selector).touchend();
             }
         });
 
