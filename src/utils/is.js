@@ -1,12 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-09-04 16:42:34
+ * @LastEditTime : 2020-09-09 11:03:54
  * @Description  : is类
  */
 module.exports.is = {
     phone() {
-        return /Android|webOS|iPhone|iPod|BlackBerry/i.test(
+        return /phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone/i.test(
             window.navigator.userAgent
         );
     },

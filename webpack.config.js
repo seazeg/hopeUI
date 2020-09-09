@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-09-09 09:33:27
+ * @LastEditTime : 2020-09-09 15:26:43
  * @Description  :
  */
 
@@ -106,7 +106,7 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: "static/libs", to: "assets/" },
-                { from: "static/video", to: "video/" },
+                { from: "src/components/", to: "components/" },
             ],
         }),
     ],
