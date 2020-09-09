@@ -1,12 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2020-09-02 14:47:44
+ * @LastEditTime : 2020-09-09 09:33:27
  * @Description  :
  */
 
 const webpack = require("webpack");
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -26,7 +27,7 @@ module.exports = {
             "/app": {
                 target: "http://0.0.0.0:9909",
                 pathRewrite: {
-                    '^/app': ''
+                    "^/app": "",
                 },
                 changeOrigin: true,
             },
@@ -101,6 +102,12 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "hopeui.min.css",
             chunkFilename: "[id].css",
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: "static/libs", to: "assets/" },
+                { from: "static/video", to: "video/" },
+            ],
         }),
     ],
 };
