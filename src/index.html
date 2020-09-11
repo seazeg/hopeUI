@@ -100,6 +100,20 @@
 </style>
 
 <body>
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">直播流组件</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <iframe
+                src="components/hopeLive/hopeLive.html?rtmp=rtmp%3A%2F%2F192.168.2.211%3A1935%2Frtmplive%2F&&hls=http%3A%2F%2Fivi.bupt.edu.cn%2Fhls%2Fcctv1hd.m3u8"
+                width="100%" height="500px" frameborder="0"></iframe>
+        </div>
+    </div>
+
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
@@ -544,8 +558,8 @@
         ele: "#loadmore",
         options: {
             loadBtnName: '加载多多',
-            autoLoad:true,
-            offset:30
+            autoLoad: true,
+            offset: 30
         },
         params: {
             url: '/assets/page/list1.json',
