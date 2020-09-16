@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-11 11:54:46
+ * @LastEditTime : 2020-09-15 14:51:34
  * @Description  : 下拉框
  */
 
@@ -39,11 +39,12 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
                         });
                 } else {
-                    if (item.value) {
-                        template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
-                    } else {
-                        template += `<div class="option hopeui-select-tips" hope-value="${item.value}">${item.innerText}</div>`;
-                    }
+                    // if (item.value) {
+                    //     template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
+                    // } else {
+                    //     template += `<div class="option hopeui-select-tips" hope-value="${item.value}">${item.innerText}</div>`;
+                    // }
+                    template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
                 }
             });
 
