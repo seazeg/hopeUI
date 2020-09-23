@@ -24,7 +24,7 @@
             }
         </style>
         <script>
-            var siteUrl = "http://192.168.2.166:3007";
+            var siteUrl = "";
         </script>
     </head>
 
@@ -36,7 +36,7 @@
             controls
             autoplay
             preload="auto"
-            poster="./assets/cool.jpg"
+            poster="./cool.jpg"
             data-setup="{}"
         >
             <source src="" type="" />
@@ -44,7 +44,7 @@
                 <object width="100%" height="100%" id="object">
                     <param
                         name="movie"
-                        value="videojs/video-js.swf"
+                        value="/videojs/video-js.swf"
                     />
                 </object>
             </p>
@@ -111,7 +111,7 @@
             if (!(os.isTablet || os.isAndroid || os.isPhone)) {
                 //rtmp
                 videojs.options.flash.swf =
-                    siteUrl + "/hopeLive/videojs/video-js.swf";
+                    siteUrl + "./videojs/video-js.swf";
                 var rtmp = videojs(
                     "video",
                     {
