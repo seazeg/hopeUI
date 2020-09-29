@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-15 14:51:34
+ * @LastEditTime : 2020-09-29 18:16:06
  * @Description  : 下拉框
  */
 
@@ -153,6 +153,20 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                 });
             }
         });
+
+        if (is.phone()) {
+            $(this).on('change',function(e){
+                if (on.change) {
+                    on.change({
+                        targetEle: e.target,
+                        label: $(this).find('option').eq($(this).get(0).selectedIndex).text(),
+                        value: $(this).val(),
+                        eventName: "change",
+                    });
+                }
+            })
+        }
+       
 
         //点击select区域外关闭下拉列表
         $(document).on("click", function (e) {
