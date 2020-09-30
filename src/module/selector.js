@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-29 18:16:06
+ * @LastEditTime : 2020-09-30 10:33:31
  * @Description  : 下拉框
  */
 
@@ -110,9 +110,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         on.toggle();
                     }
                 }
-            } else {
-                $(selector).touchend();
-            }
+            } 
         });
 
         //绑定自定义option的点击事件
@@ -156,6 +154,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
         if (is.phone()) {
             $(this).on('change',function(e){
+                newEle.find('.hopeui-input').val($(this).find('option').eq($(this).get(0).selectedIndex).text())
                 if (on.change) {
                     on.change({
                         targetEle: e.target,
