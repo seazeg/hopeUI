@@ -18,7 +18,7 @@
     font-size: 0;
 }
 
-.hopeui-row > * {
+.hopeui-row *[class*="hopeui-col-"] {
     vertical-align: top;
     display: inline-block;
     position: relative;
@@ -28,7 +28,6 @@
 .hopeui-col-center {
     text-align: center !important;
 }
-
 
 .Mixin(@index,@fen,@len) when (@index<=length(@max)) {
     @media screen and (min-width: extract(@min,@index)) and (max-width: extract(@max,@index)) {
@@ -58,16 +57,21 @@
 
 .Space(@fen,@len) when (@fen<= @len) {
     .hopeui-col-space@{fen} {
-        margin:0 -0.5px * @fen;
+        margin: 0 -0.5px * @fen;
     }
     .hopeui-col-space@{fen} > * {
-        padding:0 0.5px * @fen;
+        padding: 0 0.5px * @fen;
     }
     .Space(@fen+1, @len);
 }
+
 
 .Space(1, 10);
 
 //12栅格
 .Col(1, 12);
 .Mixin(1, 1, 12);
+
+//8栅格
+.Col(1, 8);
+.Mixin(1, 1, 8);

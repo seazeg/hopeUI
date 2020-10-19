@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-30 10:33:31
+ * @LastEditTime : 2020-10-16 10:27:25
  * @Description  : 下拉框
  */
 
@@ -215,7 +215,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         // original.value = original.selectedOptions[0].value; //?????
     }
 
-    obj.val = function (obj) {
+    obj.formset = function (obj) {
         if (obj) {
             //值拆分成数组
             Object.keys(obj).forEach(function (key) {
@@ -249,6 +249,34 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     }
                 });
             });
+        }
+    };
+
+    obj.val = function (value) {
+        if (value) {
+                $dom.each(function (i, thisEle) {
+                    let opts = $(this).next().find(".option");
+                    //内选项集合
+                    opts.each(function (index) {
+                        if (
+                            $.trim($(this).attr("hope-value")) ==
+                            obj[key].value.split(",")[i]
+                        ) {
+                            handle(thisEle, $(thisEle).next(), $(this));
+                        }
+                    });
+
+                    utils.validation(thisEle, "pass", null, "select-one");
+
+                    if (is.ie() == 8) {
+                        $(thisEle)
+                            .next()
+                            .find("input")
+                            .next(".hopeui-placeholder")
+                            .addClass("hopeui-hide");
+                    }
+                });
+
         }
     };
 

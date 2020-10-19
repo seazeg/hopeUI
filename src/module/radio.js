@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-02 11:01:21
+ * @LastEditTime : 2020-10-16 10:22:50
  * @Description  : 单选框
  */
 
@@ -56,7 +56,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
         }
     });
 
-    obj.val = function (obj) {
+    obj.formset = function (obj) {
         if (obj) {
             Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`input[name=${key}]`);

@@ -88,7 +88,7 @@ module.exports.inputHandler = function({ ele, options, on }) {
         }
     });
 
-    obj.val = function(obj) {
+    obj.formset = function(obj) {
         if (obj) {
             Object.keys(obj).forEach(function(key) {
                 let eleArr = $(`input[name=${key}]`);
