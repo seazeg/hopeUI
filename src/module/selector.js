@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-10-16 10:27:25
+ * @LastEditTime : 2020-10-22 16:02:46
  * @Description  : 下拉框
  */
 
@@ -22,7 +22,10 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         let newEle,
             selector = $(this)[0];
         let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="text" placeholder="${selector.children[0].innerText}" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}"><div class="hopeui-scrollbar-box ">`;
-
+        let tempSelectedVal = {
+            value: "",
+            label: "",
+        };
         $(this)
             .children()
             .each(function (i, item) {
@@ -36,32 +39,51 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         .children()
                         .each(function (ii, groupOpt) {
                             groupOpt = $(this)[0];
-                            template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+
+                            if (groupOpt.selected) {
+                                template += `<div class="option group hopeui-select-this" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                                tempSelectedVal = {
+                                    value: groupOpt.value,
+                                    label: groupOpt.innerText,
+                                };
+                            } else {
+                                template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                            }
                         });
                 } else {
-                    // if (item.value) {
-                    //     template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
-                    // } else {
-                    //     template += `<div class="option hopeui-select-tips" hope-value="${item.value}">${item.innerText}</div>`;
-                    // }
-                    template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
+                    if (item.selected) {
+                        template += `<div class="option hopeui-select-this" hope-value="${item.value}" >${item.innerText}</div>`;
+                        tempSelectedVal = {
+                            value: item.value,
+                            label: item.innerText,
+                        };
+                    } else {
+                        template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
+                    }
                 }
             });
 
         template += `</div></div></div>`;
 
         newEle = $(template).insertAfter(selector);
-        
+
+        newEle
+            .find("input")
+            .val(tempSelectedVal.label)
+            .attr("hope-value", tempSelectedVal.val);
+
         if (!is.phone()) {
             $(selector).addClass("hopeui-hide");
         } else {
-            $(selector).addClass("hopeui-select-phone").parent().addClass('hopeui-relative');
-            $(selector).on('change',function(e){
-                newEle.find("input").val($(this).val())
-            })
+            $(selector)
+                .addClass("hopeui-select-phone")
+                .parent()
+                .addClass("hopeui-relative");
+            $(selector).on("change", function (e) {
+                newEle.find("input").val($(this).val());
+            });
         }
 
-    
         if (is.ie() == 8) {
             let $this = newEle.find("input");
             $this
@@ -110,7 +132,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         on.toggle();
                     }
                 }
-            } 
+            }
         });
 
         //绑定自定义option的点击事件
@@ -153,19 +175,28 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         });
 
         if (is.phone()) {
-            $(this).on('change',function(e){
-                newEle.find('.hopeui-input').val($(this).find('option').eq($(this).get(0).selectedIndex).text())
+            $(this).on("change", function (e) {
+                newEle
+                    .find(".hopeui-input")
+                    .val(
+                        $(this)
+                            .find("option")
+                            .eq($(this).get(0).selectedIndex)
+                            .text()
+                    );
                 if (on.change) {
                     on.change({
                         targetEle: e.target,
-                        label: $(this).find('option').eq($(this).get(0).selectedIndex).text(),
+                        label: $(this)
+                            .find("option")
+                            .eq($(this).get(0).selectedIndex)
+                            .text(),
                         value: $(this).val(),
                         eventName: "change",
                     });
                 }
-            })
+            });
         }
-       
 
         //点击select区域外关闭下拉列表
         $(document).on("click", function (e) {
@@ -254,29 +285,28 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
     obj.val = function (value) {
         if (value) {
-                $dom.each(function (i, thisEle) {
-                    let opts = $(this).next().find(".option");
-                    //内选项集合
-                    opts.each(function (index) {
-                        if (
-                            $.trim($(this).attr("hope-value")) ==
-                            obj[key].value.split(",")[i]
-                        ) {
-                            handle(thisEle, $(thisEle).next(), $(this));
-                        }
-                    });
-
-                    utils.validation(thisEle, "pass", null, "select-one");
-
-                    if (is.ie() == 8) {
-                        $(thisEle)
-                            .next()
-                            .find("input")
-                            .next(".hopeui-placeholder")
-                            .addClass("hopeui-hide");
+            $dom.each(function (i, thisEle) {
+                let opts = $(this).next().find(".option");
+                //内选项集合
+                opts.each(function (index) {
+                    if (
+                        $.trim($(this).attr("hope-value")) ==
+                        obj[key].value.split(",")[i]
+                    ) {
+                        handle(thisEle, $(thisEle).next(), $(this));
                     }
                 });
 
+                utils.validation(thisEle, "pass", null, "select-one");
+
+                if (is.ie() == 8) {
+                    $(thisEle)
+                        .next()
+                        .find("input")
+                        .next(".hopeui-placeholder")
+                        .addClass("hopeui-hide");
+                }
+            });
         }
     };
 

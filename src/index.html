@@ -126,7 +126,7 @@
         <div class="docs-content">
             <select name="myselect" id="myselect">
                 <option value="">请选择</option>
-                <option value="qd">青岛</option>
+                <option value="qd" selected>青岛</option>
                 <option value="wh">武汉</option>
                 <option value="wlmq">乌鲁木齐</option>
                 <option value="南京">南京</option>
@@ -365,7 +365,7 @@
                             <option value="wlmq">乌鲁木齐</option>
                             <option value="南京">南京</option>
                             <option value="天津">天津</option>
-                            <option value="郑州">郑州</option>
+                            <option value="123123" selected>郑州</option>
                             <option value="重庆">重庆</option>
                             <option value="成都">成都</option>
                             <option value="云南">云南</option>
@@ -379,7 +379,7 @@
                             <option value="">请选择</option>
                             <optgroup label="北京"">
                                 <option value=" 北京大学">北京大学</option>
-                                <option value="清华大学">清华大学</option>
+                                <option value="清华大学" selected>清华大学</option>
                             </optgroup>
                             <optgroup label="浙江"">
                                 <option value=" 浙江大学">浙江大学</option>
@@ -560,7 +560,7 @@
         }
     })
 
-    myselect.val("南京");
+    // myselect.val("南京");
 
     hope.upload({
         ele: "#upload",
