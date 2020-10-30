@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-10-16 10:22:30
+ * @LastEditTime : 2020-10-30 18:15:33
  * @Description  : 复选框
  */
 
@@ -62,7 +62,7 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
         });
     }
 
-    obj.formset = function(obj) {
+    obj.val = function(obj) {
         if (obj) {
             Object.keys(obj).forEach(function(key) {
                 let eleArr = $(`input[name=${key}]`);

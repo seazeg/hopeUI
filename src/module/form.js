@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-10-16 10:23:27
+ * @LastEditTime : 2020-10-30 18:11:54
  * @Description  : 表单
  */
 
@@ -207,7 +207,7 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
 
     obj.val = function(obj) {
         Object.keys(obj).forEach(function(key) {
-            formControls[obj[key].type].formset({
+            formControls[obj[key].type].val({
                 [key]: obj[key],
             });
         });

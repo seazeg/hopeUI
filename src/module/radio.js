@@ -56,7 +56,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
         }
     });
 
-    obj.formset = function (obj) {
+    obj.val = function (obj) {
         if (obj) {
             Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`input[name=${key}]`);
