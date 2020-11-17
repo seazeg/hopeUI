@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-04 16:38:34
+ * @LastEditTime : 2020-11-17 16:00:57
  * @Description  : 文本框
  */
 
@@ -51,7 +51,7 @@ module.exports.suggestHandler = function ({
                                 _this
                                     .parents(".hopeui-suggest")
                                     .addClass("hopeui-hide")
-                                    .siblings('.hopeui-suggest')
+                                    .prev()
                                     .val(_this.attr("hope-value"));
 
                                 if (on.change) {
