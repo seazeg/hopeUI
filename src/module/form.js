@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-10-30 18:11:54
+ * @LastEditTime : 2020-11-20 15:57:40
  * @Description  : 表单
  */
 
@@ -127,9 +127,9 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
                         .substring(0, obj.value.length - 1))
                        
                     if (items.required) {
-                        if (obj.value) {
+                        // if (obj.value) {
                             formParams.push(obj);
-                        }
+                        // }
                     }
                 } else {
                     let obj = {
@@ -179,9 +179,9 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
                         .substring(0, obj.value.length - 1))
 
                     if (items.required) {
-                        if (obj.value) {
+                        // if (obj.value) {
                             formParams.push(obj);
-                        }
+                        // }
                     }
                 }
             });
