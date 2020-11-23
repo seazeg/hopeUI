@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-10-30 18:10:22
+ * @LastEditTime : 2020-11-23 16:13:59
  * @Description  : 下拉框
  */
 
@@ -129,7 +129,10 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
                     //打开列表回调
                     if (on.toggle) {
-                        on.toggle();
+                        on.toggle({
+                            name: $(this).children('.hopeui-select-list').attr("name"),
+                            eventName: "toggle",
+                        });
                     }
                 }
             }
@@ -166,7 +169,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     targetEle: e.target,
                     label: _this.text(),
                     value: _this.attr("hope-value"),
-                    name: _this.parent().attr("name"),
+                    name: _this.parents(".hopeui-select-list").attr("name"),
                     group: _this.attr("hope-group"),
                     groupSort: _this.attr("hope-group-sort"),
                     eventName: "change",
