@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-11-23 16:13:59
+ * @LastEditTime : 2020-11-23 17:55:40
  * @Description  : 下拉框
  */
 
@@ -17,6 +17,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
     if (ele) {
         utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
     }
+
     $dom.each(function () {
         //模板初始化
         let newEle,
@@ -26,6 +27,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             value: "",
             label: "",
         };
+        reset($(this))
         $(this)
             .children()
             .each(function (i, item) {
@@ -217,6 +219,12 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             });
         }
     });
+
+    function reset(dom){
+        if(dom.next().hasClass('hopeui-form-select')){
+            dom.next().remove();
+        }
+    }
 
     /**
      * @description: 选择辅助方法
