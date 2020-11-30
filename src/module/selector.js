@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-11-30 15:20:04
+ * @LastEditTime : 2020-11-30 15:50:18
  * @Description  : 下拉框
  */
 
@@ -88,9 +88,13 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
         if (is.ie() == 8) {
             let $this = newEle.find("input");
+            let isHide = '';
+            if($this.val()){
+                isHide = "hopeui-hide"
+            }
             $this
                 .after(
-                    `<label class="hopeui-placeholder">${
+                    `<label class="hopeui-placeholder ${isHide}">${
                         $this.attr("placeholder") || "请输入"
                     }</label>`
                 )
