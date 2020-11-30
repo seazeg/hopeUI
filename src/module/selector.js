@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-11-23 17:55:40
+ * @LastEditTime : 2020-11-30 15:20:04
  * @Description  : 下拉框
  */
 
@@ -22,7 +22,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         //模板初始化
         let newEle,
             selector = $(this)[0];
-        let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="text" placeholder="${selector.children[0].innerText}" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}"><div class="hopeui-scrollbar-box ">`;
+        let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="text" placeholder="${selector.children[0].innerText}" unselectable="on" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}"><div class="hopeui-scrollbar-box ">`;
         let tempSelectedVal = {
             value: "",
             label: "",
