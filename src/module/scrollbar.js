@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-09-08 15:29:35
+ * @LastEditTime : 2020-11-30 17:25:59
  * @Description  : 自定义滚动条
  */
 
@@ -34,8 +34,15 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
         $(ele).children()
     );
     $dom = $(ele).children();
+    
+   
+
+    if($dom.get(0).clientHeight >= $dom.get(0).scrollHeight){
+        $dom.eq(0).parent().height(120)
+    }
 
     let rate = $dom.get(0).clientHeight / $dom.get(0).scrollHeight;
+
     let barHeight = rate * $dom.get(0).clientHeight;
     if (rate < 1) {
         $bar.css("height", barHeight + "px");
