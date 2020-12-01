@@ -25,3 +25,4 @@ yarn-error.log*
 */**/upload/*
 
 storybook-static
+hopeUI_api

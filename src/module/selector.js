@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-01 11:27:16
+ * @LastEditTime : 2020-12-01 14:24:38
  * @Description  : 下拉框
  */
 
@@ -198,6 +198,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         );
                     if (on.change) {
                         on.change({
+                            originalParentEle: selector,
+                            virtualParentEle: null,
                             targetEle: e.target,
                             label: $(this)
                                 .find("option")

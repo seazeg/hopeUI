@@ -3,31 +3,46 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/selector.view.js";
 
 # 下拉框（Selector）
-***
+
+---
+
 <Meta title="基础控件/下拉框(Selector)" />
 
 <Canvas>
-    <Story name="通用" height="300px" parameters={{ docs: { source: { code:`${viewinfo.general}${viewinfo.generalJS}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.generalJS)()
-        });
-        return viewinfo.general
-    }}  
+    <Story
+        name="通用"
+        height="300px"
+        parameters={{
+            docs: {
+                source: { code: `${viewinfo.general}${viewinfo.generalJS}` },
+            },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.generalJS)();
+            });
+            return viewinfo.general;
+        }}
     </Story>
 </Canvas>
 
 <Canvas>
-    <Story name="分组" height="300px" parameters={{ docs: { source: { code:`${viewinfo.group}${viewinfo.groupJS}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.groupJS)()
-        });
-        return viewinfo.group
-    }}  
+    <Story
+        name="分组"
+        height="300px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.group}${viewinfo.groupJS}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.groupJS)();
+            });
+            return viewinfo.group;
+        }}
     </Story>
 </Canvas>
-
 
 ## 基础属性
 
@@ -43,18 +58,19 @@ import { viewinfo } from "../view/selector.view.js";
 | change | 选择完成后回调         | Function | null   | event↓       |
 | toggle | 下拉切换回调           | Function | null   | --           |
 | close  | 下拉框区域外关闭后回调 | Function | null   | --           |
+| update | 下拉框更新             | Function | null   | --           |
 
-| event 参数        | 说明                 | 类型   |
-| ----------------- | -------------------- | ------ |
-| originalParentEle | select 原始 dom 对象 | Object |
-| virtualParentEle  | select 虚拟 dom 对象 | Object |
-| targetEle         | 当前选中选项 dom     | Object |
-| label             | 选中的描述值         | String |
-| value             | 选中的实际值         | String |
-| name              | select 组名          | String |
-| group             | 选项组内标号         | String |
-| groupSort         | 选项组内自身编号     | String |
-| eventName         | 当前回调事件名       | String |
+| event 参数        | 说明                                 | 类型   |
+| ----------------- | ------------------------------------ | ------ |
+| originalParentEle | select 原始 dom 对象                 | Object |
+| virtualParentEle  | select 虚拟 dom 对象                 | Object |
+| targetEle         | 当前选中选项 dom                     | Object |
+| label             | 选中的描述值                         | String |
+| value             | 选中的实际值                         | String |
+| name              | select 组名                          | String |
+| group             | 选项组内标号(移动端不含有此字段)     | String |
+| groupSort         | 选项组内自身编号(移动端不含有此字段) | String |
+| eventName         | 当前回调事件名                       | String |
 
 ## 调用方法
 
