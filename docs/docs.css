@@ -73,27 +73,62 @@
     user-select: none;
     border: 20px inset #fd9037;
     border-radius: 150px;
-    margin:5px 0;
+    margin: 5px 0;
 }
 
 #lightbox img {
     width: 100%;
 }
 
-#lightbox2 >div{
+#lightbox2 > div {
     overflow: hidden;
-    max-height:200px;
+    max-height: 200px;
 }
 #lightbox2 img {
     width: 100%;
-
 }
 
-.css-1egeiho tr td{width:900px}
+.css-1egeiho tr td {
+    width: 900px;
+}
 
 .css-1egeiho tr th {
     background: #f1f1f1;
 }
-.css-1egeiho tr{
-    background-color: #ffffff!important;
+.css-1egeiho tr {
+    background-color: #ffffff !important;
+}
+
+.hope-slide .title {
+    font-size: 48px;
+    background: #fd9037;
+    color: #fff;
+    height: 400px;
+    text-align: center;
+    line-height: 400px;
+}
+
+.hope-pagination {
+    position: absolute;
+    z-index: 20;
+    left: 10px;
+    bottom: 10px;
+}
+
+.hope-pagination-switch {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background: #222;
+    margin-right: 5px;
+    opacity: 0.8;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+.hope-visible-switch {
+    background: #aaa;
+}
+.hope-active-switch {
+    background: #fff;
 }

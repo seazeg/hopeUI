@@ -1,4 +1,5 @@
-var hope_carousel = function (selector, params) {
+var Hope_carousel = function (selector, params) {
+    "use strict";
     if (!document.body.outerHTML && document.body.__defineGetter__) {
         if (HTMLElement) {
             var element = HTMLElement.prototype;
@@ -104,8 +105,8 @@ var hope_carousel = function (selector, params) {
         slidesPerViewFit: true,
         simulateTouch: true,
         followFinger: true,
-        shortSwipes: true,
-        longSwipesRatio: 0.5,
+        shortHopes: true,
+        longHopesRatio: 0.5,
         moveStartThreshold: false,
         onlyExternal: false,
         createPagination: true,
@@ -117,8 +118,8 @@ var hope_carousel = function (selector, params) {
         scrollContainer: false,
         preventLinks: true,
         preventLinksPropagation: false,
-        noSwiping: false,
-        noSwipingClass: "hope-no-swiping",
+        noGoing: false,
+        noGoingClass: "hope-no-going",
         initialSlide: 0,
         keyboardControl: false,
         mousewheelControl: false,
@@ -153,8 +154,8 @@ var hope_carousel = function (selector, params) {
             logic: "reload",
             loadAllSlides: false,
         },
-        swipeToPrev: true,
-        swipeToNext: true,
+        hopeToPrev: true,
+        hopeToNext: true,
         slideElement: "div",
         slideClass: "hope-slide",
         slideActiveClass: "hope-slide-active",
@@ -218,7 +219,7 @@ var hope_carousel = function (selector, params) {
         }
     }
     _this.wrapper = wrapper;
-    _this._extendhopeSlide = function (el) {
+    _this._extendHopeSlide = function (el) {
         el.append = function () {
             if (params.loop) {
                 el.insertAfter(_this.slides.length - _this.loopedSlides);
@@ -264,7 +265,7 @@ var hope_carousel = function (selector, params) {
             return el;
         };
         el.clone = function () {
-            return _this._extendhopeSlide(el.cloneNode(true));
+            return _this._extendHopeSlide(el.cloneNode(true));
         };
         el.remove = function () {
             _this.wrapper.removeChild(el);
@@ -332,7 +333,7 @@ var hope_carousel = function (selector, params) {
             }
         }
         for (i = _this.slides.length - 1; i >= 0; i--) {
-            _this._extendhopeSlide(_this.slides[i]);
+            _this._extendHopeSlide(_this.slides[i]);
         }
         if (oldNumber === false) return;
         if (oldNumber !== _this.slides.length || forceCalcSlides) {
@@ -349,12 +350,12 @@ var hope_carousel = function (selector, params) {
         var newSlide = document.createElement(el);
         newSlide.innerHTML = html || "";
         newSlide.className = slideClassList;
-        return _this._extendhopeSlide(newSlide);
+        return _this._extendHopeSlide(newSlide);
     };
     _this.appendSlide = function (html, slideClassList, el) {
         if (!html) return;
         if (html.nodeType) {
-            return _this._extendhopeSlide(html).append();
+            return _this._extendHopeSlide(html).append();
         } else {
             return _this.createSlide(html, slideClassList, el).append();
         }
@@ -362,7 +363,7 @@ var hope_carousel = function (selector, params) {
     _this.prependSlide = function (html, slideClassList, el) {
         if (!html) return;
         if (html.nodeType) {
-            return _this._extendhopeSlide(html).prepend();
+            return _this._extendHopeSlide(html).prepend();
         } else {
             return _this.createSlide(html, slideClassList, el).prepend();
         }
@@ -370,7 +371,7 @@ var hope_carousel = function (selector, params) {
     _this.insertSlideAfter = function (index, html, slideClassList, el) {
         if (typeof index === "undefined") return false;
         if (html.nodeType) {
-            return _this._extendhopeSlide(html).insertAfter(index);
+            return _this._extendHopeSlide(html).insertAfter(index);
         } else {
             return _this
                 .createSlide(html, slideClassList, el)
@@ -878,7 +879,7 @@ var hope_carousel = function (selector, params) {
         _this.callPlugins("beforeResizeFix");
         _this.init(params.resizeReInit || reInit);
         if (!params.freeMode) {
-            _this.swipeTo(
+            _this.hopeTo(
                 params.loop ? _this.activeLoopIndex : _this.activeIndex,
                 0,
                 false
@@ -1047,6 +1048,9 @@ var hope_carousel = function (selector, params) {
         if (window.hopeu && window.hopeu(_this.container).data("hope")) {
             window.hopeu(_this.container).removeData("hope");
         }
+        if (window.Zepto && window.Zepto(_this.container).data("hope")) {
+            window.Zepto(_this.container).removeData("hope");
+        }
         _this = null;
     };
 
@@ -1158,15 +1162,15 @@ var hope_carousel = function (selector, params) {
                 if (e.preventDefault) e.preventDefault();
                 else e.returnValue = false;
             }
-            if (kc === 39) _this.swipeNext();
-            if (kc === 37) _this.swipePrev();
+            if (kc === 39) _this.hopeNext();
+            if (kc === 37) _this.hopePrev();
         } else {
             if (kc === 38 || kc === 40) {
                 if (e.preventDefault) e.preventDefault();
                 else e.returnValue = false;
             }
-            if (kc === 40) _this.swipeNext();
-            if (kc === 38) _this.swipePrev();
+            if (kc === 40) _this.hopeNext();
+            if (kc === 38) _this.hopePrev();
         }
     }
     _this.disableKeyboardControl = function () {
@@ -1218,8 +1222,8 @@ var hope_carousel = function (selector, params) {
         }
         if (!params.freeMode) {
             if (new Date().getTime() - lastScrollTime > 60) {
-                if (delta < 0) _this.swipeNext();
-                else _this.swipePrev();
+                if (delta < 0) _this.hopeNext();
+                else _this.hopePrev();
             }
             lastScrollTime = new Date().getTime();
         } else {
@@ -1331,7 +1335,7 @@ var hope_carousel = function (selector, params) {
                 document.activeElement.blur();
         }
         var formTagNames = "input select textarea".split(" ");
-        if (params.noSwiping && eventTarget && noSwipingSlide(eventTarget))
+        if (params.noGoing && eventTarget && noGoingSlide(eventTarget))
             return false;
         allowMomentumBounce = false;
         _this.isTouched = true;
@@ -1403,24 +1407,24 @@ var hope_carousel = function (selector, params) {
         }
         if (isH) {
             if (
-                (!params.swipeToNext && pageX < _this.touches.startX) ||
-                (!params.swipeToPrev && pageX > _this.touches.startX)
+                (!params.hopeToNext && pageX < _this.touches.startX) ||
+                (!params.hopeToPrev && pageX > _this.touches.startX)
             ) {
                 return;
             }
         } else {
             if (
-                (!params.swipeToNext && pageY < _this.touches.startY) ||
-                (!params.swipeToPrev && pageY > _this.touches.startY)
+                (!params.hopeToNext && pageY < _this.touches.startY) ||
+                (!params.hopeToPrev && pageY > _this.touches.startY)
             ) {
                 return;
             }
         }
-        if (event.assignedTohope) {
+        if (event.assignedToHope) {
             _this.isTouched = false;
             return;
         }
-        event.assignedTohope = true;
+        event.assignedToHope = true;
         if (params.preventLinks) {
             _this.allowLinks = false;
         }
@@ -1552,7 +1556,7 @@ var hope_carousel = function (selector, params) {
 
     function onTouchEnd(event) {
         if (isScrolling) {
-            _this.hopeeset();
+            _this.hopeReset();
         }
         if (params.onlyExternal || !_this.isTouched) return;
         _this.isTouched = false;
@@ -1577,7 +1581,7 @@ var hope_carousel = function (selector, params) {
         var diffAbs = _this.positions.abs;
         var timeDiff = _this.times.end - _this.times.start;
         if (diffAbs < 5 && timeDiff < 300 && _this.allowLinks === false) {
-            if (!params.freeMode && diffAbs !== 0) _this.hopeeset();
+            if (!params.freeMode && diffAbs !== 0) _this.hopeReset();
             if (params.preventLinks) {
                 _this.allowLinks = true;
             }
@@ -1607,7 +1611,7 @@ var hope_carousel = function (selector, params) {
             _this.positions.current > 0 ||
             _this.positions.current < -maxPosition
         ) {
-            _this.hopeeset();
+            _this.hopeReset();
             if (params.onTouchEnd)
                 _this.fireCallback(params.onTouchEnd, _this, event);
             _this.callPlugins("onTouchEnd");
@@ -1668,12 +1672,12 @@ var hope_carousel = function (selector, params) {
         }
         direction = diff < 0 ? "toNext" : "toPrev";
         if (direction === "toNext" && timeDiff <= 300) {
-            if (diffAbs < 30 || !params.shortSwipes) _this.hopeeset();
-            else _this.swipeNext(true, true);
+            if (diffAbs < 30 || !params.shortHopes) _this.hopeReset();
+            else _this.hopeNext(true, true);
         }
         if (direction === "toPrev" && timeDiff <= 300) {
-            if (diffAbs < 30 || !params.shortSwipes) _this.hopeeset();
-            else _this.swipePrev(true, true);
+            if (diffAbs < 30 || !params.shortHopes) _this.hopeReset();
+            else _this.hopePrev(true, true);
         }
         var targetSlideSize = 0;
         if (params.slidesPerView === "auto") {
@@ -1696,17 +1700,17 @@ var hope_carousel = function (selector, params) {
             targetSlideSize = slideSize * params.slidesPerView;
         }
         if (direction === "toNext" && timeDiff > 300) {
-            if (diffAbs >= targetSlideSize * params.longSwipesRatio) {
-                _this.swipeNext(true, true);
+            if (diffAbs >= targetSlideSize * params.longHopesRatio) {
+                _this.hopeNext(true, true);
             } else {
-                _this.hopeeset();
+                _this.hopeReset();
             }
         }
         if (direction === "toPrev" && timeDiff > 300) {
-            if (diffAbs >= targetSlideSize * params.longSwipesRatio) {
-                _this.swipePrev(true, true);
+            if (diffAbs >= targetSlideSize * params.longHopesRatio) {
+                _this.hopePrev(true, true);
             } else {
-                _this.hopeeset();
+                _this.hopeReset();
             }
         }
         if (params.onTouchEnd)
@@ -1722,25 +1726,25 @@ var hope_carousel = function (selector, params) {
         );
     }
 
-    function noSwipingSlide(el) {
-        var noSwiping = false;
+    function noGoingSlide(el) {
+        var noGoing = false;
         do {
-            if (hasClass(el, params.noSwipingClass)) {
-                noSwiping = true;
+            if (hasClass(el, params.noGoingClass)) {
+                noGoing = true;
             }
             el = el.parentElement;
         } while (
-            !noSwiping &&
+            !noGoing &&
             el.parentElement &&
             !hasClass(el, params.wrapperClass)
         );
         if (
-            !noSwiping &&
+            !noGoing &&
             hasClass(el, params.wrapperClass) &&
-            hasClass(el, params.noSwipingClass)
+            hasClass(el, params.noGoingClass)
         )
-            noSwiping = true;
-        return noSwiping;
+            noGoing = true;
+        return noGoing;
     }
 
     function addClassToHtmlString(klass, outerHtml) {
@@ -1751,11 +1755,11 @@ var hope_carousel = function (selector, params) {
         child.className += " " + klass;
         return child.outerHTML;
     }
-    _this.swipeNext = function (runCallbacks, internal) {
+    _this.hopeNext = function (runCallbacks, internal) {
         if (typeof runCallbacks === "undefined") runCallbacks = true;
         if (!internal && params.loop) _this.fixLoop();
         if (!internal && params.autoplay) _this.stopAutoplay(true);
-        _this.callPlugins("onSwipeNext");
+        _this.callPlugins("onHopeNext");
         var currentPosition = _this.getWrapperTranslate().toFixed(2);
         var newPosition = currentPosition;
         if (params.slidesPerView === "auto") {
@@ -1780,16 +1784,16 @@ var hope_carousel = function (selector, params) {
             newPosition = -maxWrapperPosition();
         }
         if (newPosition === currentPosition) return false;
-        swipeToPosition(newPosition, "next", {
+        hopeToPosition(newPosition, "next", {
             runCallbacks: runCallbacks,
         });
         return true;
     };
-    _this.swipePrev = function (runCallbacks, internal) {
+    _this.hopePrev = function (runCallbacks, internal) {
         if (typeof runCallbacks === "undefined") runCallbacks = true;
         if (!internal && params.loop) _this.fixLoop();
         if (!internal && params.autoplay) _this.stopAutoplay(true);
-        _this.callPlugins("onSwipePrev");
+        _this.callPlugins("onHopePrev");
         var currentPosition = Math.ceil(_this.getWrapperTranslate());
         var newPosition;
         if (params.slidesPerView === "auto") {
@@ -1814,14 +1818,14 @@ var hope_carousel = function (selector, params) {
         }
         if (newPosition > 0) newPosition = 0;
         if (newPosition === currentPosition) return false;
-        swipeToPosition(newPosition, "prev", {
+        hopeToPosition(newPosition, "prev", {
             runCallbacks: runCallbacks,
         });
         return true;
     };
-    _this.hopeeset = function (runCallbacks) {
+    _this.hopeReset = function (runCallbacks) {
         if (typeof runCallbacks === "undefined") runCallbacks = true;
-        _this.callPlugins("onhopeeset");
+        _this.callPlugins("onHopeReset");
         var currentPosition = _this.getWrapperTranslate();
         var groupSize = slideSize * params.slidesPerGroup;
         var newPosition;
@@ -1862,14 +1866,14 @@ var hope_carousel = function (selector, params) {
             newPosition = 0;
         }
         if (newPosition === currentPosition) return false;
-        swipeToPosition(newPosition, "reset", {
+        hopeToPosition(newPosition, "reset", {
             runCallbacks: runCallbacks,
         });
         return true;
     };
-    _this.swipeTo = function (index, speed, runCallbacks) {
+    _this.hopeTo = function (index, speed, runCallbacks) {
         index = parseInt(index, 10);
-        _this.callPlugins("onSwipeTo", {
+        _this.callPlugins("onHopeTo", {
             index: index,
             speed: speed,
         });
@@ -1888,7 +1892,7 @@ var hope_carousel = function (selector, params) {
         }
         if (newPosition === currentPosition) return false;
         if (typeof runCallbacks === "undefined") runCallbacks = true;
-        swipeToPosition(newPosition, "to", {
+        hopeToPosition(newPosition, "to", {
             index: index,
             speed: speed,
             runCallbacks: runCallbacks,
@@ -1896,7 +1900,7 @@ var hope_carousel = function (selector, params) {
         return true;
     };
 
-    function swipeToPosition(newPosition, action, toOptions) {
+    function hopeToPosition(newPosition, action, toOptions) {
         var speed =
             action === "to" && toOptions.speed >= 0
                 ? toOptions.speed
@@ -2185,7 +2189,7 @@ var hope_carousel = function (selector, params) {
             if (target === pagers[i]) index = i;
         }
         if (params.autoplay) _this.stopAutoplay(true);
-        _this.swipeTo(index);
+        _this.hopeTo(index);
     }
     _this.updatePagination = function (position) {
         if (!params.pagination) return;
@@ -2333,9 +2337,9 @@ var hope_carousel = function (selector, params) {
             autoplayIntervalId = setInterval(function () {
                 if (params.loop) {
                     _this.fixLoop();
-                    _this.swipeNext(true, true);
-                } else if (!_this.swipeNext(true, true)) {
-                    if (!params.autoplayStopOnLast) _this.swipeTo(0);
+                    _this.hopeNext(true, true);
+                } else if (!_this.hopeNext(true, true)) {
+                    if (!params.autoplayStopOnLast) _this.hopeTo(0);
                     else {
                         clearInterval(autoplayIntervalId);
                         autoplayIntervalId = undefined;
@@ -2370,9 +2374,9 @@ var hope_carousel = function (selector, params) {
         autoplayTimeoutId = setTimeout(function () {
             if (params.loop) {
                 _this.fixLoop();
-                _this.swipeNext(true, true);
-            } else if (!_this.swipeNext(true, true)) {
-                if (!params.autoplayStopOnLast) _this.swipeTo(0);
+                _this.hopeNext(true, true);
+            } else if (!_this.hopeNext(true, true)) {
+                if (!params.autoplayStopOnLast) _this.hopeTo(0);
                 else {
                     clearTimeout(autoplayTimeoutId);
                     autoplayTimeoutId = undefined;
@@ -2455,7 +2459,7 @@ var hope_carousel = function (selector, params) {
                 _this.slides.length -
                 _this.loopedSlides * 3 +
                 _this.activeIndex;
-            _this.swipeTo(newIndex, 0, false);
+            _this.hopeTo(newIndex, 0, false);
         } else if (
             (params.slidesPerView === "auto" &&
                 _this.activeIndex >= _this.loopedSlides * 2) ||
@@ -2463,7 +2467,7 @@ var hope_carousel = function (selector, params) {
         ) {
             newIndex =
                 -_this.slides.length + _this.activeIndex + _this.loopedSlides;
-            _this.swipeTo(newIndex, 0, false);
+            _this.hopeTo(newIndex, 0, false);
         }
     };
     _this.loadSlides = function () {
@@ -2577,7 +2581,7 @@ var hope_carousel = function (selector, params) {
         _this.reInit(true);
     };
 
-    function makehope() {
+    function makeHope() {
         _this.calcSlides();
         if (params.loader.slides.length > 0 && _this.slides.length === 0) {
             _this.loadSlides();
@@ -2591,7 +2595,7 @@ var hope_carousel = function (selector, params) {
             _this.createPagination(true);
         }
         if (params.loop || params.initialSlide > 0) {
-            _this.swipeTo(params.initialSlide, 0, false);
+            _this.hopeTo(params.initialSlide, 0, false);
         } else {
             _this.updateActiveSlide(0);
         }
@@ -2599,13 +2603,13 @@ var hope_carousel = function (selector, params) {
             _this.startAutoplay();
         }
         _this.centerIndex = _this.activeIndex;
-        if (params.onhopeCreated)
-            _this.fireCallback(params.onhopeCreated, _this);
-        _this.callPlugins("onhopeCreated");
+        if (params.onHopeCreated)
+            _this.fireCallback(params.onHopeCreated, _this);
+        _this.callPlugins("onHopeCreated");
     }
-    makehope();
+    makeHope();
 };
-hope_carousel.prototype = {
+Hope_carousel.prototype = {
     plugins: {},
     wrapperTransitionEnd: function (callback, permanent) {
         "use strict";
@@ -2989,4 +2993,4 @@ hope_carousel.prototype = {
         ie11: window.navigator.pointerEnabled,
     },
 };
-module.exports = hope_carousel;
+module.exports = Hope_carousel;
