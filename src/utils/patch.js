@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-11 11:58:59
- * @LastEditTime : 2020-08-13 15:20:57
+ * @LastEditTime : 2020-12-02 16:30:19
  * @Description  :
  */
 
@@ -189,3 +189,26 @@ if (!Object.keys) {
         };
     })();
 }
+
+if (!Object.assign) {
+    Object.assign = function(target) {
+      'use strict';
+      if (target == null) {
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+   
+      target = Object(target);
+      for (var index = 1; index < arguments.length; index++) {
+        var source = arguments[index];
+        if (source != null) {
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+      }
+      return target;
+    };
+  }
+  

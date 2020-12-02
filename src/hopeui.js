@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-09-02 14:22:08
+ * @LastEditTime : 2020-12-02 16:01:18
  * @Description  :
  */
 
@@ -23,9 +23,18 @@ const { loadmoreHandler } = require("./module/loadmore.js");
 const { numupHandler } = require("./module/numup.js");
 const { suggestHandler } = require("./module/suggest.js");
 const { uploadHandler } = require("./module/upload.js");
+const { carouselHandler } = require("./module/carousel.js");
 
 const hope = () => {
     return {
+        carousel: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {
+            },
+        }) {
+            return carouselHandler({ ele, options, on });
+        },
         upload: function ({
             ele: ele = null,
             options: options = {},

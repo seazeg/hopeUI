@@ -97,11 +97,68 @@
     #lightbox2 li img {
         height: 100%;
     }
+
+    .hope-slide .title {
+        font-size: 48px;
+        background: #fd9037;
+        color: #fff;
+        height: 400px;
+    }
+
+    .hope-pagination {
+  position: absolute;
+  z-index: 20;
+  left: 10px;
+  bottom: 10px;
+}
+
+.hope-pagination-switch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background: #222;
+  margin-right: 5px;
+  opacity: 0.8;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+.hope-visible-switch {
+  background: #aaa;
+}
+.hope-active-switch {
+  background: #fff;
+}
 </style>
 
 <body>
 
-
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">轮播图</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <div class="hope-container">
+                <div class="hope-wrapper">
+                    <div class="hope-slide">
+                        <div class="title">Slide 1</div>
+                    </div>
+                    <div class="hope-slide">
+                        <div class="title">Slide 2</div>
+                    </div>
+                    <div class="hope-slide">
+                        <div class="title">Slide 3</div>
+                    </div>
+                    <div class="hope-slide">
+                        <div class="title">Slide 4</div>
+                    </div>
+                </div>
+                <div class="hope-pagination"></div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="docs-box">
@@ -561,6 +618,29 @@
     //     ele: '.number'
     // });
 
+
+    var carousel = hope.carousel({
+            ele: ".hope-container",
+            options: {
+                pagination : '.hope-pagination',
+            },
+            on:{
+                onFirstInit: function (e) {
+                   console.log(e);
+                },
+                onSlideChangeStart: function (e) {
+                   console.log(e);
+                }
+            }
+        }
+
+        // options: {
+        //     pagination: '.pagination',
+        //     paginationClickable: true
+        // }
+    )
+
+
     window.myselect = hope.selector({
         ele: '#myselect',
         on: {
@@ -904,7 +984,7 @@
         controls: {
             selector: {
                 on: {
-                    init:function(e){
+                    init: function (e) {
                         console.log(e);
                     },
                     change: function (e) {
@@ -1061,4 +1141,5 @@
         fm.clear();
     };
 </script>
+
 </html>
