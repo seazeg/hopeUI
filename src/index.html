@@ -103,32 +103,36 @@
         background: #fd9037;
         color: #fff;
         height: 400px;
+        text-align: center;
+        line-height: 400px;
     }
 
     .hope-pagination {
-  position: absolute;
-  z-index: 20;
-  left: 10px;
-  bottom: 10px;
-}
+        position: absolute;
+        z-index: 20;
+        left: 10px;
+        bottom: 10px;
+    }
 
-.hope-pagination-switch {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 8px;
-  background: #222;
-  margin-right: 5px;
-  opacity: 0.8;
-  border: 1px solid #fff;
-  cursor: pointer;
-}
-.hope-visible-switch {
-  background: #aaa;
-}
-.hope-active-switch {
-  background: #fff;
-}
+    .hope-pagination-switch {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 8px;
+        background: #222;
+        margin-right: 5px;
+        opacity: 0.8;
+        border: 1px solid #fff;
+        cursor: pointer;
+    }
+
+    .hope-visible-switch {
+        background: #aaa;
+    }
+
+    .hope-active-switch {
+        background: #fff;
+    }
 </style>
 
 <body>
@@ -622,14 +626,14 @@
     var carousel = hope.carousel({
             ele: ".hope-container",
             options: {
-                pagination : '.hope-pagination',
+                pagination: '.hope-pagination',
             },
-            on:{
+            on: {
                 onFirstInit: function (e) {
-                   console.log(e);
+                    //console.log(e);
                 },
                 onSlideChangeStart: function (e) {
-                   console.log(e);
+                    //console.log(e);
                 }
             }
         }
@@ -663,16 +667,16 @@
         },
         on: {
             validate: function (e) {
-                console.log(e);
+                //console.log(e);
                 if (!e.result) {
                     alert('type不符合')
                 }
             },
             uploading: function () {
-                console.log('上传中');
+                //console.log('上传中');
             },
             complete: function (res) {
-                console.log(res);
+                //console.log(res);
                 $('#uploadlist').html('<img src="/app/' + res.imgurl + '" />')
             },
             error: function (res) {
@@ -716,7 +720,7 @@
         },
         on: {
             loaded: function (e) {
-                console.log(e);
+                //console.log(e);
             }
         }
     })
@@ -734,7 +738,7 @@
         on: {
             init: function () {},
             scroll: function (e) {
-                console.log(e.distance);
+                //console.log(e.distance);
             }
         }
     })
@@ -762,7 +766,7 @@
         },
         on: {
             input: function (e) {
-                console.log(e);
+                //console.log(e);
             }
         }
     })
@@ -846,7 +850,7 @@
         },
         on: {
             jumpOver: function (e) {
-                console.log(e);
+                //console.log(e);
             }
         },
     })
@@ -862,10 +866,10 @@
         },
         on: {
             change: function (e) {
-                console.log(e);
+                //console.log(e);
             },
             init: function (e) {
-                console.log(e);
+                //console.log(e);
             },
         },
     });
@@ -907,10 +911,10 @@
     // var select_normal = hope.checkbox({
     //     on: {
     //         change: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //         toggle: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //     },
     // });
@@ -925,10 +929,10 @@
     // var select_normal2 = hope.radio({
     //     on: {
     //         change: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //         toggle: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //     },
     // });
@@ -943,13 +947,13 @@
     //  hope.input({
     //     on: {
     //         blur: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //         focus: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //         input: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //     },
     // });
@@ -957,13 +961,13 @@
     // hope.textarea({
     //     on: {
     //         blur: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //         focus: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //         input: function (e) {
-    //             console.log(e);
+    //             //console.log(e);
     //         },
     //     },
     // });
@@ -974,60 +978,60 @@
         ele: "#form",
         on: {
             submit: function (e) {
-                console.log(e);
+                //console.log(e);
             },
         },
         controls: {
             selector: {
                 on: {
                     init: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                     change: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                     toggle: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                 },
             },
             checkbox: {
                 on: {
                     change: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                 },
             },
             radio: {
                 on: {
                     change: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                 },
             },
             input: {
                 on: {
                     blur: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                     focus: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                     input: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                 },
             },
             textarea: {
                 on: {
                     blur: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                     focus: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                     input: function (e) {
-                        console.log(e);
+                        //console.log(e);
                     },
                 },
             },
