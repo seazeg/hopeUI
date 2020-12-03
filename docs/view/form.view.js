@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-08-26 14:06:17
+ * @LastEditTime : 2020-12-02 18:06:05
  * @Description  :
  */
 export const viewinfo = {
@@ -134,12 +134,15 @@ html:`
 </form>
 `,
 js:`
-var fm = hope.form({
+window.fm = hope.form({
     ele: "#form",
     on: {
         submit: function(e) {
             console.log(e);
         },
+        init:function (e) {
+            
+        }
     },
     controls: {
         selector: {
@@ -334,9 +337,7 @@ document.querySelector("#set").onclick = function() {
     });
 };
 
-document.querySelector("#clear").onclick = function() {
-    fm.clear();
-};
+
 `
 }
 

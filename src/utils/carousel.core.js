@@ -1,4 +1,4 @@
-var Hope_carousel = function (selector, params) {
+var Hope_carousel = function (selector, params, index) {
     "use strict";
     if (!document.body.outerHTML && document.body.__defineGetter__) {
         if (HTMLElement) {
@@ -71,7 +71,7 @@ var Hope_carousel = function (selector, params) {
         end: 0,
     };
     _this.id = new Date().getTime();
-    _this.container = selector.nodeType ? selector : $$(selector)[0];
+    _this.container = selector.nodeType ? selector : $$(selector)[index];
     _this.isTouched = false;
     _this.isMoved = false;
     _this.activeIndex = 0;
@@ -2130,7 +2130,7 @@ var Hope_carousel = function (selector, params) {
         }
         _this.paginationContainer = params.pagination.nodeType
             ? params.pagination
-            : $$(params.pagination)[0];
+            : $$(params.pagination)[index];
         if (params.createPagination) {
             var paginationHTML = "";
             var numOfSlides = _this.slides.length;
