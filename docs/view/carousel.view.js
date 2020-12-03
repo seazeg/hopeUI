@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-12-03 15:06:11
+ * @LastEditTime : 2020-12-03 15:06:39
  * @Description  :
  */
 export const viewinfo = {
@@ -62,7 +62,7 @@ var carousel = hope.carousel({
 </div>
     `,
     js2: `
-var carousel = hope.carousel({
+var carousel2 = hope.carousel({
     ele: ".banner2",
     options: {
         pagination: ".banner2 .hope-pagination",
@@ -105,7 +105,7 @@ var carousel = hope.carousel({
 </div>
     `,
     js3: `
-var carousel = hope.carousel({
+var carousel3 = hope.carousel({
     ele: ".banner3",
     options: {
         pagination: ".banner3 .hope-pagination",
