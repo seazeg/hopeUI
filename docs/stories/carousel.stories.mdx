@@ -17,3 +17,25 @@ import { viewinfo } from "../view/carousel.view.js";
     </Story>
 </Canvas>
 
+<Canvas>
+     <Story name="纵向" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html2}${viewinfo.js2}` }}}}>
+    {() => {
+        useEffect(() => {
+           Function(viewinfo.js2)()
+        });
+        return viewinfo.html2
+    }}  
+    </Story>
+</Canvas>
+
+<Canvas>
+     <Story name="走马灯" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html3}${viewinfo.js3}` }}}}>
+    {() => {
+        useEffect(() => {
+           Function(viewinfo.js3)()
+        });
+        return viewinfo.html3
+    }}  
+    </Story>
+</Canvas>
+

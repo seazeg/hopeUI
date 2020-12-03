@@ -132,3 +132,13 @@
 .hope-active-switch {
     background: #fff;
 }
+
+
+.hope-container2 {
+    width: 100%;
+    height: 400px;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}

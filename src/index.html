@@ -58,15 +58,15 @@
     }
 
     .docs-grid-demo-bg1 {
-        background: #ff7400;
+        background: #ff7400!important;
     }
 
     .docs-grid-demo-bg2 {
-        background: #fd9037;
+        background: #fd9037!important;
     }
 
     .docs-grid-demo-bg3 {
-        background: #ffa55b;
+        background: #ffa55b!important;
     }
 
     .docs-content .hopeui-row {
@@ -133,6 +133,12 @@
     .hope-active-switch {
         background: #fff;
     }
+
+    .banner2 {
+        height: 400px;
+        color: #fff;
+        text-align: center;
+    }
 </style>
 
 <body>
@@ -140,23 +146,23 @@
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
-                <legend><a name="icon">轮播图</a></legend>
+                <legend><a name="icon">轮播图-走马灯</a></legend>
             </fieldset>
         </div>
         <div class="docs-content">
-            <div class="hope-container">
+            <div class="hope-container banner3">
                 <div class="hope-wrapper">
                     <div class="hope-slide">
-                        <div class="title">Slide 1</div>
+                        <div class="title docs-grid-demo-bg1">Slide 1</div>
+                    </div>
+                    <div class="hope-slide ">
+                        <div class="title docs-grid-demo-bg2">Slide 2</div>
                     </div>
                     <div class="hope-slide">
-                        <div class="title">Slide 2</div>
+                        <div class="title docs-grid-demo-bg3">Slide 3</div>
                     </div>
                     <div class="hope-slide">
-                        <div class="title">Slide 3</div>
-                    </div>
-                    <div class="hope-slide">
-                        <div class="title">Slide 4</div>
+                        <div class="title ">Slide 4</div>
                     </div>
                 </div>
                 <div class="hope-pagination"></div>
@@ -168,20 +174,48 @@
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
-                <legend><a name="icon">轮播图2</a></legend>
+                <legend><a name="icon">轮播图</a></legend>
             </fieldset>
         </div>
         <div class="docs-content">
-            <div class="hope-container">
+            <div class="hope-container banner1">
                 <div class="hope-wrapper">
                     <div class="hope-slide">
-                        <div class="title">Slide 1</div>
+                        <div class="title docs-grid-demo-bg1">Slide 1</div>
+                    </div>
+                    <div class="hope-slide ">
+                        <div class="title docs-grid-demo-bg2">Slide 2</div>
                     </div>
                     <div class="hope-slide">
-                        <div class="title">Slide 2</div>
+                        <div class="title docs-grid-demo-bg3">Slide 3</div>
                     </div>
                     <div class="hope-slide">
-                        <div class="title">Slide 3</div>
+                        <div class="title ">Slide 4</div>
+                    </div>
+                </div>
+                <div class="hope-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">轮播图-纵向</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <div class="hope-container banner2">
+                <div class="hope-wrapper">
+                    <div class="hope-slide">
+                        <div class="title docs-grid-demo-bg1">Slide 1</div>
+                    </div>
+                    <div class="hope-slide ">
+                        <div class="title docs-grid-demo-bg2">Slide 2</div>
+                    </div>
+                    <div class="hope-slide">
+                        <div class="title docs-grid-demo-bg3">Slide 3</div>
                     </div>
                     <div class="hope-slide">
                         <div class="title">Slide 4</div>
@@ -652,9 +686,50 @@
 
 
     var carousel = hope.carousel({
-            ele: ".hope-container",
+            ele: ".banner3",
             options: {
-                pagination: '.hope-pagination',
+                pagination: '.banner1 .hope-pagination',
+                paginationClickable: true,
+                slidesPerView: 3,
+                calculateHeight: true,
+                resizeReInit: true,
+                roundLengths: true,
+            },
+            on: {
+                onFirstInit: function (e) {
+                    //console.log(e);
+                },
+                onSlideChangeStart: function (e) {
+                    //console.log(e);
+                }
+            }
+        }
+
+    )
+
+    var carousel = hope.carousel({
+            ele: ".banner1",
+            options: {
+                pagination: '.banner1 .hope-pagination',
+                paginationClickable: true,
+            },
+            on: {
+                onFirstInit: function (e) {
+                    //console.log(e);
+                },
+                onSlideChangeStart: function (e) {
+                    //console.log(e);
+                }
+            }
+        }
+
+    )
+    var carousel = hope.carousel({
+            ele: ".banner2",
+            options: {
+                pagination: '.banner2 .hope-pagination',
+                mode: 'vertical',
+                paginationClickable: true,
             },
             on: {
                 onFirstInit: function (e) {
