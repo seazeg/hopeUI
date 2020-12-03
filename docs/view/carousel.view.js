@@ -1,24 +1,21 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-12-03 11:53:06
+ * @LastEditTime : 2020-12-03 15:06:11
  * @Description  :
  */
 export const viewinfo = {
     html: `
-<div class="hope-container">
+<div class="hope-container banner">
     <div class="hope-wrapper">
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg1">
             <div class="title">Slide 1</div>
         </div>
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg2">
             <div class="title">Slide 2</div>
         </div>
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg3">
             <div class="title">Slide 3</div>
-        </div>
-        <div class="hope-slide">
-            <div class="title">Slide 4</div>
         </div>
     </div>
     <div class="hope-pagination"></div>
@@ -26,9 +23,9 @@ export const viewinfo = {
     `,
     js: `
 var carousel = hope.carousel({
-    ele: ".hope-container",
+    ele: ".banner",
     options: {
-        pagination: ".hope-container .hope-pagination",
+        pagination: ".banner .hope-pagination",
         loop: true
     },
     on:{
@@ -43,27 +40,22 @@ var carousel = hope.carousel({
     `,
     html2: `
 <style>
-    .hope-container2 {
+    .banner2 {
         height: 400px;
         color: #fff;
         text-align: center;
-        overflow: hidden;
-        position: relative;
     }
 </style>
-<div class="hope-container2">
+<div class="hope-container banner2">
     <div class="hope-wrapper">
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg1">
             <div class="title">Slide 1</div>
         </div>
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg2">
             <div class="title">Slide 2</div>
         </div>
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg3">
             <div class="title">Slide 3</div>
-        </div>
-        <div class="hope-slide">
-            <div class="title">Slide 4</div>
         </div>
     </div>
     <div class="hope-pagination"></div>
@@ -71,9 +63,9 @@ var carousel = hope.carousel({
     `,
     js2: `
 var carousel = hope.carousel({
-    ele: ".hope-container2",
+    ele: ".banner2",
     options: {
-        pagination: ".hope-container2 .hope-pagination",
+        pagination: ".banner2 .hope-pagination",
         loop: true,
         mode: 'vertical'
     },
@@ -88,19 +80,25 @@ var carousel = hope.carousel({
 })
     `,
     html3: `
-<div class="hope-container3">
+<div class="hope-container banner3">
     <div class="hope-wrapper">
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg1">
             <div class="title">Slide 1</div>
         </div>
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg2">
             <div class="title">Slide 2</div>
         </div>
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg3">
             <div class="title">Slide 3</div>
         </div>
-        <div class="hope-slide">
+        <div class="hope-slide docs-grid-demo-bg1">
             <div class="title">Slide 4</div>
+        </div>
+        <div class="hope-slide docs-grid-demo-bg2">
+            <div class="title">Slide 5</div>
+        </div>
+        <div class="hope-slide docs-grid-demo-bg3">
+            <div class="title">Slide 6</div>
         </div>
     </div>
     <div class="hope-pagination"></div>
@@ -108,9 +106,9 @@ var carousel = hope.carousel({
     `,
     js3: `
 var carousel = hope.carousel({
-    ele: ".hope-container3",
+    ele: ".banner3",
     options: {
-        pagination: ".hope-container3 .hope-pagination",
+        pagination: ".banner3 .hope-pagination",
         loop: true,
         slidesPerView: 3
     },

@@ -134,11 +134,14 @@
 }
 
 
-.hope-container2 {
-    width: 100%;
+.banner2 {
     height: 400px;
     color: #fff;
     text-align: center;
-    overflow: hidden;
-    position: relative;
+}
+
+.banner3 {
+    height: 400px;
+    color: #fff;
+    text-align: center;
 }
