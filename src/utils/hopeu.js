@@ -1,4 +1,3 @@
-/*jshint sub:true, regexdash:true, laxbreak: true, expr: true*/
 var hopeu = window['hopeu'] = (function () {
   var win = window,
     queryShimCdn = "http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.4/sizzle.min.js",

@@ -133,7 +133,6 @@
     background: #fff;
 }
 
-
 .banner2 {
     height: 400px;
     color: #fff;
@@ -144,4 +143,22 @@
     height: 400px;
     color: #fff;
     text-align: center;
+}
+
+.imgcenter_warp {
+    width: 400px;
+    height: 320px;
+    border: 1px solid #fd9037;
+    overflow:inherit!important;
+    margin: 0 auto;
+    margin-top:100px;
+    margin-bottom:200px;
+}
+
+.imgcenter_warp img {
+    z-index: -1;
+}
+
+.hope_picture{
+    width:100%;
 }

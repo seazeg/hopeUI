@@ -30,7 +30,7 @@
 }
 
 .Mixin(@index,@fen,@len) when (@index<=length(@max)) {
-    @media screen and (min-width: extract(@min,@index)) and (max-width: extract(@max,@index)) {
+    @media screen and (min-width: extract(@min,@index)) and (max-width: extract(@max,@index)-1) {
         .Col(@fen,@class) when (@fen<= @len) {
             .@{class}-@{fen}-@{len} {
                 width: (100% / @len) * @fen;

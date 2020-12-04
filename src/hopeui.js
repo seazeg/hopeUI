@@ -1,11 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-12-02 16:01:18
+ * @LastEditTime : 2020-12-04 10:09:41
  * @Description  :
  */
 
-require("./styles/hopeui.less");
+require("./hopeui.less");
 require("./utils/patch.js");
 
 const { scrollbarHandler } = require("./module/scrollbar.js");
@@ -24,14 +24,29 @@ const { numupHandler } = require("./module/numup.js");
 const { suggestHandler } = require("./module/suggest.js");
 const { uploadHandler } = require("./module/upload.js");
 const { carouselHandler } = require("./module/carousel.js");
+const { pictureHandler } = require("./module/picture.js");
+const { adapimageHandler } = require("./module/adapimage.js");
 
 const hope = () => {
     return {
+        adapimage: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return adapimageHandler({ ele, options, on });
+        },
+        picture: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return pictureHandler({ ele, options, on });
+        },
         carousel: function ({
             ele: ele = null,
             options: options = {},
-            on: on = {
-            },
+            on: on = {},
         }) {
             return carouselHandler({ ele, options, on });
         },
