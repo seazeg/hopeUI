@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-12-04 10:09:41
+ * @LastEditTime : 2020-12-04 15:12:48
  * @Description  :
  */
 
@@ -26,9 +26,18 @@ const { uploadHandler } = require("./module/upload.js");
 const { carouselHandler } = require("./module/carousel.js");
 const { pictureHandler } = require("./module/picture.js");
 const { adapimageHandler } = require("./module/adapimage.js");
+const { omitHandler } = require("./module/omit.js");
+
 
 const hope = () => {
     return {
+        omit: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return omitHandler({ ele, options, on });
+        },
         adapimage: function ({
             ele: ele = null,
             options: options = {},

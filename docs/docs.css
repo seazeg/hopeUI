@@ -157,7 +157,7 @@
 
 .imgcenter_warp::after {
     content: "";
-    border: 2px solid #fd9037;
+    border: 1px solid #fd9037;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -171,4 +171,9 @@
 
 .hope_picture {
     width: 40%;
+}
+
+.hope-omit{
+    width:400px;
+    line-height: 1.5;
 }

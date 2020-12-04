@@ -157,9 +157,29 @@
         /* width:100%; */
         /* height: 100%; */
     }
+
+    .hope-omit{
+        width:200px;
+        line-height: 1.5;
+    }
 </style>
 
 <body>
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">响应式文本截断</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <p class="hope-omit" hope-omit-xl="3" hope-omit-md="2" hope-omit-xs="1">
+                6月30日，全球最大的传播集团WPP与品牌资产研究专家凯度集团（Kantar）联合发布了2020年BrandZ™最具价值全球品牌100强。海尔以全球唯一物联网生态品牌蝉联百强，全球排名较去年提升21位，品牌价值显著提升，生态品牌持续引领。
+            </p>
+        </div>
+    </div>
+
+
 
     <div class="docs-box">
         <div class="docs-title">
@@ -784,6 +804,16 @@
     // hope.numup({
     //     ele: '.number'
     // });
+    hope.omit({
+        ele: '.hope-omit',
+        options:{
+        },
+        on:{
+            init: function (e){
+                console.log(e);
+            }
+        }
+    })
 
 
     var pic = hope.adapimage({
