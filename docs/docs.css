@@ -148,17 +148,27 @@
 .imgcenter_warp {
     width: 400px;
     height: 320px;
-    border: 1px solid #fd9037;
-    overflow:inherit!important;
+    overflow: inherit !important;
     margin: 0 auto;
-    margin-top:100px;
-    margin-bottom:200px;
+    margin-top: 100px;
+    margin-bottom: 200px;
+    position: relative;
+}
+
+.imgcenter_warp::after {
+    content: "";
+    border: 2px solid #fd9037;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .imgcenter_warp img {
-    z-index: -1;
+    z-index: 0;
 }
 
-.hope_picture{
-    width:100%;
+.hope_picture {
+    width: 40%;
 }

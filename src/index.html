@@ -145,14 +145,17 @@
     }
 
     .imgcenter_warp {
-        width:600px;
+        width: 600px;
         height: 320px;
         border: 1px solid greenyellow;
         margin: 50px auto;
+        overflow: hidden;
     }
 
     .imgcenter_warp img {
-        z-index: -1
+        z-index: -1;
+        /* width:100%; */
+        /* height: 100%; */
     }
 </style>
 
@@ -166,11 +169,12 @@
         </div>
         <div class="docs-content">
             <div class="imgcenter_warp ">
-               <img class="imgCover" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607062364792&di=b944518c3252a66f9f55095ac2c93ef4&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201504%2F06%2F0638202b7ws2d2w4bzsyuu.jpg" alt="">
-           </div>
-            <div class="imgcenter_warp ">
                 <img class="imgCover"
-                    src="https://imagegroup1.haier.com/press-events/news/W020201202614510610244.jpg"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607062364792&di=b944518c3252a66f9f55095ac2c93ef4&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201504%2F06%2F0638202b7ws2d2w4bzsyuu.jpg"
+                    alt="">
+            </div>
+            <div class="imgcenter_warp ">
+                <img class="imgCover" src="https://imagegroup1.haier.com/press-events/news/W020201202614510610244.jpg"
                     alt="">
             </div>
             <div class="imgcenter_warp" style="height:3000px;">
@@ -180,7 +184,7 @@
             </div>
 
 
-            
+
         </div>
     </div>
 
@@ -786,7 +790,7 @@
         ele: ".imgCover",
         options: {},
         on: {
-            init:function(){
+            init: function () {
 
             }
         }
