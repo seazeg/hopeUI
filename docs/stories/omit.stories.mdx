@@ -33,9 +33,10 @@ import { viewinfo } from "../view/omit.view.js";
 
 ## 配置 options
 
-| 参数       | 说明 | 类型   | 可选值 | 默认值 |
-| ---------- | ---- | ------ | ------ | ------ |
-| breakpoint | 断点 | Object | --     | --     |
+| 参数       | 说明                             | 类型    | 可选值 | 默认值 |
+| ---------- | -------------------------------- | ------- | ------ | ------ |
+| breakpoint | 断点                             | Object  | --     | --     |
+| isTwoway   | 双向（分辨率低到高或高到低）截断 | Boolean | --     | false     |
 
 ## 回调方法 on
 
@@ -43,7 +44,7 @@ import { viewinfo } from "../view/omit.view.js";
 | ------ | ---------- | -------- | ------ | -------- |
 | resize | 初始化回调 | Function | null   | event↓   |
 
-| event 参数 | 说明           | 类型   |
-| ---------- | -------------- | ------ |
-| ele        | 文本域 DOM 集合  | Array  | Object |
-| eventName  | 当前回调事件名 | String |
+| event 参数 | 说明            | 类型   |
+| ---------- | --------------- | ------ |
+| ele        | 文本域 DOM 集合 | Array  | Object |
+| eventName  | 当前回调事件名  | String |

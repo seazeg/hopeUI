@@ -1,11 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-04 15:16:28
+ * @LastEditTime : 2020-12-04 16:46:35
  * @Description  :
  */
 
 const $ = require("../utils/hopeu.js");
+const { is } = require("../utils/is.js");
 
 module.exports.omitHandler = function ({ ele, options, on }) {
     const obj = new Object();
@@ -18,9 +19,15 @@ module.exports.omitHandler = function ({ ele, options, on }) {
         $dom.each(function () {
             let _this = $(this);
             let bkp = options.breakpoint;
+            if (options.isTwoway) {
+                if (!_this.attr("hope-omit-title")) {
+                    _this.attr("hope-omit-title", _this.text().trim());
+                } else {
+                    _this.text(_this.attr("hope-omit-title"));
+                }
+            }
 
             if (!bkp) {
-           
                 if (winWidth >= 1200) {
                     automit(_this, _this.attr("hope-omit-xl"));
                 } else if (winWidth < 1200 && winWidth >= 750) {
@@ -31,7 +38,7 @@ module.exports.omitHandler = function ({ ele, options, on }) {
             } else {
                 for (let key in bkp) {
                     if (winWidth >= bkp[key]) {
-                        automit(_this, _this.attr(`hope-omit-{key}`));
+                        automit(_this, _this.attr(`hope-omit-${key}`));
                         break;
                     }
                 }
@@ -48,21 +55,31 @@ module.exports.omitHandler = function ({ ele, options, on }) {
     }
 
     function automit(obj, row) {
-        var _this = obj;
-        var tag = false;
-        var maxHeight = parseFloat(_this.css("lineHeight")) * row;
+        let _this = obj;
+        let tag = false;
+        let maxHeight = 0;
+        // if (is.ie() < 9) {
+        //     maxHeight = Math.floor(
+        //         _this.css("lineHeight") *
+        //             parseFloat(_this.css("fontSize")) *
+        //             row
+        //     );
+        // } else {
+        maxHeight = parseFloat(_this.css("lineHeight")) * row;
+        // }
+
         while (maxHeight < _this.height()) {
             tag = true;
-            var txt = _this.text().trim();
-            var tmp = txt.substring(0, txt.length - 1);
+            let txt = $.trim(_this.text());
+            let tmp = txt.substring(0, txt.length - 1);
             _this.text(tmp);
         }
         if (tag) {
             _this.text(
-                _this
-                    .text()
-                    .trim()
-                    .substring(0, _this.text().trim().length - 1) + "..."
+                $.trim(_this.text()).substring(
+                    0,
+                    $.trim(_this.text()).length - 1
+                ) + "..."
             );
         }
     }
