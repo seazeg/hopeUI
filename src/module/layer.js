@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-09-08 09:38:18
+ * @LastEditTime : 2020-12-04 17:10:06
  * @Description  : 弹层
  */
 
@@ -192,7 +192,7 @@ module.exports.layerHandler = function({ options, on }) {
     }
 
     open();
-
+    
     obj.close = function() {
         close();
     };
