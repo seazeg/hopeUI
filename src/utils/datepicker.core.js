@@ -21,7 +21,8 @@ let Hope_datepicker = function (ele, options, on) {
             format: "yyyy-MM-dd",
         },
         options
-    );
+	);
+
 
     let _dateBody =
         "<div class='hope-datepicker hopeui-anim hopeui-anim-upbit' id='datepicker_" +
@@ -271,7 +272,7 @@ let Hope_datepicker = function (ele, options, on) {
             let tz_m_str, tz_d_str;
             tz_m < 10 ? (tz_m_str = "0" + tz_m) : (tz_m_str = tz_m);
             tz_d < 10 ? (tz_d_str = "0" + tz_d) : (tz_d_str = tz_d);
-            let date_sel = tz_y + "-" + tz_m_str + "-" + tz_d_str;
+            let date_sel = tz_y + options.format.substring(4,5) + tz_m_str + options.format.substring(4,5) + tz_d_str;
 
             $(obj).val(date_sel);
 
