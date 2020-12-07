@@ -7,7 +7,6 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="assets/font/hopefont.css" />
     <script src="assets/jquery.js"></script>
-
 </head>
 <style>
     * {
@@ -166,6 +165,16 @@
 </style>
 
 <body>
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">日期选择</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <input name="text" type="text" value="" id="hope-datepicker" class="hopeui-input" placeholder="请选择日期" readonly/>
+        </div>
+    </div>
 
     <div class="docs-box">
         <div class="docs-title">
@@ -805,6 +814,18 @@
     // hope.numup({
     //     ele: '.number'
     // });
+
+    hope.datepicker({
+        ele: '#hope-datepicker',
+        options:{
+        },
+        on:{
+            init: function (e){
+                console.log(e);
+            }
+        }
+    })
+
 
     hope.omit({
         ele: '.hope-omit',

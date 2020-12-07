@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-12-04 15:12:48
+ * @LastEditTime : 2020-12-07 14:00:27
  * @Description  :
  */
 
@@ -20,7 +20,7 @@ const { textareaHandler } = require("./module/textarea.js");
 const { inputHandler } = require("./module/input.js");
 const { formHandler } = require("./module/form.js");
 const { loadmoreHandler } = require("./module/loadmore.js");
-const { numupHandler } = require("./module/numup.js");
+const { datepickerHandler } = require("./module/datepicker.js");
 const { suggestHandler } = require("./module/suggest.js");
 const { uploadHandler } = require("./module/upload.js");
 const { carouselHandler } = require("./module/carousel.js");
@@ -87,14 +87,14 @@ const hope = () => {
         }) {
             return suggestHandler({ ele, options, params, reader, on });
         },
-        numup: function ({
+        datepicker: function ({
             ele: ele = null,
             options: options = {},
             on: on = {
                 loaded: null,
             },
         }) {
-            return numupHandler({ ele, options, on });
+            return datepickerHandler({ ele, options, on });
         },
         loadmore: function ({
             ele: ele = null,

@@ -1,5 +1,4 @@
 var Hope_carousel = function (selector, params, index) {
-    "use strict";
     if (!document.body.outerHTML && document.body.__defineGetter__) {
         if (HTMLElement) {
             var element = HTMLElement.prototype;
