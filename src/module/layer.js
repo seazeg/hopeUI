@@ -8,7 +8,7 @@
 const $ = require("../utils/hopeu.js");
 const { is } = require("../utils/is.js");
 
-module.exports.layerHandler = function({ options, on }) {
+module.exports.layerHandler = function ({ options, on }) {
     const obj = new Object();
     options = {
         width: options.width || "",
@@ -34,11 +34,14 @@ module.exports.layerHandler = function({ options, on }) {
         if (!is.noPer(options.width)) {
             layer
                 .children(".hopeui-layer-content")
-                .css('width',$("body").width() * (parseInt(options.width) / 100))
+                .css(
+                    "width",
+                    $("body").width() * (parseInt(options.width) / 100)
+                );
         } else {
             layer
                 .children(".hopeui-layer-content")
-                .css('width',parseInt(options.width))
+                .css("width", parseInt(options.width));
         }
 
         layer.css({
@@ -46,7 +49,7 @@ module.exports.layerHandler = function({ options, on }) {
             top: (document.documentElement.clientHeight - layer.height()) / 2,
         });
 
-        $(window).resize(function() {
+        $(window).resize(function () {
             layer
                 .children(".hopeui-layer-content")
                 .width($("body").width() * (parseInt(options.width) / 100));
@@ -61,21 +64,21 @@ module.exports.layerHandler = function({ options, on }) {
     };
 
     let darg = (obj) => {
-        obj.onmousedown = function(e) {
+        obj.onmousedown = function (e) {
             //鼠标按下事件
 
             let oe = e || window.event;
             let _this = this.parentNode;
             let startX = oe.clientX - _this.offsetLeft;
             let startY = oe.clientY - _this.offsetTop;
-            document.onmousemove = function(e) {
+            document.onmousemove = function (e) {
                 //鼠标移动事件
                 let oe = e || window.event;
                 _this.style.left = oe.clientX - startX + "px";
                 _this.style.top = oe.clientY - startY + "px";
             };
 
-            document.onmouseup = function() {
+            document.onmouseup = function () {
                 //鼠标松开事件
                 document.onmousemove = null;
                 document.onmouseup = null;
@@ -145,23 +148,23 @@ module.exports.layerHandler = function({ options, on }) {
             }
         }
 
-        if (on.open) {
+        if (on && on.open) {
             on.open(self[0], obj);
         }
 
         //事件绑定
-        self.find('button[name="close"]').on("click", function(e) {
+        self.find('button[name="close"]').on("click", function (e) {
             close();
         });
-        self.find('button[name="ok"]').on("click", function(e) {
-            if (on.confirm) {
+        self.find('button[name="ok"]').on("click", function (e) {
+            if (on && on.confirm) {
                 on.confirm(self[0], obj);
             } else {
                 close();
             }
         });
 
-        self.find(".hopeui-layer-close").on("click", function(e) {
+        self.find(".hopeui-layer-close").on("click", function (e) {
             close();
         });
     };
@@ -173,18 +176,18 @@ module.exports.layerHandler = function({ options, on }) {
             mask.remove();
         }
         $("body,html").removeClass("hopeui-layer-nosrl");
-        if (on.close) {
+        if (on && on.close) {
             on.close(self[0], obj);
         }
     };
 
-    $('body',document).on('keyup', function (e) {
+    $("body", document).on("keyup", function (e) {
         if (e.which === 27) {
-           close();
+            close();
         }
     });
-    
-    if (on.init) {
+
+    if (on && on.init) {
         on.init({
             ele: $dom[0],
             eventName: "init",
@@ -192,8 +195,8 @@ module.exports.layerHandler = function({ options, on }) {
     }
 
     open();
-    
-    obj.close = function() {
+
+    obj.close = function () {
         close();
     };
 

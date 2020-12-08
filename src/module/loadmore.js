@@ -31,7 +31,9 @@ module.exports.loadmoreHandler = function ({
                         let { pageNo, pageSize, totalNumber } = reader(data);
                         let totalPage = Math.ceil(totalNumber / pageSize);
                         let nextPage = pageNo + 1;
-                        let loadHTML = `<div class="hopeui-loadmore" hope-pageNo="${nextPage}"><span class="hopeui-loadmore-tag hopeui-btn" style="${autoLoad?'opacity:0':''}">${loadBtnName}</span></div>`;
+                        let loadHTML = `<div class="hopeui-loadmore" hope-pageNo="${nextPage}"><span class="hopeui-loadmore-tag hopeui-btn" style="${
+                            autoLoad ? "opacity:0" : ""
+                        }">${loadBtnName}</span></div>`;
 
                         let loadBox = $dom.find(".hopeui-loadmore-box");
 
@@ -85,7 +87,7 @@ module.exports.loadmoreHandler = function ({
                             },
                         });
 
-                        if (on.loaded) {
+                        if (on && on.loaded) {
                             on.loaded({
                                 pageNo: pageNo,
                                 event: "loaded",

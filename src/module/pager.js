@@ -151,7 +151,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     "hopeui-num"
                                 );
                                 getData(params, reader);
-                                if (on.jumpOver) {
+                                if (on && on.jumpOver) {
                                     on.jumpOver({
                                         type: "number",
                                         targetEle: $(this)[0],
@@ -181,7 +181,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     }
                                     params.data[pageMapping] = pageNo;
                                     getData(params, reader);
-                                    if (on.jumpOver) {
+                                    if (on && on.jumpOver) {
                                         on.jumpOver({
                                             type: "prev",
                                             targetEle: $(this)[0],
@@ -212,7 +212,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     }
                                     params.data[pageMapping] = pageNo;
                                     getData(params, reader);
-                                    if (on.jumpOver) {
+                                    if (on && on.jumpOver) {
                                         on.jumpOver({
                                             type: "next",
                                             targetEle: $(this)[0],
@@ -243,7 +243,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     }
                                     params.data[pageMapping] = number;
                                     getData(params, reader);
-                                    if (on.jumpOver) {
+                                    if (on && on.jumpOver) {
                                         on.jumpOver({
                                             type: "jump",
                                             targetEle: $(this)[0],
@@ -273,7 +273,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
             }
             params.data[pageMapping] = number;
             getData(params, reader);
-            if (on.jumpOver) {
+            if (on && on.jumpOver) {
                 on.jumpOver({
                     type: "jump",
                     pageNo: number,

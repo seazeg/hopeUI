@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-04 16:46:35
+ * @LastEditTime : 2020-12-08 13:48:53
  * @Description  :
  */
 
@@ -46,7 +46,7 @@ module.exports.omitHandler = function ({ ele, options, on }) {
             initArr.push(_this.get(0));
         });
 
-        if (on.resize) {
+        if (on && on.resize) {
             on.resize({
                 ele: initArr,
                 eventName: "resize",

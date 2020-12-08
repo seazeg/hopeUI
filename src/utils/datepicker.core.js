@@ -1,6 +1,6 @@
 const hopeu = require("../utils/hopeu.js");
 
-let Hope_datepicker = function (ele, options, on) {
+let Hope_datepicker = function (ele, options, on, plugin) {
     let $ = hopeu;
     let obj = ele;
     let elem_id = $(obj).attr("id");
@@ -14,33 +14,46 @@ let Hope_datepicker = function (ele, options, on) {
     let tz_y, tz_m, tz_d, tz_y_s, tz_y_e;
     let input_y, input_m, input_d;
     let con_min_hieght;
+    let time = [];
 
     let settings = Object.assign(
         {
             offTop: $(obj).height() + 3,
-            format: "yyyy-MM-dd",
+            format: "yyyy-MM-dd HH:mm:ss",
         },
         options
-	);
-
-
-    let _dateBody =
-        "<div class='hope-datepicker hopeui-anim hopeui-anim-upbit' id='datepicker_" +
-        elem_id +
-        "'>" +
-        "<div class='year-month' id='ym" +
-        elem_id +
-        "'><span class='left hopeui-icon hopeui-icon-prev'></span>" +
-        "<span class='month'><span>6月</span><div class='month-list' id='mlist_" +
-        elem_id +
-        "'><ul><li data-id='1'>一月</li><li data-id='2'>二月</li><li data-id='3'>三月</li><li data-id='4'>四月</li><li data-id='5'>五月</li><li data-id='6'>六月</li>" +
-        "<li data-id='7'>七月</li><li data-id='8'>八月</li><li data-id='9'>九月</li><li data-id='10'>十月</li><li data-id='11'>十一</li><li data-id='12'>十二</li></ul></div></span>" +
-        "<span class='year'><span class='span-year'>2015</span><div class='year-list' id='ylist_" +
-        elem_id +
-        "'><ul></ul><div class='year-change'><span class='year-left'></span><span class='year-right'></span></div></div></span><span class='right hopeui-icon hopeui-icon-next'></span></div>" +
-        "<div class='week'><ul><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul></div>" +
-        "<div class='day'><ul></ul></div><div class='action'><span>清空日期</span></div>" +
-        "</div>";
+    );
+    let _dateBody = `<div class='hope-datepicker hopeui-anim hopeui-anim-upbit' id='datepicker_${elem_id}'>
+            <div class='year-month' id='ym${elem_id}'><span class='y_left left hopeui-icon hopeui-icon-prev'></span><span class='m_left left hopeui-icon hopeui-icon-left'></span>
+            <span class='year'>
+            <span class='span-year'>2015</span>
+            <div class='year-list' id='ylist_${elem_id}'>
+            <ul></ul>
+            <div class='year-change'>
+            <span class='year-left'></span>
+            <span class='year-right'></span></div></div></span>
+            <span class='month'><span>6月</span>
+            <div class='month-list' id='mlist_${elem_id}'>
+            <ul><li data-id='1'>一月</li><li data-id='2'>二月</li><li data-id='3'>三月</li><li data-id='4'>四月</li><li data-id='5'>五月</li><li data-id='6'>六月</li><li data-id='7'>七月</li><li data-id='8'>八月</li><li data-id='9'>九月</li><li data-id='10'>十月</li><li data-id='11'>十一</li><li data-id='12'>十二</li></ul></div></span>
+            <span class='m_right right hopeui-icon hopeui-icon-right'></span>
+            <span class='y_right right hopeui-icon hopeui-icon-next'></span></div>
+            <div class='week'><ul><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul></div><div class='day'><ul></ul></div>
+            <div class='action'><span class='selectTime' data-format='${
+                settings.format.substring(11) || "HH:mm:ss"
+            }'>选择时间</span><span class='clear'>清空日期</span>
+            <div class='time-list' id='timelist_${elem_id}'>
+                <div class='warp'>
+                   <div class='hour'><p>时</p><div class='list hopeui-scrollbar'></div></div>
+                   <div class='min'><p>分</p><div class='list hopeui-scrollbar'></div></div>
+                   <div class='sec'><p>秒</p><div class='list hopeui-scrollbar'></div></div>
+                </div>
+                <div class='group'>
+                <span class="return">返回日期</span>
+                <button type="button" class='hopeui-btn'>确定</button>
+                </div>
+            </div>
+            </div>
+        </div>`;
 
     $(_dateBody).appendTo("body");
 
@@ -74,7 +87,7 @@ let Hope_datepicker = function (ele, options, on) {
                 .text(tz_m + "月");
             $("#ylist_" + elem_id)
                 .prev("span")
-                .text(tz_y);
+                .text(tz_y + "年");
 
             dayListReload();
 
@@ -129,7 +142,7 @@ let Hope_datepicker = function (ele, options, on) {
             .text(tz_m + "月");
         $("#ylist_" + elem_id)
             .prev("span")
-            .text(tz_y);
+            .text(tz_y + "年");
 
         dayListReload();
 
@@ -143,7 +156,7 @@ let Hope_datepicker = function (ele, options, on) {
                 height: "",
             });
 
-            if (on.close) {
+            if (on && on.close) {
                 on.close({
                     ele: $(obj).get(0),
                     event: "close",
@@ -160,7 +173,7 @@ let Hope_datepicker = function (ele, options, on) {
                 });
             }
 
-            if (on.open) {
+            if (on && on.open) {
                 on.open({
                     ele: $(obj).get(0),
                     event: "open",
@@ -179,7 +192,7 @@ let Hope_datepicker = function (ele, options, on) {
         $(this).next(".month-list").hasClass("hopeui-show")
             ? $(this).next(".month-list").removeClass("hopeui-show")
             : $(this).next(".month-list").addClass("hopeui-show");
-
+        autoLayerHeight($("#mlist_" + elem_id), 50);
         $("#ylist_" + elem_id).removeClass("hopeui-show");
         $("#ylist_" + elem_id)
             .prev("span")
@@ -207,17 +220,18 @@ let Hope_datepicker = function (ele, options, on) {
         let c_y = $(this).text();
 
         tz_y_s = parseInt(c_y.substring(0, 3) + "0");
-        tz_y_e = tz_y_s + 9;
+        tz_y_e = tz_y_s + 11;
 
         $("#datepicker_" + elem_id + " .year-list li").remove();
         for (tz_y_s; tz_y_s <= tz_y_e; tz_y_s++) {
             let y_a = "";
             parseInt(c_y) == tz_y_s ? (y_a = "active") : (y_a = "");
             $("#datepicker_" + elem_id + " .year-list ul").append(
-                "<li class='" + y_a + "'>" + tz_y_s + "</li>"
+                "<li class='" + y_a + "'>" + tz_y_s + "年</li>"
             );
         }
 
+        autoLayerHeight($("#ylist_" + elem_id), 50);
         $(this).addClass("active");
         $(this).next(".year-list").hasClass("hopeui-show")
             ? $(this).next(".year-list").removeClass("hopeui-show")
@@ -233,7 +247,10 @@ let Hope_datepicker = function (ele, options, on) {
     $("#datepicker_" + elem_id).on("click", ".year li", function () {
         tz_y = parseInt($(this).text());
 
-        $(this).parents(".year-list").prev("span").text(tz_y);
+        $(this)
+            .parents(".year-list")
+            .prev("span")
+            .text(tz_y + "年");
 
         dayListReload();
 
@@ -272,7 +289,12 @@ let Hope_datepicker = function (ele, options, on) {
             let tz_m_str, tz_d_str;
             tz_m < 10 ? (tz_m_str = "0" + tz_m) : (tz_m_str = tz_m);
             tz_d < 10 ? (tz_d_str = "0" + tz_d) : (tz_d_str = tz_d);
-            let date_sel = tz_y + options.format.substring(4,5) + tz_m_str + options.format.substring(4,5) + tz_d_str;
+            let date_sel =
+                tz_y +
+                options.format.substring(4, 5) +
+                tz_m_str +
+                options.format.substring(4, 5) +
+                tz_d_str;
 
             $(obj).val(date_sel);
 
@@ -284,7 +306,7 @@ let Hope_datepicker = function (ele, options, on) {
                 height: "",
             });
 
-            if (on.change) {
+            if (on && on.change) {
                 on.change({
                     ele: $(obj).get(0),
                     date: date_sel,
@@ -295,7 +317,7 @@ let Hope_datepicker = function (ele, options, on) {
     });
 
     //减一月
-    $("#datepicker_" + elem_id + " .left").click(function () {
+    $("#datepicker_" + elem_id + " .m_left").click(function () {
         tz_m = parseInt(tz_m);
         tz_m--;
         if (tz_m == 0) {
@@ -304,13 +326,13 @@ let Hope_datepicker = function (ele, options, on) {
         }
 
         $("#datepicker_" + elem_id + " .month span").text(tz_m + "月");
-        $("#datepicker_" + elem_id + " .year .span-year").text(tz_y);
+        $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
 
         dayListReload();
     });
 
     //加一月
-    $("#datepicker_" + elem_id + " .right").click(function () {
+    $("#datepicker_" + elem_id + " .m_right").click(function () {
         tz_m = parseInt(tz_m);
         tz_m = tz_m + 1;
         if (tz_m == 13) {
@@ -319,16 +341,42 @@ let Hope_datepicker = function (ele, options, on) {
         }
 
         $("#datepicker_" + elem_id + " .month span").text(tz_m + "月");
-        $("#datepicker_" + elem_id + " .year .span-year").text(tz_y);
+        $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
 
         dayListReload();
     });
 
+    //减一年
+    $("#datepicker_" + elem_id + " .y_left").click(function () {
+        tz_y = parseInt(tz_y);
+        tz_y = tz_y - 1;
+
+        $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
+
+        dayListReload();
+    });
+
+    //加一年
+    $("#datepicker_" + elem_id + " .y_right").click(function () {
+        tz_y = parseInt(tz_y);
+        tz_y = tz_y + 1;
+
+        $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
+
+        dayListReload();
+    });
+
+    //选择时间
+    $("#datepicker_" + elem_id).on("click", ".action .selectTime", function () {
+        initTimeList(time);
+        autoLayerHeight($("#timelist_" + elem_id), 0);
+    });
+
     //清空
-    $("#datepicker_" + elem_id).on("click", ".action span", function () {
+    $("#datepicker_" + elem_id).on("click", ".action .clear", function () {
         $(obj).val("");
         $("#datepicker_" + elem_id).removeClass("hopeui-show");
-        if (on.clear) {
+        if (on && on.clear) {
             on.clear({
                 ele: $(obj).get(0),
                 event: "clear",
@@ -336,7 +384,7 @@ let Hope_datepicker = function (ele, options, on) {
         }
     });
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             ele: $(obj).get(0),
             event: "init",
@@ -386,6 +434,8 @@ let Hope_datepicker = function (ele, options, on) {
                 );
             }
         }
+
+        autoLayerHeight([$("#mlist_" + elem_id), $("#ylist_" + elem_id)], 50);
     }
 
     //获取每个月多少天
@@ -452,6 +502,7 @@ let Hope_datepicker = function (ele, options, on) {
     $(document).on("click", function (event) {
         let e = event || window.event;
         let elem = e.srcElement || e.target;
+
         if (
             elem.id == "datepicker_" + elem_id ||
             $(elem).parent()[0].id == "datepicker_" + elem_id ||
@@ -476,6 +527,13 @@ let Hope_datepicker = function (ele, options, on) {
             $(elem).parent().parent()[0].id == "ylist_" + elem_id
         ) {
             return;
+        } else if (
+            elem.id == "timelist_" + elem_id ||
+            $(elem).parent()[0].id == "timelist_" + elem_id ||
+            $(elem).parent().parent()[0].id == "timelist_" + elem_id ||
+            $(elem).parents("#timelist_" + elem_id)
+        ) {
+            return;
         } else if (elem.id != $(obj).attr("id")) {
             // debugger
             if (_shown) {
@@ -486,6 +544,143 @@ let Hope_datepicker = function (ele, options, on) {
             }
         }
     });
+
+    //弹层自动高度
+    function autoLayerHeight(obj, offsetTop) {
+        let mainH = $("#datepicker_" + elem_id).height() - offsetTop - 1;
+        if (obj instanceof Array) {
+            for (let o of obj) {
+                o.height(mainH);
+            }
+        } else {
+            obj.height(mainH);
+        }
+    }
+
+    //时间列表初始化
+    function initTimeList(time) {
+        let hourlist = "",
+            minlist = "",
+            seclist = "";
+        let hourObj = $("#timelist_" + elem_id)
+                .find(".hour")
+                .children(".list"),
+            minObj = $("#timelist_" + elem_id)
+                .find(".min")
+                .children(".list"),
+            secObj = $("#timelist_" + elem_id)
+                .find(".sec")
+                .children(".list");
+        for (let hi = 0; hi <= 23; hi++) {
+            if (hi.toString().length <= 1) {
+                if (hi == 0) {
+                    hourlist += `<div class="item active" data-id="${hi}">0${hi}</div>`;
+                } else {
+                    hourlist += `<div class="item" data-id="${hi}">0${hi}</div>`;
+                }
+            } else {
+                hourlist += `<div class="item" data-id="${hi}">${hi}</div>`;
+            }
+        }
+
+        for (let mi = 0; mi <= 59; mi++) {
+            if (mi.toString().length <= 1) {
+                if (mi == 0) {
+                    minlist += `<div class="item active" data-id="${mi}">0${mi}</div>`;
+                } else {
+                    minlist += `<div class="item" data-id="${mi}">0${mi}</div>`;
+                }
+            } else {
+                minlist += `<div class="item" data-id="${mi}">${mi}</div>`;
+            }
+        }
+
+        for (let si = 0; si <= 59; si++) {
+            if (si.toString().length <= 1) {
+                if (si == 0) {
+                    seclist += `<div class="item active" data-id="${si}">0${si}</div>`;
+                } else {
+                    seclist += `<div class="item" data-id="${si}">0${si}</div>`;
+                }
+            } else {
+                seclist += `<div class="item" data-id="${si}">${si}</div>`;
+            }
+        }
+
+        hourObj.html(hourlist);
+        minObj.html(minlist);
+        secObj.html(seclist);
+
+        $("#timelist_" + elem_id).addClass("hopeui-show");
+
+        plugin.scrollbarHandler({
+            ele: $("#timelist_" + elem_id)
+                .find(".hour")
+                .children(".list"),
+            options: { nobar: true },
+            on: {
+                init: function () {
+                    hourObj.find(".item").on("click", function () {
+                        time[0] = $(this).text();
+                        $(this)
+                            .addClass("active")
+                            .siblings()
+                            .removeClass("active");
+                    });
+                },
+            },
+        });
+
+        plugin.scrollbarHandler({
+            ele: $("#timelist_" + elem_id)
+                .find(".min")
+                .children(".list"),
+            options: { nobar: true },
+            on: {
+                init: function () {
+                    minObj.find(".item").on("click", function () {
+                        time[1] = $(this).text();
+                        $(this)
+                            .addClass("active")
+                            .siblings()
+                            .removeClass("active");
+                    });
+                },
+            },
+        });
+
+        plugin.scrollbarHandler({
+            ele: $("#timelist_" + elem_id)
+                .find(".sec")
+                .children(".list"),
+            options: { nobar: true },
+            on: {
+                init: function () {
+                    secObj.find(".item").on("click", function () {
+                        time[2] = $(this).text();
+                        $(this)
+                            .addClass("active")
+                            .siblings()
+                            .removeClass("active");
+                    });
+                },
+            },
+        });
+
+        $("#timelist_" + elem_id)
+            .find("button")
+            .on("click", function () {
+                $("#datepicker_" + elem_id)
+                    .find(".selectTime")
+                    .text(time.length>0?time.join(":"):"00:00:00");
+                $("#timelist_" + elem_id).removeClass("hopeui-show");
+            });
+        $("#timelist_" + elem_id)
+            .find(".return")
+            .on("click", function () {
+                $("#timelist_" + elem_id).removeClass("hopeui-show");
+            });
+    }
 
     //返回一个元素相对于整个文档左上角的坐标
     function getElementPos(elementId) {

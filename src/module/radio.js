@@ -42,7 +42,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
                 }
                 handle(radio, newEle);
                 //点击回调
-                if (on.change) {
+                if (on && on.change) {
                     on.change({
                         original: radio,
                         targetEle: radio.nextSibling,
@@ -88,7 +88,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
         handle(thisEle[0], $(thisEle).eq(0).next());
     };
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             ele: $dom[0],
             eventName: "init",

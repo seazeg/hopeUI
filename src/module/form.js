@@ -8,7 +8,7 @@
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
 
-module.exports.formHandler = function({ ele, options, on, controls, verify }) {
+module.exports.formHandler = function ({ ele, options, on, controls, verify }) {
     const obj = new Object();
     let formControls = {
         selector: hope.selector({
@@ -38,9 +38,9 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
     if (ele) {
         $dom = $(ele);
     }
-    $dom.each(function() {
+    $dom.each(function () {
         let form = $(this)[0];
-        form.onsubmit = function(evt) {
+        form.onsubmit = function (evt) {
             evt = evt || window.event;
             let tarEle = evt.target || evt.srcElement;
             if (evt.stopPropagation) {
@@ -52,7 +52,7 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
             let sortArr = {},
                 formParams = [],
                 status = true;
-            Array.from(tarEle).forEach(function(item) {
+            Array.from(tarEle).forEach(function (item) {
                 if (
                     (item.type != "submit" ||
                         item.type != "button" ||
@@ -78,7 +78,7 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
             });
 
             //校验区域
-            Object.keys(sortArr).forEach(function(key) {
+            Object.keys(sortArr).forEach(function (key) {
                 let items = sortArr[key];
                 //单选和多选判断
                 if (items.type == "checkbox" || items.type == "radio") {
@@ -87,7 +87,7 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
                         value: "",
                     };
 
-                    items.eles.forEach(function(ele, i) {
+                    items.eles.forEach(function (ele, i) {
                         //校验
                         if (items.required) {
                             obj.name = ele.name;
@@ -123,12 +123,13 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
                         }
                     });
 
-                    obj.value = $.trim(obj.value
-                        .substring(0, obj.value.length - 1))
-                       
+                    obj.value = $.trim(
+                        obj.value.substring(0, obj.value.length - 1)
+                    );
+
                     if (items.required) {
                         // if (obj.value) {
-                            formParams.push(obj);
+                        formParams.push(obj);
                         // }
                     }
                 } else {
@@ -137,7 +138,7 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
                         value: "",
                     };
 
-                    items.eles.forEach(function(ele, i) {
+                    items.eles.forEach(function (ele, i) {
                         //校验
                         if (items.required) {
                             //不为空
@@ -175,19 +176,20 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
                         }
                     });
 
-                    obj.value = $.trim(obj.value
-                        .substring(0, obj.value.length - 1))
+                    obj.value = $.trim(
+                        obj.value.substring(0, obj.value.length - 1)
+                    );
 
                     if (items.required) {
                         // if (obj.value) {
-                            formParams.push(obj);
+                        formParams.push(obj);
                         // }
                     }
                 }
             });
 
             //提交回调
-            if (on.submit) {
+            if (on && on.submit) {
                 on.submit({
                     objectParams: formParams,
                     stringParams: utils.deserialization(formParams),
@@ -198,22 +200,22 @@ module.exports.formHandler = function({ ele, options, on, controls, verify }) {
         };
     });
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             ele: $dom[0],
             eventName: "init",
         });
     }
 
-    obj.val = function(obj) {
-        Object.keys(obj).forEach(function(key) {
+    obj.val = function (obj) {
+        Object.keys(obj).forEach(function (key) {
             formControls[obj[key].type].val({
                 [key]: obj[key],
             });
         });
     };
-    obj.clear = function() {
-        Object.keys(formControls).forEach(function(key) {
+    obj.clear = function () {
+        Object.keys(formControls).forEach(function (key) {
             formControls[key].clear();
         });
     };

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-04 15:04:03
+ * @LastEditTime : 2020-12-08 13:48:05
  * @Description  :
  */
 
@@ -86,7 +86,7 @@ module.exports.adapimageHandler = function ({ ele, options, on }) {
         $dom.css("opacity", 1);
     }, 100);
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             eventName: "init",
         });

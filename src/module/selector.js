@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-01 14:24:38
+ * @LastEditTime : 2020-12-08 13:46:53
  * @Description  : 下拉框
  */
 
@@ -135,7 +135,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         });
 
                         //打开列表回调
-                        if (on.toggle) {
+                        if (on && on.toggle) {
                             on.toggle({
                                 name: $(this)
                                     .children(".hopeui-select-list")
@@ -171,7 +171,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     }
                 }
                 //选中options后回调
-                if (on.change) {
+                if (on && on.change) {
                     on.change({
                         originalParentEle: selector,
                         virtualParentEle: selector.nextSibling,
@@ -196,7 +196,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 .eq($(this).get(0).selectedIndex)
                                 .text()
                         );
-                    if (on.change) {
+                    if (on && on.change) {
                         on.change({
                             originalParentEle: selector,
                             virtualParentEle: null,
@@ -216,12 +216,12 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             $(document).on("click", function (e) {
                 $(newEle).removeClass("hopeui-form-selected");
                 //下拉列表关闭回调
-                if (on.close) {
+                if (on && on.close) {
                     on.close(e);
                 }
             });
 
-            if (on.init) {
+            if (on && on.init) {
                 on.init({
                     ele: $dom[0],
                     eventName: "init",

@@ -475,7 +475,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
                         $(".hopui-lightbox-prev").show();
                     }
 
-                    if (on.prev) {
+                    if (on && on.prev) {
                         on.prev({
                             thisIndex: curIndex,
                             eventName: "prev",
@@ -517,7 +517,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
                         $(".hopui-lightbox-next").hide();
                         $(".hopui-lightbox-prev").show();
                     }
-                    if (on.next) {
+                    if (on && on.next) {
                         on.next({
                             thisIndex: curIndex,
                             eventName: "next",
@@ -591,7 +591,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
                                     $(".hopui-lightbox-next").hide();
                                     $(".hopui-lightbox-prev").show();
                                 }
-                                if (on.next) {
+                                if (on && on.next) {
                                     on.next({
                                         thisIndex: curIndex,
                                         eventName: "next",
@@ -641,7 +641,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
                                     $(".hopui-lightbox-prev").show();
                                 }
 
-                                if (on.prev) {
+                                if (on && on.prev) {
                                     on.prev({
                                         thisIndex: curIndex,
                                         eventName: "prev",
@@ -700,7 +700,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
             options.frameReplaceUrl
         );
 
-        if (on.open) {
+        if (on && on.open) {
             on.open({
                 targetEle: self[0],
                 eventName: "open",
@@ -723,7 +723,7 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
         }
         curIndex = null;
         $("body,html").removeClass("hopeui-layer-nosrl");
-        if (on.close) {
+        if (on && on.close) {
             on.close({
                 targetEle: self[0],
                 eventName: "close",
@@ -731,14 +731,14 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
         }
     };
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             targetEle: self[0],
             eventName: "init",
         });
     }
 
-    dataList.off().on('click', function () {
+    dataList.off().on("click", function () {
         open($(this));
     });
 

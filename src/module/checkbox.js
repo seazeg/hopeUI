@@ -1,14 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-10-30 18:15:33
+ * @LastEditTime : 2020-12-08 13:48:24
  * @Description  : 复选框
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
 
-module.exports.checkboxHandler = function({ ele, options, on }) {
+module.exports.checkboxHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let type = "input";
     let $dom = $("input[type=checkbox]");
@@ -19,7 +19,7 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
             : ($dom = $(`${ele} input[type=checkbox]`));
     }
 
-    $dom.each(function() {
+    $dom.each(function () {
         let newEle,
             checkbox = $(this)[0];
         let template = `<div class="hopeui-noUserSelect hopeui-form-checkbox"><span>${checkbox.value}</span><i class="hopeui-icon hopeui-icon-ok"></i></div>`;
@@ -28,10 +28,10 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
 
         newEle = $(template).insertAfter(checkbox);
 
-        if($(this).attr('disabled')){
-            newEle.addClass('hopeui-checkbox-disabled');
-        }else{
-            newEle.on("click", function(e) {
+        if ($(this).attr("disabled")) {
+            newEle.addClass("hopeui-checkbox-disabled");
+        } else {
+            newEle.on("click", function (e) {
                 if (e.stopPropagation) {
                     e.stopPropagation();
                 } else if (window.event) {
@@ -39,7 +39,7 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
                 }
                 handle(checkbox, newEle);
                 //点击回调
-                if (on.change) {
+                if (on && on.change) {
                     on.change({
                         original: checkbox,
                         targetEle: checkbox.nextSibling,
@@ -51,20 +51,18 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
                 }
             });
         }
-
-        
     });
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             ele: $dom[0],
             eventName: "init",
         });
     }
 
-    obj.val = function(obj) {
+    obj.val = function (obj) {
         if (obj) {
-            Object.keys(obj).forEach(function(key) {
+            Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`input[name=${key}]`);
 
                 if (ele) {
@@ -73,8 +71,8 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
                         : (eleArr = $(`${ele} input[name=${key}]`));
                 }
 
-                eleArr.each(function(i, thisEle) {
-                    obj[key].value.split(",").forEach(function(val) {
+                eleArr.each(function (i, thisEle) {
+                    obj[key].value.split(",").forEach(function (val) {
                         if ($(thisEle).val() == val) {
                             handle(thisEle, $(thisEle).next(), true);
                         }
@@ -85,18 +83,16 @@ module.exports.checkboxHandler = function({ ele, options, on }) {
         }
     };
 
-    obj.clear = function() {
+    obj.clear = function () {
         let thisEle = $(`input[type=checkbox]`);
         if (ele) {
             utils.isSelf(ele, type)
                 ? (thisEle = $(ele))
                 : (thisEle = $(`${ele} input[type=checkbox]`));
         }
-        thisEle.each(function(i, ele) {
+        thisEle.each(function (i, ele) {
             ele.checked = false;
-            $(ele)
-                .next()
-                .removeClass("hopeui-form-checked");
+            $(ele).next().removeClass("hopeui-form-checked");
         });
     };
 

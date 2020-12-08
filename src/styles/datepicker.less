@@ -10,42 +10,27 @@
     background: #fff;
 
     .year-month .left {
-        width: 45px;
-        margin-left: 2px;
+        width: 50px;
     }
     .year-month .month {
-        width: 125px;
-        margin-left: 1px;
-        position: relative;
+        width: 75px;
+        // position: relative;
     }
     .year-month .month span {
-        width: 125px;
+        width: 100%;
         position: relative;
     }
     .year-month .year {
-        width: 125px;
-        margin-right: 1px;
-        position: relative;
+        width: 75px;
+        // position: relative;
     }
     .year-month .year span {
-        width: 125px;
+        width: 100%;
         text-align: center;
     }
     .year-month .right {
         width: 50px;
     }
-    // .year-month .month span,
-    // .year-month .year span {
-    //     background: url(image/up-default.png) no-repeat center right 6px;
-    // }
-    // .year-month .month span:hover,
-    // .year-month .year span:hover {
-    //     background: url(image/up-active.png) @primaryColor no-repeat center right 6px;
-    // }
-    // .year-month .month span.active,
-    // .year-month .year span.active {
-    //     background: url(image/up-active.png) @primaryColor no-repeat center right 6px;
-    // }
     .week {
         height: 25px;
         color: #9ea7b3;
@@ -93,12 +78,12 @@
 
     .day ul li.disable-month:hover {
         color: @gray_light;
-        background:#fff;
+        background: #fff;
     }
 
     .year-month .month .month-list {
-        width: 123px;
-        border: solid 1px #ccc;
+        width: 100%;
+        // border: solid 1px #ccc;
         border-top: none;
         position: absolute;
         top: 50px;
@@ -114,16 +99,19 @@
         display: inline-block;
     }
     .month-list ul li:hover {
-        background: @gray_superlight;
-        color: @darkFontColor;
+        // background: @gray_superlight;
+        // color: @darkFontColor;
+        color: @primaryColor;
     }
     .month-list ul li.active {
-        background: @primaryColor;
-        color: #fff;
+        // background: @primaryColor;
+        // color: #fff;
+        color: @primaryColor;
     }
     .year-month .year .year-list {
-        width: 123px;
-        border: solid 1px #ccc;
+        // width: 123px;
+        width: 100%;
+        // border: solid 1px #ccc;
         border-top: none;
         position: absolute;
         top: 50px;
@@ -142,12 +130,13 @@
         display: inline-block;
     }
     .year-list ul li:hover {
-        background: @gray_superlight;
-        color: @darkFontColor;
+        // background: @gray_superlight;
+        // color: @darkFontColor;
+        color: @primaryColor;
     }
     .year-list ul li.active {
-        background: @primaryColor;
-        color: #fff;
+        // background: @primaryColor;
+        color: @primaryColor;
     }
     .year-list .year-change {
         margin-top: 3px;
@@ -160,20 +149,72 @@
         width: 125px !important;
         height: 18px !important;
     }
-    // .year-change .year-left {
-    //     margin-left: 4px;
-    //     margin-right: 4px;
-    //     background: url(image/left-default.png) #fff no-repeat center !important;
-    // }
-    // .year-change .year-left:hover {
-    //     background: url(image/left-active.png) @primaryColor no-repeat center !important;
-    // }
-    // .year-change .year-right {
-    //     background: url(image/right-default.png) #fff no-repeat center !important;
-    // }
-    // .year-change .year-right:hover {
-    //     background: url(image/right-active.png) @primaryColor no-repeat center !important;
-    // }
+
+    .time-list {
+        border-top: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #fefefe;
+        display: none;
+        color: #9ea7b3;
+        padding: 0 5%;
+
+        .warp {
+            margin-top: 50px;
+
+            > div {
+                width: 32%;
+                display: inline-block;
+                font-size: 0;
+            }
+
+            p {
+                text-align: center;
+                font-size: 16px;
+                margin-bottom: 10px;
+                color: @darkFontColor;
+            }
+
+            .list {
+                border: 1px solid @gray_normal;
+                border-radius: 4px;
+            }
+
+            .item {
+                width: 100%;
+                line-height: 40px;
+                cursor: pointer;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .item:hover{
+               color:@primaryColor;
+            }
+
+            .item.active {
+                color: #fff;
+                background: @primaryColor;
+            }
+        }
+
+        .group {
+            margin: 10px 5px;
+
+            .return {
+                font-size: 14px;
+                color: @primaryColor;
+                float: left;
+                line-height: 38px;
+                cursor: pointer;
+            }
+
+            button {
+                float: right;
+            }
+        }
+    }
 }
 .hope-datepicker .year-month {
     height: 50px;
@@ -186,27 +227,39 @@
     height: 50px;
     line-height: 50px;
     float: left;
-
 }
 .hope-datepicker .year-month span:hover {
-    color: @darkFontColor;
-    background: @gray_superlight;
+    // color: @darkFontColor;
+    // background: @gray_superlight;
+    color: @primaryColor;
 }
 .hope-datepicker .year-month span.active {
-    color: @darkFontColor;
-    background: @gray_superlight;
+    // color: @darkFontColor;
+    // background: @gray_superlight;
+    color: @primaryColor;
 }
 
 .hope-datepicker .action {
     height: 50px;
     border-top: solid 1px #f3f3f3;
 }
-.hope-datepicker .action span {
+
+.hope-datepicker .action span.clear {
+    float: right;
     height: 50px;
     line-height: 50px;
     width: 90px;
     color: @primaryColor;
     text-align: center;
     cursor: pointer;
-    display: inline-block;
+}
+
+.hope-datepicker .action span.selectTime {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    width: 90px;
+    color: @primaryColor;
+    text-align: center;
+    cursor: pointer;
 }

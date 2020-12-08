@@ -8,7 +8,7 @@
 const $ = require("../utils/hopeu.js");
 const { is } = require("../utils/is.js");
 
-module.exports.tabHandler = function({ ele, options, on }) {
+module.exports.tabHandler = function ({ ele, options, on }) {
     const $dom = $(ele),
         obj = new Object(),
         domWidth = $(ele).width();
@@ -28,13 +28,13 @@ module.exports.tabHandler = function({ ele, options, on }) {
             moveDistance,
             targetIndex,
             switchDistance = domWidth; //点击开始坐标，点击结束坐标，移动时坐标，移动位移距离
-        $dom.find(".hopeui-tab-item").on("touchstart", function(e) {
+        $dom.find(".hopeui-tab-item").on("touchstart", function (e) {
             e.preventDefault();
             startX = e.changedTouches[0].pageX;
             targetIndex = $(this).index();
         });
 
-        $dom.find(".hopeui-tab-item").on("touchmove", function(e) {
+        $dom.find(".hopeui-tab-item").on("touchmove", function (e) {
             e.preventDefault();
             moveX = e.changedTouches[0].pageX;
             moveDistance = moveX - startX;
@@ -46,7 +46,7 @@ module.exports.tabHandler = function({ ele, options, on }) {
             }
         });
 
-        $dom.find(".hopeui-tab-item").on("touchend", function(e) {
+        $dom.find(".hopeui-tab-item").on("touchend", function (e) {
             e.preventDefault();
             endX = e.changedTouches[0].pageX;
             let tranRight = endX - startX;
@@ -84,7 +84,7 @@ module.exports.tabHandler = function({ ele, options, on }) {
             }
         });
 
-        $dom.find("li").on("click", function(e) {
+        $dom.find("li").on("click", function (e) {
             $(this)
                 .addClass("hopeui-tab-this")
                 .siblings()
@@ -97,23 +97,22 @@ module.exports.tabHandler = function({ ele, options, on }) {
                 transition: "all .5s",
             });
 
-            if (on.change) {
+            if (on && on.change) {
                 on.change({
                     index: $(this).index(),
                     targetEle: this,
                     targetEleContent: $(this)
-                        .parent().parent()
+                        .parent()
+                        .parent()
                         .siblings(".hopeui-tab-content")[0],
                     eventName: "change",
                 });
             }
         });
     } else {
-        $dom.find(".hopeui-tab-item")
-            .eq(0)
-            .addClass("hopeui-show");
+        $dom.find(".hopeui-tab-item").eq(0).addClass("hopeui-show");
 
-        $dom.find("li").on("click", function(e) {
+        $dom.find("li").on("click", function (e) {
             $(this)
                 .addClass("hopeui-tab-this")
                 .siblings()
@@ -128,7 +127,7 @@ module.exports.tabHandler = function({ ele, options, on }) {
                 .siblings()
                 .removeClass("hopeui-show");
 
-            if (on.change) {
+            if (on && on.change) {
                 on.change({
                     index: $(this).index(),
                     targetEle: this,
@@ -141,7 +140,7 @@ module.exports.tabHandler = function({ ele, options, on }) {
         });
     }
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             ele: $dom[0],
             eventName: "init",
@@ -150,4 +149,3 @@ module.exports.tabHandler = function({ ele, options, on }) {
 
     return obj;
 };
-

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-09-02 14:20:34
- * @LastEditTime : 2020-09-02 18:07:29
+ * @LastEditTime : 2020-12-08 13:49:07
  * @Description  :
  */
 
@@ -36,7 +36,7 @@ module.exports.uploadHandler = function ({ ele, options, on }) {
                 result.size = true;
             }
         }
-        if (on.validate) {
+        if (on && on.validate) {
             on.validate({
                 file: file,
                 status: result,
@@ -62,19 +62,19 @@ module.exports.uploadHandler = function ({ ele, options, on }) {
             xhr.onreadystatechange = function () {
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     input.get(0).value = "";
-                    if (on.complete) {
+                    if (on && on.complete) {
                         on.complete(JSON.parse(xhr.response));
                     }
                 } else if (xhr.readyState == 2) {
-                    if (on.uploading) {
+                    if (on && on.uploading) {
                         on.uploading();
                     }
                 } else if (xhr.status !== 200 && xhr.readyState !== 4) {
-                    if (on.error) {
+                    if (on && on.error) {
                         on.error(JSON.parse(xhr.response));
                     }
                 } else {
-                    if (on.error) {
+                    if (on && on.error) {
                         on.error(JSON.parse(xhr.response));
                     }
                 }
@@ -82,7 +82,7 @@ module.exports.uploadHandler = function ({ ele, options, on }) {
         }
     });
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             ele: $dom[0],
             eventName: "init",

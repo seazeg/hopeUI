@@ -1,19 +1,19 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-12-01 12:06:45
+ * @LastEditTime : 2020-12-08 14:38:14
  * @Description  : 自定义滚动条
  */
 
 const $ = require("../utils/hopeu.js");
-const { is } = require("../utils/is.js");
 
 module.exports.scrollbarHandler = function ({ ele, options, on }) {
     // if ($(ele).find(".hopeui-scrollbar-bar").length <= 0) {
     const obj = new Object();
     let $dom = null;
     let listTemp = $(ele).addClass("hopeui-scrollbar").html();
-    if (options.height) {
+
+    if (options && options.height) {
         $(ele).css("height", options.height + "px");
     }
     if ($(ele).find(".hopeui-scrollbar-box").length <= 0) {
@@ -47,13 +47,20 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     let barHeight = rate * $dom.get(0).clientHeight;
     if (rate < 1) {
         $bar.css("height", barHeight + "px");
+        if (options && options.nobar) {
+            $bar.css({
+                display: "none",
+            });
+        }
     } else {
-        $bar.css("display", "none");
+        $bar.css({
+            display: "none",
+        });
     }
 
     $dom.off().on("scroll", function () {
         $bar.css("top", this.scrollTop * rate + "px");
-        if (on.scroll) {
+        if (on && on.scroll) {
             on.scroll({
                 max: $dom.get(0).clientHeight - barHeight,
                 distance: this.scrollTop * rate,
@@ -114,7 +121,7 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
 
     darg($bar.get(0), $dom.get(0));
 
-    if (on.init) {
+    if (on && on.init) {
         on.init();
     }
 

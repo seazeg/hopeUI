@@ -37,7 +37,7 @@ module.exports.pictureHandler = function ({ ele, options, on }) {
             initArr.push(_this.get(0));
         });
 
-        if (on.resize) {
+        if (on && on.resize) {
             on.resize({
                 ele: initArr,
                 eventName: "resize",

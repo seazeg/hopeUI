@@ -35,7 +35,7 @@ module.exports.suggestHandler = function ({
                     if (reader) {
                         let list = reader(data);
                         let html = "";
-   
+
                         if (list.length > 0) {
                             for (let item of list) {
                                 html += `<div class="option" hope-value="${item}">${item}</div>`;
@@ -54,7 +54,7 @@ module.exports.suggestHandler = function ({
                                     .prev()
                                     .val(_this.attr("hope-value"));
 
-                                if (on.change) {
+                                if (on && on.change) {
                                     on.change({
                                         targetELe: _this.get(0),
                                         value: _this.attr("hope-value"),
@@ -75,8 +75,7 @@ module.exports.suggestHandler = function ({
                 error: function () {
                     obj.find(".hopeui-suggest-list").html(
                         `<div class="option" hope-value="">${
-                            options.noMatchName ||
-                            "-- 没有匹配的内容 --"
+                            options.noMatchName || "-- 没有匹配的内容 --"
                         }</div>`
                     );
                 },
@@ -108,14 +107,18 @@ module.exports.suggestHandler = function ({
                 $this.blur(function () {
                     let _this = $(this);
                     if (!_this.val()) {
-                        _this.siblings('.hopeui-placeholder').removeClass("hopeui-hide");
+                        _this
+                            .siblings(".hopeui-placeholder")
+                            .removeClass("hopeui-hide");
                     }
                 });
 
                 $this.focus(function () {
                     let _this = $(this);
                     if (!_this.val()) {
-                        _this.siblings('.hopeui-placeholder').addClass("hopeui-hide");
+                        _this
+                            .siblings(".hopeui-placeholder")
+                            .addClass("hopeui-hide");
                     }
                 });
             }
@@ -135,54 +138,55 @@ module.exports.suggestHandler = function ({
                 .find(".hopeui-suggest")
                 .css("top", $this.height() + 3);
 
-            $this.on('blur',function (){
-                if (on.blur) {
+            $this.on("blur", function () {
+                if (on && on.blur) {
                     on.blur({
                         targetELe: $(this).get(0),
-                        value: $(this).val(), 
+                        value: $(this).val(),
                         eventName: "blur",
                     });
                 }
-            })
-            $this.on('focus',function (){
-                if (on.focus) {
+            });
+            $this.on("focus", function () {
+                if (on && on.focus) {
                     on.focus({
                         targetELe: $(this).get(0),
-                        value: $(this).val(), 
+                        value: $(this).val(),
                         eventName: "focus",
                     });
                 }
-            })
-            $this.on('input propertychange',function (){
+            });
+            $this.on("input propertychange", function () {
                 if (!is.empty($(this).val())) {
                     getData(params, reader, $this.next());
-                    $this.siblings('.hopeui-suggest').removeClass("hopeui-hide");
+                    $this
+                        .siblings(".hopeui-suggest")
+                        .removeClass("hopeui-hide");
                 } else {
-                    $this.siblings('.hopeui-suggest').addClass("hopeui-hide");
+                    $this.siblings(".hopeui-suggest").addClass("hopeui-hide");
                 }
 
-                if (on.input) {
+                if (on && on.input) {
                     on.input({
                         targetELe: $(this).get(0),
-                        value: $(this).val(), 
+                        value: $(this).val(),
                         eventName: "input",
                     });
                 }
-            })
-
+            });
 
             //点击select区域外关闭下拉列表
             $(document).on("click", function (e) {
                 $this.next().addClass("hopeui-hide");
                 //下拉列表关闭回调
-                if (on.close) {
+                if (on && on.close) {
                     on.close(e);
                 }
             });
         }
     });
 
-    if (on.init) {
+    if (on && on.init) {
         on.init({
             ele: $dom[0],
             eventName: "init",
