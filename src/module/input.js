@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-09 17:49:58
+ * @LastEditTime : 2020-12-09 18:04:44
  * @Description  : 文本框
  */
 
@@ -32,9 +32,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                     .parent()
                     .css("position", "relative");
 
-                if ($this.attr("readonly")) {
-                    $this.attr("unselectable", "on");
-                } else {
+                if (!$this.attr("readonly")) {
                     $this.next().css({
                         lineHeight: $this.css("height") + 2,
                         paddingLeft: $this.css("paddingLeft") + 1,
@@ -56,6 +54,12 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                             _this.next().addClass("hopeui-hide");
                         }
                     });
+                }
+            }
+
+            if (is.ie() <= 11) {
+                if ($this.attr("readonly")) {
+                    $this.attr("unselectable", "on");
                 }
             }
 

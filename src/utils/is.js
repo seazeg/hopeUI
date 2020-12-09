@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-09-09 11:03:54
+ * @LastEditTime : 2020-12-09 18:03:19
  * @Description  : is类
  */
 module.exports.is = {
@@ -20,7 +20,12 @@ module.exports.is = {
         let Sys = {};
         let ua = navigator.userAgent.toLowerCase();
         let ie_version = null;
-        if (window.ActiveXObject) {
+        let isIE =
+            ua.indexOf("compatible") > -1 &&
+            ua.indexOf("msie") > -1 &&
+            !(ua.indexOf("opera") > -1);
+
+        if (isIE) {
             Sys.ie = ua.match(/msie ([\d.]+)/)[1];
             //获取版本
             if (Sys.ie.indexOf("7") > -1) {
