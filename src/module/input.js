@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-08 13:48:46
+ * @LastEditTime : 2020-12-09 17:49:58
  * @Description  : 文本框
  */
 
@@ -32,27 +32,31 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                     .parent()
                     .css("position", "relative");
 
-                $this.next().css({
-                    lineHeight: $this.css("height") + 2,
-                    paddingLeft: $this.css("paddingLeft") + 1,
-                });
-                $this.next().click(function () {
-                    $(this).addClass("hopeui-hide").prev().focus();
-                });
+                if ($this.attr("readonly")) {
+                    $this.attr("unselectable", "on");
+                } else {
+                    $this.next().css({
+                        lineHeight: $this.css("height") + 2,
+                        paddingLeft: $this.css("paddingLeft") + 1,
+                    });
+                    $this.next().click(function () {
+                        $(this).addClass("hopeui-hide").prev().focus();
+                    });
 
-                $this.blur(function () {
-                    let _this = $(this);
-                    if (!_this.val()) {
-                        _this.next().removeClass("hopeui-hide");
-                    }
-                });
+                    $this.blur(function () {
+                        let _this = $(this);
+                        if (!_this.val()) {
+                            _this.next().removeClass("hopeui-hide");
+                        }
+                    });
 
-                $this.focus(function () {
-                    let _this = $(this);
-                    if (!_this.val()) {
-                        _this.next().addClass("hopeui-hide");
-                    }
-                });
+                    $this.focus(function () {
+                        let _this = $(this);
+                        if (!_this.val()) {
+                            _this.next().addClass("hopeui-hide");
+                        }
+                    });
+                }
             }
 
             $this.on("blur", function () {

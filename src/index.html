@@ -172,7 +172,7 @@
             </fieldset>
         </div>
         <div class="docs-content">
-            <input name="text" type="text" value="" id="hope-datepicker" class="hopeui-input" placeholder="请选择日期" readonly/>
+            <input name="text" type="text" value="" id="hope-datepicker" class="hopeui-input" placeholder="请选择日期" readonly  />
         </div>
     </div>
 
@@ -814,6 +814,9 @@
     // hope.numup({
     //     ele: '.number'
     // });
+    hope.input({
+        ele: '#hope-datepicker',
+    })
 
     hope.datepicker({
         ele: '#hope-datepicker',
@@ -823,7 +826,7 @@
         },
         on:{
             init: function (e){
-                console.log(e);
+                // console.log(e);
             }
         }
     })
@@ -836,7 +839,7 @@
         },
         on:{
             init: function (e){
-                console.log(e);
+                // console.log(e);
             }
         }
     })
