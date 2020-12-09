@@ -8,6 +8,8 @@
     z-index: 999;
     display: none;
     background: #fff;
+    padding: 0 10px;
+    color:@neutralFontColor;
 
     .year-month .left {
         width: 50px;
@@ -59,12 +61,13 @@
         text-align: center;
         background: #fff;
         cursor: pointer;
-        color: @darkFontColor;
+        // color: @darkFontColor;
+        color:@neutralFontColor;
     }
 
     .day ul li:hover {
         background: @gray_superlight;
-        color: @darkFontColor;
+        color:@neutralFontColor;
     }
     .day ul li.active {
         background: @primaryColor;
@@ -189,8 +192,8 @@
                 display: inline-block;
             }
 
-            .item:hover{
-               color:@primaryColor;
+            .item:hover {
+                color: @primaryColor;
             }
 
             .item.active {
@@ -200,18 +203,22 @@
         }
 
         .group {
-            margin: 10px 5px;
+            margin: 20px 5px 0 5px;
 
             .return {
                 font-size: 14px;
-                color: @primaryColor;
+                color: @neutralFontColor;
                 float: left;
                 line-height: 38px;
                 cursor: pointer;
+
+                &:hover{
+                    color:@primaryColor;
+                }
             }
 
             button {
-                float: right;
+                margin: 0;
             }
         }
     }
@@ -220,10 +227,9 @@
     height: 50px;
     text-align: center;
     cursor: pointer;
-    margin-top: 1px;
+    margin-bottom:5px;
 }
 .hope-datepicker .year-month span {
-    display: inline-block;
     height: 50px;
     line-height: 50px;
     float: left;
@@ -241,17 +247,20 @@
 
 .hope-datepicker .action {
     height: 50px;
-    border-top: solid 1px #f3f3f3;
+    border-top: solid 1px @gray_light;
+    margin-top:5px;
+    padding:5px 0;
 }
 
-.hope-datepicker .action span.clear {
+.hope-datepicker .action button {
+    margin: 7px 5px 0 5px;
     float: right;
-    height: 50px;
-    line-height: 50px;
-    width: 90px;
-    color: @primaryColor;
-    text-align: center;
-    cursor: pointer;
+}
+
+.hope-datepicker .action button.clear {
+    margin: 7px 5px 0 5px;
+    float: right;
+    border: solid 1px @gray_light;
 }
 
 .hope-datepicker .action span.selectTime {
@@ -259,7 +268,11 @@
     height: 50px;
     line-height: 50px;
     width: 90px;
-    color: @primaryColor;
-    text-align: center;
+    color: @neutralFontColor;
     cursor: pointer;
+    margin-left: 5%;
+
+    &:hover{
+        color:@primaryColor;
+    }
 }

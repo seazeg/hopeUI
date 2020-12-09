@@ -13,16 +13,22 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
     let tz_y, tz_m, tz_d, tz_y_s, tz_y_e;
     let input_y, input_m, input_d;
-    let con_min_hieght;
-    let time = [];
+
+    let time = ["00", "00", "00"];
+    let hourAct = 0,
+        minAct = 0,
+        secAct = 0;
 
     let settings = Object.assign(
         {
             offTop: $(obj).height() + 3,
             format: "yyyy-MM-dd HH:mm:ss",
+            type: "datetime",
         },
         options
     );
+    let result = initNowDate(settings.format);
+
     let _dateBody = `<div class='hope-datepicker hopeui-anim hopeui-anim-upbit' id='datepicker_${elem_id}'>
             <div class='year-month' id='ym${elem_id}'><span class='y_left left hopeui-icon hopeui-icon-prev'></span><span class='m_left left hopeui-icon hopeui-icon-left'></span>
             <span class='year'>
@@ -38,9 +44,13 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             <span class='m_right right hopeui-icon hopeui-icon-right'></span>
             <span class='y_right right hopeui-icon hopeui-icon-next'></span></div>
             <div class='week'><ul><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul></div><div class='day'><ul></ul></div>
-            <div class='action'><span class='selectTime' data-format='${
-                settings.format.substring(11) || "HH:mm:ss"
-            }'>选择时间</span><span class='clear'>清空日期</span>
+            <div class='action'><span class='selectTime ${
+                settings.type == "datetime" ? "" : "hopeui-hide"
+            }' data-format='${
+        settings.format.substring(11) || "HH:mm:ss"
+    }'>选择时间</span>
+            <button type="button" class='hopeui-btn clear hopeui-btn-primary'>清空</button>
+            <button type="button" class='hopeui-btn changeResult'>确定</button>
             <div class='time-list' id='timelist_${elem_id}'>
                 <div class='warp'>
                    <div class='hour'><p>时</p><div class='list hopeui-scrollbar'></div></div>
@@ -49,7 +59,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 </div>
                 <div class='group'>
                 <span class="return">返回日期</span>
-                <button type="button" class='hopeui-btn'>确定</button>
+                <button type="button" class='hopeui-btn changeTime'>确定</button>
                 </div>
             </div>
             </div>
@@ -97,19 +107,19 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 $("#datepicker_" + elem_id).removeClass("hopeui-show");
                 _shown = false;
 
-                $(".content").css({
-                    height: "",
-                });
+                // $(".content").css({
+                //     height: "",
+                // });
             } else {
                 $("#datepicker_" + elem_id).addClass("hopeui-show");
                 _shown = true;
 
-                con_min_hieght = $(".content").height();
-                if (top + settings.offTop + 234 - 61 - 60 > con_min_hieght) {
-                    $(".content").css({
-                        height: top + settings.offTop + 234 - 61 + 10,
-                    });
-                }
+                // con_min_hieght = $(".content").height();
+                // if (top + settings.offTop + 234 - 61 - 60 > con_min_hieght) {
+                //     $(".content").css({
+                //         height: top + settings.offTop + 234 - 61 + 10,
+                //     });
+                // }
             }
 
             // let d = getFocusDate($(obj).val());
@@ -152,9 +162,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             $("#datepicker_" + elem_id).removeClass("hopeui-show");
             _shown = false;
 
-            $(".content").css({
-                height: "",
-            });
+            // $(".content").css({
+            //     height: "",
+            // });
 
             if (on && on.close) {
                 on.close({
@@ -166,12 +176,12 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             $("#datepicker_" + elem_id).addClass("hopeui-show");
             _shown = true;
 
-            con_min_hieght = $(".content").height();
-            if (top + settings.offTop + 234 - 61 - 60 > con_min_hieght) {
-                $(".content").css({
-                    height: top + settings.offTop + 234 - 61 + 10,
-                });
-            }
+            // con_min_hieght = $(".content").height();
+            // if (top + settings.offTop + 234 - 61 - 60 > con_min_hieght) {
+            //     $(".content").css({
+            //         height: top + settings.offTop + 234 - 61 + 10,
+            //     });
+            // }
 
             if (on && on.open) {
                 on.open({
@@ -296,23 +306,10 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 options.format.substring(4, 5) +
                 tz_d_str;
 
-            $(obj).val(date_sel);
+            // $(obj).val(date_sel);
+            $(this).addClass("active").siblings().removeClass("active");
 
-            $(this)
-                .parents("#datepicker_" + elem_id)
-                .removeClass("hopeui-show");
-            _shown = false;
-            $(".content").css({
-                height: "",
-            });
-
-            if (on && on.change) {
-                on.change({
-                    ele: $(obj).get(0),
-                    date: date_sel,
-                    event: "change",
-                });
-            }
+            result[0] = date_sel;
         }
     });
 
@@ -372,10 +369,65 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         autoLayerHeight($("#timelist_" + elem_id), 0);
     });
 
+    //确认选择
+    $("#datepicker_" + elem_id).on(
+        "click",
+        ".action .changeResult",
+        function () {
+            let seperator = settings.format.substring(13, 14) || ":";
+            $(this)
+                .parents("#datepicker_" + elem_id)
+                .removeClass("hopeui-show");
+            _shown = false;
+            // $(".content").css({
+            //     height: "",
+            // });
+           
+
+            if (settings.type == "datetime") {
+                $(obj).val(result.join(" "));
+                time = [
+                    result[1].split(seperator)[0],
+                    result[1].split(seperator)[1],
+                    result[1].split(seperator)[2],
+                ];
+                hourAct = parseInt(result[1].split(seperator)[0]);
+                minAct = parseInt(result[1].split(seperator)[1]);
+                secAct = parseInt(result[1].split(seperator)[2]);
+            }else{
+                $(obj).val(result[0]);
+            }
+
+            $("#datepicker_" + elem_id)
+                .find(".selectTime")
+                .attr("data-time", time.join(":"))
+                .text(time[0] + "时" + time[1] + "分" + time[2] + "秒");
+
+            if (on && on.change) {
+                on.change({
+                    ele: $(obj).get(0),
+                    date: date_sel,
+                    event: "change",
+                });
+            }
+        }
+    );
+
     //清空
     $("#datepicker_" + elem_id).on("click", ".action .clear", function () {
         $(obj).val("");
         $("#datepicker_" + elem_id).removeClass("hopeui-show");
+        time = ["00", "00", "00"];
+        hourAct = 0;
+        minAct = 0;
+        secAct = 0;
+
+        $("#datepicker_" + elem_id)
+            .find(".selectTime")
+            .attr("data-time", time.join(":"))
+            .text("选择时间");
+
+        _shown = false;
         if (on && on.clear) {
             on.clear({
                 ele: $(obj).get(0),
@@ -503,43 +555,12 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         let e = event || window.event;
         let elem = e.srcElement || e.target;
 
-        if (
-            elem.id == "datepicker_" + elem_id ||
-            $(elem).parent()[0].id == "datepicker_" + elem_id ||
-            $(elem).parent().parent()[0].id == "datepicker_" + elem_id
-        ) {
-            return;
-        } else if (
-            elem.id == "ym" + elem_id ||
-            $(elem).parent()[0].id == "ym" + elem_id ||
-            $(elem).parent().parent()[0].id == "ym" + elem_id
-        ) {
-            return;
-        } else if (
-            elem.id == "mlist_" + elem_id ||
-            $(elem).parent()[0].id == "mlist_" + elem_id ||
-            $(elem).parent().parent()[0].id == "mlist_" + elem_id
-        ) {
-            return;
-        } else if (
-            elem.id == "ylist_" + elem_id ||
-            $(elem).parent()[0].id == "ylist_" + elem_id ||
-            $(elem).parent().parent()[0].id == "ylist_" + elem_id
-        ) {
-            return;
-        } else if (
-            elem.id == "timelist_" + elem_id ||
-            $(elem).parent()[0].id == "timelist_" + elem_id ||
-            $(elem).parent().parent()[0].id == "timelist_" + elem_id ||
-            $(elem).parents("#timelist_" + elem_id)
-        ) {
+        if ($(elem).parents("#datepicker_" + elem_id).length != 0) {
             return;
         } else if (elem.id != $(obj).attr("id")) {
-            // debugger
             if (_shown) {
                 _shown = false;
                 $("#datepicker_" + elem_id).removeClass("hopeui-show");
-
                 return;
             }
         }
@@ -573,37 +594,49 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 .children(".list");
         for (let hi = 0; hi <= 23; hi++) {
             if (hi.toString().length <= 1) {
-                if (hi == 0) {
+                if (hi == hourAct) {
                     hourlist += `<div class="item active" data-id="${hi}">0${hi}</div>`;
                 } else {
                     hourlist += `<div class="item" data-id="${hi}">0${hi}</div>`;
                 }
             } else {
-                hourlist += `<div class="item" data-id="${hi}">${hi}</div>`;
+                if (hi == hourAct) {
+                    hourlist += `<div class="item active" data-id="${hi}">${hi}</div>`;
+                } else {
+                    hourlist += `<div class="item" data-id="${hi}">${hi}</div>`;
+                }
             }
         }
 
         for (let mi = 0; mi <= 59; mi++) {
             if (mi.toString().length <= 1) {
-                if (mi == 0) {
+                if (mi == minAct) {
                     minlist += `<div class="item active" data-id="${mi}">0${mi}</div>`;
                 } else {
                     minlist += `<div class="item" data-id="${mi}">0${mi}</div>`;
                 }
             } else {
-                minlist += `<div class="item" data-id="${mi}">${mi}</div>`;
+                if (mi == minAct) {
+                    minlist += `<div class="item active" data-id="${mi}">${mi}</div>`;
+                } else {
+                    minlist += `<div class="item" data-id="${mi}">${mi}</div>`;
+                }
             }
         }
 
         for (let si = 0; si <= 59; si++) {
             if (si.toString().length <= 1) {
-                if (si == 0) {
+                if (si == secAct) {
                     seclist += `<div class="item active" data-id="${si}">0${si}</div>`;
                 } else {
                     seclist += `<div class="item" data-id="${si}">0${si}</div>`;
                 }
             } else {
-                seclist += `<div class="item" data-id="${si}">${si}</div>`;
+                if (si == secAct) {
+                    seclist += `<div class="item active" data-id="${si}">${si}</div>`;
+                } else {
+                    seclist += `<div class="item" data-id="${si}">${si}</div>`;
+                }
             }
         }
 
@@ -617,8 +650,13 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             ele: $("#timelist_" + elem_id)
                 .find(".hour")
                 .children(".list"),
-            options: { nobar: true },
+            options: {
+                nobar: true,
+            },
             on: {
+                scroll: function (e) {
+                    console.log(e);
+                },
                 init: function () {
                     hourObj.find(".item").on("click", function () {
                         time[0] = $(this).text();
@@ -626,6 +664,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                             .addClass("active")
                             .siblings()
                             .removeClass("active");
+                        hourAct = +$(this).attr("data-id");
                     });
                 },
             },
@@ -635,7 +674,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             ele: $("#timelist_" + elem_id)
                 .find(".min")
                 .children(".list"),
-            options: { nobar: true },
+            options: {
+                nobar: true,
+            },
             on: {
                 init: function () {
                     minObj.find(".item").on("click", function () {
@@ -644,6 +685,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                             .addClass("active")
                             .siblings()
                             .removeClass("active");
+                        minAct = +$(this).attr("data-id");
                     });
                 },
             },
@@ -653,7 +695,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             ele: $("#timelist_" + elem_id)
                 .find(".sec")
                 .children(".list"),
-            options: { nobar: true },
+            options: {
+                nobar: true,
+            },
             on: {
                 init: function () {
                     secObj.find(".item").on("click", function () {
@@ -662,18 +706,21 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                             .addClass("active")
                             .siblings()
                             .removeClass("active");
+                        secAct = +$(this).attr("data-id");
                     });
                 },
             },
         });
 
         $("#timelist_" + elem_id)
-            .find("button")
+            .find(".changeTime")
             .on("click", function () {
                 $("#datepicker_" + elem_id)
                     .find(".selectTime")
-                    .text(time.length>0?time.join(":"):"00:00:00");
+                    .attr("data-time", time.join(":"))
+                    .text(time[0] + "时" + time[1] + "分" + time[2] + "秒");
                 $("#timelist_" + elem_id).removeClass("hopeui-show");
+                result[1] = time.join(":");
             });
         $("#timelist_" + elem_id)
             .find(".return")
@@ -759,5 +806,37 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         };
     }
 };
+
+function initNowDate(format) {
+    let date = new Date();
+    let seperator1 = format.substring(4, 5) || "-";
+    let seperator2 = format.substring(13, 14) || ":";
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let strDate = date.getDate();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+    if (month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    if (hour <= 9) {
+        hour = "0" + hour;
+    }
+    if (min <= 9) {
+        min = "0" + min;
+    }
+    if (sec <= 9) {
+        sec = "0" + sec;
+    }
+
+    return [
+        year + seperator1 + month + seperator1 + strDate,
+        hour + seperator2 + min + seperator2 + sec,
+    ];
+}
 
 module.exports = Hope_datepicker;
