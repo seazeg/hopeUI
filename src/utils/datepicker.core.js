@@ -382,7 +382,6 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             // $(".content").css({
             //     height: "",
             // });
-           
 
             if (settings.type == "datetime") {
                 $(obj).val(result.join(" "));
@@ -394,7 +393,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 hourAct = parseInt(result[1].split(seperator)[0]);
                 minAct = parseInt(result[1].split(seperator)[1]);
                 secAct = parseInt(result[1].split(seperator)[2]);
-            }else{
+            } else {
                 $(obj).val(result[0]);
             }
 
@@ -558,6 +557,19 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         if ($(elem).parents("#datepicker_" + elem_id).length != 0) {
             return;
         } else if (elem.id != $(obj).attr("id")) {
+            $("#timelist_" + elem_id).removeClass("hopeui-show");
+            $("#datepicker_" + elem_id)
+                .find(".year-list")
+                .removeClass("hopeui-show");
+            $("#datepicker_" + elem_id)
+                .find(".month-list")
+                .removeClass("hopeui-show");
+
+            time = ["00", "00", "00"];
+            hourAct = 0;
+            minAct = 0;
+            secAct = 0;
+
             if (_shown) {
                 _shown = false;
                 $("#datepicker_" + elem_id).removeClass("hopeui-show");
