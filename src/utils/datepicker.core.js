@@ -19,6 +19,10 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         minAct = 0,
         secAct = 0;
 
+    let hourBar = null,
+        minBar = null,
+        secBar = null;
+
     let settings = Object.assign(
         {
             offTop: $(obj).height() + 3,
@@ -28,6 +32,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         options
     );
     let result = initNowDate(settings.format);
+
+    $(obj).css("cursor", "default");
 
     let _dateBody = `<div class='hope-datepicker hopeui-anim hopeui-anim-upbit' id='datepicker_${elem_id}'>
             <div class='year-month' id='ym${elem_id}'><span class='y_left left hopeui-icon hopeui-icon-prev'></span><span class='m_left left hopeui-icon hopeui-icon-left'></span>
@@ -49,8 +55,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             }' data-format='${
         settings.format.substring(11) || "HH:mm:ss"
     }'>选择时间</span>
-            <button type="button" class='hopeui-btn clear hopeui-btn-primary'>清空</button>
             <button type="button" class='hopeui-btn changeResult'>确定</button>
+            <button type="button" class='hopeui-btn clear hopeui-btn-primary'>清空</button>
             <div class='time-list' id='timelist_${elem_id}'>
                 <div class='warp'>
                    <div class='hour'><p>时</p><div class='list hopeui-scrollbar'></div></div>
@@ -592,153 +598,157 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
     //时间列表初始化
     function initTimeList(time) {
-        let hourlist = "",
-            minlist = "",
-            seclist = "";
-        let hourObj = $("#timelist_" + elem_id)
-                .find(".hour")
-                .children(".list"),
-            minObj = $("#timelist_" + elem_id)
-                .find(".min")
-                .children(".list"),
-            secObj = $("#timelist_" + elem_id)
-                .find(".sec")
-                .children(".list");
-        for (let hi = 0; hi <= 23; hi++) {
-            if (hi.toString().length <= 1) {
-                if (hi == hourAct) {
-                    hourlist += `<div class="item active" data-id="${hi}">0${hi}</div>`;
+        if (!hourBar && !minBar && !secBar) {
+            let hourlist = "",
+                minlist = "",
+                seclist = "";
+            let hourObj = $("#timelist_" + elem_id)
+                    .find(".hour")
+                    .children(".list"),
+                minObj = $("#timelist_" + elem_id)
+                    .find(".min")
+                    .children(".list"),
+                secObj = $("#timelist_" + elem_id)
+                    .find(".sec")
+                    .children(".list");
+            for (let hi = 0; hi <= 23; hi++) {
+                if (hi.toString().length <= 1) {
+                    if (hi == hourAct) {
+                        hourlist += `<div class="item active" data-id="${hi}">0${hi}</div>`;
+                    } else {
+                        hourlist += `<div class="item" data-id="${hi}">0${hi}</div>`;
+                    }
                 } else {
-                    hourlist += `<div class="item" data-id="${hi}">0${hi}</div>`;
-                }
-            } else {
-                if (hi == hourAct) {
-                    hourlist += `<div class="item active" data-id="${hi}">${hi}</div>`;
-                } else {
-                    hourlist += `<div class="item" data-id="${hi}">${hi}</div>`;
-                }
-            }
-        }
-
-        for (let mi = 0; mi <= 59; mi++) {
-            if (mi.toString().length <= 1) {
-                if (mi == minAct) {
-                    minlist += `<div class="item active" data-id="${mi}">0${mi}</div>`;
-                } else {
-                    minlist += `<div class="item" data-id="${mi}">0${mi}</div>`;
-                }
-            } else {
-                if (mi == minAct) {
-                    minlist += `<div class="item active" data-id="${mi}">${mi}</div>`;
-                } else {
-                    minlist += `<div class="item" data-id="${mi}">${mi}</div>`;
+                    if (hi == hourAct) {
+                        hourlist += `<div class="item active" data-id="${hi}">${hi}</div>`;
+                    } else {
+                        hourlist += `<div class="item" data-id="${hi}">${hi}</div>`;
+                    }
                 }
             }
-        }
 
-        for (let si = 0; si <= 59; si++) {
-            if (si.toString().length <= 1) {
-                if (si == secAct) {
-                    seclist += `<div class="item active" data-id="${si}">0${si}</div>`;
+            for (let mi = 0; mi <= 59; mi++) {
+                if (mi.toString().length <= 1) {
+                    if (mi == minAct) {
+                        minlist += `<div class="item active" data-id="${mi}">0${mi}</div>`;
+                    } else {
+                        minlist += `<div class="item" data-id="${mi}">0${mi}</div>`;
+                    }
                 } else {
-                    seclist += `<div class="item" data-id="${si}">0${si}</div>`;
-                }
-            } else {
-                if (si == secAct) {
-                    seclist += `<div class="item active" data-id="${si}">${si}</div>`;
-                } else {
-                    seclist += `<div class="item" data-id="${si}">${si}</div>`;
+                    if (mi == minAct) {
+                        minlist += `<div class="item active" data-id="${mi}">${mi}</div>`;
+                    } else {
+                        minlist += `<div class="item" data-id="${mi}">${mi}</div>`;
+                    }
                 }
             }
-        }
 
-        hourObj.html(hourlist);
-        minObj.html(minlist);
-        secObj.html(seclist);
+            for (let si = 0; si <= 59; si++) {
+                if (si.toString().length <= 1) {
+                    if (si == secAct) {
+                        seclist += `<div class="item active" data-id="${si}">0${si}</div>`;
+                    } else {
+                        seclist += `<div class="item" data-id="${si}">0${si}</div>`;
+                    }
+                } else {
+                    if (si == secAct) {
+                        seclist += `<div class="item active" data-id="${si}">${si}</div>`;
+                    } else {
+                        seclist += `<div class="item" data-id="${si}">${si}</div>`;
+                    }
+                }
+            }
 
-        $("#timelist_" + elem_id).addClass("hopeui-show");
+            hourObj.html(hourlist);
+            minObj.html(minlist);
+            secObj.html(seclist);
 
-        plugin.scrollbarHandler({
-            ele: $("#timelist_" + elem_id)
-                .find(".hour")
-                .children(".list"),
-            options: {
-                nobar: true,
-            },
-            on: {
-                scroll: function (e) {
-                    console.log(e);
+            $("#timelist_" + elem_id).addClass("hopeui-show");
+
+            hourBar = plugin.scrollbarHandler({
+                ele: $("#timelist_" + elem_id)
+                    .find(".hour")
+                    .children(".list"),
+                options: {
+                    nobar: true,
                 },
-                init: function () {
-                    hourObj.find(".item").on("click", function () {
-                        time[0] = $(this).text();
-                        $(this)
-                            .addClass("active")
-                            .siblings()
-                            .removeClass("active");
-                        hourAct = +$(this).attr("data-id");
-                    });
+                on: {
+                    scroll: function (e) {
+                        console.log(e);
+                    },
+                    init: function () {
+                        hourObj.find(".item").on("click", function () {
+                            time[0] = $(this).text();
+                            $(this)
+                                .addClass("active")
+                                .siblings()
+                                .removeClass("active");
+                            hourAct = +$(this).attr("data-id");
+                        });
+                    },
                 },
-            },
-        });
-
-        plugin.scrollbarHandler({
-            ele: $("#timelist_" + elem_id)
-                .find(".min")
-                .children(".list"),
-            options: {
-                nobar: true,
-            },
-            on: {
-                init: function () {
-                    minObj.find(".item").on("click", function () {
-                        time[1] = $(this).text();
-                        $(this)
-                            .addClass("active")
-                            .siblings()
-                            .removeClass("active");
-                        minAct = +$(this).attr("data-id");
-                    });
-                },
-            },
-        });
-
-        plugin.scrollbarHandler({
-            ele: $("#timelist_" + elem_id)
-                .find(".sec")
-                .children(".list"),
-            options: {
-                nobar: true,
-            },
-            on: {
-                init: function () {
-                    secObj.find(".item").on("click", function () {
-                        time[2] = $(this).text();
-                        $(this)
-                            .addClass("active")
-                            .siblings()
-                            .removeClass("active");
-                        secAct = +$(this).attr("data-id");
-                    });
-                },
-            },
-        });
-
-        $("#timelist_" + elem_id)
-            .find(".changeTime")
-            .on("click", function () {
-                $("#datepicker_" + elem_id)
-                    .find(".selectTime")
-                    .attr("data-time", time.join(":"))
-                    .text(time[0] + "时" + time[1] + "分" + time[2] + "秒");
-                $("#timelist_" + elem_id).removeClass("hopeui-show");
-                result[1] = time.join(":");
             });
-        $("#timelist_" + elem_id)
-            .find(".return")
-            .on("click", function () {
-                $("#timelist_" + elem_id).removeClass("hopeui-show");
+
+            minBar = plugin.scrollbarHandler({
+                ele: $("#timelist_" + elem_id)
+                    .find(".min")
+                    .children(".list"),
+                options: {
+                    nobar: true,
+                },
+                on: {
+                    init: function () {
+                        minObj.find(".item").on("click", function () {
+                            time[1] = $(this).text();
+                            $(this)
+                                .addClass("active")
+                                .siblings()
+                                .removeClass("active");
+                            minAct = +$(this).attr("data-id");
+                        });
+                    },
+                },
             });
+
+            secBar = plugin.scrollbarHandler({
+                ele: $("#timelist_" + elem_id)
+                    .find(".sec")
+                    .children(".list"),
+                options: {
+                    nobar: true,
+                },
+                on: {
+                    init: function () {
+                        secObj.find(".item").on("click", function () {
+                            time[2] = $(this).text();
+                            $(this)
+                                .addClass("active")
+                                .siblings()
+                                .removeClass("active");
+                            secAct = +$(this).attr("data-id");
+                        });
+                    },
+                },
+            });
+
+            $("#timelist_" + elem_id)
+                .find(".changeTime")
+                .on("click", function () {
+                    $("#datepicker_" + elem_id)
+                        .find(".selectTime")
+                        .attr("data-time", time.join(":"))
+                        .text(time[0] + "时" + time[1] + "分" + time[2] + "秒");
+                    $("#timelist_" + elem_id).removeClass("hopeui-show");
+                    result[1] = time.join(":");
+                });
+            $("#timelist_" + elem_id)
+                .find(".return")
+                .on("click", function () {
+                    $("#timelist_" + elem_id).removeClass("hopeui-show");
+                });
+        } else {
+            $("#timelist_" + elem_id).addClass("hopeui-show");
+        }
     }
 
     //返回一个元素相对于整个文档左上角的坐标
@@ -847,7 +857,8 @@ function initNowDate(format) {
 
     return [
         year + seperator1 + month + seperator1 + strDate,
-        hour + seperator2 + min + seperator2 + sec,
+        // hour + seperator2 + min + seperator2 + sec,
+        "00" + seperator2 + "00" + seperator2 + "00",
     ];
 }
 
