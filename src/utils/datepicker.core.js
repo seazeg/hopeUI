@@ -620,7 +620,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
     //时间列表初始化
     function initTimeList(time) {
-        if (!hourBar && !minBar && !secBar) {
+        if ((!hourBar && !minBar && !secBar) || time.join("") == "000000") {
             let hourlist = "",
                 minlist = "",
                 seclist = "";
