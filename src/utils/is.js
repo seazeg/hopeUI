@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-12-09 18:03:19
+ * @LastEditTime : 2020-12-10 13:34:30
  * @Description  : is类
  */
 module.exports.is = {
@@ -17,34 +17,36 @@ module.exports.is = {
         );
     },
     ie() {
-        let Sys = {};
-        let ua = navigator.userAgent.toLowerCase();
-        let ie_version = null;
+        let userAgent = navigator.userAgent;
         let isIE =
-            ua.indexOf("compatible") > -1 &&
-            ua.indexOf("msie") > -1 &&
-            !(ua.indexOf("opera") > -1);
-
+            userAgent.indexOf("compatible") > -1 &&
+            userAgent.indexOf("MSIE") > -1;
+        let isEdge = userAgent.indexOf("Edge") > -1 && !isIE;
+        let isIE11 =
+            userAgent.indexOf("Trident") > -1 &&
+            userAgent.indexOf("rv:11.0") > -1;
         if (isIE) {
-            Sys.ie = ua.match(/msie ([\d.]+)/)[1];
-            //获取版本
-            if (Sys.ie.indexOf("7") > -1) {
-                ie_version = 7;
+            let reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+            reIE.test(userAgent);
+            let fIEVersion = parseFloat(RegExp["$1"]);
+            if (fIEVersion == 7) {
+                return 7;
+            } else if (fIEVersion == 8) {
+                return 8;
+            } else if (fIEVersion == 9) {
+                return 9;
+            } else if (fIEVersion == 10) {
+                return 10;
+            } else {
+                return 6;
             }
-            if (Sys.ie.indexOf("8") > -1) {
-                ie_version = 8;
-            }
-            if (Sys.ie.indexOf("9") > -1) {
-                ie_version = 9;
-            }
-            if (Sys.ie.indexOf("10") > -1) {
-                ie_version = 10;
-            }
-            if (Sys.ie.indexOf("11") > -1) {
-                ie_version = 11;
-            }
+        } else if (isEdge) {
+            return "edge";
+        } else if (isIE11) {
+            return 11;
+        } else {
+            return 999;
         }
-        return ie_version || 999;
     },
     os() {
         let agent = navigator.userAgent.toLowerCase();
@@ -59,7 +61,7 @@ module.exports.is = {
         return res;
     },
     supportCss3(style) {
-        var prefix = ["webkit", "Moz", "ms", "o"],
+        let prefix = ["webkit", "Moz", "ms", "o"],
             i,
             humpString = [],
             htmlStyle = document.documentElement.style,
@@ -70,7 +72,8 @@ module.exports.is = {
             };
         for (i in prefix) humpString.push(_toHumb(prefix[i] + "-" + style));
         humpString.push(_toHumb(style));
-        for (i in humpString) if (humpString[i] in htmlStyle) return true;
+        for (i in humpString)
+            if (humpString[i] in htmlStyle) return true;
         return false;
     },
     stopBubble(e) {
@@ -92,8 +95,8 @@ module.exports.is = {
         return !str.includes("%");
     },
     empty(str) {
-        return typeof str == "undefined" || str == null || str == ""
-            ? true
-            : false;
+        return typeof str == "undefined" || str == null || str == "" ?
+            true :
+            false;
     },
 };

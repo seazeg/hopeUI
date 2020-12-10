@@ -1,4 +1,5 @@
 const hopeu = require("../utils/hopeu.js");
+const { is } = require("./is.js");
 
 let Hope_datepicker = function (ele, options, on, plugin) {
     let $ = hopeu;
@@ -32,7 +33,6 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         options
     );
     let result = initNowDate(settings.format);
-
     $(obj).css("cursor", "default");
 
     let _dateBody = `<div class='hope-datepicker hopeui-anim hopeui-anim-upbit' id='datepicker_${elem_id}'>
@@ -78,60 +78,60 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         top: top + settings.offTop,
     });
 
-    $(obj)
-        .next("span")
-        .click(function () {
-            let pos = getElementPos(elem_id);
-            let top = pos.y;
-            let left = pos.x;
-            $("#datepicker_" + elem_id).css({
-                left: left,
-                top: top + settings.offTop,
-            });
+    // $(obj)
+    //     .next("span")
+    //     .click(function () {
+    //         let pos = getElementPos(elem_id);
+    //         let top = pos.y;
+    //         let left = pos.x;
+    //         $("#datepicker_" + elem_id).css({
+    //             left: left,
+    //             top: top + settings.offTop,
+    //         });
 
-            let d = getFocusDate($(obj).val());
-            tz_m = d.getMonth() + 1;
-            tz_y = d.getFullYear();
-            tz_d = d.getDate();
+    //         let d = getFocusDate($(obj).val());
+    //         tz_m = d.getMonth() + 1;
+    //         tz_y = d.getFullYear();
+    //         tz_d = d.getDate();
 
-            input_m = d.getMonth() + 1;
-            input_y = d.getFullYear();
-            input_d = d.getDate();
+    //         input_m = d.getMonth() + 1;
+    //         input_y = d.getFullYear();
+    //         input_d = d.getDate();
 
-            $("#mlist_" + elem_id)
-                .prev("span")
-                .text(tz_m + "月");
-            $("#ylist_" + elem_id)
-                .prev("span")
-                .text(tz_y + "年");
+    //         $("#mlist_" + elem_id)
+    //             .prev("span")
+    //             .text(tz_m + "月");
+    //         $("#ylist_" + elem_id)
+    //             .prev("span")
+    //             .text(tz_y + "年");
 
-            dayListReload();
+    //         dayListReload();
 
-            hideYearmonth(); //隐藏年月选择
+    //         hideYearmonth(); //隐藏年月选择
 
-            if (_shown) {
-                $("#datepicker_" + elem_id).removeClass("hopeui-show");
-                _shown = false;
+    //         if (_shown) {
+    //             $("#datepicker_" + elem_id).removeClass("hopeui-show");
+    //             _shown = false;
 
-                // $(".content").css({
-                //     height: "",
-                // });
-            } else {
-                $("#datepicker_" + elem_id).addClass("hopeui-show");
-                _shown = true;
+    //             // $(".content").css({
+    //             //     height: "",
+    //             // });
+    //         } else {
+    //             $("#datepicker_" + elem_id).addClass("hopeui-show");
+    //             _shown = true;
 
-                // con_min_hieght = $(".content").height();
-                // if (top + settings.offTop + 234 - 61 - 60 > con_min_hieght) {
-                //     $(".content").css({
-                //         height: top + settings.offTop + 234 - 61 + 10,
-                //     });
-                // }
-            }
+    //             // con_min_hieght = $(".content").height();
+    //             // if (top + settings.offTop + 234 - 61 - 60 > con_min_hieght) {
+    //             //     $(".content").css({
+    //             //         height: top + settings.offTop + 234 - 61 + 10,
+    //             //     });
+    //             // }
+    //         }
 
-            // let d = getFocusDate($(obj).val());
-            $(obj).focus();
-            $(this).addClass("span-ex").removeClass("span-col");
-        });
+    //         // let d = getFocusDate($(obj).val());
+    //         $(obj).focus();
+    //         $(this).addClass("span-ex").removeClass("span-col");
+    //     });
 
     $(obj).click(function () {
         //点击时获取控件位置
@@ -203,121 +203,109 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     });
 
     //点击月份
-    $("#datepicker_" + elem_id).on("click", ".month span", function () {
-        $(this).addClass("active");
-        $(this).next(".month-list").hasClass("hopeui-show")
-            ? $(this).next(".month-list").removeClass("hopeui-show")
-            : $(this).next(".month-list").addClass("hopeui-show");
-        autoLayerHeight($("#mlist_" + elem_id), 50);
-        $("#ylist_" + elem_id).removeClass("hopeui-show");
-        $("#ylist_" + elem_id)
-            .prev("span")
-            .removeClass("active");
-    });
+    $("#datepicker_" + elem_id)
+        .find(".month span")
+        .on("click", function () {
+            $(this).addClass("active");
+            $(this).next(".month-list").hasClass("hopeui-show")
+                ? $(this).next(".month-list").removeClass("hopeui-show")
+                : $(this).next(".month-list").addClass("hopeui-show");
+            autoLayerHeight($("#mlist_" + elem_id), 50);
+            $("#ylist_" + elem_id).removeClass("hopeui-show");
+            $("#ylist_" + elem_id)
+                .prev("span")
+                .removeClass("active");
+        });
 
     //选择月
-    $("#datepicker_" + elem_id).on("click", ".month li", function () {
-        tz_m = parseInt($(this).attr("data-id"));
+    $("#datepicker_" + elem_id)
+        .find(".month li")
+        .on("click", function () {
+            tz_m = parseInt($(this).attr("data-id"));
 
-        $("#datepicker_" + elem_id)
-            .find(".month span")
-            .text(tz_m + "月");
+            $("#datepicker_" + elem_id)
+                .find(".month span")
+                .text(tz_m + "月");
 
-        dayListReload();
+            dayListReload();
 
-        $(this).addClass("active").siblings("li").removeClass("active");
+            $(this).addClass("active").siblings("li").removeClass("active");
 
-        $(this).parents(".month-list").removeClass("hopeui-show");
-        $(this).parents(".month-list").prev("span").removeClass("active");
-    });
+            $(this).parents(".month-list").removeClass("hopeui-show");
+            $(this).parents(".month-list").prev("span").removeClass("active");
+        });
 
     //点击年
-    $("#datepicker_" + elem_id).on("click", ".year .span-year", function () {
-        let c_y = $(this).text();
+    $("#datepicker_" + elem_id)
+        .find(".year .span-year")
+        .on("click", function () {
+            let c_y = $(this).text();
 
-        tz_y_s = parseInt(c_y.substring(0, 3) + "0");
-        tz_y_e = tz_y_s + 11;
+            tz_y_s = parseInt(c_y.substring(0, 3) + "0");
+            tz_y_e = tz_y_s + 11;
 
-        $("#datepicker_" + elem_id + " .year-list li").remove();
-        for (tz_y_s; tz_y_s <= tz_y_e; tz_y_s++) {
-            let y_a = "";
-            parseInt(c_y) == tz_y_s ? (y_a = "active") : (y_a = "");
-            $("#datepicker_" + elem_id + " .year-list ul").append(
-                "<li class='" + y_a + "'>" + tz_y_s + "年</li>"
-            );
-        }
+            $("#datepicker_" + elem_id + " .year-list li").remove();
+            for (tz_y_s; tz_y_s <= tz_y_e; tz_y_s++) {
+                let y_a = "";
+                parseInt(c_y) == tz_y_s ? (y_a = "active") : (y_a = "");
+                $("#datepicker_" + elem_id + " .year-list ul").append(
+                    "<li class='" + y_a + "'>" + tz_y_s + "年</li>"
+                );
+            }
 
-        autoLayerHeight($("#ylist_" + elem_id), 50);
-        $(this).addClass("active");
-        $(this).next(".year-list").hasClass("hopeui-show")
-            ? $(this).next(".year-list").removeClass("hopeui-show")
-            : $(this).next(".year-list").addClass("hopeui-show");
+            autoLayerHeight($("#ylist_" + elem_id), 50);
+            $(this).addClass("active");
+            $(this).next(".year-list").hasClass("hopeui-show")
+                ? $(this).next(".year-list").removeClass("hopeui-show")
+                : $(this).next(".year-list").addClass("hopeui-show");
 
-        $("#mlist_" + elem_id).removeClass("hopeui-show");
-        $("#mlist_" + elem_id)
-            .prev("span")
-            .removeClass("active");
-    });
+            $("#mlist_" + elem_id).removeClass("hopeui-show");
+            $("#mlist_" + elem_id)
+                .prev("span")
+                .removeClass("active");
+        });
 
     //选择年
-    $("#datepicker_" + elem_id).on("click", ".year li", function () {
-        tz_y = parseInt($(this).text());
+    $("#datepicker_" + elem_id)
+        .find(".year li")
+        .on("click", function () {
+            tz_y = parseInt($(this).text());
 
-        $(this)
-            .parents(".year-list")
-            .prev("span")
-            .text(tz_y + "年");
+            $(this)
+                .parents(".year-list")
+                .prev("span")
+                .text(tz_y + "年");
 
-        dayListReload();
+            dayListReload();
 
-        $(this).addClass("active").siblings("li").removeClass("active");
+            $(this).addClass("active").siblings("li").removeClass("active");
 
-        $(this).parents(".year-list").removeClass("hopeui-show");
-        $(this).parents(".year-list").prev("span").removeClass("active");
-    });
+            $(this).parents(".year-list").removeClass("hopeui-show");
+            $(this).parents(".year-list").prev("span").removeClass("active");
+        });
 
     //切换年
-    $("#datepicker_" + elem_id).on("click", ".year-change span", function () {
-        if ($(this).hasClass("year-left")) {
-            tz_y_s = tz_y_e - 19;
-        } else if ($(this).hasClass("year-right")) {
-            tz_y_s = tz_y_e + 1;
-        } else {
-            return;
-        }
+    $("#datepicker_" + elem_id)
+        .find(".year-change span")
+        .on("click", function () {
+            if ($(this).hasClass("year-left")) {
+                tz_y_s = tz_y_e - 19;
+            } else if ($(this).hasClass("year-right")) {
+                tz_y_s = tz_y_e + 1;
+            } else {
+                return;
+            }
 
-        tz_y_e = tz_y_s + 9;
-        $("#datepicker_" + elem_id + " .year-list li").remove();
-        for (tz_y_s; tz_y_s <= tz_y_e; tz_y_s++) {
-            let y_a = "";
-            input_y == tz_y_s ? (y_a = "active") : (y_a = "");
-            $("#datepicker_" + elem_id + " .year-list ul").append(
-                "<li class='" + y_a + "'>" + tz_y_s + "</li>"
-            );
-        }
-    });
-
-    //选择天
-    $("#datepicker_" + elem_id + " .day").on("click", "li", function () {
-        if ($(this).attr("data-id")) {
-            tz_d = parseInt($(this).attr("data-id"));
-
-            let tz_m_str, tz_d_str;
-            tz_m < 10 ? (tz_m_str = "0" + tz_m) : (tz_m_str = tz_m);
-            tz_d < 10 ? (tz_d_str = "0" + tz_d) : (tz_d_str = tz_d);
-            let date_sel =
-                tz_y +
-                options.format.substring(4, 5) +
-                tz_m_str +
-                options.format.substring(4, 5) +
-                tz_d_str;
-
-            // $(obj).val(date_sel);
-            $(this).addClass("active").siblings().removeClass("active");
-
-            result[0] = date_sel;
-        }
-    });
+            tz_y_e = tz_y_s + 9;
+            $("#datepicker_" + elem_id + " .year-list li").remove();
+            for (tz_y_s; tz_y_s <= tz_y_e; tz_y_s++) {
+                let y_a = "";
+                input_y == tz_y_s ? (y_a = "active") : (y_a = "");
+                $("#datepicker_" + elem_id + " .year-list ul").append(
+                    "<li class='" + y_a + "'>" + tz_y_s + "</li>"
+                );
+            }
+        });
 
     //减一月
     $("#datepicker_" + elem_id + " .m_left").click(function () {
@@ -370,16 +358,17 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     });
 
     //选择时间
-    $("#datepicker_" + elem_id).on("click", ".action .selectTime", function () {
-        initTimeList(time);
-        autoLayerHeight($("#timelist_" + elem_id), 0);
-    });
+    $("#datepicker_" + elem_id)
+        .find(".action .selectTime")
+        .on("click", function () {
+            initTimeList(time);
+            autoLayerHeight($("#timelist_" + elem_id), 0);
+        });
 
     //确认选择
-    $("#datepicker_" + elem_id).on(
-        "click",
-        ".action .changeResult",
-        function () {
+    $("#datepicker_" + elem_id)
+        .find(".action .changeResult")
+        .on("click", function () {
             let seperator = settings.format.substring(13, 14) || ":";
             $(this)
                 .parents("#datepicker_" + elem_id)
@@ -403,6 +392,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 $(obj).val(result[0]);
             }
 
+            if (is.ie() <= 9) {
+                $(obj).next().removeClass("hopeui-hide");
+            }
             $("#datepicker_" + elem_id)
                 .find(".selectTime")
                 .attr("data-time", time.join(":"))
@@ -415,31 +407,32 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                     event: "change",
                 });
             }
-        }
-    );
+        });
 
     //清空
-    $("#datepicker_" + elem_id).on("click", ".action .clear", function () {
-        $(obj).val("");
-        $("#datepicker_" + elem_id).removeClass("hopeui-show");
-        time = ["00", "00", "00"];
-        hourAct = 0;
-        minAct = 0;
-        secAct = 0;
+    $("#datepicker_" + elem_id)
+        .find(".action .clear")
+        .on("click", function () {
+            $(obj).val("");
+            $("#datepicker_" + elem_id).removeClass("hopeui-show");
+            time = ["00", "00", "00"];
+            hourAct = 0;
+            minAct = 0;
+            secAct = 0;
 
-        $("#datepicker_" + elem_id)
-            .find(".selectTime")
-            .attr("data-time", time.join(":"))
-            .text("选择时间");
+            $("#datepicker_" + elem_id)
+                .find(".selectTime")
+                .attr("data-time", time.join(":"))
+                .text("选择时间");
 
-        _shown = false;
-        if (on && on.clear) {
-            on.clear({
-                ele: $(obj).get(0),
-                event: "clear",
-            });
-        }
-    });
+            _shown = false;
+            if (on && on.clear) {
+                on.clear({
+                    ele: $(obj).get(0),
+                    event: "clear",
+                });
+            }
+        });
 
     if (on && on.init) {
         on.init({
@@ -493,6 +486,31 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         }
 
         autoLayerHeight([$("#mlist_" + elem_id), $("#ylist_" + elem_id)], 50);
+
+        //选择天
+        $("#datepicker_" + elem_id)
+            .children(".day")
+            .find("li")
+            .on("click", function () {
+                if ($(this).attr("data-id")) {
+                    tz_d = parseInt($(this).attr("data-id"));
+
+                    let tz_m_str, tz_d_str;
+                    tz_m < 10 ? (tz_m_str = "0" + tz_m) : (tz_m_str = tz_m);
+                    tz_d < 10 ? (tz_d_str = "0" + tz_d) : (tz_d_str = tz_d);
+                    let date_sel =
+                        tz_y +
+                        options.format.substring(4, 5) +
+                        tz_m_str +
+                        options.format.substring(4, 5) +
+                        tz_d_str;
+
+                    // $(obj).val(date_sel);
+                    $(this).addClass("active").siblings().removeClass("active");
+
+                    result[0] = date_sel;
+                }
+            });
     }
 
     //获取每个月多少天
@@ -548,7 +566,11 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             return new Date();
         } else {
             try {
-                return new Date(date);
+                if (is.isIE() <= 11) {
+                    return new Date(date.replace(/-/gi, "/"));
+                } else {
+                    return new Date(date);
+                }
             } catch (e) {
                 return new Date();
             }

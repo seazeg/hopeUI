@@ -1,11 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-12-09 13:37:04
+ * @LastEditTime : 2020-12-10 15:18:01
  * @Description  : 自定义滚动条
  */
 
 const $ = require("../utils/hopeu.js");
+const { is } = require("../utils/is.js");
 
 module.exports.scrollbarHandler = function ({ ele, options, on }) {
     // if ($(ele).find(".hopeui-scrollbar-bar").length <= 0) {
@@ -16,8 +17,9 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     if (options && options.height) {
         $(ele).css("height", options.height + "px");
     }
+
     if ($(ele).find(".hopeui-scrollbar-box").length <= 0) {
-        $(ele).html(`<div class="hopeui-scrollbar-box">${listTemp}</div>`);
+        $(ele).html(`<div class="hopeui-scrollbar-box ${is.ie()<=11?"ieFix":""}">${listTemp}</div>`);
     } else {
         $dom = $(ele)
             .addClass("hopeui-scrollbar")

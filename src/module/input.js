@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-09 18:04:44
+ * @LastEditTime : 2020-12-10 12:05:33
  * @Description  : 文本框
  */
 
@@ -22,7 +22,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
     $dom.each(function () {
         let $this = $(this);
         if (!$this.attr("hope-type")) {
-            if (is.ie() == 8) {
+            if (is.ie() <= 9) {
                 $this
                     .after(
                         `<label class="hopeui-placeholder">${
@@ -32,11 +32,12 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                     .parent()
                     .css("position", "relative");
 
+                $this.next().css({
+                    lineHeight: $this.css("height") + 2,
+                    paddingLeft: $this.css("paddingLeft") + 1,
+                });
+
                 if (!$this.attr("readonly")) {
-                    $this.next().css({
-                        lineHeight: $this.css("height") + 2,
-                        paddingLeft: $this.css("paddingLeft") + 1,
-                    });
                     $this.next().click(function () {
                         $(this).addClass("hopeui-hide").prev().focus();
                     });
