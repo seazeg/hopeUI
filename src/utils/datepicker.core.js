@@ -596,7 +596,6 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         if ($(elem).parents("#datepicker_" + elem_id).length != 0) {
             return;
         } else if (elem.id != $(obj).attr("id") && !$(elem).attr("data-next-md")&& !$(elem).attr("data-prev-md")) {
-           
             $("#timelist_" + elem_id).removeClass("hopeui-show");
             $("#datepicker_" + elem_id)
                 .find(".year-list")
