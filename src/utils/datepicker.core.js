@@ -224,6 +224,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 .off()
                 .on("click", function () {
                     tz_m = parseInt($(this).attr("data-id"));
+                    input_m = tz_m;
 
                     $("#datepicker_" + elem_id)
                         .find(".month span")
@@ -279,6 +280,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 .off()
                 .on("click", function () {
                     tz_y = parseInt($(this).text());
+
+                   input_y = tz_y;
                     $(this)
                         .parents(".year-list")
                         .prev("span")
@@ -330,6 +333,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             tz_m = 12;
             tz_y--;
         }
+        input_m = tz_m;
+        input_y = tz_y;
+       
 
         $("#datepicker_" + elem_id + " .month span").text(tz_m + "月");
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
@@ -345,6 +351,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             tz_m = 1;
             tz_y++;
         }
+        input_m = tz_m;
+        input_y = tz_y;
 
         $("#datepicker_" + elem_id + " .month span").text(tz_m + "月");
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
@@ -357,6 +365,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         tz_y = parseInt(tz_y);
         tz_y = tz_y - 1;
 
+        input_y = tz_y;
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
 
         dayListReload();
@@ -366,6 +375,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     $("#datepicker_" + elem_id + " .y_right").click(function () {
         tz_y = parseInt(tz_y);
         tz_y = tz_y + 1;
+
+        input_y = tz_y;
 
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
 
