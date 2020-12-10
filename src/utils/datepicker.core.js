@@ -145,13 +145,15 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
         let d = getFocusDate($(this).val());
 
-        tz_m = d.getMonth() + 1;
-        tz_y = d.getFullYear();
-        tz_d = d.getDate();
+        if (!tz_m && !tz_y && !tz_d) {
+            tz_m = d.getMonth() + 1;
+            tz_y = d.getFullYear();
+            tz_d = d.getDate();
 
-        input_m = d.getMonth() + 1;
-        input_y = d.getFullYear();
-        input_d = d.getDate();
+            input_m = d.getMonth() + 1;
+            input_y = d.getFullYear();
+            input_d = d.getDate();
+        }
 
         $("#mlist_" + elem_id)
             .prev("span")
@@ -215,24 +217,31 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             $("#ylist_" + elem_id)
                 .prev("span")
                 .removeClass("active");
-        });
 
-    //选择月
-    $("#datepicker_" + elem_id)
-        .find(".month li")
-        .on("click", function () {
-            tz_m = parseInt($(this).attr("data-id"));
-
+            //选择月
             $("#datepicker_" + elem_id)
-                .find(".month span")
-                .text(tz_m + "月");
+                .find(".month li")
+                .off()
+                .on("click", function () {
+                    tz_m = parseInt($(this).attr("data-id"));
 
-            dayListReload();
+                    $("#datepicker_" + elem_id)
+                        .find(".month span")
+                        .text(tz_m + "月");
 
-            $(this).addClass("active").siblings("li").removeClass("active");
+                    dayListReload();
 
-            $(this).parents(".month-list").removeClass("hopeui-show");
-            $(this).parents(".month-list").prev("span").removeClass("active");
+                    $(this)
+                        .addClass("active")
+                        .siblings("li")
+                        .removeClass("active");
+
+                    $(this).parents(".month-list").removeClass("hopeui-show");
+                    $(this)
+                        .parents(".month-list")
+                        .prev("span")
+                        .removeClass("active");
+                });
         });
 
     //点击年
@@ -263,25 +272,31 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             $("#mlist_" + elem_id)
                 .prev("span")
                 .removeClass("active");
-        });
 
-    //选择年
-    $("#datepicker_" + elem_id)
-        .find(".year li")
-        .on("click", function () {
-            tz_y = parseInt($(this).text());
+            //选择年
+            $("#datepicker_" + elem_id)
+                .find(".year li")
+                .off()
+                .on("click", function () {
+                    tz_y = parseInt($(this).text());
+                    $(this)
+                        .parents(".year-list")
+                        .prev("span")
+                        .text(tz_y + "年");
 
-            $(this)
-                .parents(".year-list")
-                .prev("span")
-                .text(tz_y + "年");
+                    dayListReload();
 
-            dayListReload();
+                    $(this)
+                        .addClass("active")
+                        .siblings("li")
+                        .removeClass("active");
 
-            $(this).addClass("active").siblings("li").removeClass("active");
-
-            $(this).parents(".year-list").removeClass("hopeui-show");
-            $(this).parents(".year-list").prev("span").removeClass("active");
+                    $(this).parents(".year-list").removeClass("hopeui-show");
+                    $(this)
+                        .parents(".year-list")
+                        .prev("span")
+                        .removeClass("active");
+                });
         });
 
     //切换年
@@ -462,9 +477,11 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
         for (let i = 1; i <= days; i++) {
             let a_str = "";
+
             if (tz_y == input_y && tz_m == input_m && tz_d == i) {
                 a_str = "active";
             }
+
             $("#datepicker_" + elem_id + " .day ul").append(
                 "<li data-id=" + i + " class='" + a_str + "'>" + i + "</li>"
             );

@@ -3,17 +3,59 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/datepicker.view.js";
 
 # 日期时间选择（Datepicker）
-***
+
+---
+
 <Meta title="复用组件/日期时间选择(Datepicker)" />
 
 <Canvas>
-    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html}${viewinfo.js}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.js)()
-        });
-        return viewinfo.html
-    }}  
+    <Story
+        name="通用"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.html;
+        }}
     </Story>
 </Canvas>
 
+## 基础属性
+
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| ---- | ------------- | ------ | -------------------- | ------- |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+
+## 配置 options
+
+| 参数   | 说明                  | 类型   | 可选值        | 默认值              |
+| ------ | --------------------- | ------ | ------------- | ------------------- |
+| format | 日期格式              | String | --            | yyyy-MM-dd HH:mm:ss |
+| type   | 日期模式/日期时间模式 | String | date/datetime | datetime            |
+
+## 回调方法 on
+
+| 参数   | 说明             | 类型     | 默认值 | 回调参数     |
+| ------ | ---------------- | -------- | ------ | ------------ |
+| init   | 初始化回调       | Function | null   | 当前对象 DOM |
+| change | 状态改变后回调   | Function | null   | event↓       |
+| clear  | 清空后回调       | Function | null   | event↓       |
+| open   | 选择框打开后回调 | Function | null   | event↓       |
+| close  | 选择框关闭后回调 | Function | null   | event↓       |
+
+| event 参数 | 说明           | 类型   |
+| ---------- | -------------- | ------ |
+| ele        | 原始 dom 对象  | Object |
+| eventName  | 当前回调事件名 | String |
+
+## 调用方法
+
+| 方法名 | 说明     | 类型     | 默认值 | 参数 |
+| ------ | -------- | -------- | ------ | ---- |
+| val    | 外部赋值 | Function | --     | --   |
+| clear  | 外部清值 | Function | --     | --   |
