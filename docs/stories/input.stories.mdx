@@ -3,38 +3,75 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/input.view.js";
 
 # 单选框（Text）
-***
+
+---
+
 <Meta title="基础控件/文本框(Text)" />
 
 <Canvas>
-    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.general}${viewinfo.js}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.js)()
-        });
-        return viewinfo.general
-    }}  
+    <Story
+        name="通用"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.general}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.general;
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story
+        name="密码"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.password}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.password;
+        }}
     </Story>
 </Canvas>
 
 
 <Canvas>
-    <Story name="密码" height="150px" parameters={{ docs: { source: { code:`${viewinfo.password}${viewinfo.js}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.js)()
-        });
-        return viewinfo.password
-    }}  
+    <Story
+        name="扩展内容"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.extendContent}${viewinfo.js2}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js2)();
+            });
+            return viewinfo.extendContent;
+        }}
     </Story>
-</Canvas>    
-
+</Canvas>
 
 ## 基础属性
 
 | 参数 | 说明          | 类型   | 可选值               | 默认值  |
 | ---- | ------------- | ------ | -------------------- | ------- |
 | ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+
+## 配置 options
+
+| 参数                  | 说明                    | 类型   | 可选值     | 默认值 |
+| --------------------- | ----------------------- | ------ | ---------- | ------ |
+| extendContent         | 扩展内容（如图标,按钮） | Html   | --         | ---    |
+| extendContentLocation | 扩展内容位置            | String | left/right | right  |
 
 ## 回调方法 on
 
