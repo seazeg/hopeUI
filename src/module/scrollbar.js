@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-12-10 15:18:01
+ * @LastEditTime : 2020-12-14 18:04:21
  * @Description  : 自定义滚动条
  */
 
@@ -14,9 +14,9 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     let $dom = null;
     let listTemp = $(ele).addClass("hopeui-scrollbar").html();
 
-    if (options && options.height) {
-        $(ele).css("height", options.height + "px");
-    }
+    // if (options && options.height) {
+    //     $(ele).css("height", options.height + "px");
+    // }
 
     if ($(ele).find(".hopeui-scrollbar-box").length <= 0) {
         $(ele).html(`<div class="hopeui-scrollbar-box ${is.ie()<=11?"ieFix":""}">${listTemp}</div>`);
@@ -43,10 +43,9 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
             $(ele).find(".option").height() * $(ele).find(".option").length + 15
         );
     }else{
-        $(ele).css(
-            "height",
-            "200px"
-        );
+        if (options && options.height) {
+            $(ele).css("height", options.height + "px");
+        }
     }
 
     let rate = $dom.get(0).clientHeight / $dom.get(0).scrollHeight;
