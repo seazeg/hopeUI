@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-08 13:48:05
- * @Description  :
+ * @LastEditTime : 2020-12-15 16:01:12
+ * @Description  : 图片充满居中
  */
 
 const $ = require("../utils/hopeu.js");
@@ -11,8 +11,7 @@ module.exports.adapimageHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = $(ele);
     $dom.css({
-        opacity: 0,
-        transition: "all 0.2s",
+        transition: "all 0.8s",
     });
     $dom.each(function () {
         let _this = $(this);
