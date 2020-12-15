@@ -151,9 +151,9 @@
         overflow: hidden;
     }
 
-    .hope-omit{
-        width:200px;
-        font-size:14px;
+    .hope-omit {
+        width: 200px;
+        font-size: 14px;
         line-height: 20px;
     }
 </style>
@@ -163,11 +163,25 @@
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
+                <legend><a name="icon">带剩余字数多行文本</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <textarea name="textarea" class="hopeui-textarea hopeui-textarea-np" placeholder="请输入内容"
+                hope-verify="required" maxlength="1000"></textarea>
+        </div>
+    </div>
+
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
                 <legend><a name="icon">含有扩展内容的输入框</a></legend>
             </fieldset>
         </div>
         <div class="docs-content">
-            <input name="iconinput" type="text" value="" class="hopeui-input icon_input" placeholder="请输入"  style="width:500px"/>
+            <input name="iconinput" type="text" value="" class="hopeui-input icon_input" placeholder="请输入"
+                style="width:500px" />
         </div>
     </div>
 
@@ -179,7 +193,8 @@
             </fieldset>
         </div>
         <div class="docs-content">
-            <input name="text" type="text" value="" id="hope-datepicker" class="hopeui-input" placeholder="请选择日期" readonly  />
+            <input name="text" type="text" value="" id="hope-datepicker" class="hopeui-input" placeholder="请选择日期"
+                readonly />
         </div>
     </div>
 
@@ -211,8 +226,8 @@
                     alt="">
             </div>
             <div class="imgcenter_warp hopeui-effect-shadow">
-                <img class="imgCover hopeui-opacity-low" src="https://imagegroup1.haier.com/press-events/news/W020201202614510610244.jpg"
-                    alt="">
+                <img class="imgCover hopeui-opacity-low"
+                    src="https://imagegroup1.haier.com/press-events/news/W020201202614510610244.jpg" alt="">
             </div>
             <div class="imgcenter_warp" style="height:3000px;">
                 <img class="imgCover hopeui-opacity-low hopeui-effect-scale"
@@ -818,17 +833,38 @@
 
 </body>
 <script>
+    hope.input({
+        ele: '.icon_input',
+        options: {
+            extendContent: '<button type="button" class="hopeui-btn">发送短信</button>',
+            extendContentLocation: 'right'
+        }
+    })
+
+    hope.textarea({
+        ele: '.hopeui-textarea-np',
+        options: {
+            remainingWords: true
+        },
+        on: {
+            blur: function (e) {
+                //console.log(e);
+            },
+            focus: function (e) {
+                //console.log(e);
+            },
+            input: function (e) {
+                //console.log(e);
+            },
+        },
+    });
+
+
     // hope.numup({
     //     ele: '.number'
     // });
 
-    hope.input({
-        ele: '.icon_input',
-        options:{
-            extendContent:`<button type="button" class="hopeui-btn">发送短信</button>`,
-            extendContentLocation:'right'
-        }
-    })
+
 
 
     hope.input({
@@ -837,12 +873,12 @@
 
     hope.datepicker({
         ele: '#hope-datepicker',
-        options:{
-            format:'yyyy-MM-dd HH:mm:ss',
-            type:'datetime'//date：日期，datetime:日期+时间
+        options: {
+            format: 'yyyy-MM-dd HH:mm:ss',
+            type: 'datetime' //date：日期，datetime:日期+时间
         },
-        on:{
-            init: function (e){
+        on: {
+            init: function (e) {
                 // console.log(e);
             }
         }
@@ -851,11 +887,11 @@
 
     hope.omit({
         ele: '.hope-omit',
-        options:{
-          
+        options: {
+
         },
-        on:{
-            init: function (e){
+        on: {
+            init: function (e) {
                 // console.log(e);
             }
         }
@@ -1269,19 +1305,7 @@
     //     },
     // });
 
-    // hope.textarea({
-    //     on: {
-    //         blur: function (e) {
-    //             //console.log(e);
-    //         },
-    //         focus: function (e) {
-    //             //console.log(e);
-    //         },
-    //         input: function (e) {
-    //             //console.log(e);
-    //         },
-    //     },
-    // });
+
 
 
 

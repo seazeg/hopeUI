@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-09 17:47:20
+ * @LastEditTime : 2020-12-15 17:56:57
  * @Description  : 下拉框
  */
 
@@ -23,7 +23,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             //模板初始化
             let newEle,
                 selector = $(this)[0];
-            let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="text" placeholder="${selector.children[0].innerText}" unselectable="on" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}"><div class="hopeui-scrollbar-box ">`;
+            let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="selectText" placeholder="${selector.children[0].innerText}" unselectable="on" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}"><div class="hopeui-scrollbar-box ">`;
             let tempSelectedVal = {
                 value: "",
                 label: "",
@@ -87,12 +87,13 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                 });
             }
 
-            if (is.ie() == 8) {
+            if (is.ie() <= 9) {
                 let $this = newEle.find("input");
                 let isHide = "";
                 if ($this.val()) {
                     isHide = "hopeui-hide";
                 }
+
                 $this
                     .after(
                         `<label class="hopeui-placeholder ${isHide}">${
@@ -157,7 +158,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
                 let _this = $(this);
                 handle(selector, newEle, _this);
-                if (is.ie() == 8) {
+                if (is.ie() <= 9) {
                     if (newEle.find("input").val()) {
                         newEle
                             .find("input")
@@ -295,7 +296,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
                     utils.validation(thisEle, "pass", null, "select-one");
 
-                    if (is.ie() == 8) {
+                    if (is.ie() <= 9) {
                         $(thisEle)
                             .next()
                             .find("input")
@@ -317,7 +318,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         thisEle.each(function (i, ele) {
             handle(ele, $(this).next(), $(this).next().find(".option").eq(0));
 
-            if (is.ie() == 8) {
+            if (is.ie() <= 9) {
                 $(this)
                     .next()
                     .find("input")

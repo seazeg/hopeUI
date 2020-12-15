@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-11-30 15:51:57
+ * @LastEditTime : 2020-12-15 17:06:40
  * @Description  : 多行文本框
  */
 
@@ -21,6 +21,21 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
 
     $dom.each(function () {
         let $this = $(this);
+        let remainWords = null;
+
+        if (options && options.remainingWords) {
+            let newBox = $('<div class="hopeui-relative"></div>').insertBefore(
+                $this
+            );
+            $this.appendTo(newBox);
+            $this.after(
+                `<div class="hopeui-textarea-words"><i class="remain">0</i>/<i class="max">${$this.attr(
+                    "maxlength"
+                )}</i></div>`
+            );
+            remainWords = $this.next(".hopeui-textarea-words");
+        }
+
         if (is.ie() <= 9) {
             $this
                 .after(
@@ -73,6 +88,12 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
             }
         });
         $this.on("input propertychange", function () {
+            if (remainWords) {
+                let max = remainWords.children(".max").text();
+                if ($(this).val().length <= max) {
+                    remainWords.children(".remain").text($(this).val().length);
+                }
+            }
             if (on && on.input) {
                 on.input({
                     targetELe: $(this).get(0),
