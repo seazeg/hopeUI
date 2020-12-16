@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-12-16 17:14:02
+ * @LastEditTime : 2020-12-16 17:25:35
  * @Description  : 自定义滚动条
  */
 
@@ -60,6 +60,11 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     let barHeight = rate * $dom.get(0).clientHeight;
     if (rate < 1) {
         $bar.css("height", barHeight + "px");
+        if (options && options.autoHideBar) {
+            $bar.css({
+                opacity: 0,
+            });
+        }
     } else {
         $bar.css({
             display: "none",
@@ -68,7 +73,7 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
 
     $dom.off().on("scroll", function () {
         let distance = this.scrollTop * rate;
-        if (options && options.autoHidebar) {
+        if (options && options.autoHideBar) {
             $bar.css({
                 opacity: 1,
             });

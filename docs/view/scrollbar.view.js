@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-08-25 13:38:43
+ * @LastEditTime : 2020-12-16 17:19:22
  * @Description  :
  */
 export const viewinfo = {
@@ -45,6 +45,7 @@ hope.scrollbar({
     ele: '#scrollbar',
     options:{
         height:200,
+        autoHideBar:true
     },
     on: {
         init: function () {},
