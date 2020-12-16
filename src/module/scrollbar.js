@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-12-15 15:47:22
+ * @LastEditTime : 2020-12-16 17:14:02
  * @Description  : 自定义滚动条
  */
 
@@ -13,8 +13,9 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = null;
     let listTemp = $(ele).addClass("hopeui-scrollbar").html();
-
+    let scrollY = 0;
     // if (options && options.height) {
+
     //     $(ele).css("height", options.height + "px");
     // }
 
@@ -59,11 +60,6 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     let barHeight = rate * $dom.get(0).clientHeight;
     if (rate < 1) {
         $bar.css("height", barHeight + "px");
-        if (options && options.nobar) {
-            $bar.css({
-                display: "none",
-            });
-        }
     } else {
         $bar.css({
             display: "none",
@@ -71,11 +67,20 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     }
 
     $dom.off().on("scroll", function () {
-        $bar.css("top", this.scrollTop * rate + "px");
+        let distance = this.scrollTop * rate;
+        if (options && options.autoHidebar) {
+            $bar.css({
+                opacity: 1,
+            });
+            autoHideBar(distance, $bar);
+        }
+
+        $bar.css("top", distance + "px");
+
         if (on && on.scroll) {
             on.scroll({
                 max: $dom.get(0).clientHeight - barHeight,
-                distance: this.scrollTop * rate,
+                distance: distance,
                 eventName: "scroll",
             });
         }
@@ -132,6 +137,21 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     };
 
     darg($bar.get(0), $dom.get(0));
+
+    function autoHideBar(y, $bar) {
+        scrollY = y;
+        setTimeout(() => {
+            if (y == scrollY) {
+                $bar.css({
+                    opacity: 0,
+                });
+            } else {
+                $bar.css({
+                    opacity: 1,
+                });
+            }
+        }, 500);
+    }
 
     if (on && on.init) {
         on.init();
