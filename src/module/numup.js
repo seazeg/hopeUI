@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 14:48:09
- * @LastEditTime : 2020-12-17 15:32:43
+ * @LastEditTime : 2020-12-17 16:16:31
  * @Description  : 数字自增效果
  */
 
@@ -18,9 +18,9 @@ module.exports.numupHandler = function ({ ele, options, on }) {
         let time = options.time || +$this.attr("hopeui-numup-time") || 2000, //总时间--毫秒为单位
             finalNum = options.num || +$this.attr("hopeui-numup-num"), //要显示的真实数值
             speed = options.speed || +$this.attr("hopeui-numup-speed") || 100, //调速器，改变regulator的数值可以调节数字改变的速度
-            step = finalNum / (time / speed),
-            count = 0,
-            initial = 0;
+            count = options.start || +$this.attr("hopeui-numup-start") || 0,
+            initial = 0,
+            step = finalNum / (time / speed);
 
         let timer = setInterval(function () {
             count = count + step;
@@ -40,7 +40,7 @@ module.exports.numupHandler = function ({ ele, options, on }) {
             if (t == initial) return;
             initial = t;
             $this.html(getFormatCurrency(initial));
-        }, 30);
+        }, 50);
     });
 
     return obj;
