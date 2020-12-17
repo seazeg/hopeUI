@@ -2,7 +2,7 @@
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:56:06
  * @LastEditTime : 2020-12-17 12:01:22
- * @Description  :
+ * @Description  : 图像放大镜
  */
 
 const $ = require("../utils/hopeu.js");

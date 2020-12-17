@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-03 11:30:49
- * @Description  :
+ * @LastEditTime : 2020-12-17 14:48:40
+ * @Description  : 轮播图
  */
 
 const $ = require("../utils/hopeu.js");

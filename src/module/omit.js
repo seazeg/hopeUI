@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-08 13:48:53
- * @Description  :
+ * @LastEditTime : 2020-12-17 14:50:14
+ * @Description  : 响应式截断省略函数
  */
 
 const $ = require("../utils/hopeu.js");

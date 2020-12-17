@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-04 17:10:06
- * @Description  : 弹层
+ * @LastEditTime : 2020-12-17 14:49:11
+ * @Description  : 弹窗
  */
 
 const $ = require("../utils/hopeu.js");

@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-04 10:04:52
- * @Description  :
+ * @LastEditTime : 2020-12-17 14:50:21
+ * @Description  : 响应式图片
  */
 
 const $ = require("../utils/hopeu.js");

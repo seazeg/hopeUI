@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-08 13:44:01
- * @Description  :
+ * @LastEditTime : 2020-12-17 14:48:59
+ * @Description  : 日期时间选择器
  */
 
 const Hope_datepicker = require("../utils/datepicker.core.js");
