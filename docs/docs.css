@@ -178,10 +178,17 @@
     line-height: 20px;
 }
 
-.hopeui-zoom-thumb-wrapper{
-    width:300px;height:300px;
+.hopeui-zoom-thumb-wrapper {
+    width: 300px;
+    height: 300px;
 }
 
-.hopeui-zoom-thumb-wrapper img{
-    width:100%;
+.hopeui-zoom-thumb-wrapper img {
+    width: 100%;
+}
+
+.hope-numup-obj {
+    font-size: 100px;
+    color: #ff7400;
+    font-weight: 600;
 }

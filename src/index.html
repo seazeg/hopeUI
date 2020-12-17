@@ -165,6 +165,12 @@
     .hopeui-zoom-thumb-wrapper img {
         width: 100%;
     }
+
+    .hope-numup-obj {
+        font-size: 100px;
+        color: #ff7400;
+        font-weight: 600;
+    }
 </style>
 
 <body>
@@ -172,7 +178,20 @@
     <div class="docs-box">
         <div class="docs-title">
             <fieldset>
-                <legend><a name="icon">带剩余字数多行文本</a></legend>
+                <legend><a name="icon">数字自增效果</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <span class="hope-numup-obj" hopeui-numup-num="2345021800" hopeui-numup-time="5000"
+                hopeui-numup-speed="50">0</span>
+        </div>
+    </div>
+
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">图像放大镜</a></legend>
             </fieldset>
         </div>
         <div class="docs-content">
@@ -863,6 +882,19 @@
 
 </body>
 <script>
+    hope.numup({
+        ele: ".hope-numup-obj",
+        // options: {
+        //     time: 3000,
+        //     speed: 50
+        // },
+        on: {
+            end: function (e) {
+                console.log('完成');
+            }
+        }
+    })
+
     hope.zoom({
         ele: '#thumb',
         options: {
