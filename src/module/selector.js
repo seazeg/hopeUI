@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-15 17:56:57
+ * @LastEditTime : 2020-12-17 18:10:17
  * @Description  : 下拉框
  */
 
@@ -131,7 +131,9 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
                         scrollbarHandler({
                             ele: newEle.children(".hopeui-select-list"),
-                            options: {},
+                            options: {
+                                autoHideBar: options && options.autoHideBar || false,
+                            },
                             on: {},
                         });
 
