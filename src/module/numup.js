@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 14:48:09
- * @LastEditTime : 2020-12-17 15:24:28
+ * @LastEditTime : 2020-12-17 15:32:43
  * @Description  : 数字自增效果
  */
 
@@ -11,33 +11,37 @@ module.exports.numupHandler = function ({ ele, options, on }) {
     const obj = new Object();
     options = options || {};
 
-    let $dom = $(ele),
-        time = options.time || +$dom.attr("hopeui-numup-time") || 2000, //总时间--毫秒为单位
-        finalNum = options.num || +$dom.attr("hopeui-numup-num"), //要显示的真实数值
-        speed = options.speed || +$dom.attr("hopeui-numup-speed") || 100, //调速器，改变regulator的数值可以调节数字改变的速度
-        step = finalNum / (time / speed),
-        count = 0,
-        initial = 0;
+    let $dom = $(ele);
 
-    let timer = setInterval(function () {
-        count = count + step;
+    $dom.each(function () {
+        let $this = $(this);
+        let time = options.time || +$this.attr("hopeui-numup-time") || 2000, //总时间--毫秒为单位
+            finalNum = options.num || +$this.attr("hopeui-numup-num"), //要显示的真实数值
+            speed = options.speed || +$this.attr("hopeui-numup-speed") || 100, //调速器，改变regulator的数值可以调节数字改变的速度
+            step = finalNum / (time / speed),
+            count = 0,
+            initial = 0;
 
-        if (count >= finalNum) {
-            clearInterval(timer);
-            count = finalNum;
-            if (on.end) {
-                on.end({
-                    ele: $dom.get(0),
-                    event: "timeEnd",
-                });
+        let timer = setInterval(function () {
+            count = count + step;
+
+            if (count >= finalNum) {
+                clearInterval(timer);
+                count = finalNum;
+                if (on.end) {
+                    on.end({
+                        ele: $this.get(0),
+                        event: "timeEnd",
+                    });
+                }
             }
-        }
 
-        let t = Math.floor(count);
-        if (t == initial) return;
-        initial = t;
-        $dom.html(getFormatCurrency(initial));
-    }, 30);
+            let t = Math.floor(count);
+            if (t == initial) return;
+            initial = t;
+            $this.html(getFormatCurrency(initial));
+        }, 30);
+    });
 
     return obj;
 };
