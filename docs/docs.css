@@ -177,3 +177,11 @@
     width: 400px;
     line-height: 20px;
 }
+
+.hopeui-zoom-thumb-wrapper{
+    width:300px;height:300px;
+}
+
+.hopeui-zoom-thumb-wrapper img{
+    width:100%;
+}

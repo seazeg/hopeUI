@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-12-15 16:30:04
+ * @LastEditTime : 2020-12-17 11:29:02
  * @Description  : hopeUI
  */
 
@@ -27,10 +27,17 @@ const { carouselHandler } = require("./module/carousel.js");
 const { pictureHandler } = require("./module/picture.js");
 const { adapimageHandler } = require("./module/adapimage.js");
 const { omitHandler } = require("./module/omit.js");
-
+const { zoomHandler } = require("./module/zoom.js");
 
 const hope = () => {
     return {
+        zoom: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return zoomHandler({ ele, options, on });
+        },
         omit: function ({
             ele: ele = null,
             options: options = {},

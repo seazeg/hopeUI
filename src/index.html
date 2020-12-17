@@ -156,9 +156,39 @@
         font-size: 14px;
         line-height: 20px;
     }
+
+    .hopeui-zoom-thumb-wrapper {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hopeui-zoom-thumb-wrapper img {
+        width: 100%;
+    }
 </style>
 
 <body>
+
+    <div class="docs-box">
+        <div class="docs-title">
+            <fieldset>
+                <legend><a name="icon">带剩余字数多行文本</a></legend>
+            </fieldset>
+        </div>
+        <div class="docs-content">
+            <div>
+                <div class="hopeui-zoom-thumb-wrapper" style="display: inline-block">
+                    <img id="thumb" src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
+                        data-large-img-url="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
+                        data-large-img-wrapper="preview">
+                </div>
+                <div class="hopeui-zoom-preview" id="preview"
+                    style="width: 400px; height: 400px;display: inline-block;vertical-align: top;">局部显示区域</div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="docs-box">
         <div class="docs-title">
@@ -833,6 +863,31 @@
 
 </body>
 <script>
+    hope.zoom({
+        ele: '#thumb',
+        options: {
+            largeWrapper: 'preview',
+            mode: 'outside', //outside&inside
+            zoom: 2,
+            zoomable: true
+        },
+        on: {
+            enter: function (e) {
+                // console.log(e);
+            },
+            move: function (e) {
+                // console.log(e);
+            },
+            leave: function (e) {
+                // console.log(e);
+            },
+            scale: function (e) {
+                // console.log(e);
+            },
+        }
+    });
+
+
     hope.input({
         ele: '.icon_input',
         options: {
@@ -1081,7 +1136,7 @@
         ele: '#scrollbar',
         options: {
             height: 200,
-            autoHideBar:true
+            autoHideBar: true
         },
         on: {
             init: function () {},
