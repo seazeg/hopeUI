@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-09-02 14:20:34
- * @LastEditTime : 2020-12-17 14:50:38
+ * @LastEditTime : 2020-12-18 14:30:53
  * @Description  : 文件上传
  */
 
@@ -9,10 +9,15 @@ const $ = require("../utils/hopeu.js");
 
 module.exports.uploadHandler = function ({ ele, options, on }) {
     const obj = new Object();
+    let multiple = "";
+    if (options && options.multiple) {
+        multiple = "multiple";
+    }
     let $dom = $(ele);
-
     let container = $('<div class="hopeui-upload-container"></div>');
-    let inputfile = $('<input type="file" style="display:none"/>');
+    let inputfile = $(
+        '<input type="file" class="hopeui-hide" ' + multiple + "/>"
+    );
     inputfile.appendTo(container);
 
     //校验函数
@@ -47,7 +52,7 @@ module.exports.uploadHandler = function ({ ele, options, on }) {
         return result.size && result.type;
     };
 
-    inputfile.on("change", function () {
+    inputfile.off().on("change", function () {
         let input = $(this);
         let files = input.get(0).files[0];
         if (files != null && files != undefined) {
@@ -89,7 +94,7 @@ module.exports.uploadHandler = function ({ ele, options, on }) {
         });
     }
 
-    $dom.on("click", function () {
+    $dom.off().on("click", function () {
         inputfile.click();
     });
 

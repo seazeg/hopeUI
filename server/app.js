@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-09-02 13:45:37
- * @LastEditTime : 2020-09-02 18:06:36
+ * @LastEditTime : 2020-12-18 14:20:41
  * @Description  : 图片上传接口
  */
 const express = require("express");
@@ -10,7 +10,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "server/upload/");
+        cb(null, __dirname + "/upload");
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);

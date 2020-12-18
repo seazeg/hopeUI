@@ -1113,7 +1113,7 @@
             },
             complete: function (res) {
                 //console.log(res);
-                $('#uploadlist').html('<img src="/app/' + res.imgurl + '" />')
+                $('#uploadlist').append('<img src="/app/' + res.imgurl + '" />')
             },
             error: function (res) {
 

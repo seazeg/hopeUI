@@ -1,25 +1,26 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-09-08 10:32:49
+ * @LastEditTime : 2020-12-18 14:24:36
  * @Description  :
  */
 export const viewinfo = {
-    html:`
+    html: `
 <div class="docs-content">
     <div id="uploadlist"></div>
     <br>
     <button class="hopeui-btn" id="upload">文件选择</button>
 </div>   
     `,
-    js:`
+    js: `
 hope.upload({
     ele: "#upload",
     options: {
         url: '/app/fileUpload',
         name: "file",
         type: ['jpg', 'png'],
-        size: 5 * 1024 * 1024 //5mb
+        size: 5 * 1024 * 1024, //5mb
+        multiple: true
     },
     on: {
         validate: function (e) {
@@ -40,5 +41,5 @@ hope.upload({
         }
     }
 })
-    `
-}
+    `,
+};
