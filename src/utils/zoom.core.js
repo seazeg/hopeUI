@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:57:09
- * @LastEditTime : 2020-12-17 14:39:11
+ * @LastEditTime : 2020-12-18 10:30:41
  * @Description  :
  */
 module.exports.Hope_zoom = function (evt, options) {
@@ -175,11 +175,11 @@ module.exports.Hope_zoom = function (evt, options) {
                 }
 
                 if (xPos - curData.w + curData.lensW / 2 > 0) {
-                    l = curData.w - (curData.lensW + 2);
+                    l = curData.w - (curData.lensW);
                 }
 
                 if (yPos - curData.h + curData.lensH / 2 > 0) {
-                    t = curData.h - (curData.lensH + 2);
+                    t = curData.h - (curData.lensH);
                 }
             }
 
@@ -435,8 +435,8 @@ module.exports.Hope_zoom = function (evt, options) {
 
         if (options.large === undefined) {
             largeUrl =
-                options.thumb.getAttribute("data-large-img-url") !== null
-                    ? options.thumb.getAttribute("data-large-img-url")
+                options.thumb.getAttribute("hope-large-img-url") !== null
+                    ? options.thumb.getAttribute("hope-large-img-url")
                     : options.thumb.src;
         } else {
             largeUrl = options.large;
