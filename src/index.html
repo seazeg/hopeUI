@@ -163,7 +163,8 @@
     }
 
     .hopeui-zoom-thumb-wrapper img {
-        width: 100%;height:100%;
+        width: 100%;
+        height: 100%;
     }
 
     .hope-numup-obj {
@@ -183,7 +184,8 @@
             </fieldset>
         </div>
         <div class="docs-content">
-            <span class="hope-numup-obj" hope-numup-num="2345021800" hope-numup-time="10000" hope-numup-speed="50" hope-numup-start="10000">0</span>
+            <span class="hope-numup-obj" hope-numup-num="2345021800" hope-numup-time="10000" hope-numup-speed="50"
+                hope-numup-start="10000">0</span>
             <span class="hope-numup-obj" hope-numup-num="2021800" hope-numup-time="5000" hope-numup-speed="50">0</span>
             <span class="hope-numup-obj" hope-numup-num="21800" hope-numup-time="3000" hope-numup-speed="50">0</span>
         </div>
@@ -977,10 +979,19 @@
     hope.omit({
         ele: '.hope-omit',
         options: {
-
+            breakpoint: {
+                'xl': {
+                    point: 1200,
+                    row: 4
+                },
+                'xs': {
+                    point: 360,
+                    row: 1
+                }
+            }
         },
         on: {
-            init: function (e) {
+            resize: function (e) {
                 // console.log(e);
             }
         }

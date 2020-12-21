@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-17 14:50:14
+ * @LastEditTime : 2020-12-21 10:59:57
  * @Description  : 响应式截断省略函数
  */
 
@@ -37,8 +37,8 @@ module.exports.omitHandler = function ({ ele, options, on }) {
                 }
             } else {
                 for (let key in bkp) {
-                    if (winWidth >= bkp[key]) {
-                        automit(_this, _this.attr(`hope-omit-${key}`));
+                    if (winWidth >= bkp[key].point) {
+                        automit(_this, bkp[key].row);
                         break;
                     }
                 }

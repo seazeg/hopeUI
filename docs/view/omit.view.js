@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-12-04 15:31:10
+ * @LastEditTime : 2020-12-21 11:19:25
  * @Description  :
  */
 export const viewinfo = {
@@ -13,6 +13,18 @@ export const viewinfo = {
     js: `
 hope.omit({
     ele: ".hope-omit-run",
+    options:{
+        // breakpoint: {
+        //     'xl': {
+        //         point: 1200,
+        //         row: 4
+        //     },
+        //     'xs': {
+        //         point: 360,
+        //         row: 1
+        //     }
+        // }
+    },
     on: {
         resize: function (e) {
             console.log(e);
