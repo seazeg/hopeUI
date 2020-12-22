@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:40:22
- * @LastEditTime : 2020-08-06 18:01:00
+ * @LastEditTime : 2020-12-22 15:13:12
  * @Description  :
  */
 
@@ -10,6 +10,9 @@ import { viewport } from "./viewport.js";
 addParameters({
     options: {
         showRoots: true,
+        storySort: {
+            order: ["框架概览", "基础控件", "复用组件", "常用函数"],
+        },
     },
     viewport: {
         viewports: viewport,
