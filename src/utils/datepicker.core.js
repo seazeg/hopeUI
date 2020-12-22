@@ -703,7 +703,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                     .find(".hour")
                     .children(".list"),
                 options: {
-                    nobar: true,
+                    autoHideBar: true,
                 },
                 on: {
                     scroll: function (e) {
@@ -727,7 +727,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                     .find(".min")
                     .children(".list"),
                 options: {
-                    nobar: true,
+                    autoHideBar: true,
                 },
                 on: {
                     init: function () {
@@ -748,7 +748,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                     .find(".sec")
                     .children(".list"),
                 options: {
-                    nobar: true,
+                    autoHideBar: true,
                 },
                 on: {
                     init: function () {
