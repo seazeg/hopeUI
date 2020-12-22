@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:40:22
- * @LastEditTime : 2020-12-22 15:13:12
+ * @LastEditTime : 2020-12-22 15:25:59
  * @Description  :
  */
 
@@ -11,7 +11,7 @@ addParameters({
     options: {
         showRoots: true,
         storySort: {
-            order: ["框架概览", "基础控件", "复用组件", "常用函数"],
+            order: ["概览", "基础控件", "复用组件", "常用函数"],
         },
     },
     viewport: {
