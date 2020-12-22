@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-15 17:06:40
+ * @LastEditTime : 2020-12-22 16:19:15
  * @Description  : 多行文本框
  */
 
@@ -30,7 +30,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
             $this.appendTo(newBox);
             $this.after(
                 `<div class="hopeui-textarea-words"><i class="remain">0</i>/<i class="max">${$this.attr(
-                    "maxlength"
+                    "maxlength" || 1000
                 )}</i></div>`
             );
             remainWords = $this.next(".hopeui-textarea-words");
