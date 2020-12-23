@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2020-08-25 11:49:43
+ * @LastEditTime : 2020-12-23 15:36:45
  * @Description  :
  */
 
@@ -32,6 +32,13 @@ hope.lightbox({
         prevIcon: "hopeui-icon hopeui-icon-left",
         nextIcon: "hopeui-icon hopeui-icon-right",
         closeIcon: "hopeui-icon hopeui-icon-close",
+    },
+    on: {
+        prev:function (e) {},
+        next:function (e) {},
+        open:function (e) {},
+        close:function (e) {},
+        init:function (e) {},
     },
 });
 `,
@@ -65,7 +72,11 @@ hope.lightbox({
         animation: "no",
     },
     on: {
-
+        prev:function (e) {},
+        next:function (e) {},
+        open:function (e) {},
+        close:function (e) {},
+        init:function (e) {},
     },
 });
 `
