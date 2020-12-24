@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-09-08 16:59:58
+ * @LastEditTime : 2020-12-24 17:40:46
  * @Description  :
  */
 
@@ -20,7 +20,7 @@ var loadmore = hope.loadmore({
         offset:30
     },
     params: {
-        url: 'hopeui/mock/list1.json',
+        url: 'mock/list1.json',
         dataType: "json",
         type: 'get',
         data: {

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-12-24 17:35:36
+ * @LastEditTime : 2020-12-24 17:41:07
  * @Description  :
  */
 
@@ -13,7 +13,7 @@ export const viewinfo = {
     hope.suggest({
         ele: '.js_hopeui_input',
         params: {
-            url: 'hopeui/mock/list1.json',
+            url: 'mock/list1.json',
             dataType: "json",
             type: 'get',
             searchField: 'searchword'
