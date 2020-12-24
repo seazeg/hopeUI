@@ -20,7 +20,7 @@ var loadmore = hope.loadmore({
         offset:30
     },
     params: {
-        url: '/mock/list1.json',
+        url: 'hopeui/mock/list1.json',
         dataType: "json",
         type: 'get',
         data: {

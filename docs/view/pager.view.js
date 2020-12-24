@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-09-08 10:19:59
+ * @LastEditTime : 2020-12-24 17:35:10
  * @Description  :
  */
 
@@ -20,7 +20,7 @@ export const viewinfo = {
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
         },
         params: {
-            url: "/mock/list1.json",
+            url: "hopeui/mock/list1.json",
             dataType: "json",
             type: "get",
             data: {
@@ -70,7 +70,7 @@ export const viewinfo = {
             extend: true,
         },
         params: {
-            url: "/mock/list1.json",
+            url: "hopeui/mock/list1.json",
             dataType: "json",
             type: "get",
             data: {
