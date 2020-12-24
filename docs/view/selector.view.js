@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:18
- * @LastEditTime : 2020-08-25 10:51:25
+ * @LastEditTime : 2020-12-24 10:07:06
  * @Description  : 
  */ 
 export const viewinfo = {
@@ -35,6 +35,9 @@ group:`
 generalJS:`
 let select_normal = hope.selector({
     ele: ".select_normal",
+    options:{
+        autoHideBar:true
+    },
     on: {
         change: function(e) {
             console.log(e);
@@ -48,6 +51,9 @@ let select_normal = hope.selector({
 groupJS:`
 let select_normal = hope.selector({
     ele: ".select_group",
+    options:{
+        autoHideBar:false
+    },
     on: {
         change: function(e) {
             console.log(e);
