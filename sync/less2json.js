@@ -34,6 +34,7 @@ walker.on("file", function (root, fileStats, next) {
                 function (error, data) {
                     fs.writeFile(`${outputdir}/${fileStats.name.replace("less", "json")}`, JSON.stringify(css2json(data)), function (err) {
                         if (err) console.error(err);
+                        console.log(`${outputdir}/${fileStats.name.replace("less", "json")}已经同步完成`);
                         next();
                     });
                 }
