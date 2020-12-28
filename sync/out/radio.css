@@ -1,0 +1,36 @@
+.hopeui-form-radio {
+  padding-right: 10px;
+  cursor: pointer;
+  font-size: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.hopeui-form-radio * {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+}
+.hopeui-form-radio i {
+  margin-right: 8px;
+  font-size: 20px;
+  color: #c2c2c2;
+  display: inline-block;
+}
+.hopeui-form-radio.hopeui-form-radio {
+  color: #666;
+}
+.hopeui-form-radio.hopeui-form-radio > i:hover {
+  color: #ff7400;
+}
+.hopeui-form-radio.hopeui-form-radioed > i {
+  color: #ff7400;
+}
+.hopeui-form-radio.hopeui-radio-disabled {
+  cursor: not-allowed !important;
+}
+.hopeui-form-radio.hopeui-radio-disabled > i {
+  color: #e6e6e6 !important;
+}
+.hopeui-form-radio.hopeui-radio-disabled > span {
+  color: #d2d2d2 !important;
+}

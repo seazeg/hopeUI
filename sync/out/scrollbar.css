@@ -1,0 +1,27 @@
+.hopeui-scrollbar {
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+.hopeui-scrollbar .hopeui-scrollbar-box {
+  height: 100%;
+  overflow: auto;
+  width: 103%;
+  padding-right: 10px;
+}
+.hopeui-scrollbar .hopeui-scrollbar-box.ieFix {
+  margin-right: -20px;
+  width: auto;
+  padding-right: 0;
+}
+.hopeui-scrollbar .hopeui-scrollbar-bar {
+  background: #666666;
+  width: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}

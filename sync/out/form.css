@@ -1,0 +1,43 @@
+.hopeui-form .hopeui-form-item {
+  margin-bottom: 15px;
+  clear: both;
+}
+.hopeui-form .hopeui-form-item .hopeui-form-error {
+  border-color: #f56c6c !important;
+}
+.hopeui-form .hopeui-form-item .hopeui-form-error-prompt {
+  color: #f56c6c !important;
+  font-size: 12px;
+  padding: 10px 10px 0 0;
+  display: block;
+}
+.hopeui-form .hopeui-form-item .hopeui-form-error-prompt i {
+  vertical-align: middle;
+}
+.hopeui-form .hopeui-form-label {
+  float: left;
+  display: block;
+  padding: 9px 15px;
+  min-width: 80px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: right;
+  font-size: 14px;
+  color: #333;
+}
+.hopeui-form .hopeui-input-block {
+  margin-left: 110px;
+  min-height: 36px;
+  display: block;
+}
+.hopeui-form .hopeui-input-inline {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+}
+.hopeui-form .hopeui-form-radio {
+  margin-top: 8px;
+}
+.hopeui-form .hopeui-form-checkbox {
+  margin-top: 10px;
+}

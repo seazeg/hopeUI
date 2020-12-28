@@ -1,0 +1,88 @@
+.hopeui-form-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.hopeui-form-select .hopeui-input {
+  padding: 0 25px 0 10px;
+}
+.hopeui-form-select .hopeui-select-title > input {
+  cursor: pointer;
+}
+.hopeui-form-select .hopeui-select-list {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 39px;
+  padding: 5px 0;
+  z-index: 899;
+  width: 100%;
+  border: 1px solid #d2d2d2;
+  max-height: 300px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+.hopeui-form-select .hopeui-select-list .option {
+  padding: 0 25px 0 10px;
+  line-height: 38px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.hopeui-form-select .hopeui-select-list .option.hopeui-select-this {
+  background-color: #ff7400;
+  color: #ffffff;
+}
+.hopeui-form-select .hopeui-select-list .option.hopeui-select-this:hover {
+  background-color: #ff7400;
+  color: #ffffff;
+}
+.hopeui-form-select .hopeui-select-list .option.hopeui-select-tips {
+  color: #666;
+}
+.hopeui-form-select .hopeui-select-list .option:hover {
+  background-color: #f2f2f2;
+}
+.hopeui-form-select .hopeui-select-list .groupTitle {
+  font-size: 12px;
+  color: #999;
+  padding: 0 10px;
+  line-height: 36px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hopeui-form-select .hopeui-select-list .group {
+  padding: 0 20px;
+}
+.hopeui-form-select .hopeui-edge {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -3px;
+  cursor: pointer;
+  border-width: 6px;
+  border-top-color: #c2c2c2;
+  border-top-style: solid;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+.hopeui-form-selected .hopeui-select-list {
+  display: block;
+}
+.hopeui-form-selected .hopeui-edge {
+  margin-top: -9px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  margin-top: -3px \9;
+}
+.hopeui-select-phone {
+  position: absolute;
+  z-index: 8;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}

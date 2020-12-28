@@ -1,0 +1,32 @@
+.hopeui-suggest {
+  position: absolute!important;
+  left: 0;
+  top: 1px;
+  padding: 5px 0;
+  z-index: 899;
+  min-width: 100%;
+  border: 1px solid #d2d2d2;
+  max-height: 300px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+.hopeui-suggest .option {
+  padding: 0 10px;
+  line-height: 36px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.hopeui-suggest .option.hopeui-suggest-this {
+  background-color: #ff7400 !important;
+  color: #ffffff !important;
+}
+.hopeui-suggest .option.hopeui-suggest-tips {
+  color: #666;
+}
+.hopeui-suggest .option:hover {
+  background-color: #f2f2f2;
+}

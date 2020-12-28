@@ -1,0 +1,78 @@
+.hopeui-form-checkbox {
+  position: relative;
+  height: auto !important;
+  line-height: normal !important;
+  min-width: 18px;
+  min-height: 18px;
+  border: none !important;
+  margin-right: 0;
+  padding-left: 28px;
+  padding-right: 0;
+  background: 0 0;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.hopeui-form-checkbox:hover i {
+  border-color: #ff7400;
+}
+.hopeui-form-checkbox.hopeui-checkbox-disabled {
+  cursor: not-allowed !important;
+}
+.hopeui-form-checkbox.hopeui-checkbox-disabled > i {
+  color: #ffffff !important;
+  border-color: #e6e6e6;
+}
+.hopeui-form-checkbox.hopeui-checkbox-disabled > span {
+  color: #d2d2d2 !important;
+}
+.hopeui-form-checkbox.hopeui-checkbox-disabled:hover i {
+  color: #ffffff !important;
+  border-color: #e6e6e6;
+}
+.hopeui-form-checkbox > span {
+  padding-left: 0;
+  padding-right: 15px;
+  line-height: 18px;
+  background: 0 0;
+  color: #666;
+  height: 100%;
+  font-size: 14px;
+  border-radius: 2px 0 0 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hopeui-form-checkbox > i {
+  position: absolute;
+  top: 0;
+  right: auto;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  border: 1px solid #c2c2c2;
+  font-size: 12px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  -webkit-transition: 0.1s linear;
+  transition: 0.1s linear;
+  text-align: center;
+  color: #ffffff;
+}
+.hopeui-form-checked {
+  border-color: #ff7400 !important;
+}
+.hopeui-form-checked i {
+  border-color: #ff7400 !important;
+  background-color: #ff7400;
+  color: #ffffff;
+}
+.hopeui-form-checked:hover {
+  border-color: #ff7400 !important;
+}
+.hopeui-form-checked:hover i {
+  border-color: #ff7400 !important;
+  background-color: #ff7400;
+  color: #ffffff;
+}
