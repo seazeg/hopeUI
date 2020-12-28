@@ -5,6 +5,10 @@
 }
 .hopeui-form-select .hopeui-input {
   padding: 0 25px 0 10px;
+  line-height: 38px;
+  height: 38px;
+  font-size: 14px;
+  color: #111111;
 }
 .hopeui-form-select .hopeui-select-title > input {
   cursor: pointer;
@@ -31,6 +35,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+  color: #111111;
+  font-size: 14px;
 }
 .hopeui-form-select .hopeui-select-list .option.hopeui-select-this {
   background-color: #ff7400;
@@ -45,6 +51,7 @@
 }
 .hopeui-form-select .hopeui-select-list .option:hover {
   background-color: #f2f2f2;
+  color: #111111;
 }
 .hopeui-form-select .hopeui-select-list .groupTitle {
   font-size: 12px;
