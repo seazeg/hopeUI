@@ -8,14 +8,17 @@
 .hopeui-pager .hopeui-pager-omit {
   display: inline-block;
   vertical-align: middle;
-  padding: 0 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   height: 28px;
   line-height: 28px;
   margin: 0 -1px 0 0;
   background-color: #fff;
   color: #2f2f2f;
   font-size: 12px;
-  border: 1px solid #e2e2e2;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e2e2e2;
   user-select: none;
 }
 .hopeui-pager span:hover {
@@ -86,7 +89,10 @@
   cursor: not-allowed !important;
 }
 .hopeui-pager .hopeui-pager-cur {
-  background: #ff7400;
+  background-color: #ff7400;
   color: #fff !important;
-  border: 1px solid #ff7400;
+  border: 1px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ff7400;
 }

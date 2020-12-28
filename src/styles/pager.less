@@ -10,14 +10,17 @@
     .hopeui-pager-omit {
         display: inline-block;
         vertical-align: middle;
-        padding: 0 15px;
+        padding-left:15px;
+        padding-right:15px;
         height: 28px;
         line-height: 28px;
         margin: 0 -1px 0 0;
         background-color: #fff;
         color: @darkFontColor + 30;
         font-size: 12px;
-        border: 1px solid #e2e2e2;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #e2e2e2;
         user-select: none;
     }
 
@@ -96,8 +99,11 @@
     }
 
     .hopeui-pager-cur {
-        background: @primaryColor;
+        background-color: @primaryColor;
         color: #fff !important;
-        border: 1px solid @primaryColor;
+        border: 1px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: @primaryColor;
     }
 }

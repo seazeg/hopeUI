@@ -1,6 +1,5 @@
 .hopeui-textarea {
   min-height: 200px;
-  height: auto;
   line-height: 20px;
   padding: 10px;
   resize: vertical;
@@ -19,6 +18,8 @@
   box-sizing: border-box;
   resize: none;
   overflow: auto;
+  color: #111111;
+  font-size: 14px;
 }
 .hopeui-textarea:focus {
   border-color: #c9c9c9;

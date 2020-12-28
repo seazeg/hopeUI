@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-28 10:46:27
- * @LastEditTime : 2020-12-28 14:38:29
- * @Description  :
+ * @LastEditTime : 2020-12-28 14:54:52
+ * @Description  : less转json并同步到hope项目
  */
 const fs = require("fs");
 const walk = require("walk");
