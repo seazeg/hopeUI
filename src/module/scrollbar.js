@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2020-12-16 17:25:35
+ * @LastEditTime : 2020-12-28 17:14:50
  * @Description  : 自定义滚动条
  */
 
@@ -159,7 +159,9 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     }
 
     if (on && on.init) {
-        on.init();
+        on.init({
+            ele: $(ele).get(0),
+        });
     }
 
     obj.setDistance = function (distance) {

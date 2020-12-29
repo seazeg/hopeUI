@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-17 18:10:17
+ * @LastEditTime : 2020-12-29 17:43:46
  * @Description  : 下拉框
  */
 
@@ -310,7 +310,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         }
     };
 
-    obj.clear = function () {
+    obj.clear = function (callback) {
         let thisEle = $(`select`);
         if (ele) {
             utils.isSelf(ele, type)
@@ -328,6 +328,9 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     .removeClass("hopeui-hide");
             }
         });
+        if(callback){
+            callback();
+        }
     };
 
     obj.update = function () {
