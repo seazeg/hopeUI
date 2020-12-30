@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-12-30 09:54:52
+ * @LastEditTime : 2020-12-30 15:41:43
  * @Description  : 分页
  */
 
@@ -253,6 +253,13 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     }
                                 }
                             });
+
+                        if (on && on.init) {
+                            on.init({
+                                obj: obj,
+                                event: "init",
+                            });
+                        }
                     }
                 },
                 error: function () {},
