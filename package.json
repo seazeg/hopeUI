@@ -8,7 +8,8 @@
     "server": "node server/app.js",
     "build": "webpack --config webpack.config.js;cd sync;node less2json",
     "api": "start-storybook -s ./docs/static",
-    "build:api": "build-storybook -o hopeui;cd sync;node staticapi;"
+    "build:api": "build-storybook -o hopeui;cd sync;node staticapi;",
+    "push":"npm run build;npm run build:api"
   },
   "author": {
     "name": "Evan.G",
