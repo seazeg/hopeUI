@@ -894,7 +894,7 @@
         // },
         on: {
             end: function (e) {
-                console.log('完成');
+                //console.log('完成');
             }
         }
     })
@@ -909,16 +909,16 @@
         },
         on: {
             enter: function (e) {
-                // console.log(e);
+                // //console.log(e);
             },
             move: function (e) {
-                // console.log(e);
+                // //console.log(e);
             },
             leave: function (e) {
-                // console.log(e);
+                // //console.log(e);
             },
             scale: function (e) {
-                // console.log(e);
+                // //console.log(e);
             },
         }
     });
@@ -939,13 +939,13 @@
         },
         on: {
             blur: function (e) {
-                //console.log(e);
+                ////console.log(e);
             },
             focus: function (e) {
-                //console.log(e);
+                ////console.log(e);
             },
             input: function (e) {
-                //console.log(e);
+                ////console.log(e);
             },
         },
     });
@@ -970,7 +970,7 @@
         },
         on: {
             init: function (e) {
-                // console.log(e);
+                // //console.log(e);
             }
         }
     })
@@ -992,7 +992,7 @@
         },
         on: {
             resize: function (e) {
-                // console.log(e);
+                // //console.log(e);
             }
         }
     })
@@ -1023,7 +1023,7 @@
         },
         on: {
             resize: function (e) {
-                // console.log(e);
+                // //console.log(e);
             }
         }
     })
@@ -1041,10 +1041,10 @@
             },
             on: {
                 onFirstInit: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 },
                 onSlideChangeStart: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 }
             }
         }
@@ -1059,10 +1059,10 @@
             },
             on: {
                 onFirstInit: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 },
                 onSlideChangeStart: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 }
             }
         }
@@ -1077,10 +1077,10 @@
             },
             on: {
                 onFirstInit: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 },
                 onSlideChangeStart: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 }
             }
         }
@@ -1117,16 +1117,16 @@
         },
         on: {
             validate: function (e) {
-                //console.log(e);
+                ////console.log(e);
                 if (!e.result) {
                     alert('type不符合')
                 }
             },
             uploading: function () {
-                //console.log('上传中');
+                ////console.log('上传中');
             },
             complete: function (res) {
-                //console.log(res);
+                ////console.log(res);
                 $('#uploadlist').append('<img src="/app/' + res.imgurl + '" />')
             },
             error: function (res) {
@@ -1170,7 +1170,7 @@
         },
         on: {
             loaded: function (e) {
-                //console.log(e);
+                ////console.log(e);
             }
         }
     })
@@ -1189,7 +1189,7 @@
         on: {
             init: function () {},
             scroll: function (e) {
-                //console.log(e.distance);
+                ////console.log(e.distance);
             }
         }
     })
@@ -1209,17 +1209,17 @@
             type: 'get',
         },
         reader: function (res) {
-            console.log(res);
+            //console.log(res);
             var list = res.data;
             var tmp = [];
             for (var i = 0; i < list.length; i++) {
                 tmp.push(list[i].goodsName)
             }
-            return tmp
+            return []
         },
         on: {
             input: function (e) {
-                // console.log('111');
+                // //console.log('111');
             },
             init:function(){
                 
@@ -1306,13 +1306,13 @@
         },
         on: {
             jumpOver: function (e) {
-                //console.log(e);
+                ////console.log(e);
             },
             complete: function (e) {
 
             },
             init:function(e){
-                console.log(e);
+                //console.log(e);
             }
         },
     })
@@ -1334,10 +1334,10 @@
         },
         on: {
             change: function (e) {
-                //console.log(e);
+                ////console.log(e);
             },
             init: function (e) {
-                //console.log(e);
+                ////console.log(e);
             },
         },
     });
@@ -1379,10 +1379,10 @@
     // var select_normal = hope.checkbox({
     //     on: {
     //         change: function (e) {
-    //             //console.log(e);
+    //             ////console.log(e);
     //         },
     //         toggle: function (e) {
-    //             //console.log(e);
+    //             ////console.log(e);
     //         },
     //     },
     // });
@@ -1397,10 +1397,10 @@
     // var select_normal2 = hope.radio({
     //     on: {
     //         change: function (e) {
-    //             //console.log(e);
+    //             ////console.log(e);
     //         },
     //         toggle: function (e) {
-    //             //console.log(e);
+    //             ////console.log(e);
     //         },
     //     },
     // });
@@ -1415,13 +1415,13 @@
     //  hope.input({
     //     on: {
     //         blur: function (e) {
-    //             //console.log(e);
+    //             ////console.log(e);
     //         },
     //         focus: function (e) {
-    //             //console.log(e);
+    //             ////console.log(e);
     //         },
     //         input: function (e) {
-    //             //console.log(e);
+    //             ////console.log(e);
     //         },
     //     },
     // });
@@ -1434,60 +1434,60 @@
         ele: "#form",
         on: {
             submit: function (e) {
-                //console.log(e);
+                ////console.log(e);
             },
         },
         controls: {
             selector: {
                 on: {
                     init: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                     change: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                     toggle: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                 },
             },
             checkbox: {
                 on: {
                     change: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                 },
             },
             radio: {
                 on: {
                     change: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                 },
             },
             input: {
                 on: {
                     blur: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                     focus: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                     input: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                 },
             },
             textarea: {
                 on: {
                     blur: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                     focus: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                     input: function (e) {
-                        //console.log(e);
+                        ////console.log(e);
                     },
                 },
             },
