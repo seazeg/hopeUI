@@ -1196,15 +1196,17 @@
     hope.suggest({
         ele: '.js_hopeui_input',
         options: {
-            noMatchName: '-- 没有匹配的内容 --'
+            noMatchName: '-- 没有匹配的内容 --',
+            searchField: 'searchword',
+            isFirstData:true
         },
         params: {
             url: '/assets/page/list1.json',
             dataType: "json",
             type: 'get',
-            searchField: 'searchword'
         },
         reader: function (res) {
+            console.log(res);
             var list = res.data;
             var tmp = [];
             for (var i = 0; i < list.length; i++) {
@@ -1214,7 +1216,10 @@
         },
         on: {
             input: function (e) {
-                //console.log(e);
+                // console.log('111');
+            },
+            init:function(){
+                
             }
         }
     })

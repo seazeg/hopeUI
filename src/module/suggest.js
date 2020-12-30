@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-11-17 16:00:57
+ * @LastEditTime : 2020-12-30 10:46:54
  * @Description  : 文本框
  */
 
@@ -28,7 +28,7 @@ module.exports.suggestHandler = function ({
 
     function getData(params, reader, obj) {
         params.data = {};
-        params.data[params.searchField] = obj.prev().val();
+        params.data[options.searchField] = obj.prev().val();
         $.ajax(
             Object.assign(params, {
                 success: function (data) {
@@ -138,6 +138,10 @@ module.exports.suggestHandler = function ({
                 .find(".hopeui-suggest")
                 .css("top", $this.height() + 3);
 
+            if (options && options.isFirstData) {
+                getData(params, reader, $this.next());
+            }
+
             $this.on("blur", function () {
                 if (on && on.blur) {
                     on.blur({
@@ -175,6 +179,8 @@ module.exports.suggestHandler = function ({
                 }
             });
 
+
+
             //点击select区域外关闭下拉列表
             $(document).on("click", function (e) {
                 $this.next().addClass("hopeui-hide");
@@ -185,6 +191,8 @@ module.exports.suggestHandler = function ({
             });
         }
     });
+
+
 
     if (on && on.init) {
         on.init({
