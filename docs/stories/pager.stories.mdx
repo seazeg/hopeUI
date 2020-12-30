@@ -3,32 +3,48 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/pager.view.js";
 
 # 分页（Pager）
-***
+
+---
+
 <Meta title="复用组件/分页(Pager)" />
 
 <Canvas>
-    <Story name="基础" height="150px" parameters={{ docs: { source: { code:`${viewinfo.general}${viewinfo.generalJS}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.generalJS)()
-        });
-        return viewinfo.general
-    }}  
+    <Story
+        name="基础"
+        height="150px"
+        parameters={{
+            docs: {
+                source: { code: `${viewinfo.general}${viewinfo.generalJS}` },
+            },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.generalJS)();
+            });
+            return viewinfo.general;
+        }}
     </Story>
 </Canvas>
 
 <Canvas>
-    <Story name="扩展" height="150px" parameters={{ docs: { source: { code:`${viewinfo.extend}${viewinfo.extendJS}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.extendJS)()
-        });
-        return viewinfo.extend
-    }}  
+    <Story
+        name="扩展"
+        height="150px"
+        parameters={{
+            docs: {
+                source: { code: `${viewinfo.extend}${viewinfo.extendJS}` },
+            },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.extendJS)();
+            });
+            return viewinfo.extend;
+        }}
     </Story>
 </Canvas>
-
-
 
 ## 基础属性
 
@@ -47,7 +63,7 @@ import { viewinfo } from "../view/pager.view.js";
 | pageMapping | 当前页字段映射      | String  | --       | pageNo |
 | extend      | 完整扩展            | Boolean | --       | false  |
 
-## http请求参数 params
+## http 请求参数 params
 
 参考 jquery.ajax 参数配置列表
 
@@ -78,6 +94,7 @@ return {
 
 ## 调用方法
 
-| 方法名 | 说明         | 类型     | 默认值 | 参数 |
-| ------ | ------------ | -------- | ------ | ---- |
-| jump   | 外部跳转方法 | Function | --     | 页码 |
+| 方法名 | 说明             | 类型     | 默认值 | 参数     | 备注                              |
+| ------ | ---------------- | -------- | ------ | -------- | --------------------------------- |
+| jump   | 外部跳转方法     | Function | --     | 页码     | --                                |
+| set    | 参数设外部置方法 | Function | --     | 参数集合 | obj.set({url:'xxx',data:{keyword:22}}) |

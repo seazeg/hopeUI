@@ -1264,7 +1264,7 @@
         },
     });
 
-    var pager = hope.pager({
+    window.pager = hope.pager({
         ele: "#pager",
         options: {
             omit: 5, //最多保留多少按钮,必须奇数
@@ -1302,7 +1302,13 @@
             }
         },
     })
-    // pager.jump(10)
+
+    pager.set({
+        data:{
+            pap:11111
+        },
+        url: '/assets/page/list2.json',
+    })
 
 
 

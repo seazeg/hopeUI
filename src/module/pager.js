@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-12-15 16:17:16
+ * @LastEditTime : 2020-12-30 09:54:52
  * @Description  : 分页
  */
 
@@ -282,5 +282,15 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
             }
         }
     };
+
+    //参数设外部置方法
+    obj.set = function (obj) {
+        Object.keys(obj).forEach(function (key) {
+            params[key] = obj[key];
+        });
+
+        getData(params, reader);
+    };
+
     return obj;
 };
