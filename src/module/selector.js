@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-31 16:37:59
+ * @LastEditTime : 2021-01-04 14:52:45
  * @Description  : 下拉框
  */
 
@@ -23,7 +23,15 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             //模板初始化
             let newEle,
                 selector = $(this)[0];
-            let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="selectText" placeholder="${selector.children[0].innerText}" unselectable="on" readonly value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge ${options&&options.switchIcon || 'hopeui-default-switchIcon'}"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${selector.name}"><div class="hopeui-scrollbar-box ">`;
+            let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="selectText" placeholder="${
+                selector.children[0].innerText
+            }" unselectable="on" ${
+                options && options.searchMode ? "" : "readonly"
+            } value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge ${
+                (options && options.switchIcon) || "hopeui-default-switchIcon"
+            }"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${
+                selector.name
+            }"><div class="hopeui-scrollbar-box ">`;
             let tempSelectedVal = {
                 value: "",
                 label: "",
@@ -70,8 +78,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
             newEle = $(template).insertAfter(selector);
 
-            
-            if(tempSelectedVal.value){
+            if (tempSelectedVal.value) {
                 newEle
                     .find("input")
                     .val(tempSelectedVal.label)
@@ -135,7 +142,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         scrollbarHandler({
                             ele: newEle.children(".hopeui-select-list"),
                             options: {
-                                autoHideBar: options && options.autoHideBar || false,
+                                autoHideBar:
+                                    (options && options.autoHideBar) || false,
                             },
                             on: {},
                         });
@@ -152,6 +160,48 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     }
                 }
             });
+
+            if (options && options.searchMode) {
+                newEle
+                    .find("input[hope-type=selector]")
+                    .on("keyup", function (e) {
+                        if (!is.phone()) {
+                            let list = $(this)
+                                .parent()
+                                .next(".hopeui-select-list")
+                                .find(".option");
+                            let inputValue = $(e.target).val();
+                            newEle.removeClass("hopeui-hide");
+                            list.each(function () {
+                                if (!$(this).text().includes(inputValue)) {
+                                    $(this).addClass("hopeui-hide");
+                                } else {
+                                    $(this).removeClass("hopeui-hide");
+                                }
+                            });
+
+                            scrollbarHandler({
+                                ele: newEle.children(".hopeui-select-list"),
+                                options: {
+                                    autoHideBar:
+                                        (options && options.autoHideBar) ||
+                                        false,
+                                },
+                                on: {},
+                            });
+
+                            //打开列表回调
+                            if (on && on.input) {
+                                on.input({
+                                    ele: $(this).get(0),
+                                    value:$(this).val(),
+                                    eventName: "input",
+                                });
+                            }
+
+                        }
+                    });
+            }
 
             //绑定自定义option的点击事件
             newEle.find(".option").on("click", function (e) {
@@ -331,7 +381,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     .removeClass("hopeui-hide");
             }
         });
-        if(callback){
+        if (callback) {
             callback();
         }
     };

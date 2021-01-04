@@ -699,7 +699,7 @@
                     <div class="hopeui-input-block">
                         <select name="city" hope-verify="required">
                             <option value="">请选择</option>
-                            <option value="qd" selected>青岛</option>
+                            <option value="qd">青岛</option>
                             <option value="wh">武汉</option>
                             <option value="wlmq">乌鲁木齐</option>
                             <option value="南京">南京</option>
@@ -1091,6 +1091,7 @@
     window.myselect = hope.selector({
         ele: '#myselect',
         options:{
+            searchMode:true,
             switchIcon: 'hopeui-icon hopeui-icon-triangle-d'
         },
         on: {

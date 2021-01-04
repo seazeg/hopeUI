@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-11-20 15:57:40
+ * @LastEditTime : 2021-01-04 14:48:50
  * @Description  : 表单
  */
 
@@ -13,23 +13,28 @@ module.exports.formHandler = function ({ ele, options, on, controls, verify }) {
     let formControls = {
         selector: hope.selector({
             ele: ele,
-            on: controls.selector.on,
+            options: options,
+            on: controls.selector && controls.selector.on,
         }),
         checkbox: hope.checkbox({
             ele: ele,
-            on: controls.checkbox.on,
+            options: options,
+            on: controls.checkbox && controls.checkbox.on,
         }),
         radio: hope.radio({
             ele: ele,
-            on: controls.radio.on,
+            options: options,
+            on: controls.radio && controls.radio.on,
         }),
         input: hope.input({
             ele: ele,
-            on: controls.input.on,
+            options: options,
+            on: controls.input && controls.input.on,
         }),
         textarea: hope.textarea({
             ele: ele,
-            on: controls.textarea.on,
+            options: options,
+            on: controls.textarea && controls.textarea.on,
         }),
     };
 

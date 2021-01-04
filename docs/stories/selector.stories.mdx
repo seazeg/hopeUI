@@ -56,16 +56,18 @@ import { viewinfo } from "../view/selector.view.js";
 | ----------- | ---------------------- | ------- | ------ | ------ |
 | autoHidebar | 是否自动显示隐藏滚动条 | Boolean | --     | false  |
 | switchIcon  | 自定义下拉字体图标     | String  | --     | --     |
+| searchMode  | 搜索下拉模式(桌面端)   | Boolean | --     | false  |
 
 ## 回调方法 on
 
-| 参数   | 说明                   | 类型     | 默认值 | 回调参数     |
-| ------ | ---------------------- | -------- | ------ | ------------ |
-| init   | 初始化回调             | Function | null   | 当前对象 DOM |
-| change | 选择完成后回调         | Function | null   | event↓       |
-| toggle | 下拉切换回调           | Function | null   | --           |
-| close  | 下拉框区域外关闭后回调 | Function | null   | --           |
-| update | 下拉框更新             | Function | null   | --           |
+| 参数   | 说明                    | 类型     | 默认值 | 回调参数     |
+| ------ | ----------------------- | -------- | ------ | ------------ |
+| init   | 初始化回调              | Function | null   | 当前对象 DOM |
+| input  | searchMode 下输入后回调 | Function | null   | --|
+| change | 选择完成后回调          | Function | null   | event↓       |
+| toggle | 下拉切换回调            | Function | null   | --           |
+| close  | 下拉框区域外关闭后回调  | Function | null   | --           |
+| update | 下拉框更新              | Function | null   | --           |
 
 | event 参数        | 说明                                 | 类型   |
 | ----------------- | ------------------------------------ | ------ |
