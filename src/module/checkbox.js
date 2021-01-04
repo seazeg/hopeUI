@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-08 13:48:24
+ * @LastEditTime : 2021-01-04 16:29:15
  * @Description  : 复选框
  */
 
@@ -32,11 +32,11 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
             newEle.addClass("hopeui-checkbox-disabled");
         } else {
             newEle.on("click", function (e) {
-                if (e.stopPropagation) {
-                    e.stopPropagation();
-                } else if (window.event) {
-                    window.event.cancelBubble = true;
-                }
+                // if (e.stopPropagation) {
+                //     e.stopPropagation();
+                // } else if (window.event) {
+                //     window.event.cancelBubble = true;
+                // }
                 handle(checkbox, newEle);
                 //点击回调
                 if (on && on.change) {

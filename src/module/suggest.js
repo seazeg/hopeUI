@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-31 10:27:31
+ * @LastEditTime : 2020-12-31 10:03:12
  * @Description  : 文本框
  */
 
@@ -172,7 +172,7 @@ module.exports.suggestHandler = function ({
 
                 if (on && on.input) {
                     on.input({
-                        object:obj,
+                        object: obj,
                         targetELe: $(this).get(0),
                         value: $(this).val(),
                         eventName: "input",
@@ -193,7 +193,6 @@ module.exports.suggestHandler = function ({
                 getData(params, reader, $this.next());
                 $this.siblings(".hopeui-suggest").removeClass("hopeui-hide");
             };
-            
         }
     });
 

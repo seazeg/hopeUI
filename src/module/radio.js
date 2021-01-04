@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-10-16 10:22:50
+ * @LastEditTime : 2021-01-04 16:29:49
  * @Description  : 单选框
  */
 
@@ -35,11 +35,11 @@ module.exports.radioHandler = function ({ ele, options, on }) {
             newEle.addClass("hopeui-radio-disabled");
         } else {
             newEle.on("click", function (e) {
-                if (e.stopPropagation) {
-                    e.stopPropagation();
-                } else if (window.event) {
-                    window.event.cancelBubble = true;
-                }
+                // if (e.stopPropagation) {
+                //     e.stopPropagation();
+                // } else if (window.event) {
+                //     window.event.cancelBubble = true;
+                // }
                 handle(radio, newEle);
                 //点击回调
                 if (on && on.change) {
