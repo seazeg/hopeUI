@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-30 10:46:54
+ * @LastEditTime : 2020-12-31 10:27:31
  * @Description  : 文本框
  */
 
@@ -172,14 +172,13 @@ module.exports.suggestHandler = function ({
 
                 if (on && on.input) {
                     on.input({
+                        object:obj,
                         targetELe: $(this).get(0),
                         value: $(this).val(),
                         eventName: "input",
                     });
                 }
             });
-
-
 
             //点击select区域外关闭下拉列表
             $(document).on("click", function (e) {
@@ -189,10 +188,14 @@ module.exports.suggestHandler = function ({
                     on.close(e);
                 }
             });
+
+            obj.open = function (e) {
+                getData(params, reader, $this.next());
+                $this.siblings(".hopeui-suggest").removeClass("hopeui-hide");
+            };
+            
         }
     });
-
-
 
     if (on && on.init) {
         on.init({

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-30 13:47:31
+ * @LastEditTime : 2020-12-31 16:37:59
  * @Description  : 下拉框
  */
 
@@ -70,10 +70,13 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
             newEle = $(template).insertAfter(selector);
 
-            newEle
-                .find("input")
-                .val(tempSelectedVal.label)
-                .attr("hope-value", tempSelectedVal.val);
+            
+            if(tempSelectedVal.value){
+                newEle
+                    .find("input")
+                    .val(tempSelectedVal.label)
+                    .attr("hope-value", tempSelectedVal.val);
+            }
 
             if (!is.phone()) {
                 $(selector).addClass("hopeui-hide");

@@ -1196,7 +1196,7 @@
     scroll.setDistance(100)
 
 
-    hope.suggest({
+    window.sug = hope.suggest({
         ele: '.js_hopeui_input',
         options: {
             noMatchName: '-- 没有匹配的内容 --',
@@ -1434,7 +1434,7 @@
         ele: "#form",
         on: {
             submit: function (e) {
-                ////console.log(e);
+                console.log(e);
             },
         },
         controls: {
