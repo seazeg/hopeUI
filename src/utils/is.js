@@ -1,8 +1,8 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2020-12-10 13:34:30
- * @Description  : is类
+ * @LastEditTime : 2021-01-06 16:34:37
+ * @Description  : 基础判断类
  */
 module.exports.is = {
     phone() {
