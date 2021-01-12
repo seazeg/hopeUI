@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2020-12-17 15:05:39
+ * @LastEditTime : 2021-01-12 15:38:08
  * @Description  : hopeUI
  */
 
@@ -29,6 +29,7 @@ const { adapimageHandler } = require("./module/adapimage.js");
 const { omitHandler } = require("./module/omit.js");
 const { zoomHandler } = require("./module/zoom.js");
 const { numupHandler } = require("./module/numup.js");
+const { utilsHandler } = require("./module/utils.js");
 
 const hope = () => {
     return {
@@ -276,6 +277,7 @@ const hope = () => {
         }) {
             return formHandler({ ele, options, on, controls, verify });
         },
+        utils: utilsHandler,
     };
 };
 
