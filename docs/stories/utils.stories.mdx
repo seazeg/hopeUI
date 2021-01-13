@@ -1,0 +1,39 @@
+import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
+import { useEffect } from "@storybook/client-api";
+import { viewinfo } from "../view/loadmore.view.js";
+
+# 流式加载（Utils）
+
+---
+
+<Meta title="常用函数/工具函数(Utils)" />
+
+## 基础属性
+
+| 函数名                     | 说明                     | 参数                                 | 返回值                                                             |
+| -------------------------- | ------------------------ | ------------------------------------ | ------------------------------------------------------------------ |
+| isEmpty                    | 判断是否为空             | value:String                         | Boolean                                                            |
+| isEmptyObject              | 判断是否为空对象         | value:Object                         | Boolean                                                            |
+| isIos                      | 判断是否为 ios           | --                                   | Boolean                                                            |
+| isAndroid                  | 判断是否为 android       | --                                   | Boolean                                                            |
+| isPC                       | 判断是否为 pc 端         | --                                   | Boolean                                                            |
+| isLeapYear                 | 判断是否为闰年           | value:String                         | Boolean                                                            |
+| isCardID                   | 判断校验身份证信息       | value:String                         | Boolean                                                            |
+| isVerify                   | 各种校验集合             | type:num-数字 en-英文 chn-中文 lower-小写 upper-大写 phone-手机号码 tel-座机 url-网址 ip-IP地址 date-日期格式 email-邮箱 postal-邮政编码,value:String                                   | Boolean                                                                 |
+| getIE                      | 获取 IE 版本             | --                                   | 版本号                                                             |
+| getQueryParam              | 获取 url 中指定参数值    | value:String                         | 参数值                                                             |
+| parseQueryParam            | url 地址参数序列化       | value:String                         | Object                                                             |
+| stringfyQueryParam         | url 参数对象反序列化     | value:Object                         | String                                                             |
+| updateQueryStringParameter | 向 url 中追加参数        | url:String,key:String,value:any      | String                                                             |
+| getScrollPosition          | 获取滚动条的位置坐标     | ele:DOM                              | Object{x,y}                                                        |
+| formatDate                 | 格式化日期               | date:Date/Number/String,type:String  | String                                                             |
+| getRangeRandomNum          | 生成指定范围的随机数     | min:Number,max:Number,type:Float/Int | Float/Int                                                          |
+| getFormatCurrency          | 格式化成货币格式         | value:String                         | String                                                             |
+| guid                       | 随机生成不重复的 GUID    | --                                   | xxxx-xxxx-xxxx-xxxx                                                |
+| getRandomColor             | 随机生成色值             | --                                   | #XXXXXX                                                            |
+| checkPassword              | 密码强度校验             | value:String                         | 1-长度大于 6 且全数字,2-且包含字母,3-且含有大写字母,4-且有特殊字符 |
+| once                       | 一次执行函数             | func:Function                        | --                                                                 |
+| debounce                   | 防抖函数                 | func:Function,wait:Number            | --                                                                 |
+| throttle                   | 节流函数                 | func:Function,wait:Number            | --                                                                 |
+| filterHtmlCode             | 过滤 html 操作符(防 XSS) | value:String                         | String                                                             |
+| getAbsoluteUrl             | 获取相对路径的绝对路径   | value:String                         | String                                                             |
