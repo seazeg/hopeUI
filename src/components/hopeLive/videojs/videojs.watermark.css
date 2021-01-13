@@ -1,0 +1,28 @@
+.vjs-watermark {
+    position: absolute;
+    display: inline;
+    z-index: 2000;
+    padding: 5%;
+}
+
+.vjs-watermark-inline {
+    font-weight: bold;
+    font-size: 50px;
+    color: rgba(255, 0, 0, 0.8);
+    /* -o-transform: translate(-50%, -50%) rotate(-35deg);
+    -webkit-transform: translate(-50%, -50%) rotate(-35deg);
+    -moz-transform: translate(-50%, -50%) rotate(-35deg);
+    -ms-transform: translate(-50%, -50%) rotate(-35deg);
+    transform: translate(-50%, -50%) rotate(-35deg); */
+}
+
+.vjs-watermark-inline>span:nth-child(even) {
+    position: relative;
+    top: 100px;
+}
+
+.vjs-watermark-inline>span:nth-child(odd) {
+    position: relative;
+    top: 0;
+}
+

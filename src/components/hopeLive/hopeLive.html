@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>video</title>
         <link href="videojs/video-js.css" rel="stylesheet" />
+        <link href="videojs/videojs.watermark.css" rel="stylesheet" />
         <script src="videojs/ie8/videojs-ie8.js"></script>
+
         <script src="jquery.js"></script>
         <style>
             html,
@@ -42,10 +44,7 @@
             <source src="" type="" />
             <p class="vjs-no-js">
                 <object width="100%" height="100%" id="object">
-                    <param
-                        name="movie"
-                        value="/videojs/video-js.swf"
-                    />
+                    <param name="movie" value="/videojs/video-js.swf" />
                 </object>
             </p>
         </video>
@@ -85,64 +84,88 @@
             }
             $("#video").width($(window).width()).height($(window).height());
 
-            if (!(os.isTablet || os.isAndroid || os.isPhone)) {
-                //rtmp
-                $("#video")
-                    .find("source")
-                    .attr(
-                        "src",
-                        decodeURIComponent(getQueryVariable("rtmp") || "")
-                    )
-                    .attr("type", "rtmp/flv");
-            } else {
-                //hls
-                $("#video")
-                    .find("source")
-                    .attr(
-                        "src",
-                        decodeURIComponent(getQueryVariable("hls") || "")
-                    )
-                    .attr("type", "application/x-mpegURL");
-            }
+            // if (!(os.isTablet || os.isAndroid || os.isPhone)) {
+            //     //rtmp
+            //     $("#video")
+            //         .find("source")
+            //         .attr(
+            //             "src",
+            //             decodeURIComponent(getQueryVariable("rtmp") || "")
+            //         )
+            //         .attr("type", "rtmp/flv");
+            // } else {
+            //hls
+            $("#video")
+                .find("source")
+                .attr("src", decodeURIComponent(getQueryVariable("hls") || ""))
+                .attr("type", "application/x-mpegURL");
+            // }
         </script>
         <script src="videojs/video.js"></script>
         <script src="videojs/videojs-hlsjs-plugin.js"></script>
+        <script src="videojs/videojs.watermark.js"></script>
         <script>
-            if (!(os.isTablet || os.isAndroid || os.isPhone)) {
-                //rtmp
-                videojs.options.flash.swf =
-                    siteUrl + "./videojs/video-js.swf";
-                var rtmp = videojs(
-                    "video",
-                    {
-                        errorDisplay: true,
-                    },
-                    function () {
-                        if (this.error_) {
-                            this.createModal(function () {
-                                var ele = document.createElement("div");
-                                ele.innerHTML = `
-                                    <object style="position: absolute;top: 0;left: 0;width:100%;height:100%">
-                                        <param name="movie" value="videojs/video-js.swf">
-                                    </object>
-                                `;
-                                return ele;
-                            });
-                        }
-                    }
-                );
-            }
-            // else {
-            //     // hls
-            //     videojs.Html5Hlsjs.addHook(
-            //         "beforeinitialize",
-            //         (videojsPlayer, hlsjsInstance) => {}
-            //     );
-            //     var hls = videojs("video", {
-            //         html5: {
-            //             hlsjsConfig: {},
+            // if (!(os.isTablet || os.isAndroid || os.isPhone)) {
+            //     //rtmp
+            //     videojs.options.flash.swf = siteUrl + "./videojs/video-js.swf";
+            //     var rtmp = videojs(
+            //         "video",
+            //         {
+            //             errorDisplay: true,
             //         },
+            //         function () {
+            //             if (this.error_) {
+            //                 this.createModal(function () {
+            //                     var ele = document.createElement("div");
+            //                     ele.innerHTML = `
+            //                         <object style="position: absolute;top: 0;left: 0;width:100%;height:100%">
+            //                             <param name="movie" value="videojs/video-js.swf">
+            //                         </object>
+            //                     `;
+            //                     return ele;
+            //                 });
+            //             }
+            //         }
+            //     );
+
+            //     rtmp.watermark({
+            //         file: "videojs/mark.png",
+            //         xpos: 50,
+            //         ypos: 50,
+            //         xrepeat: 0,
+            //         opacity: 0.5,
             //     });
+            // }
+            // else {
+            // hls
+            videojs.Html5Hlsjs.addHook(
+                "beforeinitialize",
+                (videojsPlayer, hlsjsInstance) => {}
+            );
+            var hls = videojs(
+                "video",
+                {
+                    html5: {
+                        hlsjsConfig: {},
+                    },
+                },
+                function () {
+                    setTimeout(function () {
+                        $("video").css({
+                            width: "100%",
+                            height: "100%",
+                        });
+                    }, 500);
+                }
+            );
+
+            hls.watermark({
+                content: "MARK",
+                xpos: 0,
+                ypos: 0,
+                xrepeat: 0,
+                opacity: 0.5,
+            });
             // }
         </script>
     </body>
