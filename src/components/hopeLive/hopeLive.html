@@ -159,13 +159,18 @@
                 }
             );
 
+            hls.on("fullscreenchange", function (e) {
+                $('.vjs-watermark').width($(window).width()).height($(window).height() - 50);
+            });
+
             hls.watermark({
-                content: "MARK",
+                content: "1568923",
                 xpos: 0,
                 ypos: 0,
                 xrepeat: 0,
                 opacity: 0.5,
             });
+
             // }
         </script>
     </body>

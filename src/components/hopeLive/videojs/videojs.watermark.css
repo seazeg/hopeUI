@@ -2,27 +2,41 @@
     position: absolute;
     display: inline;
     z-index: 2000;
-    padding: 5%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .vjs-watermark-inline {
     font-weight: bold;
-    font-size: 50px;
-    color: rgba(255, 0, 0, 0.8);
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.5;
+    height: 100%;
+    
     /* -o-transform: translate(-50%, -50%) rotate(-35deg);
     -webkit-transform: translate(-50%, -50%) rotate(-35deg);
     -moz-transform: translate(-50%, -50%) rotate(-35deg);
     -ms-transform: translate(-50%, -50%) rotate(-35deg);
     transform: translate(-50%, -50%) rotate(-35deg); */
+    pointer-events: none;
 }
 
-.vjs-watermark-inline>span:nth-child(even) {
-    position: relative;
-    top: 100px;
+.vjs-watermark-inline > span {
+    display: inline-block;
+    width: 30%;
+    line-height:150px;
+    user-select: none;
+    padding-left:3%;
 }
 
-.vjs-watermark-inline>span:nth-child(odd) {
-    position: relative;
-    top: 0;
+.vjs-center{
+    text-align: center;
 }
 
+.vjs-left{
+    text-align: left;
+}
+
+.vjs-right {
+    text-align: right;
+}
