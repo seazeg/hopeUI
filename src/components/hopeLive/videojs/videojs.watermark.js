@@ -78,21 +78,21 @@ console.log("watermark: Start");
                 } else if (i > 3 && i <= 6) {
                     span.className = "vjs-center";
                 } else if (i > 6 && i <= 9) {
-                    span.className = "vjs-left";
+                    span.className = "vjs-right";
                 } else if (i > 9 && i <= 12) {
-                    span.className = "vjs-center";
-                } else if (i > 12 && i <= 15) {
                     span.className = "vjs-left";
-                } else if (i > 15 && i <= 18) {
+                } else if (i > 12 && i <= 15) {
                     span.className = "vjs-center";
+                } else if (i > 15 && i <= 18) {
+                    span.className = "vjs-right";
                 } else if (i > 18 && i <= 21) {
                     span.className = "vjs-left";
                 } else if (i > 21 && i <= 24) {
                     span.className = "vjs-center";
                 } else if (i > 24 && i <= 27) {
-                    span.className = "vjs-left";
+                    span.className = "vjs-right";
                 } else if (i > 27 && i <= 30) {
-                    span.className = "vjs-center";
+                    span.className = "vjs-left";
                 }
                 span.innerHTML = options.content;
             }
