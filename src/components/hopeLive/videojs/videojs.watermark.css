@@ -8,32 +8,32 @@
 
 .vjs-watermark-inline {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
     color: #fff;
-    opacity: 0.8;
+    opacity: 0.6;
     height: 100%;
-    
-    /* -o-transform: translate(-50%, -50%) rotate(-35deg);
-    -webkit-transform: translate(-50%, -50%) rotate(-35deg);
-    -moz-transform: translate(-50%, -50%) rotate(-35deg);
-    -ms-transform: translate(-50%, -50%) rotate(-35deg);
-    transform: translate(-50%, -50%) rotate(-35deg); */
-    pointer-events: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .vjs-watermark-inline > span {
     display: inline-block;
-    width: 30%;
-    line-height:150px;
     user-select: none;
-    padding-left:3%;
+    padding-left: 0;
+    -o-transform: translate(-50%, -50%) rotate(-35deg);
+    -webkit-transform: translate(-50%, -50%) rotate(-35deg);
+    -moz-transform: translate(-50%, -50%) rotate(-35deg);
+    -ms-transform: translate(-50%, -50%) rotate(-35deg);
+    transform: translate(-50%, -50%) rotate(-35deg);
+    pointer-events: none;
+    position: absolute;
 }
 
-.vjs-center{
+.vjs-center {
     text-align: center;
 }
 
-.vjs-left{
+.vjs-left {
     text-align: left;
 }
 
