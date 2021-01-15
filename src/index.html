@@ -235,6 +235,8 @@
         <div class="docs-content">
             <input name="iconinput" type="text" value="" class="hopeui-input icon_input" placeholder="请输入"
                 style="width:500px" />
+            <input name="iconinput" type="text" value="" class="hopeui-input icon_input2" placeholder="请输入"
+                style="width:500px" />
         </div>
     </div>
 
@@ -886,8 +888,6 @@
 
 </body>
 <script>
-
-
     hope.numup({
         ele: ".hope-numup-obj",
         // options: {
@@ -933,6 +933,15 @@
             extendContentLocation: 'right'
         }
     })
+
+    hope.input({
+        ele: '.icon_input2',
+        options: {
+            extendContent: '<i class="hopeui-icon hopeui-icon-vercode" style="padding-left:15px;text-align: center;line-height:38px;display:inline-block;color:#5a5a5a"></i>',
+            extendContentLocation: 'left'
+        }
+    })
+
 
     hope.textarea({
         ele: '.hopeui-textarea-np',
@@ -1092,8 +1101,8 @@
 
     window.myselect = hope.selector({
         ele: '#myselect',
-        options:{
-            searchMode:true,
+        options: {
+            searchMode: true,
             switchIcon: 'hopeui-icon hopeui-icon-triangle-d'
         },
         on: {
@@ -1224,8 +1233,8 @@
             input: function (e) {
                 // //console.log('111');
             },
-            init:function(){
-                
+            init: function () {
+
             }
         }
     })
@@ -1309,15 +1318,15 @@
             complete: function (e) {
 
             },
-            init:function(e){
+            init: function (e) {
                 //console.log(e);
             }
         },
     })
 
     pager.set({
-        data:{
-            pap:11111
+        data: {
+            pap: 11111
         },
         url: '/assets/page/list2.json',
     })

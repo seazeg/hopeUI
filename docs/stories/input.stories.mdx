@@ -60,6 +60,23 @@ import { viewinfo } from "../view/input.view.js";
     </Story>
 </Canvas>
 
+<Canvas>
+    <Story
+        name="扩展内容2"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.extendContent2}${viewinfo.js3}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js3)();
+            });
+            return viewinfo.extendContent2;
+        }}
+    </Story>
+</Canvas>
+
 ## 基础属性
 
 | 参数 | 说明          | 类型   | 可选值               | 默认值  |
