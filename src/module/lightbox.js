@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 14:02:35
+ * @LastEditTime : 2021-01-15 10:14:09
  * @Description  : 灯箱
  */
 
@@ -731,13 +731,6 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
         }
     };
 
-    if (on && on.init) {
-        on.init({
-            targetEle: self[0],
-            eventName: "init",
-        });
-    }
-
     dataList.off().on("click", function () {
         open($(this));
     });
@@ -756,43 +749,6 @@ function replaceUrl(name, title, frameReplaceUrl) {
             history.pushState({}, title, newUrl);
         }
     } catch (error) {}
-}
-
-function RGBToHEX(str) {
-    let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-    let result = "";
-    str = `${str.split(",")[0]},${str.split(",")[1]},${
-        str.split(",")[2]
-    })`.replace("rgba", "rgb");
-    if (/^(rgb|RGB)/.test(str)) {
-        let aColor = str.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
-        let strHex = "#";
-        for (let i = 0; i < aColor.length; i++) {
-            let hex = Number(aColor[i]).toString(16);
-            if (hex === "0") {
-                hex += hex;
-            }
-            strHex += hex;
-        }
-        if (strHex.length !== 7) {
-            strHex = str;
-        }
-        result = strHex;
-    } else if (reg.test(str)) {
-        let aNum = str.replace(/#/, "").split("");
-        if (aNum.length === 6) {
-            return str;
-        } else if (aNum.length === 3) {
-            let numHex = "#";
-            for (let i = 0; i < aNum.length; i += 1) {
-                numHex += aNum[i] + aNum[i];
-            }
-            result = numHex;
-        }
-    } else {
-        result = str;
-    }
-    return result;
 }
 
 //获取角度

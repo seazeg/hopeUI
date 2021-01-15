@@ -1,13 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2020-12-23 15:36:45
+ * @LastEditTime : 2021-01-15 10:14:20
  * @Description  :
  */
 
 export const viewinfo = {
 ifm:`
-<div class="hopeui-row" id="lightbox">
+<div class="hopeui-row lightbox" id="lightbox" >
     <div class="hopeui-col-xl-6-12">
         <img hope-url="http://test.haier.com/cn/"
             src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597991454359&di=c1b05e51256b5f0a175fa63e93ca38ab&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2017-11-27%2F5a1badef69784.png"
@@ -22,12 +22,12 @@ ifm:`
 `,
 ifmJS: `
 hope.lightbox({
-    ele: "#lightbox",
+    ele: ".lightbox",
     options: {
-        width: "70%",
-        type: "iframe", //pic,video
+        width: '70%',
+        type: 'iframe', //pic,video
         frameFullScreen: false,
-        maskColor: "rgba(73,74,95,0.8)",
+        maskColor: 'rgba(73,74,95,0.8)',
         animation: "no",
         prevIcon: "hopeui-icon hopeui-icon-left",
         nextIcon: "hopeui-icon hopeui-icon-right",
@@ -38,12 +38,11 @@ hope.lightbox({
         next:function (e) {},
         open:function (e) {},
         close:function (e) {},
-        init:function (e) {},
     },
 });
 `,
 pic:`
-<div class="hopeui-row" id="lightbox2">
+<div class="hopeui-row lightbox2" id="lightbox2">
     <div class="hopeui-col-xl-6-12">
         <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597998693093&di=551a5cfe9c00be5c21327d39166a3d38&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F381baf328b9d2a1df43d635b1d36553f.jpeg"
             alt="" />
@@ -76,7 +75,6 @@ hope.lightbox({
         next:function (e) {},
         open:function (e) {},
         close:function (e) {},
-        init:function (e) {},
     },
 });
 `
