@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-01-12 15:47:12
+ * @LastEditTime : 2021-01-15 14:24:42
  * @Description  : 常用工具函数
  */
 
@@ -260,7 +260,7 @@ module.exports.utilsHandler = {
     //生成指定范围的随机数
     getRangeRandomNum: function (min, max, returnType) {
         return returnType == "float"
-            ? min + Math.random() * (max + 1 - min)
+            ? min + Math.random() * (max - min)
             : Math.floor(min + Math.random() * (max + 1 - min));
     },
     //格式化成货币格式
