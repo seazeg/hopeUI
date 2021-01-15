@@ -9,7 +9,7 @@
     "build": "webpack --config webpack.config.js;cd sync;node less2json",
     "api": "start-storybook -s ./docs/static",
     "build:api": "build-storybook -o hopeui;cd sync;node staticapi;",
-    "push":"gitq p;npm run build;npm run build:api"
+    "push":"npm run build;npm run build:api"
   },
   "author": {
     "name": "Evan.G",
