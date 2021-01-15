@@ -1,11 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-28 15:11:24
- * @LastEditTime : 2021-01-15 14:34:06
+ * @LastEditTime : 2021-01-15 14:43:01
  * @Description  : 
  */
 const shell = require("shelljs");
-
+shell.exec('pwd')
 shell.exec('cp -r ../docs/static/mock ../hopeui')
 shell.exec('cp ../docs/static/logo.png ../hopeui')
 shell.exec('cd ../../seazeg.github.io/')
