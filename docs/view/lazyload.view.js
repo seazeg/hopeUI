@@ -1,73 +1,73 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2021-01-18 16:06:27
+ * @LastEditTime : 2021-01-18 16:35:26
  * @Description  :
  */
 export const viewinfo = {
     html: `
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     <img class="lazyload"
-    hope-xl-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
+    hope-xl-src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
     hope-md-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200715329984237746.jpg"
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     `,
