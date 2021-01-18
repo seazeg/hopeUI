@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2021-01-18 15:52:52
+ * @LastEditTime : 2021-01-18 16:06:27
  * @Description  :
  */
 export const viewinfo = {
@@ -72,7 +72,7 @@ export const viewinfo = {
     hope-xs-src="https://imagegroup1.haier.com/haier-ecosystem/list/W020200622494408061085.png" alt="">
     `,
     js:`
-hope.picture({
+hope.lazyload({
     ele: ".lazyload",
     options: {
         breakpoint: {
