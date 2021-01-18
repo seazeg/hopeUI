@@ -1,16 +1,16 @@
 import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
 import { useEffect } from "@storybook/client-api";
-import { viewinfo } from "../view/adapimage.view.js";
+import { viewinfo } from "../view/lazyload.view.js";
 
-# 图片充满居中（Adapimage）
+# 图片懒加载（Lazyload）
 
 ---
 
-<Meta title="常用函数/图片充满居中(Adapimage)" />
+<Meta title="复用组件/图片懒加载(Lazyload)" />
 
 <Canvas>
     <Story
-        name="图片充满居中(Adapimage)"
+        name="图片懒加载(Lazyload)"
         height="150px"
         parameters={{
             docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
@@ -33,12 +33,8 @@ import { viewinfo } from "../view/adapimage.view.js";
 
 ## 配置 options
 
-| 参数         | 说明             | 类型   | 可选值 | 默认值 |
-| ------------ | ---------------- | ------ | ------ | ------ |
-| noTransition | 是否没有过渡效果 | Boolean | --     | false   |
-
-## 回调方法 on
-
-| 参数 | 说明       | 类型     | 默认值 | 回调参数     |
-| ---- | ---------- | -------- | ------ | ------------ |
-| init | 初始化回调 | Function | null   | 当前对象 DOM |
+| 参数       | 说明             | 类型    | 可选值 | 默认值 |
+| ---------- | ---------------- | ------- | ------ | ------ |
+| responsive | 是否是响应式图片 | Boolean | --     | true   |
+| breakpoint | 自定义响应式断点 | Object  | --     | --     |
+| adapimage  | 是否图片始终居中 | Boolean | --     | true   |

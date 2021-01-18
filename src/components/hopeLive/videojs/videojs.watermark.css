@@ -7,10 +7,10 @@
 }
 
 .vjs-watermark-inline {
-    font-weight: bold;
-    font-size: 18px;
+    /* font-weight: bold; */
+    font-size: 20px;
     color: #fff;
-    opacity: 0.6;
+    opacity: 0.3;
     height: 100%;
     position: relative;
     overflow: hidden;
@@ -20,11 +20,11 @@
     display: inline-block;
     user-select: none;
     padding-left: 0;
-    -o-transform: translate(-50%, -50%) rotate(-35deg);
-    -webkit-transform: translate(-50%, -50%) rotate(-35deg);
-    -moz-transform: translate(-50%, -50%) rotate(-35deg);
-    -ms-transform: translate(-50%, -50%) rotate(-35deg);
-    transform: translate(-50%, -50%) rotate(-35deg);
+    -o-transform: translate(-50%, -50%) rotate(-45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+    -moz-transform: translate(-50%, -50%) rotate(-45deg);
+    -ms-transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
     pointer-events: none;
     position: absolute;
 }

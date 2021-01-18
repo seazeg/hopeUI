@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-15 16:01:12
+ * @LastEditTime : 2021-01-18 15:38:57
  * @Description  : 图片充满居中
  */
 
@@ -10,9 +10,11 @@ const $ = require("../utils/hopeu.js");
 module.exports.adapimageHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = $(ele);
-    $dom.css({
-        transition: "all 0.8s",
-    });
+    if (!options.noTransition) {
+        $dom.css({
+            transition: "all 0.8s",
+        });
+    }
     $dom.each(function () {
         let _this = $(this);
         getImgNaturalDimensions(_this.get(0), function (e) {
@@ -81,9 +83,11 @@ module.exports.adapimageHandler = function ({ ele, options, on }) {
         });
     });
 
-    setTimeout(() => {
-        $dom.css("opacity", 1);
-    }, 100);
+    if (!options.noTransition) {
+        setTimeout(() => {
+            $dom.css("opacity", 1);
+        }, 100);
+    }
 
     if (on && on.init) {
         on.init({

@@ -200,3 +200,6 @@
     display: block;
     font-weight: 600;
 }
+.lazyload{
+  width:48%;
+}

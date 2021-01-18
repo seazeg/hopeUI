@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-01-12 15:38:08
+ * @LastEditTime : 2021-01-15 15:34:00
  * @Description  : hopeUI
  */
 
@@ -29,10 +29,18 @@ const { adapimageHandler } = require("./module/adapimage.js");
 const { omitHandler } = require("./module/omit.js");
 const { zoomHandler } = require("./module/zoom.js");
 const { numupHandler } = require("./module/numup.js");
+const { lazyloadHandler } = require("./module/lazyload.js");
 const { utilsHandler } = require("./module/utils.js");
 
 const hope = () => {
     return {
+        lazyload: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return lazyloadHandler({ ele, options, on });
+        },
         numup: function ({
             ele: ele = null,
             options: options = {},

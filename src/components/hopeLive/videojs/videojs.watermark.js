@@ -74,8 +74,8 @@ console.log("watermark: Start");
                 for (var i = 0; i < 20; i++) {
                     var span = document.createElement("span");
                     ele.appendChild(span);
-                    span.style.left = j * 150 + "px";
-                    span.style.top = i * 150 + "px";
+                    span.style.left = j * 300 + "px";
+                    span.style.top = i * 300 + "px";
                     span.innerHTML = options.content;
                 }
             }
