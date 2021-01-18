@@ -74,8 +74,14 @@ console.log("watermark: Start");
                 for (var i = 0; i < 20; i++) {
                     var span = document.createElement("span");
                     ele.appendChild(span);
-                    span.style.left = j * 300 + "px";
-                    span.style.top = i * 300 + "px";
+                    if ($(window).width() > 750) {
+                        span.style.left = j * 300 + "px";
+                        span.style.top = i * 300 + "px";
+                    } else {
+                        span.style.left = j * 150 + "px";
+                        span.style.top = i * 100 + "px";
+                        span.style.fontSize = "14px";
+                    }
                     span.innerHTML = options.content;
                 }
             }

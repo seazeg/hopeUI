@@ -23,6 +23,7 @@
                 margin: -1em 0 0 -1em;
                 border-radius: 3em;
                 line-height: 1.9em;
+                z-index: 3000;
             }
         </style>
         <script>
@@ -45,7 +46,7 @@
             playsinline="true"
             x5-video-player-type="h5"
             x5-video-player-fullscreen="true"
-            style="object-fit:fill"
+            style="object-fit: fill;"
         >
             <source src="" type="" />
             <p class="vjs-no-js">
@@ -144,26 +145,18 @@
             // }
             // else {
             // hls
-            videojs.Html5Hlsjs.addHook(
-                "beforeinitialize",
-                (videojsPlayer, hlsjsInstance) => {}
-            );
-            var hls = videojs(
-                "video",
-                {
-                    html5: {
-                        hlsjsConfig: {},
-                    },
-                },
-                function () {
-                    setTimeout(function () {
-                        $("video").css({
-                            width: "100%",
-                            height: "100%",
-                        });
-                    }, 500);
-                }
-            );
+            // videojs.Html5Hlsjs.addHook(
+            //     "beforeinitialize",
+            //     (videojsPlayer, hlsjsInstance) => {}
+            // );
+            var hls = videojs("video", function () {
+                setTimeout(function () {
+                    $("video").css({
+                        width: "100%",
+                        height: "100%",
+                    });
+                }, 500);
+            });
 
             hls.on("fullscreenchange", function (e) {
                 $(".vjs-watermark")
@@ -178,7 +171,6 @@
                 xrepeat: 0,
                 opacity: 0.5,
             });
-
             // }
         </script>
     </body>
