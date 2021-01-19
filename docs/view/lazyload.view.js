@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2021-01-18 16:35:26
+ * @LastEditTime : 2021-01-19 14:39:34
  * @Description  :
  */
 export const viewinfo = {
@@ -78,9 +78,7 @@ hope.lazyload({
         breakpoint: {
             //每个端的最min断点，默认xl.1200,md.750
             xl: 1200,
-            lg: 960,
             md: 768,
-            sm: 575,
             xs: 0
         },
         responsive:true,
