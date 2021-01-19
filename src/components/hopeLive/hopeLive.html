@@ -46,7 +46,6 @@
             playsinline="true"
             x5-video-player-type="h5"
             x5-video-player-fullscreen="true"
-            style="object-fit: fill;"
         >
             <source src="" type="" />
             <p class="vjs-no-js">
@@ -159,6 +158,11 @@
             });
 
             hls.on("fullscreenchange", function (e) {
+                $("video").css({
+                    width: "100%",
+                    height: "100%",
+                });
+
                 $(".vjs-watermark")
                     .width($(window).width())
                     .height($(window).height() - 50);
