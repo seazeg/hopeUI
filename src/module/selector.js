@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-04 16:22:50
+ * @LastEditTime : 2021-01-22 16:22:33
  * @Description  : 下拉框
  */
 
@@ -120,7 +120,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
 
             //单击后下拉列表事件
-            newEle.on("click", function (e) {
+            newEle.off().on("click", function (e) {
                 if (!is.phone()) {
                     let oe = e || window.event;
                     if (oe.stopPropagation) {
@@ -194,11 +194,10 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             if (on && on.input) {
                                 on.input({
                                     ele: $(this).get(0),
-                                    value:$(this).val(),
+                                    value: $(this).val(),
                                     eventName: "input",
                                 });
                             }
-
                         }
                     });
             }
@@ -279,6 +278,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
             if (on && on.init) {
                 on.init({
+                    this: obj,
                     ele: $dom[0],
                     eventName: "init",
                 });
@@ -290,40 +290,6 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                 dom.next().remove();
             }
         }
-    }
-
-    //首次初始化
-    core();
-
-    /**
-     * @description: 选择辅助方法
-     * @param {original:dom对象} 原始元素
-     * @param {targetELe:$对象} 目标虚拟元素
-     * @param {optEle:$对象} 目标虚拟元素内选中选项
-     * @return:
-     */
-    function handle(original, targetELe, optEle) {
-        let input = targetELe.find("input");
-        targetELe.find(".option").removeClass("hopeui-select-this");
-        optEle.addClass("hopeui-select-this");
-        targetELe.removeClass("hopeui-form-selected");
-        input.attr("hope-value", optEle.attr("hope-value"));
-        if (optEle.attr("hope-value")) {
-            input.val(optEle.text());
-        } else {
-            input.val("");
-        }
-        if (optEle.attr("hope-group")) {
-            original.children[optEle.attr("hope-group")].children[
-                optEle.attr("hope-group-sort")
-            ].selected = true;
-        } else {
-            $(original)
-                .children("option")
-                .eq(optEle.index())[0].selected = true;
-        }
-
-        // original.value = original.selectedOptions[0].value; //?????
     }
 
     obj.val = function (obj) {
@@ -389,6 +355,52 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
     obj.update = function () {
         core();
     };
+
+    obj.set = function (val) {
+        $dom.find("option").each(function () {
+            let _this = $(this);
+            if (_this.attr("value") == val) {
+                _this.get(0).selected = true;
+            } else {
+                _this.get(0).selected = false;
+            }
+        });
+        core();
+    };
+
+    //首次初始化
+    core();
+
+    /**
+     * @description: 选择辅助方法
+     * @param {original:dom对象} 原始元素
+     * @param {targetELe:$对象} 目标虚拟元素
+     * @param {optEle:$对象} 目标虚拟元素内选中选项
+     * @return:
+     */
+    function handle(original, targetELe, optEle) {
+        let input = targetELe.find("input");
+        targetELe.find(".option").removeClass("hopeui-select-this");
+        optEle.addClass("hopeui-select-this");
+        targetELe.removeClass("hopeui-form-selected");
+        input.attr("hope-value", optEle.attr("hope-value"));
+        if (optEle.attr("hope-value")) {
+            input.val(optEle.text());
+        } else {
+            input.val("");
+        }
+        if (optEle.attr("hope-group")) {
+            original.children[optEle.attr("hope-group")].children[
+                optEle.attr("hope-group-sort")
+            ].selected = true;
+        } else {
+            $(original)
+                .children("option")
+                .eq(optEle.index())[0].selected = true;
+        }
+
+        // original.value = original.selectedOptions[0].value; //?????
+    }
 
     return obj;
 };

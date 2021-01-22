@@ -63,7 +63,7 @@ import { viewinfo } from "../view/selector.view.js";
 | 参数   | 说明                    | 类型     | 默认值 | 回调参数     |
 | ------ | ----------------------- | -------- | ------ | ------------ |
 | init   | 初始化回调              | Function | null   | 当前对象 DOM |
-| input  | searchMode 下输入后回调 | Function | null   | --|
+| input  | searchMode 下输入后回调 | Function | null   | --           |
 | change | 选择完成后回调          | Function | null   | event↓       |
 | toggle | 下拉切换回调            | Function | null   | --           |
 | close  | 下拉框区域外关闭后回调  | Function | null   | --           |
@@ -83,7 +83,7 @@ import { viewinfo } from "../view/selector.view.js";
 
 ## 调用方法
 
-| 方法名 | 说明     | 类型     | 默认值 | 参数 |
-| ------ | -------- | -------- | ------ | ---- |
-| val    | 外部赋值 | Function | --     | --   |
-| clear  | 外部清值 | Function | --     | --   |
+| 方法名 | 说明       | 类型     | 默认值 | 参数     |
+| ------ | ---------- | -------- | ------ | -------- |
+| clear  | 外部清值   | Function | --     | --       |
+| set    | 设置选中项 | Function | --     | value 值 |
