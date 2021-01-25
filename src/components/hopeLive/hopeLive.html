@@ -160,11 +160,7 @@
                         if (this.error_) {
                             this.createModal(function () {
                                 var ele = document.createElement("div");
-                                ele.innerHTML = `
-                                    <object style="position: absolute;top: 0;left: 0;width:100%;height:100%">
-                                        <param name="movie" value="videojs/video-js.swf">
-                                    </object>
-                                `;
+                                ele.innerHTML = '<object style="position: absolute;top: 0;left: 0;width:100%;height:100%"><param name="movie" value="videojs/video-js.swf"></object>';
                                 return ele;
                             });
                         }
