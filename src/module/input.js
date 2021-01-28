@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-15 15:05:59
+ * @LastEditTime : 2021-01-28 09:35:15
  * @Description  : 文本框
  */
 
@@ -150,7 +150,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
             });
         }
     };
-    obj.clear = function () {
+    obj.clear = function (callback) {
         let thisEle = $(`${ele} input[type=text],${ele} input[type=password]`);
 
         if (ele) {
@@ -172,6 +172,9 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                 $(ele).next(".hopeui-placeholder").removeClass("hopeui-hide");
             }
         });
+        if(callback){
+            callback()
+        }
     };
 
     if (on && on.init) {

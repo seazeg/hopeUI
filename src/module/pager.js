@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2020-12-30 15:58:38
+ * @LastEditTime : 2021-01-28 09:37:47
  * @Description  : 分页
  */
 
@@ -260,7 +260,6 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 event: "complete",
                             });
                         }
-
                     }
                 },
                 error: function () {},
@@ -269,7 +268,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
     }
     getData(params, reader);
     //外部跳转方法
-    obj.jump = function (number) {
+    obj.jump = function (number, callback) {
         if (number) {
             if (params.url.includes(".json")) {
                 params.url =
@@ -281,23 +280,22 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
             }
             params.data[pageMapping] = number;
             getData(params, reader);
-            if (on && on.jumpOver) {
-                on.jumpOver({
-                    type: "jump",
-                    pageNo: number,
-                    event: "jumpOver",
-                });
+            if (callback) {
+                callback(number);
             }
         }
     };
 
     //参数设外部置方法
-    obj.set = function (obj) {
+    obj.set = function (obj, callback) {
         Object.keys(obj).forEach(function (key) {
             params[key] = obj[key];
         });
 
         getData(params, reader);
+        if (callback) {
+            callback();
+        }
     };
 
     if (on && on.init) {
@@ -306,6 +304,6 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
             event: "init",
         });
     }
-    
+
     return obj;
 };

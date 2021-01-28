@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-22 16:19:15
+ * @LastEditTime : 2021-01-28 09:39:51
  * @Description  : 多行文本框
  */
 
@@ -111,7 +111,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
         });
     }
 
-    obj.val = function (obj) {
+    obj.val = function (obj, callback) {
         if (obj) {
             Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`textarea[name=${key}]`);
@@ -131,9 +131,12 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
                     }
                 });
             });
+            if (callback) {
+                callback();
+            }
         }
     };
-    obj.clear = function () {
+    obj.clear = function (callback) {
         let thisEle = $(`textarea`);
 
         if (ele) {
@@ -152,6 +155,9 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
                     .removeClass("hopeui-hide");
             }
         });
+        if (callback) {
+            callback();
+        }
     };
 
     return obj;

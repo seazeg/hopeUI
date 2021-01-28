@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-04 16:29:49
+ * @LastEditTime : 2021-01-28 09:38:24
  * @Description  : 单选框
  */
 
@@ -56,7 +56,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
         }
     });
 
-    obj.val = function (obj) {
+    obj.val = function (obj, callback) {
         if (obj) {
             Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`input[name=${key}]`);
@@ -75,9 +75,12 @@ module.exports.radioHandler = function ({ ele, options, on }) {
                     utils.validation(thisEle, "pass", null, "radio");
                 });
             });
+            if (callback) {
+                callback();
+            }
         }
     };
-    obj.clear = function () {
+    obj.clear = function (callback) {
         let thisEle = $(`input[type=radio]`);
         if (ele) {
             utils.isSelf(ele, type)
@@ -86,6 +89,9 @@ module.exports.radioHandler = function ({ ele, options, on }) {
         }
 
         handle(thisEle[0], $(thisEle).eq(0).next());
+        if (callback) {
+            callback();
+        }
     };
 
     if (on && on.init) {

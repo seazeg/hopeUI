@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-15 10:14:09
+ * @LastEditTime : 2021-01-28 09:36:02
  * @Description  : 灯箱
  */
 
@@ -735,8 +735,11 @@ module.exports.lightboxHandler = function ({ ele, options, on }) {
         open($(this));
     });
 
-    obj.close = function () {
+    obj.close = function (callback) {
         close();
+        if(callback){
+            callback()
+        }
     };
 
     return obj;

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-31 10:03:12
+ * @LastEditTime : 2021-01-28 09:39:39
  * @Description  : 文本框
  */
 
@@ -189,9 +189,12 @@ module.exports.suggestHandler = function ({
                 }
             });
 
-            obj.open = function (e) {
+            obj.open = function (callback) {
                 getData(params, reader, $this.next());
                 $this.siblings(".hopeui-suggest").removeClass("hopeui-hide");
+                if (callback) {
+                    callback();
+                }
             };
         }
     });

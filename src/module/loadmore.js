@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-17 14:49:20
+ * @LastEditTime : 2021-01-28 09:36:12
  * @Description  : 流式加载
  */
 
@@ -101,7 +101,7 @@ module.exports.loadmoreHandler = function ({
     }
     getData(params, reader);
 
-    obj.next = function () {
+    obj.next = function (callback) {
         let nextPage = +$dom.find(".hopeui-loadmore").attr("hope-pageNo");
         if (params.url.includes(".json")) {
             params.url =
@@ -113,6 +113,9 @@ module.exports.loadmoreHandler = function ({
         }
         params.data[pageMapping] = nextPage;
         getData(params, reader);
+        if(callback){
+            callback()
+        }
     };
     return obj;
 };

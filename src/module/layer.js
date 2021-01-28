@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-17 14:49:11
+ * @LastEditTime : 2021-01-28 09:35:49
  * @Description  : 弹窗
  */
 
@@ -196,8 +196,11 @@ module.exports.layerHandler = function ({ options, on }) {
 
     open();
 
-    obj.close = function () {
+    obj.close = function (callback) {
         close();
+        if(callback){
+            callback()
+        }
     };
 
     return obj;

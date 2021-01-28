@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-04 16:29:15
+ * @LastEditTime : 2021-01-28 09:38:35
  * @Description  : 复选框
  */
 
@@ -60,7 +60,7 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
         });
     }
 
-    obj.val = function (obj) {
+    obj.val = function (obj,callback) {
         if (obj) {
             Object.keys(obj).forEach(function (key) {
                 let eleArr = $(`input[name=${key}]`);
@@ -80,10 +80,13 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
                     utils.validation(thisEle, "pass", null, "checkbox");
                 });
             });
+            if(callback){
+                callback()
+            }
         }
     };
 
-    obj.clear = function () {
+    obj.clear = function (callback) {
         let thisEle = $(`input[type=checkbox]`);
         if (ele) {
             utils.isSelf(ele, type)
@@ -94,6 +97,9 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
             ele.checked = false;
             $(ele).next().removeClass("hopeui-form-checked");
         });
+        if(callback){
+            callback()
+        }
     };
 
     /**

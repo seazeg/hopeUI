@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2021-01-04 14:41:52
+ * @LastEditTime : 2021-01-28 09:38:52
  * @Description  : 自定义滚动条
  */
 
@@ -167,9 +167,12 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
         });
     }
 
-    obj.setDistance = function (distance) {
+    obj.setDistance = function (distance, callback) {
         $bar.css("top", distance + "px");
         $dom.get(0).scrollTop = parseFloat(distance) / rate;
+        if (callback) {
+            callback();
+        }
     };
 
     return obj;
