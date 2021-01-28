@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-22 17:06:27
+ * @LastEditTime : 2021-01-28 09:19:34
  * @Description  : 下拉框
  */
 
@@ -352,11 +352,14 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         }
     };
 
-    obj.update = function () {
+    obj.update = function (callback) {
         core();
+        if (callback) {
+            callback();
+        }
     };
 
-    obj.set = function (type, val) {
+    obj.set = function (type, val, callback) {
         $dom.find("option").each(function () {
             let _this = $(this);
             if (type == "value") {
@@ -374,6 +377,9 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
         });
         core();
+        if (callback) {
+            callback();
+        }
     };
 
     //首次初始化
