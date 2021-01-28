@@ -3,46 +3,53 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/radio.view.js";
 
 # 单选框（Radio）
-***
+
+---
+
 <Meta title="基础控件/单选框(Radio)" />
 
 <Canvas>
-    <Story name="单选框(Radio)" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html}${viewinfo.js}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.js)()
-        });
-        return viewinfo.html
-    }}  
+    <Story
+        name="单选框(Radio)"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.html;
+        }}
     </Story>
 </Canvas>
 
-
 ## 基础属性
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
 | ---- | ------------- | ------ | -------------------- | ------- |
-| ele | 元素 dom 节点 | String | Class / id / TagName | TagName |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
 
 ## 回调方法 on
 
-| 参数 | 说明 | 类型 | 默认值 | 回调参数 |
+| 参数   | 说明           | 类型     | 默认值 | 回调参数     |
 | ------ | -------------- | -------- | ------ | ------------ |
-| init | 初始化回调 | Function | null | 当前对象 DOM |
-| change | 状态改变后回调 | Function | null | event↓ |
+| init   | 初始化回调     | Function | null   | 当前对象 DOM |
+| change | 状态改变后回调 | Function | null   | event↓       |
 
-| event 参数 | 说明 | 类型 |
+| event 参数 | 说明           | 类型    |
 | ---------- | -------------- | ------- |
-| original | 原始 dom 对象 | Object |
-| targetEle | 虚拟 dom 对象 | Object |
-| name | 组名 | String |
-| value | 选中的值 | String |
-| status | 选中状态 | Boolean |
-| eventName | 当前回调事件名 | String |
+| original   | 原始 dom 对象  | Object  |
+| targetEle  | 虚拟 dom 对象  | Object  |
+| name       | 组名           | String  |
+| value      | 选中的值       | String  |
+| status     | 选中状态       | Boolean |
+| eventName  | 当前回调事件名 | String  |
 
 ## 调用方法
 
-| 方法名 | 说明 | 类型 | 默认值 | 参数 |
-| ------ | -------- | -------- | ------ | ---- |
-| val | 外部赋值 | Function | -- | -- |
-| clear | 外部清值 | Function | -- | -- |
+| 方法名 | 说明     | 类型     | 默认值 | 参数           |
+| ------ | -------- | -------- | ------ | -------------- |
+| val    | 外部赋值 | Function | --     | value,callback |
+| clear  | 外部清值 | Function | --     | callback       |

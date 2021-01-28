@@ -3,43 +3,63 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/layer.view.js";
 
 # 弹层（Layer）
-***
+
+---
+
 <Meta title="复用组件/弹层(Layer)" />
 
 <Canvas>
-    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.message}${viewinfo.messageJS}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.messageJS)()
-        });
-        return viewinfo.message
-    }}  
+    <Story
+        name="通用"
+        height="150px"
+        parameters={{
+            docs: {
+                source: { code: `${viewinfo.message}${viewinfo.messageJS}` },
+            },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.messageJS)();
+            });
+            return viewinfo.message;
+        }}
     </Story>
 </Canvas>
 
 <Canvas>
-    <Story name="iframe嵌套" height="150px" parameters={{ docs: { source: { code:`${viewinfo.ifm}${viewinfo.ifmJS}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.ifmJS)()
-        });
-        return viewinfo.ifm
-    }}  
+    <Story
+        name="iframe嵌套"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.ifm}${viewinfo.ifmJS}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.ifmJS)();
+            });
+            return viewinfo.ifm;
+        }}
     </Story>
 </Canvas>
 
 <Canvas>
-    <Story name="可拖拽" height="150px" parameters={{ docs: { source: { code:`${viewinfo.drag}${viewinfo.dragJS}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.dragJS)()
-        });
-        return viewinfo.drag
-    }}  
+    <Story
+        name="可拖拽"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.drag}${viewinfo.dragJS}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.dragJS)();
+            });
+            return viewinfo.drag;
+        }}
     </Story>
 </Canvas>
-
-
 
 ## 基础属性
 
@@ -71,6 +91,6 @@ import { viewinfo } from "../view/layer.view.js";
 
 ## 调用方法
 
-| 方法名 | 说明         | 类型     | 默认值 | 参数 |
-| ------ | ------------ | -------- | ------ | ---- |
-| close  | 外部调用关闭 | Function | --     | --   |
+| 方法名 | 说明         | 类型     | 默认值 | 参数     |
+| ------ | ------------ | -------- | ------ | -------- |
+| close  | 外部调用关闭 | Function | --     | callback |

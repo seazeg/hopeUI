@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-04 14:48:50
+ * @LastEditTime : 2021-01-28 09:45:22
  * @Description  : 表单
  */
 
@@ -212,17 +212,23 @@ module.exports.formHandler = function ({ ele, options, on, controls, verify }) {
         });
     }
 
-    obj.val = function (obj) {
+    obj.val = function (obj, callback) {
         Object.keys(obj).forEach(function (key) {
             formControls[obj[key].type].val({
                 [key]: obj[key],
             });
         });
+        if (callback) {
+            callback();
+        }
     };
-    obj.clear = function () {
+    obj.clear = function (callback) {
         Object.keys(formControls).forEach(function (key) {
             formControls[key].clear();
         });
+        if (callback) {
+            callback();
+        }
     };
 
     return obj;

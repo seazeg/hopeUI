@@ -3,17 +3,25 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/checkbox.view.js";
 
 # 复选框（Radio）
-***
+
+---
+
 <Meta title="基础控件/复选框(Checkbox)" />
 
 <Canvas>
-    <Story name="复选框(Checkbox)" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html}${viewinfo.js}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.js)()
-        });
-        return viewinfo.html
-    }}  
+    <Story
+        name="复选框(Checkbox)"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.html;
+        }}
     </Story>
 </Canvas>
 
@@ -41,7 +49,7 @@ import { viewinfo } from "../view/checkbox.view.js";
 
 ## 调用方法
 
-| 方法名 | 说明     | 类型     | 默认值 | 参数 |
-| ------ | -------- | -------- | ------ | ---- |
-| val    | 外部赋值 | Function | --     | --   |
-| clear  | 外部清值 | Function | --     | --   |
+| 方法名 | 说明     | 类型     | 默认值 | 参数           |
+| ------ | -------- | -------- | ------ | -------------- |
+| val    | 外部赋值 | Function | --     | value,callback |
+| clear  | 外部清值 | Function | --     | callback       |
