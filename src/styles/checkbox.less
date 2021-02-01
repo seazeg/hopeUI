@@ -25,16 +25,16 @@
         cursor: not-allowed !important;
         > i {
             color: #ffffff !important;
-            border-color: @gray_light;
+            border-color: #e6e6e6;
         }
         > span {
-            color: @gray_normal !important;
+            color: @disabled_normal !important;
         }
 
         &:hover {
             i {
                 color: #ffffff !important;
-                border-color: @gray_light;
+                border-color: #e6e6e6;
             }
         }
     }
@@ -44,7 +44,7 @@
         padding-right: 15px;
         line-height: 18px;
         background: 0 0;
-        color: #666;
+        color: @mediumColor;
         height: 100%;
         font-size: 14px;
         border-radius: 2px 0 0 2px;
@@ -62,10 +62,10 @@
         line-height: 16px;
         border-width: 1px;
         border-style: solid;
-        border-color: #c2c2c2;
+        border-color: @borderColor;
         font-size: 12px;
         border-radius: 2px;
-        background-color: @lightFontColor;
+        background-color: #ffffff;
         -webkit-transition: 0.1s linear;
         transition: 0.1s linear;
         text-align: center;
@@ -78,7 +78,8 @@
     i {
         border-color: @primaryColor !important;
         background-color: @primaryColor;
-        color: @lightFontColor;
+        color: #ffffff;
+        font-weight: bold;
     }
 }
 
@@ -90,6 +91,6 @@
     i {
         border-color: @primaryColor !important;
         background-color: @primaryColor;
-        color: @lightFontColor;
+        color: #ffffff;
     }
 }

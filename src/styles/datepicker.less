@@ -2,13 +2,13 @@
 
 .hope-datepicker {
     width: 370px;
-    border: solid 1px @gray_light;
+    border: solid 1px @borderColor;
     font-size: 12px;
     position: absolute;
     z-index: 999;
     display: none;
     background: #fff;
-    color: @neutralFontColor;
+    color: @mediumColor;
     user-select: none;
     & > div {
         padding: 0 5px;
@@ -37,7 +37,7 @@
     }
     .week {
         height: 25px;
-        color: #9ea7b3;
+        color: @lightColor - 100;
     }
     .week ul {
         padding: 0;
@@ -50,7 +50,7 @@
         text-align: center;
     }
     .day {
-        background: #fff;
+        background: #ffffff;
     }
     .day ul {
         overflow: hidden;
@@ -61,15 +61,14 @@
         width: 50px;
         float: left;
         text-align: center;
-        background: #fff;
+        background: #ffffff;
         cursor: pointer;
-        // color: @darkFontColor;
-        color: @neutralFontColor;
+        color: @mediumColor;
     }
 
     .day ul li:hover {
-        background: @gray_superlight;
-        color: @neutralFontColor;
+        background: @lightColor - 15;
+        color: @mediumColor;
     }
     .day ul li.active {
         background: @primaryColor;
@@ -77,12 +76,12 @@
     }
 
     .day ul li.other-month {
-        color: @gray_light;
+        color: @disabled_light;
     }
 
     .day ul li.other-month:hover {
-        background: @gray_superlight;
-        color: @neutralFontColor;
+        background: @lightColor - 15;
+        color: @mediumColor;
     }
 
     .year-month .month .month-list {
@@ -103,19 +102,15 @@
         display: inline-block;
     }
     .month-list ul li:hover {
-        // background: @gray_superlight;
-        // color: @darkFontColor;
+        // background: @lightColor - 15;
+        // color: @darkColor;
         color: @primaryColor;
     }
     .month-list ul li.active {
-        // background: @primaryColor;
-        // color: #fff;
         color: @primaryColor;
     }
     .year-month .year .year-list {
-        // width: 123px;
         width: 100%;
-        // border: solid 1px #ccc;
         border-top: none;
         position: absolute;
         top: 50px;
@@ -134,12 +129,9 @@
         display: inline-block;
     }
     .year-list ul li:hover {
-        // background: @gray_superlight;
-        // color: @darkFontColor;
         color: @primaryColor;
     }
     .year-list ul li.active {
-        // background: @primaryColor;
         color: @primaryColor;
     }
     .year-list .year-change {
@@ -159,9 +151,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        background: #fefefe;
+        background: @lightColor;
         display: none;
-        color: #9ea7b3;
+        color: @mediumColor;
         padding: 0 5%;
 
         .warp {
@@ -177,11 +169,11 @@
                 text-align: center;
                 font-size: 16px;
                 margin-bottom: 10px;
-                color: @darkFontColor;
+                color: @darkColor;
             }
 
             .list {
-                border: 1px solid @gray_normal;
+                border: 1px solid @borderColor;;
                 border-radius: 4px;
             }
 
@@ -208,7 +200,7 @@
 
             .return {
                 font-size: 14px;
-                color: @neutralFontColor;
+                color: @mediumColor;
                 float: left;
                 line-height: 38px;
                 cursor: pointer;
@@ -229,8 +221,6 @@
     text-align: center;
     cursor: pointer;
     margin-bottom: 5px;
-    // background:@primaryColor;
-    // color:#fff;
 }
 .hope-datepicker .year-month span {
     height: 50px;
@@ -238,19 +228,15 @@
     float: left;
 }
 .hope-datepicker .year-month span:hover {
-    // color: @darkFontColor;
-    // background: @gray_superlight;
     color: @primaryColor;
 }
 .hope-datepicker .year-month span.active {
-    // color: @darkFontColor;
-    // background: @gray_superlight;
     color: @primaryColor;
 }
 
 .hope-datepicker .action {
     height: 50px;
-    border-top: solid 1px @gray_light;
+    border-top: solid 1px @borderColor;;
     margin-top: 5px;
     padding-right: 10px;
 }
@@ -265,14 +251,14 @@
 .hope-datepicker .action button.clear {
     margin: 7px 5px 0 5px;
     float: right;
-    border: solid 1px @gray_light;
+    border: solid 1px @borderColor;;
 }
 
 .hope-datepicker .action span.selectTime {
     float: left;
     height: 50px;
     line-height: 50px;
-    color: @neutralFontColor;
+    color: @mediumColor;
     cursor: pointer;
     margin-left: 5%;
 

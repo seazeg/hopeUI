@@ -16,7 +16,7 @@
             display: none;
         }
         ul {
-            border-bottom: 1px solid @gray_light;
+            border-bottom: 1px solid @borderColor;
         }
         li {
             display: inline-block;
@@ -30,7 +30,7 @@
             padding: 0 15px;
             text-align: center;
             cursor: pointer;
-            color: @neutralFontColor;
+            color: @mediumColor;
 
             &.hopeui-tab-this {
                 &:after {
@@ -42,11 +42,11 @@
                     height: 40px;
                     border-width: 1px;
                     border-style: solid;
-                    border-bottom-color: @lightFontColor;
+                    border-bottom-color: @borderColor;
                     border-radius: 2px 2px 0 0;
                     box-sizing: border-box;
                     pointer-events: none;
-                    color: @gray_light;
+                    color: @disabled_light;
                 }
             }
         }
@@ -87,21 +87,21 @@
     }
 
     &.hopeui-tab-card {
-        border: 1px solid @gray_light;
+        border: 1px solid @borderColor;
         border-radius: 2px;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
         .hopeui-tab-title {
-            background-color: @gray_superlight;
+            background-color: @lightColor - 15;
             li {
                 margin-right: -1px;
                 margin-left: -1px;
                 &.hopeui-tab-this {
-                    color: @neutralFontColor;
-                    background-color: @lightFontColor;
+                    color: @mediumColor;
+                    background-color: @lightColor;
                     &:after {
                         border-top: none;
                         border-width: 1px;
-                        border-bottom-color: @lightFontColor;
+                        border-bottom-color: @lightColor;
                         border-radius: 0;
                     }
                 }

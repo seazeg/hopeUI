@@ -9,24 +9,24 @@
     line-height: 38px\0;
     border-width: 1px;
     border-style: solid;
-    background-color: @lightFontColor;
+    background-color: @lightColor;
     border-radius: 2px;
-    border-color: @gray_light;
+    border-color: @borderColor;
     outline: 0;
     -webkit-appearance: none;
     transition: all 0.3s;
     -webkit-transition: all 0.3s;
     box-sizing: border-box;
     font-size: 14px;
-    color: @darkFontColor;
+    color: @darkColor;
 }
 
 .hopeui-input:focus {
-    border-color: #c9c9c9;
+    border-color: @borderColor - 25;
 }
 
 .hopeui-input:hover {
-    border-color: @gray_normal;
+    border-color: @borderColor - 25;
 }
 
 .hopeui-input-content-right {

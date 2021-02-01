@@ -1049,6 +1049,7 @@
                         <button type="submit" class="hopeui-btn">
                             提交表单
                         </button>
+                        <button type="button" class="hopeui-btn hopeui-btn-disabled">禁用</button>
                     </div>
                 </div>
             </form>
@@ -1462,7 +1463,7 @@
             for (var i = 0; i < list.length; i++) {
                 tmp.push(list[i].goodsName)
             }
-            return []
+            return tmp
         },
         on: {
             input: function (e) {

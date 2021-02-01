@@ -6,10 +6,10 @@
     padding: 5px 0;
     z-index: 899;
     min-width: 100%;
-    border: 1px solid @gray_normal;
+    border: 1px solid @borderColor;
     max-height: 300px;
     // overflow: auto;
-    background-color: @lightFontColor;
+    background-color: @lightColor;
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
@@ -22,7 +22,7 @@
         cursor: pointer;
         &.hopeui-suggest-this {
             background-color: @primaryColor!important;
-            color: @lightFontColor!important;
+            color: @lightColor!important;
         }
 
         &.hopeui-suggest-tips {
@@ -30,7 +30,7 @@
         }
 
         &:hover {
-            background-color: @gray_superlight;
+            background-color: @lightColor - 15;
         }
     }
 }
