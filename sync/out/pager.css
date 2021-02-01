@@ -13,8 +13,8 @@
   height: 28px;
   line-height: 28px;
   margin: 0 -1px 0 0;
-  background-color: #fff;
-  color: #2f2f2f;
+  background-color: #ffffff;
+  color: #515151;
   font-size: 12px;
   border-width: 1px;
   border-style: solid;
@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 .hopeui-pager .hopeui-pager-omit {
-  color: #6e6e6e;
+  color: #333333;
 }
 .hopeui-pager .hopeui-pager-count {
   margin-left: 10px;
@@ -39,7 +39,7 @@
   height: 30px;
   line-height: 30px;
   margin: 0 -1px 0 0;
-  color: #2f2f2f;
+  color: #515151;
   font-size: 12px;
   user-select: none;
   font-style: normal;
@@ -47,7 +47,7 @@
 .hopeui-pager .hopeui-pager-jump {
   height: 30px;
   line-height: 30px;
-  color: #2f2f2f;
+  color: #515151;
   display: inline-block;
   vertical-align: middle;
   font-size: 12px;
@@ -77,8 +77,8 @@
   vertical-align: top;
   background-color: #fff;
   box-sizing: border-box;
-  border: 1px solid #e2e2e2;
-  color: #2f2f2f;
+  border: 1px solid #d8d8d8;
+  color: #515151;
   font-size: 12px;
 }
 .hopeui-pager .hopeui-pager-jump button:hover {

@@ -10,7 +10,7 @@
   box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
   border-width: 1px\0;
   border-style: solid\0;
-  border-color: #e6e6e6 \0;
+  border-color: #d8d8d8 \0;
   position: fixed;
   z-index: 10001;
 }
@@ -18,11 +18,11 @@
   padding: 0 0 0 20px;
   height: 42px;
   line-height: 42px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ffffff;
   font-size: 14px;
-  color: #111111;
+  color: #333333;
   overflow: hidden;
-  background-color: #f8f8f8;
+  background-color: #fafafa;
   border-radius: 2px 2px 0 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -40,7 +40,7 @@
   min-width: 100px;
   min-height: 50px;
   font-size: 14px;
-  color: #111111;
+  color: #333333;
   word-break: break-all;
 }
 .hopeui-layer .hopeui-layer-btn {
@@ -60,7 +60,7 @@
   left: 0;
   right: 0;
   z-index: 10000;
-  background: rgba(0, 0, 0, 0.3);
+  background: maskColor;
   background: #494a5f \0 !important;
 }
 .hopeui-layer-nosrl {
