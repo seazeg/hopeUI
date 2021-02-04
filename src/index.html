@@ -1286,7 +1286,7 @@
                 slidesPerView: 3,
                 calculateHeight: true,
                 resizeReInit: true,
-                roundLengths: true,
+                roundLengths: true
             },
             on: {
                 onFirstInit: function (e) {
@@ -1305,6 +1305,9 @@
             options: {
                 pagination: '.banner1 .hope-pagination',
                 paginationClickable: true,
+                autoplay: 1000,
+                autoplayDisableOnInteraction: false,
+                loop: true
             },
             on: {
                 onFirstInit: function (e) {

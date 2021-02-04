@@ -125,7 +125,7 @@ var Hope_carousel = function (selector, params, index) {
         mousewheelControlForceToAxis: false,
         useCSS3Transforms: true,
         autoplay: false,
-        autoplayDisableOnInteraction: true,
+        autoplayDisableOnInteraction: false,
         autoplayStopOnLast: false,
         loop: false,
         loopAdditionalSlides: 0,
