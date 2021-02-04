@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:19:34
+ * @LastEditTime : 2021-02-04 17:07:54
  * @Description  : 下拉框
  */
 
@@ -278,7 +278,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
             if (on && on.init) {
                 on.init({
-                    this: obj,
+                    self: obj,
                     ele: $dom[0],
                     eventName: "init",
                 });
