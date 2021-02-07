@@ -17,11 +17,11 @@
 }
 .hopeui-scrollbar .hopeui-scrollbar-bar {
   background: #888888;
-  width: 6px;
+  width: 4px;
   position: absolute;
   top: 0;
   right: 0;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
   transition: opacity 0.5s;
 }

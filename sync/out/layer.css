@@ -60,7 +60,7 @@
   left: 0;
   right: 0;
   z-index: 10000;
-  background: maskColor;
+  background: rgba(0, 0, 0, 0.3);
   background: #494a5f \0 !important;
 }
 .hopeui-layer-nosrl {
