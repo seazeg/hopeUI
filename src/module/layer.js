@@ -50,9 +50,9 @@ module.exports.layerHandler = function ({ options, on }) {
         });
 
         $(window).resize(function () {
-            layer
-                .children(".hopeui-layer-content")
-                .width($("body").width() * (parseInt(options.width) / 100));
+            // layer
+            //     .children(".hopeui-layer-content")
+            //     .width($("body").width() * (parseInt(options.width) / 100));
             layer.css({
                 left:
                     (document.documentElement.clientWidth - layer.width()) / 2,

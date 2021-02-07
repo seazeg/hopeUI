@@ -601,7 +601,11 @@
                     <div class="hope-slide">
                         <div class="title ">Slide 4</div>
                     </div>
+                    <div class="hope-slide">
+                        <div class="title ">Slide 4</div>
+                    </div>
                 </div>
+                <div ></div>
                 <div class="hope-pagination"></div>
             </div>
         </div>
@@ -1278,12 +1282,12 @@
     })
 
 
-    var carousel = hope.carousel({
+    window.banner_carousel = hope.carousel({
             ele: ".banner3",
             options: {
                 pagination: '.banner1 .hope-pagination',
                 paginationClickable: true,
-                slidesPerView: 3,
+                slidesPerView: 4,
                 calculateHeight: true,
                 resizeReInit: true,
                 roundLengths: true
@@ -1434,7 +1438,7 @@
     var scroll = hope.scrollbar({
         ele: '#scrollbar',
         options: {
-            height: 200,
+            height: 500,
             autoHideBar: true
         },
         on: {
