@@ -1,5 +1,5 @@
 .hopeui-suggest {
-  position: absolute!important;
+  position: absolute !important;
   left: 0;
   top: 1px;
   padding: 5px 0;
@@ -19,6 +19,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+  color: #333333;
+  font-size: 14px;
 }
 .hopeui-suggest .option.hopeui-suggest-this {
   background-color: #2DB4EE !important;
