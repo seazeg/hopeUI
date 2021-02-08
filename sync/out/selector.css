@@ -89,7 +89,7 @@
   display: block;
 }
 .hopeui-form-selected .hopeui-edge {
-  margin-top: -9px;
+  margin-top: -9px !important;
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
   margin-top: -3px \9;
