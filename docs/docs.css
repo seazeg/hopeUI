@@ -50,11 +50,11 @@
 }
 
 .docs-grid-demo-bg2 {
-    background: #fd9037;
+    background: #6ac9f1;
 }
 
 .docs-grid-demo-bg3 {
-    background: #ffa55b;
+    background: #9adefc;
 }
 
 .docs-content .hopeui-row {
@@ -71,7 +71,7 @@
     color: rgb(104, 68, 34);
     cursor: pointer;
     user-select: none;
-    border: 20px inset #fd9037;
+    border: 20px inset #2DB4EE;
     border-radius: 150px;
     margin: 5px 0;
 }
@@ -101,7 +101,7 @@
 
 .hope-slide .title {
     font-size: 48px;
-    background: #fd9037;
+    background: #149eda;
     color: #fff;
     height: 400px;
     text-align: center;
@@ -134,7 +134,7 @@
 
 .imgcenter_warp::after {
     content: "";
-    outline: 10px solid #fd9037;
+    outline: 10px solid #1188bb;
     width: 100%;
     height: 100%;
     position: absolute;
