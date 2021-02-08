@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-29 17:39:37
- * @LastEditTime : 2020-09-08 10:05:27
+ * @LastEditTime : 2021-02-08 14:22:28
  * @Description  :
  */
 
@@ -41,5 +41,5 @@ export default create({
 
     brandTitle: "HopeUI",
     brandUrl: "https://github.com/seazeg/hopeUI",
-    brandImage: "./logo.png",
+    brandImage: "./logo.svg",
 });
