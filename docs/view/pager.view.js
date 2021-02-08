@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-12-24 17:40:59
+ * @LastEditTime : 2021-02-08 15:36:24
  * @Description  :
  */
 
@@ -16,7 +16,6 @@ export const viewinfo = {
         ele: "#pager",
         options: {
             omit: 5, //最多保留多少按钮,奇数
-            hideNum: true,
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
         },
         params: {
@@ -65,7 +64,6 @@ export const viewinfo = {
             omit: 5, //最多保留多少按钮,必须奇数
             prevName: "prev",
             nextName: "next",
-            hideNum: true,
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
             extend: true,
         },
