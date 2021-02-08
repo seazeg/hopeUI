@@ -67,7 +67,7 @@
   color: #555555;
 }
 .hope-datepicker .day ul li.active {
-  background: #ff7400;
+  background: #58C4F2;
   color: #fff;
 }
 .hope-datepicker .day ul li.other-month {
@@ -94,10 +94,10 @@
   display: inline-block;
 }
 .hope-datepicker .month-list ul li:hover {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .month-list ul li.active {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .year-month .year .year-list {
   width: 100%;
@@ -119,10 +119,10 @@
   display: inline-block;
 }
 .hope-datepicker .year-list ul li:hover {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .year-list ul li.active {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .year-list .year-change {
   margin-top: 3px;
@@ -171,11 +171,11 @@
   display: inline-block;
 }
 .hope-datepicker .time-list .warp .item:hover {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .time-list .warp .item.active {
   color: #fff;
-  background: #ff7400;
+  background: #58C4F2;
 }
 .hope-datepicker .time-list .group {
   margin: 20px 5px 0 5px;
@@ -188,7 +188,7 @@
   cursor: pointer;
 }
 .hope-datepicker .time-list .group .return:hover {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .time-list .group button {
   margin: 0;
@@ -205,10 +205,10 @@
   float: left;
 }
 .hope-datepicker .year-month span:hover {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .year-month span.active {
-  color: #ff7400;
+  color: #58C4F2;
 }
 .hope-datepicker .action {
   height: 50px;
@@ -236,5 +236,5 @@
   margin-left: 5%;
 }
 .hope-datepicker .action span.selectTime:hover {
-  color: #ff7400;
+  color: #58C4F2;
 }
