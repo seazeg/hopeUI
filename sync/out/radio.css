@@ -20,10 +20,10 @@
   color: #666;
 }
 .hopeui-form-radio.hopeui-form-radio > i:hover {
-  color: #58C4F2;
+  color: #2DB4EE;
 }
 .hopeui-form-radio.hopeui-form-radioed > i {
-  color: #58C4F2;
+  color: #2DB4EE;
 }
 .hopeui-form-radio.hopeui-radio-disabled {
   cursor: not-allowed !important;
