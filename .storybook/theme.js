@@ -12,7 +12,7 @@ export default create({
 
 
     // colorPrimary: "#111",
-    // colorSecondary: "#ff7400",
+    // colorSecondary: "#2DB4EE",
 
     // // UI
     appBg: "#fff",
@@ -31,7 +31,7 @@ export default create({
     // // Toolbar default and active colors
     // barTextColor: "silver",
     // barSelectedColor: "black",
-    // barBg: "#ff7400",
+    // barBg: "#2DB4EE",
 
     // // Form colors
     // inputBg: "white",
