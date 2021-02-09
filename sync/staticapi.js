@@ -1,13 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-28 15:11:24
- * @LastEditTime : 2021-02-01 17:21:48
+ * @LastEditTime : 2021-02-09 10:30:44
  * @Description  : 
  */
 const shell = require("shelljs");
 shell.exec('gitq p')
 shell.exec('cp -r ../docs/static/mock ../hopeui')
-shell.exec('cp ../docs/static/logo.png ../hopeui')
+shell.exec('cp ../docs/static/logo.svg ../hopeui')
 
 shell.exec('cd ../../seazeg.github.io/')
 shell.exec('rm -rf ../../seazeg.github.io/hopeui')
