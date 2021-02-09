@@ -2,7 +2,7 @@
     width="100%" height="100%" viewBox="0 0 240.000000 80.000000" preserveAspectRatio="xMidYMid meet"
     color-interpolation-filters="sRGB" class="el-tooltip" style="margin: auto;">
     <g data-v-1e121de1="" fill="#fff" class="icon-text-wrapper icon-svg-group iconsvg" transform="translate(30,20)">
-        <g class="iconsvg-imagesvg" transform="translate(0,0)">
+        <!-- <g class="iconsvg-imagesvg" transform="translate(0,0)">
             <rect fill="#fff" fill-opacity="0" stroke-width="2" x="0" y="0" width="60" height="54.58957887223352"
                 class="image-rect"></rect> <svg filter="url(#colors6877853308)" x="0" y="-8" width="60"
                 height="54.58957887223352" filtersec="colorsf4640945283" class="image-svg-svg primary"><svg
@@ -31,6 +31,27 @@
                         class="icon-fecolormatrix"></feColorMatrix>
                 </filter>
             </defs>
+        </g> -->
+        <g class="iconsvg-imagesvg" transform="translate(0,0)">
+            <rect fill="#2DB4EE" fill-opacity="0" stroke-width="2" x="0" y="0" width="60" height="68.29400131839174"
+                class="image-rect"></rect> <svg x="0" y="-12" width="60" height="68.29400131839174"
+                filtersec="colorsb4591345970" class="image-svg-svg primary"><svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 151.7 172.67">
+                    <g>
+                        <g>
+                            <path fill="#B4A7D6"
+                                d="M151.7 48.8l-14.3 8.26v33.03l-42.91 24.78V81.83l-14.3 8.26v82.58l14.3-8.26v-33.03l42.91-24.77v33.03l14.3-8.26V48.8z">
+                            </path>
+                            <path fill="#2DB4EE"
+                                d="M18.64 33.03L4.33 41.29l71.52 41.29 14.3-8.26-28.6-16.52 42.91-24.77 28.6 16.52 14.31-8.26L75.85 0l-14.3 8.26 28.6 16.51-42.91 24.78-28.6-16.52z">
+                            </path>
+                            <path fill="#EA9999"
+                                d="M0 131.38l14.3 8.26v-33.03l42.91 24.77v33.03l14.3 8.26V90.09l-14.3-8.26v33.04L14.3 90.09V57.06L0 48.8v82.58z">
+                            </path>
+                        </g>
+                    </g>
+                </svg></svg>
+            <!---->
         </g>
         <g transform="translate(67.00054931640625,3.6952896118164062)"
             mask="url(#fd446e38-6808-4e13-8772-d723e8527efc)">
@@ -58,7 +79,7 @@
                         transform="translate(-0.9375, 8.578125)"></path>
                 </g>
             </g>
-            
+
         </g>
     </g>
     <mask id="fd446e38-6808-4e13-8772-d723e8527efc">
