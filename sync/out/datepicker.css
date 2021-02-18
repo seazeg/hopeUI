@@ -28,6 +28,7 @@
 .hope-datepicker .year-month .year span {
   width: 100%;
   text-align: center;
+  font-size: 14px;
 }
 .hope-datepicker .year-month .right {
   width: 50px;
@@ -45,6 +46,7 @@
   line-height: 25px;
   float: left;
   text-align: center;
+  font-size: 14px;
 }
 .hope-datepicker .day {
   background: #ffffff;
@@ -61,6 +63,7 @@
   background: #ffffff;
   cursor: pointer;
   color: #555555;
+  font-size: 14px;
 }
 .hope-datepicker .day ul li:hover {
   background: #f0f0f0;
@@ -92,6 +95,7 @@
   cursor: pointer;
   text-align: center;
   display: inline-block;
+  font-size: 14px;
 }
 .hope-datepicker .month-list ul li:hover {
   color: #2DB4EE;
@@ -117,6 +121,7 @@
   cursor: pointer;
   text-align: center;
   display: inline-block;
+  font-size: 14px;
 }
 .hope-datepicker .year-list ul li:hover {
   color: #2DB4EE;
@@ -144,6 +149,7 @@
   display: none;
   color: #555555;
   padding: 0 5%;
+  width: 100%;
 }
 .hope-datepicker .time-list .warp {
   margin-top: 50px;
@@ -168,6 +174,7 @@
   line-height: 40px;
   cursor: pointer;
   text-align: center;
+  font-size: 14px;
   display: inline-block;
 }
 .hope-datepicker .time-list .warp .item:hover {
@@ -234,6 +241,7 @@
   color: #555555;
   cursor: pointer;
   margin-left: 5%;
+  font-size: 14px;
 }
 .hope-datepicker .action span.selectTime:hover {
   color: #2DB4EE;
