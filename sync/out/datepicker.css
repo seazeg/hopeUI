@@ -210,6 +210,7 @@
   height: 50px;
   line-height: 50px;
   float: left;
+  font-size: 14px;
 }
 .hope-datepicker .year-month span:hover {
   color: #2DB4EE;
