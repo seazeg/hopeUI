@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-01-28 09:37:47
+ * @LastEditTime : 2021-02-18 15:38:25
  * @Description  : 分页
  */
 
@@ -134,7 +134,8 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                         $dom.html(pageHTML);
 
                         $dom.find(".hopeui-pager-num").on("click", function () {
-                            if (pageNo != $(this).attr("hopeui-num")) {
+                            let thisPageNum = parseInt($(this).attr("hopeui-num"))
+                            if (pageNo != thisPageNum) {
                                 if (params.url.includes(".json")) {
                                     params.url =
                                         params.url
@@ -144,18 +145,16 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                                 params.url.split(".")[0]
                                                     .length - 1
                                             ) +
-                                        $(this).attr("hopeui-num") +
+                                            thisPageNum +
                                         ".json"; //测试代码
                                 }
-                                params.data[pageMapping] = $(this).attr(
-                                    "hopeui-num"
-                                );
+                                params.data[pageMapping] = thisPageNum;
                                 getData(params, reader);
                                 if (on && on.jumpOver) {
                                     on.jumpOver({
                                         type: "number",
                                         targetEle: $(this)[0],
-                                        pageNo: $(this).attr("hopeui-num"),
+                                        pageNo: thisPageNum,
                                         event: "jumpOver",
                                     });
                                 }
@@ -227,7 +226,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                         $dom.find(".hopeui-pager-jump")
                             .children("button")
                             .on("click", function () {
-                                let number = $(this).siblings("input").val();
+                                let number = parseInt((this).siblings("input").val());
                                 if (number) {
                                     if (params.url.includes(".json")) {
                                         params.url =
