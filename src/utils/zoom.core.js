@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:57:09
- * @LastEditTime : 2020-12-18 10:30:41
+ * @LastEditTime : 2021-02-18 14:13:04
  * @Description  :
  */
 module.exports.Hope_zoom = function (evt, options) {
@@ -175,11 +175,11 @@ module.exports.Hope_zoom = function (evt, options) {
                 }
 
                 if (xPos - curData.w + curData.lensW / 2 > 0) {
-                    l = curData.w - (curData.lensW);
+                    l = curData.w - curData.lensW;
                 }
 
                 if (yPos - curData.h + curData.lensH / 2 > 0) {
-                    t = curData.h - (curData.lensH);
+                    t = curData.h - curData.lensH;
                 }
             }
 
@@ -541,6 +541,10 @@ module.exports.Hope_zoom = function (evt, options) {
         });
 
         thumbObj.src = thumb.src;
+
+        if (mode === "inside") {
+            thumb.nextSibling.style.opacity = 1;
+        }
     };
 
     evt.attach(
