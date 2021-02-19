@@ -96,3 +96,6 @@
   border-style: solid;
   border-color: #2DB4EE;
 }
+.hopeui-pager .hopeui-pager-cur:hover {
+  color: #ffffff;
+}
