@@ -4,7 +4,7 @@
   position: absolute;
   z-index: 999;
   display: none;
-  background: #fff;
+  background-color: #fff;
   color: #555555;
   user-select: none;
 }
@@ -48,7 +48,7 @@
   font-size: 14px;
 }
 .hope-datepicker .day {
-  background: #ffffff;
+  background-color: #ffffff;
 }
 .hope-datepicker .day ul {
   overflow: hidden;
@@ -59,24 +59,24 @@
   width: 50px;
   float: left;
   text-align: center;
-  background: #ffffff;
+  background-color: #ffffff;
   cursor: pointer;
   color: #555555;
   font-size: 14px;
 }
 .hope-datepicker .day ul li:hover {
-  background: #f0f0f0;
+  background-color: #f0f0f0;
   color: #555555;
 }
 .hope-datepicker .day ul li.active {
-  background: #2DB4EE;
+  background-color: #2DB4EE;
   color: #fff;
 }
 .hope-datepicker .day ul li.other-month {
   color: #e6e6e6;
 }
 .hope-datepicker .day ul li.other-month:hover {
-  background: #f0f0f0;
+  background-color: #f0f0f0;
   color: #555555;
 }
 .hope-datepicker .year-month .month .month-list {
@@ -85,7 +85,7 @@
   position: absolute;
   top: 50px;
   left: 0;
-  background: #fefefe;
+  background-color: #fefefe;
   display: none;
   color: #9ea7b3;
 }
@@ -108,7 +108,7 @@
   position: absolute;
   top: 50px;
   left: 0;
-  background: #fefefe;
+  background-color: #fefefe;
   display: none;
   color: #9ea7b3;
 }
@@ -144,7 +144,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #ffffff;
+  background-color: #ffffff;
   display: none;
   color: #555555;
   padding: 0 5%;
@@ -181,7 +181,7 @@
 }
 .hope-datepicker .time-list .warp .item.active {
   color: #fff;
-  background: #2DB4EE;
+  background-color: #2DB4EE;
 }
 .hope-datepicker .time-list .group {
   margin: 20px 5px 0 5px;
