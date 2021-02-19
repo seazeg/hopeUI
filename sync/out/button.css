@@ -1,8 +1,8 @@
 .hopeui-btn {
   display: inline-block;
+  width: 92px;
   height: 38px;
   line-height: 38px;
-  padding: 0 18px;
   background-color: #2DB4EE;
   color: #ffffff;
   white-space: nowrap;
