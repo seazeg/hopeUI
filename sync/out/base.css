@@ -77,7 +77,8 @@ b {
   font-style: normal;
 }
 body {
-  font: 14px "Microsoft YaHei", Arial;
+  font-size: 14px;
+  font-family: "Microsoft YaHei", Arial;
 }
 hr {
   height: 1px;
