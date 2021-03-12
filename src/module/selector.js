@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-02-04 17:07:54
+ * @LastEditTime : 2021-03-12 14:59:15
  * @Description  : 下拉框
  */
 
@@ -137,16 +137,19 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 "hopeui-form-selected"
                             );
                             $(this).addClass("hopeui-form-selected");
+
+                            scrollbarHandler({
+                                ele: newEle.children(".hopeui-select-list"),
+                                options: {
+                                    autoHideBar:
+                                        (options && options.autoHideBar) || false,
+                                },
+                                on: {},
+                            });
+                            
                         }
 
-                        scrollbarHandler({
-                            ele: newEle.children(".hopeui-select-list"),
-                            options: {
-                                autoHideBar:
-                                    (options && options.autoHideBar) || false,
-                            },
-                            on: {},
-                        });
+                     
 
                         //打开列表回调
                         if (on && on.toggle) {
