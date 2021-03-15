@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:35:15
+ * @LastEditTime : 2021-03-15 16:27:51
  * @Description  : 文本框
  */
 
@@ -60,7 +60,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
             $this
                 .after(
                     `<label class="hopeui-placeholder ${isHide}">${
-                        $this.attr("placeholder") || "请输入"
+                        $this.attr("placeholder") || ""
                     }</label>`
                 )
                 .parent()

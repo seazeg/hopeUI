@@ -90,7 +90,7 @@ module.exports.suggestHandler = function ({
                 $this
                     .after(
                         `<label class="hopeui-placeholder">${
-                            $this.attr("placeholder") || "请输入"
+                            $this.attr("placeholder") || ""
                         }</label>`
                     )
                     .parent()
