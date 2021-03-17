@@ -10,7 +10,7 @@
   font-size: 14px;
   border: none;
   border-radius: 2px;
-  transition: opacity 0.3s;
+  transition: all 0.3s;
   cursor: pointer;
 }
 .hopeui-btn i {
@@ -19,7 +19,7 @@
 .hopeui-btn:hover {
   opacity: 0.8;
   filter: alpha(opacity=80);
-  transition: opacity 0.3s;
+  transition: all 0.3s;
   color: #ffffff;
 }
 .hopeui-btn.hopeui-btn-primary {
