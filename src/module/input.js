@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-03-15 16:27:51
+ * @LastEditTime : 2021-03-18 17:48:58
  * @Description  : 文本框
  */
 
@@ -38,7 +38,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                 $(this).css("padding-left", eConWidth + 10 + "px");
             } else {
                 let newBox = $(
-                    '<div class="hopeui-relative"></div>'
+                    '<div class="hopeui-relative hopeui-input-warp"></div>'
                 ).insertAfter($this);
                 $this.appendTo(newBox);
                 newBox.css("width", $this.get(0).offsetWidth);
