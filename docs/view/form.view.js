@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-12-02 18:06:05
+ * @LastEditTime : 2021-03-23 15:19:19
  * @Description  :
  */
 export const viewinfo = {
@@ -29,11 +29,11 @@ html:`
         <div class="hopeui-input-block">
             <select name="school" hope-verify="required">
                 <option value="">请选择</option>
-                <optgroup label="北京"">
+                <optgroup label="北京">
                     <option value=" 北京大学">北京大学</option>
                     <option value="清华大学">清华大学</option>
                 </optgroup>
-                <optgroup label="浙江"">
+                <optgroup label="浙江">
                     <option value=" 浙江大学">浙江大学</option>
                 </optgroup>
             </select>
@@ -100,7 +100,7 @@ html:`
         <label class="hopeui-form-label">多选框</label>
         <div class="hopeui-input-block">
             <input type="checkbox" name="task" value="打桩" hope-verify="required" />
-            <input type="checkbox" name="task" value="钓鱼"" hope-verify=" required" />
+            <input type="checkbox" name="task" value="钓鱼"" hope-verify="required" />
             <input type="checkbox" name="task" value="看电视" hope-verify="required" />
         </div>
     </div>
