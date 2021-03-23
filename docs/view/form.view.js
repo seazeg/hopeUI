@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2021-03-23 15:19:19
+ * @LastEditTime : 2021-03-23 16:17:16
  * @Description  :
  */
 export const viewinfo = {
@@ -296,45 +296,9 @@ document.querySelector("#set").onclick = function() {
     });
 };
 
-document.querySelector("#set").onclick = function() {
-    fm.val({
-        city: {
-            type: "selector",
-            value: "南京",
-        },
-        school: {
-            type: "selector",
-            value: "清华大学",
-        },
-        LD: {
-            type: "selector",
-            value: "天津,乌鲁木齐,青岛",
-        },
-        text: {
-            type: "input",
-            value: "我爱HopeUI",
-        },
-        task: {
-            type: "checkbox",
-            value: "打桩",
-        },
-        textarea: {
-            type: "textarea",
-            value: "我爱北京天安门",
-        },
-        password: {
-            type: "input",
-            value: "999888999",
-        },
-        subject: {
-            type: "checkbox",
-            value: "历史",
-        },
-        radio: {
-            type: "radio",
-            value: "女",
-        },
-    });
+
+document.querySelector("#clear").onclick = function () {
+    fm.clear();
 };
 
 
