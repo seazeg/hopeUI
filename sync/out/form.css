@@ -18,7 +18,7 @@
   float: left;
   display: block;
   padding: 9px 15px;
-  min-width: 80px;
+  width: 20%;
   font-weight: 400;
   line-height: 20px;
   text-align: right;
@@ -26,7 +26,7 @@
   color: #333333;
 }
 .hopeui-form .hopeui-input-block {
-  margin-left: 110px;
+  margin-left: 80%;
   min-height: 36px;
   display: block;
 }
