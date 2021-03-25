@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 14:48:09
- * @LastEditTime : 2020-12-18 09:57:14
+ * @LastEditTime : 2021-03-25 21:09:31
  * @Description  : 数字自增效果
  */
 
@@ -20,26 +20,45 @@ module.exports.numupHandler = function ({ ele, options, on }) {
             speed = options.speed || +$this.attr("hope-numup-speed") || 100, //调速器，改变regulator的数值可以调节数字改变的速度
             count = options.start || +$this.attr("hope-numup-start") || 0,
             initial = 0,
-            step = finalNum / (time / speed);
-        
+            step = (finalNum - count) / (time / speed);
+
+        $this.html(count);
         let timer = setInterval(function () {
             count = count + step;
 
-            if (count >= finalNum) {
-                clearInterval(timer);
-                count = finalNum;
-                if (on.end) {
-                    on.end({
-                        ele: $this.get(0),
-                        event: "timeEnd",
-                    });
+            if (step >= 0) {
+                if (count >= finalNum) {
+                    clearInterval(timer);
+                    count = finalNum;
+                    if (on.end) {
+                        on.end({
+                            ele: $this.get(0),
+                            event: "timeEnd",
+                        });
+                    }
                 }
-            }
 
-            let t = Math.floor(count);
-            if (t == initial) return;
-            initial = t;
-            $this.html(getFormatCurrency(initial));
+                let t = Math.floor(count);
+                if (t == initial) return;
+                initial = t;
+                $this.html(getFormatCurrency(initial));
+            } else {
+                if (count < finalNum) {
+                    clearInterval(timer);
+                    count = finalNum;
+                    if (on.end) {
+                        on.end({
+                            ele: $this.get(0),
+                            event: "timeEnd",
+                        });
+                    }
+                }
+
+                let t = Math.floor(count);
+                if (t == initial) return;
+                initial = t;
+                $this.html(getFormatCurrency(initial));
+            }
         }, 50);
     });
     return obj;
