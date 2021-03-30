@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-02-18 16:02:30
+ * @LastEditTime : 2021-03-30 17:04:37
  * @Description  : 分页
  */
 
@@ -226,7 +226,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                         $dom.find(".hopeui-pager-jump")
                             .children("button")
                             .on("click", function () {
-                                let number = parseInt((this).siblings("input").val());
+                                let number = parseInt($(this).siblings("input").val());
                                 if (number) {
                                     if (params.url.includes(".json")) {
                                         params.url =
