@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-03-30 17:04:37
+ * @LastEditTime : 2021-03-30 17:39:40
  * @Description  : 分页
  */
 
@@ -148,7 +148,14 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             thisPageNum +
                                         ".json"; //测试代码
                                 }
-                                params.data[pageMapping] = thisPageNum;
+                                if(typeof params.data == "string") {
+                                    let p = JSON.parse(params.data)
+                                    p[pageMapping] = thisPageNum;
+                                    params.data = JSON.stringify(p);
+                                }else{
+                                    params.data[pageMapping] = thisPageNum;
+                                }
+                             
                                 getData(params, reader);
                                 if (on && on.jumpOver) {
                                     on.jumpOver({
@@ -178,7 +185,13 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageNo +
                                             ".json"; //测试代码
                                     }
-                                    params.data[pageMapping] = pageNo;
+                                    if(typeof params.data == "string") {
+                                        let p = JSON.parse(params.data)
+                                        p[pageMapping] = pageNo;
+                                        params.data = JSON.stringify(p);
+                                    }else{
+                                        params.data[pageMapping] = pageNo;
+                                    }
                                     getData(params, reader);
                                     if (on && on.jumpOver) {
                                         on.jumpOver({
@@ -209,7 +222,13 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageNo +
                                             ".json"; //测试代码
                                     }
-                                    params.data[pageMapping] = pageNo;
+                                    if(typeof params.data == "string") {
+                                        let p = JSON.parse(params.data)
+                                        p[pageMapping] = pageNo;
+                                        params.data = JSON.stringify(p);
+                                    }else{
+                                        params.data[pageMapping] = pageNo;
+                                    }
                                     getData(params, reader);
                                     if (on && on.jumpOver) {
                                         on.jumpOver({
@@ -240,7 +259,13 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             number +
                                             ".json"; //测试代码
                                     }
-                                    params.data[pageMapping] = number;
+                                    if(typeof params.data == "string") {
+                                        let p = JSON.parse(params.data)
+                                        p[pageMapping] = number;
+                                        params.data = JSON.stringify(p);
+                                    }else{
+                                        params.data[pageMapping] = number;
+                                    }
                                     getData(params, reader);
                                     if (on && on.jumpOver) {
                                         on.jumpOver({
@@ -277,7 +302,14 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                     number +
                     ".json"; //测试代码
             }
-            params.data[pageMapping] = number;
+            if(typeof params.data == "string") {
+                let p = JSON.parse(params.data)
+                p[pageMapping] = number;
+                params.data = JSON.stringify(p);
+            }else{
+                params.data[pageMapping] = number;
+            }
+            
             getData(params, reader);
             if (callback) {
                 callback(number);
@@ -290,7 +322,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
         Object.keys(obj).forEach(function (key) {
             params[key] = obj[key];
         });
-
+        
         getData(params, reader);
         if (callback) {
             callback();
