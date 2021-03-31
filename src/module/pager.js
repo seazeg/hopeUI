@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-03-31 10:46:04
+ * @LastEditTime : 2021-03-31 14:52:12
  * @Description  : 分页
  */
 
@@ -134,7 +134,9 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                         $dom.html(pageHTML);
 
                         $dom.find(".hopeui-pager-num").on("click", function () {
-                            let thisPageNum = parseInt($(this).attr("hopeui-num"))
+                            let thisPageNum = parseInt(
+                                $(this).attr("hopeui-num")
+                            );
                             if (pageNo != thisPageNum) {
                                 if (params.url.includes(".json")) {
                                     params.url =
@@ -145,17 +147,17 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                                 params.url.split(".")[0]
                                                     .length - 1
                                             ) +
-                                            thisPageNum +
+                                        thisPageNum +
                                         ".json"; //测试代码
                                 }
-                                if(typeof params.data == "string") {
-                                    let p = JSON.parse(params.data)
+                                if (typeof params.data == "string") {
+                                    let p = JSON.parse(params.data);
                                     p[pageMapping] = thisPageNum;
                                     params.data = JSON.stringify(p);
-                                }else{
+                                } else {
                                     params.data[pageMapping] = thisPageNum;
                                 }
-                             
+
                                 getData(params, reader);
                                 if (on && on.jumpOver) {
                                     on.jumpOver({
@@ -185,11 +187,11 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageNo +
                                             ".json"; //测试代码
                                     }
-                                    if(typeof params.data == "string") {
-                                        let p = JSON.parse(params.data)
+                                    if (typeof params.data == "string") {
+                                        let p = JSON.parse(params.data);
                                         p[pageMapping] = pageNo;
                                         params.data = JSON.stringify(p);
-                                    }else{
+                                    } else {
                                         params.data[pageMapping] = pageNo;
                                     }
                                     getData(params, reader);
@@ -222,11 +224,11 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageNo +
                                             ".json"; //测试代码
                                     }
-                                    if(typeof params.data == "string") {
-                                        let p = JSON.parse(params.data)
+                                    if (typeof params.data == "string") {
+                                        let p = JSON.parse(params.data);
                                         p[pageMapping] = pageNo;
                                         params.data = JSON.stringify(p);
-                                    }else{
+                                    } else {
                                         params.data[pageMapping] = pageNo;
                                     }
                                     getData(params, reader);
@@ -245,8 +247,10 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                         $dom.find(".hopeui-pager-jump")
                             .children("button")
                             .on("click", function () {
-                                let number = parseInt($(this).siblings("input").val());
-                                if (number) {
+                                let number = parseInt(
+                                    $(this).siblings("input").val()
+                                );
+                                if (number && number <= totalPage) {
                                     if (params.url.includes(".json")) {
                                         params.url =
                                             params.url
@@ -257,13 +261,13 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                                         .length - 1
                                                 ) +
                                             number +
-                                            ".json"; //测试代码
+                                            ".json"; //测试代码2
                                     }
-                                    if(typeof params.data == "string") {
-                                        let p = JSON.parse(params.data)
+                                    if (typeof params.data == "string") {
+                                        let p = JSON.parse(params.data);
                                         p[pageMapping] = number;
                                         params.data = JSON.stringify(p);
-                                    }else{
+                                    } else {
                                         params.data[pageMapping] = number;
                                     }
                                     getData(params, reader);
@@ -275,6 +279,8 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             event: "jumpOver",
                                         });
                                     }
+                                }else{
+                                    $(this).siblings("input").val('')
                                 }
                             });
 
@@ -302,14 +308,14 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                     number +
                     ".json"; //测试代码
             }
-            if(typeof params.data == "string") {
-                let p = JSON.parse(params.data)
+            if (typeof params.data == "string") {
+                let p = JSON.parse(params.data);
                 p[pageMapping] = number;
                 params.data = JSON.stringify(p);
-            }else{
+            } else {
                 params.data[pageMapping] = number;
             }
-            
+
             getData(params, reader);
             if (callback) {
                 callback(number);
@@ -322,7 +328,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
         Object.keys(obj).forEach(function (key) {
             params[key] = obj[key];
         });
-        
+
         getData(params, reader);
         if (callback) {
             callback();
@@ -335,7 +341,6 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
             event: "init",
         });
     }
-
 
     return obj;
 };
