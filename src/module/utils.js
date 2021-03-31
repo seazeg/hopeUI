@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-03-31 15:46:23
+ * @LastEditTime : 2021-03-31 15:49:55
  * @Description  : 常用工具函数
  */
 
@@ -25,8 +25,10 @@ module.exports.utilsHandler = {
             return "Safari";
         } else if (userAgent.match(/Opera/i)) {
             return "Opera";
-        } else if (this.getIE() != 999) {
-            return this.getIE();
+        } else if (this.getIE() != 999 && this.getIE() != "edge") {
+            return "Ie" + this.getIE();
+        } else if (this.getIE() == "edge") {
+            return "Edge";
         } else {
             return "None";
         }
