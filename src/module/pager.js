@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-03-30 18:04:06
+ * @LastEditTime : 2021-03-31 10:46:04
  * @Description  : 分页
  */
 
@@ -127,7 +127,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                         if (options.extend) {
                             pageHTML += `<i class="hopeui-pager-count">共 ${totalNumber} 条</i>`;
 
-                            pageHTML += `<div class="hopeui-pager-jump">跳转到<input type="text" min="1" value="1">页<button type="button" >确定</button></div>`;
+                            pageHTML += `<div class="hopeui-pager-jump">跳转到<input type="text" value="" oninput="value = value.replace(/[^0-9]/g,'')">页<button type="button" >确定</button></div>`;
                         }
                         pageHTML += `</div>`;
 
