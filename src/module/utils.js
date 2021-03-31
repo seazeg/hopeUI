@@ -1,13 +1,36 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-01-15 14:24:42
+ * @LastEditTime : 2021-03-31 15:46:23
  * @Description  : 常用工具函数
  */
 
 // const $ = require("../utils/hopeu.js");
 
 module.exports.utilsHandler = {
+    //判断是什么浏览器
+    isBrowser: function () {
+        let userAgent = window.navigator.userAgent;
+        if (userAgent.match(/UBrowser/i)) {
+            return "UC";
+        } else if (userAgent.match(/MicroMessenger/i)) {
+            return "Weixin";
+        } else if (userAgent.match(/QQBrowser/i)) {
+            return "QQ";
+        } else if (userAgent.match(/Firefox/i)) {
+            return "Firefox";
+        } else if (userAgent.match(/Chrome/i)) {
+            return "Chrome";
+        } else if (userAgent.match(/Safari/i)) {
+            return "Safari";
+        } else if (userAgent.match(/Opera/i)) {
+            return "Opera";
+        } else if (this.getIE() != 999) {
+            return this.getIE();
+        } else {
+            return "None";
+        }
+    },
     //判断是否为空
     isEmpty: function (value) {
         return typeof value == "undefined" || value == null || value == ""
