@@ -1,21 +1,20 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-11 11:58:59
- * @LastEditTime : 2021-01-05 09:34:12
+ * @LastEditTime : 2021-04-02 17:01:40
  * @Description  : ie补丁
  */
 
-
 if (!Array.from) {
-    Array.from = (function() {
+    Array.from = (function () {
         var toStr = Object.prototype.toString;
-        var isCallable = function(fn) {
+        var isCallable = function (fn) {
             return (
                 typeof fn === "function" ||
                 toStr.call(fn) === "[object Function]"
             );
         };
-        var toInteger = function(value) {
+        var toInteger = function (value) {
             var number = Number(value);
             if (isNaN(number)) {
                 return 0;
@@ -26,7 +25,7 @@ if (!Array.from) {
             return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
         };
         var maxSafeInteger = Math.pow(2, 53) - 1;
-        var toLength = function(value) {
+        var toLength = function (value) {
             var len = toInteger(value);
             return Math.min(Math.max(len, 0), maxSafeInteger);
         };
@@ -79,7 +78,7 @@ if (!Array.from) {
 }
 
 if (!Array.prototype.filter) {
-    Array.prototype.filter = function(fun /*, thisp */) {
+    Array.prototype.filter = function (fun /*, thisp */) {
         "use strict";
 
         if (this === void 0 || this === null) throw new TypeError();
@@ -130,13 +129,13 @@ if (!Array.prototype.forEach) {
 }
 
 if (!Array.isArray) {
-    Array.isArray = function(arg) {
+    Array.isArray = function (arg) {
         return Object.prototype.toString.call(arg) === "[object Array]";
     };
 }
 
 if (!String.prototype.includes) {
-    String.prototype.includes = function(search, start) {
+    String.prototype.includes = function (search, start) {
         if (typeof start !== "number") {
             start = 0;
         }
@@ -150,7 +149,7 @@ if (!String.prototype.includes) {
 }
 
 if (!Object.keys) {
-    Object.keys = (function() {
+    Object.keys = (function () {
         var hasOwnProperty = Object.prototype.hasOwnProperty,
             hasDontEnumBug = !{ toString: null }.propertyIsEnumerable(
                 "toString"
@@ -166,7 +165,7 @@ if (!Object.keys) {
             ],
             dontEnumsLength = dontEnums.length;
 
-        return function(obj) {
+        return function (obj) {
             if (
                 (typeof obj !== "object" && typeof obj !== "function") ||
                 obj === null
@@ -191,24 +190,24 @@ if (!Object.keys) {
 }
 
 if (!Object.assign) {
-    Object.assign = function(target) {
-      'use strict';
-      if (target == null) {
-        throw new TypeError('Cannot convert undefined or null to object');
-      }
-   
-      target = Object(target);
-      for (var index = 1; index < arguments.length; index++) {
-        var source = arguments[index];
-        if (source != null) {
-          for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-              target[key] = source[key];
-            }
-          }
+    Object.assign = function (target) {
+        "use strict";
+        if (target == null) {
+            throw new TypeError("Cannot convert undefined or null to object");
         }
-      }
-      return target;
+
+        target = Object(target);
+        for (var index = 1; index < arguments.length; index++) {
+            var source = arguments[index];
+            if (source != null) {
+                for (var key in source) {
+                    if (Object.prototype.hasOwnProperty.call(source, key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+        }
+        return target;
     };
-  }
-  
+}
+

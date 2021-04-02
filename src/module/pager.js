@@ -1,12 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-03-31 14:52:12
+ * @LastEditTime : 2021-04-02 16:13:05
  * @Description  : 分页
  */
 
 const $ = require("../utils/hopeu.js");
-
 module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
     const obj = new Object();
     let $dom = $(ele);
