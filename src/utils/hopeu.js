@@ -1,3 +1,5 @@
+const { is } = require("../utils/is.js");
+
 var hopeu = (window["hopeu"] = (function () {
     var win = window,
         queryShimCdn =
@@ -2082,6 +2084,7 @@ hopeu["plug"]("ajax", function ($) {
     function _xhr() {
         if (_xhrf != null) return _xhrf();
         for (var i = 0, l = xhrs.length; i < l; i++) {
+            debugger;
             try {
                 var f = xhrs[i],
                     req = f();
@@ -2138,42 +2141,154 @@ hopeu["plug"]("ajax", function ($) {
     );
 
     function ajax(url, o) {
-        var xhr = _xhr(),
-            timer,
-            n = 0;
-        if (typeof url === "object") o = url;
-        else o["url"] = url;
-        o = $["_defaults"](o, {
-            userAgent: "XMLHttpRequest",
-            lang: "en",
-            type: "GET",
-            data: null,
-            contentType: "application/x-www-form-urlencoded",
-            dataType: null,
-            processData: true,
-            headers: {
-                "X-Requested-With": "XMLHttpRequest",
-            },
-            cache: true,
-        });
-        if (o.timeout)
-            timer = setTimeout(function () {
-                xhr.abort();
-                if (o.timeoutFn) o.timeoutFn(o.url);
-            }, o.timeout);
-        var cbCtx = $(o["context"] || document),
-            evtCtx = cbCtx;
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (timer) clearTimeout(timer);
-                if (xhr.status < 300) {
-                    var res,
-                        decode = true,
-                        dt = o.dataType || "";
-                    try {
-                        res = _xhrResp(xhr, dt, o);
-                    } catch (e) {
-                        decode = false;
+        if (is.ie() == 8 || is.ie() == 9) {
+            var postData = "";
+            var userOptions = (options = url);
+            var userType = (userOptions.dataType || "").toLowerCase();
+
+            xdr = new XDomainRequest();
+            if (/^\d+$/.test(userOptions.timeout)) {
+                xdr.timeout = userOptions.timeout;
+            }
+
+            xdr.ontimeout = function () {
+                // complete(500, "timeout");
+            };
+
+            xdr.onload = function () {
+                var allResponseHeaders =
+                    "Content-Length: " +
+                    xdr.responseText.length +
+                    "\r\nContent-Type: " +
+                    xdr.contentType;
+                var status = {
+                    code: 200,
+                    message: "success",
+                };
+                var responses = {
+                    text: xdr.responseText,
+                };
+                try {
+                    if (
+                        userType === "html" ||
+                        /text\/html/i.test(xdr.contentType)
+                    ) {
+                        responses.html = xdr.responseText;
+                    } else if (
+                        userType === "json" ||
+                        (userType !== "text" && /\/json/i.test(xdr.contentType))
+                    ) {
+                        try {
+                            responses.json = $.parseJSON(xdr.responseText);
+                        } catch (e) {
+                            status.code = 500;
+                            status.message = "parseerror";
+                            //throw 'Invalid JSON: ' + xdr.responseText;
+                        }
+                    } else if (
+                        userType === "xml" ||
+                        (userType !== "text" && /\/xml/i.test(xdr.contentType))
+                    ) {
+                        var doc = new ActiveXObject("Microsoft.XMLDOM");
+                        doc.async = false;
+                        try {
+                            doc.loadXML(xdr.responseText);
+                        } catch (e) {
+                            doc = undefined;
+                        }
+                        if (
+                            !doc ||
+                            !doc.documentElement ||
+                            doc.getElementsByTagName("parsererror").length
+                        ) {
+                            status.code = 500;
+                            status.message = "parseerror";
+                            throw "Invalid XML: " + xdr.responseText;
+                        }
+                        responses.xml = doc;
+                    }
+                } catch (parseMessage) {
+                    throw parseMessage;
+                } finally {
+                    url.success(JSON.parse(responses.text))
+                    // complete(
+                    //     status.code,
+                    //     status.message,
+                    //     responses,
+                    //     allResponseHeaders
+                    // );
+                }
+            };
+
+            // set an empty handler for 'onprogress' so requests don't get aborted
+            xdr.onprogress = function () {};
+            xdr.onerror = function () {
+                // complete(500, "error", {
+                //     text: xdr.responseText,
+                // });
+            };
+
+            if (userOptions.data) {
+                postData =
+                    $.type(userOptions.data) === "string"
+                        ? userOptions.data
+                        : $.param(userOptions.data);
+            }
+            xdr.open(options.type, options.url);
+            xdr.send(postData);
+        } else {
+            var xhr = _xhr(),
+                timer,
+                n = 0;
+            if (typeof url === "object") o = url;
+            else o["url"] = url;
+            o = $["_defaults"](o, {
+                userAgent: "XMLHttpRequest",
+                lang: "en",
+                type: "GET",
+                data: null,
+                contentType: "application/x-www-form-urlencoded",
+                dataType: null,
+                processData: true,
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+                cache: true,
+            });
+            if (o.timeout)
+                timer = setTimeout(function () {
+                    xhr.abort();
+                    if (o.timeoutFn) o.timeoutFn(o.url);
+                }, o.timeout);
+            var cbCtx = $(o["context"] || document),
+                evtCtx = cbCtx;
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (timer) clearTimeout(timer);
+                    if (xhr.status < 300) {
+                        var res,
+                            decode = true,
+                            dt = o.dataType || "";
+                        try {
+                            res = _xhrResp(xhr, dt, o);
+                        } catch (e) {
+                            decode = false;
+                            if (o.error)
+                                o.error(xhr, xhr.status, xhr.statusText);
+                            evtCtx["trigger"](cbCtx, "ajaxError", [
+                                xhr,
+                                xhr.statusText,
+                                o,
+                            ]);
+                        }
+                        if (
+                            o["success"] &&
+                            decode &&
+                            (dt.indexOf("json") >= 0 || !!res)
+                        )
+                            o["success"](res);
+                        evtCtx["trigger"](cbCtx, "ajaxSuccess", [xhr, res, o]);
+                    } else {
                         if (o.error) o.error(xhr, xhr.status, xhr.statusText);
                         evtCtx["trigger"](cbCtx, "ajaxError", [
                             xhr,
@@ -2181,55 +2296,41 @@ hopeu["plug"]("ajax", function ($) {
                             o,
                         ]);
                     }
-                    if (
-                        o["success"] &&
-                        decode &&
-                        (dt.indexOf("json") >= 0 || !!res)
-                    )
-                        o["success"](res);
-                    evtCtx["trigger"](cbCtx, "ajaxSuccess", [xhr, res, o]);
-                } else {
-                    if (o.error) o.error(xhr, xhr.status, xhr.statusText);
-                    evtCtx["trigger"](cbCtx, "ajaxError", [
-                        xhr,
-                        xhr.statusText,
-                        o,
-                    ]);
-                }
-                if (o["complete"]) o["complete"](xhr, xhr.statusText);
-                evtCtx["trigger"](cbCtx, "ajaxComplete", [xhr, o]);
-            } else if (o["progress"]) o["progress"](++n);
-        };
-        var url = o["url"],
-            data = null;
-        var cache = o["cache"] == true;
-        var isPost = o["type"] == "POST" || o["type"] == "PUT";
-        if (o["data"] && o["processData"] && typeof o["data"] == "object")
-            data = $["formData"](o["data"]);
+                    if (o["complete"]) o["complete"](xhr, xhr.statusText);
+                    evtCtx["trigger"](cbCtx, "ajaxComplete", [xhr, o]);
+                } else if (o["progress"]) o["progress"](++n);
+            };
+            var url = o["url"],
+                data = null;
+            var cache = o["cache"] == true;
+            var isPost = o["type"] == "POST" || o["type"] == "PUT";
+            if (o["data"] && o["processData"] && typeof o["data"] == "object")
+                data = $["formData"](o["data"]);
 
-        if (!isPost && data) {
-            url += "?" + data;
-            data = null;
-            // if (!cache)
-            //   url = url + "&_=" + (new Date().getTime());
+            if (!isPost && data) {
+                url += "?" + data;
+                data = null;
+                // if (!cache)
+                //   url = url + "&_=" + (new Date().getTime());
+            }
+            // else(!isPost && !cache)
+            // url = url + "?_=" + (new Date().getTime());
+            // cache = null;
+            xhr.open(o["type"], url);
+
+            try {
+                for (var i in o.headers) xhr.setRequestHeader(i, o.headers[i]);
+            } catch (_) {
+                console.log(_);
+            }
+
+            if (isPost) {
+                if (o["contentType"].indexOf("json") >= 0) data = o["data"];
+                xhr.setRequestHeader("Content-Type", o["contentType"]);
+            }
+
+            xhr.send(data);
         }
-        // else(!isPost && !cache)
-        // url = url + "?_=" + (new Date().getTime());
-        // cache = null;
-        xhr.open(o["type"], url);
-
-        try {
-            for (var i in o.headers) xhr.setRequestHeader(i, o.headers[i]);
-        } catch (_) {
-            console.log(_);
-        }
-
-        if (isPost) {
-            if (o["contentType"].indexOf("json") >= 0) data = o["data"];
-            xhr.setRequestHeader("Content-Type", o["contentType"]);
-        }
-
-        xhr.send(data);
     }
     $["ajax"] = ajax;
 
