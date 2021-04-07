@@ -2142,8 +2142,10 @@ hopeu["plug"]("ajax", function ($) {
 
     function ajax(url, o) {
         if (is.ie() == 8 || is.ie() == 9) {
+            if (typeof url === "object") o = url;
+            else o["url"] = url;
             var postData = "";
-            var userOptions = (options = url);
+            var userOptions = options = o;
             var userType = (userOptions.dataType || "").toLowerCase();
 
             xdr = new XDomainRequest();
@@ -2210,19 +2212,14 @@ hopeu["plug"]("ajax", function ($) {
                 } catch (parseMessage) {
                     throw parseMessage;
                 } finally {
-                    url.success(JSON.parse(responses.text))
-                    // complete(
-                    //     status.code,
-                    //     status.message,
-                    //     responses,
-                    //     allResponseHeaders
-                    // );
+                    o["success"](window.JSON["parse"](xdr.responseText));
                 }
             };
 
             // set an empty handler for 'onprogress' so requests don't get aborted
             xdr.onprogress = function () {};
             xdr.onerror = function () {
+                // url["error"](JSON.parse(responses.text));
                 // complete(500, "error", {
                 //     text: xdr.responseText,
                 // });
