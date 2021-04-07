@@ -108,6 +108,9 @@ input:-ms-input-placeholder {
 .hopeui-show {
   display: block !important;
 }
+.hopeui-inlineshow {
+  display: inline-block !important;
+}
 .hopeui-hide {
   display: none !important;
 }

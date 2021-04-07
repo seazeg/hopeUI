@@ -38,6 +38,15 @@
             .@{class}-offset@{fen} {
                 margin-left: (100% / @len) * @fen;
             }
+            .@{class}-hide {
+                display: none;
+            }
+            .@{class}-show {
+                display: block;
+            }
+            .@{class}-inlineshow {
+                display: inline-block;
+            }
             .Col(@fen+1, extract(@name, @index));
         }
         .Col(@fen, extract(@name, @index));
@@ -52,6 +61,15 @@
     .hopeui-col-xl-offset@{fen} {
         margin-left: (100% / @len) * @fen;
     }
+    .hopeui-col-xl-hide {
+        display: none;
+    }
+    .hopeui-col-xl-show {
+        display: block;
+    }
+    .hopeui-col-xl-inlineshow {
+        display: inline-block;
+    }
     .Col(@fen+1, @len);
 }
 
@@ -64,7 +82,6 @@
     }
     .Space(@fen+1, @len);
 }
-
 
 .Space(1, 10);
 
