@@ -415,7 +415,8 @@
             <span class="hope-numup-obj" hope-numup-num="100" hope-numup-time="3000" hope-numup-speed="50"
                 hope-numup-start="20000">0</span>
             <span class="hope-numup-obj" hope-numup-num="2021800" hope-numup-time="3000" hope-numup-speed="50">0</span>
-            <span class="hope-numup-obj" hope-numup-num="21800" hope-numup-time="3000" hope-numup-speed="50"  hope-numup-start="20000">0</span>
+            <span class="hope-numup-obj" hope-numup-num="21800" hope-numup-time="3000" hope-numup-speed="50"
+                hope-numup-start="20000">0</span>
         </div>
     </div>
 
@@ -605,7 +606,7 @@
                         <div class="title ">Slide 4</div>
                     </div>
                 </div>
-                <div ></div>
+                <div></div>
                 <div class="hope-pagination"></div>
             </div>
         </div>
@@ -1225,7 +1226,9 @@
             init: function (e) {
                 // //console.log(e);
             },
-            change:function (e) {console.log(e);}
+            change: function (e) {
+                console.log(e);
+            }
         }
     })
 
@@ -1350,13 +1353,13 @@
         options: {
             searchMode: true,
             switchIcon: 'hopeui-icon hopeui-icon-triangle-d',
-            autoHideBar:true,
-            isTitle:true
+            autoHideBar: true,
+            isTitle: true
         },
         on: {
             init: function (e) {
                 // console.log(e.this);
-               
+
             }
         }
     })
@@ -1689,8 +1692,66 @@
                 // console.log(e);
             },
         },
+        // controls: {
+        //     selector: {
+        //         on: {
+        //             init: function (e) {
+        //                 ////console.log(e);
+        //             },
+        //             change: function (e) {
+        //                 ////console.log(e);
+        //             },
+        //             toggle: function (e) {
+        //                 ////console.log(e);
+        //             },
+        //         },
+        //     },
+            // checkbox: {
+            //     on: {
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            // },
+            // radio: {
+            //     on: {
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            // },
+            // input: {
+            //     on: {
+            //         blur: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         focus: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         input: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            // },
+            // textarea: {
+            //     on: {
+            //         blur: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         focus: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         input: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            // },
+        // },
         controls: {
-            selector: {
+            //[name]:fn
+            city: {
+                type: 'selector',
+                options: {},
                 on: {
                     init: function (e) {
                         ////console.log(e);
@@ -1702,104 +1763,62 @@
                         ////console.log(e);
                     },
                 },
-            },
-            checkbox: {
-                on: {
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                },
-            },
-            radio: {
-                on: {
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                },
-            },
-            input: {
-                on: {
-                    blur: function (e) {
-                        ////console.log(e);
-                    },
-                    focus: function (e) {
-                        ////console.log(e);
-                    },
-                    input: function (e) {
-                        ////console.log(e);
-                    },
-                },
-            },
-            textarea: {
-                on: {
-                    blur: function (e) {
-                        ////console.log(e);
-                    },
-                    focus: function (e) {
-                        ////console.log(e);
-                    },
-                    input: function (e) {
-                        ////console.log(e);
-                    },
-                },
-            },
-        },
-        verify: {
-            //[name]:fn
-            city: function (value) {
-                if (value.length <= 0) {
-                    return "请选择一个选项";
+                verify: function (value) {
+                    if (value.length <= 0) {
+                        return "请选择一个选项";
+                    }
                 }
             },
-            text: function (value) {
-                if (value.length <= 0) {
-                    return "文本不能为空";
-                }
-                if (value.length < 5) {
-                    return "文本至少得5个字符";
-                }
-                if (!/^[A-Za-z]+$/.test(value)) {
-                    return "文本必须是英文";
-                }
-            },
-            school: function (value) {
-                if (value.length <= 0) {
-                    return "请选择一个选项";
-                }
-            },
-            LD: function (value) {
-                if (value.length <= 0) {
-                    return "请选择一个选项";
-                }
-            },
-            password: function (value) {
-                if (value.length <= 0) {
-                    return "文本不能为空";
-                }
-                if (value.length < 6) {
-                    return "密码至少输入6个字符";
-                }
-            },
-            task: function (value) {
-                if (value.length <= 0) {
-                    return "需要选择至少一个选项";
-                }
-            },
-            subject: function (value) {
-                if (value.length <= 0) {
-                    return "需要选择至少一个选项";
-                }
-            },
-            radio: function (value) {
-                if (value.length <= 0) {
-                    return "需要选择至少一个选项";
-                }
-            },
-            textarea: function (value) {
-                if (value.length <= 0) {
-                    return "需要选择至少一个选项";
-                }
-            },
+
+            // text: function (value) {
+            //     if (value.length <= 0) {
+            //         return "文本不能为空";
+            //     }
+            //     if (value.length < 5) {
+            //         return "文本至少得5个字符";
+            //     }
+            //     if (!/^[A-Za-z]+$/.test(value)) {
+            //         return "文本必须是英文";
+            //     }
+            // },
+            // school: function (value) {
+            //     if (value.length <= 0) {
+            //         return "请选择一个选项";
+            //     }
+            // },
+            // LD: function (value) {
+            //     if (value.length <= 0) {
+            //         return "请选择一个选项";
+            //     }
+            // },
+            // password: function (value) {
+            //     if (value.length <= 0) {
+            //         return "文本不能为空";
+            //     }
+            //     if (value.length < 6) {
+            //         return "密码至少输入6个字符";
+            //     }
+            // },
+            // task: function (value) {
+            //     if (value.length <= 0) {
+            //         return "需要选择至少一个选项";
+            //     }
+            // },
+            // subject: function (value) {
+            //     if (value.length <= 0) {
+            //         return "需要选择至少一个选项";
+            //     }
+            // },
+            // radio: function (value) {
+            //     if (value.length <= 0) {
+            //         return "需要选择至少一个选项";
+            //     }
+            // },
+            // textarea: function (value) {
+            //     if (value.length <= 0) {
+            //         return "需要选择至少一个选项";
+            //     }
+            // },
         },
     });
 

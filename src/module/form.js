@@ -1,40 +1,44 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:45:22
+ * @LastEditTime : 2021-04-09 15:03:01
  * @Description  : 表单
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
 
-module.exports.formHandler = function ({ ele, options, on, controls, verify }) {
+module.exports.formHandler = function ({ ele, options, on, controls}) {
     const obj = new Object();
+
+    // controls.
+
+    
     let formControls = {
         selector: hope.selector({
             ele: ele,
             options: options,
-            on: controls.selector && controls.selector.on,
+            on: controls.selector.on,
         }),
         checkbox: hope.checkbox({
             ele: ele,
             options: options,
-            on: controls.checkbox && controls.checkbox.on,
+            on: controls.checkbox.on,
         }),
         radio: hope.radio({
             ele: ele,
             options: options,
-            on: controls.radio && controls.radio.on,
+            on: controls.radio.on,
         }),
         input: hope.input({
             ele: ele,
             options: options,
-            on: controls.input && controls.input.on,
+            on: controls.input.on,
         }),
         textarea: hope.textarea({
             ele: ele,
             options: options,
-            on: controls.textarea && controls.textarea.on,
+            on: controls.textarea.on,
         }),
     };
 
