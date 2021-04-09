@@ -2084,7 +2084,6 @@ hopeu["plug"]("ajax", function ($) {
     function _xhr() {
         if (_xhrf != null) return _xhrf();
         for (var i = 0, l = xhrs.length; i < l; i++) {
-            debugger;
             try {
                 var f = xhrs[i],
                     req = f();

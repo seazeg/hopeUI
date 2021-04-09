@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-03-15 16:28:05
+ * @LastEditTime : 2021-04-09 14:30:48
  * @Description  : 下拉框
  */
 
@@ -52,24 +52,24 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 groupOpt = $(this)[0];
 
                                 if (groupOpt.selected) {
-                                    template += `<div class="option group hopeui-select-this" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                                    template += `<div class="option group hopeui-select-this" ${options && options.isTitle?'title='+item.innerText:''} hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
                                     tempSelectedVal = {
                                         value: groupOpt.value,
                                         label: groupOpt.innerText,
                                     };
                                 } else {
-                                    template += `<div class="option group" hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                                    template += `<div class="option group" ${options && options.isTitle?'title='+item.innerText:''} hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
                                 }
                             });
                     } else {
                         if (item.selected) {
-                            template += `<div class="option hopeui-select-this" hope-value="${item.value}" >${item.innerText}</div>`;
+                            template += `<div class="option hopeui-select-this" ${options && options.isTitle?'title='+item.innerText:''} hope-value="${item.value}" >${item.innerText}</div>`;
                             tempSelectedVal = {
                                 value: item.value,
                                 label: item.innerText,
                             };
                         } else {
-                            template += `<div class="option" hope-value="${item.value}">${item.innerText}</div>`;
+                            template += `<div class="option" ${options && options?'title='+item.innerText:''} hope-value="${item.value}">${item.innerText}</div>`;
                         }
                     }
                 });
