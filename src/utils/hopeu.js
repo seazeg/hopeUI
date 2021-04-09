@@ -2140,7 +2140,7 @@ hopeu["plug"]("ajax", function ($) {
     );
 
     function ajax(url, o) {
-        if (is.ie() == 8 || is.ie() == 9) {
+        if (url.isXDomainRequest) {
             if (typeof url === "object") o = url;
             else o["url"] = url;
             var postData = "";
@@ -2180,7 +2180,7 @@ hopeu["plug"]("ajax", function ($) {
                         (userType !== "text" && /\/json/i.test(xdr.contentType))
                     ) {
                         try {
-                            responses.json = $.parseJSON(xdr.responseText);
+                            responses.json = window.JSON["parse"](xdr.responseText)
                         } catch (e) {
                             status.code = 500;
                             status.message = "parseerror";
@@ -2228,7 +2228,7 @@ hopeu["plug"]("ajax", function ($) {
                 postData =
                     $.type(userOptions.data) === "string"
                         ? userOptions.data
-                        : $.param(userOptions.data);
+                        : changeDataType(userOptions.data);
             }
             xdr.open(options.type, options.url);
             xdr.send(postData);
@@ -2383,5 +2383,20 @@ hopeu["plug"]("ajax", function ($) {
             "http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"
         );
 });
+
+function changeDataType(obj){
+    let str = ''
+    if(typeof obj == 'object'){
+        for(let i in obj){
+            if(typeof obj[i] != 'function' && typeof obj[i] != 'object'){
+                str += i + '=' + obj[i] + '&' ;
+            }else if (typeof obj[i] == 'object'){
+                nextStr = '';
+                str += changeSonType(i, obj[i])
+            }
+        }
+    }
+    return str.replace(/&$/g, '');
+}
 
 module.exports = hopeu;

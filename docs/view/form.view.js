@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2021-03-23 16:17:16
+ * @LastEditTime : 2021-04-09 17:26:02
  * @Description  :
  */
 export const viewinfo = {
@@ -39,42 +39,6 @@ html:`
             </select>
         </div>
     </div>
-    <!--<div class="hopeui-form-item">
-        <label class="hopeui-form-label">联动下拉框</label>
-        <div class="hopeui-input-inline">
-            <select name="LD" id="dd" hope-verify="required">
-                <option value="">请选择</option>
-                <option value="青岛">青岛</option>
-                <option value="武汉">武汉</option>
-                <option value="乌鲁木齐">乌鲁木齐</option>
-                <option value="南京">南京</option>
-                <option value="天津">天津</option>
-                <option value="郑州">郑州</option>
-            </select>
-        </div>
-        <div class="hopeui-input-inline">
-            <select name="LD" hope-verify="required">
-                <option value="">请选择</option>
-                <option value="青岛">青岛</option>
-                <option value="武汉">武汉</option>
-                <option value="乌鲁木齐">乌鲁木齐</option>
-                <option value="南京">南京</option>
-                <option value="天津">天津</option>
-                <option value="郑州">郑州</option>
-            </select>
-        </div>
-        <div class="hopeui-input-inline">
-            <select name="LD" hope-verify="required">
-                <option value="">请选择</option>
-                <option value="青岛">青岛</option>
-                <option value="武汉">武汉</option>
-                <option value="乌鲁木齐">乌鲁木齐</option>
-                <option value="南京">南京</option>
-                <option value="天津">天津</option>
-                <option value="郑州">郑州</option>
-            </select>
-        </div>
-    </div>-->
     <div class="hopeui-form-item">
         <label class="hopeui-form-label">文本框</label>
         <div class="hopeui-input-block">
@@ -137,165 +101,196 @@ js:`
 window.fm = hope.form({
     ele: "#form",
     on: {
-        submit: function(e) {
+        submit: function (e) {
             console.log(e);
         },
-        init:function (e) {
-            
-        }
     },
     controls: {
-        selector: {
+        //[name]:fn
+        city: {
+            type: 'selector',
+            options: {},
             on: {
-                change: function(e) {
+                init: function (e) {
                     console.log(e);
                 },
-                toggle: function(e) {
+                change: function (e) {
+                    console.log(e);
+                },
+                toggle: function (e) {
                     console.log(e);
                 },
             },
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "请选择一个选项";
+                }
+            }
         },
-        checkbox: {
+        text: {
+            type: 'input',
+            options: {},
             on: {
-                change: function(e) {
+                blur: function (e) {
+                    console.log(e);
+                },
+                focus: function (e) {
+                    console.log(e);
+                },
+                input: function (e) {
                     console.log(e);
                 },
             },
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "文本不能为空";
+                }
+                if (value.length < 5) {
+                    return "文本至少得5个字符";
+                }
+                if (!/^[A-Za-z]+$/.test(value)) {
+                    return "文本必须是英文";
+                }
+            }
+        },
+        school: {
+            type: 'selector',
+            options: {},
+            on: {
+                init: function (e) {
+                    console.log(e);
+                },
+                change: function (e) {
+                    console.log(e);
+                },
+                toggle: function (e) {
+                    console.log(e);
+                },
+            },
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "请选择一个选项";
+                }
+            }
+        },
+        password: {
+            type: 'input',
+            options: {},
+            on: {
+                init: function (e) {
+                    console.log(e);
+                },
+                change: function (e) {
+                    console.log(e);
+                },
+                toggle: function (e) {
+                    console.log(e);
+                },
+            },
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "文本不能为空";
+                }
+                if (value.length < 6) {
+                    return "密码至少输入6个字符";
+                }
+            }
+        },
+        task: {
+            type: 'checkbox',
+            options: {},
+            on: {
+                init: function (e) {
+                    console.log(e);
+                },
+                change: function (e) {
+                    console.log(e);
+                },
+                toggle: function (e) {
+                    console.log(e);
+                },
+            },
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "需要选择至少一个选项";
+                }
+            }
+        },
+        subject: {
+            type: 'checkbox',
+            options: {},
+            on: {
+                init: function (e) {
+                    console.log(e);
+                },
+                change: function (e) {
+                    console.log(e);
+                },
+                toggle: function (e) {
+                    console.log(e);
+                },
+            },
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "请选择一个选项";
+                }
+            }
         },
         radio: {
+            type: 'radio',
+            options: {},
             on: {
-                change: function(e) {
+                init: function (e) {
+                    console.log(e);
+                },
+                change: function (e) {
+                    console.log(e);
+                },
+                toggle: function (e) {
                     console.log(e);
                 },
             },
-        },
-        input: {
-            on: {
-                blur: function(e) {
-                    console.log(e);
-                },
-                focus: function(e) {
-                    console.log(e);
-                },
-                input: function(e) {
-                    console.log(e);
-                },
-            },
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "需要选择至少一个选项";
+                }
+            }
         },
         textarea: {
+            type: 'textarea',
+            options: {},
             on: {
-                blur: function(e) {
+                init: function (e) {
                     console.log(e);
                 },
-                focus: function(e) {
+                change: function (e) {
                     console.log(e);
                 },
-                input: function(e) {
+                toggle: function (e) {
                     console.log(e);
                 },
             },
-        },
-    },
-    verify: {
-        //[name]:fn
-        city: function(value) {
-            if (value.length <= 0) {
-                return "请选择一个选项";
-            }
-        },
-        text: function(value) {
-            if (value.length <= 0) {
-                return "文本不能为空";
-            }
-            if (value.length < 5) {
-                return "文本至少得5个字符";
-            }
-            if (!/^[A-Za-z]+$/.test(value)) {
-                return "文本必须是英文";
-            }
-        },
-        school: function(value) {
-            if (value.length <= 0) {
-                return "请选择一个选项";
-            }
-        },
-        LD: function(value) {
-            if (value.length <= 0) {
-                return "请选择一个选项";
-            }
-        },
-        password: function(value) {
-            if (value.length <= 0) {
-                return "文本不能为空";
-            }
-            if (value.length < 6) {
-                return "密码至少输入6个字符";
-            }
-        },
-        task: function(value) {
-            if (value.length <= 0) {
-                return "需要选择至少一个选项";
-            }
-        },
-        subject: function(value) {
-            if (value.length <= 0) {
-                return "需要选择至少一个选项";
-            }
-        },
-        radio: function(value) {
-            if (value.length <= 0) {
-                return "需要选择至少一个选项";
-            }
-        },
-        textarea: function(value) {
-            if (value.length <= 0) {
-                return "需要选择至少一个选项";
+            verify: function (value) {
+                if (value.length <= 0) {
+                    return "请输入内容";
+                }
             }
         },
     },
 });
 
-document.querySelector("#set").onclick = function() {
+document.querySelector("#set").onclick = function () {
     fm.val({
-        city: {
-            type: "selector",
-            value: "南京",
-        },
-        school: {
-            type: "selector",
-            value: "清华大学",
-        },
-        LD: {
-            type: "selector",
-            value: "天津,乌鲁木齐,青岛",
-        },
-        text: {
-            type: "input",
-            value: "我爱HopeUI",
-        },
-        task: {
-            type: "checkbox",
-            value: "打桩",
-        },
-        textarea: {
-            type: "textarea",
-            value: "我爱北京天安门",
-        },
-        password: {
-            type: "input",
-            value: "999888999",
-        },
-        subject: {
-            type: "checkbox",
-            value: "历史",
-        },
-        radio: {
-            type: "radio",
-            value: "女",
-        },
+        city: "南京",
+        school: "北京大学",
+        text: "我爱HopeUI",
+        task: "打桩,钓鱼",
+        textarea: "我爱北京天安门",
+        password: "999888999",
+        subject: "历史",
+        radio: '女'
     });
 };
-
 
 document.querySelector("#clear").onclick = function () {
     fm.clear();

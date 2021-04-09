@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 16:45:55
+ * @LastEditTime : 2021-04-09 17:07:09
  * @Description  : 文本框
  */
 
@@ -149,8 +149,6 @@ module.exports.inputHandler = function ({ ele, options, on }) {
             ele.value = "";
             if (is.ie() <= 9) {
                 $(this)
-                    .next()
-                    .find("input")
                     .next(".hopeui-placeholder")
                     .removeClass("hopeui-hide");
             }
