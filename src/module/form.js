@@ -1,46 +1,88 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 15:03:01
+ * @LastEditTime : 2021-04-09 15:46:30
  * @Description  : 表单
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
 
-module.exports.formHandler = function ({ ele, options, on, controls}) {
+module.exports.formHandler = function ({ ele, options, on, controls }) {
     const obj = new Object();
-
-    // controls.
-
-    
-    let formControls = {
-        selector: hope.selector({
-            ele: ele,
-            options: options,
-            on: controls.selector.on,
-        }),
-        checkbox: hope.checkbox({
-            ele: ele,
-            options: options,
-            on: controls.checkbox.on,
-        }),
-        radio: hope.radio({
-            ele: ele,
-            options: options,
-            on: controls.radio.on,
-        }),
-        input: hope.input({
-            ele: ele,
-            options: options,
-            on: controls.input.on,
-        }),
-        textarea: hope.textarea({
-            ele: ele,
-            options: options,
-            on: controls.textarea.on,
-        }),
+    let formControls = {};
+    const handlers = {
+        selector: function (ele, options, on) {
+            return hope.selector({
+                ele: ele,
+                options: options,
+                on: on,
+            });
+        },
+        checkbox: function (ele, options, on) {
+            return hope.checkbox({
+                ele: ele,
+                options: options,
+                on: on,
+            });
+        },
+        radio: function (ele, options, on) {
+            return hope.radio({
+                ele: ele,
+                options: options,
+                on: on,
+            });
+        },
+        input: function (ele, options, on) {
+            return hope.input({
+                ele: ele,
+                options: options,
+                on: on,
+            });
+        },
+        textarea: function (ele, options, on) {
+            return hope.textarea({
+                ele: ele,
+                options: options,
+                on: on,
+            });
+        },
     };
+    // controls.
+    Object.keys(controls).forEach(function (name) {
+        let cont = controls[name];
+        let newObj = handlers[cont.type](`${ele} [name=${name}]`, cont.options, cont.on);
+        formControls[name] = newObj;
+    });
+
+
+    // let formControls = {
+    //     selector: hope.selector({
+    //         ele: ele,
+    //         options: options,
+    //         on: controls.selector.on,
+    //     }),
+    //     checkbox: hope.checkbox({
+    //         ele: ele,
+    //         options: options,
+    //         on: controls.checkbox.on,
+    //     }),
+    //     radio: hope.radio({
+    //         ele: ele,
+    //         options: options,
+    //         on: controls.radio.on,
+    //     }),
+    //     input: hope.input({
+    //         ele: ele,
+    //         options: options,
+    //         on: controls.input.on,
+    //     }),
+    //     textarea: hope.textarea({
+    //         ele: ele,
+    //         options: options,
+    //         on: controls.textarea.on,
+    //     }),
+    // };
 
     //form事件绑定
     let $dom = $("form");
@@ -103,8 +145,8 @@ module.exports.formHandler = function ({ ele, options, on, controls}) {
                             if (ele.checked) {
                                 obj.value += `${ele.value},`;
                             }
-                            if (verify[ele.name]) {
-                                if (!verify[ele.name](obj.value)) {
+                            if (controls[ele.name].verify) {
+                                if (!controls[ele.name].verify(obj.value)) {
                                     utils.validation(
                                         ele,
                                         "pass",
@@ -115,7 +157,7 @@ module.exports.formHandler = function ({ ele, options, on, controls}) {
                                     utils.validation(
                                         ele,
                                         "error",
-                                        verify[ele.name](obj.value),
+                                        controls[ele.name].verify(obj.value),
                                         items.type
                                     );
                                     status = false;
@@ -156,8 +198,8 @@ module.exports.formHandler = function ({ ele, options, on, controls}) {
                                 obj.value += `${ele.value},`;
                             }
                             // 自定义校验
-                            if (verify[ele.name]) {
-                                if (!verify[ele.name](ele.value)) {
+                            if (controls[ele.name].verify) {
+                                if (!controls[ele.name].verify(ele.value)) {
                                     utils.validation(
                                         ele,
                                         "pass",
@@ -168,7 +210,7 @@ module.exports.formHandler = function ({ ele, options, on, controls}) {
                                     utils.validation(
                                         ele,
                                         "error",
-                                        verify[ele.name](ele.value),
+                                        controls[ele.name].verify(ele.value),
                                         items.type
                                     );
                                     status = false;
@@ -218,9 +260,7 @@ module.exports.formHandler = function ({ ele, options, on, controls}) {
 
     obj.val = function (obj, callback) {
         Object.keys(obj).forEach(function (key) {
-            formControls[obj[key].type].val({
-                [key]: obj[key],
-            });
+            formControls[key].val(obj[key]);
         });
         if (callback) {
             callback();

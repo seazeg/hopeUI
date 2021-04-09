@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:38:35
+ * @LastEditTime : 2021-04-09 16:41:06
  * @Description  : 复选框
  */
 
@@ -14,9 +14,7 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
     let $dom = $("input[type=checkbox]");
 
     if (ele) {
-        utils.isSelf(ele, type)
-            ? ($dom = $(ele))
-            : ($dom = $(`${ele} input[type=checkbox]`));
+        $dom = $(ele)
     }
 
     $dom.each(function () {
@@ -60,26 +58,17 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
         });
     }
 
-    obj.val = function (obj,callback) {
-        if (obj) {
-            Object.keys(obj).forEach(function (key) {
-                let eleArr = $(`input[name=${key}]`);
-
-                if (ele) {
-                    utils.isSelf(ele, type)
-                        ? (eleArr = $(ele))
-                        : (eleArr = $(`${ele} input[name=${key}]`));
-                }
-
-                eleArr.each(function (i, thisEle) {
-                    obj[key].value.split(",").forEach(function (val) {
+    obj.val = function (value,callback) {
+        if (value) {
+                $dom.each(function (i, thisEle) {
+                    value.split(",").forEach(function (val) {
                         if ($(thisEle).val() == val) {
                             handle(thisEle, $(thisEle).next(), true);
                         }
                     });
                     utils.validation(thisEle, "pass", null, "checkbox");
                 });
-            });
+  
             if(callback){
                 callback()
             }
@@ -87,13 +76,7 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
     };
 
     obj.clear = function (callback) {
-        let thisEle = $(`input[type=checkbox]`);
-        if (ele) {
-            utils.isSelf(ele, type)
-                ? (thisEle = $(ele))
-                : (thisEle = $(`${ele} input[type=checkbox]`));
-        }
-        thisEle.each(function (i, ele) {
+        $dom.each(function (i, ele) {
             ele.checked = false;
             $(ele).next().removeClass("hopeui-form-checked");
         });

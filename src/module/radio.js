@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:38:24
+ * @LastEditTime : 2021-04-09 16:42:29
  * @Description  : 单选框
  */
 
@@ -13,9 +13,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
     let type = "input";
     let $dom = $("input[type=radio]");
     if (ele) {
-        utils.isSelf(ele, type)
-            ? ($dom = $(ele))
-            : ($dom = $(`${ele} input[type=radio]`));
+        $dom = $(ele);
     }
 
     $dom.each(function () {
@@ -56,32 +54,26 @@ module.exports.radioHandler = function ({ ele, options, on }) {
         }
     });
 
-    obj.val = function (obj, callback) {
-        if (obj) {
-            Object.keys(obj).forEach(function (key) {
-                let eleArr = $(`input[name=${key}]`);
-                if (ele) {
-                    utils.isSelf(ele, type)
-                        ? (eleArr = $(ele))
-                        : (eleArr = $(`${ele} input[name=${key}]`));
-                }
+    obj.val = function (value, callback) {
+        if (value) {
+            let eleArr = $dom;
 
-                eleArr.each(function (i, thisEle) {
-                    obj[key].value.split(",").forEach(function (val) {
-                        if ($(thisEle).val() == val) {
-                            handle(thisEle, $(thisEle).next(), true);
-                        }
-                    });
-                    utils.validation(thisEle, "pass", null, "radio");
+            eleArr.each(function (i, thisEle) {
+                value.split(",").forEach(function (val) {
+                    if ($(thisEle).val() == val) {
+                        handle(thisEle, $(thisEle).next(), true);
+                    }
                 });
+                utils.validation(thisEle, "pass", null, "radio");
             });
+
             if (callback) {
                 callback();
             }
         }
     };
     obj.clear = function (callback) {
-        let thisEle = $(`input[type=radio]`);
+        let thisEle = $dom;
         if (ele) {
             utils.isSelf(ele, type)
                 ? (thisEle = $(ele))

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 14:30:48
+ * @LastEditTime : 2021-04-09 16:48:00
  * @Description  : 下拉框
  */
 
@@ -15,8 +15,10 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
     let type = "select";
     let $dom = $("select");
     if (ele) {
-        utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
+        $dom = $(ele);
+        // utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
     }
+
 
     function core() {
         $dom.each(function () {
@@ -295,24 +297,16 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         }
     }
 
-    obj.val = function (obj) {
-        if (obj) {
-            //值拆分成数组
-            Object.keys(obj).forEach(function (key) {
-                let eleArr = $(`select[name=${key}]`);
-                if (ele) {
-                    utils.isSelf(ele, type)
-                        ? (eleArr = $(ele))
-                        : (eleArr = $(`${ele} select[name=${key}]`));
-                }
+    obj.val = function (value,callback) {
+        if (value) {
+                let eleArr = $dom;
 
                 eleArr.each(function (i, thisEle) {
                     let opts = $(this).next().find(".option");
                     //内选项集合
                     opts.each(function (index) {
                         if (
-                            $.trim($(this).attr("hope-value")) ==
-                            obj[key].value.split(",")[i]
+                            $.trim($(this).attr("hope-value")) == value
                         ) {
                             handle(thisEle, $(thisEle).next(), $(this));
                         }
@@ -327,18 +321,16 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             .next(".hopeui-placeholder")
                             .addClass("hopeui-hide");
                     }
-                });
             });
+            if (callback) {
+                callback();
+            }
         }
     };
 
     obj.clear = function (callback) {
-        let thisEle = $(`select`);
-        if (ele) {
-            utils.isSelf(ele, type)
-                ? (thisEle = $(ele))
-                : (thisEle = $(`${ele} select`));
-        }
+        let thisEle = $dom;
+
         thisEle.each(function (i, ele) {
             handle(ele, $(this).next(), $(this).next().find(".option").eq(0));
 

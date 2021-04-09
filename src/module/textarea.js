@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:39:51
+ * @LastEditTime : 2021-04-09 16:43:18
  * @Description  : 多行文本框
  */
 
@@ -14,9 +14,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
     let type = "textarea";
     let $dom = $("textarea");
     if (ele) {
-        utils.isSelf(ele, type)
-            ? ($dom = $(ele))
-            : ($dom = $(`${ele} textarea`));
+        $dom = $(ele)
     }
 
     $dom.each(function () {
@@ -111,18 +109,11 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
         });
     }
 
-    obj.val = function (obj, callback) {
-        if (obj) {
-            Object.keys(obj).forEach(function (key) {
-                let eleArr = $(`textarea[name=${key}]`);
-                if (ele) {
-                    utils.isSelf(ele, type)
-                        ? (eleArr = $(ele))
-                        : (eleArr = $(`${ele} textarea[name=${key}]`));
-                }
-
+    obj.val = function (value, callback) {
+        if (value) {
+                let eleArr = $dom;
                 eleArr.each(function (i, thisEle) {
-                    $(thisEle).val(obj[key].value);
+                    $(thisEle).val(value);
                     utils.validation(thisEle, "pass", null, "textarea");
                     if (is.ie() <= 9) {
                         $(thisEle)
@@ -130,20 +121,13 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
                             .addClass("hopeui-hide");
                     }
                 });
-            });
             if (callback) {
                 callback();
             }
         }
     };
     obj.clear = function (callback) {
-        let thisEle = $(`textarea`);
-
-        if (ele) {
-            utils.isSelf(ele, type)
-                ? (thisEle = $(ele))
-                : (thisEle = $(`${ele} textarea`));
-        }
+        let thisEle = $dom;
 
         thisEle.each(function (i, ele) {
             ele.value = "";

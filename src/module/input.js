@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-03-18 17:48:58
+ * @LastEditTime : 2021-04-09 16:45:55
  * @Description  : 文本框
  */
 
@@ -14,9 +14,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
     let type = "input";
     let $dom = $("input[type=text],input[type=password]");
     if (ele) {
-        utils.isSelf(ele, type)
-            ? ($dom = $(ele))
-            : ($dom = $(`${ele} input[type=text],${ele} input[type=password]`));
+        $dom = $(ele);
     }
 
     $dom.each(function () {
@@ -127,53 +125,38 @@ module.exports.inputHandler = function ({ ele, options, on }) {
         });
     });
 
-    obj.val = function (obj) {
-        if (obj) {
-            Object.keys(obj).forEach(function (key) {
-                let eleArr = $(`input[name=${key}]`);
-
-                if (ele) {
-                    utils.isSelf(ele, type)
-                        ? (eleArr = $(ele))
-                        : (eleArr = $(`${ele} input[name=${key}]`));
+    obj.val = function (value, callback) {
+        if (value) {
+            let eleArr = $dom;
+            eleArr.each(function (i, thisEle) {
+                $(thisEle).val(value);
+                utils.validation(thisEle, "pass", null, "input");
+                if (is.ie() <= 9) {
+                    $(thisEle)
+                        .next(".hopeui-placeholder")
+                        .addClass("hopeui-hide");
                 }
-
-                eleArr.each(function (i, thisEle) {
-                    $(thisEle).val(obj[key].value);
-                    utils.validation(thisEle, "pass", null, "input");
-                    if (is.ie() <= 9) {
-                        $(thisEle)
-                            .next(".hopeui-placeholder")
-                            .addClass("hopeui-hide");
-                    }
-                });
             });
+
+            if (callback) {
+                callback();
+            }
         }
     };
     obj.clear = function (callback) {
-        let thisEle = $(`${ele} input[type=text],${ele} input[type=password]`);
-
-        if (ele) {
-            utils.isSelf(ele, type)
-                ? (thisEle = $(ele))
-                : (thisEle = $(
-                      `${ele} input[type=text],${ele} input[type=password]`
-                  ));
-        }
-
-        thisEle = Array.from(thisEle).filter(function (item) {
-            if (item.getAttribute("hope-type") != "selector") {
-                return item;
-            }
-        });
-        thisEle.forEach(function (ele) {
+        let thisEle = $dom;
+        thisEle.each(function (i, ele) {
             ele.value = "";
-            if (is.ie() == 8) {
-                $(ele).next(".hopeui-placeholder").removeClass("hopeui-hide");
+            if (is.ie() <= 9) {
+                $(this)
+                    .next()
+                    .find("input")
+                    .next(".hopeui-placeholder")
+                    .removeClass("hopeui-hide");
             }
         });
-        if(callback){
-            callback()
+        if (callback) {
+            callback();
         }
     };
 

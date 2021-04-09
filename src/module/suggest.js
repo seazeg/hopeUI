@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:39:39
+ * @LastEditTime : 2021-04-09 15:26:49
  * @Description  : 文本框
  */
 
@@ -21,11 +21,8 @@ module.exports.suggestHandler = function ({
     let type = "input";
     let $dom = $("input[type=text]");
     if (ele) {
-        utils.isSelf(ele, type)
-            ? ($dom = $(ele))
-            : ($dom = $(`${ele} input[type=text]`));
+        $dom = $(ele)
     }
-
     function getData(params, reader, obj) {
         params.data = {};
         params.data[options.searchField] = obj.prev().val();

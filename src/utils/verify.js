@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2020-08-11 17:07:36
+ * @LastEditTime : 2021-04-09 16:19:20
  * @Description  : 工具类
  */
 const $ = require("./hopeu.js");
@@ -11,7 +11,7 @@ module.exports.utils = {
         let obj = ele,
             bro = ele;
         if (type == "select-one") {
-            bro = this.siblings(ele, ".hopeui-form-select")[0];
+            bro = $(ele).siblings(".hopeui-form-select").get(0)
             obj = bro.childNodes[0].childNodes[0];
         } else if (type == "checkbox") {
             bro = ele.parentNode.querySelectorAll(".hopeui-form-checkbox")[
