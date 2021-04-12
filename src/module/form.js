@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 15:46:30
+ * @LastEditTime : 2021-04-09 18:01:31
  * @Description  : 表单
  */
 
@@ -54,35 +54,6 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
         let newObj = handlers[cont.type](`${ele} [name=${name}]`, cont.options, cont.on);
         formControls[name] = newObj;
     });
-
-
-    // let formControls = {
-    //     selector: hope.selector({
-    //         ele: ele,
-    //         options: options,
-    //         on: controls.selector.on,
-    //     }),
-    //     checkbox: hope.checkbox({
-    //         ele: ele,
-    //         options: options,
-    //         on: controls.checkbox.on,
-    //     }),
-    //     radio: hope.radio({
-    //         ele: ele,
-    //         options: options,
-    //         on: controls.radio.on,
-    //     }),
-    //     input: hope.input({
-    //         ele: ele,
-    //         options: options,
-    //         on: controls.input.on,
-    //     }),
-    //     textarea: hope.textarea({
-    //         ele: ele,
-    //         options: options,
-    //         on: controls.textarea.on,
-    //     }),
-    // };
 
     //form事件绑定
     let $dom = $("form");
