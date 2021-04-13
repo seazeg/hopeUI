@@ -1,11 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-28 15:11:24
- * @LastEditTime : 2021-04-13 13:47:30
+ * @LastEditTime : 2021-04-13 13:48:24
  * @Description  : 
  */
 const shell = require("shelljs");
-shell.exec('gitq p')
+// shell.exec('gitq p')
 shell.exec('cp -r ../docs/static/mock ../hopeui')
 shell.exec('cp ../docs/static/logo.svg ../hopeui')
 
