@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-13 15:11:43
+ * @LastEditTime : 2021-04-13 15:39:23
  * @Description  : 表单
  */
 
@@ -54,6 +54,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     if (ele) {
         $dom = $(ele);
     }
+    if(!controls){
+        controls = {}
+    }
 
     let TEMP_OBJ = {},
         TEMP_ARR = [],
@@ -66,7 +69,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     }
 
     //无contorls配置
-    if (!controls || Object.keys(controls).length === 0) {
+    if (Object.keys(controls).length === 0) {
         TEMP_ARR.forEach(function ({ name, type, value }, index) {
             if (type.includes("select")) {
                 type = "selector";
@@ -98,17 +101,6 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                 );
             }
         });
-
-        // Object.keys(controls).forEach(function (name) {
-        //     let cont = controls[name];
-        //     let newObj = handlers[cont.type](
-        //         `${ele} [name=${name}]`,
-        //         cont.options,
-        //         cont.on
-        //     );
-        //     formControls[name] = newObj;
-        //     hasOptionList.push(name);
-        // });
     }
 
     $dom.each(function () {
@@ -167,7 +159,10 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                             if (ele.checked) {
                                 obj.value += `${ele.value},`;
                             }
-                            if (controls[ele.name].verify) {
+                            if (
+                                controls[ele.name] &&
+                                controls[ele.name].verify
+                            ) {
                                 if (!controls[ele.name].verify(obj.value)) {
                                     utils.validation(
                                         ele,
@@ -220,7 +215,10 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                                 obj.value += `${ele.value},`;
                             }
                             // 自定义校验
-                            if (controls[ele.name].verify) {
+                            if (
+                                controls[ele.name] &&
+                                controls[ele.name].verify
+                            ) {
                                 if (!controls[ele.name].verify(ele.value)) {
                                     utils.validation(
                                         ele,

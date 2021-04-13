@@ -1692,7 +1692,7 @@
                 console.log(e);
             },
         },
-        controls: {
+        // controls: {
             //[name]:object
             // city: {
             //     type: 'selector',
@@ -1843,27 +1843,27 @@
             //         }
             //     }
             // },
-            textarea: {
-                type: 'textarea',
-                options: {},
-                on: {
-                    init: function (e) {
-                        // console.log(e);
-                    },
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                    toggle: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "请输入内容";
-                    }
-                }
-            },
-        },
+            // textarea: {
+            //     type: 'textarea',
+            //     options: {},
+            //     on: {
+            //         init: function (e) {
+            //             // console.log(e);
+            //         },
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         toggle: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "请输入内容";
+            //         }
+            //     }
+            // },
+        // },
     });
 
     document.querySelector("#set").onclick = function () {

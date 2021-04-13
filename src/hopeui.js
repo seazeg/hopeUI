@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-04-13 15:15:05
+ * @LastEditTime : 2021-04-13 15:25:54
  * @Description  : hopeUI
  */
 
@@ -265,7 +265,7 @@ const hope = () => {
             },
             controls: controls = null,
         }) {
-            return formHandler({ ele, options, on, controls});
+            return formHandler({ ele, options, on, controls });
         },
         utils: utilsHandler,
     };
