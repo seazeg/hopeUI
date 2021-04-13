@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 18:01:31
+ * @LastEditTime : 2021-04-13 15:11:43
  * @Description  : 表单
  */
 
@@ -10,7 +10,6 @@ const { utils } = require("../utils/verify.js");
 
 module.exports.formHandler = function ({ ele, options, on, controls }) {
     const obj = new Object();
-    let formControls = {};
     const handlers = {
         selector: function (ele, options, on) {
             return hope.selector({
@@ -48,18 +47,70 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             });
         },
     };
-    // controls.
-    Object.keys(controls).forEach(function (name) {
-        let cont = controls[name];
-        let newObj = handlers[cont.type](`${ele} [name=${name}]`, cont.options, cont.on);
-        formControls[name] = newObj;
-    });
 
     //form事件绑定
+    let formControls = {};
     let $dom = $("form");
     if (ele) {
         $dom = $(ele);
     }
+
+    let TEMP_OBJ = {},
+        TEMP_ARR = [],
+        rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i;
+    for (let i of $dom.serializeArray()) {
+        if (!TEMP_OBJ[i.name]) {
+            TEMP_ARR.push(i);
+            TEMP_OBJ[i.name] = true;
+        }
+    }
+
+    //无contorls配置
+    if (!controls || Object.keys(controls).length === 0) {
+        TEMP_ARR.forEach(function ({ name, type, value }, index) {
+            if (type.includes("select")) {
+                type = "selector";
+            } else if (rinput.test(type)) {
+                type = "input";
+            }
+            let newObj = handlers[type](`${ele} [name=${name}]`, null, null);
+            formControls[name] = newObj;
+        });
+    } else {
+        TEMP_ARR.forEach(function ({ name, type, value }, index) {
+            if (controls[name]) {
+                let cont = controls[name];
+                formControls[name] = handlers[cont.type](
+                    `${ele} [name=${name}]`,
+                    cont.options,
+                    cont.on
+                );
+            } else {
+                if (type.includes("select")) {
+                    type = "selector";
+                } else if (rinput.test(type)) {
+                    type = "input";
+                }
+                formControls[name] = handlers[type](
+                    `${ele} [name=${name}]`,
+                    null,
+                    null
+                );
+            }
+        });
+
+        // Object.keys(controls).forEach(function (name) {
+        //     let cont = controls[name];
+        //     let newObj = handlers[cont.type](
+        //         `${ele} [name=${name}]`,
+        //         cont.options,
+        //         cont.on
+        //     );
+        //     formControls[name] = newObj;
+        //     hasOptionList.push(name);
+        // });
+    }
+
     $dom.each(function () {
         let form = $(this)[0];
         form.onsubmit = function (evt) {

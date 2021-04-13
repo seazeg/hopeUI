@@ -1694,161 +1694,161 @@
         },
         controls: {
             //[name]:object
-            city: {
-                type: 'selector',
-                options: {},
-                on: {
-                    init: function (e) {
-                        ////console.log(e);
-                    },
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                    toggle: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "请选择一个选项";
-                    }
-                }
-            },
-            text: {
-                type: 'input',
-                options: {},
-                on: {
-                    blur: function (e) {
-                        ////console.log(e);
-                    },
-                    focus: function (e) {
-                        ////console.log(e);
-                    },
-                    input: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "文本不能为空";
-                    }
-                    if (value.length < 5) {
-                        return "文本至少得5个字符";
-                    }
-                    if (!/^[A-Za-z]+$/.test(value)) {
-                        return "文本必须是英文";
-                    }
-                }
-            },
-            school: {
-                type: 'selector',
-                options: {},
-                on: {
-                    init: function (e) {
-                        ////console.log(e);
-                    },
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                    toggle: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "请选择一个选项";
-                    }
-                }
-            },
-            password: {
-                type: 'input',
-                options: {},
-                on: {
-                    init: function (e) {
-                        ////console.log(e);
-                    },
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                    toggle: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "文本不能为空";
-                    }
-                    if (value.length < 6) {
-                        return "密码至少输入6个字符";
-                    }
-                }
-            },
-            task: {
-                type: 'checkbox',
-                options: {},
-                on: {
-                    init: function (e) {
-                        ////console.log(e);
-                    },
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                    toggle: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "需要选择至少一个选项";
-                    }
-                }
-            },
-            subject: {
-                type: 'checkbox',
-                options: {},
-                on: {
-                    init: function (e) {
-                        ////console.log(e);
-                    },
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                    toggle: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "请选择一个选项";
-                    }
-                }
-            },
-            radio: {
-                type: 'radio',
-                options: {},
-                on: {
-                    init: function (e) {
-                        ////console.log(e);
-                    },
-                    change: function (e) {
-                        ////console.log(e);
-                    },
-                    toggle: function (e) {
-                        ////console.log(e);
-                    },
-                },
-                verify: function (value) {
-                    if (value.length <= 0) {
-                        return "需要选择至少一个选项";
-                    }
-                }
-            },
+            // city: {
+            //     type: 'selector',
+            //     options: {},
+            //     on: {
+            //         init: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         toggle: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "请选择一个选项";
+            //         }
+            //     }
+            // },
+            // text: {
+            //     type: 'input',
+            //     options: {},
+            //     on: {
+            //         blur: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         focus: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         input: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "文本不能为空";
+            //         }
+            //         if (value.length < 5) {
+            //             return "文本至少得5个字符";
+            //         }
+            //         if (!/^[A-Za-z]+$/.test(value)) {
+            //             return "文本必须是英文";
+            //         }
+            //     }
+            // },
+            // school: {
+            //     type: 'selector',
+            //     options: {},
+            //     on: {
+            //         init: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         toggle: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "请选择一个选项";
+            //         }
+            //     }
+            // },
+            // password: {
+            //     type: 'input',
+            //     options: {},
+            //     on: {
+            //         init: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         toggle: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "文本不能为空";
+            //         }
+            //         if (value.length < 6) {
+            //             return "密码至少输入6个字符";
+            //         }
+            //     }
+            // },
+            // task: {
+            //     type: 'checkbox',
+            //     options: {},
+            //     on: {
+            //         init: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         toggle: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "需要选择至少一个选项";
+            //         }
+            //     }
+            // },
+            // subject: {
+            //     type: 'checkbox',
+            //     options: {},
+            //     on: {
+            //         init: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         toggle: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "请选择一个选项";
+            //         }
+            //     }
+            // },
+            // radio: {
+            //     type: 'radio',
+            //     options: {},
+            //     on: {
+            //         init: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         change: function (e) {
+            //             ////console.log(e);
+            //         },
+            //         toggle: function (e) {
+            //             ////console.log(e);
+            //         },
+            //     },
+            //     verify: function (value) {
+            //         if (value.length <= 0) {
+            //             return "需要选择至少一个选项";
+            //         }
+            //     }
+            // },
             textarea: {
                 type: 'textarea',
                 options: {},
                 on: {
                     init: function (e) {
-                        ////console.log(e);
+                        console.log(e);
                     },
                     change: function (e) {
                         ////console.log(e);

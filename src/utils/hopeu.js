@@ -27,7 +27,7 @@ var hopeu = (window["hopeu"] = (function () {
         rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>)?$/,
         rCRLF = /\r?\n/g,
         rselectTextarea = /^(?:select|textarea)/i,
-        rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
+        rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week|checkbox|radio)$/i,
         strim = String.prototype.trim,
         trim,
         trimLeft = /^\s+/,
@@ -507,8 +507,7 @@ var hopeu = (window["hopeu"] = (function () {
                 return (
                     this.name &&
                     !this.disabled &&
-                    (this.checked ||
-                        rselectTextarea.test(this.nodeName) ||
+                    (rselectTextarea.test(this.nodeName) ||
                         rinput.test(this.type))
                 );
             })
@@ -518,15 +517,17 @@ var hopeu = (window["hopeu"] = (function () {
                     ? map(val, function (val) {
                           return {
                               name: el.name,
+                              type: el.type,
                               value: val.replace(rCRLF, "\r\n"),
                           };
                       })
                     : {
                           name: el.name,
+                          type: el.type,
                           value: val.replace(rCRLF, "\r\n"),
                       };
             })
-            .get();
+            .get()
     };
     p["wrap"] = function (wrapper) {
         return this["each"](function () {
@@ -2144,7 +2145,7 @@ hopeu["plug"]("ajax", function ($) {
             if (typeof url === "object") o = url;
             else o["url"] = url;
             var postData = "";
-            var userOptions = options = o;
+            var userOptions = (options = o);
             var userType = (userOptions.dataType || "").toLowerCase();
 
             xdr = new XDomainRequest();
@@ -2180,7 +2181,9 @@ hopeu["plug"]("ajax", function ($) {
                         (userType !== "text" && /\/json/i.test(xdr.contentType))
                     ) {
                         try {
-                            responses.json = window.JSON["parse"](xdr.responseText)
+                            responses.json = window.JSON["parse"](
+                                xdr.responseText
+                            );
                         } catch (e) {
                             status.code = 500;
                             status.message = "parseerror";
@@ -2384,19 +2387,19 @@ hopeu["plug"]("ajax", function ($) {
         );
 });
 
-function changeDataType(obj){
-    let str = ''
-    if(typeof obj == 'object'){
-        for(let i in obj){
-            if(typeof obj[i] != 'function' && typeof obj[i] != 'object'){
-                str += i + '=' + obj[i] + '&' ;
-            }else if (typeof obj[i] == 'object'){
-                nextStr = '';
-                str += changeSonType(i, obj[i])
+function changeDataType(obj) {
+    let str = "";
+    if (typeof obj == "object") {
+        for (let i in obj) {
+            if (typeof obj[i] != "function" && typeof obj[i] != "object") {
+                str += i + "=" + obj[i] + "&";
+            } else if (typeof obj[i] == "object") {
+                nextStr = "";
+                str += changeSonType(i, obj[i]);
             }
         }
     }
-    return str.replace(/&$/g, '');
+    return str.replace(/&$/g, "");
 }
 
 module.exports = hopeu;

@@ -1,13 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-04-07 10:03:20
+ * @LastEditTime : 2021-04-13 15:15:05
  * @Description  : hopeUI
  */
 
 require("./hopeui.less");
 require("./utils/patch.js");
-
 
 const { scrollbarHandler } = require("./module/scrollbar.js");
 const { lightboxHandler } = require("./module/lightbox.js");
@@ -264,27 +263,9 @@ const hope = () => {
                 init: null,
                 submit: null,
             },
-            controls: controls = {
-                selector: (selector = {
-                    on: (on = {
-                        change: null,
-                        toggle: null,
-                    }),
-                }),
-                checkbox: (checkbox = {
-                    on: (on = {
-                        change: null,
-                    }),
-                }),
-                radio: (radio = {
-                    on: (on = {
-                        change: null,
-                    }),
-                }),
-            },
-            verify: verify = {},
+            controls: controls = null,
         }) {
-            return formHandler({ ele, options, on, controls, verify });
+            return formHandler({ ele, options, on, controls});
         },
         utils: utilsHandler,
     };
