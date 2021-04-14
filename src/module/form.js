@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-13 15:39:23
+ * @LastEditTime : 2021-04-14 10:22:49
  * @Description  : 表单
  */
 
@@ -105,15 +105,15 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
 
     $dom.each(function () {
         let form = $(this)[0];
-        form.onsubmit = function (evt) {
+        form.onsubmit =  function (evt) {
             evt = evt || window.event;
-            let tarEle = evt.target || evt.srcElement;
             if (evt.stopPropagation) {
                 evt.stopPropagation();
             } else if (window.event) {
                 window.event.cancelBubble = true;
             }
-
+            evt.preventDefault();
+            let tarEle = evt.target || evt.srcElement;
             let sortArr = {},
                 formParams = [],
                 status = true;
@@ -268,7 +268,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                 });
             }
             return false;
-        };
+        }
     });
 
     if (on && on.init) {

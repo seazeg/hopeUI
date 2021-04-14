@@ -2992,4 +2992,97 @@ Hope_carousel.prototype = {
         ie11: window.navigator.pointerEnabled,
     },
 };
+
+Hope_carousel.prototype.plugins.fade = function (Hope_carousel, params) {
+    var slides, wrapperSize, slideSize, initialized;
+    var isH = Hope_carousel.params.mode == "horizontal";
+    if (!params) return;
+    var defaults = {};
+    params = params || {};
+    for (var prop in defaults) {
+        if (!(prop in params)) {
+            params[prop] = defaults[prop];
+        }
+    }
+    function init() {
+        initialized = true;
+        slides = Hope_carousel.slides;
+        var slideMaxWidth = 0;
+        var slideMaxHeight = 0;
+
+        for (var i = 0; i < slides.length; i++) {
+            Hope_carousel.setTransition(slides[i], 0);
+            var slideWidth = Hope_carousel.h.getWidth(slides[i]);
+            var slideHeight = Hope_carousel.h.getHeight(slides[i]);
+            if (slideWidth >= slideMaxWidth) {
+                slideMaxWidth = slideWidth;
+            }
+            if (slideHeight >= slideMaxHeight) {
+                slideMaxHeight = slideHeight;
+            }
+            slides[i].className = slides[i].className + " hope-type-fade";
+        }
+        Hope_carousel.wrapper.style.height = slideMaxHeight + "px";
+        Hope_carousel.container.style.height = slideMaxHeight + "px";
+        Hope_carousel.wrapper.style.width = slideMaxWidth + "px";
+        Hope_carousel.container.style.width = slideMaxWidth + "px";
+    }
+    function fadeSlide(transform) {
+        var transform = transform || { x: 0, y: 0, z: 0 };
+        for (var i = 0; i < Hope_carousel.slides.length; i++) {
+            var translateY = isH ? 0 : -transform.y;
+            var translateX = isH ? -transform.x : 0;
+            if (Hope_carousel.support.transforms) {
+                var slideTransform =
+                    "translate3d(" +
+                    translateX +
+                    "px," +
+                    translateY +
+                    "px," +
+                    0 +
+                    "px)";
+                Hope_carousel.setTransform(
+                    Hope_carousel.slides[i],
+                    slideTransform
+                );
+            } else {
+                Hope_carousel.slides[i].style.left = translateX + "px";
+                Hope_carousel.slides[i].style.top = translateY + "px";
+            }
+        }
+    }
+    var hooks = {
+        onFirstInit: function (args) {
+            init();
+            var transform = {
+                x: Hope_carousel.getWrapperTranslate("x"),
+                y: Hope_carousel.getWrapperTranslate("y"),
+                z: Hope_carousel.getWrapperTranslate("z"),
+            };
+            fadeSlide(transform);
+        },
+        onInit: function (args) {
+            init();
+            var transform = {
+                x: Hope_carousel.getWrapperTranslate("x"),
+                y: Hope_carousel.getWrapperTranslate("y"),
+                z: Hope_carousel.getWrapperTranslate("z"),
+            };
+            fadeSlide(transform);
+        },
+        onSetWrapperTransform: function (transform) {
+            fadeSlide(transform);
+        },
+        onSetWrapperTransition: function (args) {
+            for (var i = 0; i < Hope_carousel.slides.length; i++) {
+                Hope_carousel.setTransition(
+                    Hope_carousel.slides[i],
+                    args.duration
+                );
+            }
+        },
+    };
+    return hooks;
+};
+
 module.exports = Hope_carousel;

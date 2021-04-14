@@ -603,7 +603,7 @@
                         <div class="title ">Slide 4</div>
                     </div>
                     <div class="hope-slide">
-                        <div class="title ">Slide 4</div>
+                        <div class="title ">Slide 5</div>
                     </div>
                 </div>
                 <div></div>
@@ -1289,12 +1289,16 @@
     window.banner_carousel = hope.carousel({
             ele: ".banner3",
             options: {
-                pagination: '.banner1 .hope-pagination',
+                fade: true,
+                loop: true,
+                pagination: '.banner3 .hope-pagination',
                 paginationClickable: true,
-                slidesPerView: 4,
+                // slidesPerView: 4,
                 calculateHeight: true,
                 resizeReInit: true,
-                roundLengths: true
+                roundLengths: true,
+                autoplay: 1000,
+                autoplayDisableOnInteraction: false,
             },
             on: {
                 onFirstInit: function (e) {
@@ -1692,28 +1696,28 @@
                 console.log(e);
             },
         },
-        // controls: {
+        controls: {
             //[name]:object
-            // city: {
-            //     type: 'selector',
-            //     options: {},
-            //     on: {
-            //         init: function (e) {
-            //             ////console.log(e);
-            //         },
-            //         change: function (e) {
-            //             ////console.log(e);
-            //         },
-            //         toggle: function (e) {
-            //             ////console.log(e);
-            //         },
-            //     },
-            //     verify: function (value) {
-            //         if (value.length <= 0) {
-            //             return "请选择一个选项";
-            //         }
-            //     }
-            // },
+            city: {
+                type: 'selector',
+                options: {},
+                on: {
+                    init: function (e) {
+                        ////console.log(e);
+                    },
+                    change: function (e) {
+                        ////console.log(e);
+                    },
+                    toggle: function (e) {
+                        ////console.log(e);
+                    },
+                },
+                verify: function (value) {
+                    if (value.length <= 0) {
+                        return "请选择一个选项";
+                    }
+                }
+            },
             // text: {
             //     type: 'input',
             //     options: {},
@@ -1843,27 +1847,27 @@
             //         }
             //     }
             // },
-            // textarea: {
-            //     type: 'textarea',
-            //     options: {},
-            //     on: {
-            //         init: function (e) {
-            //             // console.log(e);
-            //         },
-            //         change: function (e) {
-            //             ////console.log(e);
-            //         },
-            //         toggle: function (e) {
-            //             ////console.log(e);
-            //         },
-            //     },
-            //     verify: function (value) {
-            //         if (value.length <= 0) {
-            //             return "请输入内容";
-            //         }
-            //     }
-            // },
-        // },
+            textarea: {
+                type: 'textarea',
+                options: {},
+                on: {
+                    init: function (e) {
+                        // console.log(e);
+                    },
+                    change: function (e) {
+                        ////console.log(e);
+                    },
+                    toggle: function (e) {
+                        ////console.log(e);
+                    },
+                },
+                verify: function (value) {
+                    if (value.length <= 0) {
+                        return "请输入内容";
+                    }
+                }
+            },
+        },
     });
 
     document.querySelector("#set").onclick = function () {
