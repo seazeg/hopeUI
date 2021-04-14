@@ -12,6 +12,7 @@
     backface-visibility: hidden;
     z-index: 1;
 }
+
 .hope-wrapper {
     position: relative;
     width: 100%;
@@ -45,7 +46,8 @@
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
-.hope-free-mode > .hope-wrapper {
+
+.hope-free-mode>.hope-wrapper {
     -webkit-transition-timing-function: ease-out;
     -moz-transition-timing-function: ease-out;
     -ms-transition-timing-function: ease-out;
@@ -53,6 +55,7 @@
     transition-timing-function: ease-out;
     margin: 0 auto;
 }
+
 .hope-slide {
     float: left;
     -webkit-box-sizing: content-box;
@@ -63,6 +66,7 @@
 .hope-wp8-horizontal {
     -ms-touch-action: pan-y;
 }
+
 .hope-wp8-vertical {
     -ms-touch-action: pan-x;
 }
@@ -85,27 +89,118 @@
     border: 1px solid #fff;
     cursor: pointer;
 }
+
 .hope-visible-switch {
     background: #aaa;
 }
+
 .hope-active-switch {
     background: #fff;
 }
 
-
-
-.hope-slide.hope-type-fade {
+//fade模式
+.hope-slide.hope-mode-fade {
     position: absolute;
     top: 0;
     left: 0;
-    filter:alpha(opacity=0);
-    -moz-opacity:0;
-    -khtml-opacity:0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
     opacity: 0;
 }
-.hope-slide.hope-type-fade.hope-slide-active {
-    filter:alpha(opacity=100);
-    -moz-opacity:1;
-    -khtml-opacity:1;
+
+.hope-slide.hope-mode-fade.hope-slide-active {
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
     opacity: 1;
+}
+
+
+//3D
+.hope-container.hope-carousel-3d,
+.hope-container.hope-carousel-3d .hope-wrapper,
+.hope-container.hope-carousel-3d .hope-slide {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.hope-container.hope-carousel-3d .hope-container {
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    -o-perspective: 1200px;
+    perspective: 1200px;
+}
+
+.hope-container.hope-carousel-3d .hope-wrapper {
+    /* Windows 8 IE 10 fix */
+    -ms-perspective: 1200px;
+}
+
+.hope-slide-shadow-left,
+.hope-slide-shadow-right,
+.hope-slide-shadow-top,
+.hope-slide-shadow-bottom {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.hope-slide-shadow-left {
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
+    /* Safari 4+, Chrome */
+    background-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Chrome 10+, Safari 5.1+, iOS 5+ */
+    background-image: -moz-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 3.6-15 */
+    background-image: -o-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Opera 11.10-12.00 */
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 16+, IE10, Opera 12.50+ */
+
+}
+
+.hope-slide-shadow-right {
+    background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
+    /* Safari 4+, Chrome */
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Chrome 10+, Safari 5.1+, iOS 5+ */
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 3.6-15 */
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Opera 11.10-12.00 */
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.hope-slide-shadow-top {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
+    /* Safari 4+, Chrome */
+    background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Chrome 10+, Safari 5.1+, iOS 5+ */
+    background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 3.6-15 */
+    background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Opera 11.10-12.00 */
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.hope-slide-shadow-bottom {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
+    /* Safari 4+, Chrome */
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Chrome 10+, Safari 5.1+, iOS 5+ */
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 3.6-15 */
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Opera 11.10-12.00 */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    /* Firefox 16+, IE10, Opera 12.50+ */
 }

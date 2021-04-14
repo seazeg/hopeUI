@@ -3020,7 +3020,7 @@ Hope_carousel.prototype.plugins.fade = function (Hope_carousel, params) {
             if (slideHeight >= slideMaxHeight) {
                 slideMaxHeight = slideHeight;
             }
-            slides[i].className = slides[i].className + " hope-type-fade";
+            slides[i].className = slides[i].className + " hope-mode-fade";
         }
         Hope_carousel.wrapper.style.height = slideMaxHeight + "px";
         Hope_carousel.container.style.height = slideMaxHeight + "px";
@@ -3084,5 +3084,215 @@ Hope_carousel.prototype.plugins.fade = function (Hope_carousel, params) {
     };
     return hooks;
 };
+
+
+Hope_carousel.prototype.plugins.progress = function(Hope_carousel, params) {
+	var isH = Hope_carousel.params.mode == 'horizontal';
+	var wrapperMaxPosition;
+	function initSlides(){
+		for (var i=0; i<Hope_carousel.slides.length; i++) {
+			var slide = Hope_carousel.slides[i];
+			slide.progressSlideSize = isH ? Hope_carousel.h.getWidth(slide) : Hope_carousel.h.getHeight(slide);
+			if ('offsetLeft' in slide) {
+				slide.progressSlideOffset = isH ? slide.offsetLeft : slide.offsetTop;
+			}
+			else {
+				slide.progressSlideOffset = isH ? slide.getOffset().left - Hope_carousel.h.getOffset(Hope_carousel.container).left : slide.getOffset().top - Hope_carousel.h.getOffset(Hope_carousel.container).top;	
+			}
+		}
+		if (isH) {
+			wrapperMaxPosition = Hope_carousel.h.getWidth(Hope_carousel.wrapper) + Hope_carousel.wrapperLeft + Hope_carousel.wrapperRight - Hope_carousel.width;
+		}
+		else {
+			wrapperMaxPosition = Hope_carousel.h.getHeight(Hope_carousel.wrapper) + Hope_carousel.wrapperTop + Hope_carousel.wrapperBottom - Hope_carousel.height;
+		}
+	}
+	function calcProgress(transform) {
+		var transform = transform || {x:0, y:0, z:0};
+		var offsetCenter;
+		if(Hope_carousel.params.centeredSlides==true) offsetCenter = isH ? -transform.x+Hope_carousel.width/2 : -transform.y+Hope_carousel.height/2 ;
+		else offsetCenter = isH ? -transform.x : -transform.y ;
+		//Each slide offset from offset center
+		for (var i=0; i<Hope_carousel.slides.length; i++) {
+			var slide = Hope_carousel.slides[i];
+			var slideCenterOffset = (Hope_carousel.params.centeredSlides==true) ? slide.progressSlideSize/2 : 0;
+
+			var offsetMultiplier = (offsetCenter - slide.progressSlideOffset - slideCenterOffset)/slide.progressSlideSize;
+			slide.progress = offsetMultiplier;
+
+		}
+		// Global Hope_carousel Progress
+		Hope_carousel.progress = isH ? -transform.x/wrapperMaxPosition : -transform.y/wrapperMaxPosition;
+		// Callback
+		if(Hope_carousel.params.onProgressChange) Hope_carousel.fireCallback(Hope_carousel.params.onProgressChange,Hope_carousel);
+	}
+	
+	//Plugin Hooks
+	var hooks = {
+		onFirstInit : function(args){
+			initSlides()
+			calcProgress({
+				x: Hope_carousel.getWrapperTranslate('x'),
+				y: Hope_carousel.getWrapperTranslate('y')
+			});
+		},
+		onInit : function(args) {
+			initSlides()
+		},
+		onSetWrapperTransform: function(transform){
+			calcProgress(transform);
+		}
+	}
+	return hooks
+}
+
+
+Hope_carousel.prototype.plugins.tdFlow = function(Hope_carousel, params) {
+	if (!Hope_carousel.support.transforms3d) return;
+	var slides, wrapperSize, slideSize, initialized;
+	var isH = Hope_carousel.params.mode == 'horizontal';
+	if(!params) return;
+	/*=========================
+	  Default Parameters
+	  ===========================*/
+	var defaults = {
+		rotate : 50,
+		stretch :0,
+		depth: 100,
+		modifier : 1,
+		shadows : true 
+	}
+	params = params || {};	
+	for (var prop in defaults) {
+		if (! (prop in params)) {
+			params[prop] = defaults[prop]	
+		}
+	}
+	
+	
+	function init() {
+		initialized = true;
+		slides = Hope_carousel.slides
+		for (var i=0; i<slides.length; i++) {
+			Hope_carousel.setTransition(slides[i], 0)
+		}
+		
+		if (isH) {
+			wrapperSize = Hope_carousel.h.getWidth(Hope_carousel.wrapper);
+			slideSize = wrapperSize/slides.length;
+			
+			for (var i=0; i<slides.length; i++) {
+				slides[i].Hope_carouselSlideOffset = slides[i].offsetLeft
+			}
+		}
+		else {
+			wrapperSize = Hope_carousel.h.getHeight(Hope_carousel.wrapper);
+			slideSize = wrapperSize/slides.length;
+			for (var i=0; i<slides.length; i++) {
+				slides[i].Hope_carouselSlideOffset = slides[i].offsetTop
+			}
+		}
+	}
+	
+	function threeDSlides(transform) {
+		if (!initialized) return;
+		var transform = transform || {x:0, y:0, z:0};
+		var center = isH ? -transform.x+Hope_carousel.width/2 : -transform.y+Hope_carousel.height/2 ;
+		
+		var rotate = isH ? params.rotate : -params.rotate;
+		var translate = params.depth;
+
+		//Each slide offset from center
+		for (var i=0; i<Hope_carousel.slides.length; i++) {
+			
+			var slideOffset = Hope_carousel.slides[i].Hope_carouselSlideOffset
+			var offsetMultiplier = (center - slideOffset - slideSize/2)/slideSize*params.modifier;
+			
+			var rotateY = isH ? rotate*offsetMultiplier : 0;
+			var rotateX = isH ? 0 : rotate*offsetMultiplier;
+			// var rotateZ = 0
+			var translateZ = -translate*Math.abs(offsetMultiplier);
+			
+			var translateY = isH ? 0 : params.stretch*(offsetMultiplier)
+			var translateX = isH ? params.stretch*(offsetMultiplier) : 0;
+			
+			//Fix for ultra small values
+			if (Math.abs(translateX)<0.001) translateX = 0;
+			if (Math.abs(translateY)<0.001) translateY = 0;
+			if (Math.abs(translateZ)<0.001) translateZ = 0;
+			if (Math.abs(rotateY)<0.001) rotateY = 0;
+			if (Math.abs(rotateX)<0.001) rotateX = 0;
+			
+			var slideTransform = 'translate3d('+translateX+'px,'+translateY+'px,'+translateZ+'px)  rotateX('+rotateX+'deg) rotateY('+rotateY+'deg)';
+			
+			
+			Hope_carousel.setTransform(Hope_carousel.slides[i], slideTransform);
+			Hope_carousel.slides[i].style.zIndex =-Math.abs(Math.round(offsetMultiplier))+1
+			if (params.shadows) {
+				//Set shadows
+				var shadowBefore = isH ? Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-left') : Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-top');
+				var shadowAfter = isH ? Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-right') : Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-bottom');
+				shadowAfter.style.opacity = (-offsetMultiplier)>0 ? (-offsetMultiplier) : 0;
+				shadowBefore.style.opacity = offsetMultiplier>0 ? offsetMultiplier : 0;
+			}
+		}
+		
+		//Set correct perspective for IE10		
+		if (Hope_carousel.browser.ie10 || Hope_carousel.browser.ie11) {
+			var ws = Hope_carousel.wrapper.style;
+			ws.perspectiveOrigin = center+'px 50%'
+		}
+		
+	}
+	
+	//Plugin Hooks
+	var hooks = {
+		onFirstInit : function(args){
+			slides = Hope_carousel.slides;
+			if (params.shadows) {
+				//Add Shadows
+				var shadowEl1 = document.createElement('div')
+				var shadowEl2 = document.createElement('div')
+				shadowEl1.className = isH ? 'Hope_carousel-slide-shadow-left' : 'Hope_carousel-slide-shadow-top'
+				shadowEl2.className = isH ? 'Hope_carousel-slide-shadow-right' : 'Hope_carousel-slide-shadow-bottom'
+				for (var i=0; i<slides.length; i++) {
+					slides[i].appendChild(shadowEl1.cloneNode())
+					slides[i].appendChild(shadowEl2.cloneNode())
+				}
+			}
+			//Update Dimensions
+			init();
+			//Set in 3D
+			threeDSlides({x:Hope_carousel.getWrapperTranslate('x'), y:Hope_carousel.getWrapperTranslate('y'), z:Hope_carousel.getWrapperTranslate('z')});
+		},
+		onInit : function(args) {
+			init();
+			//Set in 3D
+			threeDSlides({x:Hope_carousel.getWrapperTranslate('x'), y:Hope_carousel.getWrapperTranslate('y'), z:Hope_carousel.getWrapperTranslate('z')});
+		},
+		onSetWrapperTransform: function(transform){
+			threeDSlides(transform);
+		},
+		onSetWrapperTransition: function(args){
+			
+			for (var i=0; i<Hope_carousel.slides.length; i++) {
+				Hope_carousel.setTransition(Hope_carousel.slides[i], args.duration)
+				if (isH && params.shadows) {
+					Hope_carousel.setTransition(Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-left'), args.duration)
+					Hope_carousel.setTransition(Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-right'), args.duration)
+				}
+				else if(params.shadows) {
+					Hope_carousel.setTransition(Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-top'), args.duration)
+					Hope_carousel.setTransition(Hope_carousel.slides[i].querySelector('.Hope_carousel-slide-shadow-bottom'), args.duration)
+				}
+			}
+	
+			
+		}
+	}
+	return hooks
+}
+
+
 
 module.exports = Hope_carousel;
