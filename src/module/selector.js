@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 16:48:00
+ * @LastEditTime : 2021-04-15 15:59:37
  * @Description  : 下拉框
  */
 
@@ -18,7 +18,6 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         $dom = $(ele);
         // utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
     }
-
 
     function core() {
         $dom.each(function () {
@@ -54,24 +53,48 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 groupOpt = $(this)[0];
 
                                 if (groupOpt.selected) {
-                                    template += `<div class="option group hopeui-select-this" ${options && options.isTitle?'title='+item.innerText:''} hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                                    template += `<div class="option group hopeui-select-this" ${
+                                        options && options.isTitle
+                                            ? "title=" + item.innerText
+                                            : ""
+                                    } hope-group=${i} hope-group-sort=${ii} hope-value="${
+                                        groupOpt.value
+                                    }">${groupOpt.innerText}</div>`;
                                     tempSelectedVal = {
                                         value: groupOpt.value,
                                         label: groupOpt.innerText,
                                     };
                                 } else {
-                                    template += `<div class="option group" ${options && options.isTitle?'title='+item.innerText:''} hope-group=${i} hope-group-sort=${ii} hope-value="${groupOpt.value}">${groupOpt.innerText}</div>`;
+                                    template += `<div class="option group" ${
+                                        options && options.isTitle
+                                            ? "title=" + item.innerText
+                                            : ""
+                                    } hope-group=${i} hope-group-sort=${ii} hope-value="${
+                                        groupOpt.value
+                                    }">${groupOpt.innerText}</div>`;
                                 }
                             });
                     } else {
                         if (item.selected) {
-                            template += `<div class="option hopeui-select-this" ${options && options.isTitle?'title='+item.innerText:''} hope-value="${item.value}" >${item.innerText}</div>`;
+                            template += `<div class="option hopeui-select-this" ${
+                                options && options.isTitle
+                                    ? "title=" + item.innerText
+                                    : ""
+                            } hope-value="${item.value}" >${
+                                item.innerText
+                            }</div>`;
                             tempSelectedVal = {
                                 value: item.value,
                                 label: item.innerText,
                             };
                         } else {
-                            template += `<div class="option" ${options && options?'title='+item.innerText:''} hope-value="${item.value}">${item.innerText}</div>`;
+                            template += `<div class="option" ${
+                                options && options
+                                    ? "title=" + item.innerText
+                                    : ""
+                            } hope-value="${item.value}">${
+                                item.innerText
+                            }</div>`;
                         }
                     }
                 });
@@ -144,14 +167,13 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 ele: newEle.children(".hopeui-select-list"),
                                 options: {
                                     autoHideBar:
-                                        (options && options.autoHideBar) || false,
+                                        (options && options.autoHideBar) ||
+                                        false,
+                                    height: (options && options.height) || null,
                                 },
                                 on: {},
                             });
-                            
                         }
-
-                     
 
                         //打开列表回调
                         if (on && on.toggle) {
@@ -297,30 +319,28 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         }
     }
 
-    obj.val = function (value,callback) {
+    obj.val = function (value, callback) {
         if (value) {
-                let eleArr = $dom;
+            let eleArr = $dom;
 
-                eleArr.each(function (i, thisEle) {
-                    let opts = $(this).next().find(".option");
-                    //内选项集合
-                    opts.each(function (index) {
-                        if (
-                            $.trim($(this).attr("hope-value")) == value
-                        ) {
-                            handle(thisEle, $(thisEle).next(), $(this));
-                        }
-                    });
-
-                    utils.validation(thisEle, "pass", null, "select-one");
-
-                    if (is.ie() <= 9) {
-                        $(thisEle)
-                            .next()
-                            .find("input")
-                            .next(".hopeui-placeholder")
-                            .addClass("hopeui-hide");
+            eleArr.each(function (i, thisEle) {
+                let opts = $(this).next().find(".option");
+                //内选项集合
+                opts.each(function (index) {
+                    if ($.trim($(this).attr("hope-value")) == value) {
+                        handle(thisEle, $(thisEle).next(), $(this));
                     }
+                });
+
+                utils.validation(thisEle, "pass", null, "select-one");
+
+                if (is.ie() <= 9) {
+                    $(thisEle)
+                        .next()
+                        .find("input")
+                        .next(".hopeui-placeholder")
+                        .addClass("hopeui-hide");
+                }
             });
             if (callback) {
                 callback();
