@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-15 15:30:24
+ * @LastEditTime : 2021-04-16 09:36:15
  * @Description  : 轮播图
  */
 
@@ -105,12 +105,6 @@ module.exports.carouselHandler = function ({ ele, options, on }) {
             case "textFilp":
                 opt = Object.assign(options || {}, on || {}, effect.textFilp);
                 break;
-            // case "zoom":
-            //     opt = Object.assign(options || {}, on || {}, effectZoom);
-            //     break;
-            // case "zoom":
-            //     opt = Object.assign(options || {}, on || {}, effectZoom);
-            //     break;
             default:
                 opt = Object.assign(options || {}, on || {});
                 break;
