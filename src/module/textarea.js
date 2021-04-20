@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 17:06:56
+ * @LastEditTime : 2021-04-20 20:20:35
  * @Description  : 多行文本框
  */
 
@@ -14,7 +14,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
     let type = "textarea";
     let $dom = $("textarea");
     if (ele) {
-        $dom = $(ele)
+        $dom = $(`textarea${ele}`);
     }
 
     $dom.each(function () {

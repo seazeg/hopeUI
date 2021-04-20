@@ -62,6 +62,45 @@
                 </fieldset>
             </div>
             <div class="docs-content">
+                <div>
+                    <input
+                        type="radio"
+                        name="radio"
+                        value="选项一"
+                        title="选项一"
+                        class="radio"
+                        checked
+                        hope-verify="required"
+                    />
+                    <input
+                        type="radio"
+                        name="radio"
+                        value="选项二"
+                        title="选项二"
+                        class="radio"
+                        hope-verify="required"
+                    />
+                    <input
+                        type="radio"
+                        name="radio"
+                        value="选项三"
+                        title="选项三"
+                        class="radio"
+                        disabled
+                        hope-verify="required"
+                    />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">放大环</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
                 <div class="hope-container bannerA">
                     <div class="hope-wrapper">
                         <div class="hope-slide">
@@ -248,6 +287,18 @@
                 effect: "textZoom",
                 speed: 1000,
                 autoplay: 1000,
+            },
+        });
+
+        var radio = hope.radio({
+            ele: ".radio",
+            on: {
+                init:function(e){
+                    console.log(e);
+                },
+                change: function (e) {
+                    console.log(e);
+                },
             },
         });
 

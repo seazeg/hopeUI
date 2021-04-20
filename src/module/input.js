@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 17:07:09
+ * @LastEditTime : 2021-04-20 20:19:44
  * @Description  : 文本框
  */
 
@@ -14,7 +14,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
     let type = "input";
     let $dom = $("input[type=text],input[type=password]");
     if (ele) {
-        $dom = $(ele);
+        $dom = $(`input${ele}`);
     }
 
     $dom.each(function () {
