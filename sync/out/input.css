@@ -34,5 +34,5 @@
   left: 0;
 }
 .hopeui-input-warp {
-  width: 0;
+  min-width: 80px;
 }
