@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-20 20:20:21
+ * @LastEditTime : 2021-05-28 14:25:15
  * @Description  : 下拉框
  */
 
@@ -15,7 +15,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
     let type = "select";
     let $dom = $("select");
     if (ele) {
-        $dom = $(`select${ele}`);
+        // $dom = $(`select${ele}`);
+        $dom = $(ele);
         // utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
     }
 

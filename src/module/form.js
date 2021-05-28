@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-14 10:22:49
+ * @LastEditTime : 2021-05-28 14:50:02
  * @Description  : 表单
  */
 
@@ -11,7 +11,7 @@ const { utils } = require("../utils/verify.js");
 module.exports.formHandler = function ({ ele, options, on, controls }) {
     const obj = new Object();
     const handlers = {
-        selector: function (ele, options, on) {
+        select: function (ele, options, on) {
             return hope.selector({
                 ele: ele,
                 options: options,
@@ -54,8 +54,8 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     if (ele) {
         $dom = $(ele);
     }
-    if(!controls){
-        controls = {}
+    if (!controls) {
+        controls = {};
     }
 
     let TEMP_OBJ = {},
@@ -71,12 +71,24 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     //无contorls配置
     if (Object.keys(controls).length === 0) {
         TEMP_ARR.forEach(function ({ name, type, value }, index) {
+            let label = null;
             if (type.includes("select")) {
-                type = "selector";
+                type = "select";
             } else if (rinput.test(type)) {
                 type = "input";
             }
-            let newObj = handlers[type](`${ele} [name=${name}]`, null, null);
+
+            if (/^(radio|checkbox|)$/i.test(type)) {
+                label = "input";
+            } else {
+                label = type;
+            }
+
+            let newObj = handlers[type](
+                `${ele} ${label}[name=${name}]`,
+                null,
+                null
+            );
             formControls[name] = newObj;
         });
     } else {
@@ -105,7 +117,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
 
     $dom.each(function () {
         let form = $(this)[0];
-        form.onsubmit =  function (evt) {
+        form.onsubmit = function (evt) {
             evt = evt || window.event;
             if (evt.stopPropagation) {
                 evt.stopPropagation();
@@ -268,7 +280,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                 });
             }
             return false;
-        }
+        };
     });
 
     if (on && on.init) {

@@ -14,7 +14,8 @@ module.exports.inputHandler = function ({ ele, options, on }) {
     let type = "input";
     let $dom = $("input[type=text],input[type=password]");
     if (ele) {
-        $dom = $(`input${ele}`);
+        // $dom = $(`input${ele}`);
+        $dom = $(ele);
     }
 
     $dom.each(function () {

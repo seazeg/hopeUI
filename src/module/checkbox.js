@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-20 20:19:30
+ * @LastEditTime : 2021-05-28 14:24:12
  * @Description  : 复选框
  */
 
@@ -14,7 +14,8 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
     let $dom = $("input[type=checkbox]");
 
     if (ele) {
-        $dom = $(`input[type=checkbox]${ele}`);
+        // $dom = $(`input[type=checkbox]${ele}`);
+        $dom = $(ele);
     }
 
     $dom.each(function () {

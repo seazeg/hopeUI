@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-20 20:18:47
+ * @LastEditTime : 2021-05-28 14:23:52
  * @Description  : 单选框
  */
 
@@ -13,7 +13,8 @@ module.exports.radioHandler = function ({ ele, options, on }) {
     let type = "input";
     let $dom = $("input[type=radio]");
     if (ele) {
-        $dom = $(`input[type=radio]${ele}`);
+        // $dom = $(`input[type=radio]${ele}`);
+        $dom = $(ele);
     }
     $dom.each(function () {
         let newEle,
