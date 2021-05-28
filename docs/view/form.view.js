@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2021-04-09 17:26:02
+ * @LastEditTime : 2021-05-28 14:54:26
  * @Description  :
  */
 export const viewinfo = {
@@ -108,7 +108,7 @@ window.fm = hope.form({
     controls: {
         //[name]:fn
         city: {
-            type: 'selector',
+            type: 'select',
             options: {},
             on: {
                 init: function (e) {
@@ -154,7 +154,7 @@ window.fm = hope.form({
             }
         },
         school: {
-            type: 'selector',
+            type: 'select',
             options: {},
             on: {
                 init: function (e) {
