@@ -1,102 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-09-02 14:20:34
- * @LastEditTime : 2020-12-18 14:30:53
+ * @LastEditTime : 2021-05-31 17:17:22
  * @Description  : 文件上传
  */
 
 const $ = require("../utils/hopeu.js");
+const Hope_upload = require("../utils/upload.core.js");
 
 module.exports.uploadHandler = function ({ ele, options, on }) {
-    const obj = new Object();
-    let multiple = "";
-    if (options && options.multiple) {
-        multiple = "multiple";
-    }
-    let $dom = $(ele);
-    let container = $('<div class="hopeui-upload-container"></div>');
-    let inputfile = $(
-        '<input type="file" class="hopeui-hide" ' + multiple + "/>"
-    );
-    inputfile.appendTo(container);
-
-    //校验函数
-    let validate = function (file) {
-        let result = {
-            size: false,
-            type: false,
-        };
-        if (options.type) {
-            options.type.forEach(function (t) {
-                let tmp = t.toLowerCase();
-                tmp == "jpg" ? (tmp = "jpeg") : null;
-                if (file.type.includes(tmp)) {
-                    result.type = true;
-                    return false;
-                }
-            });
-        }
-        if (options.size) {
-            if (file.size <= options.size) {
-                result.size = true;
-            }
-        }
-        if (on && on.validate) {
-            on.validate({
-                file: file,
-                status: result,
-                result: result.size && result.type,
-                eventName: "validate",
-            });
-        }
-        return result.size && result.type;
-    };
-
-    inputfile.off().on("change", function () {
-        let input = $(this);
-        let files = input.get(0).files[0];
-        if (files != null && files != undefined) {
-            if (!validate(files)) {
-                return;
-            }
-            let formData = new FormData();
-            let xhr = new XMLHttpRequest();
-            formData.append(options.name || "file", files);
-            xhr.open("post", options.url, true);
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (xhr.status == 200 && xhr.readyState == 4) {
-                    input.get(0).value = "";
-                    if (on && on.complete) {
-                        on.complete(JSON.parse(xhr.response));
-                    }
-                } else if (xhr.readyState == 2) {
-                    if (on && on.uploading) {
-                        on.uploading();
-                    }
-                } else if (xhr.status !== 200 && xhr.readyState !== 4) {
-                    if (on && on.error) {
-                        on.error(JSON.parse(xhr.response));
-                    }
-                } else {
-                    if (on && on.error) {
-                        on.error(JSON.parse(xhr.response));
-                    }
-                }
-            };
-        }
-    });
-
-    if (on && on.init) {
-        on.init({
-            ele: $dom[0],
-            eventName: "init",
-        });
-    }
-
-    $dom.off().on("click", function () {
-        inputfile.click();
-    });
-
+    const obj = new Hope_upload(ele, options,on);
     return obj;
 };

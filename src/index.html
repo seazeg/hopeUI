@@ -1585,8 +1585,7 @@
         options: {
             url: '/app/fileUpload',
             name: "file",
-            type: ['jpg', 'png'],
-            size: 5 * 1024 * 1024 //5mb
+            allowedExtensions: ['jpg', 'png']
         },
         on: {
             validate: function (e) {
