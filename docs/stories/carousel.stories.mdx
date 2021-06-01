@@ -42,3 +42,17 @@ import { viewinfo } from "../view/carousel.view.js";
     </Story>
 </Canvas>
 
+
+## 淡入淡出
+<Canvas>
+     <Story name="淡入淡出" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html4}${viewinfo.js4}` }}}}>
+    {() => {
+        useEffect(() => {
+           Function(viewinfo.js4)()
+        });
+        return viewinfo.html4
+    }}  
+    </Story>
+</Canvas>
+
+

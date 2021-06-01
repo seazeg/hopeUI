@@ -16,16 +16,15 @@ var Hope_upload = function (ele, options, on) {
             url: "upload.do", // 处理上传文件接口
             allowedExtensions: ["jpg", "png", "gif", "jpeg"], // 只允许上传图片
             cancelable: true, // 是否可取消上传
-            multiple: true, // 是否批量上传
+            multiple: false, // 是否批量上传
+            params: {},
             onUpload: function (fileName) {}, // 开始上传事件，fileName为本地选择的文件名
-            onComplete: function (fileName, response) {}, // 完成上传事件，fileName为本地选择的文件名，response为服务器返回的json对象
-            onCancel: function (fileName) {}, // 取消上传事件，fileName为本地选择的文件名
             messages: {
                 upload: "上传",
                 cancel: "取消",
                 emptyFile: "{file} 为空，请选择一个文件.",
-                //invalidExtension: "{file} 后缀名不合法. 只有 {extensions} 是允许的.",
-                invalidExtension: "只能上传后缀名是 {extensions} 的图片。",
+                invalidExtension:
+                    "{file} 后缀名不合法. 只有 {extensions} 是允许的",
                 onLeave: "文件正在上传，如果你现在离开，上传将会被取消。",
             },
             debug: false, // 是否打印上传信息，设置false
@@ -34,36 +33,39 @@ var Hope_upload = function (ele, options, on) {
     );
     options.id = options.name || createId();
     options.uploading = false;
-    var ieVersion = is.ie(), // ie浏览器版本
-        uploadedNum = 0; // 已成功上传张数
+    var ieVersion = is.ie();
     var initButton = function () {
         options.button = $(ele);
+        options.button.css({
+            cursor: "pointer",
+            position: "relative",
+            overflow: "hidden",
+        });
         if (options.cancelable) {
-            options.button.on("click", cancel);
+            options.button.bind("click", cancel);
         }
-        // 如果options.button里已经有input type=file，先把input type=file去掉
         if (options.button.find("input[type=file]").length) {
             options.button.find("input[type=file]").remove();
         }
         options.button.append(createInput());
-        options.button.off().on("click", function () {
-            createInput().click();
-        });
+        // options.button.unbind().bind("click", function () {
+        //     createInput().click();
+        // });
         return options.button;
     };
     var createIframe = function () {
-        var id = "hopeUploadIframe" + options.id;
+        var id = "hopeUploadIframe_" + options.id;
         var iframe = $(
             '<iframe id="' +
                 id +
                 '" name="' +
                 id +
                 '" src="javascript:false;" style="display:none"></iframe>'
-        ).on("load", complete);
+        ).bind("load", complete);
         return iframe;
     };
     var createForm = function () {
-        var id = "hopeUploadForm" + options.id;
+        var id = "hopeUploadForm_" + options.id;
         var form = $(
             '<form id="' +
                 id +
@@ -71,7 +73,7 @@ var Hope_upload = function (ele, options, on) {
                 id +
                 '" action="' +
                 options.url +
-                '" target="hopeUploadIframe' +
+                '" target="hopeUploadIframe_' +
                 options.id +
                 '" method="post" enctype="multipart/form-data" style="display:none"></form>'
         );
@@ -89,9 +91,18 @@ var Hope_upload = function (ele, options, on) {
             .attr("id", "hopeUpload-file" + options.id)
             .attr("name", options.id)
             .css({
-                display: "none",
+                position: "absolute",
+                right: 0,
+                top: 0,
+                margin: 0,
+                opacity: 0,
+                padding: 0,
+                fontFamily: "Arial",
+                fontSize: "118px",
+                verticalAlign: "baseline",
+                cursor: "pointer",
             })
-            .on("change", function () {
+            .bind("change", function () {
                 // 如果是单张上传（ie8、ie9不支持多选属性），执行if
                 if (!options.multiple || ieVersion <= 9) {
                     options.fileName = getFileName(this);
@@ -177,7 +188,7 @@ var Hope_upload = function (ele, options, on) {
         $(document.body).append(createIframe()).append(createForm());
         $("#hopeUpload-file" + options.id)
             .attr("id", "hopeUpload-file-uploading" + options.id)
-            .appendTo("#hopeUploadForm" + options.id);
+            .appendTo("#hopeUploadForm_" + options.id);
         // 如果options.button里已经有input type=file，先把input type=file去掉
         if (options.button.find("input[type=file]").length) {
             options.button.find("input[type=file]").remove();
@@ -188,13 +199,20 @@ var Hope_upload = function (ele, options, on) {
         }
         // 如果是单张上传，执行插件原有的上传方式submit()
         if (!options.multiple || ieVersion <= 9) {
-            $("#hopeUploadForm" + options.id)
+            $("#hopeUploadForm_" + options.id)
                 .get(0)
                 .submit();
         } else {
             // 为了解决批量上传的问题，用ajax来提交
             var formData = new FormData();
-            formData.append("file", file);
+            if (Object.keys(options.params).length > 0) {
+                Object.keys(options.params).forEach(function (key) {
+                    formData.append(key, options.params[key]);
+                })
+            }else{
+                formData.append(options.id, file);
+            }
+           
             var xhr = new XMLHttpRequest();
             xhr.open("post", options.url, true);
             xhr.send(formData);
@@ -202,19 +220,21 @@ var Hope_upload = function (ele, options, on) {
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     resetUpload();
                     if (on && on.complete) {
-                        on.complete(JSON.parse(xhr.response));
+                        on.complete(options.fileName, JSON.parse(xhr.response));
                     }
                 } else if (xhr.readyState == 2) {
                     if (on && on.uploading) {
-                        on.uploading();
+                        on.uploading(options.fileName);
                     }
                 } else if (xhr.status !== 200 && xhr.readyState !== 4) {
+                    resetUpload();
                     if (on && on.error) {
-                        on.error(JSON.parse(xhr.response));
+                        on.error(options.fileName, JSON.parse(xhr.response));
                     }
                 } else {
+                    resetUpload();
                     if (on && on.error) {
-                        on.error(JSON.parse(xhr.response));
+                        on.error(options.fileName, JSON.parse(xhr.response));
                     }
                 }
             };
@@ -225,25 +245,27 @@ var Hope_upload = function (ele, options, on) {
     function resetUpload() {
         options.uploading = false;
         setTimeout(function () {
-            $("#hopeUploadForm" + options.id).remove();
-            $("#hopeUploadIframe" + options.id).remove();
+            $("#hopeUploadForm_" + options.id).remove();
+            $("#hopeUploadIframe_" + options.id).remove();
         }, 10);
     }
 
     var cancel = function () {
         if (options.uploading) {
             options.uploading = false;
-            options.onCancel(options.fileName);
+            if (on && on.cancel) {
+                on.cancel(options.fileName);
+            }
             options.button.children("span").text(options.messages.upload);
-            $("#hopeUploadForm" + options.id).remove();
-            $("#hopeUploadIframe" + options.id)
+            $("#hopeUploadForm_" + options.id).remove();
+            $("#hopeUploadIframe_" + options.id)
                 .attr("src", "javascript:false;")
                 .remove();
             // $("#hopeUpload-file" + options.id).show();
         }
     };
     var complete = function () {
-        var iframe = $("#hopeUploadIframe" + options.id).get(0);
+        var iframe = $("#hopeUploadIframe_" + options.id).get(0);
         if (!iframe.parentNode) {
             return;
         }
@@ -267,8 +289,8 @@ var Hope_upload = function (ele, options, on) {
             return;
         }
         options.uploading = false;
-        // $("#hopeUpload-file" + options.id).show();
-        options.button.children("span").text(options.messages.upload);
+
+        // options.button.children("span").text(options.messages.upload);
         try {
             var json = innerHtml.replace(/<pre.*>(.*)<\/pre>/gi, "$1");
             var jsonTem = json;
@@ -279,13 +301,15 @@ var Hope_upload = function (ele, options, on) {
             response = jsonTem;
         }
         setTimeout(function () {
-            $("#hopeUploadForm" + options.id).remove();
-            $("#hopeUploadIframe" + options.id).remove();
+            $("#hopeUploadForm_" + options.id).remove();
+            $("#hopeUploadIframe_" + options.id).remove();
         }, 10);
-        options.onComplete(options.fileName, response);
+        if (on && on.complete) {
+            on.complete(options.fileName, response);
+        }
     };
 
-    $(window).on("beforeunload", function (e) {
+    $(window).bind("beforeunload", function (e) {
         if (!options.uploading) return;
         var e = e || window.event;
         e.returnValue = options.messages.onLeave;

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-12-03 15:06:39
+ * @LastEditTime : 2021-06-01 14:38:07
  * @Description  :
  */
 export const viewinfo = {
@@ -122,4 +122,48 @@ var carousel3 = hope.carousel({
     }
 })
     `,
+    html4: `
+    <div class="hope-container banner4" style="height:400px">
+        <div class="hope-wrapper">
+            <div class="hope-slide docs-grid-demo-bg1">
+                <div class="title">Slide 1</div>
+            </div>
+            <div class="hope-slide docs-grid-demo-bg2">
+                <div class="title">Slide 2</div>
+            </div>
+            <div class="hope-slide docs-grid-demo-bg3">
+                <div class="title">Slide 3</div>
+            </div>
+            <div class="hope-slide docs-grid-demo-bg1">
+                <div class="title">Slide 4</div>
+            </div>
+            <div class="hope-slide docs-grid-demo-bg2">
+                <div class="title">Slide 5</div>
+            </div>
+            <div class="hope-slide docs-grid-demo-bg3">
+                <div class="title">Slide 6</div>
+            </div>
+        </div>
+        <div class="hope-pagination"></div>
+    </div>
+        `,
+    js4: `
+    var carousel4 = hope.carousel({
+        ele: ".banner4",
+        options: {
+            pagination: ".banner4 .hope-pagination",
+            fade:true,
+            loop: true,
+            resizeReInit: true,
+        },
+        on:{
+            onFirstInit: function (e) {
+                console.log(e);
+            },
+            onSlideChangeStart: function (e) {
+                console.log(e);
+            }
+        }
+    })
+        `,
 };

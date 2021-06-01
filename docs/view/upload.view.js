@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-12-18 14:24:36
+ * @LastEditTime : 2021-06-01 17:42:29
  * @Description  :
  */
 export const viewinfo = {
@@ -18,9 +18,8 @@ hope.upload({
     options: {
         url: '/app/fileUpload',
         name: "file",
-        type: ['jpg', 'png'],
-        size: 5 * 1024 * 1024, //5mb
-        multiple: true
+        allowedExtensions: ['jpg', 'png'],
+        multiple: true,
     },
     on: {
         validate: function (e) {

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-09-02 13:45:37
- * @LastEditTime : 2020-12-18 14:20:41
+ * @LastEditTime : 2021-06-01 10:35:14
  * @Description  : 图片上传接口
  */
 const express = require("express");
@@ -27,6 +27,7 @@ app.all("*", function (req, res, next) {
     next();
 });
 app.post("/fileUpload", upload.single("file"), function (req, res, next) {
+    console.log(req.file);
     res.json({
         imgurl: req.file.filename
     });

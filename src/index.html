@@ -186,7 +186,7 @@
 
    
 
-    .hope-container.hope-mode-effect {
+    /* .hope-container.hope-mode-effect {
     width: 100%;
     height: 480px;
     background: #000;
@@ -221,7 +221,7 @@
     line-height: 60px;
     display: inline-block;
     vertical-align: middle;
-  }
+  } */
 .device {
     padding: 30px 10px;
     background: #222;
@@ -1583,8 +1583,8 @@
     hope.upload({
         ele: "#upload",
         options: {
-            url: '/app/fileUpload',
-            name: "file",
+            url: 'http://test.haier.com/interaction-service/imageUpload',
+            name: "multipartFile",
             allowedExtensions: ['jpg', 'png']
         },
         on: {
