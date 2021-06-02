@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-05-31 14:40:29
+ * @LastEditTime : 2021-06-02 15:05:00
  * @Description  : hopeUI
  */
 
@@ -30,10 +30,18 @@ const { omitHandler } = require("./module/omit.js");
 const { zoomHandler } = require("./module/zoom.js");
 const { numupHandler } = require("./module/numup.js");
 const { lazyloadHandler } = require("./module/lazyload.js");
+const { danmuHandler } = require("./module/danmu.js");
 const { utilsHandler } = require("./module/utils.js");
 
 const hope = () => {
     return {
+        danmu: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return danmuHandler({ ele, options, on });
+        },
         lazyload: function ({
             ele: ele = null,
             options: options = {},
