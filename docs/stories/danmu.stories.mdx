@@ -1,0 +1,43 @@
+import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
+import { useEffect } from "@storybook/client-api";
+import { viewinfo } from "../view/danmu.view.js";
+
+# 弹幕（Danmu）
+
+---
+
+<Meta title="复用组件/弹幕(Danmu)" />
+
+<Canvas>
+    <Story
+        name="弹幕(Danmu)"
+        height="300px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.html;
+        }}
+    </Story>
+</Canvas>
+
+## 基础属性
+
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| ---- | ------------- | ------ | -------------------- | ------- |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+
+## 配置 options
+
+| 参数    | 说明       | 类型   | 可选值 | 默认值      |
+| ------- | ---------- | ------ | ------ | ----------- |
+| channel | 通道数     | Number | --     | 3           |
+| bgColor | 背景色组   | Array  | --     | ["#111111"] |
+| speed   | 动画速度   | Number | --     | 7           |
+| unit    | 单位       | String | px/rem | px          |
+| opacity | 背景透明度 | Number | --     | 0.4         |
+| data    | 数据源     | Array  | --     | ---         |

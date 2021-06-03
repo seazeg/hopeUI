@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-06-03 11:48:10
+ * @LastEditTime : 2021-06-03 14:49:08
  * @Description  : 弹幕
  */
 
@@ -12,14 +12,14 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = $(ele);
 
-    let CHANNEL_COUNT = options.channel || 10; //通道数
+    let CHANNEL_COUNT = options.channel || 3; //通道数
     let MAX_DM_COUNT = Math.ceil(options.data.length / CHANNEL_COUNT); //通道内最多弹幕条数
 
     window.domPool = [];
     let danmuPool = options.data;
     let hasPosition = [];
-    let colorList = options.colorList || ["#111"];
-    let unit = options.unit || "px"
+    let colorList = options.bgColor || ["#111"];
+    let unit = options.unit || "px";
 
     init($dom);
     setInterval(function () {
@@ -111,7 +111,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
 
         setTimeout(function () {
             hasPosition[channel] = true;
-        }, dom.clientWidth * 5);
+        }, dom.clientWidth * 5 + 1000);
     }
 
     function getRangeRandomNum(min, max, returnType) {

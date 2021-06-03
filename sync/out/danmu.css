@@ -1,0 +1,42 @@
+.hopeui-danmu {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+.hopeui-danmu-start {
+  position: absolute;
+  visibility: hidden;
+  white-space: nowrap;
+}
+.hopeui-danmu-end {
+  position: absolute;
+  white-space: nowrap;
+  user-select: none;
+}
+.hopeui-danmu-item {
+  display: inline-block;
+  min-height: 30px;
+  line-height: 30px;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 0 10px;
+}
+.hopeui-danmu-item i {
+  font-size: 14px;
+  color: #fff;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+.hopeui-danmu-item span {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  z-index: 0;
+}
