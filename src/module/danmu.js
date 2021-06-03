@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-06-03 11:45:53
+ * @LastEditTime : 2021-06-03 11:48:10
  * @Description  : 弹幕
  */
 
@@ -19,6 +19,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     let danmuPool = options.data;
     let hasPosition = [];
     let colorList = options.colorList || ["#111"];
+    let unit = options.unit || "px"
 
     init($dom);
     setInterval(function () {
@@ -50,9 +51,9 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                 // 初始化dom的位置 通过设置className
                 dom.className = "hopeui-danmu-start hopeui-danmu-item";
 
-                dom.style.top = j * 1.2 * dom.clientHeight + 10 + "px";
+                dom.style.top = j * 1.2 * dom.clientHeight + 10 + unit;
                 dom.style.left =
-                    wrapper.width() /** (j % 2 == 0 ? 1 : 1.05)*/ + "px";
+                    wrapper.width() /** (j % 2 == 0 ? 1 : 1.05)*/ + unit;
 
                 if (is.ie() > 9) {
                     dom.addEventListener("transitionend", (e) => {
@@ -60,7 +61,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                         target.className =
                             "hopeui-danmu-start hopeui-danmu-item";
                         target.style.transition = null;
-                        target.style.left = wrapper.width() + "px";
+                        target.style.left = wrapper.width() + unit;
 
                         domPool[target.getAttribute("data-channel")].push(
                             target
@@ -98,10 +99,10 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
 
         if (is.ie() > 9) {
             dom.style.transition = `left ${options.speed || 7}s linear`;
-            dom.style.left = "-" + dom.clientWidth + "px";
+            dom.style.left = "-" + dom.clientWidth + unit;
         } else {
             animation(dom, "-" + dom.clientWidth, function () {
-                dom.style.left = $dom.width() + "px";
+                dom.style.left = $dom.width() + unit;
                 domPool[channel].push(dom);
             });
         }
@@ -122,7 +123,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     function animation(dom, end, callback) {
         var timer = setInterval(function () {
             if (parseInt(dom.style.left) > end) {
-                dom.style.left = parseInt(dom.style.left) - 1 + "px";
+                dom.style.left = parseInt(dom.style.left) - 1 + unit;
             } else {
                 clearInterval(timer);
                 if (callback) {
