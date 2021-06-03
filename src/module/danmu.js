@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-06-03 11:33:26
+ * @LastEditTime : 2021-06-03 11:45:53
  * @Description  : 弹幕
  */
 
@@ -89,6 +89,9 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     function shootDanmu(dom, text, channel) {
         if (text) {
             dom.children[0].innerHTML = text;
+        }
+        if (!dom.children[0].innerHTML) {
+            dom.style.display = "none";
         }
 
         dom.className = "hopeui-danmu-end hopeui-danmu-item";
