@@ -66,7 +66,29 @@
                 </fieldset>
             </div>
             <div class="docs-content">
-                <div id="danmu"></div>
+                <div class="danmu"></div>
+            </div>
+        </div>
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">进度条</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <div class="progress"></div>
+                <button
+                    type="button"
+                    class="hopeui-btn hopeui-btn-radius js_progress"
+                >
+                    加
+                </button>
+                <button
+                    type="button"
+                    class="hopeui-btn hopeui-btn-radius js_progress2"
+                >
+                    减
+                </button>
             </div>
         </div>
 
@@ -247,7 +269,9 @@
             </div>
         </div>
     </body>
+  
     <script>
+
         hope.carousel({
             ele: ".bannerA",
             options: {
@@ -266,20 +290,31 @@
             },
         });
 
-        // var radio = hope.radio({
-        //     ele: ".radio",
-        //     on: {
-        //         init: function (e) {
-        //             console.log(e);
-        //         },
-        //         change: function (e) {
-        //             console.log(e);
-        //         },
-        //     },
-        // });
+        var progress = hope.progress({
+            ele: ".progress",
+            options: {
+                progress: 0,
+                height: "20px",
+                isLabel: true,
+                speed: 200,
+            },
+        });
+
+        document
+            .querySelector(".js_progress")
+            .addEventListener("click", function () {
+                progress.setProgress(99,function(){
+                    console.log('结束');
+                });
+            });
+        document
+            .querySelector(".js_progress2")
+            .addEventListener("click", function () {
+                progress.setProgress(1);
+            });
 
         var danmu = hope.danmu({
-            ele: "#danmu",
+            ele: ".danmu",
             options: {
                 channel: 8,
                 speed: 10,

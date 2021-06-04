@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-05-28 14:50:02
+ * @LastEditTime : 2021-06-04 14:45:11
  * @Description  : 表单
  */
 
@@ -101,13 +101,21 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     cont.on
                 );
             } else {
+                let label = null;
                 if (type.includes("select")) {
-                    type = "selector";
+                    type = "select";
                 } else if (rinput.test(type)) {
                     type = "input";
                 }
+
+                if (/^(radio|checkbox|)$/i.test(type)) {
+                    label = "input";
+                } else {
+                    label = type;
+                }
+
                 formControls[name] = handlers[type](
-                    `${ele} [name=${name}]`,
+                    `${ele} ${label}[name=${name}]`,
                     null,
                     null
                 );

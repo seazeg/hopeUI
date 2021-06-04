@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-06-03 14:49:08
+ * @LastEditTime : 2021-06-03 15:03:33
  * @Description  : 弹幕
  */
 
@@ -15,13 +15,14 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     let CHANNEL_COUNT = options.channel || 3; //通道数
     let MAX_DM_COUNT = Math.ceil(options.data.length / CHANNEL_COUNT); //通道内最多弹幕条数
 
-    window.domPool = [];
+    let domPool = [];
     let danmuPool = options.data;
     let hasPosition = [];
     let colorList = options.bgColor || ["#111"];
     let unit = options.unit || "px";
 
     init($dom);
+
     setInterval(function () {
         var channel = getChannel();
         if (/*danmuPool.length &&*/ channel != -1) {
@@ -46,6 +47,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                 bg.style.opacity = options.opacity || 0.4;
                 dom.appendChild(bg);
                 dom.setAttribute("data-channel", j);
+                dom.setAttribute("data-start", wrapper.width());
                 wrapper.get(0).appendChild(dom);
 
                 // 初始化dom的位置 通过设置className
@@ -102,7 +104,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
             dom.style.left = "-" + dom.clientWidth + unit;
         } else {
             animation(dom, "-" + dom.clientWidth, function () {
-                dom.style.left = $dom.width() + unit;
+                dom.style.left = dom.getAttribute("data-start") + unit;
                 domPool[channel].push(dom);
             });
         }

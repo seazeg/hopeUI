@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-06-02 15:05:00
+ * @LastEditTime : 2021-06-03 14:52:54
  * @Description  : hopeUI
  */
 
@@ -31,10 +31,18 @@ const { zoomHandler } = require("./module/zoom.js");
 const { numupHandler } = require("./module/numup.js");
 const { lazyloadHandler } = require("./module/lazyload.js");
 const { danmuHandler } = require("./module/danmu.js");
+const { progressHandler } = require("./module/progress.js");
 const { utilsHandler } = require("./module/utils.js");
 
 const hope = () => {
     return {
+        progress: function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return progressHandler({ ele, options, on });
+        },
         danmu: function ({
             ele: ele = null,
             options: options = {},
