@@ -2320,7 +2320,7 @@ hopeu["plug"]("ajax", function ($) {
             try {
                 for (var i in o.headers) xhr.setRequestHeader(i, o.headers[i]);
             } catch (_) {
-                console.log(_);
+                // console.log(_);
             }
 
             if (isPost) {

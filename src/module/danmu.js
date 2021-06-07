@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-06-07 14:07:40
+ * @LastEditTime : 2021-06-07 16:30:08
  * @Description  : 弹幕
  */
 
@@ -83,10 +83,14 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
             hasPosition[i] = true;
         }
 
-        if (isMask) {
+        if (isMask && is.ie() > 9) {
             wrapper
-                .append(`<img src="${img.danmuLeft}" class="hopeui-danmu-leftMask"/>`)
-                .append(`<img src="${img.danmuRight}" class ="hopeui-danmu-rightMask"/>`);
+                .append(
+                    `<img src="${img.danmuLeft}" class="hopeui-danmu-leftMask"/>`
+                )
+                .append(
+                    `<img src="${img.danmuRight}" class ="hopeui-danmu-rightMask"/>`
+                );
         }
     }
 
@@ -118,10 +122,12 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         }
 
         hasPosition[channel] = false;
-
-        setTimeout(function () {
-            hasPosition[channel] = true;
-        }, dom.clientWidth * 5 + 1000);
+        setTimeout(
+            function () {
+                hasPosition[channel] = true;
+            },
+            is.ie() > 9 ? $(dom).width() * 5 + 1000 : $(dom).width() * 5 + 3000
+        );
     }
 
     function getRangeRandomNum(min, max, returnType) {

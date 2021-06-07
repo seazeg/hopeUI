@@ -3091,7 +3091,6 @@ Hope_carousel.prototype.plugins.effect = function (Hope_carousel, params) {
     var wrapperMaxPosition;
     Hope_carousel.container.className =
     Hope_carousel.container.className + " hope-mode-effect-" + params;
-    console.log(params);
     function initSlides() {
        
         for (var i = 0; i < Hope_carousel.slides.length; i++) {
