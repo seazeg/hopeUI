@@ -1,12 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-06-03 15:03:33
+ * @LastEditTime : 2021-06-07 14:07:40
  * @Description  : 弹幕
  */
 
 const $ = require("../utils/hopeu.js");
 const { is } = require("../utils/is.js");
+const { img } = require("../utils/img.js");
 
 module.exports.danmuHandler = function ({ ele, options, on }) {
     const obj = new Object();
@@ -20,6 +21,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     let hasPosition = [];
     let colorList = options.bgColor || ["#111"];
     let unit = options.unit || "px";
+    let isMask = options.isMask;
 
     init($dom);
 
@@ -44,6 +46,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                 var bg = document.createElement("span");
                 bg.style.background =
                     colorList[getRangeRandomNum(0, colorList.length - 1)];
+
                 bg.style.opacity = options.opacity || 0.4;
                 dom.appendChild(bg);
                 dom.setAttribute("data-channel", j);
@@ -69,7 +72,6 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                             target
                         );
                     });
-                } else {
                 }
 
                 doms.push(dom);
@@ -79,6 +81,12 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         // hasPosition 标记每个通道目前是否有位置
         for (var i = 0; i < CHANNEL_COUNT; i++) {
             hasPosition[i] = true;
+        }
+
+        if (isMask) {
+            wrapper
+                .append(`<img src="${img.danmuLeft}" class="hopeui-danmu-leftMask"/>`)
+                .append(`<img src="${img.danmuRight}" class ="hopeui-danmu-rightMask"/>`);
         }
     }
 
@@ -100,7 +108,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         dom.className = "hopeui-danmu-end hopeui-danmu-item";
 
         if (is.ie() > 9) {
-            dom.style.transition = `left ${options.speed || 7}s linear`;
+            dom.style.transition = `all ${options.speed || 7}s linear`;
             dom.style.left = "-" + dom.clientWidth + unit;
         } else {
             animation(dom, "-" + dom.clientWidth, function () {

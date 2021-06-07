@@ -53,7 +53,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
 
-        #danmu {
+        .danmu {
             background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fblog%2F201406%2F12%2F20140612042459_nN5mZ.jpeg&refer=http%3A%2F%2Fcdn.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1625215699&t=5e8ed6e8beca65e3663919c6b2744975");
         }
     </style>
@@ -269,9 +269,8 @@
             </div>
         </div>
     </body>
-  
-    <script>
 
+    <script>
         hope.carousel({
             ele: ".bannerA",
             options: {
@@ -303,8 +302,8 @@
         document
             .querySelector(".js_progress")
             .addEventListener("click", function () {
-                progress.setProgress(99,function(){
-                    console.log('结束');
+                progress.setProgress(99, function () {
+                    console.log("结束");
                 });
             });
         document
@@ -318,9 +317,10 @@
             options: {
                 channel: 8,
                 speed: 10,
-                bgColor: ["red", "blue", "green", "grey", "purple"],
+                bgColor: ["red", "blue", "green", "yellow", "green"],
                 opacity: 0.4,
                 unit: "px",
+                isMask: true,
                 data: [
                     "前方大量弹幕来袭，请做好准备！",
                     "主人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别， 别时茫茫江浸月,茫江浸月",
