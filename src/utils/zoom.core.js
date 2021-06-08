@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:57:09
- * @LastEditTime : 2021-02-18 14:13:04
+ * @LastEditTime : 2021-06-08 15:22:19
  * @Description  :
  */
 module.exports.Hope_zoom = function (evt, options) {
@@ -51,6 +51,7 @@ module.exports.Hope_zoom = function (evt, options) {
         data = {},
         inBounds = false,
         isOverThumb = 0,
+        tempOptions = {},
         getElementsByClass = function (className) {
             var list = [],
                 elements = null,
@@ -144,6 +145,8 @@ module.exports.Hope_zoom = function (evt, options) {
                 if (data[idx].mode === "inside") {
                     lens.appendChild(large);
                 } else {
+            
+                    largeWrapper.innerHTML = "";
                     largeWrapper.appendChild(large);
                 }
             }
@@ -381,6 +384,23 @@ module.exports.Hope_zoom = function (evt, options) {
             thumbData.largeH = Math.round(thumbData.zoom * h);
         };
 
+    this.update = function (imgSrc) {
+        if (imgSrc) {
+            tempOptions.thumb.src = imgSrc;
+            tempOptions.thumb.setAttribute("hope-large-img-url", imgSrc);
+            this.set(tempOptions);
+        } else {
+            throw {
+                name: "imgSrc error",
+                message: "Please set imgSrc",
+                toString: function () {
+                    return this.name + ": " + this.message;
+                },
+            };
+        }
+     
+    };
+
     this.attach = function (options) {
         if (options.thumb === undefined) {
             throw {
@@ -404,6 +424,7 @@ module.exports.Hope_zoom = function (evt, options) {
             options.thumb = thumb;
             this.set(options);
         }
+        tempOptions = options;
     };
 
     this.setThumb = function (thumb) {
@@ -411,10 +432,10 @@ module.exports.Hope_zoom = function (evt, options) {
     };
 
     this.set = function (options) {
-        if (data[options.thumb.id] !== undefined) {
-            curThumb = options.thumb;
-            return false;
-        }
+        // if (data[options.thumb.id] !== undefined) {
+        //     curThumb = options.thumb;
+        //     return false;
+        // }
 
         var thumbObj = new Image(),
             largeObj = new Image(),
@@ -536,7 +557,6 @@ module.exports.Hope_zoom = function (evt, options) {
                 data[idx].status = 2;
                 updateLensOnLoad(idx, thumb, largeObj, largeWrapper);
             });
-
             largeObj.src = data[idx].largeUrl;
         });
 

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:56:06
- * @LastEditTime : 2020-12-17 12:01:22
+ * @LastEditTime : 2021-06-08 11:54:54
  * @Description  : 图像放大镜
  */
 
@@ -11,8 +11,7 @@ const { Hope_zoom, Event } = require("../utils/zoom.core.js");
 module.exports.zoomHandler = function ({ ele, options, on }) {
     const evt = new Event();
     let zoom = new Hope_zoom(evt);
-
-    let obj = zoom.attach(
+    zoom.attach(
         Object.assign(
             {
                 thumb: ele,
@@ -21,6 +20,5 @@ module.exports.zoomHandler = function ({ ele, options, on }) {
             on
         )
     );
-
-    return obj;
+    return zoom;
 };
