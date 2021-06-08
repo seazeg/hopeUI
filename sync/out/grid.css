@@ -263,7 +263,7 @@
 .hopeui-col-xl-inlineshow {
   display: inline-block;
 }
-@media screen and (min-width: 991px) and (max-width: 1198px) {
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   .hopeui-col-lg-1-12 {
     width: 8.33333333%;
   }
@@ -445,7 +445,7 @@
     display: inline-block;
   }
 }
-@media screen and (min-width: 700px) and (max-width: 990px) {
+@media screen and (min-width: 701px) and (max-width: 991px) {
   .hopeui-col-md-1-12 {
     width: 8.33333333%;
   }
@@ -627,7 +627,7 @@
     display: inline-block;
   }
 }
-@media screen and (min-width: 575px) and (max-width: 699px) {
+@media screen and (min-width: 576px) and (max-width: 700px) {
   .hopeui-col-sm-1-12 {
     width: 8.33333333%;
   }
@@ -809,7 +809,7 @@
     display: inline-block;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 574px) {
+@media screen and (min-width: 0px) and (max-width: 575px) {
   .hopeui-col-xs-1-12 {
     width: 8.33333333%;
   }
@@ -1111,7 +1111,7 @@
 .hopeui-col-xl-inlineshow {
   display: inline-block;
 }
-@media screen and (min-width: 991px) and (max-width: 1198px) {
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   .hopeui-col-lg-1-8 {
     width: 12.5%;
   }
@@ -1233,7 +1233,7 @@
     display: inline-block;
   }
 }
-@media screen and (min-width: 700px) and (max-width: 990px) {
+@media screen and (min-width: 701px) and (max-width: 991px) {
   .hopeui-col-md-1-8 {
     width: 12.5%;
   }
@@ -1355,7 +1355,7 @@
     display: inline-block;
   }
 }
-@media screen and (min-width: 575px) and (max-width: 699px) {
+@media screen and (min-width: 576px) and (max-width: 700px) {
   .hopeui-col-sm-1-8 {
     width: 12.5%;
   }
@@ -1477,7 +1477,7 @@
     display: inline-block;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 574px) {
+@media screen and (min-width: 0px) and (max-width: 575px) {
   .hopeui-col-xs-1-8 {
     width: 12.5%;
   }

@@ -69,7 +69,7 @@
   color: #555555;
 }
 .hope-datepicker .day ul li.active {
-  background-color: #2DB4EE;
+  background-color: #2db4ee;
   color: #fff;
 }
 .hope-datepicker .day ul li.other-month {
@@ -97,10 +97,10 @@
   font-size: 14px;
 }
 .hope-datepicker .month-list ul li:hover {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .month-list ul li.active {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .year-month .year .year-list {
   width: 100%;
@@ -123,10 +123,10 @@
   font-size: 14px;
 }
 .hope-datepicker .year-list ul li:hover {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .year-list ul li.active {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .year-list .year-change {
   margin-top: 3px;
@@ -177,11 +177,11 @@
   display: inline-block;
 }
 .hope-datepicker .time-list .warp .item:hover {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .time-list .warp .item.active {
   color: #fff;
-  background-color: #2DB4EE;
+  background-color: #2db4ee;
 }
 .hope-datepicker .time-list .group {
   margin: 20px 5px 0 5px;
@@ -194,7 +194,7 @@
   cursor: pointer;
 }
 .hope-datepicker .time-list .group .return:hover {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .time-list .group button {
   margin: 0;
@@ -212,10 +212,10 @@
   font-size: 14px;
 }
 .hope-datepicker .year-month span:hover {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .year-month span.active {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
 .hope-datepicker .action {
   height: 50px;
@@ -228,7 +228,7 @@
   float: right;
   height: 36px;
   line-height: 36px;
-  background-color: #2DB4EE;
+  background-color: #2db4ee;
   color: #ffffff;
 }
 .hope-datepicker .action button.changeResult {
@@ -236,7 +236,7 @@
   float: right;
   height: 36px;
   line-height: 36px;
-  background-color: #2DB4EE;
+  background-color: #2db4ee;
   color: #ffffff;
 }
 .hope-datepicker .action button.clear {
@@ -256,5 +256,5 @@
   font-size: 14px;
 }
 .hope-datepicker .action span.selectTime:hover {
-  color: #2DB4EE;
+  color: #2db4ee;
 }
