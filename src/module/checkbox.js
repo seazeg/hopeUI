@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-05-28 14:24:12
+ * @LastEditTime : 2021-06-09 17:01:42
  * @Description  : 复选框
  */
 
@@ -37,6 +37,7 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
                 //     window.event.cancelBubble = true;
                 // }
                 handle(checkbox, newEle);
+                utils.validation(checkbox, "pass", null, "checkbox");
                 //点击回调
                 if (on && on.change) {
                     on.change({

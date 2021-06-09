@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-20 20:19:44
+ * @LastEditTime : 2021-06-09 16:59:39
  * @Description  : 文本框
  */
 
@@ -98,6 +98,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
         }
 
         $this.on("blur", function () {
+            utils.validation($(this).get(0), "pass", null, "input");
             if (on && on.blur) {
                 on.blur({
                     targetELe: $(this).get(0),

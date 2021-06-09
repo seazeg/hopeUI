@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-05-28 14:25:15
+ * @LastEditTime : 2021-06-09 17:00:28
  * @Description  : 下拉框
  */
 
@@ -208,6 +208,13 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 }
                             });
 
+                            utils.validation(
+                                selector,
+                                "pass",
+                                null,
+                                "select-one"
+                            );
+
                             scrollbarHandler({
                                 ele: newEle.children(".hopeui-select-list"),
                                 options: {
@@ -253,6 +260,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             .removeClass("hopeui-hide");
                     }
                 }
+
+                utils.validation(selector, "pass", null, "select-one");
                 //选中options后回调
                 if (on && on.change) {
                     on.change({
@@ -279,6 +288,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 .eq($(this).get(0).selectedIndex)
                                 .text()
                         );
+                    utils.validation(selector, "pass", null, "select-one");
                     if (on && on.change) {
                         on.change({
                             originalParentEle: selector,

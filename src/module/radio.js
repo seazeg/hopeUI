@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-05-28 14:23:52
+ * @LastEditTime : 2021-06-09 17:02:08
  * @Description  : 单选框
  */
 
@@ -40,6 +40,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
                 // }
                 handle(radio, newEle);
                 //点击回调
+                utils.validation(radio, "pass", null, "radio");
                 if (on && on.change) {
                     on.change({
                         original: radio,
