@@ -41,13 +41,13 @@
                 margin-left: (100% / @len) * @fen;
             }
             .@{class}-hide {
-                display: none;
+                display: none!important;
             }
             .@{class}-show {
-                display: block;
+                display: block!important;
             }
             .@{class}-inlineshow {
-                display: inline-block;
+                display: inline-block!important;
             }
             .Col(@fen+1, extract(@name, @index));
         }
@@ -64,13 +64,13 @@
         margin-left: (100% / @len) * @fen;
     }
     .hopeui-col-xl-hide {
-        display: none;
+        display: none!important;
     }
     .hopeui-col-xl-show {
-        display: block;
+        display: block!important;
     }
     .hopeui-col-xl-inlineshow {
-        display: inline-block;
+        display: inline-block!important;
     }
     .Col(@fen+1, @len);
 }
@@ -91,6 +91,6 @@
 .Col(1, 12);
 .Mixin(1, 1, 12);
 
-//8栅格
-.Col(1, 8);
-.Mixin(1, 1, 8);
+// //8栅格
+// .Col(1, 8);
+// .Mixin(1, 1, 8);

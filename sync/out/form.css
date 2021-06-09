@@ -2,16 +2,16 @@
   margin-bottom: 15px;
   clear: both;
 }
-.hopeui-form .hopeui-form-item .hopeui-form-error {
+.hopeui-form .hopeui-form-error {
   border-color: #f56c6c !important;
 }
-.hopeui-form .hopeui-form-item .hopeui-form-error-prompt {
+.hopeui-form .hopeui-form-error-prompt {
   color: #f56c6c !important;
   font-size: 12px;
   padding: 10px 10px 0 0;
   display: block;
 }
-.hopeui-form .hopeui-form-item .hopeui-form-error-prompt i {
+.hopeui-form .hopeui-form-error-prompt i {
   vertical-align: middle;
 }
 .hopeui-form .hopeui-form-label {
@@ -29,15 +29,10 @@
   margin-left: 110px;
   min-height: 36px;
   display: block;
+  line-height: 36px;
 }
 .hopeui-form .hopeui-input-inline {
   display: inline-block;
   vertical-align: top;
   margin-right: 5px;
-}
-.hopeui-form .hopeui-form-radio {
-  margin-top: 8px;
-}
-.hopeui-form .hopeui-form-checkbox {
-  margin-top: 10px;
 }
