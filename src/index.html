@@ -62,6 +62,26 @@
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
+                    <legend><a name="icon">图像放大镜</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <div>
+                    <div class="hopeui-zoom-thumb-wrapper" style="display: inline-block">
+                        <img id="hope_xxx" src="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
+                            hope-large-img-url="http://test.haier.com/frontDEMO/ProgressiveJPEG/ProgressiveJPEG.jpg"
+                            hope-large-img-wrapper="preview">
+                    </div>
+                    <div class="hopeui-zoom-preview" id="preview"
+                        style="width: 400px; height: 400px;display: inline-block;vertical-align: top;">局部显示区域</div>
+                </div>
+                <button type='button' class='hopeui-btn hopeui-btn-radius' id="fuckkk">按钮名称</button>
+            </div>
+        </div>
+
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
                     <legend><a name="icon">弹幕</a></legend>
                 </fieldset>
             </div>
@@ -303,14 +323,14 @@
             .querySelector(".js_progress")
             .addEventListener("click", function () {
                 progress.setProgress(100, function (e) {
-                    // console.log(e);
+                    console.log(e);
                 });
             });
         document
             .querySelector(".js_progress2")
             .addEventListener("click", function () {
                 progress.setProgress(0, function (e) {
-                    // console.log(e);
+                    console.log(e);
                 });
             });
 
@@ -371,5 +391,34 @@
                 ],
             },
         });
+
+
+        window.zoom = hope.zoom({
+        ele: '#hope_xxx',
+        options: {
+            largeWrapper: 'preview',
+            mode: 'outside', //outside&inside
+            zoom: 2,
+            zoomable: true
+        },
+        on: {
+            enter: function (e) {
+                // //console.log(e);
+            },
+            move: function (e) {
+                // //console.log(e);
+            },
+            leave: function (e) {
+                // //console.log(e);
+            },
+            scale: function (e) {
+                // //console.log(e);
+            },
+        }
+    });
+
+    document.querySelector('#fuckkk').addEventListener('click', function(){
+        zoom.update("https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg");
+    })
     </script>
 </html>

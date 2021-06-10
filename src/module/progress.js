@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-03 14:51:09
- * @LastEditTime : 2021-06-08 09:36:24
+ * @LastEditTime : 2021-06-10 15:25:20
  * @Description  : 进度条
  */
 
@@ -47,10 +47,16 @@ module.exports.progressHandler = function ({ ele, options, on }) {
             if (len < value) {
                 inner.style.width = inner.offsetWidth + 1 + "px";
                 label.innerHTML = len + "%";
-                
+
                 if (callback) {
-                    callback(len);
+                    if (len != inner.getAttribute("hope-progress-value")) {
+                        callback(len);
+                    }
                 }
+                inner.setAttribute(
+                    "hope-progress-value",
+                    parseInt((inner.offsetWidth / w) * 100)
+                );
                 if (len >= value) {
                     clearInterval(timer);
                 }
@@ -58,12 +64,20 @@ module.exports.progressHandler = function ({ ele, options, on }) {
                 inner.style.width = inner.offsetWidth - 1 + "px";
                 label.innerHTML = len + "%";
                 if (callback) {
-                    callback(len);
+                    if (len != inner.getAttribute("hope-progress-value")) {
+                        callback(len);
+                    }
                 }
+                inner.setAttribute(
+                    "hope-progress-value",
+                    parseInt((inner.offsetWidth / w) * 100)
+                );
                 if (len <= value) {
                     clearInterval(timer);
                 }
             }
+
+        
         }, 1);
     }, 100);
 

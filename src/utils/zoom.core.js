@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:57:09
- * @LastEditTime : 2021-06-10 14:15:46
+ * @LastEditTime : 2021-06-10 15:57:45
  * @Description  :
  */
 module.exports.Hope_zoom = function (evt, options) {
@@ -265,9 +265,6 @@ module.exports.Hope_zoom = function (evt, options) {
         onThumbEnter = function () {
             curData = data[curIdx];
 
-            document.getElementById(curData.largeWrapperId).style.visibility =
-                "visible";
-
             curLens = $("#" + curIdx + "-lens");
 
             if (curData.status === 2) {
@@ -298,6 +295,8 @@ module.exports.Hope_zoom = function (evt, options) {
             } else if (curData.status === 1) {
                 curLens.className = "hopeui-zoom-loader";
             }
+            document.getElementById(curData.largeWrapperId).style.visibility =
+                "visible";
         },
         onThumbLeave = function () {
             if (curData.status > 0) {
@@ -322,7 +321,6 @@ module.exports.Hope_zoom = function (evt, options) {
                         curLarge.className += " hopeui-hide";
                     }
                 }
-
                 document.getElementById(
                     curData.largeWrapperId
                 ).style.visibility = "hidden";
@@ -363,6 +361,9 @@ module.exports.Hope_zoom = function (evt, options) {
                     });
                 }
             }
+
+            document.getElementById(curData.largeWrapperId).style.visibility =
+                "visible";
 
             status = curData.status;
         },
@@ -442,6 +443,7 @@ module.exports.Hope_zoom = function (evt, options) {
         //     curThumb = options.thumb;
         //     return false;
         // }
+
 
         var thumbObj = new Image(),
             largeObj = new Image(),
@@ -563,7 +565,6 @@ module.exports.Hope_zoom = function (evt, options) {
                 data[idx].status = 2;
                 updateLensOnLoad(idx, thumb, largeObj, largeWrapper);
             });
-
             largeObj.src = data[idx].largeUrl;
         });
 
