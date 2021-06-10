@@ -31,7 +31,7 @@ var Hope_upload = function (ele, options, on) {
         },
         options
     );
-    options.id = options.name || createId();
+    options.id = options.name + "_" + createId();
     options.uploading = false;
     var ieVersion = is.ie();
     var initButton = function () {
@@ -89,7 +89,7 @@ var Hope_upload = function (ele, options, on) {
         }
         input
             .attr("id", "hopeUpload-file" + options.id)
-            .attr("name", options.id)
+            .attr("name", options.name)
             .css({
                 position: "absolute",
                 right: 0,
@@ -208,11 +208,11 @@ var Hope_upload = function (ele, options, on) {
             if (Object.keys(options.params).length > 0) {
                 Object.keys(options.params).forEach(function (key) {
                     formData.append(key, options.params[key]);
-                })
-            }else{
+                });
+            } else {
                 formData.append(options.id, file);
             }
-           
+
             var xhr = new XMLHttpRequest();
             xhr.open("post", options.url, true);
             xhr.send(formData);
