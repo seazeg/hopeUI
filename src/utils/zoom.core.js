@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:57:09
- * @LastEditTime : 2021-06-08 15:40:46
+ * @LastEditTime : 2021-06-10 14:15:46
  * @Description  :
  */
 module.exports.Hope_zoom = function (evt, options) {
@@ -264,8 +264,10 @@ module.exports.Hope_zoom = function (evt, options) {
         },
         onThumbEnter = function () {
             curData = data[curIdx];
-            document.getElementById(curData.largeWrapperId).style.display =
-                "inline-block";
+
+            document.getElementById(curData.largeWrapperId).style.visibility =
+                "visible";
+
             curLens = $("#" + curIdx + "-lens");
 
             if (curData.status === 2) {
@@ -300,8 +302,7 @@ module.exports.Hope_zoom = function (evt, options) {
         onThumbLeave = function () {
             if (curData.status > 0) {
                 var handler = curData.leave;
-                document.getElementById(curData.largeWrapperId).style.display =
-                    "none";
+
                 if (handler !== null) {
                     handler({
                         thumb: curThumb,
@@ -321,6 +322,10 @@ module.exports.Hope_zoom = function (evt, options) {
                         curLarge.className += " hopeui-hide";
                     }
                 }
+
+                document.getElementById(
+                    curData.largeWrapperId
+                ).style.visibility = "hidden";
             }
         },
         move = function () {

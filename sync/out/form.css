@@ -10,6 +10,7 @@
   font-size: 12px;
   padding: 10px 10px 0 0;
   display: block;
+  line-height: 1;
 }
 .hopeui-form .hopeui-form-error-prompt i {
   vertical-align: middle;
