@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-03 14:51:09
- * @LastEditTime : 2021-06-11 15:17:25
+ * @LastEditTime : 2021-06-11 15:36:40
  * @Description  : 进度条
  */
 
@@ -13,7 +13,7 @@ module.exports.progressHandler = function ({ ele, options, on }) {
     let $dom = $(ele);
     let temp = null;
     let timer = null;
-    init();
+
     function init() {
         $dom.addClass("hopeui-progress");
         let inner = document.createElement("div");
@@ -86,6 +86,8 @@ module.exports.progressHandler = function ({ ele, options, on }) {
             }
         }, 1);
     }, 100);
+
+    init();
 
     return obj;
 };
