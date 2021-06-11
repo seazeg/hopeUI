@@ -101,13 +101,13 @@
                     type="button"
                     class="hopeui-btn hopeui-btn-radius js_progress"
                 >
-                    加
+                    100%
                 </button>
                 <button
                     type="button"
                     class="hopeui-btn hopeui-btn-radius js_progress2"
                 >
-                    减
+                    33%
                 </button>
             </div>
         </div>
@@ -329,7 +329,7 @@
         document
             .querySelector(".js_progress2")
             .addEventListener("click", function () {
-                progress.setProgress(0, function (e) {
+                progress.setProgress(33, function (e) {
                     console.log(e);
                 });
             });

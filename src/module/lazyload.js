@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-15 15:33:12
- * @LastEditTime : 2021-01-18 15:39:50
+ * @LastEditTime : 2021-06-11 13:55:14
  * @Description  : 图片懒加载 + 响应式图片 + 图片居中
  */
 
@@ -79,6 +79,7 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
                     (function () {
                         if (!options.responsive) {
                             item.src = item.getAttribute("hope-src");
+
                             item.setAttribute("hope-picture-tag", "bingo");
                         } else {
                             if (!breakpoint) {
@@ -197,6 +198,14 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
                                 return;
                             }
                         }, 100);
+
+                        if (on.loaded) {
+                            on.loaded({
+                                ele: item,
+                                index: index,
+                                event: "loaded",
+                            });
+                        }
                     })();
                 }
             }

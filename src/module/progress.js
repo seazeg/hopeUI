@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-03 14:51:09
- * @LastEditTime : 2021-06-10 15:25:20
+ * @LastEditTime : 2021-06-11 15:17:25
  * @Description  : 进度条
  */
 
@@ -27,6 +27,14 @@ module.exports.progressHandler = function ({ ele, options, on }) {
             inner.appendChild(label);
         }
         $dom.get(0).appendChild(inner);
+
+        if (on.init) {
+            on.init({
+                ele: $dom,
+                progress: obj,
+                event: "init",
+            });
+        }
     }
     obj.setProgress = utilsHandler.throttle(function (value, callback) {
         let w = $dom.width();
@@ -76,8 +84,6 @@ module.exports.progressHandler = function ({ ele, options, on }) {
                     clearInterval(timer);
                 }
             }
-
-        
         }, 1);
     }, 100);
 
