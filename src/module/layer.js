@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-01-28 09:35:49
+ * @LastEditTime : 2021-06-15 10:45:06
  * @Description  : 弹窗
  */
 
@@ -16,12 +16,13 @@ module.exports.layerHandler = function ({ options, on }) {
         content: options.content || "",
         isMask: !options.isMask,
         maskColor: options.maskColor,
-        isDefaultBtn: !options.isDefaultBtn,
+        isDefaultBtn: options.isDefaultBtn && true,
         defaultBtn: options.defaultBtn || {
             ok: "确定",
             cancel: "取消",
         },
         isDrag: options.isDrag || false,
+        isLock: options.isLock || false,
         isFullScreen: options.isFullScreen || false,
         animation: options.animation || "hopeui-anim-scaleSpring",
     };
@@ -111,7 +112,10 @@ module.exports.layerHandler = function ({ options, on }) {
         self = $(template).insertAfter("body");
 
         self.addClass(`hopeui-anim ${options.animation}`);
-        $("body,html").addClass("hopeui-layer-nosrl");
+
+        if (options.isLock) {
+            $("body,html").addClass("hopeui-layer-nosrl");
+        }
 
         if (options.isFullScreen) {
             self.find(".hopeui-layer-content")
@@ -149,7 +153,11 @@ module.exports.layerHandler = function ({ options, on }) {
         }
 
         if (on && on.open) {
-            on.open(self[0], obj);
+            on.open({
+                ele: self[0],
+                layer: obj,
+                event: "open",
+            });
         }
 
         //事件绑定
@@ -158,7 +166,11 @@ module.exports.layerHandler = function ({ options, on }) {
         });
         self.find('button[name="ok"]').on("click", function (e) {
             if (on && on.confirm) {
-                on.confirm(self[0], obj);
+                on.confirm({
+                    ele: self[0],
+                    layer: obj,
+                    event: "confirm",
+                });
             } else {
                 close();
             }
@@ -175,9 +187,15 @@ module.exports.layerHandler = function ({ options, on }) {
         if (mask) {
             mask.remove();
         }
-        $("body,html").removeClass("hopeui-layer-nosrl");
+        if (options.isLock) {
+            $("body,html").removeClass("hopeui-layer-nosrl");
+        }
         if (on && on.close) {
-            on.close(self[0], obj);
+            on.close({
+                ele: self[0],
+                layer: obj,
+                event: "close",
+            });
         }
     };
 
@@ -187,21 +205,21 @@ module.exports.layerHandler = function ({ options, on }) {
         }
     });
 
+    obj.close = function (callback) {
+        close();
+        if (callback) {
+            callback();
+        }
+    };
+
     if (on && on.init) {
         on.init({
-            ele: $dom[0],
+            layer: obj,
             eventName: "init",
         });
     }
 
     open();
-
-    obj.close = function (callback) {
-        close();
-        if(callback){
-            callback()
-        }
-    };
 
     return obj;
 };

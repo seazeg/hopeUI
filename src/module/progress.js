@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-03 14:51:09
- * @LastEditTime : 2021-06-11 16:57:11
+ * @LastEditTime : 2021-06-15 09:43:51
  * @Description  : 进度条
  */
 
@@ -36,6 +36,12 @@ module.exports.progressHandler = function ({ ele, options, on }) {
             });
         }
     }
+    
+    obj.setColor = function(color){
+        let inner = $dom.children(".hopeui-progress-inner").get(0);
+        inner.style.backgroundColor = color;
+    }
+
     obj.setProgress = utilsHandler.throttle(function (value, callback) {
         let w = $dom.width();
         let inner = $dom.children(".hopeui-progress-inner").get(0);

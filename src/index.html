@@ -62,6 +62,19 @@
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
+                    <legend><a name="icon">普通弹层</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <button type="button" class="hopeui-btn" id="open1">
+                    打开弹层
+                </button>
+            </div>
+        </div>
+
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
                     <legend><a name="icon">图像放大镜</a></legend>
                 </fieldset>
             </div>
@@ -313,6 +326,27 @@
     </body>
 
     <script>
+
+    document.getElementById("open1").onclick = function () {
+        hope.layer({
+            options: {
+                content: "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
+                defaultBtn: {
+                    ok: "好的",
+                    cancel: "拜拜",
+                },
+                isDefaultBtn:false,
+                width: '300px'
+            },
+            on:{
+                init: function(e){
+                    console.log(e);
+                }
+            }
+        });
+    };
+
+    
         hope.carousel({
             ele: ".bannerA",
             options: {
