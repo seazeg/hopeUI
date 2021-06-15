@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-03 14:51:09
- * @LastEditTime : 2021-06-11 15:36:40
+ * @LastEditTime : 2021-06-11 16:57:11
  * @Description  : 进度条
  */
 
@@ -11,7 +11,6 @@ const { utilsHandler } = require("./utils.js");
 module.exports.progressHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = $(ele);
-    let temp = null;
     let timer = null;
 
     function init() {
@@ -23,8 +22,9 @@ module.exports.progressHandler = function ({ ele, options, on }) {
         inner.style.height = options.height || "20px";
         label.style.lineHeight = options.height || "20px";
         label.innerText = options.progress + "%";
-        if (options.isLabel && parseInt(options.height) >= 20) {
-            inner.appendChild(label);
+        inner.appendChild(label);
+        if (options.isLabel && parseInt(options.height) < 20) {
+            label.style.display = "none";
         }
         $dom.get(0).appendChild(inner);
 
@@ -49,22 +49,22 @@ module.exports.progressHandler = function ({ ele, options, on }) {
         // }else{
         //     clearInterval(timer);
         // }
+
         clearInterval(timer);
         timer = setInterval(function () {
             let len = parseInt((inner.offsetWidth / w) * 100);
-            if (len < value) {
+
+            if (len <= value) {
                 inner.style.width = inner.offsetWidth + 1 + "px";
                 label.innerHTML = len + "%";
 
                 if (callback) {
-                    if (len != inner.getAttribute("hope-progress-value")) {
-                        callback(len);
+                    let added = parseInt((inner.offsetWidth / w) * 100);
+                    if (len != added) {
+                        callback(added);
                     }
                 }
-                inner.setAttribute(
-                    "hope-progress-value",
-                    parseInt((inner.offsetWidth / w) * 100)
-                );
+
                 if (len >= value) {
                     clearInterval(timer);
                 }
@@ -72,14 +72,12 @@ module.exports.progressHandler = function ({ ele, options, on }) {
                 inner.style.width = inner.offsetWidth - 1 + "px";
                 label.innerHTML = len + "%";
                 if (callback) {
-                    if (len != inner.getAttribute("hope-progress-value")) {
-                        callback(len);
+                    let added = parseInt((inner.offsetWidth / w) * 100);
+                    if (len != added) {
+                        callback(added);
                     }
                 }
-                inner.setAttribute(
-                    "hope-progress-value",
-                    parseInt((inner.offsetWidth / w) * 100)
-                );
+                
                 if (len <= value) {
                     clearInterval(timer);
                 }
