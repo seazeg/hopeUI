@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-04 14:45:11
+ * @LastEditTime : 2021-06-16 16:51:28
  * @Description  : 表单
  */
 
@@ -93,27 +93,26 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
         });
     } else {
         TEMP_ARR.forEach(function ({ name, type, value }, index) {
+            let label = null;
+            if (type.includes("select")) {
+                type = "select";
+            } else if (rinput.test(type)) {
+                type = "input";
+            }
+
+            if (/^(radio|checkbox|)$/i.test(type)) {
+                label = "input";
+            } else {
+                label = type;
+            }
             if (controls[name]) {
                 let cont = controls[name];
                 formControls[name] = handlers[cont.type](
-                    `${ele} [name=${name}]`,
+                    `${ele} ${label}[name=${name}]`,
                     cont.options,
                     cont.on
                 );
             } else {
-                let label = null;
-                if (type.includes("select")) {
-                    type = "select";
-                } else if (rinput.test(type)) {
-                    type = "input";
-                }
-
-                if (/^(radio|checkbox|)$/i.test(type)) {
-                    label = "input";
-                } else {
-                    label = type;
-                }
-
                 formControls[name] = handlers[type](
                     `${ele} ${label}[name=${name}]`,
                     null,
