@@ -935,7 +935,7 @@ module.exports = {
                 info.select[1] - 1,
             ];
         }
-        var selectDate = new MobileSelect({
+        Hope_mobile_datepicker({
             trigger: el,
             title: info.title || "手势拖动选择日期",
             wheels: createDateData(infoData.start, infoData.end),
