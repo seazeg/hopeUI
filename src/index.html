@@ -62,12 +62,32 @@
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
+                    <legend><a name="icon">文件上传</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <div id="uploadlist"></div>
+                <br />
+                <button class="hopeui-btn" id="upload">文件选择</button>
+            </div>
+        </div>
+
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
                     <legend><a name="icon">日期选择</a></legend>
                 </fieldset>
             </div>
             <div class="docs-content">
-                <input name="text" type="text" value="" id="hope-datepicker" class="hopeui-input" placeholder="请选择日期"
-                    readonly />
+                <input
+                    name="text"
+                    type="text"
+                    value=""
+                    id="hope-datepicker"
+                    class="hopeui-input"
+                    placeholder="请选择日期"
+                    readonly
+                />
             </div>
         </div>
         <div class="docs-box">
@@ -337,45 +357,69 @@
     </body>
 
     <script>
-
-
-hope.datepicker({
-        ele: '#hope-datepicker',
-        options: {
-            format: 'yyyy-MM-dd HH:mm:ss',
-            type: 'datetime' //date：日期，datetime:日期+时间
-        },
-        on: {
-            init: function (e) {
-                // //console.log(e);
-            },
-            change: function (e) {
-                console.log(e);
-            }
-        }
-    })
-
-
-    document.getElementById("open1").onclick = function () {
-        hope.layer({
+        hope.upload({
+            ele: "#upload",
             options: {
-                content: "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
-                defaultBtn: {
-                    ok: "好的",
-                    cancel: "拜拜",
-                },
-                isDefaultBtn:false,
-                width: '300px'
+                url: "http://test.haier.com/interaction-activity/front/ecosystemMatchWorksController/uploadFile",
+                name: "multipartFile",
+                allowedExtensions: ["jpg", "png"],
             },
-            on:{
-                init: function(e){
-                    console.log(e);
-                }
-            }
+            on: {
+                validate: function (e) {
+                    ////console.log(e);
+                    if (!e.result) {
+                        alert("type不符合");
+                    }
+                },
+                uploading: function () {
+                    ////console.log('上传中');
+                },
+                complete: function (res) {
+                    ////console.log(res);
+                    $("#uploadlist").append(
+                        '<img src="/app/' + res.imgurl + '" />'
+                    );
+                },
+                error: function (res) {},
+            },
         });
-    };
 
-    
+        hope.datepicker({
+            ele: "#hope-datepicker",
+            options: {
+                format: "yyyy-MM-dd HH:mm:ss",
+                type: "datetime", //date：日期，datetime:日期+时间
+            },
+            on: {
+                init: function (e) {
+                    // //console.log(e);
+                },
+                change: function (e) {
+                    console.log(e);
+                },
+            },
+        });
+
+        document.getElementById("open1").onclick = function () {
+            hope.layer({
+                options: {
+                    content:
+                        "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
+                    defaultBtn: {
+                        ok: "好的",
+                        cancel: "拜拜",
+                    },
+                    isDefaultBtn: false,
+                    width: "300px",
+                },
+                on: {
+                    init: function (e) {
+                        console.log(e);
+                    },
+                },
+            });
+        };
+
         hope.carousel({
             ele: ".bannerA",
             options: {

@@ -209,9 +209,8 @@ var Hope_upload = function (ele, options, on) {
                 Object.keys(options.params).forEach(function (key) {
                     formData.append(key, options.params[key]);
                 });
-            } else {
-                formData.append(options.id, file);
             }
+            formData.append(options.name, file);
 
             var xhr = new XMLHttpRequest();
             xhr.open("post", options.url, true);
