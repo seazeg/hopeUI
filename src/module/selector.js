@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-09 17:00:28
+ * @LastEditTime : 2021-06-17 17:28:38
  * @Description  : 下拉框
  */
 
@@ -353,6 +353,14 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         .addClass("hopeui-hide");
                 }
             });
+
+            if (on && on.change) {
+                on.change({
+                    value: value,
+                    eventName: "val_change",
+                });
+            }
+
             if (callback) {
                 callback();
             }

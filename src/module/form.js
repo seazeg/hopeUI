@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-16 16:51:28
+ * @LastEditTime : 2021-06-17 18:33:11
  * @Description  : 表单
  */
 
@@ -170,13 +170,14 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         name: "",
                         value: "",
                     };
-
+                    let checked = false;
                     items.eles.forEach(function (ele, i) {
                         //校验
                         if (items.required) {
                             obj.name = ele.name;
                             if (ele.checked) {
                                 obj.value += `${ele.value},`;
+                                checked = true;
                             }
                             if (
                                 controls[ele.name] &&
@@ -196,7 +197,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                                         controls[ele.name].verify(obj.value),
                                         items.type
                                     );
-                                    status = false;
+                                    checked = false;
                                 }
                             } else {
                                 utils.validation(ele, "pass", null, items.type);
@@ -208,17 +209,23 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                             }
                             utils.validation(ele, "pass", null, items.type);
                         }
+
+
                     });
+
+                    if(!checked){
+                        status = false
+                    }
 
                     obj.value = $.trim(
                         obj.value.substring(0, obj.value.length - 1)
                     );
 
-                    if (items.required) {
+                    // if (items.required) {
                         // if (obj.value) {
                         formParams.push(obj);
                         // }
-                    }
+                    // }
                 } else {
                     let obj = {
                         name: "",
@@ -229,9 +236,11 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         //校验
                         if (items.required) {
                             //不为空
-                            obj.name = ele.name;
+                            obj.name = ele.name; 
                             if (ele.value) {
                                 obj.value += `${ele.value},`;
+                            }else{
+                                status = false;
                             }
                             // 自定义校验
                             if (
@@ -270,11 +279,11 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         obj.value.substring(0, obj.value.length - 1)
                     );
 
-                    if (items.required) {
+                    // if (items.required) {
                         // if (obj.value) {
                         formParams.push(obj);
                         // }
-                    }
+                    // }
                 }
             });
 
