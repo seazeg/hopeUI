@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-17 18:33:11
+ * @LastEditTime : 2021-06-17 18:39:15
  * @Description  : 表单
  */
 
@@ -135,7 +135,8 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             let tarEle = evt.target || evt.srcElement;
             let sortArr = {},
                 formParams = [],
-                status = true;
+                status = true,
+                errorList = {}
             Array.from(tarEle).forEach(function (item) {
                 if (
                     (item.type != "submit" ||
@@ -209,12 +210,11 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                             }
                             utils.validation(ele, "pass", null, items.type);
                         }
-
-
                     });
 
-                    if(!checked){
-                        status = false
+                    if (!checked) {
+                        status = false;
+                        errorList[items.eles[0].name] = false
                     }
 
                     obj.value = $.trim(
@@ -222,9 +222,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     );
 
                     // if (items.required) {
-                        // if (obj.value) {
-                        formParams.push(obj);
-                        // }
+                    // if (obj.value) {
+                    formParams.push(obj);
+                    // }
                     // }
                 } else {
                     let obj = {
@@ -236,11 +236,12 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         //校验
                         if (items.required) {
                             //不为空
-                            obj.name = ele.name; 
+                            obj.name = ele.name;
                             if (ele.value) {
                                 obj.value += `${ele.value},`;
-                            }else{
+                            } else {
                                 status = false;
+                                errorList[ele.name] = false
                             }
                             // 自定义校验
                             if (
@@ -262,6 +263,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                                         items.type
                                     );
                                     status = false;
+                                    errorList[ele.name] = false
                                 }
                             } else {
                                 utils.validation(ele, "pass", null, items.type);
@@ -280,9 +282,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     );
 
                     // if (items.required) {
-                        // if (obj.value) {
-                        formParams.push(obj);
-                        // }
+                    // if (obj.value) {
+                    formParams.push(obj);
+                    // }
                     // }
                 }
             });
@@ -293,6 +295,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     objectParams: formParams,
                     stringParams: utils.deserialization(formParams),
                     status: status,
+                    errorList: errorList,
                 });
             }
             return false;
