@@ -39,6 +39,7 @@ import { viewinfo } from "../view/loadmore.view.js";
 | autoLoad    | 自动加载             | Boolean | --     | false    |
 | offset      | 距离底部多少距离加载 | String  | --     | 10       |
 
+
 ## http 请求参数 params
 
 参考 jquery.ajax 参数配置列表
@@ -57,9 +58,9 @@ return {
 
 ## 回调方法 on
 
-| 参数   | 说明       | 类型     | 默认值 | 回调参数 |
-| ------ | ---------- | -------- | ------ | -------- |
-| loaded | 加载后回调 | Function | null   | event↓   |
+| 参数       | 说明       | 类型     | 默认值 | 回调参数 |
+| ---------- | ---------- | -------- | ------ | -------- |
+| loaded     | 加载后回调 | Function | null   | event↓   |
 | beforeLoad | 加载前回调 | Function | null   | event↓   |
 
 | event 参数 | 说明     | 类型   |
@@ -71,6 +72,6 @@ return {
 
 ## 调用方法
 
-| 方法名 | 说明         | 类型     | 默认值 | 参数 |
-| ------ | ------------ | -------- | ------ | ---- |
-| next   | 外部加载方法 | Function | --     | callback   |
+| 方法名 | 说明         | 类型     | 默认值 | 参数     |
+| ------ | ------------ | -------- | ------ | -------- |
+| next   | 外部加载方法 | Function | --     | callback |

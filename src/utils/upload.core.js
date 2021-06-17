@@ -48,9 +48,9 @@ var Hope_upload = function (ele, options, on) {
             options.button.find("input[type=file]").remove();
         }
         options.button.append(createInput());
-        // options.button.unbind().bind("click", function () {
-        //     createInput().click();
-        // });
+        options.button.unbind().bind("click", function () {
+            createInput().click();
+        });
         return options.button;
     };
     var createIframe = function () {
@@ -101,6 +101,7 @@ var Hope_upload = function (ele, options, on) {
                 fontSize: "118px",
                 verticalAlign: "baseline",
                 cursor: "pointer",
+                display:"none"
             })
             .bind("change", function () {
                 // 如果是单张上传（ie8、ie9不支持多选属性），执行if
@@ -226,11 +227,6 @@ var Hope_upload = function (ele, options, on) {
                         on.uploading(options.fileName);
                     }
                 } else if (xhr.status !== 200 && xhr.readyState !== 4) {
-                    resetUpload();
-                    if (on && on.error) {
-                        on.error(options.fileName, JSON.parse(xhr.response));
-                    }
-                } else {
                     resetUpload();
                     if (on && on.error) {
                         on.error(options.fileName, JSON.parse(xhr.response));

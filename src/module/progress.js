@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-03 14:51:09
- * @LastEditTime : 2021-06-15 09:43:51
+ * @LastEditTime : 2021-06-17 11:24:50
  * @Description  : 进度条
  */
 
@@ -36,11 +36,15 @@ module.exports.progressHandler = function ({ ele, options, on }) {
             });
         }
     }
-    
-    obj.setColor = function(color){
-        let inner = $dom.children(".hopeui-progress-inner").get(0);
-        inner.style.backgroundColor = color;
-    }
+
+    obj.stop = function (callback) {
+        clearInterval(timer);
+        if (callback) {
+            callback({
+                ele: $dom
+            });
+        }
+    };
 
     obj.setProgress = utilsHandler.throttle(function (value, callback) {
         let w = $dom.width();
@@ -67,7 +71,10 @@ module.exports.progressHandler = function ({ ele, options, on }) {
                 if (callback) {
                     let added = parseInt((inner.offsetWidth / w) * 100);
                     if (len != added) {
-                        callback(added);
+                        callback({
+                            ele: $dom,
+                            value: added,
+                        });
                     }
                 }
 
@@ -80,18 +87,20 @@ module.exports.progressHandler = function ({ ele, options, on }) {
                 if (callback) {
                     let added = parseInt((inner.offsetWidth / w) * 100);
                     if (len != added) {
-                        callback(added);
+                        callback({
+                            ele: $dom,
+                            value: added,
+                        });
                     }
                 }
-                
+
                 if (len <= value) {
                     clearInterval(timer);
                 }
             }
         }, 1);
-    }, 100);
+    }, 0);
 
     init();
-
     return obj;
 };
