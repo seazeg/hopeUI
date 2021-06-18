@@ -87,6 +87,7 @@ var Hope_upload = function (ele, options, on) {
                 '<input type="file" onchange="this.blur();" multiple="multiple" />'
             );
         }
+
         input
             .attr("id", "hopeUpload-file" + options.id)
             .attr("name", options.name)
@@ -105,7 +106,7 @@ var Hope_upload = function (ele, options, on) {
             })
             .bind("change", function () {
                 // 如果是单张上传（ie8、ie9不支持多选属性），执行if
-                if (!options.multiple || ieVersion <= 9) {
+                if (/*!options.multiple ||*/ ieVersion <= 9) {
                     options.fileName = getFileName(this);
                     if (validateFile(this)) {
                         upload();
@@ -146,7 +147,7 @@ var Hope_upload = function (ele, options, on) {
         return true;
     };
     var getFileName = function (file) {
-        if (!options.multiple || ieVersion <= 9) {
+        if (/*!options.multiple ||*/ ieVersion <= 9) {
             return file.value.replace(/.*(\/|\\)/, "");
         } else {
             return file.name.replace(/.*(\/|\\)/, "");
@@ -174,7 +175,7 @@ var Hope_upload = function (ele, options, on) {
             console.log("[hopeUpload] " + message);
     };
     var upload = function (file) {
-        if (!options.multiple || ieVersion <= 9) {
+        if (/*!options.multiple ||*/ ieVersion <= 9) {
             if (options.onUpload(options.fileName) === false) {
                 // 去掉input里的值，否则没法连续选同一张图片
                 $("#hopeUpload-file" + options.id).val("");
@@ -190,16 +191,12 @@ var Hope_upload = function (ele, options, on) {
         $("#hopeUpload-file" + options.id)
             .attr("id", "hopeUpload-file-uploading" + options.id)
             .appendTo("#hopeUploadForm_" + options.id);
-        // 如果options.button里已经有input type=file，先把input type=file去掉
-        if (options.button.find("input[type=file]").length) {
-            options.button.find("input[type=file]").remove();
-        }
-        options.button.append(createInput().hide());
         if (options.cancelable) {
             options.button.children("span").text(options.messages.cancel);
         }
+
         // 如果是单张上传，执行插件原有的上传方式submit()
-        if (!options.multiple || ieVersion <= 9) {
+        if (/*!options.multiple ||*/ ieVersion <= 9) {
             $("#hopeUploadForm_" + options.id)
                 .get(0)
                 .submit();
@@ -211,7 +208,7 @@ var Hope_upload = function (ele, options, on) {
                     formData.append(key, options.params[key]);
                 });
             }
-            formData.append(options.name, file);
+            formData.append("file", file);
 
             var xhr = new XMLHttpRequest();
             xhr.open("post", options.url, true);
@@ -231,9 +228,17 @@ var Hope_upload = function (ele, options, on) {
                     if (on && on.error) {
                         on.error(options.fileName, JSON.parse(xhr.response));
                     }
+                } else {
+                    console.log(xhr.status);
+                    console.log(xhr.readyState);
                 }
             };
         }
+
+        if (options.button.find("input[type=file]").length) {
+            options.button.find("input[type=file]").remove();
+        }
+        options.button.append(createInput());
     };
 
     // 重置上传

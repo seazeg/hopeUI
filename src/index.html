@@ -62,6 +62,7 @@
     </style>
 
     <body>
+        <input type="file" id="fuck">
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
@@ -420,18 +421,11 @@
         hope.upload({
             ele: "#upload",
             options: {
-                url:
-                    "http://test.haier.com/interaction-activity/front/ecosystemMatchWorksController/uploadFile",
-                name: "multipartFile",
+                url:"/app/fileUpload",
+                name: "file",
                 allowedExtensions: ["jpg", "png"],
             },
             on: {
-                validate: function (e) {
-                    ////console.log(e);
-                    if (!e.result) {
-                        alert("type不符合");
-                    }
-                },
                 uploading: function () {
                     ////console.log('上传中');
                 },

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-17 17:28:38
+ * @LastEditTime : 2021-06-17 21:09:46
  * @Description  : 下拉框
  */
 
@@ -25,15 +25,15 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             //模板初始化
             let newEle,
                 selector = $(this)[0];
-            let template = `<div class="hopeui-form-select"><div class="hopeui-select-title"><input type="selectText" placeholder="${
+            let template = `<div class="hopeui-form-select" name="${
+                selector.name
+            }"><div class="hopeui-select-title"><input type="selectText" placeholder="${
                 selector.children[0].innerText
             }" unselectable="on" ${
                 options && options.searchMode ? "" : "readonly"
             } value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge ${
                 (options && options.switchIcon) || "hopeui-default-switchIcon"
-            }"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" name="${
-                selector.name
-            }"><div class="hopeui-scrollbar-box ">`;
+            }"></i></div><div class="hopeui-select-list hopeui-anim hopeui-anim-upbit" ><div class="hopeui-scrollbar-box ">`;
             let tempSelectedVal = {
                 value: "",
                 label: "",
@@ -180,7 +180,6 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         if (on && on.toggle) {
                             on.toggle({
                                 name: $(this)
-                                    .children(".hopeui-select-list")
                                     .attr("name"),
                                 eventName: "toggle",
                             });
@@ -270,7 +269,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         targetEle: e.target,
                         label: _this.text(),
                         value: _this.attr("hope-value"),
-                        name: _this.parents(".hopeui-select-list").attr("name"),
+                        name: _this.parents(".hopeui-form-select").attr("name"),
                         group: _this.attr("hope-group"),
                         groupSort: _this.attr("hope-group-sort"),
                         eventName: "change",

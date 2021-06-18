@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-17 18:39:15
+ * @LastEditTime : 2021-06-18 11:02:52
  * @Description  : 表单
  */
 
@@ -136,7 +136,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             let sortArr = {},
                 formParams = [],
                 status = true,
-                errorList = {}
+                errorList = {};
             Array.from(tarEle).forEach(function (item) {
                 if (
                     (item.type != "submit" ||
@@ -214,7 +214,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
 
                     if (!checked) {
                         status = false;
-                        errorList[items.eles[0].name] = false
+                        errorList[items.eles[0].name] = false;
                     }
 
                     obj.value = $.trim(
@@ -241,7 +241,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                                 obj.value += `${ele.value},`;
                             } else {
                                 status = false;
-                                errorList[ele.name] = false
+                                errorList[ele.name] = false;
                             }
                             // 自定义校验
                             if (
@@ -263,7 +263,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                                         items.type
                                     );
                                     status = false;
-                                    errorList[ele.name] = false
+                                    errorList[ele.name] = false;
                                 }
                             } else {
                                 utils.validation(ele, "pass", null, items.type);
@@ -311,7 +311,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
 
     obj.val = function (obj, callback) {
         Object.keys(obj).forEach(function (key) {
-            formControls[key].val(obj[key]);
+            if (formControls[key]) {
+                formControls[key].val(obj[key]);
+            }
         });
         if (callback) {
             callback();
