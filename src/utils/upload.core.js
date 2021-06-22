@@ -15,7 +15,7 @@ var Hope_upload = function (ele, options, on) {
             button: null, // 上传按钮对象或者id
             url: "upload.do", // 处理上传文件接口
             allowedExtensions: ["jpg", "png", "gif", "jpeg"], // 只允许上传图片
-            cancelable: true, // 是否可取消上传
+            cancelable: false, // 是否可取消上传
             multiple: false, // 是否批量上传
             params: {},
             onUpload: function (fileName) {}, // 开始上传事件，fileName为本地选择的文件名

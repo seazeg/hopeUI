@@ -1,12 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-18 11:02:52
+ * @LastEditTime : 2021-06-22 21:23:22
  * @Description  : 表单
  */
 
 const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
+const { utilsHandler } = require("./utils.js");
 
 module.exports.formHandler = function ({ ele, options, on, controls }) {
     const obj = new Object();
@@ -177,7 +178,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         if (items.required) {
                             obj.name = ele.name;
                             if (ele.checked) {
-                                obj.value += `${ele.value},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
                                 checked = true;
                             }
                             if (
@@ -206,7 +207,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         } else {
                             obj.name = ele.name;
                             if (ele.checked) {
-                                obj.value += `${ele.value},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
                             }
                             utils.validation(ele, "pass", null, items.type);
                         }
@@ -238,7 +239,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                             //不为空
                             obj.name = ele.name;
                             if (ele.value) {
-                                obj.value += `${ele.value},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
                             } else {
                                 status = false;
                                 errorList[ele.name] = false;
@@ -271,7 +272,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         } else {
                             obj.name = ele.name;
                             if (ele.value) {
-                                obj.value += `${ele.value},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
                             }
                             utils.validation(ele, "pass", null, items.type);
                         }
