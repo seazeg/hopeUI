@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-06-09 11:23:40
+ * @LastEditTime : 2021-06-23 10:29:56
  * @Description  : 常用工具函数
  */
 
@@ -387,7 +387,7 @@ module.exports.utilsHandler = {
     filterHtmlCode: function (str) {
         const tag = {
             "<": "&lt;",
-            ">": "&gt",
+            ">": "&gt;",
             "&": "&amp;",
             "(": "&#40;",
             ")": "&#41;",
@@ -398,6 +398,21 @@ module.exports.utilsHandler = {
         return str.replace(/[<>&|() '"]/g, function (chr) {
             return tag[chr];
         });
+    },
+    restoreHtmlCode:function(str) {
+        let s = "";
+        if (str.length === 0) {
+          return "";
+        }
+        s = str.replace(/&amp;/g, "&");
+        s = s.replace(/&lt;/g, "<");
+        s = s.replace(/&gt;/g, ">");
+        s = s.replace(/&nbsp;/g, " ");
+        s = s.replace(/&#39;/g, "\'");
+        s = s.replace(/&quot;/g, "\"");
+        s = s.replace(/&#40;/g,"(");
+        s = s.replace(/&#41;/g,")")
+        return s;
     },
     //获取相对路径的绝对路径
     getAbsoluteUrl: function (url) {

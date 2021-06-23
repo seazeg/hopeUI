@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-22 21:23:22
+ * @LastEditTime : 2021-06-23 09:49:18
  * @Description  : 表单
  */
 
@@ -313,7 +313,11 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     obj.val = function (obj, callback) {
         Object.keys(obj).forEach(function (key) {
             if (formControls[key]) {
-                formControls[key].val(obj[key]);
+                if(typeof obj[key]!=='object'){
+                    formControls[key].val(utilsHandler.restoreHtmlCode(obj[key] + ""));
+                }
+                // formControls[key].val(utilsHandler.restoreHtmlCode(obj[key]));
+                // formControls[key].val(obj[key]);
             }
         });
         if (callback) {
