@@ -213,6 +213,9 @@ var Hope_upload = function (ele, options, on) {
             var xhr = new XMLHttpRequest();
             xhr.open("post", options.url, true);
             xhr.send(formData);
+            if (on && on.beforeUpload) {
+                on.beforeUpload(options.fileName);
+            }
             xhr.onreadystatechange = function () {
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     resetUpload();
@@ -226,7 +229,11 @@ var Hope_upload = function (ele, options, on) {
                 } else if (xhr.status !== 200 && xhr.readyState !== 4) {
                     resetUpload();
                     if (on && on.error) {
-                        on.error(options.fileName, JSON.parse(xhr.response));
+                        if(typeof xhr.response == 'object') {
+                             on.error(options.fileName, JSON.parse(xhr.response));
+                        }else{
+                            on.error(options.fileName);
+                        }
                     }
                 } else {
                     console.log(xhr.status);

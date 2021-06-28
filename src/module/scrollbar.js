@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2021-03-12 14:53:06
+ * @LastEditTime : 2021-06-28 09:39:31
  * @Description  : 自定义滚动条
  */
 
@@ -52,7 +52,7 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
         $(ele).css("height", highTotal + 15);
     } else {
         if (options && options.height || $(ele).height()) {
-            $(ele).css("height", options.height + "px");
+            $(ele).css("height", options.height);
         } else {
             $(ele).css("height", "200px");
         }
