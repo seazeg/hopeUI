@@ -1,5 +1,7 @@
 const hopeu = require("../utils/hopeu.js");
-const { is } = require("./is.js");
+const {
+    is
+} = require("./is.js");
 
 let Hope_datepicker = function (ele, options, on, plugin) {
     let $ = hopeu;
@@ -24,8 +26,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         minBar = null,
         secBar = null;
 
-    let settings = Object.assign(
-        {
+    let settings = Object.assign({
             offTop: $(obj).height() + 3,
             format: "yyyy-MM-dd HH:mm:ss",
             type: "datetime",
@@ -143,9 +144,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         .find(".month span")
         .on("click", function () {
             $(this).addClass("active");
-            $(this).next(".month-list").hasClass("hopeui-show")
-                ? $(this).next(".month-list").removeClass("hopeui-show")
-                : $(this).next(".month-list").addClass("hopeui-show");
+            $(this).next(".month-list").hasClass("hopeui-show") ?
+                $(this).next(".month-list").removeClass("hopeui-show") :
+                $(this).next(".month-list").addClass("hopeui-show");
             autoLayerHeight($("#mlist_" + elem_id), 50);
             $("#ylist_" + elem_id).removeClass("hopeui-show");
             $("#ylist_" + elem_id)
@@ -199,9 +200,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
             autoLayerHeight($("#ylist_" + elem_id), 50);
             $(this).addClass("active");
-            $(this).next(".year-list").hasClass("hopeui-show")
-                ? $(this).next(".year-list").removeClass("hopeui-show")
-                : $(this).next(".year-list").addClass("hopeui-show");
+            $(this).next(".year-list").hasClass("hopeui-show") ?
+                $(this).next(".year-list").removeClass("hopeui-show") :
+                $(this).next(".year-list").addClass("hopeui-show");
 
             $("#mlist_" + elem_id).removeClass("hopeui-show");
             $("#mlist_" + elem_id)
@@ -409,6 +410,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     //加载天
     function dayListReload() {
         let days = getDaysOfMonth(tz_m, tz_y);
+        let startDate = options.startDate ? options.startDate.split("-") : [1900, 1, 1]
+        let endDate = options.endDate ? options.endDate.split("-") : [2050, 1, 1]
         let prevDays = null,
             nextDays = null;
         if (tz_m - 1 > 0) {
@@ -419,15 +422,26 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         let dayOfWeek = new Date(tz_y + "/" + tz_m + "/01").getDay();
         $("#datepicker_" + elem_id + " .day li").remove();
 
+        //上月天
         for (let pi = prevDays - dayOfWeek + 1; pi <= prevDays; pi++) {
-            $("#datepicker_" + elem_id + " .day ul").append(
-                // "<li class='disable-month'>" + pi + "</li>"
-                `<li class="other-month" data-prev-md="${
+            if (compareDate(startDate, [tz_m <= 1 ? tz_y - 1 : tz_y, tz_m <= 1 ? 12 : tz_m - 1, pi])) {
+                $("#datepicker_" + elem_id + " .day ul").append(
+                    // "<li class='disable-month'>" + pi + "</li>"
+                    `<li class="other-month disabled" data-prev-md="${
                     tz_m <= 1 ? tz_y - 1 : tz_y
                 }, ${tz_m <= 1 ? 12 : tz_m - 1},${pi}">${pi}</li>`
-            );
+                )
+            } else {
+                $("#datepicker_" + elem_id + " .day ul").append(
+                    // "<li class='disable-month'>" + pi + "</li>"
+                    `<li class="other-month" data-evt='true' data-prev-md="${
+                        tz_m <= 1 ? tz_y - 1 : tz_y
+                    }, ${tz_m <= 1 ? 12 : tz_m - 1},${pi}">${pi}</li>`
+                )
+            }
         }
 
+        //天循环
         for (let i = 1; i <= days; i++) {
             let a_str = "";
 
@@ -435,11 +449,18 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 a_str = "active";
             }
 
-            $("#datepicker_" + elem_id + " .day ul").append(
-                "<li data-id=" + i + " class='" + a_str + "'>" + i + "</li>"
-            );
+            if (compareDate(startDate, [tz_y, tz_m, i]) || compareDate([tz_y, tz_m, i],endDate)) {
+                $("#datepicker_" + elem_id + " .day ul").append(
+                    "<li data-id=" + i + " class='disabled " + a_str + "'>" + i + "</li>"
+                );
+            } else {
+                $("#datepicker_" + elem_id + " .day ul").append(
+                    "<li data-id=" + i + " class='" + a_str + "' data-evt='true'>" + i + "</li>"
+                );
+            }
         }
 
+        //下月天
         if (
             $("#datepicker_" + elem_id + " .day ul").find("li").length % 7 !=
             0
@@ -449,11 +470,19 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 ($("#datepicker_" + elem_id + " .day ul").find("li").length %
                     7);
             for (let ni = 1; ni <= nextDays; ni++) {
-                $("#datepicker_" + elem_id + " .day ul").append(
-                    `<li class="other-month" data-next-md="${
+                if (compareDate(startDate, [tz_m >= 12 ? tz_y + 1 : tz_y, tz_m >= 12 ? 1 : tz_m + 1, ni])) {
+                    $("#datepicker_" + elem_id + " .day ul").append(
+                        `<li class="other-month disabled" data-next-md="${
                         tz_m >= 12 ? tz_y + 1 : tz_y
                     }, ${tz_m >= 12 ? 1 : tz_m + 1},${ni}">${ni}</li>`
-                );
+                    );
+                } else {
+                    $("#datepicker_" + elem_id + " .day ul").append(
+                        `<li class="other-month" data-evt='true' data-next-md="${
+                            tz_m >= 12 ? tz_y + 1 : tz_y
+                        }, ${tz_m >= 12 ? 1 : tz_m + 1},${ni}">${ni}</li>`
+                    );
+                }
             }
         }
 
@@ -462,7 +491,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         //选择天
         $("#datepicker_" + elem_id)
             .children(".day")
-            .find("li")
+            .find("li[data-evt=true]")
             .on("click", function () {
                 if ($(this).attr("data-id")) {
                     tz_d = parseInt($(this).attr("data-id"));
@@ -558,26 +587,26 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 } else {
                     return 28;
                 }
-            case 3:
-                return 31;
-            case 4:
-                return 30;
-            case 5:
-                return 31;
-            case 6:
-                return 30;
-            case 7:
-                return 31;
-            case 8:
-                return 31;
-            case 9:
-                return 30;
-            case 10:
-                return 31;
-            case 11:
-                return 30;
-            case 12:
-                return 31;
+                case 3:
+                    return 31;
+                case 4:
+                    return 30;
+                case 5:
+                    return 31;
+                case 6:
+                    return 30;
+                case 7:
+                    return 31;
+                case 8:
+                    return 31;
+                case 9:
+                    return 30;
+                case 10:
+                    return 31;
+                case 11:
+                    return 30;
+                case 12:
+                    return 31;
         }
     }
 
@@ -607,6 +636,34 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 }
             } catch (e) {
                 return new Date();
+            }
+        }
+    }
+
+    function compareDate(current, target) {
+        if (current[0] != target[0]) {
+            if (current[0] > target[0]) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (current[1] != target[1]) {
+                if (current[1] > target[1]) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if (current[2] != target[2]) {
+                    if (current[2] > target[2]) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             }
         }
     }
@@ -663,14 +720,14 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 minlist = "",
                 seclist = "";
             let hourObj = $("#timelist_" + elem_id)
-                    .find(".hour")
-                    .children(".list"),
+                .find(".hour")
+                .children(".list"),
                 minObj = $("#timelist_" + elem_id)
-                    .find(".min")
-                    .children(".list"),
+                .find(".min")
+                .children(".list"),
                 secObj = $("#timelist_" + elem_id)
-                    .find(".sec")
-                    .children(".list");
+                .find(".sec")
+                .children(".list");
             for (let hi = 0; hi <= 23; hi++) {
                 if (hi.toString().length <= 1) {
                     if (hi == hourAct) {
@@ -841,12 +898,12 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         } else if (document.getBoxObjectFor) {
             // gecko
             box = document.getBoxObjectFor(el);
-            let borderLeft = el.style.borderLeftWidth
-                ? parseInt(el.style.borderLeftWidth)
-                : 0;
-            let borderTop = el.style.borderTopWidth
-                ? parseInt(el.style.borderTopWidth)
-                : 0;
+            let borderLeft = el.style.borderLeftWidth ?
+                parseInt(el.style.borderLeftWidth) :
+                0;
+            let borderTop = el.style.borderTopWidth ?
+                parseInt(el.style.borderTopWidth) :
+                0;
             pos = [box.x - borderLeft, box.y - borderTop];
         } // safari & opera
         else {

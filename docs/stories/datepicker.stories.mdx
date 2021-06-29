@@ -38,6 +38,8 @@ import { viewinfo } from "../view/datepicker.view.js";
 | format           | 日期格式              | String | --            | yyyy-MM-dd HH:mm:ss |
 | type             | 日期模式/日期时间模式 | String | date/datetime | datetime            |
 | offTop           | 相对于 input 偏移高度 | Number | --            | --                  |
+| startDate        | 允许的开始日期        | String | --            | 1900-1-1            |
+| endDate          | 允许的结束日期        | String | --            | 2050-1-1            |
 | mobileStart      | 移动端最小日期        | String | --            | 1920                |
 | mobileEnd        | 移动端最大日期        | String | --            | 2070                |
 | mobileSelectDate | 移动端选中日期        | Array  | --            | [2020,1,1]          |
@@ -45,13 +47,13 @@ import { viewinfo } from "../view/datepicker.view.js";
 
 ## 回调方法 on
 
-| 参数   | 说明             | 类型     | 默认值 | 回调参数     |
-| ------ | ---------------- | -------- | ------ | ------------ |
-| init   | 初始化回调       | Function | null   | 当前对象 DOM |
-| change | 状态改变后回调(移动/PC)   | Function | null   | event↓       |
-| clear  | 清空后回调       | Function | null   | event↓       |
-| open   | 选择框打开后回调 | Function | null   | event↓       |
-| close  | 选择框关闭后回调 | Function | null   | event↓       |
+| 参数   | 说明                    | 类型     | 默认值 | 回调参数     |
+| ------ | ----------------------- | -------- | ------ | ------------ |
+| init   | 初始化回调              | Function | null   | 当前对象 DOM |
+| change | 状态改变后回调(移动/PC) | Function | null   | event↓       |
+| clear  | 清空后回调              | Function | null   | event↓       |
+| open   | 选择框打开后回调        | Function | null   | event↓       |
+| close  | 选择框关闭后回调        | Function | null   | event↓       |
 
 | event 参数 | 说明           | 类型   |
 | ---------- | -------------- | ------ |

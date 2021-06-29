@@ -1435,7 +1435,9 @@
         ele: '#hope-datepicker',
         options: {
             format: 'yyyy-MM-dd HH:mm:ss',
-            type: 'datetime' //date：日期，datetime:日期+时间
+            type: 'datetime', //date：日期，datetime:日期+时间
+            startDate:"2021-1-1",
+            endDate:"2021-7-30"
         },
         on: {
             init: function (e) {
@@ -2132,6 +2134,8 @@
             },
         },
     });
+
+    fm.setGlobalRequired(false);
 
     document.querySelector("#set").onclick = function () {
         fm.val({

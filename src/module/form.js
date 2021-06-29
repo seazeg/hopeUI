@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-23 09:49:18
+ * @LastEditTime : 2021-06-28 18:15:21
  * @Description  : 表单
  */
 
@@ -11,6 +11,8 @@ const { utilsHandler } = require("./utils.js");
 
 module.exports.formHandler = function ({ ele, options, on, controls }) {
     const obj = new Object();
+    let opts = options || {};
+    let globalRequired = opts.globalRequired ? false : true;
     const handlers = {
         select: function (ele, options, on) {
             return hope.selector({
@@ -126,6 +128,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     $dom.each(function () {
         let form = $(this)[0];
         form.onsubmit = function (evt) {
+            debugger
             evt = evt || window.event;
             if (evt.stopPropagation) {
                 evt.stopPropagation();
@@ -175,10 +178,12 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     let checked = false;
                     items.eles.forEach(function (ele, i) {
                         //校验
-                        if (items.required) {
+                        if (items.required && globalRequired) {
                             obj.name = ele.name;
                             if (ele.checked) {
-                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(
+                                    ele.value
+                                )},`;
                                 checked = true;
                             }
                             if (
@@ -207,7 +212,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         } else {
                             obj.name = ele.name;
                             if (ele.checked) {
-                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(
+                                    ele.value
+                                )},`;
                             }
                             utils.validation(ele, "pass", null, items.type);
                         }
@@ -235,11 +242,13 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
 
                     items.eles.forEach(function (ele, i) {
                         //校验
-                        if (items.required) {
+                        if (items.required && globalRequired) {
                             //不为空
                             obj.name = ele.name;
                             if (ele.value) {
-                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(
+                                    ele.value
+                                )},`;
                             } else {
                                 status = false;
                                 errorList[ele.name] = false;
@@ -272,7 +281,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         } else {
                             obj.name = ele.name;
                             if (ele.value) {
-                                obj.value += `${utilsHandler.filterHtmlCode(ele.value)},`;
+                                obj.value += `${utilsHandler.filterHtmlCode(
+                                    ele.value
+                                )},`;
                             }
                             utils.validation(ele, "pass", null, items.type);
                         }
@@ -291,12 +302,16 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             });
 
             //提交回调
+            if (!globalRequired) {
+                status = true;
+            }
             if (on && on.submit) {
                 on.submit({
                     objectParams: formParams,
                     stringParams: utils.deserialization(formParams),
                     status: status,
                     errorList: errorList,
+                    form: obj,
                 });
             }
             return false;
@@ -313,8 +328,10 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     obj.val = function (obj, callback) {
         Object.keys(obj).forEach(function (key) {
             if (formControls[key]) {
-                if(typeof obj[key]!=='object'){
-                    formControls[key].val(utilsHandler.restoreHtmlCode(obj[key] + ""));
+                if (typeof obj[key] !== "object") {
+                    formControls[key].val(
+                        utilsHandler.restoreHtmlCode(obj[key] + "")
+                    );
                 }
                 // formControls[key].val(utilsHandler.restoreHtmlCode(obj[key]));
                 // formControls[key].val(obj[key]);
@@ -331,6 +348,10 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
         if (callback) {
             callback();
         }
+    };
+
+    obj.setGlobalRequired = function (status) {
+        globalRequired = status;
     };
 
     return obj;

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-06-24 21:28:32
+ * @LastEditTime : 2021-06-29 15:37:46
  * @Description  : 常用工具函数
  */
 
@@ -125,7 +125,7 @@ module.exports.utilsHandler = {
             case "upper":
                 return /^[A-Z]+$/.test(value);
             case "phone":
-                return /^1[3|4|5|6|7|8][0-9]{9}$/.test(value);
+                return /^1[3|4|5|6|7|8|9][0-9]{9}$/.test(value);
             case "tel":
                 return /^0\d{2,3}-\d{7,8}(-\d{1,6})?$/.test(value);
             case "url":

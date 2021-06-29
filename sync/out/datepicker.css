@@ -64,6 +64,10 @@
   color: #555555;
   font-size: 14px;
 }
+.hope-datepicker .day ul li.disabled {
+  color: #e6e6e6 !important;
+  cursor: not-allowed !important;
+}
 .hope-datepicker .day ul li:hover {
   background-color: #f0f0f0;
   color: #555555;
