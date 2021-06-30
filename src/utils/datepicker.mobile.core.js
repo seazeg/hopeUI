@@ -101,7 +101,7 @@ var Hope_mobile_datepicker = function (config) {
                 _this.trigger.innerHTML = tempValue;
                 _this.callback(_this.getIndexArr(), _this.getValue());
             });
-		
+
             _this.trigger.addEventListener("click", function () {
                 _this.hopeMobDatepicker.classList.add(
                     "hope-mobile-datepicker-show"
@@ -817,8 +817,7 @@ var Hope_mobile_datepicker = function (config) {
         },
     };
 
-	return new HopeMobileDatepicker(config)
-
+    return new HopeMobileDatepicker(config);
 };
 
 module.exports = {
@@ -868,6 +867,7 @@ module.exports = {
         };
         var infoData = {},
             now = new Date();
+
         if (!info.start || !info.end || info.end < info.start) {
             infoData.start = now.getFullYear() - 60;
             infoData.end = now.getFullYear();
@@ -935,6 +935,7 @@ module.exports = {
                 info.select[1] - 1,
             ];
         }
+
         Hope_mobile_datepicker({
             trigger: el,
             title: info.title || "手势拖动选择日期",
