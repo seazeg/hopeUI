@@ -141,3 +141,6 @@ input:-ms-input-placeholder {
   height: 100%;
   font-size: 14px;
 }
+.hopeui-overflowhidden {
+  overflow: hidden;
+}

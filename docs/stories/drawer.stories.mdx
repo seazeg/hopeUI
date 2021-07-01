@@ -1,0 +1,52 @@
+import { Story, Canvas, Meta } from "@storybook/addon-docs/blocks";
+import { useEffect } from "@storybook/client-api";
+import { viewinfo } from "../view/danmu.view.js";
+
+# 抽屉（Drawer）
+
+---
+
+<Meta title="复用组件/抽屉(Drawer)" />
+
+<Canvas>
+    <Story
+        name="抽屉(Drawer)"
+        height="300px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js)();
+            });
+            return viewinfo.html;
+        }}
+    </Story>
+</Canvas>
+
+## 基础属性
+
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
+| ---- | ------------- | ------ | -------------------- | ------- |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
+
+## 配置 options
+
+| 参数         | 说明                     | 类型    | 可选值                | 默认值 |
+| ------------ | ------------------------ | ------- | --------------------- | ------ |
+| placement    | 弹出方向                 | String  | left/right/top/bottom | left   |
+| width        | 宽度                     | String  | --                    | 50%    |
+| height       | 高度                     | String  | --                    | 100%   |
+| closable     | 是否有关闭按钮           | Boolean | --                    | true   |
+| mask         | 是否有遮罩               | Boolean | --                    | true   |
+| maskClosable | 点击遮罩是否关闭         | Boolean | --                    | true   |
+| title        | 标题                     | String  | --                    | --     |
+| overflow     | 打开后主窗口是否禁止滑动 | Boolean | --                    | true   |
+
+## 调用方法
+
+| 方法名 | 说明         | 类型     | 默认值 | 参数     |
+| ------ | ------------ | -------- | ------ | -------- |
+| open   | 外部调用打开 | Function | --     | callback |
+| close  | 外部调用关闭 | Function | --     | callback |

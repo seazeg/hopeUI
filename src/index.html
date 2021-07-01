@@ -60,9 +60,9 @@
             height: 400px;
         }
 
-        #drawer{
+        #drawer {
             opacity: 0;
-            display:none
+            display: none;
         }
     </style>
 
@@ -74,7 +74,7 @@
                 </fieldset>
             </div>
             <div class="docs-content">
-                <button onclick="opena()">打开抽屉</button>
+                <button type='button' onclick="opena()" class='hopeui-btn hopeui-btn-radius'>打开抽屉</button>
                 <div id="drawer">
                     <div>我是内容</div>
                     <div>我是内容</div>
@@ -444,11 +444,13 @@
 
     <script>
         var mDrawer = hope.drawer({
-            ele:"#drawer",
-           options:{
-            placement: "right",
-            width: "70%",
-           },
+            ele: "#drawer",
+            options: {
+                placement: "right",
+                width: "80%",
+                height: "100%",
+                closable: true,
+            },
             on: {
                 open: function (e) {
                     console.log("open了");
@@ -457,8 +459,8 @@
         });
 
         function opena() {
-                mDrawer.open();
-            }
+            mDrawer.open();
+        }
 
         var loadmore = hope.loadmore({
             ele: "#loadmore",

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-30 15:28:57
- * @LastEditTime : 2021-06-30 18:13:08
+ * @LastEditTime : 2021-07-01 10:43:19
  * @Description  :
  */
 
@@ -10,21 +10,21 @@ const $ = require("../utils/hopeu.js");
 module.exports.drawerHandler = function ({ ele, options, on }) {
     const obj = new Object();
 
+    let defaultOptions = {
+        placement: "left",
+        width: "50%",
+        height: "100%",
+        closable: true,
+        mask: true,
+        maskClosable: true,
+        title: "",
+        overflow: true,
+    };
+    options = Object.assign(defaultOptions, options);
+
     function init(options) {
         let _this = $(ele);
-
-        let defaultOptions = {
-            placement: "left",
-            width: "250px",
-            closable: true,
-            mask: true,
-            maskClosable: true,
-        };
-        options = Object.assign(defaultOptions, options);
-        let contentBody = _this
-            .addClass("hope-drawer")
-            .children()
-            .remove();
+        let contentBody = _this.addClass("hope-drawer").children().remove();
 
         // mask
         let drawerMask = $("<div>", {
@@ -45,9 +45,9 @@ module.exports.drawerHandler = function ({ ele, options, on }) {
         // 构建drawer内容
         let drawerContent = $("<div>", {
             class: "hope-drawer-content " + options.placement,
-            style: "width: " + options.width,
+            style: `width:${options.width};height:${options.height}`,
         });
-        _this.append(drawerContent).addClass("hope-drawer-forceShow")
+        _this.append(drawerContent).addClass("hope-drawer-forceShow");
 
         if (options.closable || options.title) {
             let drawerContentHeader = $("<div>", {
@@ -65,7 +65,7 @@ module.exports.drawerHandler = function ({ ele, options, on }) {
 
             if (options.closable) {
                 let drawerClose = $("<div>", {
-                    class: "hope-drawer-close",
+                    class: "hope-drawer-close hopeui-icon hopeui-icon-close",
                     text: "×",
                 });
                 drawerContentHeader.append(drawerClose);
@@ -77,7 +77,11 @@ module.exports.drawerHandler = function ({ ele, options, on }) {
         }
 
         let drawerContentBody = $("<div>", {
-            class: "hope-drawer-content-body",
+            class: `hope-drawer-content-body ${
+                !options.closable && !options.title
+                    ? "hope-drawer-noHeader"
+                    : ""
+            }`,
         });
 
         contentBody.appendTo(drawerContentBody);
@@ -85,16 +89,26 @@ module.exports.drawerHandler = function ({ ele, options, on }) {
     }
     // 打开抽屉
     obj.open = function () {
+        if (options.overflow) {
+            $("body").addClass("hopeui-overflowhidden");
+        }
         $(ele).addClass("active");
         if (on && on.open) {
-            on.open();
+            on.open({
+                ele:$(ele).get(0)
+            });
         }
     };
     // 关闭抽屉
     obj.close = function () {
+        if (options.overflow) {
+            $("body").removeClass("hopeui-overflowhidden");
+        }
         $(ele).removeClass("active");
         if (on && on.close) {
-            on.close();
+            on.close({
+                ele:$(ele).get(0)
+            });
         }
     };
 
