@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2021-06-28 17:02:42
+ * @LastEditTime : 2021-07-01 11:29:29
  * @Description  :
  */
 
@@ -57,7 +57,7 @@ module.exports = {
         ],
     },
     output: {
-        filename: `hopeui.${pkg.version}.min.js`,
+        filename: `hopeui.min.js`,
         path: path.resolve(__dirname, "dist"),
         library: "hopeui",
         libraryTarget: "window",
@@ -100,7 +100,7 @@ module.exports = {
             `${pkg.description} version ${pkg.version}\nAuthor Evan.G\nFor more information, please visit ${pkg.author.github}\n${pkg.description} is available under the terms of the MIT license.`
         ),
         new MiniCssExtractPlugin({
-            filename: `hopeui.${pkg.version}.min.css`,
+            filename: `hopeui.min.css`,
             chunkFilename: "[id].css",
         }),
         new CopyWebpackPlugin({
