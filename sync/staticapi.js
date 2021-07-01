@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-28 15:11:24
- * @LastEditTime : 2021-06-10 14:35:51
+ * @LastEditTime : 2021-07-01 14:45:18
  * @Description  : 
  */
 const shell = require("shelljs");
@@ -17,8 +17,8 @@ shell.exec('cp -rf ../hopeui ../../seazeg.github.io/')
 shell.exec('zip -q -r ../../seazeg.github.io/hopeui.zip ../dist/')
 shell.exec('cd ../../seazeg.github.io/;gitq p -m "[API update]"')
 
-shell.exec('cd ../../vscode-hopeui-plugin/')
-shell.exec('rm -rf ../../vscode-hopeui-plugin/src/docs/hopeui')
-shell.exec('cd ../../hope_controls/')
-shell.exec('cp -rf ../hopeui ../../vscode-hopeui-plugin/src/docs/')
-shell.exec('cd ../../vscode-hopeui-plugin/;gitq p -m "[update]"')
+// shell.exec('cd ../../vscode-hopeui-plugin/')
+// shell.exec('rm -rf ../../vscode-hopeui-plugin/src/docs/hopeui')
+// shell.exec('cd ../../hope_controls/')
+// shell.exec('cp -rf ../hopeui ../../vscode-hopeui-plugin/src/docs/')
+// shell.exec('cd ../../vscode-hopeui-plugin/;gitq p -m "[update]"')
