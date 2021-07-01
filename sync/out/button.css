@@ -3,7 +3,7 @@
   width: 90px;
   height: 40px;
   line-height: 40px;
-  background-color: #2db4ee;
+  background-color: #e60012;
   color: #ffffff;
   text-align: center;
   font-size: 14px;
@@ -25,7 +25,7 @@
   color: #ffffff;
 }
 .hopeui-btn.hopeui-btn-primary {
-  border: 1px solid #d8d8d8;
+  border: 1px solid #eeeeee;
   background-color: #ffffff;
   color: #555555;
   line-height: 36px;

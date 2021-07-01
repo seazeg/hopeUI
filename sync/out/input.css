@@ -8,7 +8,7 @@
   border-style: solid;
   background-color: #ffffff;
   border-radius: 2px;
-  border-color: #d8d8d8;
+  border-color: #eeeeee;
   outline: 0;
   -webkit-appearance: none;
   transition: all 0.3s;
@@ -18,10 +18,10 @@
   color: #333333;
 }
 .hopeui-input:focus {
-  border-color: #bfbfbf;
+  border-color: #d5d5d5;
 }
 .hopeui-input:hover {
-  border-color: #bfbfbf;
+  border-color: #d5d5d5;
 }
 .hopeui-input-content-right {
   position: absolute;

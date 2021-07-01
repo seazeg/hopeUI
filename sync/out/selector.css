@@ -20,7 +20,7 @@
   top: 39px;
   z-index: 5;
   width: 100%;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #eeeeee;
   max-height: 300px;
   background-color: #ffffff;
   border-radius: 2px;
@@ -38,11 +38,11 @@
   font-size: 14px;
 }
 .hopeui-form-select .hopeui-select-list .option.hopeui-select-this {
-  background-color: #2db4ee;
+  background-color: #e60012;
   color: #ffffff;
 }
 .hopeui-form-select .hopeui-select-list .option.hopeui-select-this:hover {
-  background-color: #2db4ee;
+  background-color: #e60012;
   color: #ffffff;
 }
 .hopeui-form-select .hopeui-select-list .option.hopeui-select-tips {

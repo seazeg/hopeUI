@@ -20,13 +20,13 @@
   opacity: 0.5;
   filter: alpha(opacity=50);
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-  background: #2db4ee;
+  background: #e60012;
 }
 .hopeui-zoom-loader {
   position: absolute;
   top: 0;
   left: 0;
-  border: solid 1px #d8d8d8;
+  border: solid 1px #eeeeee;
   color: #ffffff;
   text-align: center;
   background: transparent;

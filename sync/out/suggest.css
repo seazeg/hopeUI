@@ -5,7 +5,7 @@
   padding: 5px 0;
   z-index: 899;
   min-width: 100%;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #eeeeee;
   max-height: 300px;
   background-color: #ffffff;
   border-radius: 2px;
@@ -23,7 +23,7 @@
   font-size: 14px;
 }
 .hopeui-suggest .option.hopeui-suggest-this {
-  background-color: #2db4ee !important;
+  background-color: #e60012 !important;
   color: #ffffff !important;
 }
 .hopeui-suggest .option.hopeui-suggest-tips {

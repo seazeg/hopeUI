@@ -91,19 +91,19 @@ a {
   text-decoration: none;
 }
 input::-webkit-input-placeholder {
-  color: #555555;
+  color: #aaaaaa;
 }
 input::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: #555555;
+  color: #aaaaaa;
 }
 input:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: #555555;
+  color: #aaaaaa;
 }
 input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #555555;
+  color: #aaaaaa;
 }
 .hopeui-show {
   display: block !important;
@@ -131,7 +131,7 @@ input:-ms-input-placeholder {
   display: inline;
 }
 .hopeui-placeholder {
-  color: #555555;
+  color: #aaaaaa;
   top: 0px;
   left: 0px;
   position: absolute;

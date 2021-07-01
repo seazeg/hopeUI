@@ -10,7 +10,7 @@
   border-width: 1px;
   border-style: solid;
   border-radius: 2px;
-  border-color: #d8d8d8;
+  border-color: #eeeeee;
   outline: 0;
   -webkit-appearance: none;
   transition: all 0.3s;
@@ -22,10 +22,10 @@
   font-size: 14px;
 }
 .hopeui-textarea:focus {
-  border-color: #bfbfbf;
+  border-color: #d5d5d5;
 }
 .hopeui-textarea:hover {
-  border-color: #bfbfbf;
+  border-color: #d5d5d5;
 }
 .hopeui-textarea-words {
   position: absolute;
