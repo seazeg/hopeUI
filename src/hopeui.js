@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-06-30 15:30:44
+ * @LastEditTime : 2021-07-02 16:47:45
  * @Description  : hopeUI
  */
 
@@ -33,10 +33,18 @@ const { lazyloadHandler } = require("./module/lazyload.js");
 const { danmuHandler } = require("./module/danmu.js");
 const { drawerHandler } = require("./module/drawer.js");
 const { progressHandler } = require("./module/progress.js");
+const { anchorHandler } = require("./module/anchor.js");
 const { utilsHandler } = require("./module/utils.js");
 
 const hope = () => {
     return {
+        anchor:function ({
+            ele: ele = null,
+            options: options = {},
+            on: on = {},
+        }) {
+            return anchorHandler({ ele, options, on });
+        },
         drawer:function ({
             ele: ele = null,
             options: options = {},
