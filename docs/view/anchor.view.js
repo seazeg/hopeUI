@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2021-07-05 14:39:10
+ * @LastEditTime : 2021-07-05 15:04:58
  * @Description  :
  */
 
@@ -35,6 +35,11 @@ export const viewinfo = {
         ele: "#nav",
         options: {
             offset: 50
+        },
+        on:{
+            jumpOver: function (e){
+                console.log(e);
+            }
         }
     })
     `,

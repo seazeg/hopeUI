@@ -36,3 +36,13 @@ import { viewinfo } from "../view/anchor.view.js";
 | 参数   | 说明   | 类型   | 可选值 | 默认值 |
 | ------ | ------ | ------ | ------ | ------ |
 | offset | 偏移量 | Number | --     | --     |
+
+## 回调方法 on
+
+| 方法名  | 说明           | 类型     | 默认值 | 回调参数     |
+| ------- | -------------- | -------- | ------ | ------------ |
+| init    | 初始化回调     | Function | null   | 当前对象 DOM |
+| jumpOver | 跳转完成后回调 | Function | null   | 当前对象 DOM |
+
+
+* 触发锚点标签加 `hope-anchor-key` 属性 , 锚点位置标签加 `hope-anchor-value` 属性 , 要保证属性值相同。
