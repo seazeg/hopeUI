@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-07-02 16:34:29
- * @LastEditTime : 2021-07-05 11:20:30
+ * @LastEditTime : 2021-07-05 11:30:26
  * @Description  : 锚点定位
  */
 
@@ -16,7 +16,6 @@ module.exports.anchorHandler = function ({ ele, options, on }) {
         // 获取当前位置方法
         let needScrollTop = targetY - currentY;
         let _currentY = currentY;
-        debugger;
         setTimeout(() => {
             // 一次调用滑动帧数，每次调用会不一样
             const dist = Math.ceil(needScrollTop / 10);

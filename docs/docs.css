@@ -46,7 +46,7 @@
 }
 
 .docs-grid-demo-bg1 {
-    background: #2DB4EE;
+    background: #2db4ee;
 }
 
 .docs-grid-demo-bg2 {
@@ -71,7 +71,7 @@
     color: rgb(104, 68, 34);
     cursor: pointer;
     user-select: none;
-    border: 20px inset #2DB4EE;
+    border: 20px inset #2db4ee;
     border-radius: 150px;
     margin: 5px 0;
 }
@@ -107,8 +107,6 @@
     text-align: center;
     line-height: 400px;
 }
-
-
 
 .banner2 {
     height: 400px;
@@ -166,17 +164,58 @@
 
 .hope-numup-obj {
     font-size: 100px;
-    color: #2DB4EE;
+    color: #2db4ee;
     font-weight: 600;
     display: block;
 }
 
-.hope_download{
+.hope_download {
     font-size: 20px;
     margin: 10px 0;
     display: block;
     font-weight: 600;
 }
-.lazyload{
-  width:48%;
+.lazyload {
+    width: 48%;
+}
+
+.nav {
+    width: 100%;
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+}
+
+.nav li {
+    width: 20%;
+    height: 50px;
+    color: red;
+    display: inline-block;
+    border: 1px solid red;
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+    background: #fff;
+    vertical-align: top;
+}
+
+.nav li:hover {
+    background: #ccc;
+}
+
+.anchor_module_a {
+    height: 400px;
+    background: red;
+}
+.anchor_module_b {
+    height: 600px;
+    background: yellow;
+}
+.anchor_module_c {
+    height: 200px;
+    background: green;
+}
+.anchor_module_d {
+    height: 900px;
+    background: blue;
 }
