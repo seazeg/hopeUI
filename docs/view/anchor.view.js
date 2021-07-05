@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2021-07-05 15:04:58
+ * @LastEditTime : 2021-07-05 15:49:11
  * @Description  :
  */
 
@@ -12,7 +12,7 @@ export const viewinfo = {
         <li hope-anchor-key="2">第二页</li>
         <li hope-anchor-key="3">第三页</li>
         <li hope-anchor-key="4">第四页</li>
-        <li hope-anchor-key="4">第五页</li>
+        <li hope-anchor-key="5">第五页</li>
     </ul>
     <div class="anchor_module_a" hope-anchor-value="1">
         
