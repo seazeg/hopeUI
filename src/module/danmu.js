@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-06-07 16:30:08
+ * @LastEditTime : 2021-07-06 09:32:59
  * @Description  : 弹幕
  */
 
@@ -20,8 +20,10 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     let danmuPool = options.data;
     let hasPosition = [];
     let colorList = options.bgColor || ["#111"];
-    let unit = options.unit || "px";
+    let unit =  "px";
     let isMask = options.isMask;
+    let spacing = options.spacing;
+    let maskColor = options.maskColor || "rgb(255, 255, 255)"
 
     init($dom);
 
@@ -56,7 +58,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                 // 初始化dom的位置 通过设置className
                 dom.className = "hopeui-danmu-start hopeui-danmu-item";
 
-                dom.style.top = j * 1.2 * dom.clientHeight + 10 + unit;
+                dom.style.top = j * (spacing || 1.2) * dom.clientHeight + 10 + unit;
                 dom.style.left =
                     wrapper.width() /** (j % 2 == 0 ? 1 : 1.05)*/ + unit;
 
@@ -86,10 +88,10 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         if (isMask && is.ie() > 9) {
             wrapper
                 .append(
-                    `<img src="${img.danmuLeft}" class="hopeui-danmu-leftMask"/>`
+                    `<div class="hopeui-danmu-leftMask" style="background-image: linear-gradient(to right, ${maskColor}, transparent);"></div>`
                 )
                 .append(
-                    `<img src="${img.danmuRight}" class ="hopeui-danmu-rightMask"/>`
+                    `<div class ="hopeui-danmu-rightMask" style="background-image: linear-gradient(to left, ${maskColor}, transparent);"></div>`
                 );
         }
     }
