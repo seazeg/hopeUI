@@ -43,7 +43,7 @@
 .hopeui-danmu-leftMask {
   left: 0;
   top: 0;
-  width: 15%;
+  width: 20%;
   height: 100%;
   z-index: 88;
   background-position: center;
@@ -53,7 +53,7 @@
 .hopeui-danmu-rightMask {
   right: 0;
   top: 0;
-  width: 15%;
+  width: 20%;
   height: 100%;
   z-index: 88;
   background-position: center;

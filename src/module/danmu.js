@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-07-06 09:37:20
+ * @LastEditTime : 2021-07-06 10:08:50
  * @Description  : 弹幕
  */
 
@@ -23,7 +23,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     let unit =  "px";
     let isMask = options.isMask;
     let spacing = options.spacing;
-    let maskColor = options.maskColor || "rgb(255, 255, 255)"
+    let maskColor = options.maskColor || {left:"#fff",right:"#fff"}
 
     init($dom);
 
@@ -88,10 +88,10 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         if (isMask && is.ie() > 9) {
             wrapper
                 .append(
-                    `<div class="hopeui-danmu-leftMask" style="background-image: linear-gradient(to right, ${maskColor}, transparent);"></div>`
+                    `<div class="hopeui-danmu-leftMask" style="background-image: linear-gradient(to right, ${maskColor.left}, transparent);"></div>`
                 )
                 .append(
-                    `<div class ="hopeui-danmu-rightMask" style="background-image: linear-gradient(to left, ${maskColor}, transparent);"></div>`
+                    `<div class ="hopeui-danmu-rightMask" style="background-image: linear-gradient(to left, ${maskColor.right}, transparent);"></div>`
                 );
         }
     }

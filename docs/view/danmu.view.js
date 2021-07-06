@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2021-07-06 09:54:02
+ * @LastEditTime : 2021-07-06 10:07:47
  * @Description  :
  */
 export const viewinfo = {
@@ -15,7 +15,7 @@ export const viewinfo = {
             opacity: 0.4,
             isMask: true,
             spacing: 1.2,
-            maskColor: '#fff',
+            maskColor: {left:"#fff",right:"#fff"},
             data: [
                 "前方大量弹幕来袭，请做好准备！",
                 "主人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别， 别时茫茫江浸月,茫江浸月",
