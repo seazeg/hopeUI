@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-07-02 16:34:29
- * @LastEditTime : 2021-07-07 15:07:56
+ * @LastEditTime : 2021-07-12 10:29:06
  * @Description  : 锚点定位
  */
 
@@ -50,11 +50,13 @@ module.exports.anchorHandler = function ({ ele, options, on }) {
                 };
             });
 
-            $dom.find("[hope-anchor-key]").on("click", function () {
+            $dom.find("[hope-anchor-key]").on("click", function (e) {
+                e.stopPropagation();
+                e.preventDefault();
                 let _this = $(this);
                 let value = _this.attr("hope-anchor-key");
+                temp = anchorObj[value];
                 if (temp) {
-                    temp = anchorObj[value];
                     scrollAnimation(
                         document.documentElement.scrollTop ||
                             document.body.scrollTop,
