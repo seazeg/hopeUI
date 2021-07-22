@@ -1,21 +1,21 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2021-07-06 10:07:47
+ * @LastEditTime : 2021-07-22 15:37:47
  * @Description  :
  */
 export const viewinfo = {
-    html:`<div class="danmu"></div>`,
+    html:`<div class="danmu" id="danmu"></div>`,
     js:`hope.danmu({
         ele: ".danmu",
         options: {
             channel: 8,
             speed: 10,
-            bgColor: ["red", "blue", "green", "grey", "purple"],
+            bgColor: ["red", "blue", "green", "yellow", "green"],
             opacity: 0.4,
             isMask: true,
-            spacing: 1.2,
-            maskColor: {left:"#fff",right:"#fff"},
+            spacing:1.4,
+            maskColor: {left:"#f3e3af",right:"#f3e3af",},
             data: [
                 "前方大量弹幕来袭，请做好准备！",
                 "主人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别， 别时茫茫江浸月,茫江浸月",
