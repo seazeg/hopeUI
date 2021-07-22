@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-06-29 15:37:46
+ * @LastEditTime : 2021-07-22 17:10:17
  * @Description  : 常用工具函数
  */
 
@@ -399,6 +399,7 @@ module.exports.utilsHandler = {
             return tag[chr];
         });
     },
+    //反转义操作符
     restoreHtmlCode:function(str) {
         let s = "";
         if (str.length === 0) {
