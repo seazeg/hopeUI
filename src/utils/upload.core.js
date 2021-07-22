@@ -1,5 +1,7 @@
 const $ = require("../utils/hopeu.js");
-const { is } = require("./is.js");
+const {
+    is
+} = require("./is.js");
 
 var createId = (function () {
     var id = 0;
@@ -9,9 +11,7 @@ var createId = (function () {
 })();
 
 var Hope_upload = function (ele, options, on) {
-    options = $.extend(
-        {},
-        {
+    options = $.extend({}, {
             button: null, // 上传按钮对象或者id
             url: "upload.do", // 处理上传文件接口
             allowedExtensions: ["jpg", "png", "gif", "jpeg"], // 只允许上传图片
@@ -23,8 +23,7 @@ var Hope_upload = function (ele, options, on) {
                 upload: "上传",
                 cancel: "取消",
                 emptyFile: "{file} 为空，请选择一个文件.",
-                invalidExtension:
-                    "{file} 后缀名不合法. 只有 {extensions} 是允许的",
+                invalidExtension: "{file} 后缀名不合法. 只有 {extensions} 是允许的",
                 onLeave: "文件正在上传，如果你现在离开，上传将会被取消。",
             },
             debug: false, // 是否打印上传信息，设置false
@@ -57,10 +56,10 @@ var Hope_upload = function (ele, options, on) {
         var id = "hopeUploadIframe_" + options.id;
         var iframe = $(
             '<iframe id="' +
-                id +
-                '" name="' +
-                id +
-                '" src="javascript:false;" style="display:none"></iframe>'
+            id +
+            '" name="' +
+            id +
+            '" src="javascript:false;" style="display:none"></iframe>'
         ).bind("load", complete);
         return iframe;
     };
@@ -68,14 +67,14 @@ var Hope_upload = function (ele, options, on) {
         var id = "hopeUploadForm_" + options.id;
         var form = $(
             '<form id="' +
-                id +
-                '" name="' +
-                id +
-                '" action="' +
-                options.url +
-                '" target="hopeUploadIframe_' +
-                options.id +
-                '" method="post" enctype="multipart/form-data" style="display:none"></form>'
+            id +
+            '" name="' +
+            id +
+            '" action="' +
+            options.url +
+            '" target="hopeUploadIframe_' +
+            options.id +
+            '" method="post" enctype="multipart/form-data" style="display:none"></form>'
         );
         return form;
     };
@@ -102,11 +101,11 @@ var Hope_upload = function (ele, options, on) {
                 fontSize: "118px",
                 verticalAlign: "baseline",
                 cursor: "pointer",
-                display:"none"
+                display: "none"
             })
             .bind("change", function () {
                 // 如果是单张上传（ie8、ie9不支持多选属性），执行if
-                if (/*!options.multiple ||*/ ieVersion <= 9) {
+                if ( /*!options.multiple ||*/ ieVersion <= 9) {
                     options.fileName = getFileName(this);
                     if (validateFile(this)) {
                         upload();
@@ -147,7 +146,7 @@ var Hope_upload = function (ele, options, on) {
         return true;
     };
     var getFileName = function (file) {
-        if (/*!options.multiple ||*/ ieVersion <= 9) {
+        if ( /*!options.multiple ||*/ ieVersion <= 9) {
             return file.value.replace(/.*(\/|\\)/, "");
         } else {
             return file.name.replace(/.*(\/|\\)/, "");
@@ -155,10 +154,9 @@ var Hope_upload = function (ele, options, on) {
     };
 
     var isAllowedExtension = function (fileName) {
-        var ext =
-            -1 !== fileName.indexOf(".")
-                ? fileName.replace(/.*[.]/, "").toLowerCase()
-                : "";
+        var ext = -1 !== fileName.indexOf(".") ?
+            fileName.replace(/.*[.]/, "").toLowerCase() :
+            "";
         if (!options.allowedExtensions.length) {
             return true;
         }
@@ -175,7 +173,7 @@ var Hope_upload = function (ele, options, on) {
             console.log("[hopeUpload] " + message);
     };
     var upload = function (file) {
-        if (/*!options.multiple ||*/ ieVersion <= 9) {
+        if ( /*!options.multiple ||*/ ieVersion <= 9) {
             if (options.onUpload(options.fileName) === false) {
                 // 去掉input里的值，否则没法连续选同一张图片
                 $("#hopeUpload-file" + options.id).val("");
@@ -187,6 +185,7 @@ var Hope_upload = function (ele, options, on) {
             }
         }
         options.uploading = true;
+        let isPass = true;
         $(document.body).append(createIframe()).append(createForm());
         $("#hopeUpload-file" + options.id)
             .attr("id", "hopeUpload-file-uploading" + options.id)
@@ -196,7 +195,7 @@ var Hope_upload = function (ele, options, on) {
         }
 
         // 如果是单张上传，执行插件原有的上传方式submit()
-        if (/*!options.multiple ||*/ ieVersion <= 9) {
+        if ( /*!options.multiple ||*/ ieVersion <= 9) {
             $("#hopeUploadForm_" + options.id)
                 .get(0)
                 .submit();
@@ -210,36 +209,37 @@ var Hope_upload = function (ele, options, on) {
             }
             formData.append("file", file);
             if (on && on.beforeUpload) {
-                on.beforeUpload(options.fileName,file);
+                isPass = on.beforeUpload(options.fileName, file);
             }
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("post", options.url, true);
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (xhr.status == 200 && xhr.readyState == 4) {
-                    resetUpload();
-                    if (on && on.complete) {
-                        on.complete(options.fileName, JSON.parse(xhr.response));
-                    }
-                } else if (xhr.readyState == 2) {
-                    if (on && on.uploading) {
-                        on.uploading(options.fileName,file);
-                    }
-                } else if (xhr.status !== 200 && xhr.readyState !== 4) {
-                    resetUpload();
-                    if (on && on.error) {
-                        if(typeof xhr.response == 'object') {
-                             on.error(options.fileName, JSON.parse(xhr.response));
-                        }else{
-                            on.error(options.fileName);
+            if (isPass) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("post", options.url, true);
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        resetUpload();
+                        if (on && on.complete) {
+                            on.complete(options.fileName, JSON.parse(xhr.response));
                         }
+                    } else if (xhr.readyState == 2) {
+                        if (on && on.uploading) {
+                            on.uploading(options.fileName, file);
+                        }
+                    } else if (xhr.status !== 200 && xhr.readyState !== 4) {
+                        resetUpload();
+                        if (on && on.error) {
+                            if (typeof xhr.response == 'object') {
+                                on.error(options.fileName, JSON.parse(xhr.response));
+                            } else {
+                                on.error(options.fileName);
+                            }
+                        }
+                    } else {
+                        console.log(xhr.status);
+                        console.log(xhr.readyState);
                     }
-                } else {
-                    console.log(xhr.status);
-                    console.log(xhr.readyState);
-                }
-            };
+                };
+            }
         }
 
         if (options.button.find("input[type=file]").length) {
@@ -286,9 +286,9 @@ var Hope_upload = function (ele, options, on) {
         ) {
             return;
         }
-        var doc = iframe.contentDocument
-            ? iframe.contentDocument
-            : iframe.contentWindow.document;
+        var doc = iframe.contentDocument ?
+            iframe.contentDocument :
+            iframe.contentWindow.document;
         var response;
         var innerHtml = doc.body.innerHTML;
         log("innerHTML = " + innerHtml);
