@@ -2302,7 +2302,7 @@ hopeu["plug"]("ajax", function ($) {
             var url = o["url"],
                 data = null;
             var cache = o["cache"] == true;
-            var isPost = o["type"] == "POST" || o["type"] == "PUT";
+            var isPost = o["type"] == "POST" || o["type"] == "PUT" || o["type"] == "post" || o["type"] == "put";
             if (o["data"] && o["processData"] && typeof o["data"] == "object")
                 data = $["formData"](o["data"]);
 

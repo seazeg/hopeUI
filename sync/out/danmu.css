@@ -3,6 +3,10 @@
   overflow: hidden;
   min-height: 300px;
 }
+.hopeui-danmu.hopeui-danmu-close .hopeui-danmu-item {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
 .hopeui-danmu-start {
   position: absolute;
   visibility: hidden;

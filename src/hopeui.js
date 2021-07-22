@@ -1,12 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-07-02 16:47:45
+ * @LastEditTime : 2021-07-22 10:35:16
  * @Description  : hopeUI
  */
 
 require("./hopeui.less");
 require("./utils/patch.js");
+
 
 const { scrollbarHandler } = require("./module/scrollbar.js");
 const { lightboxHandler } = require("./module/lightbox.js");

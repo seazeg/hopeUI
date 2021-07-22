@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-30 15:28:57
- * @LastEditTime : 2021-07-02 16:34:56
+ * @LastEditTime : 2021-07-22 09:52:59
  * @Description  : 抽屉
  */
 
@@ -57,8 +57,7 @@ module.exports.drawerHandler = function ({ ele, options, on }) {
 
             if (options.title) {
                 let drawerContentTitle = $("<div>", {
-                    class: "hope-drawer-content-title",
-                    text: options.title,
+                    class: "hope-drawer-content-title"
                 });
                 drawerContentHeader.append(drawerContentTitle);
             }
@@ -66,7 +65,6 @@ module.exports.drawerHandler = function ({ ele, options, on }) {
             if (options.closable) {
                 let drawerClose = $("<div>", {
                     class: "hope-drawer-close hopeui-icon hopeui-icon-close",
-                    text: "×",
                 });
                 drawerContentHeader.append(drawerClose);
 

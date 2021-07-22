@@ -2,12 +2,21 @@
     position: relative;
     overflow: hidden;
     min-height: 300px;
+
+    &.hopeui-danmu-close {
+        .hopeui-danmu-item {
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+    }
 }
+
 .hopeui-danmu-start {
     position: absolute;
     visibility: hidden;
     white-space: nowrap;
 }
+
 .hopeui-danmu-end {
     position: absolute;
     white-space: nowrap;
@@ -21,6 +30,7 @@
     border-radius: 20px;
     overflow: hidden;
     padding: 0 10px;
+
     i {
         font-size: 14px;
         color: #fff;
@@ -30,6 +40,7 @@
         position: relative;
         z-index: 1;
     }
+
     span {
         content: "";
         top: 0;
@@ -42,27 +53,26 @@
     }
 }
 
-.hopeui-danmu-leftMask{
-    position:absolute;
-    left:0;
-    top:0;
-    width:20%;
-    height:100%;
+.hopeui-danmu-leftMask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20%;
+    height: 100%;
     z-index: 88;
     background-position: center;
     background-blend-mode: normal;
     position: absolute;
 }
 
-.hopeui-danmu-rightMask{
-    position:absolute;
-    right:0;
-    top:0;
-    width:20%;
-    height:100%;
+.hopeui-danmu-rightMask {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+    height: 100%;
     z-index: 88;
     background-position: center;
     background-blend-mode: normal;
     position: absolute;
 }
-

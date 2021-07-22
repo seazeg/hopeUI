@@ -209,13 +209,13 @@ var Hope_upload = function (ele, options, on) {
                 });
             }
             formData.append("file", file);
+            if (on && on.beforeUpload) {
+                on.beforeUpload(options.fileName,file);
+            }
 
             var xhr = new XMLHttpRequest();
             xhr.open("post", options.url, true);
             xhr.send(formData);
-            if (on && on.beforeUpload) {
-                on.beforeUpload(options.fileName);
-            }
             xhr.onreadystatechange = function () {
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     resetUpload();
@@ -224,7 +224,7 @@ var Hope_upload = function (ele, options, on) {
                     }
                 } else if (xhr.readyState == 2) {
                     if (on && on.uploading) {
-                        on.uploading(options.fileName);
+                        on.uploading(options.fileName,file);
                     }
                 } else if (xhr.status !== 200 && xhr.readyState !== 4) {
                     resetUpload();
