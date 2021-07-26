@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-04-02 16:13:05
+ * @LastEditTime : 2021-07-23 11:33:58
  * @Description  : 分页
  */
 
@@ -126,7 +126,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                         if (options.extend) {
                             pageHTML += `<i class="hopeui-pager-count">共 ${totalNumber} 条</i>`;
 
-                            pageHTML += `<div class="hopeui-pager-jump">跳转到<input type="text" value="" oninput="value = value.replace(/[^0-9]/g,'')">页<button type="button" >确定</button></div>`;
+                            pageHTML += `<div class="hopeui-pager-jump">跳转到<input type="text" value="" oninput="value = value.replace(/[^0-9]/g,'')" class="hopeui-pager-input">页<button type="button" >确定</button></div>`;
                         }
                         pageHTML += `</div>`;
 
@@ -282,6 +282,12 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     $(this).siblings("input").val('')
                                 }
                             });
+
+                        $dom.find(".hopeui-pager-input").on('keyup',function(e){
+                            if(e.keyCode == 13){
+                                obj.jump($(this).val());
+                            }
+                        })
 
                         if (on && on.complete) {
                             on.complete({

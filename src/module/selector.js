@@ -1,16 +1,26 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-17 21:09:46
+ * @LastEditTime : 2021-07-26 10:08:07
  * @Description  : 下拉框
  */
 
 const $ = require("../utils/hopeu.js");
-const { utils } = require("../utils/verify.js");
-const { is } = require("../utils/is.js");
-const { scrollbarHandler } = require("./scrollbar.js");
+const {
+    utils
+} = require("../utils/verify.js");
+const {
+    is
+} = require("../utils/is.js");
+const {
+    scrollbarHandler
+} = require("./scrollbar.js");
 
-module.exports.selectorHandler = function ({ ele, options, on }) {
+module.exports.selectorHandler = function ({
+    ele,
+    options,
+    on
+}) {
     const obj = new Object();
     let type = "select";
     let $dom = $("select");
@@ -20,7 +30,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
         // utils.isSelf(ele, type) ? ($dom = $(ele)) : ($dom = $(`${ele} select`));
     }
 
-    function core() {
+    function core(status) {
         $dom.each(function () {
             //模板初始化
             let newEle,
@@ -167,8 +177,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             scrollbarHandler({
                                 ele: newEle.children(".hopeui-select-list"),
                                 options: {
-                                    autoHideBar:
-                                        (options && options.autoHideBar) ||
+                                    autoHideBar: (options && options.autoHideBar) ||
                                         false,
                                     height: (options && options.height) || null,
                                 },
@@ -217,8 +226,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             scrollbarHandler({
                                 ele: newEle.children(".hopeui-select-list"),
                                 options: {
-                                    autoHideBar:
-                                        (options && options.autoHideBar) ||
+                                    autoHideBar: (options && options.autoHideBar) ||
                                         false,
                                 },
                                 on: {},
@@ -283,9 +291,9 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         .find(".hopeui-input")
                         .val(
                             $(this)
-                                .find("option")
-                                .eq($(this).get(0).selectedIndex)
-                                .text()
+                            .find("option")
+                            .eq($(this).get(0).selectedIndex)
+                            .text()
                         );
                     utils.validation(selector, "pass", null, "select-one");
                     if (on && on.change) {
@@ -305,7 +313,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
 
             //点击select区域外关闭下拉列表
-            $(document).on("click", function (e) {
+            $(document).off().on("click", function (e) {
                 $(newEle).removeClass("hopeui-form-selected");
                 //下拉列表关闭回调
                 if (on && on.close) {
@@ -313,12 +321,15 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                 }
             });
 
-            if (on && on.init) {
-                on.init({
-                    self: obj,
-                    ele: $dom[0],
-                    eventName: "init",
-                });
+            //是否是初次是初始化
+            if (status) {
+                if (on && on.init) {
+                    on.init({
+                        self: obj,
+                        ele: $dom[0],
+                        eventName: "init",
+                    });
+                }
             }
         });
 
@@ -416,7 +427,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
     };
 
     //首次初始化
-    core();
+    core(true);
 
     /**
      * @description: 选择辅助方法

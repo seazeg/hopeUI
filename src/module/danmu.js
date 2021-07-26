@@ -1,13 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-07-22 14:00:14
+ * @LastEditTime : 2021-07-22 17:56:47
  * @Description  : 弹幕
  */
 
 const $ = require("../utils/hopeu.js");
 const { is } = require("../utils/is.js");
-const { img } = require("../utils/img.js");
+
 
 module.exports.danmuHandler = function ({ ele, options, on }) {
     const obj = new Object();
@@ -27,7 +27,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         left: "#fff",
         right: "#fff",
     };
-    window.timer = null;
+    let timer = null;
 
     init($dom);
 
@@ -108,11 +108,11 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
 
     obj.close = function () {
         clearInterval(timer);
-        $dom.children().hide();
+        $dom.children('.hopeui-danmu-item').hide();
     };
 
     obj.open = function () {
-        $dom.children().each(function(){
+        $dom.children('.hopeui-danmu-item').each(function(){
             $(this).css('left',$dom.width())
             $(this).removeClass('hopeui-danmu-end').addClass('hopeui-danmu-start')
         })
@@ -124,7 +124,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                 shootDanmu(dom, danmu, channel);
             }
         }, 1);
-        $dom.children().show();
+        $dom.children('.hopeui-danmu-item').show();
     };
 
     function getChannel() {
@@ -159,7 +159,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
             function () {
                 hasPosition[channel] = true;
             },
-            is.ie() > 9 ? $(dom).width() * 5 + 2000 : $(dom).width() * 5 + 3000
+            is.ie() > 9 ? $(dom).width() * 5  + 2000 : $(dom).width() * 5 + 3000
         );
     }
 
