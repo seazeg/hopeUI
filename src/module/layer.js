@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-07-29 10:53:06
+ * @LastEditTime : 2021-07-29 16:48:58
  * @Description  : 弹窗
  */
 
@@ -30,6 +30,8 @@ module.exports.layerHandler = function ({
         isLock: options.isLock || true,
         isFullScreen: options.isFullScreen || false,
         animation: options.animation || "hopeui-anim-scaleSpring",
+        offsetTop: options.offsetTop || 30,
+        offsetBottom: options.offsetBottom || 30
     };
 
     let self = null,
@@ -37,29 +39,20 @@ module.exports.layerHandler = function ({
 
     //重新定位函数
     let location = (layer) => {
-        if (!is.noPer(options.width)) {
-            layer
-                .children(".hopeui-layer-content")
-                .css(
-                    "width",
-                    $("body").width() * (parseInt(options.width) / 100)
-                );
-        } else {
-            layer
-                .children(".hopeui-layer-content")
-                .css("width", parseInt(options.width));
-        }
+        layer.css("width", options.width);
 
         if (layer.height() > document.documentElement.clientHeight) {
             layer.css({
                 left: (document.documentElement.clientWidth - layer.width()) / 2,
-                top: 20
+                top: options.offsetTop,
+                paddingBottom:options.offsetBottom
             });
 
             $(window).resize(function () {
                 layer.css({
                     left: (document.documentElement.clientWidth - layer.width()) / 2,
-                    top: 20
+                    top: options.offsetTop,
+                    paddingBottom:options.offsetBottom
                 });
             });
         } else {
@@ -132,7 +125,7 @@ module.exports.layerHandler = function ({
     };
 
     let open = () => {
-        let template = '<div class="hopeui-layer-warp"><div class="hopeui-layer">';
+        let template = '<div class="hopeui-layer-warp"><div class="hopeui-layer"><div class="hopeui-layer-inner">';
         if (options.title) {
             template += `<div class="hopeui-layer-title">${options.title}<i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i></div>`;
         }
@@ -143,7 +136,7 @@ module.exports.layerHandler = function ({
             template += `<div class="hopeui-layer-btn"><button type="button" name="close" class="hopeui-btn hopeui-btn-primary">${options.defaultBtn.cancel}</button><button type="button" name="ok" class="hopeui-btn">${options.defaultBtn.ok}</button></div>`;
         }
 
-        template += "</div></div>";
+        template += "</div></div></div>";
         self = $(template).insertAfter("body").children('.hopeui-layer')
 
         self.addClass(`hopeui-anim ${options.animation}`);

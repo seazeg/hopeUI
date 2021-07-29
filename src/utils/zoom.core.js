@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-12-17 09:57:09
- * @LastEditTime : 2021-06-10 15:57:45
+ * @LastEditTime : 2021-07-29 16:04:56
  * @Description  :
  */
 module.exports.Hope_zoom = function (evt, options) {
@@ -22,14 +22,12 @@ module.exports.Hope_zoom = function (evt, options) {
             largeT: 0,
             zoom: 2,
             mode: "outside",
-            largeWrapperId:
-                gOptions.largeWrapper !== undefined
-                    ? gOptions.largeWrapper.id || null
-                    : null,
+            largeWrapperId: gOptions.largeWrapper !== undefined ?
+                gOptions.largeWrapper.id || null :
+                null,
             status: 0,
             zoomAttached: false,
-            zoomable:
-                gOptions.zoomable !== undefined ? gOptions.zoomable : false,
+            zoomable: gOptions.zoomable !== undefined ? gOptions.zoomable : false,
             enter: gOptions.enter !== undefined ? gOptions.enter : null,
             leave: gOptions.leave !== undefined ? gOptions.leave : null,
             move: gOptions.move !== undefined ? gOptions.move : null,
@@ -160,9 +158,9 @@ module.exports.Hope_zoom = function (evt, options) {
                 l = 0;
 
             inBounds =
-                xPos < 0 || yPos < 0 || xPos > curData.w || yPos > curData.h
-                    ? false
-                    : true;
+                xPos < 0 || yPos < 0 || xPos > curData.w || yPos > curData.h ?
+                false :
+                true;
 
             l = xPos - curData.lensW / 2;
             t = yPos - curData.lensH / 2;
@@ -201,13 +199,13 @@ module.exports.Hope_zoom = function (evt, options) {
             } else {
                 curData.largeL = Math.round(
                     curData.lensBgX *
-                        curData.zoom *
-                        (curData.largeWrapperW / curData.w)
+                    curData.zoom *
+                    (curData.largeWrapperW / curData.w)
                 );
                 curData.largeT = Math.round(
                     curData.lensBgY *
-                        curData.zoom *
-                        (curData.largeWrapperH / curData.h)
+                    curData.zoom *
+                    (curData.largeWrapperH / curData.h)
                 );
             }
         },
@@ -444,7 +442,6 @@ module.exports.Hope_zoom = function (evt, options) {
         //     return false;
         // }
 
-
         var thumbObj = new Image(),
             largeObj = new Image(),
             thumb = options.thumb,
@@ -452,9 +449,9 @@ module.exports.Hope_zoom = function (evt, options) {
             zoomable = null,
             largeUrl = null,
             largeWrapper =
-                $("#" + options.largeWrapper) ||
-                $("#" + thumb.getAttribute("data-large-img-wrapper")) ||
-                $("#" + curData.largeWrapperId),
+            $("#" + options.largeWrapper) ||
+            $("#" + thumb.getAttribute("data-large-img-wrapper")) ||
+            $("#" + curData.largeWrapperId),
             zoom = options.zoom || thumb.getAttribute("data-zoom") || gZoom,
             mode = options.mode || thumb.getAttribute("data-mode") || gMode,
             enter = options.enter !== undefined ? options.enter : curData.enter,
@@ -464,9 +461,9 @@ module.exports.Hope_zoom = function (evt, options) {
 
         if (options.large === undefined) {
             largeUrl =
-                options.thumb.getAttribute("hope-large-img-url") !== null
-                    ? options.thumb.getAttribute("hope-large-img-url")
-                    : options.thumb.src;
+                options.thumb.getAttribute("hope-large-img-url") !== null ?
+                options.thumb.getAttribute("hope-large-img-url") :
+                options.thumb.src;
         } else {
             largeUrl = options.large;
         }
@@ -506,8 +503,7 @@ module.exports.Hope_zoom = function (evt, options) {
             largeUrl: largeUrl,
             largeWrapperId: mode === "outside" ? largeWrapper.id : null,
             largeWrapperW: mode === "outside" ? largeWrapper.offsetWidth : null,
-            largeWrapperH:
-                mode === "outside" ? largeWrapper.offsetHeight : null,
+            largeWrapperH: mode === "outside" ? largeWrapper.offsetHeight : null,
             scale: scale,
             enter: enter,
             leave: leave,
@@ -555,6 +551,7 @@ module.exports.Hope_zoom = function (evt, options) {
             isOverThumb = 1;
         });
 
+
         evt.attach("load", thumbObj, function () {
             data[idx].status = 1;
 
@@ -581,7 +578,6 @@ module.exports.Hope_zoom = function (evt, options) {
         function (e) {
             pos.x = e.clientX;
             pos.y = e.clientY;
-
             getMousePos();
 
             if (inBounds === true) {
@@ -591,7 +587,7 @@ module.exports.Hope_zoom = function (evt, options) {
                     onThumbLeave();
                 }
 
-                isOverThumb = 0;
+                // isOverThumb = 0;
             }
         },
         false
