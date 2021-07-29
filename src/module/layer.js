@@ -1,28 +1,33 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-15 10:45:06
+ * @LastEditTime : 2021-07-29 10:53:06
  * @Description  : 弹窗
  */
 
 const $ = require("../utils/hopeu.js");
-const { is } = require("../utils/is.js");
+const {
+    is
+} = require("../utils/is.js");
 
-module.exports.layerHandler = function ({ options, on }) {
+module.exports.layerHandler = function ({
+    options,
+    on
+}) {
     const obj = new Object();
     options = {
         width: options.width || "",
         title: options.title || "",
         content: options.content || "",
-        isMask: !options.isMask,
+        isMask: options.isMask || true,
         maskColor: options.maskColor,
-        isDefaultBtn: options.isDefaultBtn && true,
+        isDefaultBtn: options.isDefaultBtn || true,
         defaultBtn: options.defaultBtn || {
             ok: "确定",
             cancel: "取消",
         },
         isDrag: options.isDrag || false,
-        isLock: options.isLock || false,
+        isLock: options.isLock || true,
         isFullScreen: options.isFullScreen || false,
         animation: options.animation || "hopeui-anim-scaleSpring",
     };
@@ -45,23 +50,34 @@ module.exports.layerHandler = function ({ options, on }) {
                 .css("width", parseInt(options.width));
         }
 
-        layer.css({
-            left: (document.documentElement.clientWidth - layer.width()) / 2,
-            top: (document.documentElement.clientHeight - layer.height()) / 2,
-        });
-
-        $(window).resize(function () {
-            // layer
-            //     .children(".hopeui-layer-content")
-            //     .width($("body").width() * (parseInt(options.width) / 100));
+        if (layer.height() > document.documentElement.clientHeight) {
             layer.css({
-                left:
-                    (document.documentElement.clientWidth - layer.width()) / 2,
-                top:
-                    (document.documentElement.clientHeight - layer.height()) /
-                    2,
+                left: (document.documentElement.clientWidth - layer.width()) / 2,
+                top: 20
             });
-        });
+
+            $(window).resize(function () {
+                layer.css({
+                    left: (document.documentElement.clientWidth - layer.width()) / 2,
+                    top: 20
+                });
+            });
+        } else {
+            layer.css({
+                left: (document.documentElement.clientWidth - layer.width()) / 2,
+                top: (document.documentElement.clientHeight - layer.height()) / 2,
+            });
+
+            $(window).resize(function () {
+                layer.css({
+                    left: (document.documentElement.clientWidth - layer.width()) / 2,
+                    top: (document.documentElement.clientHeight - layer.height()) /
+                        2,
+                });
+            });
+        }
+
+
     };
 
     let darg = (obj) => {
@@ -96,8 +112,27 @@ module.exports.layerHandler = function ({ options, on }) {
         };
     };
 
+
+    let close = () => {
+        self.parent().addClass("hopeui-hide").remove();
+
+        if (mask) {
+            mask.remove();
+        }
+        if (options.isLock) {
+            $("body,html").removeClass("hopeui-layer-nosrl");
+        }
+        if (on && on.close) {
+            on.close({
+                ele: self[0],
+                layer: obj,
+                event: "close",
+            });
+        }
+    };
+
     let open = () => {
-        let template = '<div class="hopeui-layer">';
+        let template = '<div class="hopeui-layer-warp"><div class="hopeui-layer">';
         if (options.title) {
             template += `<div class="hopeui-layer-title">${options.title}<i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i></div>`;
         }
@@ -108,10 +143,11 @@ module.exports.layerHandler = function ({ options, on }) {
             template += `<div class="hopeui-layer-btn"><button type="button" name="close" class="hopeui-btn hopeui-btn-primary">${options.defaultBtn.cancel}</button><button type="button" name="ok" class="hopeui-btn">${options.defaultBtn.ok}</button></div>`;
         }
 
-        template += "</div>";
-        self = $(template).insertAfter("body");
+        template += "</div></div>";
+        self = $(template).insertAfter("body").children('.hopeui-layer')
 
         self.addClass(`hopeui-anim ${options.animation}`);
+
 
         if (options.isLock) {
             $("body,html").addClass("hopeui-layer-nosrl");
@@ -126,13 +162,14 @@ module.exports.layerHandler = function ({ options, on }) {
         location(self);
 
         if (options.isDrag) {
-            darg(self.children(".hopeui-layer-title")[0]);
+            darg(self.find(".hopeui-layer-title")[0]);
         }
         if (options.isMask) {
             mask = $(".hopeui-layer-mask");
             if (mask.length <= 0) {
                 let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
-                mask = $(maskTemplate).insertAfter("body");
+                // mask = $(maskTemplate).insertAfter(".hopeui-layer-warp");
+                mask = $('.hopeui-layer-warp').append(maskTemplate);
             }
 
             if (options.maskColor) {
@@ -179,25 +216,14 @@ module.exports.layerHandler = function ({ options, on }) {
         self.find(".hopeui-layer-close").on("click", function (e) {
             close();
         });
+        
+        mask.on('click', function () {
+            close();
+        })
+
     };
 
-    let close = () => {
-        self.addClass("hopeui-hide").remove();
 
-        if (mask) {
-            mask.remove();
-        }
-        if (options.isLock) {
-            $("body,html").removeClass("hopeui-layer-nosrl");
-        }
-        if (on && on.close) {
-            on.close({
-                ele: self[0],
-                layer: obj,
-                event: "close",
-            });
-        }
-    };
 
     $("body", document).on("keyup", function (e) {
         if (e.which === 27) {
