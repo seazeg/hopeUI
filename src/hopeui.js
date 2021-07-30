@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-07-22 10:35:16
+ * @LastEditTime : 2021-07-30 14:15:16
  * @Description  : hopeUI
  */
 
@@ -10,7 +10,7 @@ require("./utils/patch.js");
 
 
 const { scrollbarHandler } = require("./module/scrollbar.js");
-const { lightboxHandler } = require("./module/lightbox.js");
+// const { lightboxHandler } = require("./module/lightbox.js");
 const { pagerHandler } = require("./module/pager.js");
 const { tabHandler } = require("./module/tab.js");
 const { layerHandler } = require("./module/layer.js");
@@ -174,24 +174,24 @@ const hope = () => {
         }) {
             return scrollbarHandler({ ele, options, on });
         },
-        lightbox: function ({
-            ele: ele = null,
-            options: options = {
-                content: null,
-                isMask: true,
-                maskColor: null,
-                animation: "hopeui-anim-scaleSpring",
-            },
-            on: on = {
-                init: null,
-                open: null,
-                close: null,
-                prev: null,
-                next: null,
-            },
-        }) {
-            return lightboxHandler({ ele, options, on });
-        },
+        // lightbox: function ({
+        //     ele: ele = null,
+        //     options: options = {
+        //         content: null,
+        //         isMask: true,
+        //         maskColor: null,
+        //         animation: "hopeui-anim-scaleSpring",
+        //     },
+        //     on: on = {
+        //         init: null,
+        //         open: null,
+        //         close: null,
+        //         prev: null,
+        //         next: null,
+        //     },
+        // }) {
+        //     return lightboxHandler({ ele, options, on });
+        // },
         pager: function ({
             ele: ele = null,
             options: options = {},
