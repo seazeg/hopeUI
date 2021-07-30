@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-18 16:04:09
- * @LastEditTime : 2021-06-02 16:41:10
+ * @LastEditTime : 2021-07-30 10:25:22
  * @Description  : 基础判断类
  */
 module.exports.is = {
@@ -72,7 +72,8 @@ module.exports.is = {
             };
         for (i in prefix) humpString.push(_toHumb(prefix[i] + "-" + style));
         humpString.push(_toHumb(style));
-        for (i in humpString) if (humpString[i] in htmlStyle) return true;
+        for (i in humpString)
+            if (humpString[i] in htmlStyle) return true;
         return false;
     },
     stopBubble(e) {
@@ -94,8 +95,8 @@ module.exports.is = {
         return !str.includes("%");
     },
     empty(str) {
-        return typeof str == "undefined" || str == null || str == ""
-            ? true
-            : false;
+        return typeof str == "undefined" || str == null || (str == "" && typeof str == 'string') ?
+            true :
+            false;
     }
 };

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-07-30 10:10:50
+ * @LastEditTime : 2021-07-30 10:26:03
  * @Description  : 弹窗
  */
 
@@ -19,15 +19,15 @@ module.exports.layerHandler = function ({
         width: options.width || "",
         title: options.title || "",
         content: options.content || "",
-        isMask: options.isMask || true,
+        isMask: is.empty(options.isMask) ? true : options.isMask,
         maskColor: options.maskColor,
-        isDefaultBtn: options.isDefaultBtn || true,
+        isDefaultBtn: is.empty(options.isDefaultBtn) ? true : options.isDefaultBtn,
         defaultBtn: options.defaultBtn || {
             ok: "确定",
             cancel: "取消",
         },
         isDrag: options.isDrag || false,
-        isLock: options.isLock || true,
+        isLock: is.empty(options.isLock) ? true : options.isLock,
         isFullScreen: options.isFullScreen || false,
         animation: options.animation || "hopeui-anim-scaleSpring",
         offsetTop: options.offsetTop || 30,
