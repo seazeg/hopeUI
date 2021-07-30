@@ -6,7 +6,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10000;
+  z-index: 100002;
   overflow-y: auto;
 }
 .hopeui-layer {
@@ -20,7 +20,7 @@
   border-style: solid\0;
   border-color: #eeeeee \0;
   position: absolute;
-  z-index: 10001;
+  z-index: 100002;
 }
 .hopeui-layer .hopeui-layer-inner {
   width: 100%;
@@ -59,6 +59,7 @@
 .hopeui-layer .hopeui-layer-btn {
   padding: 10px 20px 20px 20px;
   text-align: center;
+  font-size: 0;
 }
 .hopeui-layer .hopeui-layer-btn button {
   min-width: 100px;
@@ -72,7 +73,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10000;
+  z-index: 100001;
   background: rgba(0, 0, 0, 0.3);
   background: #494a5f \0 !important;
 }

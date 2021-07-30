@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-07-29 16:48:58
+ * @LastEditTime : 2021-07-30 10:10:50
  * @Description  : 弹窗
  */
 
@@ -31,7 +31,8 @@ module.exports.layerHandler = function ({
         isFullScreen: options.isFullScreen || false,
         animation: options.animation || "hopeui-anim-scaleSpring",
         offsetTop: options.offsetTop || 30,
-        offsetBottom: options.offsetBottom || 30
+        offsetBottom: options.offsetBottom || 30,
+        maskClose: options.maskClose || false
     };
 
     let self = null,
@@ -45,14 +46,14 @@ module.exports.layerHandler = function ({
             layer.css({
                 left: (document.documentElement.clientWidth - layer.width()) / 2,
                 top: options.offsetTop,
-                paddingBottom:options.offsetBottom
+                paddingBottom: options.offsetBottom
             });
 
             $(window).resize(function () {
                 layer.css({
                     left: (document.documentElement.clientWidth - layer.width()) / 2,
                     top: options.offsetTop,
-                    paddingBottom:options.offsetBottom
+                    paddingBottom: options.offsetBottom
                 });
             });
         } else {
@@ -158,12 +159,14 @@ module.exports.layerHandler = function ({
             darg(self.find(".hopeui-layer-title")[0]);
         }
         if (options.isMask) {
-            mask = $(".hopeui-layer-mask");
-            if (mask.length <= 0) {
+
+            if ($(".hopeui-layer-mask").length <= 0) {
                 let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
                 // mask = $(maskTemplate).insertAfter(".hopeui-layer-warp");
-                mask = $('.hopeui-layer-warp').append(maskTemplate);
+                $('.hopeui-layer-warp').append(maskTemplate);
             }
+
+            mask = $(".hopeui-layer-mask");
 
             if (options.maskColor) {
                 mask.css("background", options.maskColor);
@@ -209,10 +212,12 @@ module.exports.layerHandler = function ({
         self.find(".hopeui-layer-close").on("click", function (e) {
             close();
         });
-        
-        mask.on('click', function () {
-            close();
-        })
+
+        if (options.maskClose) {
+            mask.on('click', function () {
+                close();
+            })
+        }
 
     };
 
