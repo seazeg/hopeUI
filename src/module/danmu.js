@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-07-22 17:56:47
+ * @LastEditTime : 2021-08-02 09:44:21
  * @Description  : 弹幕
  */
 
@@ -47,7 +47,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                 bg.style.opacity = options.opacity || 0.4;
                 dom.appendChild(bg);
                 dom.setAttribute("data-channel", j);
-                dom.setAttribute("data-start", wrapper.width());
+                dom.setAttribute("data-start", wrapper.get(0).clientWidth);
                 wrapper.get(0).appendChild(dom);
 
                 // 初始化dom的位置 通过设置className
@@ -56,7 +56,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                 dom.style.top =
                     j * (spacing || 1.2) * dom.clientHeight + 10 + unit;
                 dom.style.left =
-                    wrapper.width() /** (j % 2 == 0 ? 1 : 1.05)*/ + unit;
+                    wrapper.get(0).clientWidth + unit;
 
                 if (is.ie() > 9) {
                     dom.addEventListener("transitionend", (e) => {
@@ -64,7 +64,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                         target.className =
                             "hopeui-danmu-start hopeui-danmu-item";
                         target.style.transition = null;
-                        target.style.left = wrapper.width() + unit;
+                        target.style.left = wrapper.get(0).clientWidth + unit;
 
                         domPool[target.getAttribute("data-channel")].push(
                             target
