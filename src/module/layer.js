@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-07-30 10:26:03
+ * @LastEditTime : 2021-08-02 11:16:19
  * @Description  : 弹窗
  */
 
@@ -79,7 +79,7 @@ module.exports.layerHandler = function ({
             //鼠标按下事件
 
             let oe = e || window.event;
-            let _this = this.parentNode;
+            let _this = this.parentNode.parentNode;
             let startX = oe.clientX - _this.offsetLeft;
             let startY = oe.clientY - _this.offsetTop;
             document.onmousemove = function (e) {

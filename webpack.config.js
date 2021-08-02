@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2021-07-30 17:58:13
+ * @LastEditTime : 2021-08-02 11:01:37
  * @Description  :
  */
 
@@ -64,25 +64,25 @@ module.exports = {
     },
     mode: process.env.NODE_ENV == "development" ? "development" : "production",
     optimization: {
-        // minimizer: [
-        //     new UglifyJsPlugin({
-        //         cache: false,
-        //         parallel: true,
-        //         // sourceMap: true,
-        //         uglifyOptions: {
-        //             compress: {
-        //                 properties: false,
-        //                 ie8: true,
-        //                 keep_fnames: true,
-        //             },
-        //             mangle: {
-        //                 keep_fnames: true,
-        //             },
-        //         },
-        //     }),
-        //     new OptimizeCssAssetsPlugin({}),
-        // ],
-        minimize: false,
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: false,
+                parallel: true,
+                // sourceMap: true,
+                uglifyOptions: {
+                    compress: {
+                        properties: false,
+                        ie8: true,
+                        keep_fnames: true,
+                    },
+                    mangle: {
+                        keep_fnames: true,
+                    },
+                },
+            }),
+            new OptimizeCssAssetsPlugin({}),
+        ],
+        // minimize: false,
     },
     plugins: [
         new HtmlWebpackPlugin({

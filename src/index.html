@@ -550,6 +550,7 @@
         document.getElementById("open1").onclick = function () {
             hope.layer({
                 options: {
+                    title:"123123",
                     content:
                         "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
                     defaultBtn: {
@@ -558,6 +559,7 @@
                     },
                     isDefaultBtn: false,
                     width: "300px",
+                    isDrag:true
                 },
                 on: {
                     init: function (e) {
