@@ -1,13 +1,17 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-07-02 16:34:29
- * @LastEditTime : 2021-07-12 10:29:06
+ * @LastEditTime : 2021-08-03 11:10:13
  * @Description  : 锚点定位
  */
 
 const $ = require("../utils/hopeu.js");
 
-module.exports.anchorHandler = function ({ ele, options, on }) {
+module.exports.anchorHandler = function ({
+    ele,
+    options,
+    on
+}) {
     const obj = new Object();
     let $dom = $(ele);
     let anchorObj = {};
@@ -51,15 +55,24 @@ module.exports.anchorHandler = function ({ ele, options, on }) {
             });
 
             $dom.find("[hope-anchor-key]").on("click", function (e) {
-                e.stopPropagation();
-                e.preventDefault();
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else {
+                    window.event.cancelBubble = true;
+                }
+                if (e.preventDefault) {
+                    e.preventDefault();
+                } else {
+                    window.event.returnValue = false;
+                }
+
                 let _this = $(this);
                 let value = _this.attr("hope-anchor-key");
                 temp = anchorObj[value];
                 if (temp) {
                     scrollAnimation(
                         document.documentElement.scrollTop ||
-                            document.body.scrollTop,
+                        document.body.scrollTop,
                         temp.top - temp.offset
                     );
                 } else {
@@ -72,7 +85,7 @@ module.exports.anchorHandler = function ({ ele, options, on }) {
                 if (temp) {
                     scrollAnimation(
                         document.documentElement.scrollTop ||
-                            document.body.scrollTop,
+                        document.body.scrollTop,
                         temp.top - temp.offset
                     );
                 } else {
