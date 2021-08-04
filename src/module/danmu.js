@@ -1,15 +1,22 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-08-02 09:44:21
+ * @LastEditTime : 2021-08-04 15:44:33
  * @Description  : 弹幕
  */
 
 const $ = require("../utils/hopeu.js");
-const { is } = require("../utils/is.js");
+const {
+    is
+} = require("../utils/is.js");
+const { utilsHandler } = require("./utils.js")
 
 
-module.exports.danmuHandler = function ({ ele, options, on }) {
+module.exports.danmuHandler = function ({
+    ele,
+    options,
+    on
+}) {
     const obj = new Object();
     let $dom = $(ele);
 
@@ -17,7 +24,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
     let MAX_DM_COUNT = Math.ceil(options.data.length / CHANNEL_COUNT); //通道内最多弹幕条数
 
     let domPool = [];
-    let danmuPool = options.data;
+    let danmuPool = utilsHandler.deepClone(options.data);
     let hasPosition = [];
     let colorList = options.bgColor || ["#111"];
     let unit = "px";
@@ -33,6 +40,8 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
 
     function init(wrapper) {
         // 先new一些span 重复利用这些DOM
+        domPool = [];
+        danmuPool = utilsHandler.deepClone(options.data);
         wrapper.addClass("hopeui-danmu");
         for (let j = 0; j < CHANNEL_COUNT; j++) {
             let doms = [];
@@ -59,17 +68,13 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
                     wrapper.get(0).clientWidth + unit;
 
                 if (is.ie() > 9) {
-                    dom.addEventListener("transitionend", (e) => {
-                        let target = e.target;
-                        target.className =
-                            "hopeui-danmu-start hopeui-danmu-item";
+                    $(dom).off().on("transitionend", function (e) {
+                        var target = e.target;
+                        target.className = "hopeui-danmu-start hopeui-danmu-item";
                         target.style.transition = null;
                         target.style.left = wrapper.get(0).clientWidth + unit;
-
-                        domPool[target.getAttribute("data-channel")].push(
-                            target
-                        );
-                    });
+                        domPool[target.getAttribute("data-channel")].push(target);
+                    })
                 }
 
                 doms.push(dom);
@@ -93,38 +98,25 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         timer = null;
         timer = setInterval(function () {
             let channel = getChannel();
-            if (/*danmuPool.length &&*/ channel != -1) {
+            if ( /*danmuPool.length &&*/ channel != -1) {
                 let dom = domPool[channel].shift();
                 let danmu = danmuPool.shift();
                 shootDanmu(dom, danmu, channel);
             }
         }, 1);
 
-
-
-    
     }
 
 
     obj.close = function () {
         clearInterval(timer);
-        $dom.children('.hopeui-danmu-item').hide();
+        timer = null
+        $dom.children('.hopeui-danmu-item').off()
+        $dom.children().remove();
     };
 
     obj.open = function () {
-        $dom.children('.hopeui-danmu-item').each(function(){
-            $(this).css('left',$dom.width())
-            $(this).removeClass('hopeui-danmu-end').addClass('hopeui-danmu-start')
-        })
-        timer = setInterval(function () {
-            let channel = getChannel();
-            if (/*danmuPool.length &&*/ channel != -1) {
-                let dom = domPool[channel].shift();
-                let danmu = danmuPool.shift();
-                shootDanmu(dom, danmu, channel);
-            }
-        }, 1);
-        $dom.children('.hopeui-danmu-item').show();
+        init($dom)
     };
 
     function getChannel() {
@@ -159,14 +151,14 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
             function () {
                 hasPosition[channel] = true;
             },
-            is.ie() > 9 ? $(dom).width() * 5  + 2000 : $(dom).width() * 5 + 3000
+            is.ie() > 9 ? $(dom).width() * 5 + 2000 : $(dom).width() * 5 + 3000
         );
     }
 
     function getRangeRandomNum(min, max, returnType) {
-        return returnType == "float"
-            ? min + Math.random() * (max - min)
-            : Math.floor(min + Math.random() * (max + 1 - min));
+        return returnType == "float" ?
+            min + Math.random() * (max - min) :
+            Math.floor(min + Math.random() * (max + 1 - min));
     }
 
     function animation(dom, end, callback) {
