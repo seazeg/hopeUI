@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-08-04 15:44:33
+ * @LastEditTime : 2021-08-04 16:31:21
  * @Description  : 弹幕
  */
 
@@ -21,7 +21,7 @@ module.exports.danmuHandler = function ({
     let $dom = $(ele);
 
     let CHANNEL_COUNT = options.channel || 3; //通道数
-    let MAX_DM_COUNT = Math.ceil(options.data.length / CHANNEL_COUNT); //通道内最多弹幕条数
+    let MAX_DM_COUNT = Math.ceil(utilsHandler.deepClone(options.data).length / CHANNEL_COUNT); //通道内最多弹幕条数
 
     let domPool = [];
     let danmuPool = utilsHandler.deepClone(options.data);
@@ -40,8 +40,10 @@ module.exports.danmuHandler = function ({
 
     function init(wrapper) {
         // 先new一些span 重复利用这些DOM
+        hasPosition = []
         domPool = [];
         danmuPool = utilsHandler.deepClone(options.data);
+
         wrapper.addClass("hopeui-danmu");
         for (let j = 0; j < CHANNEL_COUNT; j++) {
             let doms = [];
@@ -65,8 +67,7 @@ module.exports.danmuHandler = function ({
                 dom.style.top =
                     j * (spacing || 1.2) * dom.clientHeight + 10 + unit;
                 dom.style.left =
-                    wrapper.get(0).clientWidth + unit;
-
+                    wrapper.get(0).clientWidth  + unit;
                 if (is.ie() > 9) {
                     $(dom).off().on("transitionend", function (e) {
                         var target = e.target;
@@ -95,7 +96,6 @@ module.exports.danmuHandler = function ({
                     `<div class ="hopeui-danmu-rightMask" style="background-image: linear-gradient(to left, ${maskColor.right}, transparent);"></div>`
                 );
         }
-        timer = null;
         timer = setInterval(function () {
             let channel = getChannel();
             if ( /*danmuPool.length &&*/ channel != -1) {
@@ -110,13 +110,15 @@ module.exports.danmuHandler = function ({
 
     obj.close = function () {
         clearInterval(timer);
-        timer = null
+        timer = null;
         $dom.children('.hopeui-danmu-item').off()
         $dom.children().remove();
     };
 
     obj.open = function () {
-        init($dom)
+        if(!timer){
+             init($dom)
+        }
     };
 
     function getChannel() {
@@ -147,7 +149,7 @@ module.exports.danmuHandler = function ({
         }
 
         hasPosition[channel] = false;
-        setTimeout(
+        shootTimer = setTimeout(
             function () {
                 hasPosition[channel] = true;
             },
