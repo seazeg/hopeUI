@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-12-17 14:50:21
+ * @LastEditTime : 2021-08-05 16:59:45
  * @Description  : 响应式图片
  */
 
@@ -21,9 +21,9 @@ module.exports.pictureHandler = function ({ ele, options, on }) {
             if (!bkp) {
                 if (winWidth >= 1200) {
                     _this.attr("src", _this.attr("hope-xl-src"));
-                } else if (winWidth < 1200 && winWidth >= 750) {
+                } else if (winWidth < 1200 && winWidth > 750) {
                     _this.attr("src", _this.attr("hope-md-src"));
-                } else if (winWidth < 750) {
+                } else if (winWidth <= 750) {
                     _this.attr("src", _this.attr("hope-xs-src"));
                 }
             } else {

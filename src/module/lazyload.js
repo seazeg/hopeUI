@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-15 15:33:12
- * @LastEditTime : 2021-06-11 13:55:14
+ * @LastEditTime : 2021-08-05 17:00:07
  * @Description  : 图片懒加载 + 响应式图片 + 图片居中
  */
 
@@ -50,11 +50,11 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
                         if (item.getAttribute("hope-picture-tag") == "xl") {
                             SWITCH = false;
                         }
-                    } else if (winWidth < 1200 && winWidth >= 750) {
+                    } else if (winWidth < 1200 && winWidth > 750) {
                         if (item.getAttribute("hope-picture-tag") == "md") {
                             SWITCH = false;
                         }
-                    } else if (winWidth < 750) {
+                    } else if (winWidth <= 750) {
                         if (item.getAttribute("hope-picture-tag") == "xs") {
                             SWITCH = false;
                         }
@@ -86,10 +86,10 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
                                 if (winWidth >= 1200) {
                                     item.src = item.getAttribute("hope-xl-src");
                                     item.setAttribute("hope-picture-tag", "xl");
-                                } else if (winWidth < 1200 && winWidth >= 750) {
+                                } else if (winWidth < 1200 && winWidth > 750) {
                                     item.src = item.getAttribute("hope-md-src");
                                     item.setAttribute("hope-picture-tag", "md");
-                                } else if (winWidth < 750) {
+                                } else if (winWidth <= 750) {
                                     item.src = item.getAttribute("hope-xs-src");
                                     item.setAttribute("hope-picture-tag", "xs");
                                 }
