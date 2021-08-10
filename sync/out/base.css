@@ -145,5 +145,7 @@ input:-ms-input-placeholder {
   overflow: hidden;
 }
 .hopeui-noSelect {
-  cursor: not-allowed !important;
+  background-color: #f8f8f8 !important;
+  border-color: #e3e3e3 !important;
+  color: #aaa !important;
 }

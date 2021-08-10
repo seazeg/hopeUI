@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-10 11:39:03
+ * @LastEditTime : 2021-08-10 11:57:19
  * @Description  : 下拉框
  */
 
@@ -14,6 +14,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let type = "select";
     let $dom = $("select");
+
     if (ele) {
         // $dom = $(`select${ele}`);
         $dom = $(ele);
@@ -146,7 +147,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
 
             //单击后下拉列表事件
-            if (!selector.disabled) {
+            if (!selector.getAttribute('noselect')) {
                 newEle.find('.hopeui-input').removeClass("hopeui-noSelect")
                 newEle.off().on("click", function (e) {
                     if (!is.phone()) {

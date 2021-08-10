@@ -940,14 +940,14 @@
             </div>
         </div>
 
-        <div class="docs-box">
+        <!-- <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
                     <legend><a name="icon">selector</a></legend>
                 </fieldset>
             </div>
             <div class="docs-content">
-                <select name="myselect" id="myselect" disabled>
+                <select name="myselect" id="myselect">
                     <option value="">请选择</option>
                     <option value="qd" selected>青岛</option>
                     <option value="nj">南京</option>
@@ -955,22 +955,10 @@
                     <option value="wh">武汉</option>
                     <option value="wh">武汉</option>
                     <option value="wh">武汉</option>
-                    <!-- <option value="wh">武汉</option> -->
-                    <!-- <option value="wh">武汉</option> -->
-
-
-                    <!-- <option value="wh">武汉</option>
-                <option value="wh">武汉</option>
-                <option value="wlmq">乌鲁木齐</option>
-                <option value="南京">南京</option>
-                <option value="天津">天津</option>
-                <option value="郑州">郑州</option>
-                <option value="重庆">重庆</option>
-                <option value="成都">成都</option>
-                <option value="云南">云南</option> -->
+         
                 </select>
             </div>
-        </div>
+        </div> -->
 
         <div class="docs-box">
             <div class="docs-title">
@@ -1192,7 +1180,7 @@
                     <div class="hopeui-form-item">
                         <label class="hopeui-form-label">下拉框</label>
                         <div class="hopeui-input-block">
-                            <select name="city" hope-verify="required">
+                            <select name="city" hope-verify="required" noselect="true">
                                 <option value="">请选择</option>
                                 <option value="qd">青岛</option>
                                 <option value="wh">武汉</option>
@@ -1206,10 +1194,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="hopeui-form-item">
+                    <!-- <div class="hopeui-form-item">
                         <label class="hopeui-form-label">分组下拉框</label>
                         <div class="hopeui-input-block">
-                            <select name="school" hope-verify="required">
+                            <select name="school" hope-verify="required" disabled>
                                 <option value="">请选择</option>
                                 <optgroup label="北京"">
                                 <option value=" 北京大学">北京大学</option>
@@ -1220,7 +1208,7 @@
                                 </optgroup>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="hopeui-form-item">
                     <label class="hopeui-form-label">联动下拉框</label>
                     <div class="hopeui-input-inline">
@@ -1694,23 +1682,23 @@
     )
 
 
-    window.myselect = hope.selector({
-        ele: '#myselect',
-        options: {
-            searchMode: true,
-            switchIcon: 'hopeui-icon hopeui-icon-triangle-d',
-            autoHideBar: true,
-            isTitle: true
-        },
-        on: {
-            init: function (e) {
+    // window.myselect = hope.selector({
+    //     ele: '#myselect',
+    //     options: {
+    //         searchMode: true,
+    //         switchIcon: 'hopeui-icon hopeui-icon-triangle-d',
+    //         autoHideBar: true,
+    //         isTitle: true
+    //     },
+    //     on: {
+    //         init: function (e) {
                 
 
-            }
-        }
-    })
+    //         }
+    //     }
+    // })
 
-    myselect.set('value','nj')
+    // myselect.set('value','nj')
 
 
 
