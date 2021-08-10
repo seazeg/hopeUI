@@ -1,26 +1,16 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-07-26 10:08:07
+ * @LastEditTime : 2021-08-10 11:39:03
  * @Description  : 下拉框
  */
 
 const $ = require("../utils/hopeu.js");
-const {
-    utils
-} = require("../utils/verify.js");
-const {
-    is
-} = require("../utils/is.js");
-const {
-    scrollbarHandler
-} = require("./scrollbar.js");
+const { utils } = require("../utils/verify.js");
+const { is } = require("../utils/is.js");
+const { scrollbarHandler } = require("./scrollbar.js");
 
-module.exports.selectorHandler = function ({
-    ele,
-    options,
-    on
-}) {
+module.exports.selectorHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let type = "select";
     let $dom = $("select");
@@ -156,46 +146,52 @@ module.exports.selectorHandler = function ({
             }
 
             //单击后下拉列表事件
-            newEle.off().on("click", function (e) {
-                if (!is.phone()) {
-                    let oe = e || window.event;
-                    if (oe.stopPropagation) {
-                        oe.stopPropagation();
-                    } else if (window.event) {
-                        oe.cancelBubble = true;
-                    }
-
-                    if (!$(oe.target).hasClass("hopeui-scrollbar-bar")) {
-                        if ($(this).hasClass("hopeui-form-selected")) {
-                            $(this).removeClass("hopeui-form-selected");
-                        } else {
-                            $(".hopeui-form-selected").removeClass(
-                                "hopeui-form-selected"
-                            );
-                            $(this).addClass("hopeui-form-selected");
-
-                            scrollbarHandler({
-                                ele: newEle.children(".hopeui-select-list"),
-                                options: {
-                                    autoHideBar: (options && options.autoHideBar) ||
-                                        false,
-                                    height: (options && options.height) || null,
-                                },
-                                on: {},
-                            });
+            if (!selector.disabled) {
+                newEle.find('.hopeui-input').removeClass("hopeui-noSelect")
+                newEle.off().on("click", function (e) {
+                    if (!is.phone()) {
+                        let oe = e || window.event;
+                        if (oe.stopPropagation) {
+                            oe.stopPropagation();
+                        } else if (window.event) {
+                            oe.cancelBubble = true;
                         }
 
-                        //打开列表回调
-                        if (on && on.toggle) {
-                            on.toggle({
-                                name: $(this)
-                                    .attr("name"),
-                                eventName: "toggle",
-                            });
+                        if (!$(oe.target).hasClass("hopeui-scrollbar-bar")) {
+                            if ($(this).hasClass("hopeui-form-selected")) {
+                                $(this).removeClass("hopeui-form-selected");
+                            } else {
+                                $(".hopeui-form-selected").removeClass(
+                                    "hopeui-form-selected"
+                                );
+                                $(this).addClass("hopeui-form-selected");
+
+                                scrollbarHandler({
+                                    ele: newEle.children(".hopeui-select-list"),
+                                    options: {
+                                        autoHideBar:
+                                            (options && options.autoHideBar) ||
+                                            false,
+                                        height:
+                                            (options && options.height) || null,
+                                    },
+                                    on: {},
+                                });
+                            }
+
+                            //打开列表回调
+                            if (on && on.toggle) {
+                                on.toggle({
+                                    name: $(this).attr("name"),
+                                    eventName: "toggle",
+                                });
+                            }
                         }
                     }
-                }
-            });
+                });
+            }else{
+                newEle.find('.hopeui-input').addClass("hopeui-noSelect")
+            }
 
             if (options && options.searchMode) {
                 newEle
@@ -226,7 +222,8 @@ module.exports.selectorHandler = function ({
                             scrollbarHandler({
                                 ele: newEle.children(".hopeui-select-list"),
                                 options: {
-                                    autoHideBar: (options && options.autoHideBar) ||
+                                    autoHideBar:
+                                        (options && options.autoHideBar) ||
                                         false,
                                 },
                                 on: {},
@@ -291,9 +288,9 @@ module.exports.selectorHandler = function ({
                         .find(".hopeui-input")
                         .val(
                             $(this)
-                            .find("option")
-                            .eq($(this).get(0).selectedIndex)
-                            .text()
+                                .find("option")
+                                .eq($(this).get(0).selectedIndex)
+                                .text()
                         );
                     utils.validation(selector, "pass", null, "select-one");
                     if (on && on.change) {
@@ -313,7 +310,7 @@ module.exports.selectorHandler = function ({
             }
 
             //点击select区域外关闭下拉列表
-            $(document).off().on("click", function (e) {
+            $(document).on("click", function (e) {
                 $(newEle).removeClass("hopeui-form-selected");
                 //下拉列表关闭回调
                 if (on && on.close) {
