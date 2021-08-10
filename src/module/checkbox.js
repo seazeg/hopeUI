@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-02 11:55:47
+ * @LastEditTime : 2021-08-10 16:13:28
  * @Description  : 复选框
  */
 
@@ -17,6 +17,8 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
         // $dom = $(`input[type=checkbox]${ele}`);
         $dom = $(ele);
     }
+
+    let checkedArr = [];
 
     $dom.each(function () {
         let newEle,
@@ -38,16 +40,20 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
                 // }
                 handle(checkbox, newEle);
                 utils.validation(checkbox, "pass", null, "checkbox");
+
                 //点击回调
                 if (on && on.change) {
-                    on.change({
-                        original: checkbox,
-                        targetEle: checkbox.nextSibling,
-                        name: checkbox.name,
-                        value: checkbox.value,
-                        status: checkbox.checked,
-                        eventName: "change",
-                    });
+                    on.change(
+                        {
+                            original: checkbox,
+                            targetEle: checkbox.nextSibling,
+                            name: checkbox.name,
+                            value: checkbox.value,
+                            status: checkbox.checked,
+                            eventName: "change",
+                        },
+                        checkedArr
+                    );
                 }
             });
         }
@@ -60,19 +66,19 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
         });
     }
 
-    obj.val = function (value,callback) {
+    obj.val = function (value, callback) {
         if (value) {
-                $dom.each(function (i, thisEle) {
-                    value.split(",").forEach(function (val) {
-                        if ($(thisEle).val() == val) {
-                            handle(thisEle, $(thisEle).next(), true);
-                        }
-                    });
-                    utils.validation(thisEle, "pass", null, "checkbox");
+            $dom.each(function (i, thisEle) {
+                value.split(",").forEach(function (val) {
+                    if ($(thisEle).val() == val) {
+                        handle(thisEle, $(thisEle).next(), true);
+                    }
                 });
-  
-            if(callback){
-                callback()
+                utils.validation(thisEle, "pass", null, "checkbox");
+            });
+
+            if (callback) {
+                callback();
             }
         }
     };
@@ -82,8 +88,8 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
             ele.checked = false;
             $(ele).next().removeClass("hopeui-form-checked");
         });
-        if(callback){
-            callback()
+        if (callback) {
+            callback();
         }
     };
 
@@ -98,9 +104,15 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
         if (targetEle.hasClass("hopeui-form-checked") && !single) {
             original.checked = false;
             targetEle.removeClass("hopeui-form-checked");
+            checkedArr.forEach(function (item, i) {
+                if (item == original.value) {
+                    checkedArr.splice(i, 1);
+                }
+            });
         } else {
             original.checked = true;
             targetEle.addClass("hopeui-form-checked");
+            checkedArr.push(original.value);
         }
     }
 

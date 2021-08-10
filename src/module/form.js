@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-28 18:15:21
+ * @LastEditTime : 2021-08-10 16:04:31
  * @Description  : 表单
  */
 
@@ -128,7 +128,6 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     $dom.each(function () {
         let form = $(this)[0];
         form.onsubmit = function (evt) {
-            debugger
             evt = evt || window.event;
             if (evt.stopPropagation) {
                 evt.stopPropagation();
