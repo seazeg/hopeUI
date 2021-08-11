@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:15:50
+ * @LastEditTime : 2021-08-11 17:38:34
  * @Description  : 文本框
  */
 
@@ -21,11 +21,12 @@ module.exports.suggestHandler = function ({
     let type = "input";
     let $dom = $("input[type=text]");
     if (ele) {
-        $dom = $(ele)
+        $dom = $(ele);
     }
     function getData(params, reader, obj) {
         params.data = {};
         params.data[options.searchField] = obj.prev().val();
+
         $.ajax(
             Object.assign(params, {
                 success: function (data) {
@@ -40,7 +41,12 @@ module.exports.suggestHandler = function ({
                             obj.find(".hopeui-suggest-list").html(html);
                             scrollbarHandler({
                                 ele: obj,
-                                options: {},
+                                options: {
+                                    autoHideBar:
+                                        (options && options.autoHideBar) ||
+                                        false,
+                                    height: (options && options.height) || null,
+                                },
                                 on: {},
                             });
                             obj.find(".option").on("click", function () {
@@ -65,7 +71,7 @@ module.exports.suggestHandler = function ({
                                     options.noMatchName ||
                                     "-- 没有匹配的内容 --"
                                 }</div>`
-                            );
+                            ).parent().css('height','auto')
                         }
                     }
                 },
@@ -74,7 +80,7 @@ module.exports.suggestHandler = function ({
                         `<div class="option" hope-value="">${
                             options.noMatchName || "-- 没有匹配的内容 --"
                         }</div>`
-                    );
+                    ).parent().css('height','auto')
                 },
             })
         );
