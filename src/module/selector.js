@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:15:42
+ * @LastEditTime : 2021-08-11 15:19:36
  * @Description  : 下拉框
  */
 
@@ -303,7 +303,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             originalParentEle: selector,
                             virtualParentEle: null,
                             targetEle: e.target,
-                            ele:obj,
+                            ele: obj,
                             label: $(this)
                                 .find("option")
                                 .eq($(this).get(0).selectedIndex)
@@ -317,14 +317,16 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
             //点击select区域外关闭下拉列表
             $(document).on("click", function (e) {
-                $(newEle).removeClass("hopeui-form-selected");
-                //下拉列表关闭回调
-                if (on && on.close) {
-                    on.close({
-                        targetEle: $dom[0],
-                        ele: obj,
-                        eventName: "close",
-                    });
+                if ($(newEle).hasClass("hopeui-form-selected")) {
+                    $(newEle).removeClass("hopeui-form-selected");
+                    //下拉列表关闭回调
+                    if (on && on.close) {
+                        on.close({
+                            targetEle: $dom[0],
+                            ele: obj,
+                            eventName: "close",
+                        });
+                    }
                 }
             });
 
