@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2021-08-11 14:31:01
+ * @LastEditTime : 2021-08-11 15:36:31
  * @Description  : 自定义滚动条
  */
 
@@ -13,7 +13,7 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = null;
     let listTemp = $(ele).addClass("hopeui-scrollbar").html();
-    let listWidth = $(ele).width();
+    let listWidth = $(ele).outerWidth();
     let scrollY = 0;
     // if (options && options.height) {
 
@@ -36,7 +36,7 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
 
     $(ele)
         .find(".hopeui-scrollbar-box")
-        .css("width", listWidth + 10 + "px");
+        .css("width", listWidth + 20 + "px");
 
 
     if ($(ele).find(".hopeui-scrollbar-bar").length > 0) {
