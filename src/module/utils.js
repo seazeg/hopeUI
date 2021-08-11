@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-08-11 10:09:21
+ * @LastEditTime : 2021-08-11 10:11:25
  * @Description  : 常用工具函数
  */
 
@@ -446,7 +446,7 @@ module.exports.utilsHandler = {
             //鼠标按下事件
 
             let oe = e || window.event;
-            let _this = this.parentNode.parentNode;
+            let _this = this;
             let startX = oe.clientX - _this.offsetLeft;
             let startY = oe.clientY - _this.offsetTop;
             document.onmousemove = function (e) {
