@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-10 16:04:31
+ * @LastEditTime : 2021-08-11 14:50:40
  * @Description  : 表单
  */
 
@@ -135,6 +135,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                 window.event.cancelBubble = true;
             }
             evt.preventDefault();
+
             let tarEle = evt.target || evt.srcElement;
             let sortArr = {},
                 formParams = [],
@@ -352,6 +353,24 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     obj.setGlobalRequired = function (status) {
         globalRequired = status;
     };
+
+    obj.verify = function (ele){
+        if (!controls[ele.name].verify(ele.value)) {
+            utils.validation(
+                ele,
+                "pass",
+                null,
+                ele.type
+            );
+        } else {
+            utils.validation(
+                ele,
+                "error",
+                controls[ele.name].verify(ele.value),
+                ele.type
+            );
+        }
+    }
 
     return obj;
 };

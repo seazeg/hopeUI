@@ -2032,7 +2032,7 @@
         ele: "#form",
         on: {
             submit: function (e) {
-                //console.log(e);
+                console.log(e);
             },
         },
         controls: {
@@ -2062,7 +2062,8 @@
                 options: {},
                 on: {
                     blur: function (e) {
-                        //////console.log(e);
+                        fm.verify(e.targetELe);
+                        console.log(e);
                     },
                     focus: function (e) {
                         //////console.log(e);
@@ -2213,7 +2214,7 @@
         },
     });
 
-    fm.setGlobalRequired(false);
+    // fm.setGlobalRequired(false);
 
     document.querySelector("#set").onclick = function () {
         fm.val({
@@ -2244,7 +2245,7 @@
                 //console.log(e);
             },
             init: function (e){
-                // e.goLocation(3)
+                e.goLocation(5)
             }
         }
     })
