@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-10 11:57:19
+ * @LastEditTime : 2021-08-11 15:06:39
  * @Description  : 下拉框
  */
 
@@ -147,8 +147,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
 
             //单击后下拉列表事件
-            if (!selector.getAttribute('noselect')) {
-                newEle.find('.hopeui-input').removeClass("hopeui-noSelect")
+            if (!selector.getAttribute("noselect")) {
+                newEle.find(".hopeui-input").removeClass("hopeui-noSelect");
                 newEle.off().on("click", function (e) {
                     if (!is.phone()) {
                         let oe = e || window.event;
@@ -183,6 +183,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             //打开列表回调
                             if (on && on.toggle) {
                                 on.toggle({
+                                    targetEle: $dom[0],
+                                    ele: obj,
                                     name: $(this).attr("name"),
                                     eventName: "toggle",
                                 });
@@ -190,8 +192,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         }
                     }
                 });
-            }else{
-                newEle.find('.hopeui-input').addClass("hopeui-noSelect")
+            } else {
+                newEle.find(".hopeui-input").addClass("hopeui-noSelect");
             }
 
             if (options && options.searchMode) {
@@ -233,7 +235,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             //打开列表回调
                             if (on && on.input) {
                                 on.input({
-                                    ele: $(this).get(0),
+                                    targetEle: $(this).get(0),
+                                    ele: obj,
                                     value: $(this).val(),
                                     eventName: "input",
                                 });
@@ -273,6 +276,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                         originalParentEle: selector,
                         virtualParentEle: selector.nextSibling,
                         targetEle: e.target,
+                        ele: obj,
                         label: _this.text(),
                         value: _this.attr("hope-value"),
                         name: _this.parents(".hopeui-form-select").attr("name"),
@@ -299,6 +303,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             originalParentEle: selector,
                             virtualParentEle: null,
                             targetEle: e.target,
+                            ele:obj,
                             label: $(this)
                                 .find("option")
                                 .eq($(this).get(0).selectedIndex)
@@ -315,7 +320,11 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                 $(newEle).removeClass("hopeui-form-selected");
                 //下拉列表关闭回调
                 if (on && on.close) {
-                    on.close(e);
+                    on.close({
+                        targetEle: $dom[0],
+                        ele: obj,
+                        eventName: "close",
+                    });
                 }
             });
 
@@ -323,8 +332,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             if (status) {
                 if (on && on.init) {
                     on.init({
-                        self: obj,
-                        ele: $dom[0],
+                        targetEle: $dom[0],
+                        ele: obj,
                         eventName: "init",
                     });
                 }
@@ -364,6 +373,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
             if (on && on.change) {
                 on.change({
+                    targetEle: $dom[0],
+                    ele: obj,
                     value: value,
                     eventName: "val_change",
                 });

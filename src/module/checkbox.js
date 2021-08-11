@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-10 16:13:28
+ * @LastEditTime : 2021-08-11 15:08:16
  * @Description  : 复选框
  */
 
@@ -45,8 +45,8 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
                 if (on && on.change) {
                     on.change(
                         {
-                            original: checkbox,
-                            targetEle: checkbox.nextSibling,
+                            targetEle: checkbox,
+                            newEle: checkbox.nextSibling,
                             name: checkbox.name,
                             value: checkbox.value,
                             status: checkbox.checked,
