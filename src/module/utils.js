@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-08-04 15:42:54
+ * @LastEditTime : 2021-08-11 10:03:08
  * @Description  : 常用工具函数
  */
 
@@ -439,5 +439,37 @@ module.exports.utilsHandler = {
             }
             return _o
         }
+    },
+    //赋予元素拖拽功能
+    darg: function (obj) {
+        obj.onmousedown = function (e) {
+            //鼠标按下事件
+
+            let oe = e || window.event;
+            let _this = this.parentNode.parentNode;
+            let startX = oe.clientX - _this.offsetLeft;
+            let startY = oe.clientY - _this.offsetTop;
+            document.onmousemove = function (e) {
+                //鼠标移动事件
+                let oe = e || window.event;
+                _this.style.left = oe.clientX - startX + "px";
+                _this.style.top = oe.clientY - startY + "px";
+            };
+
+            document.onmouseup = function () {
+                //鼠标松开事件
+                document.onmousemove = null;
+                document.onmouseup = null;
+                if (_this.releaseCapture) {
+                    //debug释放鼠标捕获
+                    _this.releaseCapture();
+                }
+            };
+            if (_this.setCapture) {
+                //debug设置鼠标捕获
+                _this.setCapture();
+            }
+            return false;
+        };
     }
 };
