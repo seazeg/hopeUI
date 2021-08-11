@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-09 16:59:39
+ * @LastEditTime : 2021-08-11 15:15:02
  * @Description  : 文本框
  */
 
@@ -101,7 +101,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
             utils.validation($(this).get(0), "pass", null, "input");
             if (on && on.blur) {
                 on.blur({
-                    targetELe: $(this).get(0),
+                    targetEle: $(this).get(0),
                     value: $(this).val(),
                     eventName: "blur",
                 });
@@ -110,7 +110,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
         $this.on("focus", function () {
             if (on && on.focus) {
                 on.focus({
-                    targetELe: $(this).get(0),
+                    targetEle: $(this).get(0),
                     value: $(this).val(),
                     eventName: "focus",
                 });
@@ -119,7 +119,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
         $this.on("input propertychange", function () {
             if (on && on.input) {
                 on.input({
-                    targetELe: $(this).get(0),
+                    targetEle: $(this).get(0),
                     value: $(this).val(),
                     eventName: "input",
                 });

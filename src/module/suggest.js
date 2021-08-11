@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-04-09 15:26:49
+ * @LastEditTime : 2021-08-11 15:15:50
  * @Description  : 文本框
  */
 
@@ -53,7 +53,7 @@ module.exports.suggestHandler = function ({
 
                                 if (on && on.change) {
                                     on.change({
-                                        targetELe: _this.get(0),
+                                        targetEle: _this.get(0),
                                         value: _this.attr("hope-value"),
                                         eventName: "change",
                                     });
@@ -142,7 +142,7 @@ module.exports.suggestHandler = function ({
             $this.on("blur", function () {
                 if (on && on.blur) {
                     on.blur({
-                        targetELe: $(this).get(0),
+                        targetEle: $(this).get(0),
                         value: $(this).val(),
                         eventName: "blur",
                     });
@@ -151,7 +151,7 @@ module.exports.suggestHandler = function ({
             $this.on("focus", function () {
                 if (on && on.focus) {
                     on.focus({
-                        targetELe: $(this).get(0),
+                        targetEle: $(this).get(0),
                         value: $(this).val(),
                         eventName: "focus",
                     });
@@ -170,7 +170,7 @@ module.exports.suggestHandler = function ({
                 if (on && on.input) {
                     on.input({
                         object: obj,
-                        targetELe: $(this).get(0),
+                        targetEle: $(this).get(0),
                         value: $(this).val(),
                         eventName: "input",
                     });

@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:08:16
+ * @LastEditTime : 2021-08-11 15:16:00
  * @Description  : 复选框
  */
 
@@ -96,7 +96,7 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
     /**
      * @description: 选择辅助方法
      * @param {original:dom对象} 原始元素
-     * @param {targetELe:$对象} 目标虚拟元素
+     * @param {targetEle:$对象} 目标虚拟元素
      * @param {single} 是否只选择不取消选择
      * @return:
      */

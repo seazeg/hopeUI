@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:06:39
+ * @LastEditTime : 2021-08-11 15:15:42
  * @Description  : 下拉框
  */
 
@@ -441,15 +441,15 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
     /**
      * @description: 选择辅助方法
      * @param {original:dom对象} 原始元素
-     * @param {targetELe:$对象} 目标虚拟元素
+     * @param {targetEle:$对象} 目标虚拟元素
      * @param {optEle:$对象} 目标虚拟元素内选中选项
      * @return:
      */
-    function handle(original, targetELe, optEle) {
-        let input = targetELe.find("input");
-        targetELe.find(".option").removeClass("hopeui-select-this");
+    function handle(original, targetEle, optEle) {
+        let input = targetEle.find("input");
+        targetEle.find(".option").removeClass("hopeui-select-this");
         optEle.addClass("hopeui-select-this");
-        targetELe.removeClass("hopeui-form-selected");
+        targetEle.removeClass("hopeui-form-selected");
         input.attr("hope-value", optEle.attr("hope-value"));
         if (optEle.attr("hope-value")) {
             input.val(optEle.text());

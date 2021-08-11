@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-09 17:00:14
+ * @LastEditTime : 2021-08-11 15:15:10
  * @Description  : 多行文本框
  */
 
@@ -72,7 +72,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
             utils.validation($(this).get(0), "pass", null, "textarea");
             if (on && on.blur) {
                 on.blur({
-                    targetELe: $(this).get(0),
+                    targetEle: $(this).get(0),
                     value: $(this).val(),
                     eventName: "blur",
                 });
@@ -81,7 +81,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
         $this.on("focus", function () {
             if (on && on.focus) {
                 on.focus({
-                    targetELe: $(this).get(0),
+                    targetEle: $(this).get(0),
                     value: $(this).val(),
                     eventName: "focus",
                 });
@@ -96,7 +96,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
             }
             if (on && on.input) {
                 on.input({
-                    targetELe: $(this).get(0),
+                    targetEle: $(this).get(0),
                     value: $(this).val(),
                     eventName: "input",
                 });
