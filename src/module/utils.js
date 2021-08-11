@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-08-11 10:22:14
+ * @LastEditTime : 2021-08-11 11:53:18
  * @Description  : 常用工具函数
  */
 
@@ -35,9 +35,9 @@ module.exports.utilsHandler = {
     },
     //判断是否为空
     isEmpty: function (value) {
-        return typeof value == "undefined" || value == null || value == "" ?
-            true :
-            false;
+        return typeof value == "undefined" || value == null || value == ""
+            ? true
+            : false;
     },
     //判断是否为空对象
     isEmptyObject: function (value) {
@@ -201,11 +201,11 @@ module.exports.utilsHandler = {
         }
         return JSON.parse(
             '{"' +
-            decodeURIComponent(search)
-            .replace(/"/g, '\\"')
-            .replace(/&/g, '","')
-            .replace(/=/g, '":"') +
-            '"}'
+                decodeURIComponent(search)
+                    .replace(/"/g, '\\"')
+                    .replace(/&/g, '","')
+                    .replace(/=/g, '":"') +
+                '"}'
         );
     },
     //url参数对象反序列化
@@ -218,16 +218,16 @@ module.exports.utilsHandler = {
                 for (let i = 0; i < value.length; ++i) {
                     temp.push(
                         encodeURIComponent(key + "[" + i + "]") +
-                        "=" +
-                        encodeURIComponent(value[i])
+                            "=" +
+                            encodeURIComponent(value[i])
                     );
                 }
                 continue;
             }
             temp.push(
                 encodeURIComponent(key) +
-                "=" +
-                encodeURIComponent(paramObj[key])
+                    "=" +
+                    encodeURIComponent(paramObj[key])
             );
         }
         return temp.join("&");
@@ -284,9 +284,9 @@ module.exports.utilsHandler = {
     },
     //生成指定范围的随机数
     getRangeRandomNum: function (min, max, returnType) {
-        return returnType == "float" ?
-            min + Math.random() * (max - min) :
-            Math.floor(min + Math.random() * (max + 1 - min));
+        return returnType == "float"
+            ? min + Math.random() * (max - min)
+            : Math.floor(min + Math.random() * (max + 1 - min));
     },
     //格式化成货币格式
     getFormatCurrency: function (value) {
@@ -314,11 +314,11 @@ module.exports.utilsHandler = {
         return (
             "#" +
             (function (color) {
-                return (color += "0123456789abcdef" [
-                        Math.floor(Math.random() * 16)
-                    ]) && color.length == 6 ?
-                    color :
-                    arguments.callee(color);
+                return (color += "0123456789abcdef"[
+                    Math.floor(Math.random() * 16)
+                ]) && color.length == 6
+                    ? color
+                    : arguments.callee(color);
             })("")
         );
     },
@@ -409,10 +409,10 @@ module.exports.utilsHandler = {
         s = s.replace(/&lt;/g, "<");
         s = s.replace(/&gt;/g, ">");
         s = s.replace(/&nbsp;/g, " ");
-        s = s.replace(/&#39;/g, "\'");
-        s = s.replace(/&quot;/g, "\"");
+        s = s.replace(/&#39;/g, "'");
+        s = s.replace(/&quot;/g, '"');
         s = s.replace(/&#40;/g, "(");
-        s = s.replace(/&#41;/g, ")")
+        s = s.replace(/&#41;/g, ")");
         return s;
     },
     //获取相对路径的绝对路径
@@ -424,20 +424,25 @@ module.exports.utilsHandler = {
     },
     //深度拷贝
     deepClone: function (o) {
-        if (typeof o === 'string' || typeof o === 'number' || typeof o === 'boolean' || typeof o === 'undefined') {
-            return o
+        if (
+            typeof o === "string" ||
+            typeof o === "number" ||
+            typeof o === "boolean" ||
+            typeof o === "undefined"
+        ) {
+            return o;
         } else if (Array.isArray(o)) {
-            var _arr = []
-            o.forEach(item => {
-                _arr.push(item)
-            })
-            return _arr
-        } else if (typeof o === 'object') {
-            var _o = {}
+            var _arr = [];
+            o.forEach((item) => {
+                _arr.push(item);
+            });
+            return _arr;
+        } else if (typeof o === "object") {
+            var _o = {};
             for (let key in o) {
-                _o[key] = deepClone(o[key])
+                _o[key] = deepClone(o[key]);
             }
-            return _o
+            return _o;
         }
     },
     //赋予元素拖拽功能
@@ -470,5 +475,5 @@ module.exports.utilsHandler = {
             }
             return false;
         };
-    }
+    },
 };

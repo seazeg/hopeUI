@@ -1194,10 +1194,10 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="hopeui-form-item">
+                    <div class="hopeui-form-item">
                         <label class="hopeui-form-label">分组下拉框</label>
                         <div class="hopeui-input-block">
-                            <select name="school" hope-verify="required" disabled>
+                            <select name="school" hope-verify="required">
                                 <option value="">请选择</option>
                                 <optgroup label="北京"">
                                 <option value=" 北京大学">北京大学</option>
@@ -1208,7 +1208,7 @@
                                 </optgroup>
                             </select>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- <div class="hopeui-form-item">
                     <label class="hopeui-form-label">联动下拉框</label>
                     <div class="hopeui-input-inline">
@@ -1682,21 +1682,21 @@
     )
 
 
-    // window.myselect = hope.selector({
-    //     ele: '#myselect',
-    //     options: {
-    //         searchMode: true,
-    //         switchIcon: 'hopeui-icon hopeui-icon-triangle-d',
-    //         autoHideBar: true,
-    //         isTitle: true
-    //     },
-    //     on: {
-    //         init: function (e) {
+    window.myselect = hope.selector({
+        ele: '#myselect',
+        options: {
+            searchMode: true,
+            switchIcon: 'hopeui-icon hopeui-icon-triangle-d',
+            autoHideBar: true,
+            isTitle: true
+        },
+        on: {
+            init: function (e) {
                 
 
-    //         }
-    //     }
-    // })
+            }
+        }
+    })
 
     // myselect.set('value','nj')
 
