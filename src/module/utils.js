@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-08-11 10:11:25
+ * @LastEditTime : 2021-08-11 10:22:14
  * @Description  : 常用工具函数
  */
 
@@ -441,12 +441,11 @@ module.exports.utilsHandler = {
         }
     },
     //赋予元素拖拽功能
-    drag: function (obj) {
+    drag: function (obj, moveObj) {
         obj.onmousedown = function (e) {
             //鼠标按下事件
-
             let oe = e || window.event;
-            let _this = this;
+            let _this = moveObj || this;
             let startX = oe.clientX - _this.offsetLeft;
             let startY = oe.clientY - _this.offsetTop;
             document.onmousemove = function (e) {
