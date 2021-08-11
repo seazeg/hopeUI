@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-08-11 10:03:08
+ * @LastEditTime : 2021-08-11 10:09:21
  * @Description  : 常用工具函数
  */
 
@@ -441,7 +441,7 @@ module.exports.utilsHandler = {
         }
     },
     //赋予元素拖拽功能
-    darg: function (obj) {
+    drag: function (obj) {
         obj.onmousedown = function (e) {
             //鼠标按下事件
 
