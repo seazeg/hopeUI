@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2021-06-28 09:39:31
+ * @LastEditTime : 2021-08-11 14:31:01
  * @Description  : 自定义滚动条
  */
 
@@ -13,6 +13,7 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = null;
     let listTemp = $(ele).addClass("hopeui-scrollbar").html();
+    let listWidth = $(ele).width();
     let scrollY = 0;
     // if (options && options.height) {
 
@@ -33,6 +34,11 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
             .get(0);
     }
 
+    $(ele)
+        .find(".hopeui-scrollbar-box")
+        .css("width", listWidth + 10 + "px");
+
+
     if ($(ele).find(".hopeui-scrollbar-bar").length > 0) {
         $(ele).find(".hopeui-scrollbar-bar").remove();
     }
@@ -51,21 +57,20 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
             });
         $(ele).css("height", highTotal + 15);
     } else {
-        if (options && options.height || $(ele).height()) {
+        if ((options && options.height) || $(ele).height()) {
             $(ele).css("height", options.height);
         } else {
             $(ele).css("height", "200px");
         }
     }
- 
+
     let rate = $dom.get(0).clientHeight / $dom.get(0).scrollHeight;
-    
+
     let barHeight = rate * $dom.get(0).clientHeight;
 
     if (rate < 1) {
         $bar.css("height", barHeight + "px");
         if (options && options.autoHideBar) {
-        
             $bar.css({
                 opacity: 0,
             });

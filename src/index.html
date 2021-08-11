@@ -271,6 +271,29 @@
         <li hope-anchor-key="5">表单</li>
     </ul>
     <div style="padding-top:100px">
+
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">selector</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content" style="width:100px">
+                <select name="myselect" id="myselect">
+                    <option value="">请选择</option>
+                    <option value="qd" selected>青岛</option>
+                    <option value="nj">南京</option>
+                    <option value="wh">武汉</option>
+                    <option value="wh">武汉</option>
+                    <option value="wh">武汉</option>
+                    <option value="wh">武汉</option>
+         
+                </select>
+            </div>
+        </div>
+
+
+
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
@@ -940,25 +963,7 @@
             </div>
         </div>
 
-        <!-- <div class="docs-box">
-            <div class="docs-title">
-                <fieldset>
-                    <legend><a name="icon">selector</a></legend>
-                </fieldset>
-            </div>
-            <div class="docs-content">
-                <select name="myselect" id="myselect">
-                    <option value="">请选择</option>
-                    <option value="qd" selected>青岛</option>
-                    <option value="nj">南京</option>
-                    <option value="wh">武汉</option>
-                    <option value="wh">武汉</option>
-                    <option value="wh">武汉</option>
-                    <option value="wh">武汉</option>
-         
-                </select>
-            </div>
-        </div> -->
+     
 
         <div class="docs-box">
             <div class="docs-title">
@@ -1685,7 +1690,7 @@
     window.myselect = hope.selector({
         ele: '#myselect',
         options: {
-            searchMode: true,
+            searchMode: false,
             switchIcon: 'hopeui-icon hopeui-icon-triangle-d',
             autoHideBar: true,
             isTitle: true
@@ -2239,7 +2244,7 @@
                 //console.log(e);
             },
             init: function (e){
-                e.goLocation(3)
+                // e.goLocation(3)
             }
         }
     })
