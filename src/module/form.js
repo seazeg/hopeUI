@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 14:50:40
+ * @LastEditTime : 2021-08-12 15:40:40
  * @Description  : 表单
  */
 
@@ -371,6 +371,8 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             );
         }
     }
+
+    obj.controls = formControls;
 
     return obj;
 };
