@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2021-08-11 17:50:07
+ * @LastEditTime : 2021-08-12 14:33:46
  * @Description  : 自定义滚动条
  */
 
@@ -38,7 +38,6 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
         .find(".hopeui-scrollbar-box")
         .css("width", listWidth + 20 + "px");
 
-
     if ($(ele).find(".hopeui-scrollbar-bar").length > 0) {
         $(ele).find(".hopeui-scrollbar-bar").remove();
     }
@@ -48,19 +47,20 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
     );
     $dom = $(ele).children();
 
-    if ($dom.get(0).scrollHeight < 200) {
-        let highTotal = 0;
+    if ($dom.get(0).scrollHeight <= 200) {
+        var highTotal = 0;
         $(ele)
-            .find(".option")
+            .children(".hopeui-scrollbar-box")
+            .children()
             .each(function () {
-                highTotal += $(this).height() || 0;
+                highTotal += $(this).outerHeight() || 0;
             });
-        $(ele).css("height", highTotal + 15);
+        $(ele).css("height", highTotal);
     } else {
-        if ((options && options.height) || $(ele).height()) {
+        if (options && options.height) {
             $(ele).css("height", options.height);
         } else {
-            $(ele).css("height", ($(ele).find(".option").eq(0).height() || 200) + 'px');
+            $(ele).css("height", 200 + "px");
         }
     }
 
