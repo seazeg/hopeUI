@@ -1,7 +1,5 @@
 const hopeu = require("../utils/hopeu.js");
-const {
-    is
-} = require("./is.js");
+const { is } = require("./is.js");
 
 let Hope_datepicker = function (ele, options, on, plugin) {
     let $ = hopeu;
@@ -26,7 +24,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         minBar = null,
         secBar = null;
 
-    let settings = Object.assign({
+    let settings = Object.assign(
+        {
             offTop: $(obj).height() + 3,
             format: "yyyy-MM-dd HH:mm:ss",
             type: "datetime",
@@ -56,7 +55,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             }' data-format='${
         settings.format.substring(11) || "HH:mm:ss"
     }'>选择时间</span>
-            <button type="button" class='hopeui-btn changeResult'>确定</button>
+            <button type="button" class='hopeui-btn changeResult ${
+                settings.confirmBtn ? "" : "hopeui-hide"
+            }' >确定</button>
             <button type="button" class='hopeui-btn clear hopeui-btn-primary'>清空</button>
             <div class='time-list' id='timelist_${elem_id}'>
                 <div class='warp'>
@@ -144,9 +145,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         .find(".month span")
         .on("click", function () {
             $(this).addClass("active");
-            $(this).next(".month-list").hasClass("hopeui-show") ?
-                $(this).next(".month-list").removeClass("hopeui-show") :
-                $(this).next(".month-list").addClass("hopeui-show");
+            $(this).next(".month-list").hasClass("hopeui-show")
+                ? $(this).next(".month-list").removeClass("hopeui-show")
+                : $(this).next(".month-list").addClass("hopeui-show");
             autoLayerHeight($("#mlist_" + elem_id), 50);
             $("#ylist_" + elem_id).removeClass("hopeui-show");
             $("#ylist_" + elem_id)
@@ -200,9 +201,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
             autoLayerHeight($("#ylist_" + elem_id), 50);
             $(this).addClass("active");
-            $(this).next(".year-list").hasClass("hopeui-show") ?
-                $(this).next(".year-list").removeClass("hopeui-show") :
-                $(this).next(".year-list").addClass("hopeui-show");
+            $(this).next(".year-list").hasClass("hopeui-show")
+                ? $(this).next(".year-list").removeClass("hopeui-show")
+                : $(this).next(".year-list").addClass("hopeui-show");
 
             $("#mlist_" + elem_id).removeClass("hopeui-show");
             $("#mlist_" + elem_id)
@@ -410,8 +411,12 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     //加载天
     function dayListReload() {
         let days = getDaysOfMonth(tz_m, tz_y);
-        let startDate = options.startDate ? options.startDate.split("-") : [1900, 1, 1]
-        let endDate = options.endDate ? options.endDate.split("-") : [2050, 1, 1]
+        let startDate = options.startDate
+            ? options.startDate.split("-")
+            : [1900, 1, 1];
+        let endDate = options.endDate
+            ? options.endDate.split("-")
+            : [2050, 1, 1];
         let prevDays = null,
             nextDays = null;
         if (tz_m - 1 > 0) {
@@ -424,20 +429,26 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
         //上月天
         for (let pi = prevDays - dayOfWeek + 1; pi <= prevDays; pi++) {
-            if (compareDate(startDate, [tz_m <= 1 ? tz_y - 1 : tz_y, tz_m <= 1 ? 12 : tz_m - 1, pi])) {
+            if (
+                compareDate(startDate, [
+                    tz_m <= 1 ? tz_y - 1 : tz_y,
+                    tz_m <= 1 ? 12 : tz_m - 1,
+                    pi,
+                ])
+            ) {
                 $("#datepicker_" + elem_id + " .day ul").append(
                     // "<li class='disable-month'>" + pi + "</li>"
                     `<li class="other-month disabled" data-prev-md="${
-                    tz_m <= 1 ? tz_y - 1 : tz_y
-                }, ${tz_m <= 1 ? 12 : tz_m - 1},${pi}">${pi}</li>`
-                )
+                        tz_m <= 1 ? tz_y - 1 : tz_y
+                    }, ${tz_m <= 1 ? 12 : tz_m - 1},${pi}">${pi}</li>`
+                );
             } else {
                 $("#datepicker_" + elem_id + " .day ul").append(
                     // "<li class='disable-month'>" + pi + "</li>"
                     `<li class="other-month" data-evt='true' data-prev-md="${
                         tz_m <= 1 ? tz_y - 1 : tz_y
                     }, ${tz_m <= 1 ? 12 : tz_m - 1},${pi}">${pi}</li>`
-                )
+                );
             }
         }
 
@@ -449,13 +460,28 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 a_str = "active";
             }
 
-            if (compareDate(startDate, [tz_y, tz_m, i]) || compareDate([tz_y, tz_m, i],endDate)) {
+            if (
+                compareDate(startDate, [tz_y, tz_m, i]) ||
+                compareDate([tz_y, tz_m, i], endDate)
+            ) {
                 $("#datepicker_" + elem_id + " .day ul").append(
-                    "<li data-id=" + i + " class='disabled " + a_str + "'>" + i + "</li>"
+                    "<li data-id=" +
+                        i +
+                        " class='disabled " +
+                        a_str +
+                        "'>" +
+                        i +
+                        "</li>"
                 );
             } else {
                 $("#datepicker_" + elem_id + " .day ul").append(
-                    "<li data-id=" + i + " class='" + a_str + "' data-evt='true'>" + i + "</li>"
+                    "<li data-id=" +
+                        i +
+                        " class='" +
+                        a_str +
+                        "' data-evt='true'>" +
+                        i +
+                        "</li>"
                 );
             }
         }
@@ -470,11 +496,17 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 ($("#datepicker_" + elem_id + " .day ul").find("li").length %
                     7);
             for (let ni = 1; ni <= nextDays; ni++) {
-                if (compareDate(startDate, [tz_m >= 12 ? tz_y + 1 : tz_y, tz_m >= 12 ? 1 : tz_m + 1, ni])) {
+                if (
+                    compareDate(startDate, [
+                        tz_m >= 12 ? tz_y + 1 : tz_y,
+                        tz_m >= 12 ? 1 : tz_m + 1,
+                        ni,
+                    ])
+                ) {
                     $("#datepicker_" + elem_id + " .day ul").append(
                         `<li class="other-month disabled" data-next-md="${
-                        tz_m >= 12 ? tz_y + 1 : tz_y
-                    }, ${tz_m >= 12 ? 1 : tz_m + 1},${ni}">${ni}</li>`
+                            tz_m >= 12 ? tz_y + 1 : tz_y
+                        }, ${tz_m >= 12 ? 1 : tz_m + 1},${ni}">${ni}</li>`
                     );
                 } else {
                     $("#datepicker_" + elem_id + " .day ul").append(
@@ -508,8 +540,54 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
                     // $(obj).val(date_sel);
                     $(this).addClass("active").siblings().removeClass("active");
-
                     result[0] = date_sel;
+
+                    //确认选择
+                    if (!settings.confirmBtn) {
+                        let seperator =
+                            settings.format.substring(13, 14) || ":";
+                        $(this)
+                            .parents("#datepicker_" + elem_id)
+                            .removeClass("hopeui-show");
+                        _shown = false;
+                        let realDate = null;
+
+                        if (settings.type == "datetime") {
+                            $(obj).val(result.join(" "));
+
+                            time = [
+                                result[1].split(seperator)[0],
+                                result[1].split(seperator)[1],
+                                result[1].split(seperator)[2],
+                            ];
+                            hourAct = parseInt(result[1].split(seperator)[0]);
+                            minAct = parseInt(result[1].split(seperator)[1]);
+                            secAct = parseInt(result[1].split(seperator)[2]);
+
+                            realDate = result[0] + " " + result[1];
+                        } else {
+                            $(obj).val(result[0]);
+                            realDate = result[0];
+                        }
+
+                        if (is.ie() <= 9) {
+                            $(obj).next().removeClass("hopeui-hide");
+                        }
+                        $("#datepicker_" + elem_id)
+                            .find(".selectTime")
+                            .attr("data-time", time.join(":"))
+                            .text(
+                                time[0] + "时" + time[1] + "分" + time[2] + "秒"
+                            );
+
+                        if (on && on.change) {
+                            on.change({
+                                ele: $(obj).get(0),
+                                date: realDate,
+                                event: "change",
+                            });
+                        }
+                    }
                 } else if ($(this).attr("data-prev-md")) {
                     tz_y = input_y = parseInt(
                         $(this).attr("data-prev-md").split(",")[0]
@@ -587,26 +665,26 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 } else {
                     return 28;
                 }
-                case 3:
-                    return 31;
-                case 4:
-                    return 30;
-                case 5:
-                    return 31;
-                case 6:
-                    return 30;
-                case 7:
-                    return 31;
-                case 8:
-                    return 31;
-                case 9:
-                    return 30;
-                case 10:
-                    return 31;
-                case 11:
-                    return 30;
-                case 12:
-                    return 31;
+            case 3:
+                return 31;
+            case 4:
+                return 30;
+            case 5:
+                return 31;
+            case 6:
+                return 30;
+            case 7:
+                return 31;
+            case 8:
+                return 31;
+            case 9:
+                return 30;
+            case 10:
+                return 31;
+            case 11:
+                return 30;
+            case 12:
+                return 31;
         }
     }
 
@@ -720,14 +798,14 @@ let Hope_datepicker = function (ele, options, on, plugin) {
                 minlist = "",
                 seclist = "";
             let hourObj = $("#timelist_" + elem_id)
-                .find(".hour")
-                .children(".list"),
+                    .find(".hour")
+                    .children(".list"),
                 minObj = $("#timelist_" + elem_id)
-                .find(".min")
-                .children(".list"),
+                    .find(".min")
+                    .children(".list"),
                 secObj = $("#timelist_" + elem_id)
-                .find(".sec")
-                .children(".list");
+                    .find(".sec")
+                    .children(".list");
             for (let hi = 0; hi <= 23; hi++) {
                 if (hi.toString().length <= 1) {
                     if (hi == hourAct) {
@@ -898,12 +976,12 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         } else if (document.getBoxObjectFor) {
             // gecko
             box = document.getBoxObjectFor(el);
-            let borderLeft = el.style.borderLeftWidth ?
-                parseInt(el.style.borderLeftWidth) :
-                0;
-            let borderTop = el.style.borderTopWidth ?
-                parseInt(el.style.borderTopWidth) :
-                0;
+            let borderLeft = el.style.borderLeftWidth
+                ? parseInt(el.style.borderLeftWidth)
+                : 0;
+            let borderTop = el.style.borderTopWidth
+                ? parseInt(el.style.borderTopWidth)
+                : 0;
             pos = [box.x - borderLeft, box.y - borderTop];
         } // safari & opera
         else {

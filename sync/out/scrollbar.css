@@ -8,6 +8,7 @@
   height: 100%;
   overflow: auto;
   width: 103%;
+  margin-left: -10px;
 }
 .hopeui-scrollbar .hopeui-scrollbar-box.ieFix {
   margin-right: -20px;

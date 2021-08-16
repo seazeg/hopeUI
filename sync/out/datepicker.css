@@ -151,14 +151,16 @@
   background-color: #ffffff;
   display: none;
   color: #555555;
-  padding: 0 5%;
+  padding: 0 10px;
   width: 100%;
+  box-sizing: border-box;
 }
 .hope-datepicker .time-list .warp {
   margin-top: 50px;
+  font-size: 0;
 }
 .hope-datepicker .time-list .warp > div {
-  width: 32%;
+  width: 33.3333%;
   display: inline-block;
   font-size: 0;
 }

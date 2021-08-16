@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2021-08-12 16:41:00
+ * @LastEditTime : 2021-08-16 09:27:17
  * @Description  :
  */
 
@@ -106,6 +106,17 @@ module.exports = {
             },
             // hash: true,
             template: path.join(__dirname, "./src/index2.html"),
+        }),
+        new HtmlWebpackPlugin({
+            title: "HopeUI",
+            filename: "index3.html",
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                minifyCSS: true,
+            },
+            // hash: true,
+            template: path.join(__dirname, "./src/index3.html"),
         }),
         new webpack.BannerPlugin(
             `${pkg.description} version ${pkg.version}\nAuthor Evan.G\nFor more information, please visit ${pkg.author.github}\n${pkg.description} is available under the terms of the MIT license.`

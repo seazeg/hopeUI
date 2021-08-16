@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="user-scalable=no，width=device-width, initial-scale=1.0"
+        />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <link rel="stylesheet" href="assets/font/hopefont.css" />
+        <script src="assets/jquery.js"></script>
+    </head>
+    <style>
+        * {
+            font-size: 14px;
+        }
+
+        .docs-box {
+            padding: 0 30px;
+        }
+
+        .docs-title {
+            margin: 30px 0 20px;
+        }
+
+        .docs-title fieldset {
+            border: none;
+            padding: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .docs-title fieldset legend {
+            margin-left: 20px;
+            padding: 0 10px;
+        }
+
+        .docs-title fieldset legend a {
+            font-size: 22px;
+            font-weight: 300;
+        }
+
+        .docs-content {
+            padding-bottom: 50px;
+        }
+
+        .device {
+            padding: 30px 10px;
+            background: #222;
+            margin: 10px auto;
+            width: 320px;
+            border-radius: 20px;
+            border: 4px solid #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .danmu {
+            background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fblog%2F201406%2F12%2F20140612042459_nN5mZ.jpeg&refer=http%3A%2F%2Fcdn.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1625215699&t=5e8ed6e8beca65e3663919c6b2744975");
+        }
+        #loadmore {
+            height: 400px;
+        }
+
+        #drawer {
+            opacity: 0;
+            display: none;
+        }
+    </style>
+
+    <body>
+        <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">日期选择</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content">
+                <input
+                    name="text"
+                    type="text"
+                    value=""
+                    id="hope-datepicker"
+                    class="hopeui-input"
+                    placeholder="请选择日期"
+                    readonly
+                />
+            </div>
+        </div>
+    </body>
+
+    <script>
+        hope.datepicker({
+            ele: "#hope-datepicker",
+            options: {
+                format: "yyyy-MM-dd HH:mm:ss",
+                type: "datetime", //date：日期，datetime:日期+时间
+            },
+            on: {
+                init: function (e) {
+                    // ////console.log(e);
+                },
+                change: function (e) {
+                    //console.log(e);
+                },
+            },
+        });
+    </script>
+</html>
