@@ -853,39 +853,26 @@ module.exports = {
                     var dayArr = [];
                     var len = returnDayLen(x, y);
                     for (var z = 1; z <= len; z++) {
-                        var hourArr = []
-                        //小时
-                        for (var i = 0; i <= 23; i++) {
-                            var pra = i < 10 ? "0" + i : i;
-                            hourArr.push({ id: pra, value: pra + '时' });
+                        var hourArr = [];
+                        if (info.type == "datetime") {
+                            for (var i = 0; i <= 23; i++) {
+                                hourArr.push({ id: i < 10 ? "0" + i : i, value: i + "时" });
+                            }
                         }
-                        dayArr.push({ id: z, value: z + "日", childs: hourArr});
-
+                        dayArr.push({
+                            id: z < 10 ? "0" + z : z,
+                            value: z + "日",
+                            childs: hourArr,
+                        });
                     }
                     data.childs.push({
-                        id: y,
+                        id: y < 10 ? "0" + y : y,
                         value: y + "月",
                         childs: dayArr,
                     });
                 }
                 dateData[0].data.push(data);
             }
-
-            //分钟
-            // var childData = [];
-            // for (var j = 0; j <= 59; j++) {
-            //     if (j < 10) {
-            //         childData.push({
-            //             id: "0" + j,
-            //             value: "0" + j,
-            //         });
-            //     } else {
-            //         childData.push({
-            //             id: j,
-            //             value: j,
-            //         });
-            //     }
-            // }
 
 
             return dateData;
@@ -906,7 +893,7 @@ module.exports = {
                 now.getFullYear() - infoData.start,
                 now.getMonth(),
                 now.getDate() - 1,
-                now.getHours()
+                now.getHours(),
             ];
         } else {
             infoData.select = [
@@ -922,58 +909,23 @@ module.exports = {
             wheels: createDateData(infoData.start, infoData.end),
             position: infoData.select,
             callback: function (item, data) {
-                var dateInfo = {
-                    year: data[0].id,
-                    month: data[1].id,
-                    day: data[2].id,
-                    hour: data[3].id
-                };
+                var dateInfo = {};
+                if (info.type == "datetime") {
+                    dateInfo = {
+                        year: data[0].id,
+                        month: data[1].id,
+                        day: data[2].id,
+                        hour: data[3].id,
+                    };
+                } else {
+                    dateInfo = {
+                        year: data[0].id,
+                        month: data[1].id,
+                        day: data[2].id
+                    };
+                }
                 cbFn && cbFn(dateInfo);
             },
         });
-    },
-    selectDateSimple: function (el, info, cbFn) {
-        var createDateData = function (start, end) {
-            var dateData = [{ data: [] }, { data: [] }];
-            for (var i = start; i <= end; i++) {
-                dateData[0].data.push({ id: i, value: i + "年" });
-            }
-            for (var j = 1; j <= 12; j++) {
-                dateData[1].data.push({ id: j, value: j + "月" });
-            }
-            return dateData;
-        };
-        var infoData = {},
-            now = new Date();
-        if (!info.start || !info.end || info.end < info.start) {
-            infoData.start = now.getFullYear() - 60;
-            infoData.end = now.getFullYear();
-        } else {
-            infoData.start = info.start;
-            infoData.end = info.end;
-        }
-        if (!info.select || info.select.length != 2) {
-            infoData.select = [
-                infoData.end - infoData.start,
-                now.getMonth(),
-                now.getDate() - 1,
-            ];
-        } else {
-            infoData.select = [
-                info.select[0] - infoData.start,
-                info.select[1] - 1,
-            ];
-        }
-
-        Hope_mobile_datepicker({
-            trigger: el,
-            title: info.title || "手势拖动选择日期",
-            wheels: createDateData(infoData.start, infoData.end),
-            position: infoData.select,
-            callback: function (item, data) {
-                var dateInfo = { year: data[0].id, month: data[1].id };
-                cbFn && cbFn(dateInfo);
-            },
-        });
-    },
+    }
 };
