@@ -853,7 +853,14 @@ module.exports = {
                     var dayArr = [];
                     var len = returnDayLen(x, y);
                     for (var z = 1; z <= len; z++) {
-                        dayArr.push({ id: z, value: z + "日" });
+                        var hourArr = []
+                        //小时
+                        for (var i = 0; i <= 23; i++) {
+                            var pra = i < 10 ? "0" + i : i;
+                            hourArr.push({ id: pra, value: pra + '时' });
+                        }
+                        dayArr.push({ id: z, value: z + "日", childs: hourArr});
+
                     }
                     data.childs.push({
                         id: y,
@@ -863,6 +870,24 @@ module.exports = {
                 }
                 dateData[0].data.push(data);
             }
+
+            //分钟
+            // var childData = [];
+            // for (var j = 0; j <= 59; j++) {
+            //     if (j < 10) {
+            //         childData.push({
+            //             id: "0" + j,
+            //             value: "0" + j,
+            //         });
+            //     } else {
+            //         childData.push({
+            //             id: j,
+            //             value: j,
+            //         });
+            //     }
+            // }
+
+
             return dateData;
         };
         var infoData = {},
@@ -875,17 +900,20 @@ module.exports = {
             infoData.start = info.start;
             infoData.end = info.end;
         }
-        if (!info.select || info.select.length != 3) {
+
+        if (!info.select || info.select.length != 4) {
             infoData.select = [
-                infoData.end - infoData.start,
+                now.getFullYear() - infoData.start,
                 now.getMonth(),
                 now.getDate() - 1,
+                now.getHours()
             ];
         } else {
             infoData.select = [
                 info.select[0] - infoData.start,
                 info.select[1] - 1,
                 info.select[2] - 1,
+                info.select[3],
             ];
         }
         Hope_mobile_datepicker({
@@ -898,6 +926,7 @@ module.exports = {
                     year: data[0].id,
                     month: data[1].id,
                     day: data[2].id,
+                    hour: data[3].id
                 };
                 cbFn && cbFn(dateInfo);
             },

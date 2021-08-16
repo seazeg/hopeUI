@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-06-29 17:38:34
+ * @LastEditTime : 2021-08-16 15:44:37
  * @Description  : 日期时间选择器
  */
 
@@ -18,7 +18,7 @@ module.exports.datepickerHandler = function ({ ele, options, on }) {
             {
                 start: options.mobileStart || 1920,
                 end: options.mobileEnd || 2070,
-                select: options.mobileSelectDate || [2021, 6, 16],
+                select: options.mobileSelectDate ,//|| [2021, 8, 16, 1],
                 title: options.mobileTitle || "日期选择",
             },
             function (data) {
@@ -27,7 +27,7 @@ module.exports.datepickerHandler = function ({ ele, options, on }) {
                     .replace("yyyy", data.year)
                     .replace("MM", data.month)
                     .replace("dd", data.day)
-                    .replace("HH", "00")
+                    .replace("HH", data.hour)
                     .replace("mm", "00")
                     .replace("ss", "00");
 
