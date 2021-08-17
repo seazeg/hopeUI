@@ -181,6 +181,7 @@
   text-align: center;
   font-size: 14px;
   display: inline-block;
+  margin-left: -10px;
 }
 .hope-datepicker .time-list .warp .item:hover {
   color: #e60012;
