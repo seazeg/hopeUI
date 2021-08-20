@@ -4,6 +4,7 @@
 .hopeui-form .hopeui-form-item {
   margin-bottom: 10px;
   clear: both;
+  vertical-align: top;
 }
 .hopeui-form .hopeui-form-error {
   border-color: #f56c6c !important;
