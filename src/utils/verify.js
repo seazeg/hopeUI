@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2021-04-09 16:19:20
+ * @LastEditTime : 2021-08-20 15:13:20
  * @Description  : 工具类
  */
 const $ = require("./hopeu.js");
@@ -22,6 +22,8 @@ module.exports.utils = {
             bro = ele.parentNode.querySelectorAll(".hopeui-form-radio")[
                 ele.parentNode.querySelectorAll(".hopeui-form-radio").length - 1
             ];
+        } else if (type == "textarea") {
+            bro = ele.parentNode;
         }
         switch (rule) {
             case "error":

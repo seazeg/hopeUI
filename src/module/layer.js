@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-02 11:16:19
+ * @LastEditTime : 2021-08-20 15:42:18
  * @Description  : 弹窗
  */
 
@@ -111,7 +111,9 @@ module.exports.layerHandler = function ({
         self.parent().addClass("hopeui-hide").remove();
 
         if (mask) {
-            mask.remove();
+            if($('.hopeui-layer-warp').length <= 0) {
+                mask.remove();
+            }
         }
         if (options.isLock) {
             $("body,html").removeClass("hopeui-layer-nosrl");
@@ -138,7 +140,14 @@ module.exports.layerHandler = function ({
         }
 
         template += "</div></div></div>";
-        self = $(template).insertAfter("body").children('.hopeui-layer')
+
+        let layerWarp = $(".hopeui-layer-warp")
+        if(layerWarp.length > 0) {
+            self = $(template).insertAfter(layerWarp.eq(layerWarp.length - 1)).children('.hopeui-layer')
+        }else{
+            self = $(template).insertAfter("body").children('.hopeui-layer')
+        }
+       
 
         self.addClass(`hopeui-anim ${options.animation}`);
 
@@ -163,7 +172,7 @@ module.exports.layerHandler = function ({
             if ($(".hopeui-layer-mask").length <= 0) {
                 let maskTemplate = `<div class="hopeui-layer-mask"></div>`;
                 // mask = $(maskTemplate).insertAfter(".hopeui-layer-warp");
-                $('.hopeui-layer-warp').append(maskTemplate);
+                $('html').append(maskTemplate);
             }
 
             mask = $(".hopeui-layer-mask");
@@ -231,6 +240,13 @@ module.exports.layerHandler = function ({
 
     obj.close = function (callback) {
         close();
+        if (callback) {
+            callback();
+        }
+    };
+
+    obj.open = function (callback) {
+        open();
         if (callback) {
             callback();
         }

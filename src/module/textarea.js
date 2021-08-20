@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:15:10
+ * @LastEditTime : 2021-08-20 15:09:46
  * @Description  : 多行文本框
  */
 
@@ -23,7 +23,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
         let remainWords = null;
 
         if (options && options.remainingWords) {
-            let newBox = $('<div class="hopeui-relative"></div>').insertBefore(
+            let newBox = $('<div class="hopeui-form-warp"></div>').insertBefore(
                 $this
             );
             $this.appendTo(newBox);
@@ -33,6 +33,12 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
                 )}</i></div>`
             );
             remainWords = $this.next(".hopeui-textarea-words");
+            
+            let warp = $('<div class="hopeui-relative"></div>').insertBefore(
+                newBox
+            );
+            newBox.appendTo(warp);
+           
         }
 
         if (is.ie() <= 9) {

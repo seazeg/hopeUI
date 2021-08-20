@@ -1,3 +1,6 @@
+.hopeui-form .hopeui-form-warp {
+  position: relative;
+}
 .hopeui-form .hopeui-form-item {
   margin-bottom: 10px;
   clear: both;
