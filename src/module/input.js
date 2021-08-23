@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:15:02
+ * @LastEditTime : 2021-08-23 15:12:49
  * @Description  : 文本框
  */
 
@@ -51,7 +51,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
             }
         }
 
-        if (is.ie() <= 9) {
+        if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
             let isHide = "";
             if ($this.val()) {
                 isHide = "hopeui-hide";
@@ -65,10 +65,10 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                 .parent()
                 .css("position", "relative");
 
-            $this.next().css({
-                lineHeight: $this.css("height") + 2,
-                paddingLeft: $this.css("paddingLeft") + 1,
-            });
+            // $this.siblings('.hopeui-placeholder').css({
+            //     lineHeight: $this.css("height") + 2,
+            //     paddingLeft: $this.css("paddingLeft") + 1,
+            // });
 
             if (!$this.attr("readonly")) {
                 $this.next().click(function () {
@@ -89,6 +89,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                     }
                 });
             }
+            $this.attr("placeholder", "");
         }
 
         if (is.ie() <= 11) {
@@ -150,9 +151,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
         thisEle.each(function (i, ele) {
             ele.value = "";
             if (is.ie() <= 9) {
-                $(this)
-                    .next(".hopeui-placeholder")
-                    .removeClass("hopeui-hide");
+                $(this).next(".hopeui-placeholder").removeClass("hopeui-hide");
             }
         });
         if (callback) {

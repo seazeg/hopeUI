@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 17:38:34
+ * @LastEditTime : 2021-08-23 15:14:29
  * @Description  : 文本框
  */
 
@@ -89,41 +89,45 @@ module.exports.suggestHandler = function ({
     $dom.each(function () {
         let $this = $(this);
         if (!$this.attr("hope-type")) {
-            if (is.ie() <= 9) {
+            if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
+                let isHide = "";
+                if ($this.val()) {
+                    isHide = "hopeui-hide";
+                }
                 $this
                     .after(
-                        `<label class="hopeui-placeholder">${
+                        `<label class="hopeui-placeholder ${isHide}">${
                             $this.attr("placeholder") || ""
                         }</label>`
                     )
                     .parent()
                     .css("position", "relative");
-
-                $this.next().css({
-                    lineHeight: $this.css("height") + 2,
-                    paddingLeft: $this.css("paddingLeft") + 1,
-                });
-                $this.next().click(function () {
-                    $(this).addClass("hopeui-hide").prev().focus();
-                });
-
-                $this.blur(function () {
-                    let _this = $(this);
-                    if (!_this.val()) {
-                        _this
-                            .siblings(".hopeui-placeholder")
-                            .removeClass("hopeui-hide");
-                    }
-                });
-
-                $this.focus(function () {
-                    let _this = $(this);
-                    if (!_this.val()) {
-                        _this
-                            .siblings(".hopeui-placeholder")
-                            .addClass("hopeui-hide");
-                    }
-                });
+    
+                // $this.siblings('.hopeui-placeholder').css({
+                //     lineHeight: $this.css("height") + 2,
+                //     paddingLeft: $this.css("paddingLeft") + 1,
+                // });
+    
+                if (!$this.attr("readonly")) {
+                    $this.next().click(function () {
+                        $(this).addClass("hopeui-hide").prev().focus();
+                    });
+    
+                    $this.blur(function () {
+                        let _this = $(this);
+                        if (!_this.val()) {
+                            _this.next().removeClass("hopeui-hide");
+                        }
+                    });
+    
+                    $this.focus(function () {
+                        let _this = $(this);
+                        if (!_this.val()) {
+                            _this.next().addClass("hopeui-hide");
+                        }
+                    });
+                }
+                $this.attr("placeholder", "");
             }
 
             $this

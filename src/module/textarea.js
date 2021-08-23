@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-20 15:09:46
+ * @LastEditTime : 2021-08-23 15:13:57
  * @Description  : 多行文本框
  */
 
@@ -41,20 +41,24 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
            
         }
 
-        if (is.ie() <= 9) {
+        if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
+            let isHide = "";
+            if ($this.val()) {
+                isHide = "hopeui-hide";
+            }
             $this
                 .after(
-                    `<label class="hopeui-placeholder">${
+                    `<label class="hopeui-placeholder ${isHide}"">${
                         $this.attr("placeholder") || ""
                     }</label>`
                 )
                 .parent()
                 .css("position", "relative");
 
-            $this.next().css({
-                lineHeight: $this.css("height") + 2,
-                paddingLeft: $this.css("paddingLeft") + 1,
-            });
+            // $this.next().css({
+            //     lineHeight: $this.css("height") + 2,
+            //     paddingLeft: $this.css("paddingLeft") + 1,
+            // });
             $this.next().click(function () {
                 $(this).addClass("hopeui-hide").prev().focus();
             });
@@ -72,6 +76,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
                     _this.next().addClass("hopeui-hide");
                 }
             });
+            $this.attr("placeholder", "");
         }
 
         $this.on("blur", function () {
