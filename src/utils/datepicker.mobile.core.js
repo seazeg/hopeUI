@@ -887,8 +887,7 @@ module.exports = {
             infoData.start = info.start;
             infoData.end = info.end;
         }
-
-        if (!info.select || info.select.length != 4) {
+        if (!info.select /*|| info.select.length != 4*/) {
             infoData.select = [
                 now.getFullYear() - infoData.start,
                 now.getMonth(),
@@ -903,7 +902,7 @@ module.exports = {
                 info.select[3],
             ];
         }
-        Hope_mobile_datepicker({
+        return Hope_mobile_datepicker({
             trigger: el,
             title: info.title || "手势拖动选择日期",
             wheels: createDateData(infoData.start, infoData.end),

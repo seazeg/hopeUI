@@ -85,10 +85,13 @@
                 />
             </div>
         </div>
+        <button type="button" class="hopeui-btn hopeui-btn-primary" id="go">
+            按钮名称
+        </button>
     </body>
 
     <script>
-        hope.datepicker({
+        let hp = hope.datepicker({
             ele: "#hope-datepicker",
             options: {
                 format: "yyyy-MM-dd",
@@ -100,8 +103,13 @@
                 },
                 change: function (e) {
                     //console.log(e);
+                    hp.val([2021,1,1,1])
                 },
             },
         });
+
+        document.querySelector("#go").onclick = function () {
+            hp.val([2021,1,1,1])
+        };
     </script>
 </html>
