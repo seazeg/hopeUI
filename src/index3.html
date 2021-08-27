@@ -91,7 +91,7 @@
     </body>
 
     <script>
-        let hp = hope.datepicker({
+        window.hp = hope.datepicker({
             ele: "#hope-datepicker",
             options: {
                 format: "yyyy-MM-dd",
@@ -103,13 +103,13 @@
                 },
                 change: function (e) {
                     //console.log(e);
-                    hp.val([2021,1,1,1])
+                    // hp.val([2021,1,1,1])
                 },
             },
         });
 
         document.querySelector("#go").onclick = function () {
-            hp.val([2021,1,1,1])
+            hp.set([2021,9,20,1])
         };
     </script>
 </html>

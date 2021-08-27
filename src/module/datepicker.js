@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-25 18:20:41
+ * @LastEditTime : 2021-08-27 16:53:59
  * @Description  : 日期时间选择器
  */
 
@@ -38,7 +38,7 @@ module.exports.datepickerHandler = function ({ ele, options, on }) {
             }
         });
 
-        obj.val = function (position) {
+        obj.set = function (position) {
             var infoData = {}, now = new Date();
 
             if (!info.start || !info.end || info.end < info.start) {
@@ -60,7 +60,7 @@ module.exports.datepickerHandler = function ({ ele, options, on }) {
             });
         };
     } else {
-        Hope_datepicker(ele, options, on, {
+        obj = Hope_datepicker(ele, options, on, {
             scrollbarHandler: scrollbarHandler,
         });
     }

@@ -2,6 +2,7 @@ const hopeu = require("../utils/hopeu.js");
 const { is } = require("./is.js");
 
 let Hope_datepicker = function (ele, options, on, plugin) {
+    let o = {}
     let $ = hopeu;
     let obj = ele;
     let elem_id = $(obj).attr("id");
@@ -409,7 +410,13 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     }
 
     //加载天
-    function dayListReload() {
+    function dayListReload(date) {
+        tz_y = date?date[0]:tz_y;
+        tz_m = date?date[1]:tz_m;
+        tz_d = date?date[2]:tz_d;
+        input_y =date?date[0]:input_y;
+        input_m =date?date[1]:input_m;
+        
         let days = getDaysOfMonth(tz_m, tz_y);
         let startDate = options.startDate
             ? options.startDate.split("-")
@@ -1022,6 +1029,12 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             y: pos[1],
         };
     }
+
+    o.set = (date) => {
+        dayListReload(date)
+    };
+
+    return o;
 };
 
 function initNowDate(format) {
