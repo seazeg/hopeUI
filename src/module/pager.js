@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-07-23 11:33:58
+ * @LastEditTime : 2021-08-27 18:04:03
  * @Description  : 分页
  */
 
@@ -71,6 +71,26 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
                                         }
                                     }
+                                } else if (pageNo == options.omit) {
+                                    pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
+                                    pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                    for (
+                                        let i = options.omit;
+                                        i <=
+                                        pageNo +
+                                            Math.floor(options.omit / 2) +
+                                            1;
+                                        i++
+                                    ) {
+                                        if (pageNo == i) {
+                                            pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
+                                        } else {
+                                            pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
+                                        }
+                                    }
+
+                                    pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                    pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
                                 } else {
                                     for (let i = 1; i <= options.omit; i++) {
                                         if (pageNo == i) {
@@ -97,19 +117,42 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 totalPage - pageNo <=
                                 options.omit - Math.floor(options.omit / 2)
                             ) {
-                                pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
-                                if (options.omit != totalPage - 1) {
-                                    pageHTML += `<i class="hopeui-pager-omit">...</i>`;
-                                }
-                                for (
-                                    let i = totalPage - options.omit + 1;
-                                    i <= totalPage;
-                                    i++
+                                if (
+                                    totalPage - pageNo ==
+                                    options.omit - Math.floor(options.omit / 2)
                                 ) {
-                                    if (pageNo == i) {
-                                        pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
-                                    } else {
-                                        pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
+                                    pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
+                                    if (options.omit != totalPage - 1) {
+                                        pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                    }
+                                    for (
+                                        let i = totalPage - options.omit - 1;
+                                        i <= totalPage - options.omit + 1;
+                                        i++
+                                    ) {
+                                        if (pageNo == i) {
+                                            pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
+                                        } else {
+                                            pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
+                                        }
+                                    }
+                                    pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                    pageHTML += `<span class="hopeui-pager-num" hopeui-num="${totalPage}">${totalPage}</span>`;
+                                } else {
+                                    pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
+                                    if (options.omit != totalPage - 1) {
+                                        pageHTML += `<i class="hopeui-pager-omit">...</i>`;
+                                    }
+                                    for (
+                                        let i = totalPage - options.omit + 1;
+                                        i <= totalPage;
+                                        i++
+                                    ) {
+                                        if (pageNo == i) {
+                                            pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
+                                        } else {
+                                            pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
+                                        }
                                     }
                                 }
                             }
@@ -278,16 +321,18 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             event: "jumpOver",
                                         });
                                     }
-                                }else{
-                                    $(this).siblings("input").val('')
+                                } else {
+                                    $(this).siblings("input").val("");
                                 }
                             });
 
-                        $dom.find(".hopeui-pager-input").on('keyup',function(e){
-                            if(e.keyCode == 13){
+                        $dom.find(".hopeui-pager-input").on("keyup", function (
+                            e
+                        ) {
+                            if (e.keyCode == 13) {
                                 obj.jump($(this).val());
                             }
-                        })
+                        });
 
                         if (on && on.complete) {
                             on.complete({
