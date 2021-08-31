@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-23 15:14:29
+ * @LastEditTime : 2021-08-31 17:18:31
  * @Description  : 文本框
  */
 
@@ -66,21 +66,27 @@ module.exports.suggestHandler = function ({
                                 }
                             });
                         } else {
-                            obj.find(".hopeui-suggest-list").html(
-                                `<div class="option" hope-value="">${
-                                    options.noMatchName ||
-                                    "-- 没有匹配的内容 --"
-                                }</div>`
-                            ).parent().css('height','auto')
+                            obj.find(".hopeui-suggest-list")
+                                .html(
+                                    `<div class="option" hope-value="">${
+                                        options.noMatchName ||
+                                        "-- 没有匹配的内容 --"
+                                    }</div>`
+                                )
+                                .parent()
+                                .css("height", "auto");
                         }
                     }
                 },
                 error: function () {
-                    obj.find(".hopeui-suggest-list").html(
-                        `<div class="option" hope-value="">${
-                            options.noMatchName || "-- 没有匹配的内容 --"
-                        }</div>`
-                    ).parent().css('height','auto')
+                    obj.find(".hopeui-suggest-list")
+                        .html(
+                            `<div class="option" hope-value="">${
+                                options.noMatchName || "-- 没有匹配的内容 --"
+                            }</div>`
+                        )
+                        .parent()
+                        .css("height", "auto");
                 },
             })
         );
@@ -90,43 +96,40 @@ module.exports.suggestHandler = function ({
         let $this = $(this);
         if (!$this.attr("hope-type")) {
             if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
-                let isHide = "";
-                if ($this.val()) {
-                    isHide = "hopeui-hide";
-                }
                 $this
                     .after(
-                        `<label class="hopeui-placeholder ${isHide}">${
+                        `<label class="hopeui-placeholder">${
                             $this.attr("placeholder") || ""
                         }</label>`
                     )
                     .parent()
                     .css("position", "relative");
-    
-                // $this.siblings('.hopeui-placeholder').css({
-                //     lineHeight: $this.css("height") + 2,
-                //     paddingLeft: $this.css("paddingLeft") + 1,
-                // });
-    
-                if (!$this.attr("readonly")) {
-                    $this.next().click(function () {
-                        $(this).addClass("hopeui-hide").prev().focus();
-                    });
-    
-                    $this.blur(function () {
-                        let _this = $(this);
-                        if (!_this.val()) {
-                            _this.next().removeClass("hopeui-hide");
-                        }
-                    });
-    
-                    $this.focus(function () {
-                        let _this = $(this);
-                        if (!_this.val()) {
-                            _this.next().addClass("hopeui-hide");
-                        }
-                    });
-                }
+
+                $this.siblings(".hopeui-placeholder").css({
+                    lineHeight: $this.css("height") + 2,
+                    paddingLeft: $this.css("paddingLeft") + 1,
+                });
+                $this.siblings(".hopeui-placeholder").click(function () {
+                    $(this).addClass("hopeui-hide").siblings("input").focus();
+                });
+
+                $this.blur(function () {
+                    let _this = $(this);
+                    if (!_this.val()) {
+                        _this
+                            .siblings(".hopeui-placeholder")
+                            .removeClass("hopeui-hide");
+                    }
+                });
+
+                $this.focus(function () {
+                    let _this = $(this);
+                    if (!_this.val()) {
+                        _this
+                            .siblings(".hopeui-placeholder")
+                            .addClass("hopeui-hide");
+                    }
+                });
                 $this.attr("placeholder", "");
             }
 
@@ -190,6 +193,7 @@ module.exports.suggestHandler = function ({
             //点击select区域外关闭下拉列表
             $(document).on("click", function (e) {
                 $this.next().addClass("hopeui-hide");
+                // $this.siblings('.hopeui-placeholder').addClass("hopeui-hide");
                 //下拉列表关闭回调
                 if (on && on.close) {
                     on.close(e);

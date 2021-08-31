@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-23 15:13:57
+ * @LastEditTime : 2021-08-31 17:03:56
  * @Description  : 多行文本框
  */
 
@@ -128,7 +128,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
                 eleArr.each(function (i, thisEle) {
                     $(thisEle).val(value);
                     utils.validation(thisEle, "pass", null, "textarea");
-                    if (is.ie() <= 9) {
+                    if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
                         $(thisEle)
                             .next(".hopeui-placeholder")
                             .addClass("hopeui-hide");
@@ -144,7 +144,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
 
         thisEle.each(function (i, ele) {
             ele.value = "";
-            if (is.ie() <= 9) {
+            if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
                 $(this)
                     .next(".hopeui-placeholder")
                     .removeClass("hopeui-hide");
