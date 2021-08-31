@@ -63,6 +63,7 @@
   cursor: pointer;
   color: #555555;
   font-size: 14px;
+  border-radius: 100%;
 }
 .hope-datepicker .day ul li.disabled {
   color: #e6e6e6 !important;
@@ -75,6 +76,7 @@
 .hope-datepicker .day ul li.active {
   background-color: #e60012;
   color: #fff;
+  border-radius: 100%;
 }
 .hope-datepicker .day ul li.other-month {
   color: #e6e6e6;
