@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-31 17:35:29
+ * @LastEditTime : 2021-09-08 14:11:30
  * @Description  : 多行文本框
  */
 
@@ -22,24 +22,23 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
         let $this = $(this);
         let remainWords = null;
 
+        // if (options && options.remainingWords) {
+        let newBox = $('<div class="hopeui-form-warp"></div>').insertBefore(
+            $this
+        );
+        $this.appendTo(newBox);
         if (options && options.remainingWords) {
-            let newBox = $('<div class="hopeui-form-warp"></div>').insertBefore(
-                $this
-            );
-            $this.appendTo(newBox);
             $this.after(
                 `<div class="hopeui-textarea-words"><i class="remain">0</i>/<i class="max">${$this.attr(
                     "maxlength" || 1000
                 )}</i></div>`
             );
             remainWords = $this.next(".hopeui-textarea-words");
-            
-            let warp = $('<div class="hopeui-relative"></div>').insertBefore(
-                newBox
-            );
-            newBox.appendTo(warp);
-           
         }
+        let warp = $('<div class="hopeui-relative"></div>').insertBefore(
+            newBox
+        );
+        newBox.appendTo(warp);
 
         if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
             let isHide = "";
@@ -124,16 +123,16 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
 
     obj.val = function (value, callback) {
         if (value) {
-                let eleArr = $dom;
-                eleArr.each(function (i, thisEle) {
-                    $(thisEle).val(value);
-                    utils.validation(thisEle, "pass", null, "textarea");
-                    if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
-                        $(thisEle)
-                            .siblings(".hopeui-placeholder")
-                            .addClass("hopeui-hide");
-                    }
-                });
+            let eleArr = $dom;
+            eleArr.each(function (i, thisEle) {
+                $(thisEle).val(value);
+                utils.validation(thisEle, "pass", null, "textarea");
+                if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
+                    $(thisEle)
+                        .siblings(".hopeui-placeholder")
+                        .addClass("hopeui-hide");
+                }
+            });
             if (callback) {
                 callback();
             }
