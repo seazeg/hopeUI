@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-08 14:11:30
+ * @LastEditTime : 2021-09-09 09:58:43
  * @Description  : 多行文本框
  */
 
@@ -59,31 +59,38 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
             //     paddingLeft: $this.css("paddingLeft") + 1,
             // });
             $this.next().click(function () {
-                $(this).addClass("hopeui-hide").prev().focus();
+                $(this).addClass("hopeui-hide").siblings("input").focus();
             });
 
             $this.blur(function () {
                 let _this = $(this);
                 if (!_this.val()) {
-                    _this.next().removeClass("hopeui-hide");
+                    _this
+                        .siblings(".hopeui-placeholder")
+                        .removeClass("hopeui-hide");
                 }
             });
 
             $this.focus(function () {
                 let _this = $(this);
                 if (!_this.val()) {
-                    _this.next().addClass("hopeui-hide");
+                    _this
+                        .siblings(".hopeui-placeholder")
+                        .addClass("hopeui-hide");
                 }
             });
             $this.attr("placeholder", "");
         }
 
         $this.on("blur", function () {
-            utils.validation($(this).get(0), "pass", null, "textarea");
+            let _this = $(this);
+            if (_this.val()) {
+                utils.validation(_this.get(0), "pass", null, "textarea");
+            }
             if (on && on.blur) {
                 on.blur({
-                    targetEle: $(this).get(0),
-                    value: $(this).val(),
+                    targetEle: _this.get(0),
+                    value: _this.val(),
                     eventName: "blur",
                 });
             }
@@ -140,7 +147,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
     };
     obj.clear = function (callback) {
         let thisEle = $dom;
-
+        utils.validation(thisEle.get(0), "pass", null, "textarea");
         thisEle.each(function (i, ele) {
             ele.value = "";
             if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {

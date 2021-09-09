@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:19:36
+ * @LastEditTime : 2021-09-09 10:03:04
  * @Description  : 下拉框
  */
 
@@ -390,7 +390,12 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
     obj.clear = function (callback) {
         let thisEle = $dom;
-
+        utils.validation(
+            thisEle.get(0),
+            "pass",
+            null,
+            "select-one"
+        );
         thisEle.each(function (i, ele) {
             handle(ele, $(this).next(), $(this).next().find(".option").eq(0));
 

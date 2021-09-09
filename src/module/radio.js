@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-02 11:45:46
+ * @LastEditTime : 2021-09-09 10:01:56
  * @Description  : 单选框
  */
 
@@ -76,6 +76,7 @@ module.exports.radioHandler = function ({ ele, options, on }) {
     };
     obj.clear = function (callback) {
         let thisEle = $dom;
+        utils.validation(thisEle.get(0), "pass", null, "radio");
         if (ele) {
             utils.isSelf(ele, type)
                 ? (thisEle = $(ele))

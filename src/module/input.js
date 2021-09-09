@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-31 17:35:13
+ * @LastEditTime : 2021-09-09 09:59:55
  * @Description  : 文本框
  */
 
@@ -72,20 +72,24 @@ module.exports.inputHandler = function ({ ele, options, on }) {
 
             if (!$this.attr("readonly")) {
                 $this.next().click(function () {
-                    $(this).addClass("hopeui-hide").prev().focus();
+                    $(this).addClass("hopeui-hide").siblings("input").focus();
                 });
 
                 $this.blur(function () {
                     let _this = $(this);
                     if (!_this.val()) {
-                        _this.next().removeClass("hopeui-hide");
+                        _this
+                            .siblings(".hopeui-placeholder")
+                            .removeClass("hopeui-hide");
                     }
                 });
 
                 $this.focus(function () {
                     let _this = $(this);
                     if (!_this.val()) {
-                        _this.next().addClass("hopeui-hide");
+                        _this
+                            .siblings(".hopeui-placeholder")
+                            .addClass("hopeui-hide");
                     }
                 });
             }
@@ -99,11 +103,14 @@ module.exports.inputHandler = function ({ ele, options, on }) {
         }
 
         $this.on("blur", function () {
-            utils.validation($(this).get(0), "pass", null, "input");
+            let _this = $(this);
+            if (_this.val()) {
+                utils.validation(_this.get(0), "pass", null, "input");
+            }
             if (on && on.blur) {
                 on.blur({
-                    targetEle: $(this).get(0),
-                    value: $(this).val(),
+                    targetEle: _this.get(0),
+                    value: _this.val(),
                     eventName: "blur",
                 });
             }
@@ -148,10 +155,13 @@ module.exports.inputHandler = function ({ ele, options, on }) {
     };
     obj.clear = function (callback) {
         let thisEle = $dom;
+        utils.validation(thisEle.get(0), "pass", null, "input");
         thisEle.each(function (i, ele) {
             ele.value = "";
             if (is.ie() <= 9 || (options && !options.noPlaceholderMode)) {
-                $(this).siblings(".hopeui-placeholder").removeClass("hopeui-hide");
+                $(this)
+                    .siblings(".hopeui-placeholder")
+                    .removeClass("hopeui-hide");
             }
         });
         if (callback) {

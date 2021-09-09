@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-11 15:16:00
+ * @LastEditTime : 2021-09-09 10:01:44
  * @Description  : 复选框
  */
 
@@ -84,6 +84,8 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
     };
 
     obj.clear = function (callback) {
+        let thisEle = $dom;
+        utils.validation(thisEle.get(0), "pass", null, "checkbox");
         $dom.each(function (i, ele) {
             ele.checked = false;
             $(ele).next().removeClass("hopeui-form-checked");
