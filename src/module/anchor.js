@@ -1,17 +1,13 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-07-02 16:34:29
- * @LastEditTime : 2021-08-10 16:35:19
+ * @LastEditTime : 2021-09-09 18:05:24
  * @Description  : 锚点定位
  */
 
 const $ = require("../utils/hopeu.js");
 
-module.exports.anchorHandler = function ({
-    ele,
-    options,
-    on
-}) {
+module.exports.anchorHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = $(ele);
     let anchorObj = {};
@@ -41,63 +37,66 @@ module.exports.anchorHandler = function ({
         }, 10);
     }
 
-    document.onreadystatechange = function () {
-        if (document.readyState == "complete") {
-            $("[hope-anchor-value]").each(function () {
-                let _this = $(this);
-                let value = _this.attr("hope-anchor-value");
-                anchorObj[value] = {
-                    ele: _this.get(0),
-                    top: _this.offset().top,
-                    offset: options.offset || 0,
-                    value: value,
-                };
-            });
-
-            $dom.find("[hope-anchor-key]").on("click", function (e) {
-                if (e.stopPropagation) {
-                    e.stopPropagation();
-                } else {
-                    window.event.cancelBubble = true;
-                }
-                if (e.preventDefault) {
-                    e.preventDefault();
-                } else {
-                    window.event.returnValue = false;
-                }
-
-                let _this = $(this);
-                let value = _this.attr("hope-anchor-key");
-                temp = anchorObj[value];
-                if (temp) {
-                    scrollAnimation(
-                        document.documentElement.scrollTop ||
-                        document.body.scrollTop,
-                        temp.top - temp.offset
-                    );
-                } else {
-                    throw new Error("No the anchor!");
-                }
-            });
-
-            obj.goLocation = function (value) {
-                temp = anchorObj[value];
-                if (temp) {
-                    scrollAnimation(
-                        document.documentElement.scrollTop ||
-                        document.body.scrollTop,
-                        temp.top - temp.offset
-                    );
-                } else {
-                    throw new Error("No the anchor!");
-                }
+    // document.onreadystatechange = function () {
+    //     if (document.readyState == "complete") {
+    function init() {
+        $("[hope-anchor-value]").each(function () {
+            let _this = $(this);
+            let value = _this.attr("hope-anchor-value");
+            anchorObj[value] = {
+                ele: _this.get(0),
+                top: _this.offset().top,
+                offset: options.offset || 0,
+                value: value,
             };
+        });
 
-            if (on && on.init) {
-                on.init(obj);
+        $dom.find("[hope-anchor-key]").on("click", function (e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            } else {
+                window.event.cancelBubble = true;
             }
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                window.event.returnValue = false;
+            }
+
+            let _this = $(this);
+            let value = _this.attr("hope-anchor-key");
+            temp = anchorObj[value];
+            if (temp) {
+                scrollAnimation(
+                    document.documentElement.scrollTop ||
+                        document.body.scrollTop,
+                    temp.top - temp.offset
+                );
+            } else {
+                throw new Error("No the anchor!");
+            }
+        });
+
+        obj.goLocation = function (value) {
+            temp = anchorObj[value];
+            if (temp) {
+                scrollAnimation(
+                    document.documentElement.scrollTop ||
+                        document.body.scrollTop,
+                    temp.top - temp.offset
+                );
+            } else {
+                throw new Error("No the anchor!");
+            }
+        };
+
+        if (on && on.init) {
+            on.init(obj);
         }
-    };
+        // }
+    }
+
+    obj.init = init;
 
     return obj;
 };

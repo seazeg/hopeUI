@@ -2235,6 +2235,7 @@
     };
 
 //    setTimeout(() => {
+
     window.anchor = hope.anchor({
         ele: "#nav",
         options: {
@@ -2249,7 +2250,16 @@
             }
         }
     })
+document.onreadystatechange = function () {
+    if( document.readyState  == 'complete' ) {
+    anchor.init();
+}
+}
 
+ 
+
+
+  
 
 
 //    }, 1000);
