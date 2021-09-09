@@ -20,7 +20,8 @@
   top: 39px;
   z-index: 5;
   width: 100%;
-  border: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+  border-left: 1px solid #eeeeee;
   max-height: 300px;
   background-color: #ffffff;
   border-radius: 2px;
