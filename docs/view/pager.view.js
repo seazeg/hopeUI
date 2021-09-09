@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2021-04-09 17:34:02
+ * @LastEditTime : 2021-09-09 13:46:46
  * @Description  :
  */
 
@@ -33,10 +33,7 @@ export const viewinfo = {
             for (var i = 0; i < data.length; i++) {
                 template +=
                     "<p>" +
-                    data[i].goodsName +
-                    "|" +
-                    data[i].goodsStar +
-                    "</p>";
+                    data[i].goodsName;
             }
             $("#pagelist").html(template);
             return {
