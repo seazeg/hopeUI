@@ -1185,14 +1185,14 @@
                     <div class="hopeui-form-item">
                         <label class="hopeui-form-label">下拉框</label>
                         <div class="hopeui-input-block">
-                            <select name="city" hope-verify="required" noselect="true">
+                            <select name="city" hope-verify="required">
                                 <option value="">请选择</option>
                                 <option value="qd">青岛</option>
                                 <option value="wh">武汉</option>
                                 <option value="wlmq">乌鲁木齐</option>
                                 <option value="南京">南京</option>
                                 <option value="天津">天津</option>
-                                <option value="123123" selected>郑州</option>
+                                <option value="123123">郑州</option>
                                 <option value="重庆">重庆</option>
                                 <option value="成都">成都</option>
                                 <option value="云南">云南</option>
@@ -2039,7 +2039,9 @@
             //[name]:object
             city: {
                 type: 'select',
-                options: {},
+                options: {
+                    hideItemIndex:1
+                },
                 on: {
                     init: function (e) {
                         //////console.log(e);

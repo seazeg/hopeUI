@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-09 10:03:04
+ * @LastEditTime : 2021-09-10 14:59:42
  * @Description  : 下拉框
  */
 
@@ -29,7 +29,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             let template = `<div class="hopeui-form-select" name="${
                 selector.name
             }"><div class="hopeui-select-title"><input type="selectText" placeholder="${
-                selector.children[0].innerText
+                options && options.placeholder ? options.placeholder: "请选择"
             }" unselectable="on" ${
                 options && options.searchMode ? "" : "readonly"
             } value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge ${
@@ -99,6 +99,10 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                             }</div>`;
                         }
                     }
+
+        
+                    
+
                 });
 
             template += `</div></div></div>`;
@@ -111,6 +115,11 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     .val(tempSelectedVal.label)
                     .attr("hope-value", tempSelectedVal.val);
             }
+
+            if(options&& options.hideItemIndex){
+                newEle.find(".option").eq(options.hideItemIndex - 1 || 0).addClass('hopeui-hide');
+            }
+           
 
             if (!is.phone()) {
                 $(selector).addClass("hopeui-hide");
