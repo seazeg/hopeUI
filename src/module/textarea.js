@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-09 09:58:43
+ * @LastEditTime : 2021-09-10 15:15:03
  * @Description  : 多行文本框
  */
 
@@ -59,7 +59,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
             //     paddingLeft: $this.css("paddingLeft") + 1,
             // });
             $this.next().click(function () {
-                $(this).addClass("hopeui-hide").siblings("input").focus();
+                $(this).addClass("hopeui-hide").siblings("textarea").focus();
             });
 
             $this.blur(function () {
