@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-09 10:01:56
+ * @LastEditTime : 2021-09-10 16:45:52
  * @Description  : 单选框
  */
 
@@ -39,18 +39,20 @@ module.exports.radioHandler = function ({ ele, options, on }) {
                 // } else if (window.event) {
                 //     window.event.cancelBubble = true;
                 // }
-                handle(radio, newEle);
-                //点击回调
-                utils.validation(radio, "pass", null, "radio");
-                if (on && on.change) {
-                    on.change({
-                        original: radio,
-                        targetEle: radio.nextSibling,
-                        name: radio.name,
-                        value: radio.value,
-                        status: radio.checked,
-                        eventName: "change",
-                    });
+                if (!newEle.hasClass("hopeui-form-radioed")) {
+                    handle(radio, newEle);
+                    //点击回调
+                    utils.validation(radio, "pass", null, "radio");
+                    if (on && on.change) {
+                        on.change({
+                            original: radio,
+                            targetEle: radio.nextSibling,
+                            name: radio.name,
+                            value: radio.value,
+                            status: radio.checked,
+                            eventName: "change",
+                        });
+                    }
                 }
             });
         }
