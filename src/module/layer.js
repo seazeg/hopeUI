@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-23 10:43:50
+ * @LastEditTime : 2021-09-13 13:47:11
  * @Description  : 弹窗
  */
 
@@ -253,6 +253,13 @@ module.exports.layerHandler = function ({ options, on }) {
             callback();
         }
     };
+
+    obj.update = function (callback) {
+        location(self);
+        if (callback) {
+            callback();
+        }
+    }
 
     if (on && on.init) {
         on.init({
