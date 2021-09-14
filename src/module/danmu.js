@@ -1,27 +1,22 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-08-04 16:31:21
+ * @LastEditTime : 2021-09-14 13:50:05
  * @Description  : 弹幕
  */
 
 const $ = require("../utils/hopeu.js");
-const {
-    is
-} = require("../utils/is.js");
-const { utilsHandler } = require("./utils.js")
+const { is } = require("../utils/is.js");
+const { utilsHandler } = require("./utils.js");
 
-
-module.exports.danmuHandler = function ({
-    ele,
-    options,
-    on
-}) {
+module.exports.danmuHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let $dom = $(ele);
 
     let CHANNEL_COUNT = options.channel || 3; //通道数
-    let MAX_DM_COUNT = Math.ceil(utilsHandler.deepClone(options.data).length / CHANNEL_COUNT); //通道内最多弹幕条数
+    let MAX_DM_COUNT = Math.ceil(
+        utilsHandler.deepClone(options.data).length / CHANNEL_COUNT
+    ); //通道内最多弹幕条数
 
     let domPool = [];
     let danmuPool = utilsHandler.deepClone(options.data);
@@ -35,12 +30,13 @@ module.exports.danmuHandler = function ({
         right: "#fff",
     };
     let timer = null;
+    let animationT = null;
 
     init($dom);
 
     function init(wrapper) {
         // 先new一些span 重复利用这些DOM
-        hasPosition = []
+        hasPosition = [];
         domPool = [];
         danmuPool = utilsHandler.deepClone(options.data);
 
@@ -66,16 +62,21 @@ module.exports.danmuHandler = function ({
 
                 dom.style.top =
                     j * (spacing || 1.2) * dom.clientHeight + 10 + unit;
-                dom.style.left =
-                    wrapper.get(0).clientWidth  + unit;
+                dom.style.left = wrapper.get(0).clientWidth + unit;
                 if (is.ie() > 9) {
-                    $(dom).off().on("transitionend", function (e) {
-                        var target = e.target;
-                        target.className = "hopeui-danmu-start hopeui-danmu-item";
-                        target.style.transition = null;
-                        target.style.left = wrapper.get(0).clientWidth + unit;
-                        domPool[target.getAttribute("data-channel")].push(target);
-                    })
+                    $(dom)
+                        .off()
+                        .on("transitionend", function (e) {
+                            var target = e.target;
+                            target.className =
+                                "hopeui-danmu-start hopeui-danmu-item";
+                            target.style.transition = null;
+                            target.style.left =
+                                wrapper.get(0).clientWidth + unit;
+                            domPool[target.getAttribute("data-channel")].push(
+                                target
+                            );
+                        });
                 }
 
                 doms.push(dom);
@@ -98,26 +99,36 @@ module.exports.danmuHandler = function ({
         }
         timer = setInterval(function () {
             let channel = getChannel();
-            if ( /*danmuPool.length &&*/ channel != -1) {
+            if (/*danmuPool.length &&*/ channel != -1) {
                 let dom = domPool[channel].shift();
                 let danmu = danmuPool.shift();
                 shootDanmu(dom, danmu, channel);
             }
         }, 1);
-
     }
-
 
     obj.close = function () {
         clearInterval(timer);
         timer = null;
-        $dom.children('.hopeui-danmu-item').off()
+        $dom.children(".hopeui-danmu-item").off();
         $dom.children().remove();
     };
 
     obj.open = function () {
-        if(!timer){
-             init($dom)
+        if (!timer) {
+            init($dom);
+        }
+    };
+
+    obj.hide = function () {
+        if (!$dom.hasClass("hopeui-danmu-close")) {
+            $dom.addClass("hopeui-danmu-close");
+        }
+    };
+
+    obj.show = function () {
+        if ($dom.hasClass("hopeui-danmu-close")) {
+            $dom.removeClass("hopeui-danmu-close");
         }
     };
 
@@ -139,7 +150,7 @@ module.exports.danmuHandler = function ({
         dom.className = "hopeui-danmu-end hopeui-danmu-item";
 
         if (is.ie() > 9) {
-            dom.style.transition = `all ${options.speed || 7}s linear`;
+            dom.style.transition = `left ${options.speed || 7}s linear`;
             dom.style.left = "-" + dom.clientWidth + unit;
         } else {
             animation(dom, "-" + dom.clientWidth, function () {
@@ -149,7 +160,7 @@ module.exports.danmuHandler = function ({
         }
 
         hasPosition[channel] = false;
-        shootTimer = setTimeout(
+        setTimeout(
             function () {
                 hasPosition[channel] = true;
             },
@@ -158,17 +169,17 @@ module.exports.danmuHandler = function ({
     }
 
     function getRangeRandomNum(min, max, returnType) {
-        return returnType == "float" ?
-            min + Math.random() * (max - min) :
-            Math.floor(min + Math.random() * (max + 1 - min));
+        return returnType == "float"
+            ? min + Math.random() * (max - min)
+            : Math.floor(min + Math.random() * (max + 1 - min));
     }
 
     function animation(dom, end, callback) {
-        let timer = setInterval(function () {
+        animationT = setInterval(function () {
             if (parseInt(dom.style.left) > end) {
                 dom.style.left = parseInt(dom.style.left) - 1 + unit;
             } else {
-                clearInterval(timer);
+                clearInterval(animationT);
                 if (callback) {
                     callback();
                 }

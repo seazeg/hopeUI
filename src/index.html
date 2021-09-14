@@ -96,16 +96,16 @@
                 <button
                     type="button"
                     class="hopeui-btn hopeui-btn-radius"
-                    onclick="danmu.open()"
+                    onclick="danmu.hide()"
                 >
-                    open
+                    hidden
                 </button>
                 <button
                     type="button"
                     class="hopeui-btn hopeui-btn-radius"
-                    onclick="danmu.close()"
+                    onclick="danmu.show()"
                 >
-                    close
+                    shown
                 </button>
             </div>
         </div>
@@ -501,7 +501,7 @@
             },
             on: {
                 input: function (e) {
-                    console.log(e);
+                    //console.log(e);
                 },
             },
         });
@@ -516,7 +516,7 @@
             },
             on: {
                 open: function (e) {
-                    //console.log("open了");
+                    ////console.log("open了");
                 },
             },
         });
@@ -562,10 +562,10 @@
             },
             on: {
                 loaded: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 },
                 beforeLoad: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 },
             },
         });
@@ -578,13 +578,13 @@
             },
             on: {
                 beforeUpload: function (filename, file) {
-                    console.log(file);
+                    //console.log(file);
                 },
                 uploading: function () {
-                    //////console.log('上传中');
+                    ////////console.log('上传中');
                 },
                 complete: function (res) {
-                    //////console.log(res);
+                    ////////console.log(res);
                     $("#uploadlist").append(
                         '<img src="/app/' + res.imgurl + '" />'
                     );
@@ -601,57 +601,59 @@
             },
             on: {
                 init: function (e) {
-                    // ////console.log(e);
+                    // //////console.log(e);
                 },
                 change: function (e) {
-                    //console.log(e);
+                    ////console.log(e);
                 },
             },
         });
 
         window.layerop = null;
         window.layerop2 = null;
-        document.getElementById("open1").onclick = function () {
-            layerop = hope.layer({
-                options: {
-                    title: "123123",
-                    content:`<button id="fuckyou" class="hopeui-btn">dddddddd</button>`,
-                    defaultBtn: {
-                        ok: "好的",
-                        cancel: "拜拜",
-                    },
-                    isDefaultBtn: false,
-                    width: "300px",
-                    isDrag: true,
-                },
-                on: {
-                    open: function (e) {
-                        //console.log(e);
-                        document.getElementById("fuckyou").onclick = function () {
-                            layerop2 = hope.layer({
-                                options: {
-                                    title: "123123",
-                                    content:
-                                        "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
-                                    defaultBtn: {
-                                        ok: "好的",
-                                        cancel: "拜拜",
-                                    },
-                                    isDefaultBtn: false,
-                                    width: "300px",
-                                    isDrag: true,
-                                },
-                                on: {
-                                    init: function (e) {
-                                        //console.log(e);
-                                    },
-                                },
-                            });
-                        };
-                    },
-                },
-            });
-        };
+        // document.getElementById("open1").onclick = function () {
+        //     layerop = hope.layer({
+        //         options: {
+        //             title: "123123",
+        //             content: `<button id="fuckyou" class="hopeui-btn">dddddddd</button>`,
+        //             defaultBtn: {
+        //                 ok: "好的",
+        //                 cancel: "拜拜",
+        //             },
+        //             isDefaultBtn: false,
+        //             width: "300px",
+        //             isDrag: true,
+        //         },
+        //         on: {
+        //             open: function (e) {
+        //                 ////console.log(e);
+        //                 document.getElementById(
+        //                     "fuckyou"
+        //                 ).onclick = function () {
+        //                     layerop2 = hope.layer({
+        //                         options: {
+        //                             title: "123123",
+        //                             content:
+        //                                 "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
+        //                             defaultBtn: {
+        //                                 ok: "好的",
+        //                                 cancel: "拜拜",
+        //                             },
+        //                             isDefaultBtn: false,
+        //                             width: "300px",
+        //                             isDrag: true,
+        //                         },
+        //                         on: {
+        //                             init: function (e) {
+        //                                 ////console.log(e);
+        //                             },
+        //                         },
+        //                     });
+        //                 };
+        //             },
+        //         },
+        //     });
+        // };
 
         hope.carousel({
             ele: ".bannerA",
@@ -682,7 +684,7 @@
             on: {
                 init: function (e) {
                     // e.progress.setProgress(60, function (f) {
-                    //     //console.log(f);
+                    //     ////console.log(f);
                     // });
                 },
             },
@@ -692,14 +694,14 @@
         //     .querySelector(".js_progress")
         //     .addEventListener("click", function () {
         //         progress.setProgress(100, function (e) {
-        //             //console.log(e);
+        //             ////console.log(e);
         //         });
         //     });
         // documentmu
         //     .querySelector(".js_progress2")
         //     .addEventListener("click", function () {
         //         progress.setProgress(33, function (e) {
-        //             //console.log(e);
+        //             ////console.log(e);
         //         });
         //     });
 
@@ -714,16 +716,18 @@
                 spacing: 1.4,
                 maskColor: { left: "#f3e3af", right: "#f3e3af" },
                 data: [
-                    "前方大量弹幕来袭，请做好准备！",
-                    "主人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别，人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别， 别时茫茫江浸月,茫江浸月",
-                    "醉不成欢惨将别， 别时茫茫江浸月",
-                    "醉不成欢惨将别， 别时茫茫江浸月",
-                    "主人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别，人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别， 别时茫茫江浸月,茫江浸月",
-                    "前方大量弹幕来袭，请做好准备！",
-                    "主人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别，人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别， 别时茫茫江浸月,茫江浸月",
-                    "醉不成欢惨将别， 别时茫茫江浸月",
-                    "醉不成欢惨将别， 别时茫茫江浸月",
-                    "主人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别，人下马客在船， 举酒欲饮无管弦。醉不成欢惨将别， 别时茫茫江浸月,茫江浸月",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
+                    "门店的工作人员服务很热情",
                 ],
             },
         });
@@ -738,16 +742,16 @@
             },
             on: {
                 enter: function (e) {
-                    // ////console.log(e);
+                    // //////console.log(e);
                 },
                 move: function (e) {
-                    // ////console.log(e);
+                    // //////console.log(e);
                 },
                 leave: function (e) {
-                    // ////console.log(e);
+                    // //////console.log(e);
                 },
                 scale: function (e) {
-                    // ////console.log(e);
+                    // //////console.log(e);
                 },
             },
         });

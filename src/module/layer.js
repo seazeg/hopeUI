@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-13 13:47:11
+ * @LastEditTime : 2021-09-13 14:50:20
  * @Description  : 弹窗
  */
 
@@ -136,7 +136,7 @@ module.exports.layerHandler = function ({ options, on }) {
         let template =
             '<div class="hopeui-layer-warp"><div class="hopeui-layer"><div class="hopeui-layer-inner">';
         if (options.title) {
-            template += `<div class="hopeui-layer-title">${options.title}<i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i></div>`;
+            template += `<div class="hopeui-layer-title"><span>${options.title}</span><i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i></div>`;
         }
 
         template += `<div class="hopeui-layer-content">${options.content}</div>`;
