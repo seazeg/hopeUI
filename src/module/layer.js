@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-13 14:50:20
+ * @LastEditTime : 2021-09-15 10:00:59
  * @Description  : 弹窗
  */
 
@@ -30,7 +30,8 @@ module.exports.layerHandler = function ({ options, on }) {
         offsetTop: options.offsetTop || 30,
         offsetBottom: options.offsetBottom || 30,
         maskClose: options.maskClose || false,
-        isAutoOpen: is.empty(options.isAutoOpen) ? true : options.isAutoOpen
+        isAutoOpen: is.empty(options.isAutoOpen) ? true : options.isAutoOpen,
+        customClass: options.customClass || ''
     };
 
     let self = null,
@@ -44,8 +45,10 @@ module.exports.layerHandler = function ({ options, on }) {
             layer.css({
                 left:
                     (document.documentElement.clientWidth - layer.width()) / 2,
-                top: options.offsetTop,
-                paddingBottom: options.offsetBottom,
+                top: 'initial',
+                marginTop: options.offsetTop,
+                marginBottom: options.offsetTop,
+                // paddingBottom: options.offsetBottom,
             });
 
             $(window).resize(function () {
@@ -53,8 +56,11 @@ module.exports.layerHandler = function ({ options, on }) {
                     left:
                         (document.documentElement.clientWidth - layer.width()) /
                         2,
-                    top: options.offsetTop,
-                    paddingBottom: options.offsetBottom,
+                    // top: options.offsetTop,
+                    top: 'initial',
+                    marginTop: options.offsetTop,
+                    marginBottom: options.offsetTop,
+                    // paddingBottom: options.offsetBottom,
                 });
             });
         } else {
@@ -134,7 +140,7 @@ module.exports.layerHandler = function ({ options, on }) {
 
     let open = () => {
         let template =
-            '<div class="hopeui-layer-warp"><div class="hopeui-layer"><div class="hopeui-layer-inner">';
+            `<div class="hopeui-layer-warp"><div class="hopeui-layer ${options.customClass}"><div class="hopeui-layer-inner">`;
         if (options.title) {
             template += `<div class="hopeui-layer-title"><span>${options.title}</span><i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i></div>`;
         }

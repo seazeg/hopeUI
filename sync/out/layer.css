@@ -19,8 +19,8 @@
   border-width: 1px\0;
   border-style: solid\0;
   border-color: #eeeeee \0;
-  position: absolute;
   z-index: 100002;
+  position: relative;
 }
 .hopeui-layer .hopeui-layer-inner {
   width: 100%;
@@ -39,13 +39,16 @@
   border-radius: 2px 2px 0 0;
   text-overflow: ellipsis;
   white-space: nowrap;
+  position: relative;
 }
 .hopeui-layer .hopeui-layer-close {
   height: 100%;
   width: 40px;
   text-align: center;
-  float: right;
   cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  right: 0;
 }
 .hopeui-layer .hopeui-layer-content {
   position: relative;
@@ -75,7 +78,7 @@
   right: 0;
   z-index: 100001;
   background: rgba(0, 0, 0, 0.3);
-  background: #494a5f \0 !important;
+  background: #494a5f \0  !important;
 }
 .hopeui-layer-nosrl {
   overflow: hidden !important;

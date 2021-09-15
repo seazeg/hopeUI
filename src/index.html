@@ -611,49 +611,49 @@
 
         window.layerop = null;
         window.layerop2 = null;
-        // document.getElementById("open1").onclick = function () {
-        //     layerop = hope.layer({
-        //         options: {
-        //             title: "123123",
-        //             content: `<button id="fuckyou" class="hopeui-btn">dddddddd</button>`,
-        //             defaultBtn: {
-        //                 ok: "好的",
-        //                 cancel: "拜拜",
-        //             },
-        //             isDefaultBtn: false,
-        //             width: "300px",
-        //             isDrag: true,
-        //         },
-        //         on: {
-        //             open: function (e) {
-        //                 ////console.log(e);
-        //                 document.getElementById(
-        //                     "fuckyou"
-        //                 ).onclick = function () {
-        //                     layerop2 = hope.layer({
-        //                         options: {
-        //                             title: "123123",
-        //                             content:
-        //                                 "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
-        //                             defaultBtn: {
-        //                                 ok: "好的",
-        //                                 cancel: "拜拜",
-        //                             },
-        //                             isDefaultBtn: false,
-        //                             width: "300px",
-        //                             isDrag: true,
-        //                         },
-        //                         on: {
-        //                             init: function (e) {
-        //                                 ////console.log(e);
-        //                             },
-        //                         },
-        //                     });
-        //                 };
-        //             },
-        //         },
-        //     });
-        // };
+        document.getElementById("open1").onclick = function () {
+            layerop = hope.layer({
+                options: {
+                    title: "123123",
+                    content: `<div style='height:11920px;text-align: center;'>你好，你已经吃过了</div>`,
+                    defaultBtn: {
+                        ok: "好的",
+                        cancel: "拜拜",
+                    },
+                    isDefaultBtn: false,
+                    width: "50%",
+                    isDrag: true,
+                },
+                on: {
+                    open: function (e) {
+                        // ////console.log(e);
+                        // document.getElementById(
+                        //     "fuckyou"
+                        // ).onclick = function () {
+                        //     layerop2 = hope.layer({
+                        //         options: {
+                        //             title: "123123",
+                        //             content:
+                        //                 "<div style='height:11920px;width:500px;text-align: center;'>你好，你已经吃过了</div>",
+                        //             defaultBtn: {
+                        //                 ok: "好的",
+                        //                 cancel: "拜拜",
+                        //             },
+                        //             isDefaultBtn: false,
+                        //             // width: "1200px",
+                        //             isDrag: true,
+                        //         },
+                        //         on: {
+                        //             init: function (e) {
+                        //                 ////console.log(e);
+                        //             },
+                        //         },
+                        //     });
+                        // };
+                    },
+                },
+            });
+        };
 
         hope.carousel({
             ele: ".bannerA",
