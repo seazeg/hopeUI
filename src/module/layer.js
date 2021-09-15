@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-15 17:02:20
+ * @LastEditTime : 2021-09-15 18:03:22
  * @Description  : 弹窗
  */
 
@@ -159,7 +159,7 @@ module.exports.layerHandler = function ({ options, on }) {
                 .insertAfter(layerWarp.eq(layerWarp.length - 1))
                 .children(".hopeui-layer");
         } else {
-            self = $(template).insertAfter("body").children(".hopeui-layer");
+            self = $(template).appendTo("body").children(".hopeui-layer");
         }
 
         self.addClass(`hopeui-anim ${options.animation}`);
