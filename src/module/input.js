@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-09 09:59:55
+ * @LastEditTime : 2021-09-15 17:13:15
  * @Description  : 文本框
  */
 
@@ -71,7 +71,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
             // });
 
             if (!$this.attr("readonly")) {
-                $this.next().click(function () {
+                $this.siblings(".hopeui-placeholder").click(function () {
                     $(this).addClass("hopeui-hide").siblings("input").focus();
                 });
 
