@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-08-11 11:53:18
+ * @LastEditTime : 2021-09-15 14:24:06
  * @Description  : 常用工具函数
  */
 
@@ -388,14 +388,14 @@ module.exports.utilsHandler = {
         const tag = {
             "<": "&lt;",
             ">": "&gt;",
-            "&": "&amp;",
+            // "&": "&amp;",
             "(": "&#40;",
             ")": "&#41;",
             " ": "&nbsp;",
             '"': "&quot;",
             "'": "&#39;",
         };
-        return str.replace(/[<>&|() '"]/g, function (chr) {
+        return str.replace(/[<>|() '"]/g, function (chr) {
             return tag[chr];
         });
     },
@@ -405,7 +405,7 @@ module.exports.utilsHandler = {
         if (str.length === 0) {
             return "";
         }
-        s = str.replace(/&amp;/g, "&");
+        // s = str.replace(/&amp;/g, "&");
         s = s.replace(/&lt;/g, "<");
         s = s.replace(/&gt;/g, ">");
         s = s.replace(/&nbsp;/g, " ");
