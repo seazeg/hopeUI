@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-09-14 13:50:05
+ * @LastEditTime : 2021-09-16 18:17:23
  * @Description  : 弹幕
  */
 
@@ -164,7 +164,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
             function () {
                 hasPosition[channel] = true;
             },
-            is.ie() > 9 ? $(dom).width() * 5 + 2000 : $(dom).width() * 5 + 3000
+            is.ie() > 9 ? $(dom).width() * 5 + 8000 : 300 * 100
         );
     }
 

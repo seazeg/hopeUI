@@ -78,7 +78,7 @@
   right: 0;
   z-index: 100001;
   background: rgba(0, 0, 0, 0.3);
-  background: #494a5f \0  !important;
+  background: #494a5f \0 !important;
 }
 .hopeui-layer-nosrl {
   overflow: hidden !important;
