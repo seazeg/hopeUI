@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-09-15 14:24:06
+ * @LastEditTime : 2021-09-17 09:59:10
  * @Description  : 常用工具函数
  */
 
@@ -401,7 +401,7 @@ module.exports.utilsHandler = {
     },
     //反转义操作符
     restoreHtmlCode: function (str) {
-        let s = "";
+        let s = str;
         if (str.length === 0) {
             return "";
         }
