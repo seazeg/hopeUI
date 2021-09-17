@@ -1,15 +1,23 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-06-02 15:03:18
- * @LastEditTime : 2021-09-16 18:17:23
+ * @LastEditTime : 2021-09-17 17:33:17
  * @Description  : 弹幕
  */
 
 const $ = require("../utils/hopeu.js");
-const { is } = require("../utils/is.js");
-const { utilsHandler } = require("./utils.js");
+const {
+    is
+} = require("../utils/is.js");
+const {
+    utilsHandler
+} = require("./utils.js");
 
-module.exports.danmuHandler = function ({ ele, options, on }) {
+module.exports.danmuHandler = function ({
+    ele,
+    options,
+    on
+}) {
     const obj = new Object();
     let $dom = $(ele);
 
@@ -99,7 +107,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         }
         timer = setInterval(function () {
             let channel = getChannel();
-            if (/*danmuPool.length &&*/ channel != -1) {
+            if ( /*danmuPool.length &&*/ channel != -1) {
                 let dom = domPool[channel].shift();
                 let danmu = danmuPool.shift();
                 shootDanmu(dom, danmu, channel);
@@ -150,7 +158,7 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
         dom.className = "hopeui-danmu-end hopeui-danmu-item";
 
         if (is.ie() > 9) {
-            dom.style.transition = `left ${options.speed || 7}s linear`;
+            dom.style.transition = `left ${options.speed + $(dom).width()/ 60|| 7}s linear`;
             dom.style.left = "-" + dom.clientWidth + unit;
         } else {
             animation(dom, "-" + dom.clientWidth, function () {
@@ -164,14 +172,14 @@ module.exports.danmuHandler = function ({ ele, options, on }) {
             function () {
                 hasPosition[channel] = true;
             },
-            is.ie() > 9 ? $(dom).width() * 5 + 8000 : 300 * 100
+            is.ie() > 9 ? (options.speed + $(dom).width()/ 60) * 1000: 300 * 100
         );
     }
 
     function getRangeRandomNum(min, max, returnType) {
-        return returnType == "float"
-            ? min + Math.random() * (max - min)
-            : Math.floor(min + Math.random() * (max + 1 - min));
+        return returnType == "float" ?
+            min + Math.random() * (max - min) :
+            Math.floor(min + Math.random() * (max + 1 - min));
     }
 
     function animation(dom, end, callback) {

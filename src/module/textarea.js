@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-15 17:13:06
+ * @LastEditTime : 2021-09-17 15:24:17
  * @Description  : 多行文本框
  */
 
@@ -104,7 +104,7 @@ module.exports.textareaHandler = function ({ ele, options, on }) {
                 });
             }
         });
-        $this.on("input propertychange", function () {
+        $this.on("keyup", function () {
             if (remainWords) {
                 let max = remainWords.children(".max").text();
                 if ($(this).val().length <= max) {

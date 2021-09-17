@@ -2252,6 +2252,35 @@
             }
         }
     })
+
+    window.anchor = hope.anchor({
+        ele: "#nav",
+        options: {
+            offset: 100
+        },
+        on:{
+            jumpOver: function (e){
+                //console.log(e);
+            },
+            init: function (e){
+                // e.goLocation(5)
+            }
+        }
+    })
+    window.anchor = hope.anchor({
+        ele: "#nav",
+        options: {
+            offset: 100
+        },
+        on:{
+            jumpOver: function (e){
+                console.log(e);
+            },
+            init: function (e){
+                // e.goLocation(5)
+            }
+        }
+    })
 document.onreadystatechange = function () {
     if( document.readyState  == 'complete' ) {
     anchor.init();

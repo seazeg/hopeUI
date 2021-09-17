@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-31 17:18:31
+ * @LastEditTime : 2021-09-17 15:24:11
  * @Description  : 文本框
  */
 
@@ -170,7 +170,7 @@ module.exports.suggestHandler = function ({
                     });
                 }
             });
-            $this.on("input propertychange", function () {
+            $this.on("keyup", function () {
                 if (!is.empty($(this).val())) {
                     getData(params, reader, $this.next());
                     $this

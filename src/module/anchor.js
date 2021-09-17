@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-07-02 16:34:29
- * @LastEditTime : 2021-09-09 18:05:24
+ * @LastEditTime : 2021-09-17 14:42:02
  * @Description  : 锚点定位
  */
 
@@ -51,7 +51,7 @@ module.exports.anchorHandler = function ({ ele, options, on }) {
             };
         });
 
-        $dom.find("[hope-anchor-key]").on("click", function (e) {
+        $dom.find("[hope-anchor-key]").off().on("click", function (e) {
             if (e.stopPropagation) {
                 e.stopPropagation();
             } else {
