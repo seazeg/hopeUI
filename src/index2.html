@@ -287,7 +287,7 @@
                     <option value="wh">武汉</option>
                     <option value="wh">武汉</option>
                     <option value="wh">武汉</option>
-         
+
                 </select>
             </div>
         </div>
@@ -963,7 +963,7 @@
             </div>
         </div>
 
-     
+
 
         <div class="docs-box">
             <div class="docs-title">
@@ -1292,8 +1292,8 @@
                     <div class="hopeui-form-item">
                         <label class="hopeui-form-label">多文本域</label>
                         <div class="hopeui-input-block">
-                            <textarea name="textarea" class="hopeui-textarea" placeholder="请输入内容"
-                                hope-verify="required" maxlength="1000"></textarea>
+                            <textarea name="textarea" class="hopeui-textarea" placeholder="请输入内容" hope-verify="required"
+                                maxlength="1000"></textarea>
                         </div>
                     </div>
                     <div class="hopeui-form-item">
@@ -1317,7 +1317,7 @@
 
 
 
-       
+
 
         <!-- 
     <div class="docs-box">
@@ -1373,18 +1373,20 @@
 </body>
 <script>
 
+    // hope.lazyload({
+    //     ele: '.lazyload',
+    //     options: {
+    //         responsive: true
+    //     },
+    //     on: {
+    //         loaded: function (e) {
+    //             $(e.ele).parent().addClass('hopeui-anim').addClass('hopeui-anim-up').css(
+    //                 'animationDuration', (($(e.ele).parent().attr('hope-time') / 1000) || 1 + 's'));
 
-    hope.lazyload({
-        ele: '.lazyload',
-        options: {
-            responsive: true
-        },
-        on: {
-            loaded: function (e) {
-                $(e.ele).parent().addClass('hopeui-anim').addClass('hopeui-anim-up')
-            }
-        }
-    })
+    //             // $(this).addClass('hopeui-anim').addClass('hopeui-anim-up').css('animationDuration', (($(this).attr('hope-time') / 1000) || 1 + 's'));
+    //         }
+    //     }
+    // })
 
 
     hope.numup({
@@ -1697,7 +1699,7 @@
         },
         on: {
             init: function (e) {
-                
+
 
             }
         }
@@ -1951,7 +1953,7 @@
                     cancel: "拜拜",
                 },
                 width: '300px',
-                isDefaultBtn:false,
+                isDefaultBtn: false,
             },
         });
     };
@@ -2040,7 +2042,7 @@
             city: {
                 type: 'select',
                 options: {
-                    hideItemIndex:1
+                    hideItemIndex: 1
                 },
                 on: {
                     init: function (e) {
@@ -2138,7 +2140,7 @@
                     init: function (e) {
                         //////console.log(e);
                     },
-                    change: function (e,checked) {
+                    change: function (e, checked) {
                         console.log(checked);
                     },
                     toggle: function (e) {
@@ -2194,7 +2196,7 @@
             textarea: {
                 type: 'textarea',
                 options: {
-                    remainingWords:true
+                    remainingWords: true
                 },
                 on: {
                     init: function (e) {
@@ -2236,18 +2238,18 @@
         fm.clear();
     };
 
-//    setTimeout(() => {
+    //    setTimeout(() => {
 
     window.anchor = hope.anchor({
         ele: "#nav",
         options: {
             offset: 100
         },
-        on:{
-            jumpOver: function (e){
+        on: {
+            jumpOver: function (e) {
                 //console.log(e);
             },
-            init: function (e){
+            init: function (e) {
                 // e.goLocation(5)
             }
         }
@@ -2258,11 +2260,11 @@
         options: {
             offset: 100
         },
-        on:{
-            jumpOver: function (e){
+        on: {
+            jumpOver: function (e) {
                 //console.log(e);
             },
-            init: function (e){
+            init: function (e) {
                 // e.goLocation(5)
             }
         }
@@ -2272,28 +2274,28 @@
         options: {
             offset: 100
         },
-        on:{
-            jumpOver: function (e){
+        on: {
+            jumpOver: function (e) {
                 console.log(e);
             },
-            init: function (e){
+            init: function (e) {
                 // e.goLocation(5)
             }
         }
     })
-document.onreadystatechange = function () {
-    if( document.readyState  == 'complete' ) {
-    anchor.init();
-}
-}
-
- 
+    document.onreadystatechange = function () {
+        if (document.readyState == 'complete') {
+            anchor.init();
+        }
+    }
 
 
-  
 
 
-//    }, 1000);
+
+
+
+    //    }, 1000);
 </script>
 
 </html>

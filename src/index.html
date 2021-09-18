@@ -67,8 +67,8 @@
     </style>
 
     <body>
-        <iframe src="https://www.douyu.com/2856300" frameborder="0"></iframe>
-        <div class="docs-box">
+        <!-- <iframe src="https://www.douyu.com/2856300" frameborder="0"></iframe> -->
+        <div class="docs-box hopeui-anim hopeui-anim-up">
             <div class="docs-title">
                 <fieldset>
                     <legend><a name="icon">弹幕</a></legend>
@@ -724,7 +724,6 @@
                     "红色的外观真的漂亮非凡,超大的容量,对开门的设计都突出了富贵的特点,虽然这么大的容量,但只有每天不足1度电的消耗,真是非常的出色,让我们在使用的时候也不会担心会出现过高的电费负担.",
                     "视觉冲击力很强啊",
                     "非常赞喔！~",
-                   
 
                     "一直在关注，比较，等待促销力度到位时出手！",
                     "最重要的就是好看啊~~~ 又很大。但是贵！",
@@ -764,5 +763,22 @@
         //             "https://imagegroup1.haier.com/haier-ecosystem/list/W020201210671316567465.jpg"
         //         );
         //     });
+
+        $(window).scroll(function () {
+            $(".docs-box").each(function () {
+                var $this = $(this);
+                var _this = $this.get(0);
+                var rect = _this.getBoundingClientRect();
+                if (rect.top <= document.documentElement.clientHeight) {
+                    $this
+                        .addClass("hopeui-anim")
+                        .addClass("hopeui-anim-up")
+                        .css(
+                            "animationDuration",
+                            $this.attr("hope-time") / 1000 || 1 + "s"
+                        );
+                }
+            });
+        });
     </script>
 </html>
