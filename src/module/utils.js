@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-09-17 09:59:10
+ * @LastEditTime : 2021-09-22 15:58:01
  * @Description  : 常用工具函数
  */
 
@@ -115,7 +115,7 @@ module.exports.utilsHandler = {
     isVerify: function (type, value) {
         switch (type) {
             case "num":
-                return /^[0-9]$/.test(value);
+                return /^[0-9]+$/.test(value);
             case "en":
                 return /^[a-zA-Z]+$/.test(value);
             case "chn":
