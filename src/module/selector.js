@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-10 14:59:42
+ * @LastEditTime : 2021-09-23 09:55:50
  * @Description  : 下拉框
  */
 
@@ -94,9 +94,9 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 options && options
                                     ? "title=" + item.innerText
                                     : ""
-                            } hope-value="${item.value}">${
+                            } hope-value="${item.value}"><span class="select__name">${
                                 item.innerText
-                            }</div>`;
+                            }</span></div>`;
                         }
                     }
 
