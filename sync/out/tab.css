@@ -61,12 +61,12 @@
   padding: 10px 20px;
 }
 .hopeui-tab.hopeui-tab-simple .hopeui-tab-title li.hopeui-tab-this {
-  color: #e60012;
+  color: #005aaa;
 }
 .hopeui-tab.hopeui-tab-simple .hopeui-tab-title li.hopeui-tab-this:after {
   border: none;
   border-radius: 0;
-  border-bottom: 2px solid #e60012;
+  border-bottom: 2px solid #005aaa;
 }
 .hopeui-tab.hopeui-tab-card {
   border: 1px solid #eeeeee;

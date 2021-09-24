@@ -39,11 +39,11 @@
   font-size: 14px;
 }
 .hopeui-form-select .hopeui-select-list .option.hopeui-select-this {
-  background-color: #e60012;
+  background-color: #005aaa;
   color: #ffffff;
 }
 .hopeui-form-select .hopeui-select-list .option.hopeui-select-this:hover {
-  background-color: #e60012;
+  background-color: #005aaa;
   color: #ffffff;
 }
 .hopeui-form-select .hopeui-select-list .option.hopeui-select-tips {

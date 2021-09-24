@@ -14,7 +14,7 @@
   cursor: pointer;
 }
 .hopeui-form-checkbox:hover i {
-  border-color: #e60012;
+  border-color: #005aaa;
 }
 .hopeui-form-checkbox.hopeui-checkbox-disabled {
   cursor: not-allowed !important;
@@ -63,19 +63,19 @@
   color: #ffffff;
 }
 .hopeui-form-checked {
-  border-color: #e60012 !important;
+  border-color: #005aaa !important;
 }
 .hopeui-form-checked i {
-  border-color: #e60012 !important;
-  background-color: #e60012;
+  border-color: #005aaa !important;
+  background-color: #005aaa;
   color: #ffffff;
   font-weight: bold;
 }
 .hopeui-form-checked:hover {
-  border-color: #e60012 !important;
+  border-color: #005aaa !important;
 }
 .hopeui-form-checked:hover i {
-  border-color: #e60012 !important;
-  background-color: #e60012;
+  border-color: #005aaa !important;
+  background-color: #005aaa;
   color: #ffffff;
 }
