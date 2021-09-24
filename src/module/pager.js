@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-08-27 18:04:03
+ * @LastEditTime : 2021-09-24 16:04:59
  * @Description  : 分页
  */
 
@@ -181,16 +181,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             );
                             if (pageNo != thisPageNum) {
                                 if (params.url.includes(".json")) {
-                                    params.url =
-                                        params.url
-                                            .split(".")[0]
-                                            .substring(
-                                                0,
-                                                params.url.split(".")[0]
-                                                    .length - 1
-                                            ) +
-                                        thisPageNum +
-                                        ".json"; //测试代码
+                                    params.url = "mock/list" + thisPageNum + ".json"; //测试代码
                                 }
                                 if (typeof params.data == "string") {
                                     let p = JSON.parse(params.data);
@@ -219,15 +210,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     pageNo = pageNo - 1;
                                     if (params.url.includes(".json")) {
                                         params.url =
-                                            params.url
-                                                .split(".")[0]
-                                                .substring(
-                                                    0,
-                                                    params.url.split(".")[0]
-                                                        .length - 1
-                                                ) +
-                                            pageNo +
-                                            ".json"; //测试代码
+                                            "mock/list" + pageNo + ".json"; //测试代码
                                     }
                                     if (typeof params.data == "string") {
                                         let p = JSON.parse(params.data);
@@ -256,15 +239,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     pageNo = pageNo + 1;
                                     if (params.url.includes(".json")) {
                                         params.url =
-                                            params.url
-                                                .split(".")[0]
-                                                .substring(
-                                                    0,
-                                                    params.url.split(".")[0]
-                                                        .length - 1
-                                                ) +
-                                            pageNo +
-                                            ".json"; //测试代码
+                                            "mock/list" + pageNo + ".json"; //测试代码
                                     }
                                     if (typeof params.data == "string") {
                                         let p = JSON.parse(params.data);
@@ -295,15 +270,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 if (number && number <= totalPage) {
                                     if (params.url.includes(".json")) {
                                         params.url =
-                                            params.url
-                                                .split(".")[0]
-                                                .substring(
-                                                    0,
-                                                    params.url.split(".")[0]
-                                                        .length - 1
-                                                ) +
-                                            number +
-                                            ".json"; //测试代码2
+                                            "mock/list" + number + ".json";//测试代码2
                                     }
                                     if (typeof params.data == "string") {
                                         let p = JSON.parse(params.data);
@@ -351,12 +318,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
     obj.jump = function (number, callback) {
         if (number) {
             if (params.url.includes(".json")) {
-                params.url =
-                    params.url
-                        .split(".")[0]
-                        .substring(0, params.url.split(".")[0].length - 1) +
-                    number +
-                    ".json"; //测试代码
+                params.url = "mock/list" + number + ".json"; //测试代码
             }
             if (typeof params.data == "string") {
                 let p = JSON.parse(params.data);
