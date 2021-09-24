@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:34:52
- * @LastEditTime : 2021-09-09 13:49:57
+ * @LastEditTime : 2021-09-24 15:33:10
  * @Description  :
  */
 const Mock = require("mockjs");
@@ -18,7 +18,7 @@ for (var i = 1; i <= 12; i++) {
         ],
         pageNo: i,
         pageSize: 20,
-        totalNumber: i * 20 ,
+        totalNumber: 240 ,
     });
 
     fs.writeFile(
