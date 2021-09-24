@@ -5,7 +5,7 @@
  * @Description  : 
  */
 const shell = require("shelljs");
-shell.exec('gitq p')
+shell.exec('git add .;git commit -m "[update]";')
 shell.exec('cp -r ../docs/static/mock ../hopeui')
 shell.exec('cp -r ../docs/static/img ../hopeui')
 shell.exec('cp ../docs/static/logo.svg ../hopeui')
@@ -15,7 +15,8 @@ shell.exec('rm -rf ../../seazeg.github.io/hopeui')
 shell.exec('cd ../../hope_controls/')
 shell.exec('cp -rf ../hopeui ../../seazeg.github.io/')
 shell.exec('zip -q -r ../../seazeg.github.io/hopeui.zip ../dist/')
-shell.exec('cd ../../seazeg.github.io/;gitq p -m "[API update]"')
+// shell.exec('cd ../../seazeg.github.io/;gitq p -m "[API update]"')
+shell.exec('git add .;git commit -m "[update]";');
 
 // shell.exec('cd ../../vscode-hopeui-plugin/')
 // shell.exec('rm -rf ../../vscode-hopeui-plugin/src/docs/hopeui')
