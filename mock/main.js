@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:34:52
- * @LastEditTime : 2021-09-24 15:33:10
+ * @LastEditTime : 2021-09-24 15:43:14
  * @Description  :
  */
 const Mock = require("mockjs");
@@ -13,19 +13,19 @@ for (var i = 1; i <= 12; i++) {
         // 20条数据
         "data|20": [
             {
-                goodsName: "@cname"
+                goodsName: i + "_" + i,
             },
         ],
         pageNo: i,
         pageSize: 20,
-        totalNumber: 240 ,
+        totalNumber: 240,
     });
 
     fs.writeFile(
         `../dist/assets/page/list${i}.json`,
         JSON.stringify(data),
         "utf-8",
-        function(err) {
+        function (err) {
             if (err) {
                 console.log(err);
             } else {
