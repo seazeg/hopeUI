@@ -1,14 +1,20 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2021-08-12 16:39:59
+ * @LastEditTime : 2021-09-24 09:54:13
  * @Description  : 自定义滚动条
  */
 
 const $ = require("../utils/hopeu.js");
-const { is } = require("../utils/is.js");
+const {
+    is
+} = require("../utils/is.js");
 
-module.exports.scrollbarHandler = function ({ ele, options, on }) {
+module.exports.scrollbarHandler = function ({
+    ele,
+    options,
+    on
+}) {
     // if ($(ele).find(".hopeui-scrollbar-bar").length <= 0) {
     const obj = new Object();
     let $dom = null;
@@ -46,9 +52,10 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
         $(ele).children()
     );
     $dom = $(ele).children();
-    
+
     //每次重置高度
     $(ele).css('height', '');
+
     if ($dom.get(0).scrollHeight <= 200) {
         var highTotal = 0;
         $(ele)
@@ -58,11 +65,14 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
                 highTotal += $(this).outerHeight() || 0;
             });
         $(ele).css("height", highTotal);
+        $(ele).children(".hopeui-scrollbar-box").height(highTotal);
     } else {
         if (options && options.height) {
             $(ele).css("height", options.height);
+            $(ele).children(".hopeui-scrollbar-box").height(options.height);
         } else {
             $(ele).css("height", 200 + "px");
+            $(ele).children(".hopeui-scrollbar-box").height(200);
         }
     }
 
@@ -118,7 +128,7 @@ module.exports.scrollbarHandler = function ({ ele, options, on }) {
                 if (
                     (parseFloat(_this.style.top) >= 0 &&
                         parseFloat(_this.style.top) <=
-                            content.offsetHeight - _this.offsetHeight) ||
+                        content.offsetHeight - _this.offsetHeight) ||
                     !_this.style.top
                 ) {
                     _this.style.top = oe.clientY - startY + "px";
