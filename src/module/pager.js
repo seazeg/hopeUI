@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-09-24 16:29:51
+ * @LastEditTime : 2021-09-24 17:44:57
  * @Description  : 分页
  */
 
@@ -125,11 +125,22 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     if (options.omit != totalPage - 1) {
                                         pageHTML += `<i class="hopeui-pager-omit">...</i>`;
                                     }
-                                    for (
-                                        let i = totalPage - options.omit - 1;
-                                        i <= totalPage - options.omit + 1;
-                                        i++
-                                    ) {
+
+                                    let start =
+                                        pageNo - Math.floor(options.omit / 2);
+                                    let end =
+                                        pageNo -
+                                        Math.floor(options.omit / 2) +
+                                        options.omit;
+                                    if (start + options.omit >= totalPage) {
+                                        start = start - 1;
+                                        end = start + options.omit - 1;
+                                    }
+                                    if (end >= totalPage) {
+                                        end = totalPage;
+                                    }
+                                    debugger;
+                                    for (let i = start; i <= end; i++) {
                                         if (pageNo == i) {
                                             pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
                                         } else {
@@ -331,8 +342,8 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
     obj.jump = function (number, callback) {
         if (number) {
             if (params.url.includes(".json")) {
-                params.url = 
-                    params.url.split("list")[0] + "list" + number + '.json'//测试代码
+                params.url =
+                    params.url.split("list")[0] + "list" + number + ".json"; //测试代码
             }
             if (typeof params.data == "string") {
                 let p = JSON.parse(params.data);
