@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx webpack-dev-server --mode development --content-base ./dist --open",
     "server": "node server/app.js",
-    "build": "webpack --config webpack.config.js;cd sync;node less2json",
+    "build": "webpack --config webpack.config.js;",
     "api": "start-storybook -s ./docs/static",
     "build:api": "build-storybook -o hopeui;cd sync;node staticapi;",
     "push": "npm run build;npm run build:api"
