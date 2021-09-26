@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-09-24 17:44:57
+ * @LastEditTime : 2021-09-24 17:50:20
  * @Description  : 分页
  */
 
@@ -139,7 +139,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     if (end >= totalPage) {
                                         end = totalPage;
                                     }
-                                    debugger;
+          
                                     for (let i = start; i <= end; i++) {
                                         if (pageNo == i) {
                                             pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
