@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2021-09-09 17:51:36
+ * @LastEditTime : 2021-09-28 14:59:16
  * @Description  :
  */
 
@@ -119,7 +119,7 @@ module.exports = {
             template: path.join(__dirname, "./src/index3.html"),
         }),
         new webpack.BannerPlugin(
-            `${pkg.description} version ${pkg.version}\nAuthor Evan.G\nFor more information, please visit ${pkg.author.github}\n${pkg.description} is available under the terms of the MIT license.`
+            `${pkg.description} version ${pkg.version}\nAuthor Evan.G\n${pkg.description} is available under the terms of the MIT license.`
         ),
         new MiniCssExtractPlugin({
             filename: `hopeui.min.css`,
