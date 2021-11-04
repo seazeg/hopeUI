@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-02-02 09:53:11
+ * @LastEditTime : 2021-11-03 09:46:50
  * @Description  : 图片充满居中
  */
 
@@ -33,7 +33,7 @@ module.exports.adapimageHandler = function ({ ele, options, on }) {
                 position: "relative",
             });
 
-            if (e.w > e.h) {
+            if (e.w >= e.h) {
                 //以宽为准，高100%
                 if (scale.w > parent.w) {
                     _this.css({
@@ -58,7 +58,7 @@ module.exports.adapimageHandler = function ({ ele, options, on }) {
                 }
             } else if (e.w < e.h) {
                 //以高为准，宽100%
-                if (scale.h > parent.h) {
+                if (scale.h = parent.h) {
                     _this.css({
                         width: "100%",
                         height: "auto",
