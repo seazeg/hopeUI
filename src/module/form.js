@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-12 15:40:40
+ * @LastEditTime : 2021-11-04 16:09:31
  * @Description  : 表单
  */
 
@@ -216,6 +216,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                                     ele.value
                                 )},`;
                             }
+                            checked = true;
                             utils.validation(ele, "pass", null, items.type);
                         }
                     });

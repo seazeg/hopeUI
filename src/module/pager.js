@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-09-24 17:50:20
+ * @LastEditTime : 2021-11-05 11:49:00
  * @Description  : 分页
  */
 
@@ -139,7 +139,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     if (end >= totalPage) {
                                         end = totalPage;
                                     }
-          
+
                                     for (let i = start; i <= end; i++) {
                                         if (pageNo == i) {
                                             pageHTML += `<span class="hopeui-pager-num hopeui-pager-cur" hopeui-num="${i}">${i}</span>`;
@@ -191,12 +191,26 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                 $(this).attr("hopeui-num")
                             );
                             if (pageNo != thisPageNum) {
-                                if (params.url.includes(".json")) {
-                                    params.url =
-                                        params.url.split("list")[0] +
-                                        "list" +
-                                        thisPageNum +
-                                        ".json"; //测试代码
+                                if (options.staticMode) {
+                                    let {
+                                        origName,
+                                        fileName,
+                                        extend,
+                                    } = urlHandler(params.url);
+
+                                    params.url = params.url.replace(
+                                        origName,
+                                        `${fileName.split("_")[0]}${
+                                            thisPageNum > 1
+                                                ? "_" + (thisPageNum - 1)
+                                                : ""
+                                        }.${extend}`
+                                    );
+                                    // params.url =
+                                    //     params.url.split("list")[0] +
+                                    //     "list" +
+                                    //     thisPageNum +
+                                    //     ".json"; //测试代码
                                 }
                                 if (typeof params.data == "string") {
                                     let p = JSON.parse(params.data);
@@ -223,13 +237,23 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             function () {
                                 if (pageNo > 1) {
                                     pageNo = pageNo - 1;
-                                    if (params.url.includes(".json")) {
-                                        params.url =
-                                            params.url.split("list")[0] +
-                                            "list" +
-                                            pageNo +
-                                            ".json"; //测试代码
+                                    if (options.staticMode) {
+                                        let {
+                                            origName,
+                                            fileName,
+                                            extend,
+                                        } = urlHandler(params.url);
+
+                                        params.url = params.url.replace(
+                                            origName,
+                                            `${fileName.split("_")[0]}${
+                                                pageNo > 1
+                                                    ? "_" + (pageNo - 1)
+                                                    : ""
+                                            }.${extend}`
+                                        );
                                     }
+
                                     if (typeof params.data == "string") {
                                         let p = JSON.parse(params.data);
                                         p[pageMapping] = pageNo;
@@ -255,12 +279,27 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             function () {
                                 if (pageNo < totalPage) {
                                     pageNo = pageNo + 1;
-                                    if (params.url.includes(".json")) {
-                                        params.url =
-                                            params.url.split("list")[0] +
-                                            "list" +
-                                            pageNo +
-                                            ".json"; //测试代码
+                                    if (options.staticMode) {
+                                        let {
+                                            origName,
+                                            fileName,
+                                            extend,
+                                        } = urlHandler(params.url);
+
+                                        params.url = params.url.replace(
+                                            origName,
+                                            `${fileName.split("_")[0]}${
+                                                pageNo > 1
+                                                    ? "_" + (pageNo - 1)
+                                                    : ""
+                                            }.${extend}`
+                                        );
+
+                                        // params.url =
+                                        //     params.url.split("list")[0] +
+                                        //     "list" +
+                                        //     pageNo +
+                                        //     ".json"; //测试代码
                                     }
                                     if (typeof params.data == "string") {
                                         let p = JSON.parse(params.data);
@@ -289,12 +328,27 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                     $(this).siblings("input").val()
                                 );
                                 if (number && number <= totalPage) {
-                                    if (params.url.includes(".json")) {
-                                        params.url =
-                                            params.url.split("list")[0] +
-                                            "list" +
-                                            number +
-                                            ".json"; //测试代码
+                                    if (options.staticMode) {
+                                        let {
+                                            origName,
+                                            fileName,
+                                            extend,
+                                        } = urlHandler(params.url);
+
+                                        params.url = params.url.replace(
+                                            origName,
+                                            `${fileName.split("_")[0]}${
+                                                number > 1
+                                                    ? "_" + (number - 1)
+                                                    : ""
+                                            }.${extend}`
+                                        );
+
+                                        // params.url =
+                                        //     params.url.split("list")[0] +
+                                        //     "list" +
+                                        //     number +
+                                        //     ".json"; //测试代码
                                     }
                                     if (typeof params.data == "string") {
                                         let p = JSON.parse(params.data);
@@ -327,6 +381,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
 
                         if (on && on.complete) {
                             on.complete({
+                                pageNo: pageNo,
                                 object: obj,
                                 event: "complete",
                             });
@@ -338,12 +393,20 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
         );
     }
     getData(params, reader);
+
     //外部跳转方法
     obj.jump = function (number, callback) {
         if (number) {
-            if (params.url.includes(".json")) {
-                params.url =
-                    params.url.split("list")[0] + "list" + number + ".json"; //测试代码
+            if (options.staticMode) {
+                let { origName, fileName, extend } = urlHandler(params.url);
+
+                params.url = params.url.replace(
+                    origName,
+                    `${fileName.split("_")[0]}${
+                        number > 1 ? "_" + (number - 1) : ""
+                    }.${extend}`
+                );
+                // params.url.split("list")[0] + "list" + number + ".json";
             }
             if (typeof params.data == "string") {
                 let p = JSON.parse(params.data);
@@ -361,12 +424,22 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
     };
 
     //参数设外部置方法
-    obj.set = function (obj, callback) {
+    obj.setJump = function (obj, callback) {
         Object.keys(obj).forEach(function (key) {
             params[key] = obj[key];
         });
 
         getData(params, reader);
+        if (callback) {
+            callback();
+        }
+    };
+
+    obj.set = function (obj, callback) {
+        Object.keys(obj).forEach(function (key) {
+            params[key] = obj[key];
+        });
+
         if (callback) {
             callback();
         }
@@ -381,3 +454,14 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
 
     return obj;
 };
+
+function urlHandler(url) {
+    let origName = url.match("[^/]+(?!.*/)")[0];
+    let fileName = origName.split(".")[0],
+        extend = origName.split(".")[1];
+    return {
+        origName: origName,
+        fileName: fileName,
+        extend: extend,
+    };
+}

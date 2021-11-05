@@ -1372,7 +1372,6 @@
 
 </body>
 <script>
-
     // hope.lazyload({
     //     ele: '.lazyload',
     //     options: {
@@ -1744,7 +1743,7 @@
             offset: 30
         },
         params: {
-            url: '/assets/page/list1.json',
+            url: '/assets/page/list.json',
             dataType: "json",
             type: 'get',
             data: {
@@ -1808,7 +1807,7 @@
             // isFirstData:true
         },
         params: {
-            url: '/assets/page/list1.json',
+            url: '/assets/page/list.json',
             dataType: "json",
             type: 'get',
         },
@@ -1878,12 +1877,13 @@
             prevName: "prev",
             nextName: "next",
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
-            extend: true
+            extend: true,
+            staticMode: true,
         },
         params: {
-            url: 'assets/page/list1.json',
+            url: 'assets/page/list.json',
             dataType: "json",
-            type: 'post',
+            type: 'get',
             // contentType: "application/json",
             data: {
                 pageNo: 1,
@@ -1904,11 +1904,19 @@
             }
         },
         on: {
+            // jumpBelow: function (e) {
+
+            // },
             jumpOver: function (e) {
-                //////console.log(e);
+
             },
             complete: function (e) {
-
+                console.log(e);
+                pager.set({
+                    data: {
+                        pageSize: 3
+                    }
+                })
             },
             init: function (e) {
                 ////console.log(e);
@@ -1916,12 +1924,12 @@
         },
     })
 
-    pager.set({
-        data: {
-            pap: 11111
-        },
-        url: '/assets/page/list2.json',
-    })
+    // pager.set({
+    //     data: {
+    //         pap: 11111
+    //     },
+    //     url: '/assets/page/list2.json',
+    // })
 
 
 

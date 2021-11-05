@@ -61,14 +61,15 @@ import { viewinfo } from "../view/pager.view.js";
 | nextName    | 下翻页命名定义      | String  | --       | 下一页 |
 | pageMapping | 当前页字段映射      | String  | --       | pageNo |
 | extend      | 完整扩展            | Boolean | --       | false  |
+| staticMode  | 静态分页模式（wcm） | Boolean | --       | false  |
 
 ## http 请求参数 params
 
 参考 jquery.ajax 参数配置列表
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 |
-| ----------- | ------------------- | ------- | -------- | ------ |
-| isXDomainRequest | 特殊参数，ie8,9 中请求可跨域 | -- |--| false |
+| 参数             | 说明                         | 类型 | 可选值 | 默认值 |
+| ---------------- | ---------------------------- | ---- | ------ | ------ |
+| isXDomainRequest | 特殊参数，ie8,9 中请求可跨域 | --   | --     | false  |
 
 ## 初始化函数 reader
 
@@ -99,7 +100,8 @@ return {
 
 ## 调用方法
 
-| 方法名 | 说明             | 类型     | 默认值 | 参数     | 备注                                            |
-| ------ | ---------------- | -------- | ------ | -------- | ----------------------------------------------- |
-| jump   | 外部跳转方法     | Function | --     | 页码     | pageNo ,callback                                |
-| set    | 参数设外部置方法 | Function | --     | 参数集合 | obj.set({url:'xxx',data:{keyword:22}}),callback |
+| 方法名  | 说明               | 类型     | 默认值 | 参数     | 备注                                            |
+| ------- | ------------------ | -------- | ------ | -------- | ----------------------------------------------- |
+| jump    | 外部跳转方法       | Function | --     | 页码     | pageNo ,callback                                |
+| set     | 参数外部设置       | Function | --     | 参数集合 | obj.set({url:'xxx',data:{keyword:22}}),callback |
+| setJump | 参数外部设置并跳转 | Function | --     | 参数集合 | obj.set({url:'xxx',data:{keyword:22}}),callback |
