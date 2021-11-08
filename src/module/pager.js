@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-11-05 11:49:00
+ * @LastEditTime : 2021-11-08 11:42:13
  * @Description  : 分页
  */
 
@@ -21,6 +21,18 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
      */
 
     function getData(params, reader) {
+        if (on && on.sendBefore) {
+            on.sendBefore({
+                params: params,
+                setParams: function (obj) {
+                    Object.keys(obj).forEach(function (key) {
+                        params[key] = obj[key];
+                    });
+                },
+                event: "sendBefore",
+            });
+        }
+
         $.ajax(
             Object.assign(params, {
                 success: function (data) {

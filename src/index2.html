@@ -1887,7 +1887,7 @@
             // contentType: "application/json",
             data: {
                 pageNo: 1,
-                pageSize: 20
+                pageSize: 3
             }
         },
         reader: function (res) {
@@ -1904,19 +1904,24 @@
             }
         },
         on: {
-            // jumpBelow: function (e) {
+            sendBefore: function (e) {
+               
+                if (e.params.data.pageNo == 1) {
+                    e.setParams({
+                        data:{pageSize:3}
+                    })
+                } else {
+                     e.setParams({
+                         data:{pageSize:20}
+                    })
+                }
 
-            // },
+            },
             jumpOver: function (e) {
 
             },
             complete: function (e) {
-                console.log(e);
-                pager.set({
-                    data: {
-                        pageSize: 3
-                    }
-                })
+
             },
             init: function (e) {
                 ////console.log(e);
