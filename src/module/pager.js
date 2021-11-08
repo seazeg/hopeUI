@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-11-08 11:42:13
+ * @LastEditTime : 2021-11-08 14:02:29
  * @Description  : 分页
  */
 
@@ -12,7 +12,6 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
     let prevName = options.prevName || "上一页",
         nextName = options.nextName || "下一页",
         pageMapping = options.pageMapping || "pageNo";
-
     /**
      * @description:
      * @param {params} ajax参数
@@ -21,18 +20,6 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
      */
 
     function getData(params, reader) {
-        if (on && on.sendBefore) {
-            on.sendBefore({
-                params: params,
-                setParams: function (obj) {
-                    Object.keys(obj).forEach(function (key) {
-                        params[key] = obj[key];
-                    });
-                },
-                event: "sendBefore",
-            });
-        }
-
         $.ajax(
             Object.assign(params, {
                 success: function (data) {
