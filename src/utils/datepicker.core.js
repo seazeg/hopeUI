@@ -2,7 +2,7 @@ const hopeu = require("../utils/hopeu.js");
 const { is } = require("./is.js");
 
 let Hope_datepicker = function (ele, options, on, plugin) {
-    let o = {}
+    let o = {};
     let $ = hopeu;
     let obj = ele;
     let elem_id = $(obj).attr("id");
@@ -47,7 +47,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             <span class='year-right'></span></div></div></span>
             <span class='month'><span>6月</span>
             <div class='month-list' id='mlist_${elem_id}'>
-            <ul><li data-id='1'>一月</li><li data-id='2'>二月</li><li data-id='3'>三月</li><li data-id='4'>四月</li><li data-id='5'>五月</li><li data-id='6'>六月</li><li data-id='7'>七月</li><li data-id='8'>八月</li><li data-id='9'>九月</li><li data-id='10'>十月</li><li data-id='11'>十一</li><li data-id='12'>十二</li></ul></div></span>
+            <ul><li data-id='1'>1月</li><li data-id='2'>2月</li><li data-id='3'>3月</li><li data-id='4'>4月</li><li data-id='5'>5月</li><li data-id='6'>6月</li><li data-id='7'>7月</li><li data-id='8'>8月</li><li data-id='9'>9月</li><li data-id='10'>10月</li><li data-id='11'>11月</li><li data-id='12'>12月</li></ul></div></span>
             <span class='m_right right hopeui-icon hopeui-icon-right'></span>
             <span class='y_right right hopeui-icon hopeui-icon-next'></span></div>
             <div class='week'><ul><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul></div><div class='day'><ul></ul></div>
@@ -145,7 +145,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     $("#datepicker_" + elem_id)
         .find(".month span")
         .on("click", function () {
-            $(this).addClass("active");
+          
             $(this).next(".month-list").hasClass("hopeui-show")
                 ? $(this).next(".month-list").removeClass("hopeui-show")
                 : $(this).next(".month-list").addClass("hopeui-show");
@@ -154,7 +154,9 @@ let Hope_datepicker = function (ele, options, on, plugin) {
             $("#ylist_" + elem_id)
                 .prev("span")
                 .removeClass("active");
-
+             $("#mlist_" + elem_id)
+                 .find("li").removeClass('active')
+                 .eq(parseInt($(this).text()) - 1).addClass('active');
             //选择月
             $("#datepicker_" + elem_id)
                 .find(".month li")
@@ -275,7 +277,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
         $("#datepicker_" + elem_id + " .month span").text(tz_m + "月");
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
-
+        $("#ylist_" + elem_id).removeClass("hopeui-show");
+        $("#mlist_" + elem_id).removeClass("hopeui-show");
         dayListReload();
     });
 
@@ -292,7 +295,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
         $("#datepicker_" + elem_id + " .month span").text(tz_m + "月");
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
-
+        $("#ylist_" + elem_id).removeClass("hopeui-show");
+        $("#mlist_" + elem_id).removeClass("hopeui-show");
         dayListReload();
     });
 
@@ -303,7 +307,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
         input_y = tz_y;
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
-
+        $("#ylist_" + elem_id).removeClass("hopeui-show");
+        $("#mlist_" + elem_id).removeClass("hopeui-show");
         dayListReload();
     });
 
@@ -315,7 +320,8 @@ let Hope_datepicker = function (ele, options, on, plugin) {
         input_y = tz_y;
 
         $("#datepicker_" + elem_id + " .year .span-year").text(tz_y + "年");
-
+        $("#ylist_" + elem_id).removeClass("hopeui-show");
+        $("#mlist_" + elem_id).removeClass("hopeui-show");
         dayListReload();
     });
 
@@ -411,12 +417,12 @@ let Hope_datepicker = function (ele, options, on, plugin) {
 
     //加载天
     function dayListReload(date) {
-        tz_y = date?date[0]:tz_y;
-        tz_m = date?date[1]:tz_m;
-        tz_d = date?date[2]:tz_d;
-        input_y =date?date[0]:input_y;
-        input_m =date?date[1]:input_m;
-        
+        tz_y = date ? date[0] : tz_y;
+        tz_m = date ? date[1] : tz_m;
+        tz_d = date ? date[2] : tz_d;
+        input_y = date ? date[0] : input_y;
+        input_m = date ? date[1] : input_m;
+
         let days = getDaysOfMonth(tz_m, tz_y);
         let startDate = options.startDate
             ? options.startDate.split("-")
@@ -1031,7 +1037,7 @@ let Hope_datepicker = function (ele, options, on, plugin) {
     }
 
     o.set = (date) => {
-        dayListReload(date)
+        dayListReload(date);
     };
 
     return o;
