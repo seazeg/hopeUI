@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-15 18:03:22
+ * @LastEditTime : 2021-11-15 10:57:11
  * @Description  : 弹窗
  */
 
@@ -11,7 +11,7 @@ const { is } = require("../utils/is.js");
 module.exports.layerHandler = function ({ options, on }) {
     const obj = new Object();
     options = {
-        width: options.width || "",
+        width: options.width || "300",
         title: options.title || "",
         content: options.content || "",
         isMask: is.empty(options.isMask) ? true : options.isMask,
