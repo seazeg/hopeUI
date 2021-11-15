@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-17 15:23:58
+ * @LastEditTime : 2021-11-15 10:14:10
  * @Description  : 文本框
  */
 
@@ -20,7 +20,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
 
     $dom.each(function () {
         let $this = $(this);
-
+        let eConWidth = null;
         if (options && options.extendContent && options.extendContentLocation) {
             if (options.extendContentLocation == "left") {
                 let newBox = $(
@@ -33,7 +33,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                     .prev()
                     .addClass("hopeui-input-content-left");
 
-                let eConWidth = $(this).prev().get(0).offsetWidth;
+                eConWidth = $(this).prev().get(0).offsetWidth;
                 $(this).css("padding-left", eConWidth + 10 + "px");
             } else {
                 let newBox = $(
@@ -46,7 +46,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                     .next()
                     .addClass("hopeui-input-content-right");
 
-                let eConWidth = $(this).next().get(0).offsetWidth;
+                eConWidth = $(this).next().get(0).offsetWidth;
                 $(this).css("padding-right", eConWidth + 10 + "px");
             }
         }
@@ -56,14 +56,28 @@ module.exports.inputHandler = function ({ ele, options, on }) {
             if ($this.val()) {
                 isHide = "hopeui-hide";
             }
-            $this
-                .after(
-                    `<label class="hopeui-placeholder ${isHide}">${
-                        $this.attr("placeholder") || ""
-                    }</label>`
-                )
-                .parent()
-                .css("position", "relative");
+
+            if (options.extendContent && options.extendContentLocation) {
+                $this
+                    .after(
+                        `<label class="hopeui-placeholder ${isHide}" style="${
+                            options.extendContentLocation == "left"
+                                ? "padding-left:" + (eConWidth + 10) + "px"
+                                : "padding-right:" + (eConWidth + 10) + "px"
+                        }">${$this.attr("placeholder") || ""}</label>`
+                    )
+                    .parent()
+                    .css("position", "relative");
+            } else {
+                $this
+                    .after(
+                        `<label class="hopeui-placeholder ${isHide}">${
+                            $this.attr("placeholder") || ""
+                        }</label>`
+                    )
+                    .parent()
+                    .css("position", "relative");
+            }
 
             // $this.siblings('.hopeui-placeholder').css({
             //     lineHeight: $this.css("height") + 2,

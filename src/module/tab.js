@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2020-08-26 14:31:10
+ * @LastEditTime : 2021-11-15 10:17:43
  * @Description  : 选项卡
  */
 
@@ -146,6 +146,10 @@ module.exports.tabHandler = function ({ ele, options, on }) {
             eventName: "init",
         });
     }
+
+    obj.switch = function (index) {
+        $dom.find("li").eq(index).click();
+    };
 
     return obj;
 };
