@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-11-15 10:14:10
+ * @LastEditTime : 2021-11-24 15:40:35
  * @Description  : 文本框
  */
 
@@ -57,7 +57,7 @@ module.exports.inputHandler = function ({ ele, options, on }) {
                 isHide = "hopeui-hide";
             }
 
-            if (options.extendContent && options.extendContentLocation) {
+            if (options && options.extendContent && options.extendContentLocation) {
                 $this
                     .after(
                         `<label class="hopeui-placeholder ${isHide}" style="${
