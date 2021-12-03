@@ -1873,7 +1873,7 @@
     window.pager = hope.pager({
         ele: "#pager",
         options: {
-            omit: 5, //最多保留多少按钮,必须奇数
+            omit: 3, //最多保留多少按钮,必须奇数
             prevName: "prev",
             nextName: "next",
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
@@ -1887,7 +1887,7 @@
             // contentType: "application/json",
             data: {
                 pageNo: 1,
-                pageSize: 3
+                pageSize: 12
             }
         },
         reader: function (res) {
@@ -1900,7 +1900,7 @@
             return {
                 pageNo: res.pageNo,
                 pageSize: res.pageSize,
-                totalNumber: res.totalNumber
+                totalNumber: 200
             }
         },
         on: {

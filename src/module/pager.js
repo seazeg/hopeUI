@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-11-08 14:06:38
+ * @LastEditTime : 2021-12-03 11:18:46
  * @Description  : 分页
  */
 
@@ -82,7 +82,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             pageHTML += `<span class="hopeui-pager-num" hopeui-num="${i}">${i}</span>`;
                                         }
                                     }
-                                } else if (pageNo == options.omit) {
+                                } else if (pageNo > options.omit) {
                                     pageHTML += `<span class="hopeui-pager-num" hopeui-num="1">1</span>`;
                                     pageHTML += `<i class="hopeui-pager-omit">...</i>`;
                                     for (
