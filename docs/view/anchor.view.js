@@ -1,12 +1,12 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2021-07-05 15:49:11
+ * @LastEditTime : 2021-12-06 16:53:21
  * @Description  :
  */
 
 export const viewinfo = {
-    html: `
+           html: `
     <ul class="nav" id="nav">
         <li hope-anchor-key="1">第一页</li>
         <li hope-anchor-key="2">第二页</li>
@@ -30,8 +30,8 @@ export const viewinfo = {
         
     </div>
     `,
-    js: `
-    hope.anchor({
+           js: `
+    var anchor = hope.anchor({
         ele: "#nav",
         options: {
             offset: 50
@@ -42,5 +42,6 @@ export const viewinfo = {
             }
         }
     })
+    anchor.init()
     `,
-};
+       };
