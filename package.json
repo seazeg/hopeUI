@@ -11,11 +11,7 @@
     "build:api": "build-storybook -o hopeui;cd sync;node staticapi;",
     "push": "npm run build;npm run build:api"
   },
-  "author": {
-    "name": "Evan.G",
-    "email": "seazeg@126.com",
-    "github": "https://github.com/seazeg/hopeUI"
-  },
+  "author": "Evan.G <seazeg@126.com>",
   "repository": {
     "type": "git"
   },
@@ -63,5 +59,8 @@
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "directories": {
+    "doc": "docs"
+  }
 }
