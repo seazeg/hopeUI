@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-23 09:55:50
+ * @LastEditTime : 2021-12-23 16:43:14
  * @Description  : 下拉框
  */
 
@@ -128,7 +128,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     .addClass("hopeui-select-phone")
                     .parent()
                     .addClass("hopeui-relative");
-                $(selector).on("change", function (e) {
+                $(selector).off().on("change", function (e) {
                     newEle.find("input").val($(this).val());
                 });
             }
@@ -208,7 +208,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             if (options && options.searchMode) {
                 newEle
                     .find("input[hope-type=selector]")
-                    .on("keyup", function (e) {
+                    .off().on("keyup", function (e) {
                         if (!is.phone()) {
                             let list = $(this)
                                 .parent()
@@ -255,7 +255,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
 
             //绑定自定义option的点击事件
-            newEle.find(".option").on("click", function (e) {
+            newEle.find(".option").off().on("click", function (e) {
                 if (e.stopPropagation) {
                     e.stopPropagation();
                 } else if (window.event) {
@@ -297,7 +297,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             });
 
             if (is.phone()) {
-                $(this).on("change", function (e) {
+                $(this).off().on("change", function (e) {
                     newEle
                         .find(".hopeui-input")
                         .val(
@@ -325,7 +325,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
 
             //点击select区域外关闭下拉列表
-            $(document).on("click", function (e) {
+            $(document).off().on("click", function (e) {
                 if ($(newEle).hasClass("hopeui-form-selected")) {
                     $(newEle).removeClass("hopeui-form-selected");
                     //下拉列表关闭回调
