@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2021-09-28 14:59:16
+ * @LastEditTime : 2021-12-27 10:43:52
  * @Description  :
  */
 
@@ -127,7 +127,6 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: "static/libs", to: "assets/" },
                 { from: "src/components/", to: "components/" },
             ],
         }),
