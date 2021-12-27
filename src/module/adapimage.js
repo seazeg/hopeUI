@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-11-03 09:46:50
+ * @LastEditTime : 2021-12-27 22:36:33
  * @Description  : 图片充满居中
  */
 
@@ -58,7 +58,7 @@ module.exports.adapimageHandler = function ({ ele, options, on }) {
                 }
             } else if (e.w < e.h) {
                 //以高为准，宽100%
-                if (scale.h = parent.h) {
+                if (scale.h > parent.h) {
                     _this.css({
                         width: "100%",
                         height: "auto",

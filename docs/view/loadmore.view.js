@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2020-12-24 17:40:46
+ * @LastEditTime : 2021-12-27 22:28:51
  * @Description  :
  */
 
@@ -20,7 +20,7 @@ var loadmore = hope.loadmore({
         offset:30
     },
     params: {
-        url: 'mock/list1.json',
+        url: 'mock/list_1.json',
         dataType: "json",
         type: 'get',
         data: {
@@ -32,7 +32,7 @@ var loadmore = hope.loadmore({
         var data = res.data;
         var template = '';
         for (var i = 0; i < data.length; i++) {
-            template += "<p>" + data[i].goodsName + "|" + data[i].goodsStar + "</p>"
+            template += "<p>" + data[i].goodsName + "</p>"
         }
         $('#loadlist').append(template);
         return {

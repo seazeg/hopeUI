@@ -46,15 +46,15 @@
 }
 
 .docs-grid-demo-bg1 {
-    background: #2db4ee;
+    background: #ffa69e;
 }
 
 .docs-grid-demo-bg2 {
-    background: #6ac9f1;
+    background: #faf3dd;
 }
 
 .docs-grid-demo-bg3 {
-    background: #9adefc;
+    background: #b8f2e6;
 }
 
 .docs-content .hopeui-row {
@@ -190,9 +190,9 @@
 .nav li {
     width: calc(100%/5 - 7.5px);
     height: 50px;
-    color: red;
+    color: #6ac9f1;
     display: inline-block;
-    border: 1px solid red;
+    border: 1px solid #6ac9f1;
     cursor: pointer;
     text-align: center;
     line-height: 50px;
@@ -201,26 +201,27 @@
 }
 
 .nav li:hover {
-    background: #ccc;
+    background: #6ac9f1;
+    color:#fff;
 }
 
 .anchor_module_a {
     height: 400px;
-    background: red;
+    background: #ffadad;
 }
 .anchor_module_b {
     height: 600px;
-    background: yellow;
+    background: #ffd6a5;
 }
 .anchor_module_c {
     height: 200px;
-    background: green;
+    background: #fdffb6;
 }
 .anchor_module_d {
     height: 900px;
-    background: blue;
+    background: #caffbf;
 }
 .anchor_module_e {
     height: 900px;
-    background: pink;
+    background: #9bf6ff;
 }

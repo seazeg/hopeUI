@@ -1,26 +1,26 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2020-12-04 17:14:17
+ * @LastEditTime : 2021-12-27 22:27:43
  * @Description  :
  */
 export const viewinfo = {
-    message: `
+           message: `
 <button type="button" class="hopeui-btn" id="open1">
     消息弹框
 </button>`,
 
-    ifm: `
+           ifm: `
 <button type="button" class="hopeui-btn" id="open2">
     ifm嵌套
 </button>`,
 
-    drag: `
+           drag: `
 <button type="button" class="hopeui-btn" id="open3">
     可拖拽
 </button>`,
 
-    messageJS: `
+           messageJS: `
     document.querySelector("#open1").onclick = function() {
         hope.layer({
             options: {
@@ -35,11 +35,12 @@ export const viewinfo = {
         });
     };`,
 
-    ifmJS:`
+           ifmJS: `
     document.querySelector("#open2").onclick = function() {
         let ly = hope.layer({
             options: {
                 title: "iframe弹框",
+                width:"375px",
                 content: '<iframe id="frameContent" style="width:375px;height:800px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
                 isFullScreen:false
             },
@@ -51,13 +52,14 @@ export const viewinfo = {
         });
     };`,
 
-    dragJS:`
+           dragJS: `
     document.querySelector("#open3").onclick = function() {
         let ly = hope.layer({
             options: {
                 title: "可拖拽弹框",
+                width:"800px",
                 content:
-                    '<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596605654660&di=3efa3194330834b16d1edce806f3ace4&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201105%2F17%2F113554rnu40q7nbgnn3lgq.jpg" style="width:800px;height:500px" />',
+                    '<img src="img/demo1.jpeg" style="width:800px;height:500px" />',
                 isMask: false,
                 isDrag: true,
             },
@@ -67,7 +69,5 @@ export const viewinfo = {
                 },
             },
         });
-    };`
-
-
-};
+    };`,
+       };

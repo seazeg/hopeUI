@@ -1,25 +1,26 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2021-09-09 13:46:46
+ * @LastEditTime : 2021-12-27 22:30:56
  * @Description  :
  */
 
 export const viewinfo = {
-    general: `
+           general: `
     <div id="pagelist"></div>
     <div id="pager">
     </div>
     `,
-    generalJS:`
+           generalJS: `
     var mypager = hope.pager({
         ele: "#pager",
         options: {
             omit: 5, //最多保留多少按钮,奇数
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
+            staticMode:true
         },
         params: {
-            url: "mock/list1.json",
+            url: "mock/list.json",
             dataType: "json",
             type: "get",
             data: {
@@ -49,12 +50,12 @@ export const viewinfo = {
         },
     });
     `,
-    extend: `
+           extend: `
     <div id="pagelist2"></div>
     <div id="pager2">
     </div>
     `,
-    extendJS:`
+           extendJS: `
     var mypager2 = hope.pager({
         ele: "#pager2",
         options: {
@@ -63,9 +64,10 @@ export const viewinfo = {
             nextName: "next",
             pageMapping: "pageNo", //当前页码字段的映射，默认pageNo
             extend: true,
+            staticMode:true
         },
         params: {
-            url: "mock/list1.json",
+            url: "mock/list.json",
             dataType: "json",
             type: "get",
             data: {
@@ -80,8 +82,6 @@ export const viewinfo = {
                 template +=
                     "<p>" +
                     data[i].goodsName +
-                    "|" +
-                    data[i].goodsStar +
                     "</p>";
             }
             $("#pagelist2").html(template);
@@ -100,5 +100,4 @@ export const viewinfo = {
     //跳转到第10页
     mypager2.jump(2);
     `,
-
-}
+       };
