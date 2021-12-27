@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:34:52
- * @LastEditTime : 2021-09-24 15:43:14
+ * @LastEditTime : 2021-12-27 14:10:02
  * @Description  :
  */
 const Mock = require("mockjs");
@@ -13,7 +13,7 @@ for (var i = 1; i <= 12; i++) {
         // 20条数据
         "data|20": [
             {
-                goodsName: i + "_" + i,
+                goodsName: `内容内容内容内容内容内容内容内容内容内容内容内容内容内容_${i}`,
             },
         ],
         pageNo: i,
@@ -22,7 +22,7 @@ for (var i = 1; i <= 12; i++) {
     });
 
     fs.writeFile(
-        `../dist/assets/page/list${i}.json`,
+        `../dist/assets/page/list_${i}.json`,
         JSON.stringify(data),
         "utf-8",
         function (err) {
