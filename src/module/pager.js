@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-12 17:02:59
- * @LastEditTime : 2021-12-03 11:18:46
+ * @LastEditTime : 2021-12-27 13:42:26
  * @Description  : 分页
  */
 
@@ -201,6 +201,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                             let thisPageNum = parseInt(
                                 $(this).attr("hopeui-num")
                             );
+
                             if (pageNo != thisPageNum) {
                                 if (options.staticMode) {
                                     let {
@@ -296,7 +297,7 @@ module.exports.pagerHandler = function ({ ele, options, params, reader, on }) {
                                             fileName,
                                             extend,
                                         } = urlHandler(params.url);
-
+                                        
                                         params.url = params.url.replace(
                                             origName,
                                             `${fileName.split("_")[0]}${
