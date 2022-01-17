@@ -21,7 +21,7 @@
   user-select: none;
 }
 .hopeui-pager span:hover {
-  color: #2db4ee;
+  color: #005aab;
   cursor: pointer;
 }
 .hopeui-pager .hopeui-pager-omit {
@@ -81,19 +81,19 @@
   font-size: 12px;
 }
 .hopeui-pager .hopeui-pager-jump button:hover {
-  color: #2db4ee;
+  color: #005aab;
 }
 .hopeui-pager .hopeui-pager-disabled {
   color: #d2d2d2 !important;
   cursor: not-allowed !important;
 }
 .hopeui-pager .hopeui-pager-cur {
-  background-color: #2db4ee;
+  background-color: #005aab;
   color: #ffffff;
   border: 1px;
   border-width: 1px;
   border-style: solid;
-  border-color: #2db4ee;
+  border-color: #005aab;
 }
 .hopeui-pager .hopeui-pager-cur:hover {
   color: #ffffff;

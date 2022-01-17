@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-17 15:24:11
+ * @LastEditTime : 2022-01-17 16:16:44
  * @Description  : 文本框
  */
 
@@ -24,9 +24,14 @@ module.exports.suggestHandler = function ({
         $dom = $(ele);
     }
     function getData(params, reader, obj) {
-        params.data = {};
+        // params.data = {};
         params.data[options.searchField] = obj.prev().val();
-
+        if (on && on.sendBefore) {
+            params.data[options.searchField] = on.sendBefore({
+                value: obj.prev().val(),
+                eventName: "sendBefore",
+            });
+        }
         $.ajax(
             Object.assign(params, {
                 success: function (data) {
