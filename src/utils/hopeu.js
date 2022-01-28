@@ -2323,7 +2323,6 @@ hopeu["plug"]("ajax", function ($) {
 
             try {
                 for (var i in o.headers) xhr.setRequestHeader(i, o.headers[i]);
-                debugger
                 if (o.csrf) {
                     var date = new Date();
                     date.setTime(date.getTime() + 10 * 1000);
