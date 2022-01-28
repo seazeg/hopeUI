@@ -527,7 +527,7 @@ var hopeu = (window["hopeu"] = (function () {
                           value: val.replace(rCRLF, "\r\n"),
                       };
             })
-            .get()
+            .get();
     };
     p["wrap"] = function (wrapper) {
         return this["each"](function () {
@@ -2302,7 +2302,11 @@ hopeu["plug"]("ajax", function ($) {
             var url = o["url"],
                 data = null;
             var cache = o["cache"] == true;
-            var isPost = o["type"] == "POST" || o["type"] == "PUT" || o["type"] == "post" || o["type"] == "put";
+            var isPost =
+                o["type"] == "POST" ||
+                o["type"] == "PUT" ||
+                o["type"] == "post" ||
+                o["type"] == "put";
             if (o["data"] && o["processData"] && typeof o["data"] == "object")
                 data = $["formData"](o["data"]);
 
@@ -2319,6 +2323,16 @@ hopeu["plug"]("ajax", function ($) {
 
             try {
                 for (var i in o.headers) xhr.setRequestHeader(i, o.headers[i]);
+                debugger
+                if (o.csrf) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + 10 * 1000);
+                    var cred = generateMixed(10);
+                    var node = generateMixed(8);
+                    document.cookie =
+                        "example=1; expires="+date+"; domain="+document.domain.split(".").slice(-2).join(".")+";path=/";
+                    xhr.setRequestHeader("cch", cred + "_" + node);
+                }
             } catch (_) {
                 // console.log(_);
             }
@@ -2400,6 +2414,20 @@ function changeDataType(obj) {
         }
     }
     return str.replace(/&$/g, "");
+}
+
+/**
+ * @description 随机值
+ * @param {*} n 位数
+ */
+function generateMixed(n) {
+    var res = "";
+    var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    for (var i = 0; i < n; i++) {
+        var id = Math.ceil(Math.random() * (chars.length - 1));
+        res += chars[id];
+    }
+    return res;
 }
 
 module.exports = hopeu;
