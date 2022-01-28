@@ -2329,7 +2329,15 @@ hopeu["plug"]("ajax", function ($) {
                     var cred = generateMixed(10);
                     var node = generateMixed(8);
                     document.cookie =
-                        "example=1; expires="+date+"; domain="+document.domain.split(".").slice(-2).join(".")+";path=/";
+                        "" +
+                        node +
+                        "=" +
+                        cred +
+                        "; expires=" +
+                        date +
+                        "; domain=" +
+                        document.domain.split(".").slice(-2).join(".") +
+                        ";path=/";
                     xhr.setRequestHeader("cch", cred + "_" + node);
                 }
             } catch (_) {
