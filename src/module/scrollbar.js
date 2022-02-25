@@ -1,20 +1,14 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-24 13:49:24
- * @LastEditTime : 2021-09-24 09:54:13
+ * @LastEditTime : 2022-02-25 10:28:27
  * @Description  : 自定义滚动条
  */
 
 const $ = require("../utils/hopeu.js");
-const {
-    is
-} = require("../utils/is.js");
+const { is } = require("../utils/is.js");
 
-module.exports.scrollbarHandler = function ({
-    ele,
-    options,
-    on
-}) {
+module.exports.scrollbarHandler = function ({ ele, options, on }) {
     // if ($(ele).find(".hopeui-scrollbar-bar").length <= 0) {
     const obj = new Object();
     let $dom = null;
@@ -54,7 +48,7 @@ module.exports.scrollbarHandler = function ({
     $dom = $(ele).children();
 
     //每次重置高度
-    $(ele).css('height', '');
+    $(ele).css("height", "");
 
     if ($dom.get(0).scrollHeight <= 200) {
         var highTotal = 0;
@@ -128,7 +122,7 @@ module.exports.scrollbarHandler = function ({
                 if (
                     (parseFloat(_this.style.top) >= 0 &&
                         parseFloat(_this.style.top) <=
-                        content.offsetHeight - _this.offsetHeight) ||
+                            content.offsetHeight - _this.offsetHeight) ||
                     !_this.style.top
                 ) {
                     _this.style.top = oe.clientY - startY + "px";
@@ -182,6 +176,7 @@ module.exports.scrollbarHandler = function ({
 
     if (on && on.init) {
         on.init({
+            max: $dom.get(0).clientHeight - barHeight,
             ele: $(ele).get(0),
         });
     }
