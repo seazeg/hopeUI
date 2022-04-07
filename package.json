@@ -1,6 +1,6 @@
 {
     "name": "hopeui",
-    "version": "1.0.5",
+    "version": "1.0.5.2",
     "description": "HopeUI",
     "main": "hopeui.js",
     "scripts": {

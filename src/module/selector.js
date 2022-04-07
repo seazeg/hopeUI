@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-12-23 16:43:14
+ * @LastEditTime : 2022-04-07 15:57:50
  * @Description  : 下拉框
  */
 
@@ -29,7 +29,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             let template = `<div class="hopeui-form-select" name="${
                 selector.name
             }"><div class="hopeui-select-title"><input type="selectText" placeholder="${
-                options && options.placeholder ? options.placeholder: "请选择"
+                options && options.placeholder ? options.placeholder : "请选择"
             }" unselectable="on" ${
                 options && options.searchMode ? "" : "readonly"
             } value="" hope-value="" hope-type="selector" class="hopeui-input"/><i class="hopeui-edge ${
@@ -94,15 +94,13 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                                 options && options
                                     ? "title=" + item.innerText
                                     : ""
-                            } hope-value="${item.value}"><span class="select__name">${
+                            } hope-value="${
+                                item.value
+                            }"><span class="select__name">${
                                 item.innerText
                             }</span></div>`;
                         }
                     }
-
-        
-                    
-
                 });
 
             template += `</div></div></div>`;
@@ -116,10 +114,12 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     .attr("hope-value", tempSelectedVal.val);
             }
 
-            if(options&& options.hideItemIndex){
-                newEle.find(".option").eq(options.hideItemIndex - 1 || 0).addClass('hopeui-hide');
+            if (options && options.hideItemIndex) {
+                newEle
+                    .find(".option")
+                    .eq(options.hideItemIndex - 1 || 0)
+                    .addClass("hopeui-hide");
             }
-           
 
             if (!is.phone()) {
                 $(selector).addClass("hopeui-hide");
@@ -128,9 +128,11 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     .addClass("hopeui-select-phone")
                     .parent()
                     .addClass("hopeui-relative");
-                $(selector).off().on("change", function (e) {
-                    newEle.find("input").val($(this).val());
-                });
+                $(selector)
+                    .off()
+                    .on("change", function (e) {
+                        newEle.find("input").val($(this).val());
+                    });
             }
 
             if (is.ie() <= 9) {
@@ -208,7 +210,8 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             if (options && options.searchMode) {
                 newEle
                     .find("input[hope-type=selector]")
-                    .off().on("keyup", function (e) {
+                    .off()
+                    .on("keyup", function (e) {
                         if (!is.phone()) {
                             let list = $(this)
                                 .parent()
@@ -255,77 +258,98 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             }
 
             //绑定自定义option的点击事件
-            newEle.find(".option").off().on("click", function (e) {
-                if (e.stopPropagation) {
-                    e.stopPropagation();
-                } else if (window.event) {
-                    window.event.cancelBubble = true;
-                }
-
-                let _this = $(this);
-                handle(selector, newEle, _this);
-                if (is.ie() <= 9) {
-                    if (newEle.find("input").val()) {
-                        newEle
-                            .find("input")
-                            .next(".hopeui-placeholder")
-                            .addClass("hopeui-hide");
-                    } else {
-                        newEle
-                            .find("input")
-                            .next(".hopeui-placeholder")
-                            .removeClass("hopeui-hide");
+            newEle
+                .find(".option")
+                .off()
+                .on("click", function (e) {
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
                     }
-                }
 
-                utils.validation(selector, "pass", null, "select-one");
-                //选中options后回调
-                if (on && on.change) {
-                    on.change({
-                        originalParentEle: selector,
-                        virtualParentEle: selector.nextSibling,
-                        targetEle: e.target,
-                        ele: obj,
-                        label: _this.text(),
-                        value: _this.attr("hope-value"),
-                        name: _this.parents(".hopeui-form-select").attr("name"),
-                        group: _this.attr("hope-group"),
-                        groupSort: _this.attr("hope-group-sort"),
-                        eventName: "change",
-                    });
-                }
-            });
+                    let _this = $(this);
+                    handle(selector, newEle, _this);
+                    if (is.ie() <= 9) {
+                        if (newEle.find("input").val()) {
+                            newEle
+                                .find("input")
+                                .next(".hopeui-placeholder")
+                                .addClass("hopeui-hide");
+                        } else {
+                            newEle
+                                .find("input")
+                                .next(".hopeui-placeholder")
+                                .removeClass("hopeui-hide");
+                        }
+                    }
 
-            if (is.phone()) {
-                $(this).off().on("change", function (e) {
-                    newEle
-                        .find(".hopeui-input")
-                        .val(
-                            $(this)
-                                .find("option")
-                                .eq($(this).get(0).selectedIndex)
-                                .text()
-                        );
                     utils.validation(selector, "pass", null, "select-one");
+                    //选中options后回调
                     if (on && on.change) {
                         on.change({
                             originalParentEle: selector,
-                            virtualParentEle: null,
+                            virtualParentEle: selector.nextSibling,
                             targetEle: e.target,
                             ele: obj,
-                            label: $(this)
-                                .find("option")
-                                .eq($(this).get(0).selectedIndex)
-                                .text(),
-                            value: $(this).val(),
+                            label: _this.text(),
+                            value: _this.attr("hope-value"),
+                            name: _this
+                                .parents(".hopeui-form-select")
+                                .attr("name"),
+                            group: _this.attr("hope-group"),
+                            groupSort: _this.attr("hope-group-sort"),
                             eventName: "change",
                         });
                     }
                 });
+
+            if (is.phone()) {
+                $(this)
+                    .off()
+                    .on("change", function (e) {
+                        newEle
+                            .find(".hopeui-input")
+                            .val(
+                                $(this)
+                                    .find("option")
+                                    .eq($(this).get(0).selectedIndex)
+                                    .text()
+                            );
+                        utils.validation(selector, "pass", null, "select-one");
+                        if (on && on.change) {
+                            on.change({
+                                originalParentEle: selector,
+                                virtualParentEle: null,
+                                targetEle: e.target,
+                                ele: obj,
+                                label: $(this)
+                                    .find("option")
+                                    .eq($(this).get(0).selectedIndex)
+                                    .text(),
+                                value: $(this).val(),
+                                eventName: "change",
+                            });
+                        }
+                    });
             }
 
             //点击select区域外关闭下拉列表
-            $(document).off().on("click", function (e) {
+            // $(document).on("click", function (e) {
+            //     if ($(newEle).hasClass("hopeui-form-selected")) {
+            //         $(newEle).removeClass("hopeui-form-selected");
+            //         //下拉列表关闭回调
+            //         if (on && on.close) {
+            //             on.close({
+            //                 targetEle: $dom[0],
+            //                 ele: obj,
+            //                 eventName: "close",
+            //             });
+            //         }
+            //     }
+            // });
+
+            $(newEle).on("mouseleave", function () {
                 if ($(newEle).hasClass("hopeui-form-selected")) {
                     $(newEle).removeClass("hopeui-form-selected");
                     //下拉列表关闭回调
@@ -399,12 +423,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
     obj.clear = function (callback) {
         let thisEle = $dom;
-        utils.validation(
-            thisEle.get(0),
-            "pass",
-            null,
-            "select-one"
-        );
+        utils.validation(thisEle.get(0), "pass", null, "select-one");
         thisEle.each(function (i, ele) {
             handle(ele, $(this).next(), $(this).next().find(".option").eq(0));
 
