@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-04-07 15:57:50
+ * @LastEditTime : 2022-04-07 17:21:31
  * @Description  : 下拉框
  */
 
@@ -336,6 +336,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
 
             //点击select区域外关闭下拉列表
             // $(document).on("click", function (e) {
+            //     console.log(e.toElement);
             //     if ($(newEle).hasClass("hopeui-form-selected")) {
             //         $(newEle).removeClass("hopeui-form-selected");
             //         //下拉列表关闭回调
@@ -349,19 +350,22 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
             //     }
             // });
 
-            $(newEle).on("mouseleave", function () {
-                if ($(newEle).hasClass("hopeui-form-selected")) {
-                    $(newEle).removeClass("hopeui-form-selected");
-                    //下拉列表关闭回调
-                    if (on && on.close) {
-                        on.close({
-                            targetEle: $dom[0],
-                            ele: obj,
-                            eventName: "close",
-                        });
+            $(newEle)
+                .parent()
+                .on("mouseleave", function (e) {
+                    console.log(e.toElement);
+                    if ($(newEle).hasClass("hopeui-form-selected")) {
+                        $(newEle).removeClass("hopeui-form-selected");
+                        //下拉列表关闭回调
+                        if (on && on.close) {
+                            on.close({
+                                targetEle: $dom[0],
+                                ele: obj,
+                                eventName: "close",
+                            });
+                        }
                     }
-                }
-            });
+                });
 
             //是否是初次是初始化
             if (status) {

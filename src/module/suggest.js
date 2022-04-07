@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-02-10 11:01:04
+ * @LastEditTime : 2022-04-07 17:48:23
  * @Description  : 文本框
  */
 
@@ -75,15 +75,17 @@ module.exports.suggestHandler = function ({
                                 }
                             });
                         } else {
-                            obj.find(".hopeui-suggest-list")
-                                .html(
-                                    `<div class="option" hope-value="">${
-                                        options.noMatchName ||
-                                        "-- 没有匹配的内容 --"
-                                    }</div>`
-                                )
-                                .parent()
-                                .css("height", "auto");
+                            if (options.noMatchName) {
+                                obj.find(".hopeui-suggest-list")
+                                    .html(
+                                        `<div class="option" hope-value="">${
+                                            options.noMatchName ||
+                                            "-- 没有匹配的内容 --"
+                                        }</div>`
+                                    )
+                                    .parent()
+                                    .css("height", "auto");
+                            }
                         }
                     }
                 },
