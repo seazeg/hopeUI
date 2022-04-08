@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-04-07 17:48:23
+ * @LastEditTime : 2022-04-08 09:41:32
  * @Description  : 文本框
  */
 
@@ -48,6 +48,7 @@ module.exports.suggestHandler = function ({
                                 html += `<div class="option" hope-value="${item}">${item}</div>`;
                             }
                             obj.find(".hopeui-suggest-list").html(html);
+                            obj.removeClass("hopeui-hide");
                             scrollbarHandler({
                                 ele: obj,
                                 options: {
@@ -74,30 +75,32 @@ module.exports.suggestHandler = function ({
                                     });
                                 }
                             });
+                          
                         } else {
-                            if (options.noMatchName) {
-                                obj.find(".hopeui-suggest-list")
-                                    .html(
-                                        `<div class="option" hope-value="">${
-                                            options.noMatchName ||
-                                            "-- 没有匹配的内容 --"
-                                        }</div>`
-                                    )
-                                    .parent()
-                                    .css("height", "auto");
-                            }
+                            obj.addClass("hopeui-hide");
+                            // obj.find(".hopeui-suggest-list")
+                            //     .html(
+                            //         `<div class="option" hope-value="">${
+                            //             options.noMatchName ||
+                            //             "-- 没有匹配的内容 --"
+                            //         }</div>`
+                            //     )
+                            //     .parent()
+                            //     .css("height", "auto")
+                            //     .hide();
                         }
                     }
                 },
                 error: function () {
-                    obj.find(".hopeui-suggest-list")
-                        .html(
-                            `<div class="option" hope-value="">${
-                                options.noMatchName || "-- 没有匹配的内容 --"
-                            }</div>`
-                        )
-                        .parent()
-                        .css("height", "auto");
+                    obj.addClass("hopeui-hide");
+                    // obj.find(".hopeui-suggest-list")
+                    //     .html(
+                    //         `<div class="option" hope-value="">${
+                    //             options.noMatchName || "-- 没有匹配的内容 --"
+                    //         }</div>`
+                    //     )
+                    //     .parent()
+                    //     .css("height", "auto");
                 },
             })
         );
@@ -183,10 +186,10 @@ module.exports.suggestHandler = function ({
             });
             $this.on("keyup", function () {
                 if (!is.empty($(this).val())) {
-                    getData(params, reader, $this.next());
-                    $this
-                        .siblings(".hopeui-suggest")
-                        .removeClass("hopeui-hide");
+                    getData(params, reader, $this.siblings(".hopeui-suggest"));
+                    // $this
+                    //     .siblings(".hopeui-suggest")
+                    //     .removeClass("hopeui-hide");
                 } else {
                     $this.siblings(".hopeui-suggest").addClass("hopeui-hide");
                 }
