@@ -74,7 +74,7 @@
   color: #555555;
 }
 .hope-datepicker .day ul li.active {
-  background-color: #005aab;
+  background-color: #1ea7fd;
   color: #fff;
   border-radius: 100%;
 }
@@ -103,10 +103,10 @@
   font-size: 14px;
 }
 .hope-datepicker .month-list ul li:hover {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .month-list ul li.active {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .year-month .year .year-list {
   width: 100%;
@@ -129,10 +129,10 @@
   font-size: 14px;
 }
 .hope-datepicker .year-list ul li:hover {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .year-list ul li.active {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .year-list .year-change {
   margin-top: 3px;
@@ -186,11 +186,11 @@
   margin-left: -10px;
 }
 .hope-datepicker .time-list .warp .item:hover {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .time-list .warp .item.active {
   color: #fff;
-  background-color: #005aab;
+  background-color: #1ea7fd;
 }
 .hope-datepicker .time-list .group {
   margin: 20px 5px 0 5px;
@@ -203,7 +203,7 @@
   cursor: pointer;
 }
 .hope-datepicker .time-list .group .return:hover {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .time-list .group button {
   margin: 0;
@@ -221,10 +221,10 @@
   font-size: 14px;
 }
 .hope-datepicker .year-month span:hover {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .year-month span.active {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-datepicker .action {
   height: 50px;
@@ -237,7 +237,7 @@
   float: right;
   height: 36px;
   line-height: 36px;
-  background-color: #005aab;
+  background-color: #1ea7fd;
   color: #ffffff;
 }
 .hope-datepicker .action button.changeResult {
@@ -245,7 +245,7 @@
   float: right;
   height: 36px;
   line-height: 36px;
-  background-color: #005aab;
+  background-color: #1ea7fd;
   color: #ffffff;
 }
 .hope-datepicker .action button.clear {
@@ -265,7 +265,7 @@
   font-size: 14px;
 }
 .hope-datepicker .action span.selectTime:hover {
-  color: #005aab;
+  color: #1ea7fd;
 }
 .hope-mobile-datepicker {
   position: relative;
