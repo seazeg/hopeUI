@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-05 17:00:27
+ * @LastEditTime : 2022-04-18 09:44:54
  * @Description  : 响应式截断省略函数
  */
 
@@ -26,9 +26,10 @@ module.exports.omitHandler = function ({ ele, options, on }) {
                     _this.text(_this.attr("hope-omit-title"));
                 }
             }
-
+    
             if (!bkp) {
                 if (winWidth >= 1200) {
+                 
                     automit(_this, _this.attr("hope-omit-xl"));
                 } else if (winWidth < 1200 && winWidth > 750) {
                     automit(_this, _this.attr("hope-omit-md"));
@@ -65,6 +66,7 @@ module.exports.omitHandler = function ({ ele, options, on }) {
         //             row
         //     );
         // } else {
+  
         maxHeight = parseFloat(_this.css("lineHeight")) * row;
         // }
 

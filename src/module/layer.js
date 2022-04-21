@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-11-15 10:57:11
+ * @LastEditTime : 2022-04-18 09:22:25
  * @Description  : 弹窗
  */
 
@@ -11,7 +11,7 @@ const { is } = require("../utils/is.js");
 module.exports.layerHandler = function ({ options, on }) {
     const obj = new Object();
     options = {
-        width: options.width || "300",
+        width: options.width || "800",
         title: options.title || "",
         content: options.content || "",
         isMask: is.empty(options.isMask) ? true : options.isMask,
@@ -31,7 +31,7 @@ module.exports.layerHandler = function ({ options, on }) {
         offsetBottom: options.offsetBottom || 30,
         maskClose: options.maskClose || false,
         isAutoOpen: is.empty(options.isAutoOpen) ? true : options.isAutoOpen,
-        customClass: options.customClass || ''
+        customClass: options.customClass || "",
     };
 
     let self = null,
@@ -39,7 +39,7 @@ module.exports.layerHandler = function ({ options, on }) {
 
     //重新定位函数
     let location = (layer) => {
-        layer.css("width", options.width);
+        layer.css("maxWidth", options.width + "px");
 
         if (layer.height() > document.documentElement.clientHeight) {
             layer.css({
@@ -139,8 +139,7 @@ module.exports.layerHandler = function ({ options, on }) {
     };
 
     let open = () => {
-        let template =
-            `<div class="hopeui-layer-warp"><div class="hopeui-layer ${options.customClass}"><div class="hopeui-layer-inner">`;
+        let template = `<div class="hopeui-layer-warp"><div class="hopeui-layer ${options.customClass}"><div class="hopeui-layer-inner">`;
         if (options.title) {
             template += `<div class="hopeui-layer-title"><span>${options.title}</span><i class="hopeui-layer-close hopeui-icon hopeui-icon-close"></i></div>`;
         }
@@ -265,7 +264,7 @@ module.exports.layerHandler = function ({ options, on }) {
         if (callback) {
             callback();
         }
-    }
+    };
 
     if (on && on.init) {
         on.init({
