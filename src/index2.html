@@ -278,6 +278,24 @@
     </ul>
     <div style="padding-top:100px">
 
+            <div class="docs-box">
+            <div class="docs-title">
+                <fieldset>
+                    <legend><a name="icon">selector</a></legend>
+                </fieldset>
+            </div>
+            <div class="docs-content" style="width:100px">
+                  <div class="hopeui-input-block">
+                            <input type="checkbox" checked class="testck" name="task" value="打桩" hope-verify="required" />
+                            <input type="checkbox" class="testck"  name="task" value="钓鱼"" hope-verify=" required" />
+                            <input type="checkbox" class="testck"  name="task" value="看电视" hope-verify="required" />
+                        </div>
+            </div>
+        </div>
+
+      
+
+
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
@@ -2000,16 +2018,19 @@
         });
     };
 
-    // var select_normal = hope.checkbox({
-    //     on: {
-    //         change: function (e) {
-    //             //////console.log(e);
-    //         },
-    //         toggle: function (e) {
-    //             //////console.log(e);
-    //         },
-    //     },
-    // });
+    var select_normal = hope.checkbox({
+        ele:".testck",
+        on: {
+            change: function (e) {
+                //////console.log(e);
+            },
+            toggle: function (e) {
+                //////console.log(e);
+            },
+        },
+    });
+
+    // select_normal.val('')
 
     // select_normal.val({
     //     subject: {
@@ -2163,6 +2184,7 @@
                 on: {
                     init: function (e) {
                         //////console.log(e);
+                        console.log('ch',e);
                     },
                     change: function (e, checked) {
                         console.log(checked);

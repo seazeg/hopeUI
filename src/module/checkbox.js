@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-09-09 10:01:44
+ * @LastEditTime : 2022-04-29 13:48:56
  * @Description  : 复选框
  */
 
@@ -23,7 +23,11 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
     $dom.each(function () {
         let newEle,
             checkbox = $(this)[0];
-        let template = `<div class="hopeui-noUserSelect hopeui-form-checkbox"><span>${checkbox.value}</span><i class="hopeui-icon hopeui-icon-ok"></i></div>`;
+        let template = `<div class="hopeui-noUserSelect hopeui-form-checkbox ${
+            checkbox.checked ? "hopeui-form-checked" : ""
+        }"><span>${
+            checkbox.value
+        }</span><i class="hopeui-icon hopeui-icon-ok"></i></div>`;
 
         $(checkbox).addClass("hopeui-hide");
 
@@ -80,6 +84,8 @@ module.exports.checkboxHandler = function ({ ele, options, on }) {
             if (callback) {
                 callback();
             }
+        } else {
+            obj.clear();
         }
     };
 
