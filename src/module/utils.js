@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2022-05-12 16:02:38
+ * @LastEditTime : 2022-05-12 17:16:20
  * @Description  : 常用工具函数
  */
 
@@ -478,8 +478,13 @@ module.exports.utilsHandler = {
             return false;
         };
     },
-    //字体缩放
-    scaleFont: function (ele, options, callback) {
+    //元素缩放
+    scaleEle: function (ele, options, callback) {
+        /*
+            minWidth 最小宽度
+            maxWidth 最大宽度
+            styles:‘xx,xx,xx’ 需要缩放的样式清单 
+         */
         function scale() {
             let screenWidth = options.maxWidth;
             if ($(window).width() < options.minWidth) {
@@ -490,22 +495,26 @@ module.exports.utilsHandler = {
             ) {
                 screenWidth = $(window).width();
             }
+
             $(ele).each(function () {
                 let _this = $(this);
-                _this.css(
-                    "fontSize",
-                    (parseInt(_this.attr("hope-data-fontSize")) * screenWidth) /
-                        1920
-                );
+                let list = _this.attr("hope-scale-styles").split(",");
+                list.forEach(function (name, index) {
+                    _this.css(
+                        name,
+                        (parseInt(_this.css(list[index])) * screenWidth) / 1920
+                    );
+                });
             });
             if (callback) {
                 callback();
             }
         }
-        scale();
+
         $(ele).each(function () {
-            $(this).attr("hope-data-fontSize", $(this).css("fontSize"));
+            $(this).attr("hope-scale-styles", options.styles);
         });
+        scale();
         $(window).resize(function () {
             scale();
         });

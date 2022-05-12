@@ -69,11 +69,13 @@
             top: 50%;
             position: absolute;
             transition: all 0.9s;
+            padding:10px;
         }
         .boxbox {
             width: 100%;
             height: 500px;
             transition: all 0.9s;
+            
         }
     </style>
 
@@ -87,9 +89,7 @@
             </div>
             <div class="docs-content">
                 <div class="boxbox">
-                    <span hope-scaleFont hope-vertical class="mfontSize"
-                        >八格牙路</span
-                    >
+                    <span class="mfontSize">八格牙路</span>
                 </div>
             </div>
         </div>
@@ -505,9 +505,13 @@
     </body>
 
     <script>
-        hope.utils.scaleFont(1200, 1920, function () {
-            hope.utils.verticalCenter();
-        });
+        hope.utils.scaleEle(
+            ".mfontSize",
+            { minWidth: 1200, maxWidth: 1920, styles: "fontSize,padding" },
+            function () {
+                hope.utils.verticalCenter(".mfontSize");
+            }
+        );
 
         hope.suggest({
             ele: ".js_hopeui_input",
