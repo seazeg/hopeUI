@@ -1,11 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2021-09-22 18:03:47
+ * @LastEditTime : 2022-05-12 16:02:38
  * @Description  : 常用工具函数
  */
 
-// const $ = require("../utils/hopeu.js");
+const $ = require("../utils/hopeu.js");
 
 module.exports.utilsHandler = {
     //判断是什么浏览器
@@ -125,7 +125,9 @@ module.exports.utilsHandler = {
             case "upper":
                 return /^[A-Z]+$/.test(value);
             case "phone":
-                return /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/.test(value);
+                return /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/.test(
+                    value
+                );
             case "tel":
                 return /^0\d{2,3}-\d{7,8}(-\d{1,6})?$/.test(value);
             case "url":
@@ -475,5 +477,56 @@ module.exports.utilsHandler = {
             }
             return false;
         };
+    },
+    //字体缩放
+    scaleFont: function (ele, options, callback) {
+        function scale() {
+            let screenWidth = options.maxWidth;
+            if ($(window).width() < options.minWidth) {
+                screenWidth = options.maxWidth;
+            } else if (
+                $(window).width() >= options.minWidth &&
+                $(window).width() <= options.maxWidth
+            ) {
+                screenWidth = $(window).width();
+            }
+            $(ele).each(function () {
+                let _this = $(this);
+                _this.css(
+                    "fontSize",
+                    (parseInt(_this.attr("hope-data-fontSize")) * screenWidth) /
+                        1920
+                );
+            });
+            if (callback) {
+                callback();
+            }
+        }
+        scale();
+        $(ele).each(function () {
+            $(this).attr("hope-data-fontSize", $(this).css("fontSize"));
+        });
+        $(window).resize(function () {
+            scale();
+        });
+    },
+    //元素垂直居中
+    verticalCenter: function (ele, callback) {
+        function vertical() {
+            $(ele).each(function () {
+                let _this = $(this);
+                let h = _this.height();
+                _this.css("position", "absolute");
+                _this.css("top", "50%");
+                _this.css("marginTop", "-" + h / 2 + "px");
+            });
+            if (callback) {
+                callback();
+            }
+        }
+        vertical();
+        $(window).resize(function () {
+            vertical();
+        });
     },
 };
