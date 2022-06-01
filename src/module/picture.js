@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-08-05 16:59:45
+ * @LastEditTime : 2022-06-01 17:09:29
  * @Description  : 响应式图片
  */
 
@@ -20,16 +20,26 @@ module.exports.pictureHandler = function ({ ele, options, on }) {
 
             if (!bkp) {
                 if (winWidth >= 1200) {
-                    _this.attr("src", _this.attr("hope-xl-src"));
+                    if (_this.attr("src") != _this.attr("hope-xl-src")) {
+                        _this.attr("src", _this.attr("hope-xl-src"));
+                    }
                 } else if (winWidth < 1200 && winWidth > 750) {
-                    _this.attr("src", _this.attr("hope-md-src"));
+                    if (_this.attr("src") != _this.attr("hope-md-src")) {
+                        _this.attr("src", _this.attr("hope-md-src"));
+                    }
                 } else if (winWidth <= 750) {
-                    _this.attr("src", _this.attr("hope-xs-src"));
+                    if (_this.attr("src") != _this.attr("hope-xs-src")) {
+                        _this.attr("src", _this.attr("hope-xs-src"));
+                    }
                 }
             } else {
                 for (let key in bkp) {
                     if (winWidth >= bkp[key]) {
-                        _this.attr("src", _this.attr(`hope-${key}-src`));
+                        if (
+                            _this.attr("src") != _this.attr(`hope-${key}-src`)
+                        ) {
+                            _this.attr("src", _this.attr(`hope-${key}-src`));
+                        }
                         break;
                     }
                 }
