@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2022-05-12 17:16:20
+ * @LastEditTime : 2022-06-13 11:07:55
  * @Description  : 常用工具函数
  */
 
@@ -537,5 +537,27 @@ module.exports.utilsHandler = {
         $(window).resize(function () {
             vertical();
         });
+    },
+    //滚动到顶部
+    scrollToTop: function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    //页面滚动到某个元素
+    scrollToEL: function (el) {
+        let element = document.querySelector(el);
+        element.scrollIntoView({ behavior: "smooth" });
+    },
+    //获取当前页面滚动位置
+    getScrollPosition: function (el) {
+        let element = el ? el : window;
+        let x =
+            element.pageXOffset !== undefined
+                ? element.pageXOffset
+                : element.scrollLeft;
+        let y =
+            element.pageYOffset !== undefined
+                ? element.pageYOffset
+                : element.scrollTop;
+        return { x, y };
     },
 };
