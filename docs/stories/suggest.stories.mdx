@@ -52,9 +52,12 @@ import { viewinfo } from "../view/suggest.view.js";
 var list = res.data;
 var tmp = [];
 for (var i = 0; i < list.length; i++) {
-    tmp.push(list[i].goodsName);
+    tmp.push({
+        label: list[i].goodsName,
+        value: list[i].goodsName,
+    });
 }
-return tmp; //['hhhh','xxxx','333333']
+return tmp;
 ```
 
 ## 回调方法 on

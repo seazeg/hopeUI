@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-04-08 09:41:32
+ * @LastEditTime : 2022-07-11 16:15:58
  * @Description  : 文本框
  */
 
@@ -45,7 +45,7 @@ module.exports.suggestHandler = function ({
 
                         if (list.length > 0) {
                             for (let item of list) {
-                                html += `<div class="option" hope-value="${item}">${item}</div>`;
+                                html += `<div class="option" hope-value="${item.value}">${item.label}</div>`;
                             }
                             obj.find(".hopeui-suggest-list").html(html);
                             obj.removeClass("hopeui-hide");

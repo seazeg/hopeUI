@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-04-07 17:21:31
+ * @LastEditTime : 2022-07-08 16:41:25
  * @Description  : 下拉框
  */
 
@@ -156,7 +156,10 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     paddingLeft: $this.css("paddingLeft") + 1,
                 });
             }
-
+            
+            newEle
+                .children(".hopeui-select-list")
+                .css("top", newEle.height() + 3 + "px");
             //单击后下拉列表事件
             if (!selector.getAttribute("noselect")) {
                 newEle.find(".hopeui-input").removeClass("hopeui-noSelect");
@@ -269,6 +272,7 @@ module.exports.selectorHandler = function ({ ele, options, on }) {
                     }
 
                     let _this = $(this);
+
                     handle(selector, newEle, _this);
                     if (is.ie() <= 9) {
                         if (newEle.find("input").val()) {

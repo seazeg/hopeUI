@@ -3,6 +3,13 @@
 > https://seazeg.github.io/hopeui/
 
 ---
+### ver 1.0.5.9
+
+-   修复selector组件，有间隙后移出关闭问题
+
+### ver 1.0.5.8
+
+-   修复selector组件，有间隙后移出关闭问题
 
 ### ver 1.0.5.7
 
