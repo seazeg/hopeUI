@@ -3,6 +3,11 @@
 > https://seazeg.github.io/hopeui/
 
 ---
+
+### ver 1.0.6.0
+
+-   修复lazyload懒加载组件，图片垂直居中问题。
+  
 ### ver 1.0.5.9
 
 -   修复suggest组件，每次下拉宽度增加问题。

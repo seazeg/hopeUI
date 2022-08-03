@@ -107,7 +107,7 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
                                         );
                                         break;
                                     }
-                                }
+                                }                                
                             }
                         }
 
