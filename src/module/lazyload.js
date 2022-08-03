@@ -1,15 +1,17 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-15 15:33:12
- * @LastEditTime : 2021-08-05 17:00:07
+ * @LastEditTime : 2022-08-03 18:12:03
  * @Description  : 图片懒加载 + 响应式图片 + 图片居中
  */
 
 const $ = require("../utils/hopeu.js");
+const { is } = require("../utils/is.js");
 
 module.exports.lazyloadHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let breakpoint = options.breakpoint;
+    let adapimage = is.empty(options.adapimage) ? true : options.adapimage
 
     function getImgNaturalDimensions(oImg, callback) {
         var nImg = new Image();
@@ -109,7 +111,7 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
                             }
                         }
 
-                        if (!options.adapimage) {
+                        if (adapimage) {
                             let _this = $(item);
                             getImgNaturalDimensions(_this.get(0), function (e) {
                                 let parent = {
