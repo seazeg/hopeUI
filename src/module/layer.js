@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-04-18 09:22:25
+ * @LastEditTime : 2022-08-22 12:44:56
  * @Description  : 弹窗
  */
 
@@ -39,7 +39,11 @@ module.exports.layerHandler = function ({ options, on }) {
 
     //重新定位函数
     let location = (layer) => {
-        layer.css("maxWidth", options.width + "px");
+        if (options.width.includes("%")) {
+            layer.css("maxWidth", options.width);
+        } else {
+            layer.css("maxWidth", parseInt(options.width) + "px");
+        }
 
         if (layer.height() > document.documentElement.clientHeight) {
             layer.css({

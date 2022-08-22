@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2021-12-27 22:27:43
+ * @LastEditTime : 2022-08-22 12:48:14
  * @Description  :
  */
 export const viewinfo = {
@@ -25,6 +25,7 @@ export const viewinfo = {
         hope.layer({
             options: {
                 title: "信息",
+                width:"300",
                 content:
                     "<div style='padding:20px;text-align: center;'>你好，你已经吃过了</div>",
                 defaultBtn: {
@@ -40,7 +41,7 @@ export const viewinfo = {
         let ly = hope.layer({
             options: {
                 title: "iframe弹框",
-                width:"375px",
+                width:"375",
                 content: '<iframe id="frameContent" style="width:375px;height:800px" src="http://test.haier.com/netcn/" frameborder=0 allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></iframe>',
                 isFullScreen:false
             },
@@ -57,7 +58,7 @@ export const viewinfo = {
         let ly = hope.layer({
             options: {
                 title: "可拖拽弹框",
-                width:"800px",
+                width:"800"
                 content:
                     '<img src="img/demo1.jpeg" style="width:800px;height:500px" />',
                 isMask: false,
