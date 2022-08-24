@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-31 15:32:44
- * @LastEditTime : 2022-08-22 12:48:14
+ * @LastEditTime : 2022-08-24 09:34:15
  * @Description  :
  */
 export const viewinfo = {
@@ -58,7 +58,7 @@ export const viewinfo = {
         let ly = hope.layer({
             options: {
                 title: "可拖拽弹框",
-                width:"800"
+                width:"800",
                 content:
                     '<img src="img/demo1.jpeg" style="width:800px;height:500px" />',
                 isMask: false,
