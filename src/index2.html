@@ -1401,20 +1401,20 @@
 
 </body>
 <script>
-    // hope.lazyload({
-    //     ele: '.lazyload',
-    //     options: {
-    //         responsive: true
-    //     },
-    //     on: {
-    //         loaded: function (e) {
-    //             $(e.ele).parent().addClass('hopeui-anim').addClass('hopeui-anim-up').css(
-    //                 'animationDuration', (($(e.ele).parent().attr('hope-time') / 1000) || 1 + 's'));
+    hope.lazyload({
+        ele: '.lazyload',
+        options: {
+            responsive: true
+        },
+        on: {
+            loaded: function (e) {
+                $(e.ele).parent().addClass('hopeui-anim').addClass('hopeui-anim-up').css(
+                    'animationDuration', (($(e.ele).parent().attr('hope-time') / 1000) || 1 + 's'));
 
-    //             // $(this).addClass('hopeui-anim').addClass('hopeui-anim-up').css('animationDuration', (($(this).attr('hope-time') / 1000) || 1 + 's'));
-    //         }
-    //     }
-    // })
+                // $(this).addClass('hopeui-anim').addClass('hopeui-anim-up').css('animationDuration', (($(this).attr('hope-time') / 1000) || 1 + 's'));
+            }
+        }
+    })
 
 
     hope.numup({

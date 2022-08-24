@@ -7,6 +7,7 @@
 ### ver 1.0.6.2
 
 -   utils 新增清除HTML标签[clearHtmlTag]方法
+-   优化lazyload懒加载的触发判定
 
 ### ver 1.0.6.1
 

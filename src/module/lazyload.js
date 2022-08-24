@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-15 15:33:12
- * @LastEditTime : 2022-08-03 18:12:03
+ * @LastEditTime : 2022-08-24 10:35:34
  * @Description  : 图片懒加载 + 响应式图片 + 图片居中
  */
 
@@ -11,7 +11,7 @@ const { is } = require("../utils/is.js");
 module.exports.lazyloadHandler = function ({ ele, options, on }) {
     const obj = new Object();
     let breakpoint = options.breakpoint;
-    let adapimage = is.empty(options.adapimage) ? true : options.adapimage
+    let adapimage = is.empty(options.adapimage) ? true : options.adapimage;
 
     function getImgNaturalDimensions(oImg, callback) {
         var nImg = new Image();
@@ -75,9 +75,22 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
 
             if (SWITCH) {
                 //getBoundingClientRect用于获取某个元素相对于视窗的位置集合。集合中有top, right, bottom, left等属性。
+                let throughImg = false;
                 rect = item.getBoundingClientRect();
-                // 图片一进入可视区，动态加载
-                if (rect.bottom >= 0 && rect.top < viewHeight) {
+
+                //判断是否穿过图片
+                if ($(item).parent().height() > 0 && rect.bottom < 0) {
+                    $(item).parent().height() >= Math.abs(rect.bottom)
+                        ? (throughImg = true)
+                        : null;
+                }
+
+                if (
+                    (rect.bottom >= 0 && rect.top < viewHeight) ||
+                    (throughImg && rect.top < viewHeight)
+                ) {
+                    // 图片一进入可视区，动态加载
+                    // rect.bottom >= 0 &&
                     (function () {
                         if (!options.responsive) {
                             item.src = item.getAttribute("hope-src");
@@ -107,7 +120,7 @@ module.exports.lazyloadHandler = function ({ ele, options, on }) {
                                         );
                                         break;
                                     }
-                                }                                
+                                }
                             }
                         }
 
