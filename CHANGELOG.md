@@ -1,6 +1,7 @@
 ## hopeUI API 文档地址：
 
 > https://seazeg.github.io/hopeui/
+> http://seazeg.gitee.io/hopeui/
 
 ---
 
