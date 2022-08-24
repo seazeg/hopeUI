@@ -3,6 +3,9 @@
     "version": "1.0.6.2",
     "description": "HopeUI",
     "main": "hopeui.js",
+    "directories": {
+        "doc": "docs"
+    },
     "scripts": {
         "dev": "npx webpack-dev-server --mode development --content-base ./dist --open",
         "server": "node server/app.js",
@@ -13,24 +16,29 @@
     },
     "author": "Evan.G <seazeg@126.com>",
     "repository": {
-        "type": "git"
+        "type": "git",
+        "url": "git+https://github.com/seazeg/hopeUI.git"
     },
     "license": "MIT",
-    "devDependencies": {
+    "bugs": {
+        "url": "https://github.com/seazeg/hopeUI/issues"
+    },
+    "homepage": "https://github.com/seazeg/hopeUI#readme",
+    "dependencies": {
         "@babel/core": "^7.10.5",
         "@babel/plugin-proposal-decorators": "^7.10.5",
         "@babel/plugin-transform-object-assign": "^7.10.4",
         "@babel/polyfill": "^7.10.4",
         "@babel/preset-env": "^7.10.4",
-        "@storybook/addon-actions": "^6.1.17",
-        "@storybook/addon-docs": "^6.1.17",
-        "@storybook/addon-knobs": "^6.1.17",
-        "@storybook/addon-storysource": "^6.1.17",
-        "@storybook/addon-viewport": "^6.1.17",
-        "@storybook/addons": "^6.1.17",
-        "@storybook/client-api": "^6.1.17",
-        "@storybook/html": "^6.1.17",
-        "@storybook/theming": "^6.1.17",
+        "@storybook/addon-actions": "^6.5.10",
+        "@storybook/addon-controls": "^6.5.10",
+        "@storybook/addon-docs": "^6.5.10",
+        "@storybook/addon-storysource": "^6.5.10",
+        "@storybook/addon-viewport": "^6.5.10",
+        "@storybook/addons": "^6.5.10",
+        "@storybook/client-api": "^6.5.10",
+        "@storybook/html": "^6.5.10",
+        "@storybook/theming": "^6.5.10",
         "babel-loader": "^8.1.0",
         "browser-sync": "^2.26.12",
         "connect-multiparty": "^2.2.0",
@@ -50,6 +58,7 @@
         "mockjs": "^1.1.0",
         "multer": "^1.4.2",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "shelljs": "^0.8.5",
         "ssi": "^0.3.0",
         "style-loader": "^1.2.1",
         "uglifyjs-webpack-plugin": "^2.1.1",
@@ -58,9 +67,5 @@
         "webpack": "^4.29.3",
         "webpack-cli": "^3.2.3",
         "webpack-dev-server": "^3.1.14"
-    },
-    "dependencies": {},
-    "directories": {
-        "doc": "docs"
     }
 }
