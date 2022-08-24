@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2022-06-13 11:07:55
+ * @LastEditTime : 2022-08-24 09:47:41
  * @Description  : 常用工具函数
  */
 
@@ -416,6 +416,14 @@ module.exports.utilsHandler = {
         s = s.replace(/&#40;/g, "(");
         s = s.replace(/&#41;/g, ")");
         return s;
+    },
+    //清除HTML标签
+    clearHtmlTag: function (str) {
+        let res = str;
+        res = res.replace(/<.*?>/g, "");
+        res = res.replace(/<.*?/g, "");
+        res = res.replace(/.*?>/g, "");
+        return res;
     },
     //获取相对路径的绝对路径
     getAbsoluteUrl: function (url) {

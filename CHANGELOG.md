@@ -4,6 +4,10 @@
 
 ---
 
+### ver 1.0.6.2
+
+-   utils 新增清除HTML标签[clearHtmlTag]方法
+
 ### ver 1.0.6.1
 
 -   修复layer组件width属性赋值错误
