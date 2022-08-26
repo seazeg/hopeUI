@@ -69,13 +69,12 @@
             top: 50%;
             position: absolute;
             transition: all 0.9s;
-            padding:10px;
+            padding: 10px;
         }
         .boxbox {
             width: 100%;
             height: 500px;
             transition: all 0.9s;
-            
         }
     </style>
 
@@ -272,7 +271,7 @@
                 <div>
                     <div
                         class="hopeui-zoom-thumb-wrapper"
-                        style="display: inline-block;"
+                        style="display: inline-block"
                     >
                         <img
                             id="hope_xxx"
@@ -520,8 +519,7 @@
                 noMatchName: " ",
             },
             params: {
-                url:
-                    "//test.haier.com/OverseasFramework/productAndAddress/getIndiaPostCode",
+                url: "//test.haier.com/OverseasFramework/productAndAddress/getIndiaPostCode",
                 type: "post",
                 dataType: "json",
                 csrf: true,
@@ -731,20 +729,20 @@
             },
         });
 
-        // document
-        //     .querySelector(".js_progress")
-        //     .addEventListener("click", function () {
-        //         progress.setProgress(100, function (e) {
-        //             ////console.log(e);
-        //         });
-        //     });
-        // documentmu
-        //     .querySelector(".js_progress2")
-        //     .addEventListener("click", function () {
-        //         progress.setProgress(33, function (e) {
-        //             ////console.log(e);
-        //         });
-        //     });
+        document
+            .querySelector(".js_progress")
+            .addEventListener("click", function () {
+                progress.setProgress(100, function (e) {
+                    ////console.log(e);
+                });
+            });
+        document
+            .querySelector(".js_progress2")
+            .addEventListener("click", function () {
+                progress.setProgress(33, function (e) {
+                    ////console.log(e);
+                });
+            });
 
         window.danmu = hope.danmu({
             ele: ".danmu",
