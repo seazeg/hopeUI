@@ -1,11 +1,8 @@
 {
     "name": "hopeui",
-    "version": "1.0.6.3",
+    "version": "1.0.6.2",
     "description": "HopeUI",
     "main": "hopeui.js",
-    "directories": {
-        "doc": "docs"
-    },
     "scripts": {
         "dev": "npx webpack-dev-server --mode development --content-base ./dist --open",
         "server": "node server/app.js",
@@ -24,7 +21,8 @@
         "url": "https://github.com/seazeg/hopeUI/issues"
     },
     "homepage": "https://github.com/seazeg/hopeUI#readme",
-    "dependencies": {
+    "dependencies": {},
+    "devDependencies": {
         "@babel/core": "^7.10.5",
         "@babel/plugin-proposal-decorators": "^7.10.5",
         "@babel/plugin-transform-object-assign": "^7.10.4",
