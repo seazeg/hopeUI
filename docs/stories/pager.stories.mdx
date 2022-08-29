@@ -20,11 +20,14 @@ import { viewinfo } from "../view/pager.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.generalJS)();
+                 setTimeout(() => {
+                    Function(viewinfo.generalJS)();
+                }, 100);
             });
             return viewinfo.general;
         }}
     </Story>
+
 </Canvas>
 
 <Canvas>

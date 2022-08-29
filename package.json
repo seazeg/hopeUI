@@ -21,7 +21,9 @@
         "url": "https://github.com/seazeg/hopeUI/issues"
     },
     "homepage": "https://github.com/seazeg/hopeUI#readme",
-    "dependencies": {},
+    "dependencies": {
+        "@storybook/addon-controls": "^6.5.10"
+    },
     "devDependencies": {
         "@babel/core": "^7.10.5",
         "@babel/plugin-proposal-decorators": "^7.10.5",

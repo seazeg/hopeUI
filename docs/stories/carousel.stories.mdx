@@ -3,56 +3,89 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/carousel.view.js";
 
 # 轮播图（Carousel）
-***
+
+---
+
 <Meta title="复用组件/轮播图(Carousel)" />
 
 ## 通用
+
 <Canvas>
-    <Story name="通用" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html}${viewinfo.js}` }}}}>
-    {() => {
-        useEffect(() => {
-           Function(viewinfo.js)()
-        });
-        return viewinfo.html
-    }}  
+    <Story
+        name="通用"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                setTimeout(() => {
+                    Function(viewinfo.js)();
+                }, 100);
+            });
+            return viewinfo.html;
+        }}
     </Story>
 </Canvas>
 
 ## 纵向
+
 <Canvas>
-     <Story name="纵向" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html2}${viewinfo.js2}` }}}}>
-    {() => {
-        useEffect(() => {
-           Function(viewinfo.js2)()
-        });
-        return viewinfo.html2
-    }}  
+    <Story
+        name="纵向"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html2}${viewinfo.js2}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                setTimeout(() => {
+                    Function(viewinfo.js2)();
+                }, 100);
+            });
+            return viewinfo.html2;
+        }}
     </Story>
 </Canvas>
 
 ## 走马灯
+
 <Canvas>
-     <Story name="走马灯" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html3}${viewinfo.js3}` }}}}>
-    {() => {
-        useEffect(() => {
-           Function(viewinfo.js3)()
-        });
-        return viewinfo.html3
-    }}  
+    <Story
+        name="走马灯"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html3}${viewinfo.js3}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                setTimeout(() => {
+                    Function(viewinfo.js3)();
+                }, 100);
+            });
+            return viewinfo.html3;
+        }}
     </Story>
 </Canvas>
-
 
 ## 淡入淡出
+
 <Canvas>
-     <Story name="淡入淡出" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html4}${viewinfo.js4}` }}}}>
-    {() => {
-        useEffect(() => {
-           Function(viewinfo.js4)()
-        });
-        return viewinfo.html4
-    }}  
+    <Story
+        name="淡入淡出"
+        height="150px"
+        parameters={{
+            docs: { source: { code: `${viewinfo.html4}${viewinfo.js4}` } },
+        }}
+    >
+        {() => {
+            useEffect(() => {
+                Function(viewinfo.js4)();
+            });
+            return viewinfo.html4;
+        }}
     </Story>
 </Canvas>
-
-

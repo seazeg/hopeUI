@@ -12,7 +12,9 @@ import { viewinfo } from "../view/upload.view.js";
     <Story name="文件上传(Upload)" height="150px" parameters={{ docs: { source: { code: viewinfo.js } } }}>
         {() => {
         useEffect(() => {
-        Function(viewinfo.js)();
+        setTimeout(() => {
+                    Function(viewinfo.js)();
+                }, 100);
         });
         return viewinfo.html;
         }}

@@ -18,7 +18,9 @@ import { viewinfo } from "../view/checkbox.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.js)();
+                setTimeout(() => {
+                    Function(viewinfo.js)();
+                }, 100);
             });
             return viewinfo.html;
         }}

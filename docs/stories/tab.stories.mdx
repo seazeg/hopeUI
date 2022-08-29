@@ -20,7 +20,9 @@ import { viewinfo } from "../view/tab.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.generalJS)();
+                setTimeout(() => {
+                    Function(viewinfo.generalJS)();
+                }, 100);
             });
             return viewinfo.general;
         }}

@@ -3,16 +3,24 @@ import { useEffect } from "@storybook/client-api";
 import { viewinfo } from "../view/animate.view.js";
 
 # 动画（Animate）
-***
+
+---
+
 <Meta title="基础控件/动画(Animate)" />
 
 <Canvas>
-    <Story name="动画(Animate)" height="150px" parameters={{ docs: { source: { code:`${viewinfo.html}` }}}}>
-    {() => {
-        useEffect(() => {
-            Function(viewinfo.js)()
-        });
-        return viewinfo.html
-    }}  
+    <Story
+        name="动画(Animate)"
+        height="150px"
+        parameters={{ docs: { source: { code: `${viewinfo.html}` } } }}
+    >
+        {() => {
+            useEffect(() => {
+                setTimeout(() => {
+                    Function(viewinfo.js)();
+                }, 100);
+            });
+            return viewinfo.html;
+        }}
     </Story>
 </Canvas>

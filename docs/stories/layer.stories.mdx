@@ -20,7 +20,9 @@ import { viewinfo } from "../view/layer.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.messageJS)();
+                setTimeout(() => {
+                    Function(viewinfo.messageJS)();
+                }, 100);
             });
             return viewinfo.message;
         }}
@@ -37,7 +39,9 @@ import { viewinfo } from "../view/layer.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.ifmJS)();
+                setTimeout(() => {
+                    Function(viewinfo.ifmJS)();
+                }, 100);
             });
             return viewinfo.ifm;
         }}
@@ -54,7 +58,9 @@ import { viewinfo } from "../view/layer.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.dragJS)();
+                setTimeout(() => {
+                    Function(viewinfo.dragJS)();
+                }, 100);
             });
             return viewinfo.drag;
         }}
