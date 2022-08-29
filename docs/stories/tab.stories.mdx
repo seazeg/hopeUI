@@ -21,8 +21,8 @@ import { viewinfo } from "../view/tab.view.js";
         {() => {
             useEffect(() => {
                 setTimeout(() => {
-                    Function(viewinfo.generalJS)();
-                }, 100);
+                Function(viewinfo.generalJS)();
+                },100)
             });
             return viewinfo.general;
         }}
@@ -42,13 +42,12 @@ import { viewinfo } from "../view/tab.view.js";
         {() => {
             useEffect(() => {
                 setTimeout(() => {
-                    Function(viewinfo.conciseJS)();
-                }, 100);
+                Function(viewinfo.conciseJS)();
+                },100)
             });
             return viewinfo.concise;
         }}
     </Story>
-
 </Canvas>
 
 <Canvas>
@@ -61,7 +60,9 @@ import { viewinfo } from "../view/tab.view.js";
     >
         {() => {
             useEffect(() => {
+                setTimeout(() => {
                 Function(viewinfo.cardJS)();
+                },100)
             });
             return viewinfo.card;
         }}

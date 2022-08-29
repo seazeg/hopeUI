@@ -10,29 +10,7 @@ import { viewinfo } from "../view/pager.view.js";
 
 <Canvas>
     <Story
-        name="基础"
-        height="150px"
-        parameters={{
-            docs: {
-                source: { code: `${viewinfo.general}${viewinfo.generalJS}` },
-            },
-        }}
-    >
-        {() => {
-            useEffect(() => {
-                 setTimeout(() => {
-                    Function(viewinfo.generalJS)();
-                }, 100);
-            });
-            return viewinfo.general;
-        }}
-    </Story>
-
-</Canvas>
-
-<Canvas>
-    <Story
-        name="扩展"
+        name="分页(Pager)"
         height="150px"
         parameters={{
             docs: {
@@ -50,6 +28,7 @@ import { viewinfo } from "../view/pager.view.js";
         }}
     </Story>
 </Canvas>
+
 
 ## 基础属性
 
