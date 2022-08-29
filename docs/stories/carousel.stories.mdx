@@ -83,7 +83,9 @@ import { viewinfo } from "../view/carousel.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.js4)();
+                setTimeout(() => {
+                    Function(viewinfo.js4)();
+                }, 100);
             });
             return viewinfo.html4;
         }}
