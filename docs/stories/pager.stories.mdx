@@ -42,7 +42,9 @@ import { viewinfo } from "../view/pager.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.extendJS)();
+                setTimeout(() => {
+                    Function(viewinfo.extendJS)();
+                }, 100);
             });
             return viewinfo.extend;
         }}

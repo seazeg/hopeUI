@@ -58,7 +58,9 @@ import { viewinfo } from "../view/input.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.js2)();
+                setTimeout(() => {
+                    Function(viewinfo.js2)();
+                }, 100);
             });
             return viewinfo.extendContent;
         }}
@@ -77,7 +79,9 @@ import { viewinfo } from "../view/input.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.js3)();
+                setTimeout(() => {
+                    Function(viewinfo.js3)();
+                }, 100);
             });
             return viewinfo.extendContent2;
         }}

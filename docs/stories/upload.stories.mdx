@@ -9,39 +9,42 @@ import { viewinfo } from "../view/upload.view.js";
 <Meta title="复用组件/文件上传(Upload)" />
 
 <Canvas>
-    <Story name="文件上传(Upload)" height="150px" parameters={{ docs: { source: { code: viewinfo.js } } }}>
+    <Story
+        name="文件上传(Upload)"
+        height="150px"
+        parameters={{ docs: { source: { code: viewinfo.js } } }}
+    >
         {() => {
-        useEffect(() => {
-        setTimeout(() => {
+            useEffect(() => {
+                setTimeout(() => {
                     Function(viewinfo.js)();
                 }, 100);
-        });
-        return viewinfo.html;
+            });
+            return viewinfo.html;
         }}
     </Story>
 </Canvas>
 
 ## 基础属性
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| 参数 | 说明          | 类型   | 可选值               | 默认值  |
 | ---- | ------------- | ------ | -------------------- | ------- |
-| ele | 元素 dom 节点 | String | Class / id / TagName | TagName |
+| ele  | 元素 dom 节点 | String | Class / id / TagName | TagName |
 
 ## 配置 options
 
-| 参数 | 说明 | 类型 | 可选值 | 默认值 |
-| -------- | -------------- | ------- | ------ | ------ |
-| url | 上传服务地址 | String | -- | -- |
-| name | 标签name值 | String | -- | file |
-| allowedExtensions | 可上传文件类型 | Array | -- | -- |
-| multiple | 是否多选 | Boolean | -- | false |
-
+| 参数              | 说明           | 类型    | 可选值 | 默认值 |
+| ----------------- | -------------- | ------- | ------ | ------ |
+| url               | 上传服务地址   | String  | --     | --     |
+| name              | 标签 name 值   | String  | --     | file   |
+| allowedExtensions | 可上传文件类型 | Array   | --     | --     |
+| multiple          | 是否多选       | Boolean | --     | false  |
 
 ## 回调方法 on
 
-| 参数 | 说明 | 类型 | 默认值 | 回调参数 |
-| --------- | ---------- | -------- | ------ | ------------------ |
-| beforeUpload | 上传前回调 | Function | null | fileName,file |
-| uploading | 上传中回调 | Function | null | fileName,file |
-| complete | 完成时回调 | Function | null | fileName,res(服务返回 json) |
-| error | 错误时回调 | Function | null | fileName,res(服务返回 json) |
+| 参数         | 说明       | 类型     | 默认值 | 回调参数                    |
+| ------------ | ---------- | -------- | ------ | --------------------------- |
+| beforeUpload | 上传前回调 | Function | null   | fileName,file               |
+| uploading    | 上传中回调 | Function | null   | fileName,file               |
+| complete     | 完成时回调 | Function | null   | fileName,res(服务返回 json) |
+| error        | 错误时回调 | Function | null   | fileName,res(服务返回 json) |

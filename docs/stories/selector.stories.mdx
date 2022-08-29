@@ -39,7 +39,9 @@ import { viewinfo } from "../view/selector.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.groupJS)();
+                setTimeout(() => {
+                    Function(viewinfo.groupJS)();
+                }, 100);
             });
             return viewinfo.group;
         }}

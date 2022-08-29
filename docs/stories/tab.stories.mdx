@@ -41,11 +41,14 @@ import { viewinfo } from "../view/tab.view.js";
     >
         {() => {
             useEffect(() => {
-                Function(viewinfo.conciseJS)();
+                setTimeout(() => {
+                    Function(viewinfo.conciseJS)();
+                }, 100);
             });
             return viewinfo.concise;
         }}
     </Story>
+
 </Canvas>
 
 <Canvas>
