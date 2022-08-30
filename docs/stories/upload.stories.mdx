@@ -12,7 +12,7 @@ import { viewinfo } from "../view/upload.view.js";
     <Story
         name="文件上传(Upload)"
         height="150px"
-        parameters={{ docs: { source: { code: viewinfo.js } } }}
+        parameters={{ docs: { source: { code: `<script type="text/javascript">\n${viewinfo.js}\n</script>` } } }}
     >
         {() => {
             useEffect(() => {

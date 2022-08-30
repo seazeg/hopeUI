@@ -14,7 +14,7 @@ import { viewinfo } from "../view/tab.view.js";
         height="150px"
         parameters={{
             docs: {
-                source: { code: `${viewinfo.general}${viewinfo.generalJS}` },
+                source: { code: `${viewinfo.general}\n\n<script type="text/javascript">\n${viewinfo.generalJS}\n</script>` },
             },
         }}
     >
@@ -35,7 +35,7 @@ import { viewinfo } from "../view/tab.view.js";
         height="150px"
         parameters={{
             docs: {
-                source: { code: `${viewinfo.concise}${viewinfo.conciseJS}` },
+                source: { code: `${viewinfo.concise}\n\n<script type="text/javascript">\n${viewinfo.conciseJS}\n</script>` },
             },
         }}
     >
@@ -55,7 +55,7 @@ import { viewinfo } from "../view/tab.view.js";
         name="卡片"
         height="150px"
         parameters={{
-            docs: { source: { code: `${viewinfo.card}${viewinfo.cardJS}` } },
+            docs: { source: { code: `${viewinfo.card}\n\n<script type="text/javascript">\n${viewinfo.cardJS}\n</script>` } },
         }}
     >
         {() => {

@@ -13,7 +13,7 @@ import { viewinfo } from "../view/drawer.view.js";
         name="抽屉(Drawer)"
         height="300px"
         parameters={{
-            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+            docs: { source: { code: `${viewinfo.html}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>` } },
         }}
     >
         {() => {

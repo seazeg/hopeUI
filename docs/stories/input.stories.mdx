@@ -13,7 +13,7 @@ import { viewinfo } from "../view/input.view.js";
         name="通用"
         height="150px"
         parameters={{
-            docs: { source: { code: `${viewinfo.general}${viewinfo.js}` } },
+            docs: { source: { code: `${viewinfo.general}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>` } },
         }}
     >
         {() => {
@@ -32,7 +32,7 @@ import { viewinfo } from "../view/input.view.js";
         name="密码"
         height="150px"
         parameters={{
-            docs: { source: { code: `${viewinfo.password}${viewinfo.js}` } },
+            docs: { source: { code: `${viewinfo.password}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>` } },
         }}
     >
         {() => {
@@ -52,7 +52,7 @@ import { viewinfo } from "../view/input.view.js";
         height="150px"
         parameters={{
             docs: {
-                source: { code: `${viewinfo.extendContent}${viewinfo.js2}` },
+                source: { code: `${viewinfo.extendContent}\n\n<script type="text/javascript">\n${viewinfo.js2}\n</script>` },
             },
         }}
     >
@@ -73,7 +73,7 @@ import { viewinfo } from "../view/input.view.js";
         height="150px"
         parameters={{
             docs: {
-                source: { code: `${viewinfo.extendContent2}${viewinfo.js3}` },
+                source: { code: `${viewinfo.extendContent2}\n\n<script type="text/javascript">\n${viewinfo.js3}\n</script>` },
             },
         }}
     >

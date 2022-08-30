@@ -14,7 +14,7 @@ import { viewinfo } from "../view/selector.view.js";
         height="300px"
         parameters={{
             docs: {
-                source: { code: `${viewinfo.general}${viewinfo.generalJS}` },
+                source: { code: `${viewinfo.general}\n\n<script type="text/javascript">\n${viewinfo.generalJS}\n</script>` },
             },
         }}
     >
@@ -34,7 +34,7 @@ import { viewinfo } from "../view/selector.view.js";
         name="分组"
         height="300px"
         parameters={{
-            docs: { source: { code: `${viewinfo.group}${viewinfo.groupJS}` } },
+            docs: { source: { code: `${viewinfo.group}\n\n<script type="text/javascript">\n${viewinfo.groupJS}\n</script>` } },
         }}
     >
         {() => {

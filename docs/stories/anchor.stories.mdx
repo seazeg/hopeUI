@@ -13,7 +13,7 @@ import { viewinfo } from "../view/anchor.view.js";
         name="锚点(Anchor)"
         height="300px"
         parameters={{
-            docs: { source: { code: `${viewinfo.html}${viewinfo.js}` } },
+            docs: { source: { code: `${viewinfo.html}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>` } },
         }}
     >
         {() => {

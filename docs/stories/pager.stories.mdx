@@ -14,7 +14,7 @@ import { viewinfo } from "../view/pager.view.js";
         height="150px"
         parameters={{
             docs: {
-                source: { code: `${viewinfo.extend}${viewinfo.extendJS}` },
+                source: { code: `${viewinfo.extend}\n\n<script type="text/javascript">\n${viewinfo.extendJS}\n</script>` },
             },
         }}
     >

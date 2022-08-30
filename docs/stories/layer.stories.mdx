@@ -14,7 +14,7 @@ import { viewinfo } from "../view/layer.view.js";
         height="150px"
         parameters={{
             docs: {
-                source: { code: `${viewinfo.message}${viewinfo.messageJS}` },
+                source: { code: `${viewinfo.message}\n\n<script type="text/javascript">\n${viewinfo.messageJS}\n</script>` },
             },
         }}
     >
@@ -34,7 +34,7 @@ import { viewinfo } from "../view/layer.view.js";
         name="iframe嵌套"
         height="150px"
         parameters={{
-            docs: { source: { code: `${viewinfo.ifm}${viewinfo.ifmJS}` } },
+            docs: { source: { code: `${viewinfo.ifm}\n\n<script type="text/javascript">\n${viewinfo.ifmJS}\n</script>` } },
         }}
     >
         {() => {
@@ -53,7 +53,7 @@ import { viewinfo } from "../view/layer.view.js";
         name="可拖拽"
         height="150px"
         parameters={{
-            docs: { source: { code: `${viewinfo.drag}${viewinfo.dragJS}` } },
+            docs: { source: { code: `${viewinfo.drag}\n\n<script type="text/javascript">\n${viewinfo.dragJS}\n</script>` } },
         }}
     >
         {() => {
