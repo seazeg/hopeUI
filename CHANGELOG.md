@@ -5,6 +5,11 @@
 
 ---
 
+### ver 1.0.63
+
+-   utils 删除元素缩放方法
+-   utils 新增可自定义名称下载文件方法（ie10+）
+
 ### ver 1.0.62
 
 -   utils 新增清除HTML标签[clearHtmlTag]方法

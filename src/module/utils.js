@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2021-01-12 14:28:18
- * @LastEditTime : 2022-08-24 09:47:41
+ * @LastEditTime : 2022-09-21 16:11:34
  * @Description  : 常用工具函数
  */
 
@@ -80,7 +80,8 @@ module.exports.utilsHandler = {
     },
     //判断校验身份证信息
     isCardID: function (value) {
-        let format = /^(([1][1-5])|([2][1-3])|([3][1-7])|([4][1-6])|([5][0-4])|([6][1-5])|([7][1])|([8][1-2]))\d{4}(([1][9]\d{2})|([2]\d{3}))(([0][1-9])|([1][0-2]))(([0][1-9])|([1-2][0-9])|([3][0-1]))\d{3}[0-9xX]$/;
+        let format =
+            /^(([1][1-5])|([2][1-3])|([3][1-7])|([4][1-6])|([5][0-4])|([6][1-5])|([7][1])|([8][1-2]))\d{4}(([1][9]\d{2})|([2]\d{3}))(([0][1-9])|([1][0-2]))(([0][1-9])|([1-2][0-9])|([3][0-1]))\d{3}[0-9xX]$/;
         if (Object.prototype.toString.call(value).slice(8, -1) === "Number") {
             value = new String(value);
         }
@@ -486,47 +487,6 @@ module.exports.utilsHandler = {
             return false;
         };
     },
-    //元素缩放
-    scaleEle: function (ele, options, callback) {
-        /*
-            minWidth 最小宽度
-            maxWidth 最大宽度
-            styles:‘xx,xx,xx’ 需要缩放的样式清单 
-         */
-        function scale() {
-            let screenWidth = options.maxWidth;
-            if ($(window).width() < options.minWidth) {
-                screenWidth = options.maxWidth;
-            } else if (
-                $(window).width() >= options.minWidth &&
-                $(window).width() <= options.maxWidth
-            ) {
-                screenWidth = $(window).width();
-            }
-
-            $(ele).each(function () {
-                let _this = $(this);
-                let list = _this.attr("hope-scale-styles").split(",");
-                list.forEach(function (name, index) {
-                    _this.css(
-                        name,
-                        (parseInt(_this.css(list[index])) * screenWidth) / 1920
-                    );
-                });
-            });
-            if (callback) {
-                callback();
-            }
-        }
-
-        $(ele).each(function () {
-            $(this).attr("hope-scale-styles", options.styles);
-        });
-        scale();
-        $(window).resize(function () {
-            scale();
-        });
-    },
     //元素垂直居中
     verticalCenter: function (ele, callback) {
         function vertical() {
@@ -567,5 +527,45 @@ module.exports.utilsHandler = {
                 ? element.pageYOffset
                 : element.scrollTop;
         return { x, y };
+    },
+    //前端保存文件（可重命名）
+    saveAsFile: function (url, filename) {
+        const getBlob = (url, callback) => {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.responseType = "blob";
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    if (callback) {
+                        callback(xhr.response);
+                    }
+                }
+            };
+            xhr.send();
+        };
+        const saveAs = (blob, filename) => {
+            if (window.navigator.msSaveOrOpenBlob) {
+                navigator.msSaveBlob(blob, filename);
+            } else {
+                var link = document.createElement("a");
+                var body = document.querySelector("body");
+
+                link.href = window.URL.createObjectURL(blob);
+                link.download = filename;
+
+                // fix Firefox
+                link.style.display = "none";
+                body.appendChild(link);
+
+                link.click();
+                body.removeChild(link);
+
+                window.URL.revokeObjectURL(link.href);
+                return;
+            }
+        };
+        getBlob(url, function (blob) {
+            saveAs(blob, filename);
+        });
     },
 };
