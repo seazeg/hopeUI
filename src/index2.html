@@ -1284,6 +1284,7 @@
                         <div class="hopeui-input-block">
                             <input name="text" type="text" placeholder="请输入" value="" class="hopeui-input"
                                 hope-verify="required" />
+                            <div>111111111111111111</div>   
                         </div>
                     </div>
                     <div class="hopeui-form-item">
@@ -2087,7 +2088,8 @@
             city: {
                 type: 'select',
                 options: {
-                    hideItemIndex: 1
+                    hideItemIndex: 1,
+                    switchIcon:"iconfont_jz icon-jinrujiantouxiao-copy-copy"
                 },
                 on: {
                     init: function (e) {
@@ -2135,7 +2137,9 @@
             },
             school: {
                 type: 'select',
-                options: {},
+                options: {
+                    switchIcon:"iconfont_jz icon-jinrujiantouxiao-copy-copy"
+                },
                 on: {
                     init: function (e) {
                         //////console.log(e);

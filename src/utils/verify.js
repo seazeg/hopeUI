@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2021-08-20 15:13:20
+ * @LastEditTime : 2022-10-08 15:52:11
  * @Description  : 工具类
  */
 const $ = require("./hopeu.js");
@@ -35,7 +35,11 @@ module.exports.utils = {
                     //     template: ``,
                     //     rootClass: `hopeui-form-error-prompt`,
                     // });
-                    $(bro).after(`<div class="hopeui-form-error-prompt"><i class="hopeui-icon hopeui-icon-close-fill"></i>${prompt}</div>`)
+                    $(bro)
+                        .parent()
+                        .append(
+                            `<div class="hopeui-form-error-prompt"><i class="hopeui-icon hopeui-icon-close-fill"></i><span class="hopeui-form-error-prompt-content">${prompt}</span></div>`
+                        );
                     
                 } else {
                     this.siblings(

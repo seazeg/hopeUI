@@ -16,7 +16,8 @@
   display: block;
   line-height: 1;
 }
-.hopeui-form .hopeui-form-error-prompt i {
+.hopeui-form .hopeui-form-error-prompt i,
+.hopeui-form .hopeui-form-error-prompt .hopeui-form-error-prompt-content {
   vertical-align: middle;
 }
 .hopeui-form .hopeui-form-label {
