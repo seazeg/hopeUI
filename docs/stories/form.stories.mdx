@@ -13,7 +13,11 @@ import { viewinfo } from "../view/form.view.js";
         name="表单(Form)"
         height="150px"
         parameters={{
-            docs: { source: { code: `${viewinfo.html}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>` } },
+            docs: {
+                source: {
+                    code: `${viewinfo.html}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>`,
+                },
+            },
         }}
     >
         {() => {
@@ -57,14 +61,15 @@ import { viewinfo } from "../view/form.view.js";
 | ------------ | ------------------ | ------- |
 | objectParams | 表单元素键值对象   | Object  |
 | stringParams | 反序列化参数字符串 | String  |
+| jsonParams   | 序列化参数字符串   | Object  |
 | status       | 是否通过校验状态   | Boolean |
 
 ## 调用方法
 
-| 方法名            | 说明                 | 类型     | 默认值 | 参数           |
-| ----------------- | -------------------- | -------- | ------ | -------------- |
-| val               | 外部赋值             | Function | --     | value,callback |
-| clear             | 外部清值             | Function | --     | callback       |
-| setGlobalRequired | 设置全局是否开启校验 | Function | --     | value(Boolean) |
-| verify            | 触发校验             | Function | --     | dom-object     |
-| controls          | 所有控件声明后的对象 | Object   | --     | --             |
+| 方法名            | 说明                 | 类型     | 默认值 | 参数                                                        |
+| ----------------- | -------------------- | -------- | ------ | ----------------------------------------------------------- |
+| val               | 外部赋值             | Function | --     | value,callback                                              |
+| clear             | 外部清值             | Function | --     | callback                                                    |
+| setGlobalRequired | 设置全局是否开启校验 | Function | --     | value(Boolean)                                              |
+| verify            | 触发校验             | Function | --     | {ele:DOM-objects,name:控件 name,type:控件类型,value:控件值} |
+| controls          | 所有控件声明后的对象 | Object   | --     | --                                                          |

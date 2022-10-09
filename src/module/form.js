@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-10-09 11:12:23
+ * @LastEditTime : 2022-10-09 14:56:47
  * @Description  : 表单
  */
 
@@ -63,7 +63,8 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
 
     let TEMP_OBJ = {},
         TEMP_ARR = [],
-        rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i;
+        rinput =
+            /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i;
     for (let i of $dom.serializeArray()) {
         if (!TEMP_OBJ[i.name]) {
             TEMP_ARR.push(i);
@@ -153,15 +154,13 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         sortArr[item.name].eles = [];
                         sortArr[item.name].eles.push(item);
                         sortArr[item.name].type = item.type;
-                        sortArr[item.name].required = item.getAttribute(
-                            "hope-verify"
-                        );
+                        sortArr[item.name].required =
+                            item.getAttribute("hope-verify");
                     } else {
                         sortArr[item.name].eles.push(item);
                         sortArr[item.name].type = item.type;
-                        sortArr[item.name].required = item.getAttribute(
-                            "hope-verify"
-                        );
+                        sortArr[item.name].required =
+                            item.getAttribute("hope-verify");
                     }
                 }
             });
@@ -310,7 +309,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                 on.submit({
                     objectParams: formParams,
                     stringParams: utils.deserialization(formParams),
-                    jsonParams: utilsHandler.parseQueryParam(utils.deserialization(formParams)),
+                    jsonParams: utilsHandler.parseQueryParam(
+                        utils.deserialization(formParams)
+                    ),
                     status: status,
                     errorList: errorList,
                     form: obj,
@@ -356,23 +357,18 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
         globalRequired = status;
     };
 
-    obj.verify = function (ele){
-        if (!controls[ele.name].verify(ele.value)) {
-            utils.validation(
-                ele,
-                "pass",
-                null,
-                ele.type
-            );
+    obj.verify = function (params) {
+        if (!controls[params.name].verify(params.value)) {
+            utils.validation(params.ele, "pass", null, params.type);
         } else {
             utils.validation(
-                ele,
+                params.ele,
                 "error",
-                controls[ele.name].verify(ele.value),
-                ele.type
+                controls[params.name].verify(params.value),
+                params.type
             );
         }
-    }
+    };
 
     obj.controls = formControls;
 

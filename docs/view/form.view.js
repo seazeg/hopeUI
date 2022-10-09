@@ -1,11 +1,11 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2021-09-15 09:56:10
+ * @LastEditTime : 2022-10-09 14:59:37
  * @Description  :
  */
 export const viewinfo = {
-html:`
+    html: `
 <form class="hopeui-form" name="form" action="" id="form">
     <div class="hopeui-form-item">
         <label class="hopeui-form-label">下拉框</label>
@@ -97,7 +97,7 @@ html:`
     </div>
 </form>
 `,
-js:`
+    js: `
 window.fm = hope.form({
     ele: "#form",
     on: {
@@ -132,7 +132,12 @@ window.fm = hope.form({
             options: {},
             on: {
                 blur: function (e) {
-                    fm.verify(e.targetEle)
+                    fm.verify({
+                        ele:e.targetEle,
+                        name:'text',
+                        type: 'input',
+                        value: e.value,
+                    });
                 },
                 focus: function (e) {
                     console.log(e);
@@ -297,6 +302,6 @@ document.querySelector("#clear").onclick = function () {
 };
 
 
-`
-}
+`,
+};
 

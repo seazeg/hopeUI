@@ -1238,7 +1238,7 @@
                                     <option value="清华大学" selected>清华大学</option>
                                 </optgroup>
                                 <optgroup label="浙江"">
-                                <option value=" 浙江大学">浙江大学</option>
+                                     <option value=" 浙江大学">浙江大学</option>
                                 </optgroup>
                             </select>
                         </div>
@@ -1282,7 +1282,7 @@
                     <div class="hopeui-form-item">
                         <label class="hopeui-form-label">文本框</label>
                         <div class="hopeui-input-block">
-                            <input name="text" type="text" placeholder="请输入" value="" class="hopeui-input"
+                            <input name="textonly" type="text" placeholder="请输入" value="" class="hopeui-input"
                                 hope-verify="required" />
                             <div>111111111111111111</div>   
                         </div>
@@ -2076,7 +2076,7 @@
 
 
 
-    var fm = hope.form({
+    window.fm = hope.form({
         ele: "#form",
         on: {
             submit: function (e) {
@@ -2108,12 +2108,18 @@
                     }
                 }
             },
-            text: {
+            textonly: {
                 type: 'input',
                 options: {},
                 on: {
                     blur: function (e) {
-                        fm.verify(e.targetELe);
+                        console.log(e)
+                        fm.verify({
+                            ele:e.targetEle,
+                            name:'textonly',
+                            type: 'input',
+                            value: e.value,
+                        });
                         console.log(e);
                     },
                     focus: function (e) {
