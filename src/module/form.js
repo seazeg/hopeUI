@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2021-11-04 16:09:31
+ * @LastEditTime : 2022-10-09 11:12:23
  * @Description  : 表单
  */
 
@@ -310,6 +310,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                 on.submit({
                     objectParams: formParams,
                     stringParams: utils.deserialization(formParams),
+                    jsonParams: utilsHandler.parseQueryParam(utils.deserialization(formParams)),
                     status: status,
                     errorList: errorList,
                     form: obj,
