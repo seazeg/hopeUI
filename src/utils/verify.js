@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2022-10-09 16:11:42
+ * @LastEditTime : 2022-10-09 18:02:11
  * @Description  : 工具类
  */
 const $ = require("./hopeu.js");
@@ -37,6 +37,8 @@ module.exports.utils = {
                     //     template: ``,
                     //     rootClass: `hopeui-form-error-prompt`,
                     // });
+
+                    //插入最后，暂时取消
                     // $(bro)
                     //     .parent()
                     //     .append(

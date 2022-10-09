@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-10-09 16:05:57
+ * @LastEditTime : 2022-10-09 16:50:57
  * @Description  : 表单
  */
 
@@ -360,15 +360,28 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
     };
 
     obj.verify = function (params) {
-        if (!controls[params.ele.name].verify(params.value)) {
-            utils.validation(params.ele, "pass", null, params.ele.type);
+        if (params.ele) {
+            if (!controls[params.ele.name].verify(params.value)) {
+                utils.validation(params.ele, "pass", null, params.ele.type);
+            } else {
+                utils.validation(
+                    params.ele,
+                    "error",
+                    controls[params.ele.name].verify(params.value),
+                    params.ele.type
+                );
+            }
         } else {
-            utils.validation(
-                params.ele,
-                "error",
-                controls[params.ele.name].verify(params.value),
-                params.ele.type
-            );
+            if (!controls[params.name].verify(params.value)) {
+                utils.validation(params, "pass", null, params.type);
+            } else {
+                utils.validation(
+                    params,
+                    "error",
+                    controls[params.name].verify(params.value),
+                    params.type
+                );
+            }
         }
     };
 
