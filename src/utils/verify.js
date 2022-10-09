@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-15 15:10:41
- * @LastEditTime : 2022-10-09 10:10:45
+ * @LastEditTime : 2022-10-09 16:11:42
  * @Description  : 工具类
  */
 const $ = require("./hopeu.js");
@@ -11,7 +11,7 @@ module.exports.utils = {
         let obj = ele,
             bro = ele;
         if (type == "select-one") {
-            bro = $(ele).siblings(".hopeui-form-select").get(0)
+            bro = $(ele).siblings(".hopeui-form-select").get(0);
             obj = bro.childNodes[0].childNodes[0];
         } else if (type == "checkbox") {
             bro = ele.parentNode.querySelectorAll(".hopeui-form-checkbox")[
@@ -19,9 +19,11 @@ module.exports.utils = {
                     .length - 1
             ];
         } else if (type == "radio") {
-            bro = ele.parentNode.querySelectorAll(".hopeui-form-radio")[
-                ele.parentNode.querySelectorAll(".hopeui-form-radio").length - 1
-            ];
+            bro =
+                ele.parentNode.querySelectorAll(".hopeui-form-radio")[
+                    ele.parentNode.querySelectorAll(".hopeui-form-radio")
+                        .length - 1
+                ];
         } else if (type == "textarea") {
             bro = ele.parentNode;
         }
@@ -35,12 +37,14 @@ module.exports.utils = {
                     //     template: ``,
                     //     rootClass: `hopeui-form-error-prompt`,
                     // });
-                    $(bro)
-                        .parent()
-                        .append(
-                            `<div class="hopeui-form-error-prompt"><i class="hopeui-icon hopeui-icon-close-fill"></i><span class="hopeui-form-error-prompt-content">${prompt}</span></div>`
-                        );
-                    
+                    // $(bro)
+                    //     .parent()
+                    //     .append(
+                    //         `<div class="hopeui-form-error-prompt"><i class="hopeui-icon hopeui-icon-close-fill"></i><span class="hopeui-form-error-prompt-content">${prompt}</span></div>`
+                    //     );
+                    $(bro).after(
+                        `<div class="hopeui-form-error-prompt"><i class="hopeui-icon hopeui-icon-close-fill"></i><span class="hopeui-form-error-prompt-content">${prompt}</span></div>`
+                    );
                 } else {
                     this.siblings(
                         bro,
@@ -85,7 +89,7 @@ module.exports.utils = {
     removeClass(ele, cls) {
         let _this = this;
         if (ele.length > 0 && ele.tagName != "SELECT") {
-            ele.forEach(function(el) {
+            ele.forEach(function (el) {
                 if (_this.hasClass(el, cls)) {
                     el.className = el.className.replace(
                         new RegExp("(\\s|^)" + cls + "(\\s|$)"),

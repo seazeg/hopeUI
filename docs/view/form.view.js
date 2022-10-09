@@ -132,7 +132,7 @@ window.fm = hope.form({
             options: {},
             on: {
                 blur: function (e) {
-                    fm.verify({
+                    e.form.verify({
                         ele:e.targetEle,
                         value: e.value,
                     });
@@ -302,4 +302,3 @@ document.querySelector("#clear").onclick = function () {
 
 `,
 };
-

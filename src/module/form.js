@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-10-09 15:38:56
+ * @LastEditTime : 2022-10-09 16:05:57
  * @Description  : 表单
  */
 
@@ -140,6 +140,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             let tarEle = evt.target || evt.srcElement;
             let sortArr = {},
                 formParams = [],
+                ctrls = {},
                 status = true,
                 errorList = {};
             Array.from(tarEle).forEach(function (item) {
@@ -239,9 +240,9 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         name: "",
                         value: "",
                     };
-
                     items.eles.forEach(function (ele, i) {
                         //校验
+                        ctrls[ele.name] = ele;
                         if (items.required && globalRequired) {
                             //不为空
                             obj.name = ele.name;
@@ -312,6 +313,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     jsonParams: utilsHandler.parseQueryParam(
                         utils.deserialization(formParams)
                     ),
+                    controls: ctrls,
                     status: status,
                     errorList: errorList,
                     form: obj,
