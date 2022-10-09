@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:25:10
- * @LastEditTime : 2022-10-09 14:59:37
+ * @LastEditTime : 2022-10-09 15:40:28
  * @Description  :
  */
 export const viewinfo = {
@@ -134,8 +134,6 @@ window.fm = hope.form({
                 blur: function (e) {
                     fm.verify({
                         ele:e.targetEle,
-                        name:'text',
-                        type: 'input',
                         value: e.value,
                     });
                 },
