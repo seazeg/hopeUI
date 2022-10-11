@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-10-09 16:50:57
+ * @LastEditTime : 2022-10-10 17:42:48
  * @Description  : 表单
  */
 
@@ -247,9 +247,10 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                             //不为空
                             obj.name = ele.name;
                             if (ele.value) {
-                                obj.value += `${utilsHandler.filterHtmlCode(
-                                    ele.value
-                                )},`;
+                                // obj.value += `${utilsHandler.filterHtmlCode(
+                                //     ele.value
+                                // )},`;
+                                obj.value += ele.value;
                             } else {
                                 status = false;
                                 errorList[ele.name] = false;
@@ -282,9 +283,10 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         } else {
                             obj.name = ele.name;
                             if (ele.value) {
-                                obj.value += `${utilsHandler.filterHtmlCode(
-                                    ele.value
-                                )},`;
+                                // obj.value += `${utilsHandler.filterHtmlCode(
+                                //     ele.value
+                                // )},`;
+                                obj.value += ele.value;
                             }
                             utils.validation(ele, "pass", null, items.type);
                         }

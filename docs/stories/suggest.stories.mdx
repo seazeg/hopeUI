@@ -13,7 +13,11 @@ import { viewinfo } from "../view/suggest.view.js";
         name="联想文本框(suggest)"
         height="300px"
         parameters={{
-            docs: { source: { code: `${viewinfo.html}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>` } },
+            docs: {
+                source: {
+                    code: `${viewinfo.html}\n\n<script type="text/javascript">\n${viewinfo.js}\n</script>`,
+                },
+            },
         }}
     >
         {() => {
@@ -35,12 +39,13 @@ import { viewinfo } from "../view/suggest.view.js";
 
 ## 配置 options
 
-| 参数              | 说明             | 类型    | 可选值 | 默认值               |
-| ----------------- | ---------------- | ------- | ------ | -------------------- |
-| noMatchName       | 没有匹配时描述   | String  | --     | -- 没有匹配的内容 -- |
-| searchField       | 搜索字段映射     | String  | --     | --                   |
-| isFirstData       | 是否会初始化数据 | Boolean | --     | --                   |
-| noPlaceholderMode | 原生 placeholder | Boolean | --     | false                |
+| 参数              | 说明                 | 类型    | 可选值 | 默认值               |
+| ----------------- | -------------------- | ------- | ------ | -------------------- |
+| noMatchName       | 没有匹配时描述       | String  | --     | -- 没有匹配的内容 -- |
+| searchField       | 搜索字段映射         | String  | --     | --                   |
+| isFirstData       | 是否会初始化数据     | Boolean | --     | --                   |
+| noPlaceholderMode | 原生 placeholder     | Boolean | --     | false                |
+| delay             | 延时调用时间（防抖） | Number  | --     | 0                    |
 
 ## http 请求参数 params
 

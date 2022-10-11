@@ -1011,7 +1011,7 @@
         <div class="docs-box">
             <div class="docs-title">
                 <fieldset>
-                    <legend><a name="icon">通用</a></legend>
+                    <legend><a name="icon">联想</a></legend>
                 </fieldset>
             </div>
             <div class="docs-content">
@@ -1834,6 +1834,7 @@
         options: {
             noMatchName: '-- 没有匹配的内容 --',
             searchField: 'searchword',
+            delay: 500,
             // isFirstData:true
         },
         params: {
@@ -1852,6 +1853,7 @@
         },
         on: {
             input: function (e) {
+                console.log(e);
                 // ////console.log('111');
             },
             init: function () {

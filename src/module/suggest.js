@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-07-11 16:15:58
+ * @LastEditTime : 2022-10-10 15:14:58
  * @Description  : 文本框
  */
 
@@ -9,6 +9,7 @@ const $ = require("../utils/hopeu.js");
 const { utils } = require("../utils/verify.js");
 const { is } = require("../utils/is.js");
 const { scrollbarHandler } = require("./scrollbar.js");
+const { utilsHandler } = require("./utils.js");
 
 module.exports.suggestHandler = function ({
     ele,
@@ -32,7 +33,7 @@ module.exports.suggestHandler = function ({
             //     eventName: "sendBefore",
             // });
             params.data = on.sendBefore({
-                value: obj.prev().val(),
+                value: obj.siblings('input').val(),
                 eventName: "sendBefore",
             });
         }
@@ -75,7 +76,6 @@ module.exports.suggestHandler = function ({
                                     });
                                 }
                             });
-                          
                         } else {
                             obj.addClass("hopeui-hide");
                             // obj.find(".hopeui-suggest-list")
@@ -184,29 +184,38 @@ module.exports.suggestHandler = function ({
                     });
                 }
             });
-            $this.on("keyup", function () {
-                if (!is.empty($(this).val())) {
-                    getData(params, reader, $this.siblings(".hopeui-suggest"));
-                    // $this
-                    //     .siblings(".hopeui-suggest")
-                    //     .removeClass("hopeui-hide");
-                } else {
-                    $this.siblings(".hopeui-suggest").addClass("hopeui-hide");
-                }
+            $this.on(
+                "keyup",
+                utilsHandler.debounce(function () {
+                    if (!is.empty($this.val())) {
+                        getData(
+                            params,
+                            reader,
+                            $this.siblings(".hopeui-suggest")
+                        );
+                        // $this
+                        //     .siblings(".hopeui-suggest")
+                        //     .removeClass("hopeui-hide");
+                    } else {
+                        $this
+                            .siblings(".hopeui-suggest")
+                            .addClass("hopeui-hide");
+                    }
 
-                if (on && on.input) {
-                    on.input({
-                        object: obj,
-                        targetEle: $(this).get(0),
-                        value: $(this).val(),
-                        eventName: "input",
-                    });
-                }
-            });
+                    if (on && on.input) {
+                        on.input({
+                            object: obj,
+                            targetEle: $this.get(0),
+                            value: $this.val(),
+                            eventName: "input",
+                        });
+                    }
+                }, options.delay || 0)
+            );
 
             //点击select区域外关闭下拉列表
             $(document).on("click", function (e) {
-                $this.next().addClass("hopeui-hide");
+                $this.siblings(".hopeui-suggest").addClass("hopeui-hide");
                 // $this.siblings('.hopeui-placeholder').addClass("hopeui-hide");
                 //下拉列表关闭回调
                 if (on && on.close) {
@@ -215,7 +224,7 @@ module.exports.suggestHandler = function ({
             });
 
             obj.open = function (callback) {
-                getData(params, reader, $this.next());
+                getData(params, reader, $this.siblings(".hopeui-suggest"));
                 $this.siblings(".hopeui-suggest").removeClass("hopeui-hide");
                 if (callback) {
                     callback();

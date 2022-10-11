@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-08-22 12:44:56
+ * @LastEditTime : 2022-10-10 16:42:36
  * @Description  : 弹窗
  */
 
@@ -39,7 +39,7 @@ module.exports.layerHandler = function ({ options, on }) {
 
     //重新定位函数
     let location = (layer) => {
-        if (options.width.includes("%")) {
+        if (options.width.includes("%") || options.width.includes("rem")) {
             layer.css("maxWidth", options.width);
         } else {
             layer.css("maxWidth", parseInt(options.width) + "px");
