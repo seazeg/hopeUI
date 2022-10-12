@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-10-10 17:42:48
+ * @LastEditTime : 2022-10-12 11:31:45
  * @Description  : 表单
  */
 
@@ -243,6 +243,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     items.eles.forEach(function (ele, i) {
                         //校验
                         ctrls[ele.name] = ele;
+    
                         if (items.required && globalRequired) {
                             //不为空
                             obj.name = ele.name;
@@ -292,9 +293,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                         }
                     });
 
-                    obj.value = $.trim(
-                        obj.value.substring(0, obj.value.length - 1)
-                    );
+                    obj.value = $.trim(obj.value);
 
                     // if (items.required) {
                     // if (obj.value) {
