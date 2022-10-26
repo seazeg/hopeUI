@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-10-12 11:31:45
+ * @LastEditTime : 2022-10-26 10:43:52
  * @Description  : 表单
  */
 
@@ -243,7 +243,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
                     items.eles.forEach(function (ele, i) {
                         //校验
                         ctrls[ele.name] = ele;
-    
+
                         if (items.required && globalRequired) {
                             //不为空
                             obj.name = ele.name;
@@ -307,13 +307,17 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             if (!globalRequired) {
                 status = true;
             }
+
+            let jsonParams = {};
+            formParams.map((item) => {
+                jsonParams[item.name] = item.value;
+            });
+
             if (on && on.submit) {
                 on.submit({
                     objectParams: formParams,
                     stringParams: utils.deserialization(formParams),
-                    jsonParams: utilsHandler.parseQueryParam(
-                        utils.deserialization(formParams)
-                    ),
+                    jsonParams: jsonParams,
                     controls: ctrls,
                     status: status,
                     errorList: errorList,
