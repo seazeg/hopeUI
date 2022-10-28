@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-04 11:43:06
- * @LastEditTime : 2020-12-09 14:59:21
+ * @LastEditTime : 2022-10-28 10:01:06
  * @Description  :
  */
 export const viewinfo = {
@@ -14,6 +14,8 @@ export const viewinfo = {
         options:{
             format:'yyyy-MM-dd HH:mm:ss',
             type:'datetime'//date：日期，datetime:日期+时间
+            startDate:'2022-11-28',
+            endDate:'2022-12-22'
         },
         on:{
             init: function (e){

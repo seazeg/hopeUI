@@ -1528,17 +1528,17 @@
 
 
 
-    hope.input({
-        ele: '#hope-datepicker',
-    })
+    // hope.input({
+    //     ele: '#hope-datepicker',
+    // })
 
-    hope.datepicker({
+    window.datepick = hope.datepicker({
         ele: '#hope-datepicker',
         options: {
-            format: 'yyyy-MM-dd HH:mm:ss',
-            type: 'datetime', //date：日期，datetime:日期+时间
-            startDate: "2021-1-1",
-            endDate: "2021-7-30"
+            format: 'yyyy-MM-dd',
+            type: 'date', //date：日期，datetime:日期+时间
+            startDate: "2022-10-01",
+            // endDate: "2022-11-30"
         },
         on: {
             init: function (e) {
@@ -1549,6 +1549,8 @@
             }
         }
     })
+
+    datepick.set([2022,9,22])
 
 
     hope.omit({
