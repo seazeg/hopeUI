@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2022-10-31 15:02:13
+ * @LastEditTime : 2022-10-31 15:04:29
  * @Description  :
  */
 
@@ -19,7 +19,7 @@ module.exports = {
     // entry: ["@babel/polyfill", "./src/hopeui.js"],
     // devtool: "inline-source-map",
     devServer: {
-        contentBase: path.resolve(__dirname, "dist"),
+        contentBase: path.resolve(__dirname, `dist/${pkg.version}/`),
         host: "0.0.0.0",
         compress: true,
         port: 8090,
