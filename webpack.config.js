@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-07-27 09:41:42
- * @LastEditTime : 2022-08-26 14:32:03
+ * @LastEditTime : 2022-10-31 15:02:13
  * @Description  :
  */
 
@@ -58,7 +58,7 @@ module.exports = {
     },
     output: {
         filename: `hopeui.min.js`,
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, `dist/${pkg.version}/`),
         library: "hopeui",
         libraryTarget: "window",
     },
@@ -123,12 +123,11 @@ module.exports = {
         ),
         new MiniCssExtractPlugin({
             filename: `hopeui.min.css`,
+            path: path.resolve(__dirname, `dist/${pkg.version}/`),
             chunkFilename: "[id].css",
         }),
         new CopyWebpackPlugin({
-            patterns: [
-                { from: "src/components/", to: "components/" },
-            ],
+            patterns: [{ from: "src/components/", to: "components/" }],
         }),
     ],
 };

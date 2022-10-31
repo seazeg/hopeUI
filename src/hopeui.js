@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-10 14:14:49
- * @LastEditTime : 2021-07-30 14:15:16
+ * @LastEditTime : 2022-10-31 14:55:07
  * @Description  : hopeUI
  */
 
@@ -235,7 +235,7 @@ const hope = () => {
         },
         selector: function ({
             ele: ele = null,
-            options: options = null,
+            options: options = {},
             on: on = {
                 init: null,
                 toggle: null,
@@ -247,7 +247,7 @@ const hope = () => {
         },
         checkbox: function ({
             ele: ele = null,
-            options: options = null,
+            options: options = {},
             on: on = {
                 init: null,
                 change: null,
@@ -257,7 +257,7 @@ const hope = () => {
         },
         radio: function ({
             ele: ele = null,
-            options: options = null,
+            options: options = {},
             on: on = {
                 init: null,
                 change: null,
@@ -267,7 +267,7 @@ const hope = () => {
         },
         input: function ({
             ele: ele = null,
-            options: options = null,
+            options: options = {},
             on: on = {
                 init: null,
                 blur: null,
@@ -279,7 +279,7 @@ const hope = () => {
         },
         textarea: function ({
             ele: ele = null,
-            options: options = null,
+            options: options = {},
             on: on = {
                 init: null,
                 blur: null,
@@ -291,7 +291,7 @@ const hope = () => {
         },
         form: function ({
             ele: ele = null,
-            options: options = null,
+            options: options = {},
             on: on = {
                 init: null,
                 submit: null,

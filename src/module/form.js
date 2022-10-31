@@ -1,7 +1,7 @@
 /*
  * @Author       : Evan.G
  * @Date         : 2020-08-07 10:35:59
- * @LastEditTime : 2022-10-26 10:43:52
+ * @LastEditTime : 2022-10-31 14:57:18
  * @Description  : 表单
  */
 
@@ -90,7 +90,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
 
             let newObj = handlers[type](
                 `${ele} ${label}[name=${name}]`,
-                null,
+                {},
                 null
             );
             formControls[name] = newObj;
@@ -119,7 +119,7 @@ module.exports.formHandler = function ({ ele, options, on, controls }) {
             } else {
                 formControls[name] = handlers[type](
                     `${ele} ${label}[name=${name}]`,
-                    null,
+                    {},
                     null
                 );
             }
